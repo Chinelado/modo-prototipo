@@ -220,6 +220,22 @@ Você não precisa entender cada palavra. Procure primeiro os campos que você c
 `,
 });
 
+// Esquemas visuais (mesmo formato de data/visuals.js) e palavras de apoio (data/support.js) das lições novas.
+V('Wie schreibt man das?',
+  'V:As letras que mais enganam;V se chama "fau"|Vera: fau · e · er · a;W se chama "vê"|Wien: vê · i · e · en;Z se chama "tsét"|Zoo: tsét · o · o',
+  'P:Soletrar um e-mail, peça por peça;ana=a · n · a;. (ponto)=Punkt;souza=s · o · u · z · a;@ (arroba)=at;web.de=web Punkt de');
+V('Wie alt bist du?',
+  'E:De 13 a 19, uma regra só;unidade (vier)^s|+|zehn^v|=|vierzehn^p',
+  'F:A idade se diz com sein;Quem^s|sein^v|Idade^p;Ich|bin|zwanzig.;Sie|ist|zwölf.;Er|ist|siebzehn.');
+V('Ein Formular',
+  'V:du ou Sie?;du · amigos e família|Wie heißt du?|Wo wohnst du?|dein Name;Sie · formal|Wie heißen Sie?|Wo wohnen Sie?|Ihr Name',
+  'M:Como ler uma ficha;Na ficha|Significa;**Name**: Mendes|sobrenome;**Vorname**: Carla|nome;Geburtsdatum: 05.03.1990|data: dia.mês.ano;PLZ, Ort: 10969 Berlin|CEP e cidade;Unterschrift|assinatura');
+S_('Wie schreibt man das?', 'oder=ou|at=arroba (@), dito como em inglês');
+S_('Wie alt bist du?', 'die Tochter=a filha|dein / deine=seu, sua (informal)|die Nummer=o número');
+S_('Ein Formular', 'ausfüllen (Sie füllen … aus)=preencher (o aus vai para o fim)|unterschreiben=assinar');
+['oliveira', 'vera', 'carla', 'mendes', 'web', 'recife', 'tim'].forEach((n) => NAMES.add(n));
+NEW_LESSONS['n-buchstabieren'].rule = 'soletrar';
+
 /* ---------- 2. sequência nova ---------- */
 // Números = índice original da lição (antes da reordenação). Texto = lição nova ainda não escrita (aparece como "em preparação").
 const SEQ = [
