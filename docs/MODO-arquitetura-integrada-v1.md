@@ -87,6 +87,14 @@ O aluno navega **Trilha → Módulo → Lição**. A Unidade existe só no model
 | 7. Feedback | Sim | erro com o "porquê", respostas alternativas aceitas, nova tentativa no fim |
 | 8. Conclusão | Parcial | estrelas, XP e tarefa de casa; faltam as competências praticadas e a recomendação |
 
+**Objetivos "consigo…" — decidido em 20/11/2026** ✅
+- **Granularidade:** 1 objetivo por lição (210) e, para cada módulo, um **nome curto** + 3 a 4 objetivos que resumem os das suas lições (35 módulos).
+- **Referência:** inspirados nos **descritores ilustrativos do Quadro Europeu (versão 2020)** do nível da lição, reescritos em português simples. Cada objetivo guarda o descritor que o inspirou, para revisão. Nada de equivalência inventada: se nenhum descritor se aplica, o objetivo é marcado assim.
+- **Formato:** "Consigo + ação observável + contexto" (ex.: *Consigo dizer o que eu acho sobre um tema do dia a dia usando „Ich glaube, dass …“*).
+- **Autoria:** rascunho em lote feito pelo Claude, começando por um **piloto do A1** (18 lições + 3 módulos); a direção revisa o piloto antes do resto. Revisão por professor de alemão antes de publicar.
+- **Uso:** o objetivo abre a lição (etapa 2) e aparece na tela de Módulo. Na conclusão, **autoavaliação** "Já consigo / Ainda não", guardada à parte: **não entra** no acerto das competências.
+- **Modelo de dados:** `LessonObjective { lesson_id, texto, descritor_ref, status: rascunho | revisado | aprovado }`; `Module.nome`; `SelfAssessment { user, lesson_id, resposta, data }`.
+
 ### 3.3 Biblioteca de exercícios (16 tipos do documento × motor atual)
 
 | Tipo pedido | Situação | Observação |
@@ -224,7 +232,7 @@ Explorar (situações reais) ──"pôr nas cartas"─────────�
 
 ### 9.2 Achados que mudam a prioridade
 - **O A1 e o A2 são finos** (42 lições juntos) e o B2 é o maior nível (72). Para o público prioritário (adultos iniciantes), o primeiro trabalho de conteúdo alemão é **ampliar o A1–A2**, e não reorganizar o B2. 🔴
-- **Falta o objetivo can-do** nas 210 lições: dá para redigir em lote a partir do tema e da gramática de cada uma, com revisão humana. 🟡
+- **Falta o objetivo can-do** nas 210 lições e o nome dos 35 módulos: rascunho em lote a partir dos descritores do Quadro Europeu, piloto no A1, com revisão humana (ver 3.2). ✅ *(20/11/2026)*
 - O código específico do alemão (cores de gênero, regras de frase, respostas alternativas) vira o **pacote de idioma alemão**, sem mudança pedagógica.
 
 ### 9.3 Passos
@@ -257,3 +265,4 @@ O roadmap do documento-mestre começa pelas fases 2 a 5 (Home, Trilha, motor, ca
 | 7 | Tokens finais (com os tons de texto acessíveis do protótipo) e cores de gênero | Design |
 | 8 | Infraestrutura: manter o app estático + Supabase ou adotar um back-end com API de conteúdo | Arquitetura |
 | 9 | Algoritmo de revisão espaçada (manter o atual ou adotar outro, como FSRS) | Pedagogia + engenharia |
+| 10 | ~~Objetivos "consigo…"~~ ✅ Lição + módulo (com nome), base nos descritores do Quadro Europeu 2020, piloto A1 revisado pela direção, autoavaliação no fim da lição fora do acerto (20/11/2026) | Pedagogia |
