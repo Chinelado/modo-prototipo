@@ -14,7 +14,7 @@
 
 1. **Três lições do A1 trabalham funções que o Quadro Europeu descreve no A2:** pedir uma refeição (lição 9), explicar sintomas ao médico (lição 17) e contar o que fez no passado (lição 18). A trilha antecipa o A2, o que não é erro, mas precisa ficar claro no objetivo e pesa na decisão de **ampliar o A1–A2**.
 2. **Rotina (lição 10) e moradia (lição 13)** ficam na fronteira: o A1 cobre "dizer onde mora e o que faz"; descrever a rotina e as condições de moradia aparece explicitamente no A2.
-3. **O A1 não tem objetivo de leitura nem de escrita.** Os textos longos começam no módulo 5 (A2), e o A1 do Quadro Europeu inclui, por exemplo, preencher um formulário com dados pessoais e escrever uma mensagem curta. É uma lacuna de conteúdo, não de redação.
+3. **Nenhum objetivo do A1 é de leitura ou de escrita.** O A1 tem material de leitura e escuta (3 textos longos, um por módulo, e 5 Pockets), mas eles ficam fora das lições. Na escrita só há frases livres: nada como preencher um formulário com dados pessoais ou escrever uma mensagem curta, que o A1 do Quadro Europeu inclui. É uma lacuna de conteúdo, não de redação.
 4. **Quase todos os objetivos são de interação oral**, que o Perfil ainda não mostra (decisão de 20/11/2026). Os exercícios de hoje dão evidência parcial: escolher a resposta num diálogo e falar a frase.
 
 ---
