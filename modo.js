@@ -37,6 +37,9 @@ const LOGO_WORD = '<path d="M958.7,344.56l.22-34.54-.63-90.45-57.49,84.59c-5.84,
 const modoLogo = (s = 30) => `<svg viewBox="0 0 552.64 475.01" width="${s}" height="${Math.round(s * 0.86)}" aria-hidden="true">${LOGO_SYM}</svg>`;
 const modoLockup = (h = 26) => `<svg class="mo-logo" viewBox="0 0 1922.86 475.01" height="${h}" width="${Math.round(h * 4.048)}" role="img" aria-label="MODO">${LOGO_SYM}<g fill="currentColor">${LOGO_WORD}</g></svg>`;
 
+// Miniatura da ilustração de cada pocket (images/pocket/thumb, 240×180), nos cartões do início e do Explorar.
+const pkThumb = (p) => `<span class="mo-thumb"><img src="images/pocket/thumb/${p.id}.webp" alt="" loading="lazy" decoding="async" onerror="this.parentNode.textContent='${p.e || ''}'"></span>`;
+
 /* ---------- navegação ---------- */
 const MODO_NAV = [['home', 'home', 'Hoje'], ['trilha', 'book', 'Aprender'], ['praticar', 'target', 'Praticar'], ['extras', 'compass', 'Explorar'], ['cards', 'layers', 'Cartas'], ['perfil', 'user', 'Perfil']];
 const NAV_OF = { intro: 'trilha', guide: 'trilha', nivel: 'trilha', modulo: 'trilha', curriculo: 'trilha', pocket: 'extras', texto: 'extras' };
@@ -115,7 +118,7 @@ home = function () {
       <b class="mo-big">${sug.t}</b><p class="mut">${sug.d}</p>${sug.p ? `<button class="ghost" id="moS">Praticar agora ${ic('arrow', 16)}</button>` : ''}</div>
   </div>
   ${pk.length ? `<div class="mo-sec"><h2>Para explorar</h2><span class="grow"></span><button class="ghost" id="moE">Ver todos ${ic('arrow', 16)}</button></div>
-  <div class="mo-explore">${pk.map((p) => `<button class="mo-ex" data-pk="${p.id}"><span class="mo-tile">${ic('compass', 22)}</span><span><b>${esc(p.t)}</b><small>${esc(p.pt)} · ${p.lv}</small></span>${ic('chevron', 18, 'arr')}</button>`).join('')}</div>` : ''}
+  <div class="mo-explore">${pk.map((p) => `<button class="mo-ex" data-pk="${p.id}">${pkThumb(p)}<span><b>${esc(p.t)}</b><small>${esc(p.pt)} · ${p.lv}</small></span>${ic('chevron', 18, 'arr')}</button>`).join('')}</div>` : ''}
   ${pendingHw() !== undefined ? hwCard(pendingHw(), 'Tarefa de casa · ' + esc(LESSONS[pendingHw()].de)) : ''}`;
   $('#moGo').onclick = H.act; if ($('#moAlt')) $('#moAlt').onclick = H.alt[1];
   if ($('#moC')) $('#moC').onclick = () => go('cards');
