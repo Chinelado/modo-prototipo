@@ -271,6 +271,19 @@ button.ghost { color: var(--p600); }
 .mo-verif .opts { margin: 0; } .mo-verif .line, .mo-verif .pool { max-width: none; }
 .mo-chkr p { margin: 10px 0 0; } .mo-ok2 { color: var(--ok); font-weight: 600; display: flex; align-items: center; gap: 6px; } .mo-no2 { color: var(--no); }
 
+/* ---------- conclusão que ensina e aquecimento ---------- */
+.mo-concl .mo-card-h small, .mo-warm .mo-card-h .link { margin-left: auto; }
+.mo-concl > p.mut { margin: -4px 0 8px; }
+.mo-crow { display: flex; align-items: center; justify-content: space-between; gap: 8px 14px; flex-wrap: wrap; padding: 10px 0; border-top: 1px solid var(--line); }
+.mo-crow b { font-weight: 600; } .mo-crow small { display: block; color: var(--mut); font-size: .8rem; }
+.mo-crow button { display: inline-flex; align-items: center; gap: 6px; font-size: .88rem; padding: 6px 10px; white-space: nowrap; }
+.mo-cnext { display: flex; align-items: center; gap: 6px; margin: 10px 0 0; }
+.mo-warm { border-left: 4px solid var(--a500); }
+.mo-warm .mo-card-h .ic { color: var(--a700); }
+.mo-warm > p.mut { margin: -4px 0 8px; } .mo-warm .q { margin: 0 0 8px; } .mo-warm .opts { margin: 0; }
+.mo-wr p { margin: 10px 0 0; }
+@media (max-width: 640px) { .mo-crow button { white-space: normal; text-align: left; } }
+
 /* ---------- tradução escondida na conversa ---------- */
 .mo-hidept h3 { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .mo-ptall { margin-left: auto; font-size: .85rem; font-weight: 500; }

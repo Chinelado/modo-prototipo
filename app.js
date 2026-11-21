@@ -675,6 +675,7 @@ function nextEx() {
     keys.forEach((k) => { const c = S.cards[k]; if (c) c.mods[it.k] = (c.mods[it.k] || 0) + 1; });
     if (!it.retry) { sess.first++; if (ok) sess.firstOk++; }
     const by = (sess.by[it.k] = sess.by[it.k] || [0, 0]); by[1]++; if (ok) by[0]++;
+    if (!ok) (sess.errs = sess.errs || []).push({ k: it.k, li: (it.k === 'leq' || it.k === 'lew' ? sess.ctxs[0] : les).i, ans, keys, fala }); // a conclusão mostra o que rever
     let gain = 0;
     if (ok) { sess.combo++; sess.maxCombo = Math.max(sess.maxCombo, sess.combo); S.maxCombo = Math.max(S.maxCombo, sess.combo); gain = 10 + Math.min(sess.combo, 5) * 2; sess.xp += gain; addXP(gain); if (sess.combo === 5 || sess.combo === 10) toast('🔥 Combo de ' + sess.combo + '!'); }
     else { sess.combo = 0; if (sess.re < 6 && INT[it.k]) { sess.re++; sess.queue.push({ k: it.k, retry: true }); } }

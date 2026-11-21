@@ -67,6 +67,8 @@ def shots(mobile):
     add('03-aula-3-palavras', "go('intro', LDAY[LBYSID['29'].i]); document.querySelector('[data-ls=\"2\"]').click()", False, 1000)
     add('03-aula-4-praticar', "go('intro', LDAY[LBYSID['29'].i]); document.querySelector('[data-ls=\"3\"]').click()", False, 800)
     add('03-aula-5-ir-alem', "go('intro', LDAY[LBYSID['29'].i]); document.querySelector('[data-ls=\"4\"]').click()", False, 800)
+    add('03-aula-0-aquecimento', "const d = currentDay(); lsGet(d).warm = false; lsGet(d).s = 0; go('intro', d)", False, 900)
+    add('03-aula-6-conclusao', "const l = LBYSID['29']; startSession('lesson', LDAY[l.i]); sess.errs = [{ k: 'lin', li: l.i, ans: fill(l.cz[0]), keys: [] }, { k: 'int', li: l.i, ans: l.dlg[3].de + ' = ' + l.dlg[3].pt, keys: [] }, { k: 'esp', li: l.i, ans: '', keys: l.v.slice(0, 4).map((v) => v.k) }, { k: 'intra', li: l.i, ans: 'Molde: Ich habe ein Zimmer reserviert = Reservei um quarto', keys: [] }]; sess.first = 14; sess.firstOk = 11; sess.queue.length = 0; nextEx()", True, 1000)
     add('03-aula-guia-vagao-2', "go('guide', 'n14')", False, 1200)
     add('04-praticar', "go('praticar')")
     add('04-exercicio', "startSession('extra', null, { kinds: ['log'] })")

@@ -533,5 +533,88 @@ intro = function (day) {
   show(Math.min(st.s, 4), st.c, false);
 };
 
+/* ---------- Conclusão que ensina ---------- */
+// Cada erro da sessão aponta para onde ele é explicado: o passo da aula (pelas palavras da resposta certa),
+// as palavras da lição ou a conversa. As cartas das palavras erradas voltam já no dia seguinte.
+const RV_STOP = new Set(['der', 'die', 'das', 'den', 'dem', 'des', 'ein', 'eine', 'einen', 'einem', 'einer', 'und', 'ich', 'du', 'er', 'sie', 'es', 'wir', 'ihr', 'nicht', 'mit', 'auf', 'ist', 'sind', 'bin', 'bist', 'hat', 'habe', 'hast', 'aus', 'von', 'fuer', 'auch', 'noch', 'sehr', 'gern', 'bitte', 'heute']);
+const deepSecs = (l) => (l.deep || '').split(/\n# /).slice(1).map((s) => { const [h, ...r] = s.split('\n'); return { t: h.replace(/\*\*/g, '').trim(), txt: ' ' + norm(r.join(' ')) + ' ' }; });
+function revTarget(e) {
+  const l = LESSONS[e.li];
+  if (e.k === 'leq' || e.k === 'lew') return null;
+  if (['esp', 'nat', 'cor'].includes(e.k) || (e.k === 'lin' && (e.keys || []).length)) return { s: 2, label: 'Rever as palavras' };
+  if (e.k === 'int' || e.k === 'mus') return { s: 0, label: 'Ouvir a conversa de novo' };
+  const ansN = norm(String(e.ans || '').split(' = ')[0].replace(/<[^>]+>/g, ' '));
+  // se o erro foi numa lacuna, o que importa é a palavra da lacuna; senão, as palavras da resposta certa
+  const cz = l.cz.find((c) => ansN.startsWith(norm(fill(c))));
+  const toks = cz ? norm(cz.a).split(' ').filter(Boolean) : [...new Set(ansN.split(' ').filter((w) => w.length >= 3 && !RV_STOP.has(w)))];
+  // peso: palavra rara entre os passos vale mais (um passo de revisão que cita tudo não ganha sempre);
+  // palavra do resumo da regra vale o dobro; no empate, vence o passo anterior
+  const secs = deepSecs(l), gx = ' ' + norm(l.gx || '') + ' ';
+  const wt = (w) => (gx.includes(' ' + w + ' ') ? 2 : 1) / Math.max(1, secs.filter((s) => s.txt.includes(' ' + w + ' ')).length);
+  let best = null, bs = 0;
+  secs.forEach((sec) => { const sc = toks.filter((w) => sec.txt.includes(' ' + w + ' ')).reduce((a, w) => a + wt(w), 0); if (sc > bs + 1e-9) { bs = sc; best = sec; } });
+  return best ? { s: 1, go: best.t, label: 'Rever: ' + best.t } : { s: 1, go: 'resumo', label: 'Rever o resumo da regra' };
+}
+const errText = (e) => (['esp', 'nat', 'cor'].includes(e.k) && (e.keys || []).length ? e.keys.slice(0, 4).map((k) => vocab(k).de).join(' · ') : String(e.ans || '').replace(/<[^>]+>/g, '').slice(0, 110));
+const _finish = finish;
+finish = function () {
+  const s = sess; _finish();
+  if (!s) return;
+  const errs = s.errs || [], tm = new Date(); tm.setHours(24, 0, 0, 0);
+  const keys = [...new Set(errs.flatMap((e) => e.keys || []))].filter((k) => S.cards[k]);
+  keys.forEach((k) => { S.cards[k].due = Math.min(S.cards[k].due, tm.getTime()); });
+  if (keys.length) save();
+  const seen = new Set(), rows = [];
+  errs.forEach((e) => { const id = e.li + '|' + errText(e); if (seen.has(id)) return; seen.add(id); rows.push({ e, t: revTarget(e) }); });
+  const html = rows.length
+    ? `<div class="card mo-concl"><div class="mo-card-h">${ic('bulb', 22)}<h3>O que rever desta sessão</h3><small class="mut">${rows.length} ${rows.length === 1 ? 'ponto' : 'pontos'}</small></div>
+      <p class="mut">A resposta certa de cada erro e onde ela é explicada.</p>
+      ${rows.slice(0, 6).map((r, i) => `<div class="mo-crow"><span><b lang="de">${esc(errText(r.e))}</b>${s.kind !== 'lesson' ? `<small>${esc(LESSONS[r.e.li].de)}</small>` : ''}</span>${r.t ? `<button class="ghost" data-rev="${i}">${esc(r.t.label)} ${ic('arrow', 14)}</button>` : ''}</div>`).join('')}
+      ${keys.length ? `<p class="mut mo-cnext">${ic('layers', 16)} ${keys.length} ${keys.length === 1 ? 'palavra que você errou volta' : 'palavras que você errou voltam'} na revisão de cartas amanhã.</p>` : ''}</div>`
+    : `<div class="card mo-concl"><div class="mo-card-h">${ic('check', 22)}<h3>Nada para rever</h3></div><p class="mut">Você não errou nenhum exercício nesta sessão.</p></div>`;
+  app.querySelector('.stats')?.insertAdjacentHTML('afterend', html);
+  $$('[data-rev]', app).forEach((b) => (b.onclick = () => { const r = rows[+b.dataset.rev], day = LDAY[r.e.li], st = lsGet(day); st.goS = r.t.s; st.go = r.t.go || null; go('intro', day); }));
+};
+
+/* ---------- Aquecimento: revisão da lição anterior no começo ---------- */
+// 3 perguntas rápidas (2 palavras e 1 lacuna) da lição anterior da trilha, uma vez por lição, antes da conversa nova.
+const _intro4 = intro;
+intro = function (day) {
+  _intro4(day);
+  const d = dayInfo(day); if (d.review) return;
+  const st = lsGet(day);
+  if (st.goS != null) { // veio da conclusão: abre direto no ponto a rever
+    const s = st.goS, g = st.go; delete st.goS; delete st.go;
+    $(`[data-ls="${s}"]`)?.click();
+    if (s === 1 && g) { const ps = $$('[data-part]'), k = g === 'resumo' ? ps.length - 1 : ps.findIndex((p) => norm(p.querySelector('h3.step')?.textContent || '') === norm(g)); if (k >= 0) $(`[data-pd="${k}"]`)?.click(); }
+    return;
+  }
+  const pi = d.li - 1, pl = LESSONS[pi];
+  if (st.warm || S.done[day] || !pl || !S.done[LDAY[pi]] || st.s !== 0) return;
+  const due = (v) => (S.cards[v.k] ? S.cards[v.k].due : Infinity);
+  const vs = pl.v.filter((v) => !v.x).sort((a, b) => due(a) - due(b)).slice(0, 2);
+  const qs = [...vs.map((v) => ({ v })), ...(pl.cz.length ? [{ c: pick(pl.cz) }] : [])];
+  if (!qs.length) return;
+  const card = elOf(`<div class="card mo-warm"><div class="mo-card-h">${ic('flame', 22)}<h3>Aquecimento · 1 min</h3><button class="link mo-wskip" type="button">Pular</button></div>
+    <p class="mut">${qs.length} perguntas da lição anterior, <b lang="de">${esc(pl.de)}</b>, para lembrar antes de começar.</p><div class="mo-wq"></div><div class="mo-wr"></div></div>`);
+  $('[data-lp="0"]').prepend(card);
+  let i = 0, hits = 0;
+  const end = () => { st.warm = true; save(); $('.mo-wq', card).innerHTML = ''; $('.mo-wr', card).innerHTML = `<p><b>${hits} de ${qs.length}</b> certas. ${hits === qs.length ? 'A lição anterior está firme.' : 'O que você errou volta nas cartas.'}</p>`; $('.mo-wskip', card).remove(); };
+  const next = () => {
+    if (i >= qs.length) return end();
+    const q = qs[i], el = $('.mo-wq', card); $('.mo-wr', card).innerHTML = '';
+    const after = (ok, right, comp, k) => {
+      if (ok) { hits++; sfx('tarefa'); } else if (k && S.cards[k]) { const tm = new Date(); tm.setHours(24, 0, 0, 0); S.cards[k].due = Math.min(S.cards[k].due, tm.getTime()); }
+      logAtt([comp], ok);
+      $('.mo-wr', card).innerHTML = ok ? `<p class="mo-ok2">${ic('check', 16)} Isso!</p>` : `<p class="mo-no2">Resposta: <b>${esc(right)}</b></p>`;
+      i++; setTimeout(() => { if (card.isConnected) next(); }, ok ? 700 : 1600);
+    };
+    if (q.v) { const opts = shuffle([q.v.pt, ...sample(pl.v.filter((x) => x !== q.v && x.pt !== q.v.pt), 2).map((x) => x.pt)]); mcq(el, `<p class="q">${i + 1}/${qs.length} · O que significa esta palavra?<b lang="de" class="${gcls(q.v.de)}">${esc(q.v.de)}</b></p>`, opts, q.v.pt, (ok) => after(ok, q.v.pt, 'voc', q.v.k)); }
+    else mcq(el, `<p class="q">${i + 1}/${qs.length} · Complete: <b lang="de">${esc(q.c.q)}</b></p>`, shuffle([q.c.a, ...q.c.w]), (o) => czOk(q.c, o), (ok) => after(ok, fill(q.c), 'gra'));
+  };
+  $('.mo-wskip', card).onclick = () => { st.warm = true; save(); card.remove(); };
+  next();
+};
+
 // app.js já desenhou a primeira tela com a versão antiga: redesenha com a camada MODO.
 go(view === "run" ? "home" : view);

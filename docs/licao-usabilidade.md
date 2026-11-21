@@ -23,9 +23,9 @@ A lição deixou de ser uma página única e passou a ter **5 etapas**, com a ba
 ### Aprendizado
 1. ~~**Prática dentro da aula.**~~ ✅ Feito: cada passo da aula termina com uma verificação rápida, sem nota (uma lacuna da lição ligada àquele passo ou montar uma frase-exemplo do passo). Cobre 612 dos 781 passos; os demais são passos sem exemplo nem lacuna correspondente.
 2. **Objetivo no início e autoavaliação no fim** (já decidido; depende dos objetivos "consigo…").
-3. **Revisão no começo da lição.** Abrir com 3 cartas ou perguntas da lição anterior antes da conversa nova.
+3. ~~**Revisão no começo da lição.**~~ ✅ Feito: "Aquecimento · 1 min" no topo da etapa Ouvir, com 2 palavras e 1 lacuna da lição anterior da trilha. Aparece uma vez por lição, só se a anterior foi concluída e a atual ainda não; dá para pular. Palavra errada volta nas cartas no dia seguinte.
 4. **Vocabulário em grupos de 5** com um minijogo de memória antes de praticar, em vez da tabela inteira de uma vez.
-5. **Conclusão que ensina:** mostrar os erros da sessão com link para o passo da aula que explica cada um, e quando as palavras voltam para revisão.
+5. ~~**Conclusão que ensina**~~ ✅ Feito: a tela final mostra "O que rever desta sessão", com a resposta certa de cada erro e um botão que abre a lição no ponto que o explica (o passo da aula, as palavras ou a conversa). As cartas das palavras erradas voltam no dia seguinte.
 6. **Fala guiada na etapa Ouvir:** ouvir, repetir com o microfone e só depois ver a tradução (sombra).
 
 ### Usabilidade
