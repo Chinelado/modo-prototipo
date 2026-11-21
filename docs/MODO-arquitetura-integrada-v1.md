@@ -15,8 +15,8 @@
 
 ### O que precisa de ajuste
 1. **O motor atual gera os exercícios, ele não os guarda.** O modelo de dados proposto trata a atividade (Activity) como um registro escrito à mão. No Deutsch-Trilha, os 8 formatos são **montados na hora** a partir dos dados da lição: vocabulário, exemplos, diálogos, lacunas e frase desmontada. Isso é o maior ativo técnico do projeto. Uma lição de inglês escrita com os mesmos campos ganha os exercícios de graça. O modelo precisa ter os dois tipos: atividade **gerada** (modelo + parâmetros) e atividade **escrita à mão**. 🟡
-2. **Competências comunicativas × conhecimento linguístico.** O CEFR separa as atividades comunicativas (Listening, Reading, Speaking, Writing, Interaction, Mediation) das competências linguísticas (vocabulário, gramática, pronúncia). Boa parte dos exercícios atuais mede conhecimento, não uma habilidade. O Perfil deve mostrar os dois blocos separados, para não chamar de "Speaking" o que é escolher uma palavra. 🟡
-3. **Mediation não tem evidência hoje.** Há uma única lição sobre mediação (C2). A competência não deve aparecer no Perfil até existirem atividades que a avaliem. 🟡
+2. **Competências comunicativas × conhecimento linguístico.** O CEFR separa as atividades comunicativas (Listening, Reading, Speaking, Writing, Interaction, Mediation) das competências linguísticas (vocabulário, gramática, pronúncia). Boa parte dos exercícios atuais mede conhecimento, não uma habilidade. O Perfil deve mostrar os dois blocos separados, para não chamar de "Speaking" o que é escolher uma palavra. ✅ *(20/11/2026)*
+3. **Mediation não tem evidência hoje.** Há uma única lição sobre mediação (C2). A competência não deve aparecer no Perfil até existirem atividades que a avaliem; o mesmo vale para Interaction. ✅ *(20/11/2026)*
 4. **"Currículo" como área própria repete o Aprender.** Decidido: Currículo é uma **visão dentro de Aprender** (a árvore Idioma → Nível → Módulo → Lição), e Certificações é um destino contextual (a partir do nível e das lições de preparação). A navegação fica em seis itens. ✅ *(20/11/2026)*
 5. **Quatro níveis de conteúdo são demais para o alemão atual.** O código tem Nível → Semana (6 lições + checkpoint) → Lição → Exercício. Criar "Unidades" artificiais só para preencher a hierarquia não tem ganho pedagógico. Decidido: **Módulo = semana**, e o checkpoint é a avaliação do módulo. O modelo prevê Unidade, mas ela é **invisível** para o aluno (1:1 com o módulo) enquanto o conteúdo não pedir outra coisa. Nenhuma lição muda de lugar. ✅ *(20/11/2026)*
 6. **O nível "A2" mostrado ao aluno hoje é posição na trilha, não proficiência.** A interface deve chamar de "Trilha: A2" e reservar "nível estimado por competência" para quando houver evidência. 🟡
@@ -118,11 +118,17 @@ O aluno navega **Trilha → Módulo → Lição**. A Unidade existe só no model
 | Textos longos com perguntas | Reading | — |
 | Fale a frase | Speaking (inteligibilidade) | Pronúncia |
 | Frase livre | Writing | Gramática |
-| Diálogo (escolher a resposta) | Interaction (receptiva, evidência fraca) | — |
+| Diálogo (escolher a resposta) | conta como Reading (compreensão de diálogo) | — |
 | Lacunas, montar frase, regra | — | Gramática |
 | Pares, classificar, resposta rápida, cartas | — | Vocabulário |
 
-Regra: o Perfil mostra uma competência só com **evidência mínima** (por exemplo, 20 tentativas em 2 semanas). Sem isso, aparece "ainda sem dados suficientes". 🔴 (o limite exato precisa de validação pedagógica)
+**Decidido em 20/11/2026** ✅
+- **Inteligências múltiplas ficam só no motor.** Continuam escolhendo os formatos por trás, sem aparecer para o aluno. O Perfil mostra competências.
+- **Medida = acerto + volume.** Cada competência mostra a taxa de acerto recente e quantas respostas a sustentam. Não há nível A1–C2 por competência enquanto os exercícios não forem calibrados para isso.
+- **Evidência mínima:** a competência aparece com número a partir de **20 respostas no total**; a taxa usa as **30 respostas mais recentes**. Abaixo disso: "ainda sem dados suficientes (8 de 20)".
+- **Interaction e Mediation ficam fora do Perfil** até existirem atividades que as avaliem (conversa com resposta aberta ou falada; tarefas de mediação). Os diálogos de escolha contam para Reading.
+- **Blocos do Perfil:** *Competências comunicativas* (Listening, Reading, Speaking, Writing) e *Conhecimento linguístico* (Vocabulário, Gramática, Pronúncia).
+- **Consequência técnica:** "as 30 mais recentes" exige guardar cada resposta (ActivityAttempt), não só os totais por formato de hoje.
 
 ### 3.5 Avaliação
 - **Nivelamento:** posiciona o aluno na trilha (já existe, adaptativo, 6 perguntas por nível). Não é certificação. ✅
@@ -242,10 +248,10 @@ O roadmap do documento-mestre começa pelas fases 2 a 5 (Home, Trilha, motor, ca
 
 | # | Decisão | Quem decide |
 |---|---|---|
-| 1 | Inteligências múltiplas saem do Perfil e do motor de escolha, ou ficam só no motor? | Produto + pedagogia |
+| 1 | ~~Inteligências múltiplas saem do Perfil e do motor?~~ ✅ Ficam só no motor; o Perfil mostra competências (20/11/2026) | Produto + pedagogia |
 | 2 | ~~Currículo e Certificações: áreas próprias ou destinos contextuais~~ ✅ Currículo = aba de Aprender; Certificações = destino contextual (20/11/2026) | Produto + UX |
 | 3 | ~~Unidade opcional no alemão~~ ✅ Módulo = semana, Unidade invisível; Cartas no celular dentro de Praticar + atalho na Home (20/11/2026) | Pedagogia |
-| 4 | Evidência mínima para mostrar uma competência | Pedagogia |
+| 4 | ~~Evidência mínima para mostrar uma competência~~ ✅ 20 respostas no total, taxa das 30 últimas; acerto + volume, sem nível por competência; Interaction e Mediation fora (20/11/2026) | Pedagogia |
 | 5 | Variante do inglês e idioma de interface | Produto |
 | 6 | Ampliar o A1–A2 alemão antes de reorganizar o resto | Produto + pedagogia |
 | 7 | Tokens finais (com os tons de texto acessíveis do protótipo) e cores de gênero | Design |
