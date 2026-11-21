@@ -70,3 +70,12 @@ Object.assign(MOD_OBJ, {
   12: ['Consigo falar de festas e datas e dizer o que sinto.', 'Consigo descrever pessoas e coisas com orações relativas.', 'Consigo dar opiniões simples e comentar um post.'],
   13: ['Consigo ligar ideias e falar dos meus hábitos com a mídia.', 'Consigo concordar, discordar e entender notícias curtas.', 'Consigo escrever uma opinião curta num fórum e sei como é a prova do A2.'],
 });
+// Módulos 9 e 10 (21/11/2026)
+Object.assign(OBJ, {
+  'n-umtauschen': { o: 'Consigo trocar um produto numa loja, explicando o problema e dizendo o que quero.', a: 'Você consegue trocar um produto e explicar o motivo?', ref: 'Obtaining goods and services · A2' },
+  'n-bankpost': { o: 'Consigo resolver coisas simples no banco e no correio: pedir um serviço e perguntar preço e prazo.', a: 'Você consegue pedir um serviço no banco ou no correio?', ref: 'Obtaining goods and services · A2' },
+  'n-bestellung': { o: 'Consigo ler a confirmação de um pedido online e escrever uma reclamação curta e formal.', a: 'Você consegue escrever uma reclamação curta para uma loja?', ref: 'Correspondence · A2; Reading for orientation · A2' },
+  'n-arbeitstag': { o: 'Consigo descrever o meu dia de trabalho com horários e com vor, nach e seit.', a: 'Você consegue descrever o seu dia de trabalho?', ref: 'Sustained monologue: describing experience · A2' },
+  'n-telefon': { o: 'Consigo fazer uma ligação de trabalho simples: pedir para falar com alguém e deixar ou anotar um recado.', a: 'Você consegue pedir para falar com alguém ao telefone e deixar recado?', ref: 'Using telecommunications · A2' },
+  'n-stellenanzeige': { o: 'Consigo ler um anúncio de emprego simples e escrever um e-mail curto de interesse.', a: 'Você consegue ler um anúncio de emprego e escrever um e-mail de interesse?', ref: 'Reading for orientation · A2; Correspondence · A2' },
+});

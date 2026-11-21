@@ -1362,6 +1362,372 @@ S_('Schule und Ausbildung', 'der Deutschkurs=o curso de alemão');
 S_('Eine E-Mail über mich', 'der Stress=o estresse|antworten (geantwortet)=responder (Perfekt: hat geantwortet)');
 S_('Die Hausordnung', 'die Tonne=a lixeira, o contêiner|helfen (er hilft)=ajudar (ele ajuda)');
 S_('Ein Zettel an die Nachbarn', 'die Party=a festa|sich entschuldigen=pedir desculpas');
+/* Módulo 9 (21/11/2026): trocar um produto, banco e correio e a lição de Ler e escrever "Eine Online-Bestellung". */
+NL('n-umtauschen', {
+  de: 'Umtauschen', pt: 'Trocar um produto', gt: 'passen, gefallen · zu groß, zu klein',
+  gx: 'Para trocar: Ich möchte das umtauschen. Motivo: Das passt mir nicht (tamanho), Das gefällt mir nicht (gosto), Das ist zu klein, Das ist kaputt. Peça: eine Nummer größer, das Geld zurück. Leve o Kassenbon.',
+  ge: 'Ich möchte diese Jacke umtauschen.=Eu gostaria de trocar esta jaqueta.|Sie passt mir nicht, sie ist zu klein.=Ela não serve em mim, está pequena demais.|Kann ich das Geld zurückbekommen?=Posso receber o dinheiro de volta?',
+  v: 'umtauschen=trocar (um produto)=🔄|der Kassenbon=o cupom fiscal=🧾|kaputt=quebrado, com defeito=💔|zurückbekommen=receber de volta=💶|der Fehler=o defeito, o erro=⚠️|die Reklamation=a reclamação (de produto)=📢|die Gutschrift=o crédito (na loja)=💳|innerhalb von=dentro de (um prazo)=📅|die Frist=o prazo=⏳|das Etikett=a etiqueta=🏷️',
+  x: 'der Kundenservice=o atendimento ao cliente|die Garantie=a garantia|reparieren=consertar|das Loch=o buraco|der Fleck=a mancha|eine Nummer kleiner=um número menor|die Originalverpackung=a embalagem original|unbenutzt=sem uso|die Abteilung=o departamento, a seção|Das tut mir leid.=Sinto muito.',
+  dlg: 'Guten Tag, ich möchte diese Hose umtauschen.=Bom dia, eu gostaria de trocar esta calça.|Was ist das Problem?=Qual é o problema?|Sie passt mir nicht. Sie ist zu klein.=Ela não serve. Está pequena demais.|Kein Problem. Haben Sie den Kassenbon?=Sem problema. A senhora tem o cupom fiscal?',
+  cz: 'Die Jacke passt ___ nicht.=mir=mich=ich|Die Farbe ___ mir nicht.=gefällt=gefallen=gefällst|Die Schuhe sind ___ groß.=zu=sehr=so',
+  whys: 'passen pede dativo: passt mir|die Farbe é o sujeito: gefällt|zu + adjetivo = demais: zu groß',
+  pts: 'Tamanho: Das passt mir nicht. Gosto: Das gefällt mir nicht. A coisa é o sujeito; a pessoa vai no dativo.|zu + adjetivo = demais: zu groß, zu klein, zu eng.|Defeito: Das ist kaputt. · Hier ist ein Loch.|Pedidos: eine Nummer größer, eine andere Farbe, das Geld zurück.',
+  ex: 'Das Hemd ist kaputt.=A camisa está com defeito.|Haben Sie die Hose eine Nummer größer?=Vocês têm a calça um número maior?|Die Farbe gefällt mir nicht.=Não gosto da cor.|Hier ist der Kassenbon.=Aqui está o cupom fiscal.',
+  bd: ['Die_Hose=S^a coisa é o sujeito|passt=V^passen: servir (no tamanho)|mir=OD^a pessoa vai no dativo|nicht.=NEG', 'A calça não serve em mim.'],
+  rule: 'troca',
+  hw: 'Escolha uma roupa ou um objeto que você comprou e imagine a troca: escreva o diálogo com o motivo (passt nicht, gefällt nicht, kaputt) e o que você quer.',
+  deep: `
+Comprou e não serviu, não gostou ou veio com defeito? Na Alemanha a troca é comum e quase sempre tranquila, desde que você explique o motivo. Hoje você aprende a fazer isso com passen, gefallen e zu.
+# Passo 1: não serve ou não gosta?
+| Problema | Em alemão |
+| não serve (tamanho) | Das passt mir nicht. |
+| não gosto | Das gefällt mir nicht. |
+| tem defeito | Das ist kaputt. |
+! Com **passen** e **gefallen** a coisa é o sujeito e a pessoa vai no **dativo**: Die Hose passt **mir** nicht.
+~ Die Farbe gefällt mir nicht. = Não gosto da cor.
+# Passo 2: zu = demais
+| Alemão | Português |
+| zu groß | grande demais |
+| zu klein | pequeno demais |
+| zu eng | apertado demais |
+| zu lang | comprido demais |
+BR "Muito grande" em português pode ser elogio ou problema. Em alemão, **sehr groß** é só "muito grande"; **zu groß** é problema: grande demais.
+~ Sie ist zu klein. = Ela está pequena demais.
+# Passo 3: o que você quer
+- **eine Nummer größer / kleiner**: um número maior / menor
+- **eine andere Farbe**: outra cor
+- **das Geld zurück**: o dinheiro de volta
+- **eine Gutschrift**: um crédito na loja
+~ Haben Sie die Hose eine Nummer größer? = Vocês têm a calça um número maior?
+# Passo 4: a conversa no caixa
+| Quem | Diz |
+| você | Ich möchte das umtauschen. |
+| loja | Was ist das Problem? |
+| loja | Haben Sie den Kassenbon? |
+| você | Kann ich das Geld zurückbekommen? |
+~ Hier ist der Kassenbon. = Aqui está o cupom fiscal.
+> Ensaie em voz alta uma troca: o que é, o problema e o que você quer.
+? Como se diz "não serve em mim"? || Das passt mir nicht.
+? Qual a diferença entre sehr groß e zu groß? || sehr = muito; zu = demais, um problema
+? O que é o Kassenbon? || o cupom fiscal
+`,
+});
+
+NL('n-bankpost', {
+  de: 'Auf der Bank und der Post', pt: 'Serviços no banco e no correio', gt: 'Perguntas formais · Ich möchte …',
+  gx: 'Nos serviços se fala com Sie e se pede com Ich möchte … + infinitivo no fim (Ich möchte ein Konto eröffnen). Perguntas úteis: Was kostet das? Wie lange dauert das? Brauche ich …?',
+  ge: 'Ich möchte ein Konto eröffnen.=Eu gostaria de abrir uma conta.|Ich möchte dieses Paket nach Brasilien schicken.=Eu gostaria de mandar este pacote para o Brasil.|Wie lange dauert das?=Quanto tempo demora?',
+  v: 'das Konto=a conta (bancária)=🏦|eröffnen=abrir (uma conta)=🔓|überweisen=transferir (dinheiro)=💸|die Bankkarte=o cartão do banco=💳|der Geldautomat=o caixa eletrônico=🏧|abheben=sacar=💵|der Ausweis=a carteira de identidade=🪪|der Brief=a carta=✉️|das Einschreiben=a carta registrada=📨|dauern=demorar, durar=⏳',
+  x: 'die IBAN=o número da conta (IBAN)|die Gebühr=a taxa|die PIN=a senha do cartão|der Kontoauszug=o extrato|der Schalter=o guichê|die Sendungsnummer=o código de rastreio|wiegen=pesar|die Packstation=o armário de retirada de pacotes|der Reisepass=o passaporte|die Wartenummer=a senha de espera',
+  dlg: 'Guten Tag, ich möchte ein Paket nach Brasilien schicken.=Bom dia, eu gostaria de mandar um pacote para o Brasil.|Gern. Wie schwer ist es?=Pois não. Quanto ele pesa?|Ungefähr zwei Kilo. Wie lange dauert das?=Uns dois quilos. Quanto tempo demora?|Ungefähr zwei Wochen. Das kostet 38 Euro.=Umas duas semanas. Custa 38 euros.',
+  cz: 'Ich möchte ein Konto ___.=eröffnen=eröffne=eröffnet|Wie lange ___ das?=dauert=dauern=dauerst|___ ich meinen Ausweis?=Brauche=Braucht=Brauchen',
+  whys: 'depois de möchte o outro verbo vai para o fim, no infinitivo|das é o sujeito: dauert|com ich: brauche',
+  pts: 'Pedir um serviço: Ich möchte … + infinitivo no fim (Ich möchte Geld abheben).|Perguntas: Was kostet das? · Wie lange dauert das? · Brauche ich meinen Ausweis?|No banco: ein Konto eröffnen, Geld überweisen, Geld abheben.|No correio: einen Brief schicken, ein Paket schicken, ein Einschreiben.',
+  ex: 'Ich möchte 200 Euro abheben.=Eu gostaria de sacar 200 euros.|Muss ich ein Formular ausfüllen?=Preciso preencher um formulário?|Was kostet ein Brief nach Brasilien?=Quanto custa uma carta para o Brasil?|Hier ist mein Ausweis.=Aqui está a minha identidade.',
+  bd: ['Ich=S|möchte=MOD^möchte na 2ª posição|ein_Konto=OA|eröffnen.=INF^o infinitivo vai para o fim', 'Eu gostaria de abrir uma conta.'],
+  rule: 'modal',
+  hw: 'Escreva três pedidos que você faria no banco ou no correio, com Ich möchte …, e uma pergunta para cada um (Was kostet …? Wie lange dauert …?).',
+  deep: `
+Abrir conta, sacar dinheiro, mandar um pacote para o Brasil: nos serviços alemães tudo é formal e direto. Com **Ich möchte …** e três ou quatro perguntas, você resolve quase tudo.
+# Passo 1: pedir com Ich möchte …
+**Ich möchte** + o que você quer + o verbo no **fim**, no infinitivo.
+~ Ich möchte ein Konto eröffnen. = Eu gostaria de abrir uma conta.
+~ Ich möchte 200 Euro abheben. = Eu gostaria de sacar 200 euros.
+# Passo 2: no banco
+| Alemão | Português |
+| ein Konto eröffnen | abrir uma conta |
+| Geld überweisen | transferir dinheiro |
+| Geld abheben | sacar dinheiro |
+| der Geldautomat | o caixa eletrônico |
+BR Para abrir conta pedem o **Ausweis** ou o **Reisepass** e, muitas vezes, o comprovante de endereço registrado. Sem endereço registrado, quase nada anda.
+~ Hier ist mein Ausweis. = Aqui está a minha identidade.
+# Passo 3: no correio
+| Alemão | Português |
+| einen Brief schicken | mandar uma carta |
+| ein Paket schicken | mandar um pacote |
+| ein Einschreiben | uma carta registrada |
+| die Sendungsnummer | o código de rastreio |
+~ Was kostet ein Brief nach Brasilien? = Quanto custa uma carta para o Brasil?
+# Passo 4: as perguntas que resolvem
+- **Was kostet das?** Quanto custa?
+- **Brauche ich …?** Eu preciso de …?
+- **Muss ich ein Formular ausfüllen?** Preciso preencher um formulário?
+~ Wie lange dauert das? = Quanto tempo demora?
+> Ensaie em voz alta: peça um serviço com Ich möchte … e faça duas perguntas.
+? Como se diz "sacar dinheiro"? || Geld abheben
+? Onde fica o verbo depois de Ich möchte? || no fim, no infinitivo
+? Como se pergunta "Quanto tempo demora?" || Wie lange dauert das?
+`,
+});
+
+NL('n-bestellung', {
+  de: 'Eine Online-Bestellung', pt: 'Ler a confirmação de um pedido e escrever uma reclamação curta', gt: 'leider · e-mail formal',
+  gx: 'Reclamação formal: Sehr geehrte Damen und Herren, o número do pedido, o problema com leider (o verbo vem logo depois), o que você quer e Mit freundlichen Grüßen. Datas em números: 06.05.2026.',
+  ge: 'Sehr geehrte Damen und Herren,=Prezados senhores,|Leider ist die Lieferung nicht angekommen.=Infelizmente a entrega não chegou.|Mit freundlichen Grüßen=Atenciosamente',
+  v: 'die Bestellung=o pedido (de compra)=🛒|die Bestellnummer=o número do pedido=#️⃣|die Lieferung=a entrega=🚚|liefern=entregar=📦|beschädigt=danificado=💥|die Rücksendung=a devolução=↩️|Sehr geehrte Damen und Herren=Prezados senhores=📩|Mit freundlichen Grüßen=Atenciosamente=✒️|erstatten=reembolsar=💶|der Artikel=o artigo, o produto=🏷️',
+  x: 'stornieren=cancelar (um pedido)|die Lieferzeit=o prazo de entrega|der Warenkorb=o carrinho de compras|die Versandkosten=o frete|kostenlos=grátis|der Händler=o vendedor, a loja|die Bestätigung=a confirmação|voraussichtlich=previsto|das Rücksendeetikett=a etiqueta de devolução|bezahlt=pago',
+  dlg: 'Ist dein Paket schon angekommen?=O seu pacote já chegou?|Ja, aber der Artikel ist beschädigt.=Sim, mas o produto está danificado.|Oh nein! Schreib dem Händler eine E-Mail.=Ah, não! Escreva um e-mail para a loja.|Ja, ich möchte mein Geld zurück.=Sim, eu quero o meu dinheiro de volta.',
+  cz: '___ ist die Lieferung nicht angekommen.=Leider=Gern=Bitte|Sehr ___ Damen und Herren,=geehrte=geehrter=gehört|Mit freundlichen ___=Grüßen=Grüße=Gruß',
+  whys: 'leider abre a frase da má notícia; o verbo vem logo depois|a fórmula fixa é Sehr geehrte Damen und Herren|a despedida formal é Mit freundlichen Grüßen',
+  pts: 'Abertura formal: Sehr geehrte Damen und Herren, ou Sehr geehrte Frau … / Sehr geehrter Herr …|O pedido: meine Bestellnummer ist 4521.|O problema com leider: Leider ist der Artikel beschädigt. Depois, o que você quer.|Fechamento: Mit freundlichen Grüßen + nome completo.',
+  ex: 'Meine Bestellnummer ist 4521.=O número do meu pedido é 4521.|Leider ist der Artikel beschädigt.=Infelizmente o produto está danificado.|Ich möchte den Artikel zurückschicken.=Eu gostaria de devolver o produto.|Bitte erstatten Sie mir das Geld.=Por favor, reembolsem o meu dinheiro.',
+  bd: ['Leider=ADV^leider na 1ª posição|ist=V^o verbo vem logo depois|der_Artikel=S|beschädigt.=PR^o estado do produto', 'Infelizmente o produto está danificado.'],
+  rule: 'reclamacao',
+  hw: 'Pense numa compra online que deu problema (ou invente) e escreva o e-mail de reclamação: abertura formal, número do pedido, o problema com leider, o que você quer e o fechamento.',
+  le: {
+    texto: {
+      t: 'Bestellbestätigung', kind: 'leitura',
+      intro: 'A confirmação de um pedido feito pela Ana numa loja online. Leia e responda.',
+      paras: ['Vielen Dank für Ihre Bestellung!', 'Bestellnummer: 4521 · Datum: 03.05.2026', '1 × Regenjacke, Größe M, Farbe Blau · 59,90 €', '1 × Rucksack, Schwarz · 34,90 €', 'Versandkosten: kostenlos · Summe: 94,80 €', 'Lieferung voraussichtlich am 06.05.2026. Rücksendung innerhalb von 30 Tagen kostenlos.'],
+      qs: [
+        { q: 'Qual é o número do pedido?', o: ['4521', '0305', '9480'], a: 0 },
+        { q: 'Quanto custa o frete?', o: ['nada, é grátis', '5,90 €', '34,90 €'], a: 0 },
+        { q: 'Quando a entrega deve chegar?', o: ['no dia 6 de maio', 'no dia 3 de maio', 'em 30 dias'], a: 0 },
+        { q: 'Em quanto tempo a Ana pode devolver de graça?', o: ['em até 30 dias', 'até o dia 6 de maio', 'ela não pode devolver'], a: 0 },
+      ],
+    },
+    escrita: {
+      t: 'Escreva a reclamação', tipo: 'form', ok: 'Reclamação escrita corretamente.',
+      pede: 'A jaqueta chegou com um buraco. Escreva um e-mail curto e formal para a loja, uma frase em cada linha.',
+      campos: [
+        { l: 'Anrede', d: 'Sehr geehrte Damen und Herren,', re: '^sehr geehrte\\s+damen\\s+und\\s+herren\\b', f: 'iu', err: 'Comece com a fórmula formal: Sehr geehrte Damen und Herren,', bad: [['^(hallo|liebe)', 'Para uma loja, use a abertura formal: <b>Sehr geehrte Damen und Herren,</b>']] },
+        { l: 'Bestellung', d: 'o número do pedido: meine Bestellnummer ist 4521.', re: '\\b4521\\b', f: 'iu', err: 'Diga o número do pedido: meine Bestellnummer ist 4521.' },
+        { l: 'Problem', d: 'o problema, com leider', re: '^leider\\s+(ist|sind|hat|haben|war|fehlt|kam)\\b', f: 'iu', err: 'Comece com leider e ponha o verbo logo depois: Leider ist die Jacke kaputt.', bad: [['^leider (die|der|das|ich|es)\\b', 'Depois de <b>leider</b> vem o verbo: Leider <b>ist</b> die Jacke …']] },
+        { l: 'Wunsch', d: 'o que você quer: eine neue Jacke / das Geld zurück', re: '\\b(möchte|bitte|erstatten|zurück|umtauschen|neue)\\b', f: 'iu', err: 'Diga o que quer: Ich möchte eine neue Jacke. / Bitte erstatten Sie mir das Geld.' },
+        { l: 'Gruß', d: 'Mit freundlichen Grüßen + o seu nome', re: '^mit freundlichen gr(ü|ue)(ß|ss)en\\b', f: 'iu', err: 'Feche com Mit freundlichen Grüßen e o seu nome.', bad: [['^viele gr', 'Num e-mail formal: <b>Mit freundlichen Grüßen</b>.']] },
+      ],
+      modelo: 'Sehr geehrte Damen und Herren, · meine Bestellnummer ist 4521. · Leider ist die Jacke kaputt. · Bitte erstatten Sie mir das Geld. · Mit freundlichen Grüßen, Ana Souza',
+    },
+  },
+  deep: `
+Esta lição é de **ler e escrever**. Você vai ler a confirmação de um pedido feito numa loja online e depois escrever uma reclamação curta e formal, porque o produto chegou com defeito.
+# Passo 1: ler a confirmação do pedido
+| Na confirmação | Significa |
+| Bestellnummer | número do pedido |
+| Versandkosten | frete |
+| Summe | total |
+| Lieferung voraussichtlich | entrega prevista |
+| Rücksendung | devolução |
+As datas vêm em números, com pontos: **06.05.2026** = 6 de maio de 2026.
+~ Meine Bestellnummer ist 4521. = O número do meu pedido é 4521.
+# Passo 2: o e-mail formal
+| Parte | Fórmula |
+| Abertura | Sehr geehrte Damen und Herren, |
+| Fechamento | Mit freundlichen Grüßen |
+BR Equivale ao nosso "Prezados senhores" e "Atenciosamente". Num e-mail para uma empresa, **Hallo** e **Viele Grüße** soam informais demais.
+~ Mit freundlichen Grüßen = Atenciosamente
+# Passo 3: o problema com leider
+**leider** abre a frase da má notícia, e o verbo vem logo depois:
+- Leider **ist** die Lieferung nicht angekommen.
+- Leider **fehlt** ein Artikel.
+~ Leider ist der Artikel beschädigt. = Infelizmente o produto está danificado.
+# Passo 4: o que você quer
+- Ich möchte den Artikel **umtauschen**.
+- Ich möchte den Artikel **zurückschicken**.
+- Bitte **erstatten** Sie mir das Geld.
+~ Bitte erstatten Sie mir das Geld. = Por favor, reembolsem o meu dinheiro.
+> No exercício, leia a confirmação do pedido e escreva a sua reclamação, uma frase por linha.
+? Como começa um e-mail formal para uma empresa? || Sehr geehrte Damen und Herren,
+? Como se fecha esse e-mail? || Mit freundlichen Grüßen
+? Complete: Leider ___ der Artikel beschädigt. || ist
+`,
+});
+
+/* Módulo 10 (21/11/2026): o dia de trabalho, o telefone e a lição de Ler e escrever "Eine Stellenanzeige". */
+NL('n-arbeitstag', {
+  de: 'Mein Arbeitstag', pt: 'Horários e colegas', gt: 'vor, nach, seit + Dativ (tempo)',
+  gx: 'Tempo com Dativ: vor (antes de; há, e acabou), nach (depois de), seit (desde; há, e continua). vor dem Meeting, nach der Arbeit, seit zwei Jahren. Abrindo a frase, o verbo vem logo depois.',
+  ge: 'Nach der Arbeit gehe ich nach Hause.=Depois do trabalho eu vou para casa.|Vor der Besprechung trinke ich einen Kaffee.=Antes da reunião eu tomo um café.|Ich arbeite seit drei Jahren hier.=Eu trabalho aqui há três anos.',
+  v: 'vor (+ Dativ)=antes de; há (tempo)=⏮️|nach (+ Dativ)=depois de=⏭️|seit (+ Dativ)=desde; há (e continua)=⏳|der Arbeitstag=o dia de trabalho=💼|die Kantine=o refeitório=🍽️|das Meeting=a reunião=👥|die Gleitzeit=o horário flexível=🕰️|das Homeoffice=o trabalho de casa=🏠|die Frühschicht=o turno da manhã=🌅|erledigen=resolver, fazer (tarefas)=✅',
+  x: 'die Spätschicht=o turno da tarde|die Nachtschicht=o turno da noite|der Schreibtisch=a escrivaninha|die Aufgabe=a tarefa|E-Mails beantworten=responder os e-mails|die Kaffeepause=a pausa do café|der Arbeitsweg=o caminho para o trabalho|pendeln=ir e voltar de outra cidade todo dia|der Urlaubstag=o dia de férias|die Teamsitzung=a reunião da equipe',
+  dlg: 'Wie sieht dein Arbeitstag aus?=Como é o seu dia de trabalho?|Ich fange um acht an. Vor dem Meeting lese ich meine E-Mails.=Eu começo às oito. Antes da reunião eu leio os meus e-mails.|Und nach der Arbeit?=E depois do trabalho?|Nach der Arbeit gehe ich mit Kollegen joggen.=Depois do trabalho eu vou correr com colegas.',
+  cz: 'Nach ___ Arbeit gehe ich nach Hause.=der=die=dem|Vor ___ Meeting trinke ich Kaffee.=dem=das=den|Ich arbeite ___ zwei Jahren hier.=seit=vor=nach',
+  whys: 'die Arbeit no dativo: der|das Meeting no dativo: dem|seit = há, e continua até hoje (verbo no presente)',
+  pts: 'vor, nach e seit pedem Dativ: der/das → dem, die → der, plural → den + n.|vor = antes de (vor dem Meeting) e há, no passado (vor zwei Jahren).|nach = depois de. seit = desde, com o presente (Ich arbeite seit 2020 hier).|Abrindo a frase, o verbo vem logo depois: Nach der Arbeit gehe ich …',
+  ex: 'Vor zwei Jahren habe ich hier angefangen.=Há dois anos eu comecei aqui.|Nach dem Mittagessen habe ich ein Meeting.=Depois do almoço eu tenho uma reunião.|Seit Montag arbeite ich im Homeoffice.=Desde segunda eu trabalho de casa.|In der Kantine esse ich mit Kollegen.=No refeitório eu como com colegas.',
+  bd: ['Nach_der_Arbeit=T^nach + Dativ: die Arbeit → der Arbeit|gehe=V^o verbo vem logo depois|ich=S|nach_Hause.=L', 'Depois do trabalho eu vou para casa.'],
+  rule: 'dativ_prep',
+  hw: 'Descreva o seu dia de trabalho ou de estudo em cinco frases, com vor, nach e seit (ex.: Vor der Arbeit trinke ich Kaffee.).',
+  deep: `
+Como é o seu dia de trabalho? Para contar, você precisa de três palavrinhas de tempo: **vor**, **nach** e **seit**. As três pedem **Dativ**, o mesmo caso que você já usa com mit e zu.
+# Passo 1: vor e nach
+| Alemão | Português |
+| vor dem Meeting | antes da reunião |
+| nach der Arbeit | depois do trabalho |
+| vor dem Mittagessen | antes do almoço |
+| nach der Pause | depois do intervalo |
+~ Nach der Arbeit gehe ich nach Hause. = Depois do trabalho eu vou para casa.
+# Passo 2: o Dativ depois de vor, nach, seit
+| Gênero | Artigo | Exemplo |
+| der | dem | vor dem Termin |
+| das | dem | nach dem Meeting |
+| die | der | nach der Arbeit |
+| plural | den + n | seit zwei Jahren |
+~ Vor der Besprechung trinke ich einen Kaffee. = Antes da reunião eu tomo um café.
+# Passo 3: vor e seit com tempo passado
+- **vor** + tempo = **há**, e acabou: Vor zwei Jahren habe ich hier angefangen.
+- **seit** + tempo = **há**, e continua: Ich arbeite seit zwei Jahren hier.
+BR Em português os dois são "há dois anos". Em alemão: acabou → **vor** (com Perfekt); continua → **seit** (com presente).
+~ Ich arbeite seit drei Jahren hier. = Eu trabalho aqui há três anos.
+# Passo 4: o dia de trabalho
+| Palavra | Significa |
+| die Frühschicht | o turno da manhã |
+| die Gleitzeit | o horário flexível |
+| das Homeoffice | o trabalho de casa |
+| die Kantine | o refeitório |
+~ Seit Montag arbeite ich im Homeoffice. = Desde segunda eu trabalho de casa.
+> Conte em voz alta o seu dia, com vor, nach e seit.
+? Complete: Nach ___ Arbeit gehe ich nach Hause. || der
+? "Há dois anos, e continuo" se diz com vor ou seit? || seit
+? Qual é o caso depois de vor, nach e seit? || Dativ
+`,
+});
+
+NL('n-telefon', {
+  de: 'Am Telefon', pt: 'Telefonar e deixar recado', gt: 'anrufen, zurückrufen, ausrichten',
+  gx: 'No telefone de trabalho: atenda com a empresa e o nome (… am Apparat), peça alguém (Kann ich bitte Frau … sprechen?) e deixe recado (Kann ich eine Nachricht hinterlassen?). anrufen e zurückrufen são separáveis: Ich rufe Sie morgen an.',
+  ge: 'Kann ich bitte Frau Weber sprechen?=Posso falar com a sra. Weber, por favor?|Sie ist gerade nicht da.=Ela não está no momento.|Kann ich eine Nachricht hinterlassen?=Posso deixar um recado?',
+  v: 'anrufen (ich rufe an)=ligar, telefonar=📞|zurückrufen=retornar a ligação=↩️|ausrichten=dar o recado=📨|hinterlassen=deixar (um recado)=📝|verbinden=transferir a ligação=🔀|am Apparat=falando (ao telefone)=☎️|die Durchwahl=o ramal=#️⃣|die Mailbox=a caixa postal=📬|sich verwählen=discar o número errado=❌|erreichen=conseguir falar com=🎯',
+  x: 'die Leitung=a linha|Die Verbindung ist schlecht.=A ligação está ruim.|lauter sprechen=falar mais alto|der Anrufbeantworter=a secretária eletrônica|die Vorwahl=o código de área|wählen=discar|auflegen=desligar (o telefone)|die SMS=a mensagem de texto|der Rückruf=o retorno da ligação|unter der Nummer=no número',
+  dlg: 'Firma Berger, Lena Koch am Apparat.=Empresa Berger, Lena Koch falando.|Guten Tag, kann ich bitte Herrn Weber sprechen?=Bom dia, posso falar com o sr. Weber, por favor?|Er ist gerade nicht da. Kann ich etwas ausrichten?=Ele não está no momento. Posso dar algum recado?|Ja. Könnte er mich bitte zurückrufen?=Sim. Ele poderia me retornar, por favor?',
+  cz: 'Ich ___ Sie morgen an.=rufe=anrufe=rufen|Könnten Sie mich bitte mit Frau Weber ___?=verbinden=verbindet=verbunden|Kann ich eine Nachricht ___?=hinterlassen=hinterlässt=hinterlasse',
+  whys: 'anrufen é separável: ich rufe … an|depois de könnten, o verbo vai para o fim no infinitivo|depois de kann, infinitivo no fim',
+  pts: 'Atenda com a empresa e o nome: Firma Berger, Lena Koch am Apparat. Quem liga: Hier ist …|Pedir alguém: Kann ich bitte Frau Weber sprechen?|Recado: Kann ich eine Nachricht hinterlassen? · Kann ich etwas ausrichten?|anrufen e zurückrufen são separáveis: Ich rufe Sie morgen an.',
+  ex: 'Einen Moment, ich verbinde Sie.=Um momento, vou transferir a ligação.|Die Leitung ist besetzt.=A linha está ocupada.|Bitte rufen Sie mich zurück.=Por favor, me retorne a ligação.|Meine Nummer ist 0151 2233 4455.=O meu número é 0151 2233 4455.',
+  bd: ['Ich=S|rufe=V^anrufen é separável: rufe na 2ª posição|Sie=OA|morgen=T|an.=PX^o prefixo an vai para o fim', 'Eu ligo para o senhor amanhã.'],
+  rule: 'separavel',
+  hw: 'Escreva duas ligações curtas: numa você pede para falar com alguém e deixa recado; na outra você atende e anota o recado. Leia em voz alta.',
+  deep: `
+Telefonar numa língua estrangeira assusta: sem gestos e sem rosto, só a voz. A boa notícia é que as ligações de trabalho seguem fórmulas fixas. Hoje você aprende as principais e os verbos separáveis do telefone.
+# Passo 1: atender e se apresentar
+| Quem | Diz |
+| quem atende | Firma Berger, Lena Koch am Apparat. |
+| quem liga | Guten Tag, hier ist Ana Souza. |
+**am Apparat** = "falando". Na Alemanha se atende o telefone de trabalho dizendo a empresa e o nome.
+~ Kann ich bitte Herrn Weber sprechen? = Posso falar com o sr. Weber, por favor?
+# Passo 2: transferir ou não está
+- **Einen Moment, ich verbinde Sie.** Um momento, vou transferir.
+- **Er ist gerade nicht da.** Ele não está no momento.
+- **Die Leitung ist besetzt.** A linha está ocupada.
+~ Einen Moment, ich verbinde Sie. = Um momento, vou transferir a ligação.
+# Passo 3: deixar e anotar recado
+| Para | Diga |
+| deixar recado | Kann ich eine Nachricht hinterlassen? |
+| oferecer | Kann ich etwas ausrichten? |
+| pedir retorno | Könnte er mich bitte zurückrufen? |
+~ Bitte rufen Sie mich zurück. = Por favor, me retorne a ligação.
+# Passo 4: os separáveis do telefone
+| Infinitivo | Na frase |
+| anrufen | Ich rufe Sie morgen an. |
+| zurückrufen | Er ruft Sie gleich zurück. |
+| ausrichten | Ich richte es ihm aus. |
+BR Dite números de telefone devagar, em pares ou dígito por dígito, e use **zwo** para não confundir zwei com drei.
+~ Ich rufe Sie morgen an. = Eu ligo para o senhor amanhã.
+> Ensaie em voz alta: peça para falar com alguém, ouça que a pessoa não está e deixe um recado.
+? O que significa "am Apparat"? || falando, ao atender
+? Como se pede para deixar recado? || Kann ich eine Nachricht hinterlassen?
+? Onde fica o an de anrufen na frase? || no fim
+`,
+});
+
+NL('n-stellenanzeige', {
+  de: 'Eine Stellenanzeige', pt: 'Ler um anúncio de emprego e escrever um e-mail de interesse', gt: 'Fórmulas de e-mail formal',
+  gx: 'E-mail de interesse: Sehr geehrte Frau … / Sehr geehrter Herr …, a vaga (mit großem Interesse habe ich Ihre Anzeige gelesen), a sua experiência, o pedido (Über eine Einladung zum Gespräch würde ich mich freuen) e Mit freundlichen Grüßen.',
+  ge: 'Sehr geehrte Frau Berger,=Prezada sra. Berger,|mit großem Interesse habe ich Ihre Anzeige gelesen.=li o seu anúncio com grande interesse.|Ich habe drei Jahre Erfahrung als Kellnerin.=Tenho três anos de experiência como garçonete.',
+  v: 'die Stellenanzeige=o anúncio de emprego=📰|die Bewerbung=a candidatura=📂|sich bewerben=candidatar-se=✋|das Interesse=o interesse=👀|die Voraussetzung=o requisito=📋|Vollzeit / Teilzeit=tempo integral / meio período=⏰|das Gehalt=o salário=💶|der Arbeitgeber=o empregador=🏢|das Vorstellungsgespräch=a entrevista de emprego=🤝|zuverlässig=confiável=🔒',
+  x: 'die Unterlagen=os documentos|der Nebenjob=o trabalho extra|die Berufserfahrung=a experiência profissional|teamfähig=que sabe trabalhar em equipe|flexibel=flexível|die Kenntnisse=os conhecimentos|ab sofort=a partir de já|befristet=por tempo determinado|unbefristet=por tempo indeterminado|das Anschreiben=a carta de apresentação',
+  dlg: 'Hast du die Anzeige vom Café Linde gesehen?=Você viu o anúncio do Café Linde?|Ja! Sie suchen eine Servicekraft in Teilzeit.=Sim! Eles procuram um atendente em meio período.|Bewirbst du dich?=Você vai se candidatar?|Ja, ich schreibe heute eine E-Mail.=Sim, eu escrevo um e-mail hoje.',
+  cz: 'Sehr ___ Herr Berger,=geehrter=geehrte=geehrt|Ich ___ mich um die Stelle.=bewerbe=bewerbt=bewerben|Ich habe zwei Jahre Erfahrung ___ Kellnerin.=als=wie=für',
+  whys: 'Herr é masculino: Sehr geehrter Herr …; para mulher, Sehr geehrte Frau …|sich bewerben é reflexivo; com ich: bewerbe mich|als = como, na função de',
+  pts: 'Abertura: Sehr geehrte Frau … / Sehr geehrter Herr … ou Sehr geehrte Damen und Herren.|Primeira frase, com minúscula: mit großem Interesse habe ich Ihre Anzeige gelesen.|Quem você é: Erfahrung als …, as línguas, quando pode começar. Pedido: Über eine Einladung zum Gespräch würde ich mich freuen.|Fechamento: Mit freundlichen Grüßen + nome completo.',
+  ex: 'Ich bewerbe mich um die Stelle als Verkäuferin.=Eu me candidato à vaga de vendedora.|Ich spreche Portugiesisch, Englisch und Deutsch.=Eu falo português, inglês e alemão.|Ich kann ab sofort anfangen.=Eu posso começar imediatamente.|Über eine Einladung zum Gespräch würde ich mich freuen.=Eu ficaria feliz com um convite para uma entrevista.',
+  bd: ['Ich=S|bewerbe=V^sich bewerben: reflexivo|mich=RX^o pronome reflexivo|um_die_Stelle.=PP^sich bewerben um + acusativo', 'Eu me candidato à vaga.'],
+  rule: 'candidatura',
+  hw: 'Procure um anúncio de emprego simples em alemão (ou use o do Café Linde) e escreva um e-mail curto de interesse, com as cinco partes da lição.',
+  le: {
+    texto: {
+      t: 'Stellenanzeige · Café Linde', kind: 'leitura',
+      intro: 'Um café em Berlim procura um atendente. Leia o anúncio e responda.',
+      paras: ['Café Linde sucht ab sofort eine Servicekraft (m/w/d) in Teilzeit, 20 Stunden pro Woche.', 'Ihre Aufgaben: Gäste bedienen, Kaffee machen, kassieren.', 'Sie haben Erfahrung im Service, sprechen gut Deutsch und sind freundlich und zuverlässig.', 'Wir bieten: ein nettes Team, flexible Arbeitszeiten und 14 Euro pro Stunde.', 'Interesse? Schreiben Sie eine kurze E-Mail an Frau Berger.'],
+      qs: [
+        { q: 'Quantas horas por semana é o trabalho?', o: ['20 horas', '14 horas', '40 horas'], a: 0 },
+        { q: 'O que o café oferece?', o: ['equipe simpática, horários flexíveis e 14 euros por hora', 'um salário fixo mensal', 'refeições grátis'], a: 0 },
+        { q: 'Qual destas é uma tarefa do trabalho?', o: ['atender os clientes', 'limpar a cozinha', 'fazer bolos'], a: 0 },
+        { q: 'Para quem se deve escrever?', o: ['para a sra. Berger', 'para o sr. Linde', 'para a equipe'], a: 0 },
+      ],
+    },
+    escrita: {
+      t: 'Escreva o seu e-mail de interesse', tipo: 'form', ok: 'E-mail escrito corretamente.',
+      pede: 'Escreva um e-mail curto e formal para a Frau Berger, uma frase em cada linha. Pode inventar a sua experiência.',
+      campos: [
+        { l: 'Anrede', d: 'Sehr geehrte Frau Berger,', re: '^sehr geehrte\\s+frau\\s+berger\\b', f: 'iu', err: 'Comece com Sehr geehrte Frau Berger,', bad: [['^sehr geehrter frau', 'Para mulher: Sehr <b>geehrte</b> Frau Berger.'], ['^(hallo|liebe)', 'Num e-mail de candidatura, use a abertura formal: <b>Sehr geehrte Frau Berger,</b>']] },
+        { l: 'Anzeige', d: 'mit großem Interesse habe ich Ihre Anzeige gelesen.', re: '\\b(interesse|anzeige|bewerbe)\\b', f: 'iu', err: 'Diga que viu o anúncio: mit großem Interesse habe ich Ihre Anzeige gelesen.' },
+        { l: 'Erfahrung', d: 'a sua experiência: Ich habe … Erfahrung als …', re: '\\b(erfahrung|gearbeitet|arbeite)\\b', f: 'iu', err: 'Fale da sua experiência: Ich habe zwei Jahre Erfahrung als Kellnerin.', bad: [['erfahrung wie', 'Para a função, use <b>als</b>: Erfahrung als Kellnerin.']] },
+        { l: 'Wunsch', d: 'o pedido: Über eine Einladung zum Gespräch würde ich mich freuen.', re: '\\b(einladung|gespräch|freuen|freue)\\b', f: 'iu', err: 'Peça a entrevista: Über eine Einladung zum Gespräch würde ich mich freuen.' },
+        { l: 'Gruß', d: 'Mit freundlichen Grüßen + nome completo', re: '^mit freundlichen gr(ü|ue)(ß|ss)en\\b', f: 'iu', err: 'Feche com Mit freundlichen Grüßen e o seu nome completo.', bad: [['^viele gr', 'Num e-mail formal: <b>Mit freundlichen Grüßen</b>.']] },
+      ],
+      modelo: 'Sehr geehrte Frau Berger, · mit großem Interesse habe ich Ihre Anzeige gelesen. · Ich habe zwei Jahre Erfahrung als Kellnerin. · Über eine Einladung zum Gespräch würde ich mich freuen. · Mit freundlichen Grüßen, Ana Souza',
+    },
+  },
+  deep: `
+Esta lição é de **ler e escrever**. Você vai ler um anúncio de emprego de um café e escrever um e-mail curto de interesse, com as fórmulas que todo e-mail formal alemão usa.
+# Passo 1: como ler um anúncio de emprego
+| No anúncio | Significa |
+| sucht ab sofort | procura, para começar já |
+| (m/w/d) | masculino, feminino, diverso |
+| Teilzeit / Vollzeit | meio período / tempo integral |
+| Ihre Aufgaben | as suas tarefas |
+| Wir bieten | o que a empresa oferece |
+~ Sie suchen eine Servicekraft in Teilzeit. = Eles procuram um atendente em meio período.
+# Passo 2: abertura e fechamento formais
+| Para | Abertura |
+| mulher | Sehr geehrte Frau Berger, |
+| homem | Sehr geehrter Herr Berger, |
+| sem nome | Sehr geehrte Damen und Herren, |
+Fechamento: **Mit freundlichen Grüßen** + nome completo.
+~ Sehr geehrter Herr Berger, = Prezado sr. Berger,
+# Passo 3: o corpo do e-mail
+- A vaga: mit großem Interesse habe ich Ihre Anzeige gelesen.
+- Quem você é: Ich habe zwei Jahre Erfahrung als Kellnerin.
+- O pedido: Über eine Einladung zum Gespräch würde ich mich freuen.
+BR Depois da vírgula de **Sehr geehrte Frau Berger,** a primeira frase começa com **minúscula**: "mit großem Interesse …".
+~ Ich kann ab sofort anfangen. = Eu posso começar imediatamente.
+# Passo 4: sich bewerben
+**sich bewerben um** + acusativo = candidatar-se a. É reflexivo: ich bewerbe **mich**, du bewirbst **dich**.
+~ Ich bewerbe mich um die Stelle. = Eu me candidato à vaga.
+> No exercício, leia o anúncio do Café Linde e escreva o seu e-mail, uma frase por linha.
+? Como começa um e-mail para a Frau Berger? || Sehr geehrte Frau Berger,
+? Como se fecha um e-mail formal? || Mit freundlichen Grüßen
+? O que significa Teilzeit? || meio período
+`,
+});
+
+V('Umtauschen',
+  'V:Não serve ou não gosta?;passen · o tamanho|Die Hose passt mir nicht.|Sie ist zu klein.;gefallen · o gosto|Die Farbe gefällt mir nicht.|Ich mag die Farbe nicht.',
+  'P:A troca no caixa;O quê=Ich möchte das umtauschen.;O motivo=Es passt mir nicht.;O que você quer=eine Nummer größer;A prova=Hier ist der Kassenbon.');
+V('Auf der Bank und der Post',
+  'V:No banco ou no correio?;die Bank|ein Konto eröffnen|Geld überweisen|Geld abheben;die Post|einen Brief schicken|ein Paket schicken|ein Einschreiben',
+  'E:Pedir um serviço;Ich^s|möchte^v|ein Konto^o|eröffnen.^v2');
+V('Eine Online-Bestellung',
+  'V:Informal ou formal?;Para amigos|Hallo Jonas,|Viele Grüße;Para empresas|Sehr geehrte Damen und Herren,|Mit freundlichen Grüßen',
+  'P:O e-mail de reclamação;Abertura=Sehr geehrte Damen und Herren,;O pedido=meine Bestellnummer ist 4521.;O problema=Leider ist die Jacke kaputt.;O que você quer=Bitte erstatten Sie mir das Geld.;Fechamento=Mit freundlichen Grüßen');
+V('Mein Arbeitstag',
+  'P:Um dia de trabalho;vor der Arbeit=Kaffee trinken;um acht Uhr=anfangen;vor dem Meeting=E-Mails lesen;nach dem Mittagessen=Meeting;nach der Arbeit=nach Hause gehen',
+  'V:vor ou seit?;vor · acabou|Vor zwei Jahren habe ich hier angefangen.;seit · continua|Ich arbeite seit zwei Jahren hier.');
+V('Am Telefon',
+  'P:A ligação de trabalho;Atendem=Firma Berger, Lena Koch am Apparat.;Você pede=Kann ich bitte Herrn Weber sprechen?;Ele não está=Er ist gerade nicht da.;O recado=Könnte er mich bitte zurückrufen?',
+  'E:anrufen na frase;Ich^s|rufe^v|Sie morgen^c|an.^v2');
+V('Eine Stellenanzeige',
+  'M:O anúncio em poucas palavras;No anúncio|Significa;ab sofort|para começar já;(m/w/d)|para qualquer gênero;Teilzeit|meio período;Wir bieten|a empresa oferece',
+  'P:O e-mail de interesse;Abertura=Sehr geehrte Frau Berger,;A vaga=mit großem Interesse habe ich Ihre Anzeige gelesen.;Quem sou=Ich habe zwei Jahre Erfahrung als Kellnerin.;O pedido=Über eine Einladung zum Gespräch würde ich mich freuen.;Fechamento=Mit freundlichen Grüßen');
+
+S_('Umtauschen', 'Kein Problem.=Sem problema.');
+S_('Auf der Bank und der Post', 'ungefähr=mais ou menos, uns');
+S_('Eine Online-Bestellung', 'ankommen (angekommen)=chegar (Perfekt: ist angekommen)|Oh nein!=Ah, não!');
+S_('Mein Arbeitstag', 'joggen gehen=ir correr');
+S_('Am Telefon', 'gerade=neste momento');
+S_('Eine Stellenanzeige', 'die Kellnerin=a garçonete|das Gespräch=a conversa; aqui, a entrevista|die Servicekraft=o atendente (em café ou restaurante)|du bewirbst dich=você se candidata (de sich bewerben)');
 // Esquemas visuais (mesmo formato de data/visuals.js) e palavras de apoio (data/support.js) das lições novas.
 V('Wie schreibt man das?',
   'V:As letras que mais enganam;V se chama "fau"|Vera: fau · e · er · a;W se chama "vê"|Wien: vê · i · e · en;Z se chama "tsét"|Zoo: tsét · o · o',
@@ -1422,8 +1788,8 @@ const SEQ = [
   { lv: 'A1', n: 'Saúde e fim de semana', l: [16, 'n-arzttermin', 17, 18, 'n-wochenende', 'n-postkarte'] },
   { lv: 'A2', n: 'Biografia e passado', l: [19, 'n-lebenslauf', 20, 'n-ausbildung', 23, 'n-email'] },
   { lv: 'A2', n: 'Casa e vizinhança', l: [21, 27, 28, 26, 'n-hausordnung', 'n-zettel-nachbarn'] },
-  { lv: 'A2', n: 'Compras e serviços', l: [22, 31, 32, '?Umtauschen', '?Auf der Bank und der Post', '?Ler e escrever: Eine Online-Bestellung'] },
-  { lv: 'A2', n: 'Trabalho', l: [30, '?Mein Arbeitstag', 35, 38, '?Am Telefon', '?Ler e escrever: Eine Stellenanzeige'] },
+  { lv: 'A2', n: 'Compras e serviços', l: [22, 31, 32, 'n-umtauschen', 'n-bankpost', 'n-bestellung'] },
+  { lv: 'A2', n: 'Trabalho', l: [30, 'n-arbeitstag', 35, 38, 'n-telefon', 'n-stellenanzeige'] },
   { lv: 'A2', n: 'Saúde', l: [33, '?Ich brauche einen Termin', '?In der Apotheke', '?Gesund leben', '?Im Notfall', '?Ler e escrever: Krank melden'] },
   { lv: 'A2', n: 'Viagens', l: [29, 34, '?Am Bahnhof und am Flughafen', 25, '?Probleme auf der Reise', '?Ler e escrever: Eine Hotelbewertung'] },
   { lv: 'A2', n: 'Festas e relações', l: [39, 40, 36, 37, 24, '?Ler e escrever: Ein Blogbeitrag'] },
