@@ -87,3 +87,10 @@ Object.assign(OBJ, {
   'n-notfall': { o: 'Consigo pedir ajuda numa emergência, chamar uma ambulância e dizer o que aconteceu.', a: 'Você consegue pedir ajuda e explicar uma emergência?', ref: 'Obtaining goods and services · A2 (emergências)' },
   'n-krankmelden': { o: 'Consigo ler uma bula simples e escrever uma mensagem avisando que estou doente.', a: 'Você consegue avisar o trabalho que está doente?', ref: 'Notes, messages and forms · A2; Reading for orientation · A2' },
 });
+// Módulos 12 e 13 (21/11/2026)
+Object.assign(OBJ, {
+  'n-bahnhof': { o: 'Consigo entender avisos de atraso, cancelamento e baldeação na estação e no aeroporto.', a: 'Você consegue entender um aviso de atraso ou de cancelamento?', ref: 'Understanding announcements and instructions · A2' },
+  'n-reiseprobleme': { o: 'Consigo explicar um problema na viagem, dizer o que aconteceu e pedir ajuda.', a: 'Você consegue explicar um imprevisto de viagem e pedir ajuda?', ref: 'Obtaining goods and services · A2' },
+  'n-hotelbewertung': { o: 'Consigo ler avaliações de hotel e escrever uma curta, dizendo o que foi bom e o que foi ruim.', a: 'Você consegue escrever uma avaliação curta de um hotel?', ref: 'Reading for orientation · A2; Creative writing · A2' },
+  'n-blog': { o: 'Consigo ler um post de blog sobre uma festa e escrever um comentário com a minha opinião.', a: 'Você consegue comentar um post dando a sua opinião?', ref: 'Reading correspondence · A2; Online conversation and discussion · A2' },
+});

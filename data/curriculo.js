@@ -1998,6 +1998,260 @@ S_('In der Apotheke', 'das Penicillin=a penicilina');
 S_('Gesund bleiben', 'keine Zeit für …=sem tempo para …');
 S_('Im Notfall', 'passieren (ist passiert)=acontecer');
 S_('Krank melden', 'jemand=alguém|die Erwachsenen=os adultos');
+/* Módulo 12 (21/11/2026): avisos de estação e aeroporto, imprevistos e a lição de Ler e escrever "Eine Hotelbewertung". */
+NL('n-bahnhof', {
+  de: 'Am Bahnhof und am Flughafen', pt: 'Avisos, atrasos e conexões', gt: 'Verspätung · fällt aus · umsteigen',
+  gx: 'Atraso: Der Zug hat 20 Minuten Verspätung. Cancelamento: Der Zug fällt aus (ausfallen). Baldeação: umsteigen (In Köln steigen Sie um). No painel: Gleis, Abfahrt, Ankunft. No aeroporto: der Flug ist verspätet ou annulliert.',
+  ge: 'Der Zug nach Hamburg hat zwanzig Minuten Verspätung.=O trem para Hamburgo tem vinte minutos de atraso.|Der Zug fällt heute aus.=O trem foi cancelado hoje.|In Köln müssen Sie umsteigen.=Em Colônia o senhor precisa fazer baldeação.',
+  v: 'die Verspätung=o atraso=⏰|das Gleis=a plataforma (o trilho)=🛤️|umsteigen=fazer baldeação=🔀|der Anschluss=a conexão=🔗|die Durchsage=o aviso pelo alto-falante=📢|der Abflug=a partida (do avião)=🛫|die Landung=a aterrissagem=🛬|das Gate=o portão de embarque=🚪|die Bordkarte=o cartão de embarque=🎫|der Ersatzverkehr=o transporte substituto=🚌',
+  x: 'ausfallen (er fällt aus)=ser cancelado|verspätet=atrasado|annulliert=cancelado (voo)|die Gepäckausgabe=a esteira de bagagens|das Handgepäck=a bagagem de mão|die Sicherheitskontrolle=o controle de segurança|der Fahrgast=o passageiro|die Weiterfahrt=a continuação da viagem|der Bahnsteig=a plataforma|die Entschädigung=a indenização',
+  dlg: 'Entschuldigung, fährt der Zug nach Köln von Gleis 7?=Com licença, o trem para Colônia sai da plataforma 7?|Ja, aber er hat 30 Minuten Verspätung.=Sim, mas está com 30 minutos de atraso.|Oh nein! Dann verpasse ich meinen Anschluss.=Ah, não! Aí eu perco a minha conexão.|Fragen Sie am Infoschalter. Es gibt einen späteren Zug.=Pergunte no balcão de informações. Tem um trem mais tarde.',
+  cz: 'Der Zug hat zehn Minuten ___.=Verspätung=verspätet=spät|Der Zug ___ heute aus.=fällt=fallt=fallen|In Köln müssen Sie ___.=umsteigen=steigen um=umgestiegen',
+  whys: 'o trem "tem" atraso: Verspätung haben|ausfallen é separável e troca a → ä: er fällt … aus|depois de müssen, o separável fica junto no fim: umsteigen',
+  pts: 'Atraso: Der Zug hat 20 Minuten Verspätung. / Der Flug ist verspätet.|Cancelamento: Der Zug fällt aus. Der Flug ist annulliert.|Baldeação: umsteigen (In Köln steigen Sie um; com modal: Sie müssen umsteigen).|Nos avisos: Gleis, Abfahrt, Ankunft, Anschluss, Ersatzverkehr.',
+  ex: 'Achtung an Gleis 3!=Atenção na plataforma 3!|Der Flug nach Lissabon ist verspätet.=O voo para Lisboa está atrasado.|Wo ist die Gepäckausgabe?=Onde é a esteira de bagagens?|Ich habe meinen Anschluss verpasst.=Eu perdi a minha conexão.',
+  bd: ['Der_Zug=S|fällt=V^ausfallen é separável: fällt na 2ª posição|heute=T|aus.=PX^o prefixo aus vai para o fim', 'O trem foi cancelado hoje.'],
+  rule: 'separavel',
+  hw: 'Procure no site da companhia ferroviária alemã uma viagem entre duas cidades e anote a plataforma, o horário e se há baldeação. Depois escreva três frases sobre a viagem.',
+  deep: `
+Trem atrasado, conexão perdida, voo cancelado: na estação e no aeroporto, entender os avisos faz toda a diferença. Hoje você aprende as palavras dos painéis e dos alto-falantes.
+# Passo 1: o painel de partidas
+| No painel | Significa |
+| Abfahrt / Ankunft | partida / chegada |
+| Gleis 7 | plataforma 7 |
+| + 20 | 20 minutos de atraso |
+| fällt aus | cancelado |
+~ Der Zug fährt von Gleis 7. = O trem sai da plataforma 7.
+# Passo 2: atraso e cancelamento
+- **die Verspätung**: Der Zug hat 20 Minuten Verspätung.
+- **ausfallen** (separável, a → ä): Der Zug **fällt** heute **aus**.
+- No avião: Der Flug ist **verspätet** ou **annulliert**.
+BR Atraso de trem é comum na Alemanha. Se o atraso for grande, você pode ter direito a uma **Entschädigung** (reembolso de parte da passagem).
+~ Der Zug hat zwanzig Minuten Verspätung. = O trem tem vinte minutos de atraso.
+# Passo 3: baldeação e conexão
+**umsteigen** = trocar de trem ou de ônibus. É separável: In Köln **steigen** Sie **um**. Com modal fica junto: Sie müssen in Köln **umsteigen**.
+~ In Köln müssen Sie umsteigen. = Em Colônia o senhor precisa fazer baldeação.
+# Passo 4: no aeroporto
+| Alemão | Português |
+| der Abflug | a partida |
+| die Bordkarte | o cartão de embarque |
+| das Gate | o portão |
+| die Gepäckausgabe | a esteira de bagagens |
+~ Wo ist die Gepäckausgabe? = Onde é a esteira de bagagens?
+> Leia em voz alta um aviso inventado: Der Zug nach … hat … Minuten Verspätung.
+? O que significa "Der Zug fällt aus"? || o trem foi cancelado
+? Como se diz "plataforma"? || das Gleis
+? O que é umsteigen? || fazer baldeação, trocar de trem
+`,
+});
+
+NL('n-reiseprobleme', {
+  de: 'Probleme auf der Reise', pt: 'Resolver imprevistos', gt: 'Perfekt + weil (revisão)',
+  gx: 'Contar o problema no Perfekt (Ich habe meinen Pass verloren) e explicar com weil, com o verbo no fim (…, weil der Zug Verspätung hatte). Pedir ajuda: Können Sie mir helfen? Was kann ich jetzt machen?',
+  ge: 'Mein Koffer ist nicht angekommen.=A minha mala não chegou.|Ich habe meinen Pass verloren.=Eu perdi o meu passaporte.|Ich komme zu spät, weil der Zug Verspätung hatte.=Eu chego atrasada porque o trem atrasou.',
+  v: 'verlieren (verloren)=perder=😟|gestohlen=roubado=🦹|das Fundbüro=os achados e perdidos=🔎|die Botschaft=a embaixada=🏛️|das Konsulat=o consulado=🏢|die Reiseversicherung=o seguro-viagem=🛡️|die Lösung=a solução=💡|das Gepäck=a bagagem=🧳|die Panne=a pane (do carro)=🚗|funktionieren=funcionar=⚙️',
+  x: 'die Klimaanlage=o ar-condicionado|das WLAN=o wi-fi|überbucht=com overbooking|der Ersatz=a substituição|die Kreditkarte=o cartão de crédito|sperren=bloquear|die Diebstahlanzeige=o boletim de ocorrência (de roubo)|der Abschleppdienst=o guincho|ersetzen=substituir, reembolsar|umbuchen=remarcar (passagem)',
+  dlg: 'Guten Tag, mein Koffer ist nicht angekommen.=Bom dia, a minha mala não chegou.|Das tut mir leid. Welche Flugnummer hatten Sie?=Sinto muito. Qual era o número do seu voo?|LH 507 aus São Paulo. Was kann ich jetzt machen?=LH 507, de São Paulo. O que eu posso fazer agora?|Füllen Sie bitte dieses Formular aus. Wir bringen den Koffer ins Hotel.=Preencha este formulário, por favor. Nós levamos a mala até o hotel.',
+  cz: 'Ich ___ meinen Pass verloren.=habe=bin=hat|Mein Koffer ist nicht ___.=angekommen=ankommen=geankommen|Ich komme zu spät, weil der Zug Verspätung ___.=hatte=hat gehabt=hatten',
+  whys: 'verlieren faz o Perfekt com haben: habe … verloren|ankommen é separável: an-ge-kommen|depois de weil, o verbo conjugado vai para o fim: hatte',
+  pts: 'O que aconteceu, no Perfekt: Ich habe meinen Pass verloren. Mein Koffer ist nicht angekommen.|O motivo, com weil (verbo no fim): …, weil der Zug Verspätung hatte.|Pedir ajuda: Können Sie mir helfen? · Was kann ich jetzt machen?|Aonde ir: Fundbüro (achados e perdidos), Polizei (roubo), Botschaft ou Konsulat (passaporte).',
+  ex: 'Man hat meine Tasche gestohlen.=Roubaram a minha bolsa.|Die Klimaanlage im Zimmer funktioniert nicht.=O ar-condicionado do quarto não funciona.|Ich muss meine Kreditkarte sperren.=Preciso bloquear o meu cartão de crédito.|Ich habe den Zug verpasst, weil der Bus zu spät war.=Perdi o trem porque o ônibus atrasou.',
+  bd: ['Ich_komme_zu_spät,=C^a oração principal|weil=C^weil abre o motivo|der_Zug=S|Verspätung=OA|hatte.=V^com weil, o verbo conjugado vai para o fim', 'Eu chego atrasada porque o trem atrasou.'],
+  rule: 'weil',
+  hw: 'Pense num problema que você já teve numa viagem (ou invente) e conte em quatro frases: o que aconteceu (Perfekt), por quê (weil) e como resolveu.',
+  deep: `
+Mala perdida, cartão roubado, quarto sem ar-condicionado: imprevistos acontecem em qualquer viagem. Hoje você revisa o Perfekt e o weil para contar o problema e pedir ajuda.
+# Passo 1: contar o problema no Perfekt
+| Problema | No Perfekt |
+| perder | Ich habe meinen Pass verloren. |
+| não chegar | Mein Koffer ist nicht angekommen. |
+| roubar | Man hat meine Tasche gestohlen. |
+| perder o trem | Ich habe den Zug verpasst. |
+~ Ich habe meinen Pass verloren. = Eu perdi o meu passaporte.
+# Passo 2: explicar com weil
+Depois de **weil**, o verbo conjugado vai para o **fim**. No passado, com **hatte** e **war** ou com o Perfekt:
+- …, weil der Zug Verspätung **hatte**.
+- …, weil der Bus zu spät **war**.
+~ Ich komme spät, weil der Bus spät war. = Eu chego tarde porque o ônibus atrasou.
+# Passo 3: pedir ajuda
+- **Können Sie mir helfen?** O senhor pode me ajudar?
+- **Die Klimaanlage funktioniert nicht.** O ar-condicionado não funciona.
+~ Was kann ich jetzt machen? = O que eu posso fazer agora?
+# Passo 4: aonde ir
+| Problema | Aonde ir |
+| perdi algo | das Fundbüro |
+| fui roubado | die Polizei |
+| perdi o passaporte | die Botschaft / das Konsulat |
+BR Para um passaporte brasileiro perdido, o caminho é a Embaixada do Brasil, em Berlim, ou um consulado-geral, como os de Frankfurt e de Munique.
+~ Wo ist das Fundbüro? = Onde ficam os achados e perdidos?
+> Conte em voz alta um imprevisto de viagem: o que aconteceu e por quê.
+? Qual é o Perfekt de verlieren? || hat verloren
+? Onde você procura algo que perdeu? || im Fundbüro
+? Depois de weil, onde fica o verbo? || no fim
+`,
+});
+
+NL('n-hotelbewertung', {
+  de: 'Eine Hotelbewertung', pt: 'Ler avaliações de hotel e escrever uma curta', gt: 'Adjetivos (revisão)',
+  gx: 'Avaliação: o que foi bom e o que foi ruim, com adjetivos, e uma recomendação. Depois de war, o adjetivo fica sem terminação (Das Zimmer war sauber); antes do substantivo, tem terminação (ein ruhiges Zimmer).',
+  ge: 'Das Zimmer war sauber und ruhig.=O quarto estava limpo e silencioso.|Das Personal war sehr freundlich.=Os funcionários foram muito simpáticos.|Ich kann das Hotel empfehlen.=Eu posso recomendar o hotel.',
+  v: 'die Bewertung=a avaliação=⭐|das Personal=os funcionários=👥|die Sauberkeit=a limpeza=🧼|das Preis-Leistungs-Verhältnis=o custo-benefício=⚖️|enttäuscht=decepcionado=😞|zufrieden=satisfeito=😊|der Stern=a estrela=🌟|der Aufenthalt=a estadia=🏨|das Frühstücksbuffet=o café da manhã em bufê=🥐|weiterempfehlen=recomendar a outras pessoas=👍',
+  x: 'die Matratze=o colchão|hellhörig=com paredes finas (dá para ouvir tudo)|veraltet=antiquado|top=excelente|erholsam=repousante|das Badezimmer=o banheiro|die Bushaltestelle=o ponto de ônibus|zu Fuß erreichbar=dá para ir a pé|die Pension=a pousada|der Gastgeber=o anfitrião',
+  dlg: 'Wie war das Hotel in Wien?=Como foi o hotel em Viena?|Super! Das Zimmer war groß und hell.=Ótimo! O quarto era grande e claro.|Und das Frühstück?=E o café da manhã?|Leider nicht so gut. Aber die Lage war perfekt.=Infelizmente não tão bom. Mas a localização era perfeita.',
+  cz: 'Wir hatten ein ___ Zimmer.=ruhiges=ruhige=ruhiger|Das Personal war sehr ___.=freundlich=freundliche=freundliches|Ich kann das Hotel ___.=empfehlen=empfehle=empfohlen',
+  whys: 'depois de ein, com substantivo neutro, o adjetivo leva -es: ein ruhiges Zimmer|depois de war o adjetivo fica sem terminação|depois de kann, infinitivo no fim',
+  pts: 'Depois de sein (ist, war), o adjetivo fica sem terminação: Das Zimmer war sauber.|Antes do substantivo, tem terminação: ein ruhiges Zimmer, das freundliche Personal.|O ruim: leider, nicht so, zu (Das Bett war zu weich).|Recomendação: Ich kann das Hotel (nicht) empfehlen.',
+  ex: 'Wir hatten ein ruhiges Zimmer mit Balkon.=Tivemos um quarto silencioso com varanda.|Das Bett war leider zu weich.=Infelizmente a cama era macia demais.|Die Lage ist zentral, aber laut.=A localização é central, mas barulhenta.|Insgesamt sind wir zufrieden.=No geral, ficamos satisfeitos.',
+  bd: ['Wir=S|hatten=V^hatten: Präteritum de haben|ein_ruhiges_Zimmer=OA^das Zimmer depois de ein: -es|mit_Balkon.=PP', 'Tivemos um quarto silencioso com varanda.'],
+  rule: 'avaliacao',
+  hw: 'Escreva uma avaliação curta de um hotel, restaurante ou lugar onde você esteve: duas coisas boas, uma ruim (com leider ou zu) e se você recomenda.',
+  le: {
+    texto: {
+      t: 'Bewertungen · Hotel Am Park, Wien', kind: 'leitura',
+      intro: 'Duas avaliações de um hotel em Viena. Leia e responda.',
+      paras: ['★★★★★ Marta, Lissabon: Super Lage! Das Hotel ist ruhig und nur fünf Minuten von der U-Bahn. Das Personal war sehr freundlich. Ich kann das Hotel empfehlen.', '★★☆☆☆ Peter, Köln: Das Zimmer war sauber, aber sehr klein und leider hellhörig. Das Frühstück war teuer und nicht so gut. Für den Preis bin ich enttäuscht.'],
+      qs: [
+        { q: 'O que a Marta achou da localização?', o: ['ótima', 'barulhenta', 'longe do metrô'], a: 0 },
+        { q: 'Qual foi o problema do quarto do Peter?', o: ['era pequeno e dava para ouvir tudo', 'estava sujo', 'não tinha janela'], a: 0 },
+        { q: 'O que o Peter achou do café da manhã?', o: ['caro e não muito bom', 'barato e bom', 'não havia café da manhã'], a: 0 },
+        { q: 'Quem recomenda o hotel?', o: ['a Marta', 'o Peter', 'os dois'], a: 0 },
+      ],
+    },
+    escrita: {
+      t: 'Escreva a sua avaliação', tipo: 'form', ok: 'Avaliação escrita corretamente.',
+      pede: 'Você passou duas noites no Hotel Am Park. Escreva uma avaliação curta, uma frase em cada linha.',
+      campos: [
+        { l: 'Titel', d: 'um título: Schönes Hotel! / Gute Lage', re: '\\b\\p{L}+(es|er|e|en)\\s+\\p{Lu}\\p{L}+', f: 'u', err: 'Escreva um título com adjetivo + substantivo: Schönes Hotel! / Gute Lage' },
+        { l: 'Positiv', d: 'algo bom: Das Zimmer war sauber.', re: '\\b(war|waren|ist|sind)\\b.+\\b(gut|sauber|ruhig|freundlich|groß|hell|schön|toll|super|zentral|bequem|modern|perfekt|lecker)\\b', f: 'iu', err: 'Diga algo bom com war + adjetivo: Das Zimmer war sauber.', bad: [['\\bwar (saubere|ruhige|freundliche|gute|große)\\b', 'Depois de <b>war</b> o adjetivo fica <b>sem terminação</b>: Das Zimmer war sauber.']] },
+        { l: 'Negativ', d: 'algo ruim, com leider ou zu', re: '\\b(leider|zu|nicht so|aber)\\b', f: 'iu', err: 'Diga algo ruim com leider ou zu: Das Frühstück war leider nicht so gut.' },
+        { l: 'Adjektiv', d: 'um adjetivo antes do substantivo: Wir hatten ein ruhiges Zimmer.', re: '\\b(ein|eine|einen|das|die|der|den)\\s+\\p{L}+(es|er|e|en)\\s+\\p{Lu}', f: 'u', err: 'Use um adjetivo antes do substantivo: Wir hatten ein ruhiges Zimmer.', bad: [['ein ruhige zimmer|ein ruhiger zimmer', 'das Zimmer é neutro: ein ruhig<b>es</b> Zimmer.']] },
+        { l: 'Empfehlung', d: 'recomenda? Ich kann das Hotel (nicht) empfehlen.', re: '\\bempfehlen\\b', f: 'iu', err: 'Termine com a recomendação: Ich kann das Hotel empfehlen.' },
+      ],
+      modelo: 'Schönes Hotel! · Das Personal war sehr freundlich. · Das Frühstück war leider nicht so gut. · Wir hatten ein ruhiges Zimmer. · Ich kann das Hotel empfehlen.',
+    },
+  },
+  deep: `
+Esta lição é de **ler e escrever**. Antes de reservar, todo mundo lê avaliações. Você vai ler duas sobre um hotel em Viena e escrever a sua, revisando os adjetivos: sem terminação depois de **war**, com terminação antes do substantivo.
+# Passo 1: como ler uma avaliação
+| Palavra | Significa |
+| die Lage | a localização |
+| das Personal | os funcionários |
+| hellhörig | dá para ouvir tudo |
+| enttäuscht | decepcionado |
+~ Das Personal war sehr freundlich. = Os funcionários foram muito simpáticos.
+# Passo 2: adjetivo depois de war
+Depois de **sein** (ist, war), o adjetivo fica **sem terminação**:
+- Das Zimmer war **sauber**.
+- Die Lage ist **zentral**.
+~ Das Zimmer war sauber und ruhig. = O quarto estava limpo e silencioso.
+# Passo 3: adjetivo antes do substantivo
+| Com ein | Com der/die/das |
+| ein ruhiges Zimmer | das ruhige Zimmer |
+| ein großer Balkon | der große Balkon |
+| eine schöne Aussicht | die schöne Aussicht |
+! Antes do substantivo o adjetivo sempre tem terminação. Depois de **ein**, ela mostra o gênero: -er, -e, -es.
+~ Wir hatten ein ruhiges Zimmer. = Tivemos um quarto silencioso.
+# Passo 4: o bom, o ruim e a recomendação
+- O ruim, com **leider**, **nicht so** ou **zu**: Das Frühstück war leider nicht so gut.
+- A recomendação: Ich kann das Hotel (nicht) **empfehlen**.
+BR Avaliações alemãs costumam ser diretas. Um "nicht so gut" já é uma crítica clara.
+~ Ich kann das Hotel empfehlen. = Eu posso recomendar o hotel.
+> No exercício, leia as duas avaliações e escreva a sua, uma frase por linha.
+? Complete: Das Zimmer war ___ (limpo). || sauber
+? Complete: Wir hatten ein ___ Zimmer (silencioso). || ruhiges
+? Como se diz "Eu posso recomendar o hotel"? || Ich kann das Hotel empfehlen.
+`,
+});
+
+/* Módulo 13 (21/11/2026): a lição de Ler e escrever "Ein Blogbeitrag". */
+NL('n-blog', {
+  de: 'Ein Blogbeitrag', pt: 'Ler um post sobre uma festa e escrever um comentário', gt: 'dass · relativas (revisão)',
+  gx: 'Comentário: uma reação (Toller Beitrag!), a opinião com dass, com o verbo no fim (Ich finde, dass die Party toll war), um detalhe com uma relativa (Die Torte, die du gebacken hast, …) e uma pergunta.',
+  ge: 'Ich finde, dass die Fotos sehr schön sind.=Eu acho que as fotos estão muito bonitas.|Die Torte, die du gebacken hast, sieht lecker aus.=O bolo que você fez parece gostoso.|Danke für den tollen Beitrag!=Obrigada pelo post legal!',
+  v: 'der Blog=o blog=💻|der Beitrag=o post, a publicação=📝|der Kommentar=o comentário=💬|kommentieren=comentar=✍️|teilen=compartilhar=🔗|backen (gebacken)=assar (bolo, pão)=🎂|die Stimmung=o clima, o astral (da festa)=🎶|überraschen=surpreender=🎁|die Überraschungsparty=a festa surpresa=🎉|liken=curtir=👍',
+  x: 'der Follower=o seguidor|posten=postar|die Anleitung=o passo a passo|die Dekoration=a decoração|die Girlande=a guirlanda|die Luftballons=os balões|die Playlist=a playlist|Viel Spaß!=Divirta-se!|nachträglich=atrasado (parabéns atrasados)|unvergesslich=inesquecível',
+  dlg: 'Hast du Lenas Blog gelesen?=Você leu o blog da Lena?|Ja, sie schreibt über die Überraschungsparty für ihre Oma.=Sim, ela escreve sobre a festa surpresa para a avó.|Ich finde, dass die Fotos toll sind.=Eu acho que as fotos estão ótimas.|Ich auch! Ich schreibe gleich einen Kommentar.=Eu também! Vou escrever um comentário agora mesmo.',
+  cz: 'Ich finde, dass die Party toll ___.=war=ist gewesen=waren|Das ist der Kuchen, ___ Lena gebacken hat.=den=der=das|Ich glaube, ___ alle Spaß hatten.=dass=das=weil',
+  whys: 'depois de dass, o verbo conjugado vai para o fim: dass die Party toll war|der Kuchen é objeto na relativa: den|dass introduz a opinião; das sem o segundo s é artigo ou pronome',
+  pts: 'Opinião com dass: Ich finde, dass … (vírgula antes, verbo no fim).|Relativa para descrever: Die Torte, die du gebacken hast, … O pronome tem o gênero do substantivo.|Reação: Toller Beitrag! · Super Fotos! · Danke fürs Teilen!|Termine com uma pergunta: Wo hast du die Deko gekauft?',
+  ex: 'Toller Beitrag!=Post incrível!|Ich glaube, dass alle viel Spaß hatten.=Eu acho que todo mundo se divertiu muito.|Wer ist die Frau, die neben dir steht?=Quem é a mulher que está do seu lado?|Danke fürs Teilen!=Obrigada por compartilhar!',
+  bd: ['Ich_finde,=C^a oração principal|dass=C^dass introduz a opinião|die_Fotos=S|sehr_schön=PR|sind.=V^com dass, o verbo conjugado vai para o fim', 'Eu acho que as fotos estão muito bonitas.'],
+  rule: 'dass',
+  hw: 'Escreva um comentário de três frases para o post de um amigo (real ou inventado): uma reação, uma opinião com dass e uma pergunta.',
+  le: {
+    texto: {
+      t: 'Lenas Blog: Eine Überraschung für Oma Gerda', kind: 'leitura',
+      intro: 'A Lena conta no blog como foi a festa surpresa de 80 anos da avó. Leia e responda.',
+      paras: ['Am Samstag ist meine Oma Gerda 80 Jahre alt geworden. Wir haben eine Überraschungsparty gemacht!', 'Mein Bruder hat den Garten dekoriert, und ich habe die Torte gebacken, die Oma so liebt: Apfelkuchen mit Sahne.', 'Um drei Uhr ist Oma gekommen. Sie war sprachlos! Dann haben alle Happy Birthday gesungen.', 'Ich finde, dass es der schönste Tag des Jahres war. Was habt ihr für eure Großeltern gemacht?'],
+      qs: [
+        { q: 'Quantos anos a avó fez?', o: ['80', '70', '90'], a: 0 },
+        { q: 'O que a Lena fez para a festa?', o: ['o bolo preferido da avó', 'a decoração do jardim', 'os convites'], a: 0 },
+        { q: 'Como a avó reagiu?', o: ['ficou sem palavras', 'ficou brava', 'foi embora cedo'], a: 0 },
+        { q: 'O que a Lena pergunta aos leitores?', o: ['o que eles fizeram para os avós', 'se gostaram do bolo', 'quando é o aniversário deles'], a: 0 },
+      ],
+    },
+    escrita: {
+      t: 'Escreva um comentário', tipo: 'form', ok: 'Comentário escrito corretamente.',
+      pede: 'Escreva um comentário curto para o post da Lena, uma frase em cada linha.',
+      campos: [
+        { l: 'Reaktion', d: 'uma reação: Toller Beitrag! / Super Fotos!', re: '\\b\\p{L}+(es|er|e|en)\\s+\\p{Lu}\\p{L}+|\\b(super|toll|schön|wow|danke)\\b', f: 'iu', err: 'Comece com uma reação: Toller Beitrag! / Super Fotos!' },
+        { l: 'Meinung', d: 'a sua opinião com dass: Ich finde, dass …', re: ',\\s*dass\\b.+\\s\\p{L}+[.!]?$', f: 'iu', err: 'Dê a opinião com dass, depois de uma vírgula: Ich finde, dass die Party toll war.', bad: [['dass\\s+\\S+(\\s+\\S+)?\\s+(ist|war|hat|sind|waren|hatte)\\s+\\S+[.!]?$', 'Depois de <b>dass</b> o verbo vai <b>para o fim</b>: …, dass die Party toll <b>war</b>.']] },
+        { l: 'Relativsatz', d: 'um detalhe com uma relativa: Die Torte, die du gebacken hast, …', re: ',\\s*(der|die|das|den|dem)\\s+.+', f: 'iu', err: 'Descreva algo com uma relativa: Die Torte, die du gebacken hast, sieht super aus.' },
+        { l: 'Frage', d: 'uma pergunta para a Lena', re: '\\?\\s*$', f: 'iu', err: 'Termine com uma pergunta (com ?): Wie alt ist dein Opa?' },
+      ],
+      modelo: 'Toller Beitrag! · Ich finde, dass die Party wunderschön war. · Die Torte, die du gebacken hast, sieht super aus. · Wie hat Oma Gerda reagiert?',
+    },
+  },
+  deep: `
+Esta lição é de **ler e escrever**. Você vai ler o post de um blog sobre uma festa surpresa e escrever um comentário, revisando duas estruturas do módulo: **dass** para a opinião e a **oração relativa** para descrever.
+# Passo 1: como ler um post
+Posts contam em ordem, no **Perfekt**: o que fizeram, quem fez o quê, como foi. No fim costuma vir uma pergunta para os leitores.
+~ Wir haben eine Überraschungsparty gemacht! = Nós fizemos uma festa surpresa!
+# Passo 2: a opinião com dass
+| Começo | Opinião |
+| Ich finde, | dass die Fotos schön sind. |
+| Ich glaube, | dass alle Spaß hatten. |
+| Ich bin sicher, | dass Oma glücklich war. |
+! Depois de **dass**, o verbo conjugado vai para o **fim**. E antes de dass vai sempre vírgula.
+~ Ich finde, dass die Party toll war. = Eu acho que a festa foi ótima.
+# Passo 3: descrever com uma relativa
+A relativa vem logo depois do substantivo, entre vírgulas, com o verbo no fim:
+- Die Torte, **die** du gebacken **hast**, sieht lecker aus.
+- Wer ist der Mann, **der** neben Oma **steht**?
+~ Das ist der Kuchen, den Lena gebacken hat. = Este é o bolo que a Lena fez.
+# Passo 4: o comentário
+| Parte | Exemplo |
+| Reação | Toller Beitrag! |
+| Opinião | Ich finde, dass … |
+| Detalhe | Die Torte, die …, … |
+| Pergunta | Wie alt ist dein Opa? |
+BR Como nas redes brasileiras, comentário bom é curto e simpático. Em alemão, **Danke fürs Teilen!** ("obrigado por compartilhar") é muito comum.
+~ Danke fürs Teilen! = Obrigada por compartilhar!
+> No exercício, leia o post da Lena e escreva o seu comentário, uma frase por linha.
+? Depois de dass, onde fica o verbo? || no fim
+? Complete: Das ist der Kuchen, ___ Lena gebacken hat. || den
+? Como se diz "obrigado por compartilhar"? || Danke fürs Teilen!
+`,
+});
+
+V('Am Bahnhof und am Flughafen',
+  'M:O painel de partidas;Hora|Destino|Gleis|Aviso;10:15|Köln|7|+ 20;10:32|Berlin|3|fällt aus;10:45|München|5|pünktlich',
+  'V:Atraso ou cancelamento?;Atraso|Der Zug hat 20 Minuten Verspätung.|Der Flug ist verspätet.;Cancelamento|Der Zug fällt aus.|Der Flug ist annulliert.');
+V('Probleme auf der Reise',
+  'M:Aonde ir;Problema|Aonde ir;perdi algo|das Fundbüro;fui roubado|die Polizei;perdi o passaporte|das Konsulat;a mala não chegou|o balcão de bagagens',
+  'E:O motivo com weil;…, weil^w|der Zug^s|Verspätung^o|hatte.^v');
+V('Eine Hotelbewertung',
+  'V:Com ou sem terminação?;Depois de war: sem|Das Zimmer war ruhig.|Die Lage war zentral.;Antes do substantivo: com|ein ruhiges Zimmer|eine zentrale Lage',
+  'M:Do elogio à crítica;Em alemão|O tom;super, perfekt|elogio forte;gut, sauber|elogio;nicht so gut|crítica leve;enttäuscht|crítica forte');
+V('Ein Blogbeitrag',
+  'E:A opinião com dass;Ich finde,^c|dass^w|die Fotos^s|schön^p|sind.^v',
+  'P:Um comentário;Reação=Toller Beitrag!;Opinião=Ich finde, dass die Party toll war.;Detalhe=Die Torte, die du gebacken hast, sieht super aus.;Pergunta=Wie alt ist dein Opa?');
+['marta', 'peter', 'gerda', 'lh'].forEach((n) => NAMES.add(n));
+
+S_('Am Bahnhof und am Flughafen', 'verpassen (verpasst)=perder (o trem, a conexão)|der Infoschalter=o balcão de informações');
+S_('Probleme auf der Reise', 'die Flugnummer=o número do voo');
+S_('Eine Hotelbewertung', 'weich=macio|insgesamt=no geral');
+S_('Ein Blogbeitrag', 'die Oma=a avó|aussehen (sieht … aus)=parecer, ter cara de');
 // Esquemas visuais (mesmo formato de data/visuals.js) e palavras de apoio (data/support.js) das lições novas.
 V('Wie schreibt man das?',
   'V:As letras que mais enganam;V se chama "fau"|Vera: fau · e · er · a;W se chama "vê"|Wien: vê · i · e · en;Z se chama "tsét"|Zoo: tsét · o · o',
@@ -2061,8 +2315,8 @@ const SEQ = [
   { lv: 'A2', n: 'Compras e serviços', l: [22, 31, 32, 'n-umtauschen', 'n-bankpost', 'n-bestellung'] },
   { lv: 'A2', n: 'Trabalho', l: [30, 'n-arbeitstag', 35, 38, 'n-telefon', 'n-stellenanzeige'] },
   { lv: 'A2', n: 'Saúde', l: [33, 'n-termin2', 'n-apotheke', 'n-gesund', 'n-notfall', 'n-krankmelden'] },
-  { lv: 'A2', n: 'Viagens', l: [29, 34, '?Am Bahnhof und am Flughafen', 25, '?Probleme auf der Reise', '?Ler e escrever: Eine Hotelbewertung'] },
-  { lv: 'A2', n: 'Festas e relações', l: [39, 40, 36, 37, 24, '?Ler e escrever: Ein Blogbeitrag'] },
+  { lv: 'A2', n: 'Viagens', l: [29, 34, 'n-bahnhof', 25, 'n-reiseprobleme', 'n-hotelbewertung'] },
+  { lv: 'A2', n: 'Festas e relações', l: [39, 40, 36, 37, 24, 'n-blog'] },
   { lv: 'A2', n: 'Opinião e mídia', l: [41, '?Medien im Alltag', '?Dafür oder dagegen?', '?Kurze Nachrichten', '?Prüfungstraining A2', '?Ler e escrever: Ein Forumsbeitrag'] },
 ];
 // B1 a C2 continuam como estão: cada semana antiga vira um módulo, com o nível da semana.
