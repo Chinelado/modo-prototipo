@@ -142,3 +142,40 @@ Comparado às 3 lições antigas do módulo (Ich habe Hunger, Im Restaurant, Ein
 **Migração:** a reconstrução da ordem da versão 1 agora considera todas as lições novas criadas depois dela (antes era uma lista fixa, que teria de crescer a cada módulo). Testado vindo da versão 1 e de uma ordem salva sem o Módulo 4.
 
 **O que falta no Módulo 4:** imagens, áudio gravado e revisão pedagógica. A maior tela das 3 lições (o resumo da regra) passa em 20 a 30 palavras a das antigas do módulo.
+
+---
+
+## Módulos 5 a 14 (escritos em 21/11/2026): o A1–A2 completo
+Com estes módulos, as **42 lições novas** do redesenho estão no protótipo: a trilha tem 252 lições e nenhuma "em preparação". As 14 lições de **Ler e escrever** (uma por módulo) estão todas prontas.
+
+| Módulo | Lições novas |
+|---|---|
+| 5 · Casa e cidade | Die Wohnungsanzeige · Zur Post, zum Bahnhof · Schilder und Zettel (Ler e escrever) |
+| 6 · Saúde e fim de semana | Einen Termin machen · Mein Wochenende · Eine Postkarte (Ler e escrever) |
+| 7 · Biografia e passado | Mein Lebenslauf · Schule und Ausbildung · Eine E-Mail über mich (Ler e escrever) |
+| 8 · Casa e vizinhança | Die Hausordnung · Ein Zettel an die Nachbarn (Ler e escrever) |
+| 9 · Compras e serviços | Umtauschen · Auf der Bank und der Post · Eine Online-Bestellung (Ler e escrever) |
+| 10 · Trabalho | Mein Arbeitstag · Am Telefon · Eine Stellenanzeige (Ler e escrever) |
+| 11 · Saúde | Ich brauche einen Termin · In der Apotheke · Gesund bleiben · Im Notfall · Krank melden (Ler e escrever) |
+| 12 · Viagens | Am Bahnhof und am Flughafen · Probleme auf der Reise · Eine Hotelbewertung (Ler e escrever) |
+| 13 · Festas e relações | Ein Blogbeitrag (Ler e escrever) |
+| 14 · Opinião e mídia | Medien im Alltag · Ich bin dafür! · Kurze Nachrichten · Prüfungstraining A2 · Ein Forumsbeitrag (Ler e escrever) |
+
+**Verificação automática das 42 lições** (mesmo critério dos Módulos 1 a 4, num teste que roda todas de uma vez):
+- formato completo em todas: tema, regra resumida, 4 pontos, exemplos, 10 + 10 palavras, conversa de 4 falas com microfone, 3 lacunas com explicação, frase desmontada, tarefa de casa, objetivo com autoavaliação e regra da frase livre;
+- 2 esquemas visuais por lição, nenhum cortado na tela do celular (390 px);
+- verificação em todos os passos da aula;
+- nenhuma palavra usada antes de ser ensinada: o que faltava virou palavra de apoio;
+- nas 14 escritas guiadas, o modelo passa em todos os campos e os erros típicos recebem a dica certa (por exemplo: verbo fora do fim depois de weil ou dass, "deshalb ich", "Lieber Julia", "ein Liter", "eine Lehrerin");
+- migração do progresso testada a cada módulo: nenhuma lição feita perde o lugar, e a avaliação de um módulo só continua valendo se as lições novas dele também estiverem feitas;
+- a maior tela da aula no celular fica, em média, com 231 palavras (o resumo da regra, que não se divide); as antigas do A2 chegam a 255.
+
+**Correções durante a escrita**
+- **Títulos repetidos:** "Gesund leben" e "Dafür oder dagegen?" já eram títulos de lições do B1 e do B2. Como esquemas, palavras de apoio e tarefa de casa são guardados pelo título, a lição nova estava apagando o esquema e a tarefa da lição do B1. As novas viraram **Gesund bleiben** e **Ich bin dafür!**, e agora o teste confere títulos repetidos.
+- **Migração da versão 1:** a ordem antiga passou a ser reconstruída sem todas as lições novas posteriores, em vez de uma lista fixa.
+
+**Prüfungstraining A2:** a estrutura da prova foi conferida no site do Goethe-Institut (21/11/2026): quatro partes, Lesen 30 min, Hören cerca de 30 min, Schreiben 30 min, Sprechen cerca de 15 min em dupla (há versão individual), prova escrita de cerca de 90 min sem pausa, sem dicionário e sem celular. A lição avisa que o formato pode mudar e manda conferir o site oficial. Não cita nota mínima nem número de questões de cada parte.
+
+**Objetivos:** as 42 lições novas têm objetivo "consigo…" e os 8 módulos do A2 ganharam objetivos de módulo. As 24 lições antigas do A2 ainda não têm objetivo próprio (aparecem sem ele na lista do módulo).
+
+**O que falta em todas as lições novas:** imagens, áudio gravado (hoje é a voz do navegador; os textos de Ler e escrever também precisam entrar no gerador de áudio) e a revisão pedagógica de todo o conteúdo, que continua em rascunho.

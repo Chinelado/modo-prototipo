@@ -1,7 +1,7 @@
 // Objetivos "consigo…" (decisão 10, 20/11/2026) — RASCUNHO, ainda sem revisão pedagógica.
 // OBJ: por lição, pelo id estável (sid): o = objetivo, a = pergunta de autoavaliação, ref = escala do Quadro Europeu e nível.
-// Vêm do piloto do A1 (docs/objetivos-A1-piloto.md) mais as lições novas dos Módulos 1 a 4 e "Im Urlaub", que desceu para o A1.
-// MOD_OBJ: por módulo (índice na trilha nova). Só o A1 tem objetivos por enquanto; o A2 em diante mostra "em redação".
+// Vêm do piloto do A1 (docs/objetivos-A1-piloto.md), mais as 42 lições novas do A1–A2 e "Im Urlaub", que desceu para o A1.
+// MOD_OBJ: por módulo (índice na trilha nova). A1 e A2 têm objetivos; as lições antigas do A2 ainda não têm objetivo próprio.
 const OBJ = {
   0: { o: 'Consigo cumprimentar, me despedir, dizer meu nome e perguntar o nome de alguém.', a: 'Você consegue cumprimentar alguém, dizer seu nome e perguntar o nome da pessoa?', ref: 'Conversation · A1' },
   1: { o: 'Consigo dizer de onde sou e onde moro, e perguntar isso a alguém.', a: 'Você consegue dizer de onde é e onde mora, e perguntar isso a alguém?', ref: 'Information exchange · A1' },
@@ -93,4 +93,12 @@ Object.assign(OBJ, {
   'n-reiseprobleme': { o: 'Consigo explicar um problema na viagem, dizer o que aconteceu e pedir ajuda.', a: 'Você consegue explicar um imprevisto de viagem e pedir ajuda?', ref: 'Obtaining goods and services · A2' },
   'n-hotelbewertung': { o: 'Consigo ler avaliações de hotel e escrever uma curta, dizendo o que foi bom e o que foi ruim.', a: 'Você consegue escrever uma avaliação curta de um hotel?', ref: 'Reading for orientation · A2; Creative writing · A2' },
   'n-blog': { o: 'Consigo ler um post de blog sobre uma festa e escrever um comentário com a minha opinião.', a: 'Você consegue comentar um post dando a sua opinião?', ref: 'Reading correspondence · A2; Online conversation and discussion · A2' },
+});
+// Módulo 14 (21/11/2026)
+Object.assign(OBJ, {
+  'n-medien': { o: 'Consigo falar dos meus hábitos com celular, internet e notícias e dar uma opinião simples sobre eles.', a: 'Você consegue falar dos seus hábitos com a mídia?', ref: 'Sustained monologue: describing experience · A2' },
+  'n-meinung': { o: 'Consigo dar a minha opinião, concordar e discordar com educação e dar um argumento.', a: 'Você consegue concordar ou discordar dando um motivo?', ref: 'Informal discussion (with friends) · A2' },
+  'n-nachrichten': { o: 'Consigo entender o essencial de uma notícia curta: quem, o quê, quando e onde.', a: 'Você consegue entender o essencial de uma notícia curta?', ref: 'Reading for information and argument · A2' },
+  'n-pruefung': { o: 'Sei como é a prova do A2 e consigo planejar algo junto com outra pessoa, como na parte oral.', a: 'Você sabe como é a prova do A2 e consegue combinar um horário com alguém?', ref: 'Goal-oriented co-operation · A2' },
+  'n-forum': { o: 'Consigo ler opiniões num fórum e escrever a minha, com motivo, consequência e objeção.', a: 'Você consegue escrever uma opinião curta num fórum?', ref: 'Online conversation and discussion · A2; Reading for information and argument · A2' },
 });

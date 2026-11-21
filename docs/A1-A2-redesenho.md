@@ -3,7 +3,7 @@
 **Status:** para aprovação da direção · 20/11/2026
 **Decisões (20/11/2026):** A1 com 6 módulos e A2 com 8 (de 42 para 84 lições) · sequência redesenhada do zero, reaproveitando as lições atuais onde couberem · cada módulo tem uma lição de **leitura + escrita guiada** · inserção direta no protótipo (o site real não é tocado).
 
-**Andamento (21/11/2026):** Módulos 1 a 4 escritos no protótipo (11 lições novas, marcadas "escrita ✅"); faltam 31 lições novas, do Módulo 5 em diante.
+**Andamento (21/11/2026):** os 14 módulos do A1–A2 estão escritos no protótipo: as 42 lições novas (marcadas "escrita ✅") e as 42 reaproveitadas, sem nenhuma lição "em preparação". Dois títulos mudaram porque já existiam no B1/B2 e esquemas, apoio e tarefa de casa são guardados pelo título: "Gesund leben" virou **Gesund bleiben** e "Dafür oder dagegen?" virou **Ich bin dafür!**.
 
 **Como ler:** **R** = lição atual reaproveitada (com a posição de hoje); **NOVA** = a escrever. A 6ª lição de cada módulo é sempre **Ler e escrever**: um texto curto com perguntas e uma tarefa de escrita guiada (formulário, mensagem, cartão, e-mail).
 
@@ -64,20 +64,20 @@ A única lição que muda de nível é **Im Urlaub** (Perfekt com sein), que des
 |---|---|---|---|---|
 | 25 | Meine Wohnung | casa e cômodos | es gibt + Akkusativ | R · A1 L13 |
 | 26 | Wo ist …? | onde estão as coisas | preposições de lugar + Dativ | R · A1 L14 |
-| 27 | Die Wohnungsanzeige | procurar apartamento | abreviações de anúncio · Zimmer, Miete, Nebenkosten | NOVA |
+| 27 | Die Wohnungsanzeige | procurar apartamento | abreviações de anúncio · Zimmer, Miete, Nebenkosten | NOVA · escrita ✅ |
 | 28 | In der Stadt | pedir o caminho | Imperativ | R · A1 L16 |
-| 29 | Zur Post, zum Bahnhof | lugares e serviços da cidade | zu + Dativ (zum, zur) | NOVA |
-| 30 | **Ler e escrever:** Schilder und Zettel | ler placas e avisos e escrever um bilhete curto | geöffnet, geschlossen, bitte nicht … | NOVA |
+| 29 | Zur Post, zum Bahnhof | lugares e serviços da cidade | zu + Dativ (zum, zur) | NOVA · escrita ✅ |
+| 30 | **Ler e escrever:** Schilder und Zettel | ler placas e avisos e escrever um bilhete curto | geöffnet, geschlossen, bitte nicht … | NOVA · escrita ✅ |
 
 ### Módulo 6 · Saúde e fim de semana
 | # | Lição | Tema | Gramática | Origem |
 |---|---|---|---|---|
 | 31 | Beim Arzt | corpo e saúde | müssen, dürfen, wollen | R · A1 L17 |
-| 32 | Einen Termin machen | marcar consulta por telefone | modais (revisão) · horários | NOVA |
+| 32 | Einen Termin machen | marcar consulta por telefone | modais (revisão) · horários | NOVA · escrita ✅ |
 | 33 | Was hast du gemacht? | o que fiz ontem | Perfekt com haben | R · A1 L18 |
 | 34 | Im Urlaub | férias passadas | Perfekt com sein | R · **A2 L1** (desce para o A1) |
-| 35 | Mein Wochenende | contar o fim de semana em ordem | zuerst, dann, danach · Perfekt | NOVA |
-| 36 | **Ler e escrever:** Eine Postkarte | ler e escrever um cartão-postal de férias | Perfekt · Grüße aus … | NOVA |
+| 35 | Mein Wochenende | contar o fim de semana em ordem | zuerst, dann, danach · Perfekt | NOVA · escrita ✅ |
+| 36 | **Ler e escrever:** Eine Postkarte | ler e escrever um cartão-postal de férias | Perfekt · Grüße aus … | NOVA · escrita ✅ |
 
 ---
 
@@ -87,11 +87,11 @@ A única lição que muda de nível é **Im Urlaub** (Perfekt com sein), que des
 | # | Lição | Tema | Gramática | Origem |
 |---|---|---|---|---|
 | 37 | Früher | como era antes | Präteritum de sein e haben | R · A2 L2 |
-| 38 | Mein Lebenslauf | datas e etapas da vida | anos (im Jahr …) · Perfekt (revisão) | NOVA |
+| 38 | Mein Lebenslauf | datas e etapas da vida | anos (im Jahr …) · Perfekt (revisão) | NOVA · escrita ✅ |
 | 39 | Mit wem? | pessoas e companhia | Dativ: mit, bei, zu, von, seit | R · A2 L3 |
-| 40 | Schule und Ausbildung | estudos e formação | Perfekt dos separáveis e inseparáveis | NOVA |
+| 40 | Schule und Ausbildung | estudos e formação | Perfekt dos separáveis e inseparáveis | NOVA · escrita ✅ |
 | 41 | Warum? | dar motivos | weil e denn | R · A2 L6 |
-| 42 | **Ler e escrever:** Eine E-Mail über mich | ler um e-mail pessoal e responder contando sobre si | weil · Perfekt | NOVA |
+| 42 | **Ler e escrever:** Eine E-Mail über mich | ler um e-mail pessoal e responder contando sobre si | weil · Perfekt | NOVA · escrita ✅ |
 
 ### Módulo 8 · Casa e vizinhança
 | # | Lição | Tema | Gramática | Origem |
@@ -100,8 +100,8 @@ A única lição que muda de nível é **Im Urlaub** (Perfekt com sein), que des
 | 44 | Eine neue Wohnung | descrever a casa | adjetivo depois de ein/eine | R · A2 L10 |
 | 45 | Die netten Nachbarn | descrever pessoas e coisas | adjetivo depois de der/die/das | R · A2 L11 |
 | 46 | Morgens im Bad | rotina pessoal | verbos reflexivos | R · A2 L9 |
-| 47 | Die Hausordnung | regras do prédio | man + modais (man darf nicht, man muss) | NOVA |
-| 48 | **Ler e escrever:** Ein Zettel an die Nachbarn | ler regras do prédio e escrever um bilhete aos vizinhos | Könnten Sie …? (só como fórmula) | NOVA |
+| 47 | Die Hausordnung | regras do prédio | man + modais (man darf nicht, man muss) | NOVA · escrita ✅ |
+| 48 | **Ler e escrever:** Ein Zettel an die Nachbarn | ler regras do prédio e escrever um bilhete aos vizinhos | Könnten Sie …? (só como fórmula) | NOVA · escrita ✅ |
 
 ### Módulo 9 · Compras e serviços
 | # | Lição | Tema | Gramática | Origem |
@@ -109,39 +109,39 @@ A única lição que muda de nível é **Im Urlaub** (Perfekt com sein), que des
 | 49 | Besser, schneller, am besten | comparar | Komparativ e Superlativ | R · A2 L5 |
 | 50 | Geschenke | presentes e gostos | verbos com Dativ | R · A2 L14 |
 | 51 | Gib es mir! | dar, mostrar, emprestar | pronomes no Akkusativ e Dativ | R · A2 L15 |
-| 52 | Umtauschen | trocar um produto | passen, gefallen · zu groß, zu klein | NOVA |
-| 53 | Auf der Bank und der Post | serviços e formulários | perguntas formais · Ich möchte … | NOVA |
-| 54 | **Ler e escrever:** Eine Online-Bestellung | ler a confirmação de um pedido e escrever uma reclamação curta | leider · Datum | NOVA |
+| 52 | Umtauschen | trocar um produto | passen, gefallen · zu groß, zu klein | NOVA · escrita ✅ |
+| 53 | Auf der Bank und der Post | serviços e formulários | perguntas formais · Ich möchte … | NOVA · escrita ✅ |
+| 54 | **Ler e escrever:** Eine Online-Bestellung | ler a confirmação de um pedido e escrever uma reclamação curta | leider · Datum | NOVA · escrita ✅ |
 
 ### Módulo 10 · Trabalho
 | # | Lição | Tema | Gramática | Origem |
 |---|---|---|---|---|
 | 55 | Im Beruf | trabalho e profissão | Präteritum dos modais | R · A2 L13 |
-| 56 | Mein Arbeitstag | horários e colegas | vor, nach, seit + Dativ (tempo) | NOVA |
+| 56 | Mein Arbeitstag | horários e colegas | vor, nach, seit + Dativ (tempo) | NOVA · escrita ✅ |
 | 57 | Wissen Sie, ob …? | pedir informações com educação | perguntas indiretas | R · A2 L18 |
 | 58 | Könnten Sie …? | pedidos educados | Konjunktiv II de cortesia | R · A2 L21 |
-| 59 | Am Telefon | telefonar e deixar recado | anrufen, zurückrufen, ausrichten | NOVA |
-| 60 | **Ler e escrever:** Eine Stellenanzeige | ler um anúncio de emprego e escrever um e-mail de interesse | fórmulas de e-mail formal | NOVA |
+| 59 | Am Telefon | telefonar e deixar recado | anrufen, zurückrufen, ausrichten | NOVA · escrita ✅ |
+| 60 | **Ler e escrever:** Eine Stellenanzeige | ler um anúncio de emprego e escrever um e-mail de interesse | fórmulas de e-mail formal | NOVA · escrita ✅ |
 
 ### Módulo 11 · Saúde
 | # | Lição | Tema | Gramática | Origem |
 |---|---|---|---|---|
 | 61 | Gute Besserung! | no consultório | sollen e conselhos | R · A2 L16 |
-| 62 | Ich brauche einen Termin | marcar e remarcar consultas | dias e horários · verschieben, absagen | NOVA |
-| 63 | In der Apotheke | pedir remédio e entender a dose | zweimal täglich · vor/nach dem Essen | NOVA |
-| 64 | Gesund bleiben | hábitos e conselhos | Imperativ (revisão) · Komparativ | NOVA |
-| 65 | Im Notfall | emergência e acidente simples | Perfekt · Hilfe! · rufen Sie … | NOVA |
-| 66 | **Ler e escrever:** Krank melden | ler uma bula simples e escrever uma mensagem avisando que está doente | Ich kann heute nicht …, weil … | NOVA |
+| 62 | Ich brauche einen Termin | marcar e remarcar consultas | dias e horários · verschieben, absagen | NOVA · escrita ✅ |
+| 63 | In der Apotheke | pedir remédio e entender a dose | zweimal täglich · vor/nach dem Essen | NOVA · escrita ✅ |
+| 64 | Gesund bleiben | hábitos e conselhos | Imperativ (revisão) · Komparativ | NOVA · escrita ✅ |
+| 65 | Im Notfall | emergência e acidente simples | Perfekt · Hilfe! · rufen Sie … | NOVA · escrita ✅ |
+| 66 | **Ler e escrever:** Krank melden | ler uma bula simples e escrever uma mensagem avisando que está doente | Ich kann heute nicht …, weil … | NOVA · escrita ✅ |
 
 ### Módulo 12 · Viagens
 | # | Lição | Tema | Gramática | Origem |
 |---|---|---|---|---|
 | 67 | Eine Reise buchen | viagem e hotel | Futur com werden | R · A2 L12 |
 | 68 | Das Wetter | tempo e estações | es impessoal · im + estação | R · A2 L17 |
-| 69 | Am Bahnhof und am Flughafen | avisos, atrasos e conexões | Verspätung · fällt aus · umsteigen | NOVA |
+| 69 | Am Bahnhof und am Flughafen | avisos, atrasos e conexões | Verspätung · fällt aus · umsteigen | NOVA · escrita ✅ |
 | 70 | Wenn es regnet … | condições e planos | orações com wenn | R · A2 L8 |
-| 71 | Probleme auf der Reise | resolver imprevistos | Perfekt + weil (revisão) | NOVA |
-| 72 | **Ler e escrever:** Eine Hotelbewertung | ler avaliações de hotel e escrever uma curta | adjetivos (revisão) | NOVA |
+| 71 | Probleme auf der Reise | resolver imprevistos | Perfekt + weil (revisão) | NOVA · escrita ✅ |
+| 72 | **Ler e escrever:** Eine Hotelbewertung | ler avaliações de hotel e escrever uma curta | adjetivos (revisão) | NOVA · escrita ✅ |
 
 ### Módulo 13 · Festas e relações
 | # | Lição | Tema | Gramática | Origem |
@@ -151,17 +151,17 @@ A única lição que muda de nível é **Im Urlaub** (Perfekt com sein), que des
 | 75 | Der Mann, der … | descrever pessoas | orações relativas (Nominativ) | R · A2 L19 |
 | 76 | Das Lied, das ich liebe | descrever coisas | orações relativas (Akkusativ) | R · A2 L20 |
 | 77 | Ich glaube, dass … | opiniões simples | orações com dass | R · A2 L7 |
-| 78 | **Ler e escrever:** Ein Blogbeitrag | ler um post sobre uma festa e escrever um comentário | dass · relativas (revisão) | NOVA |
+| 78 | **Ler e escrever:** Ein Blogbeitrag | ler um post sobre uma festa e escrever um comentário | dass · relativas (revisão) | NOVA · escrita ✅ |
 
 ### Módulo 14 · Opinião e mídia
 | # | Lição | Tema | Gramática | Origem |
 |---|---|---|---|---|
 | 79 | Deshalb und trotzdem | ligar ideias | deshalb, trotzdem, sonst | R · A2 L24 |
-| 80 | Medien im Alltag | celular, internet e hábitos | frequência · dass (revisão) | NOVA |
-| 81 | Dafür oder dagegen? | concordar e discordar | Ich finde, dass … · ich bin dafür/dagegen | NOVA |
-| 82 | Kurze Nachrichten | entender notícias curtas | Präteritum (reconhecer) | NOVA |
-| 83 | Prüfungstraining A2 | como é a prova do A2 | estrutura da prova ⚠️ conferir na fonte oficial do Goethe | NOVA |
-| 84 | **Ler e escrever:** Ein Forumsbeitrag | ler um fórum e escrever uma opinião curta | weil, deshalb, trotzdem | NOVA |
+| 80 | Medien im Alltag | celular, internet e hábitos | frequência · dass (revisão) | NOVA · escrita ✅ |
+| 81 | Ich bin dafür! | concordar e discordar | Ich finde, dass … · ich bin dafür/dagegen | NOVA · escrita ✅ |
+| 82 | Kurze Nachrichten | entender notícias curtas | Präteritum (reconhecer) | NOVA · escrita ✅ |
+| 83 | Prüfungstraining A2 | como é a prova do A2 | estrutura da prova (conferida no site do Goethe-Institut em 21/11/2026) | NOVA · escrita ✅ |
+| 84 | **Ler e escrever:** Ein Forumsbeitrag | ler um fórum e escrever uma opinião curta | weil, deshalb, trotzdem | NOVA · escrita ✅ |
 
 ---
 

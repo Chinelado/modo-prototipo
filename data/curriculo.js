@@ -2252,6 +2252,285 @@ S_('Am Bahnhof und am Flughafen', 'verpassen (verpasst)=perder (o trem, a conex�
 S_('Probleme auf der Reise', 'die Flugnummer=o número do voo');
 S_('Eine Hotelbewertung', 'weich=macio|insgesamt=no geral');
 S_('Ein Blogbeitrag', 'die Oma=a avó|aussehen (sieht … aus)=parecer, ter cara de');
+/* Módulo 14 (21/11/2026): mídia, opinião, notícias, a prova do A2 e a lição de Ler e escrever "Ein Forumsbeitrag". */
+NL('n-medien', {
+  de: 'Medien im Alltag', pt: 'Celular, internet e hábitos', gt: 'Frequência · dass (revisão)',
+  gx: 'Hábitos: Ich lese jeden Tag die Nachrichten. Ich bin oft online. Frequência: täglich / jeden Tag, zweimal pro Woche, selten, nie. Onde: am Handy, im Internet. Opinião com dass (verbo no fim): Ich finde, dass wir zu viel online sind.',
+  ge: 'Ich bin jeden Tag zwei Stunden online.=Eu fico online duas horas por dia.|Ich lese die Nachrichten auf dem Handy.=Eu leio as notícias no celular.|Ich finde, dass wir zu viel Zeit am Handy verbringen.=Eu acho que passamos tempo demais no celular.',
+  v: 'die Medien=a mídia, os meios de comunicação=📺|das Internet=a internet=🌐|surfen=navegar (na internet)=🏄|die Nachrichten=as notícias=📰|das soziale Netzwerk=a rede social=📱|herunterladen=baixar=⬇️|streamen=assistir por streaming=🎬|die Zeitung=o jornal=🗞️|verbringen=passar (tempo)=⏳|die Bildschirmzeit=o tempo de tela=📵',
+  x: 'der Podcast=o podcast|das Passwort=a senha|der Bildschirm=a tela|abonnieren=assinar (um canal)|süchtig=viciado|die Werbung=a propaganda|das Fernsehen=a televisão|der Sender=o canal (de TV)|die Zeitschrift=a revista|pro Woche=por semana',
+  dlg: 'Wie lange bist du jeden Tag am Handy?=Quanto tempo você fica no celular por dia?|Ungefähr drei Stunden. Und du?=Umas três horas. E você?|Ich weiß nicht, aber ich glaube, dass es zu viel ist.=Não sei, mas acho que é demais.|Ich auch. Abends mache ich das Handy jetzt aus.=Eu também. À noite agora eu desligo o celular.',
+  cz: 'Ich lese ___ Tag die Zeitung.=jeden=jede=jedem|Ich finde, dass Kinder zu viel am Handy ___.=sind=ist=sein|Wie viel Zeit ___ du online?=verbringst=verbringt=verbringen',
+  whys: 'der Tag no acusativo de tempo: jeden Tag|depois de dass, o verbo conjugado vai para o fim: sind|com du: verbringst',
+  pts: 'Frequência: täglich / jeden Tag, zweimal pro Woche, oft, manchmal, selten, nie.|Onde: am Handy, am Computer (o aparelho); im Internet, im Fernsehen (o meio).|Opinião com dass (verbo no fim): Ich finde, dass wir zu viel online sind.|Hábitos: Nachrichten lesen, Serien streamen, Podcasts hören, Fotos posten.',
+  ex: 'Ich höre jeden Morgen einen Podcast.=Eu ouço um podcast toda manhã.|Am Wochenende streame ich Serien.=No fim de semana eu assisto a séries.|Ich lese selten eine Zeitung.=Eu raramente leio jornal.|Ich glaube, dass soziale Netzwerke auch gut sind.=Eu acho que as redes sociais também são boas.',
+  bd: ['Ich=S|bin=V|jeden_Tag=T^jeden Tag: acusativo de tempo, sem preposição|zwei_Stunden=T|online.=PR', 'Eu fico online duas horas por dia.'],
+  rule: 'dass',
+  hw: 'Anote durante um dia quanto tempo você passa no celular e fazendo o quê. Depois escreva três frases sobre os seus hábitos e uma opinião com dass.',
+  deep: `
+Celular, streaming, redes sociais: a relação com a mídia é tema de conversa e de prova. Hoje você aprende a descrever os seus hábitos e a opinar sobre eles com **dass**.
+# Passo 1: as mídias
+| Alemão | Português |
+| das Handy | o celular |
+| das Internet | a internet |
+| die Nachrichten | as notícias |
+| das soziale Netzwerk | a rede social |
+| die Zeitung | o jornal |
+~ Ich lese die Nachrichten auf dem Handy. = Eu leio as notícias no celular.
+# Passo 2: com que frequência
+- **täglich** ou **jeden Tag**: todo dia
+- **zweimal pro Woche**: duas vezes por semana
+- **oft, manchmal, selten, nie**
+! **jeden Tag**, **jeden Morgen**, **jede Woche** ficam no acusativo, sem preposição.
+~ Ich höre jeden Morgen einen Podcast. = Eu ouço um podcast toda manhã.
+# Passo 3: am ou im?
+- **am** Handy, **am** Computer: o aparelho
+- **im** Internet, **im** Fernsehen: o meio
+BR "No celular", quando é o tempo que você passa usando, vira **am Handy**: Ich bin zu viel am Handy.
+~ Am Wochenende streame ich Serien. = No fim de semana eu assisto a séries.
+# Passo 4: a opinião com dass
+| Começo | Opinião |
+| Ich finde, | dass wir zu viel online sind. |
+| Ich glaube, | dass Podcasts gut zum Lernen sind. |
+~ Ich glaube, dass es zu viel ist. = Eu acho que é demais.
+> Conte em voz alta os seus hábitos: quanto tempo, onde e o que você acha disso.
+? Como se diz "todo dia"? || jeden Tag ou täglich
+? Complete: Ich bin zu viel ___ Handy. || am
+? Depois de dass, onde fica o verbo? || no fim
+`,
+});
+
+NL('n-meinung', {
+  de: 'Ich bin dafür!', pt: 'Concordar e discordar', gt: 'Ich finde, dass … · ich bin dafür/dagegen',
+  gx: 'Opinar: Ich finde, dass … (verbo no fim) ou Meiner Meinung nach + verbo logo depois. Concordar: Das stimmt. Da hast du recht. Ich bin dafür. Discordar: Das sehe ich anders. Ich bin dagegen.',
+  ge: 'Ich bin dafür, weil es gesünder ist.=Eu sou a favor, porque é mais saudável.|Das sehe ich anders.=Eu vejo isso de outro jeito.|Meiner Meinung nach ist das zu teuer.=Na minha opinião, isso é caro demais.',
+  v: 'dafür=a favor=👍|dagegen=contra=👎|meiner Meinung nach=na minha opinião=💭|recht haben=ter razão=☝️|anders sehen=ver de outro jeito=🔄|einverstanden=de acordo=🤝|das Argument=o argumento=🗣️|der Vorteil=a vantagem=➕|der Nachteil=a desvantagem=➖|überzeugen=convencer=💡',
+  x: 'Das stimmt.=Isso é verdade.|Genau!=Exatamente!|Auf keinen Fall!=De jeito nenhum!|einerseits … andererseits=por um lado … por outro|die Diskussion=a discussão|diskutieren=discutir|zustimmen=concordar|widersprechen=discordar, contradizer|die Umfrage=a pesquisa de opinião|das Verbot=a proibição',
+  dlg: 'Sollen Handys in der Schule verboten sein? Ich bin dafür.=Celular deve ser proibido na escola? Eu sou a favor.|Wirklich? Das sehe ich anders.=Sério? Eu vejo isso de outro jeito.|Warum? Die Kinder lernen besser ohne Handy.=Por quê? As crianças aprendem melhor sem celular.|Da hast du recht, aber das Handy kann auch helfen.=Nisso você tem razão, mas o celular também pode ajudar.',
+  cz: 'Ich bin ___, weil es gesund ist.=dafür=dagegen=davon|Meiner Meinung nach ___ das zu teuer.=ist=das ist=sein|Da ___ du recht.=hast=bist=hat',
+  whys: 'a favor, porque é saudável: dafür|Meiner Meinung nach ocupa a 1ª posição: o verbo vem logo depois|recht haben: com du, hast',
+  pts: 'Opinar: Ich finde, dass … (verbo no fim) ou Meiner Meinung nach + verbo (Meiner Meinung nach ist das gut).|Concordar: Das stimmt. · Da hast du recht. · Ich bin dafür. · Genau!|Discordar com educação: Das sehe ich anders. · Ich bin dagegen. · Ich bin nicht sicher.|Argumentar: Ein Vorteil ist, dass … · Ein Nachteil ist, dass … · …, weil …',
+  ex: 'Ein Vorteil ist, dass man Zeit spart.=Uma vantagem é que se economiza tempo.|Ich bin dagegen, weil es zu teuer ist.=Eu sou contra, porque é caro demais.|Da hast du recht.=Nisso você tem razão.|Ich bin nicht sicher.=Não tenho certeza.',
+  bd: ['Meiner_Meinung_nach=ADV^a expressão inteira ocupa a 1ª posição|ist=V^o verbo vem logo depois|das=S|zu_teuer.=PR', 'Na minha opinião, isso é caro demais.'],
+  rule: 'opiniao',
+  hw: 'Escolha um tema (celular na escola, home office, carros no centro) e escreva: a sua posição (dafür ou dagegen), um argumento com weil, uma vantagem e uma desvantagem.',
+  deep: `
+Concordar e discordar com educação é uma habilidade importante, na vida e na prova do A2. Hoje você aprende as frases para dar a sua opinião, concordar, discordar e argumentar.
+# Passo 1: dar a opinião
+- **Ich finde, dass** + verbo no fim: Ich finde, dass das gut ist.
+- **Meiner Meinung nach** + verbo logo depois: Meiner Meinung nach **ist** das gut.
+~ Meiner Meinung nach ist das zu teuer. = Na minha opinião, isso é caro demais.
+# Passo 2: a favor ou contra
+| Alemão | Português |
+| Ich bin dafür. | Sou a favor. |
+| Ich bin dagegen. | Sou contra. |
+| Ich bin nicht sicher. | Não tenho certeza. |
+~ Ich bin dafür, weil es gesünder ist. = Eu sou a favor, porque é mais saudável.
+# Passo 3: concordar e discordar
+| Concordar | Discordar |
+| Das stimmt. | Das sehe ich anders. |
+| Da hast du recht. | Da bin ich nicht einverstanden. |
+| Genau! | Auf keinen Fall! |
+BR Em alemão discordar diretamente não é falta de educação, mas **Das sehe ich anders** soa mais suave que um simples "Nein".
+~ Das sehe ich anders. = Eu vejo isso de outro jeito.
+# Passo 4: argumentar
+- **Ein Vorteil ist, dass …** Uma vantagem é que …
+- **Ein Nachteil ist, dass …** Uma desvantagem é que …
+- **Einerseits … andererseits …** Por um lado … por outro …
+~ Ein Nachteil ist, dass es teuer ist. = Uma desvantagem é que é caro.
+> Escolha um tema e diga em voz alta: a sua posição, um argumento com weil e uma vantagem.
+? Como se diz "Sou contra"? || Ich bin dagegen.
+? Complete: Meiner Meinung nach ___ das gut. || ist
+? Como discordar com educação? || Das sehe ich anders.
+`,
+});
+
+NL('n-nachrichten', {
+  de: 'Kurze Nachrichten', pt: 'Entender notícias curtas', gt: 'Präteritum (reconhecer)',
+  gx: 'Notícias escritas usam o Präteritum, o passado da escrita. Basta reconhecer: regulares com -te (machte, eröffnete) e irregulares com a vogal mudada (kommen → kam, geben → gab, finden → fand).',
+  ge: 'Gestern regnete es in ganz Deutschland.=Ontem choveu na Alemanha inteira.|Der Zug kam mit einer Stunde Verspätung an.=O trem chegou com uma hora de atraso.|Das Konzert fand im Stadtpark statt.=O show aconteceu no parque da cidade.',
+  v: 'die Meldung=a notícia curta=📰|die Schlagzeile=a manchete=🗞️|der Bericht=a reportagem=📝|stattfinden (fand statt)=acontecer, realizar-se=📅|es gab=houve=✔️|das Ereignis=o acontecimento=⚡|die Eröffnung=a inauguração=✂️|der Stau=o congestionamento=🚗|das Unwetter=o temporal=⛈️|die Besucher=os visitantes=👥',
+  x: 'der Bürgermeister / die Bürgermeisterin=o prefeito / a prefeita|die Temperatur=a temperatura|gewinnen (gewann)=ganhar (ganhou)|sagen (sagte)=dizer (disse)|beginnen (begann)=começar (começou)|fahren (fuhr)=ir de veículo (foi)|gehen (ging)=ir a pé (foi)|die Region=a região|laut Polizei=segundo a polícia|niemand=ninguém',
+  dlg: 'Hast du die Nachrichten gehört?=Você ouviu as notícias?|Nein, was ist passiert?=Não, o que aconteceu?|Gestern gab es ein Unwetter in Köln. Viele Züge fielen aus.=Ontem houve um temporal em Colônia. Muitos trens foram cancelados.|Zum Glück gab es keine Verletzten.=Felizmente não houve feridos.',
+  cz: 'Gestern ___ es ein Konzert im Park.=gab=gibt=gebte|Der Bürgermeister ___ die Brücke.=eröffnete=eröffnen=eröffnetet|Das Fest ___ am Samstag statt.=fand=findet=fandet',
+  whys: 'es gab é o Präteritum de es gibt: houve|Präteritum regular: radical + -te (eröffnete)|stattfinden no Präteritum: fand … statt',
+  pts: 'Notícias escritas usam o Präteritum, não o Perfekt. Basta reconhecer as formas.|Regulares: radical + -te (machte, eröffnete); no plural, -ten.|Irregulares mudam a vogal: kommen → kam, geben → gab, finden → fand, gehen → ging.|Leia procurando wer, was, wann e wo.',
+  ex: 'Am Montag eröffnete die Stadt eine neue Bibliothek.=Na segunda, a cidade inaugurou uma nova biblioteca.|Es gab einen langen Stau auf der Autobahn.=Houve um longo congestionamento na rodovia.|Über 5000 Besucher kamen zum Fest.=Mais de 5000 visitantes vieram à festa.|Das Wetter war schön und warm.=O tempo estava bonito e quente.',
+  bd: ['Gestern=T^o tempo na 1ª posição|regnete=V^Präteritum de regnen: -te|es=S^es impessoal: o tempo|in_ganz_Deutschland.=L', 'Ontem choveu na Alemanha inteira.'],
+  rule: 'praet',
+  hw: 'Leia uma notícia curta num site de notícias em alemão fácil e anote três verbos no Präteritum, com o infinitivo ao lado (ex.: kam – kommen).',
+  deep: `
+Notícias em alemão parecem difíceis por um motivo: elas usam o **Präteritum**, o passado da escrita. Você não precisa saber formar todas as formas; precisa **reconhecê-las**. Hoje você aprende como.
+# Passo 1: Perfekt na fala, Präteritum na escrita
+| Na conversa (Perfekt) | Na notícia (Präteritum) |
+| es hat geregnet | es regnete |
+| er ist gekommen | er kam |
+| es hat … gegeben | es gab |
+~ Gestern regnete es in ganz Deutschland. = Ontem choveu na Alemanha inteira.
+# Passo 2: os regulares: -te
+Radical + **-te**: machen → mach**te**, eröffnen → eröffne**te**, regnen → regne**te**. No plural: **-ten** (sie machten).
+~ Die Stadt eröffnete eine neue Bibliothek. = A cidade inaugurou uma nova biblioteca.
+# Passo 3: os irregulares: a vogal muda
+| Infinitivo | Präteritum |
+| kommen | kam |
+| geben (es gibt) | gab (es gab) |
+| finden (statt) | fand (statt) |
+| gehen | ging |
+| fahren | fuhr |
+BR É como "fazer → fez" e "ir → foi": decore os mais comuns. O dicionário sempre mostra o Präteritum ao lado do infinitivo.
+~ Es gab einen langen Stau. = Houve um longo congestionamento.
+# Passo 4: como ler uma notícia curta
+Procure quatro coisas: **wer** (quem), **was** (o quê), **wann** (quando) e **wo** (onde). A manchete (**die Schlagzeile**) resume, e a primeira frase quase sempre responde às quatro.
+~ Das Konzert fand im Park statt. = O show aconteceu no parque.
+> Pegue uma manchete em alemão e procure o verbo no Präteritum.
+? Qual é o Präteritum de kommen? || kam
+? O que significa "es gab"? || houve
+? Notícias escritas usam mais o Perfekt ou o Präteritum? || o Präteritum
+`,
+});
+
+NL('n-pruefung', {
+  de: 'Prüfungstraining A2', pt: 'Como é a prova do A2', gt: 'Estrutura da prova · planejar juntos',
+  gx: 'O Goethe-Zertifikat A2 tem quatro partes: Lesen (30 min), Hören (cerca de 30 min), Schreiben (30 min) e Sprechen (cerca de 15 min, em dupla). Na parte 3 do Sprechen, a dupla planeja algo junto: Wie wäre es um drei? Geht es um fünf?',
+  ge: 'Wie heißt du und woher kommst du?=Como você se chama e de onde vem?|Was machen wir am Samstag?=O que nós fazemos no sábado?|Wie wäre es um drei Uhr?=Que tal às três horas?',
+  v: 'das Zertifikat=o certificado=📜|der Prüfungsteil=a parte da prova=🧩|der Antwortbogen=a folha de respostas=📋|die Paarprüfung=a prova em dupla=👥|der Prüfer / die Prüferin=o examinador / a examinadora=🧑‍🏫|die Mitteilung=a mensagem, o aviso=✉️|der Hörtext=o texto para ouvir=🎧|die Punktzahl=a pontuação=💯|die Musterprüfung=a prova-modelo=📝|Wie wäre es mit …?=Que tal …?=💡',
+  x: 'die Vorbereitung=a preparação|gemeinsam=juntos|der Vorschlag=a sugestão|vorschlagen=sugerir|ablehnen=recusar|das Thema=o tema|die Notiz=a anotação|nachfragen=perguntar de novo|die Wortzahl=o número de palavras|der Teilnehmer / die Teilnehmerin=o participante / a participante',
+  dlg: 'Wann hast du am Samstag Zeit?=Quando você tem tempo no sábado?|Vormittags habe ich einen Deutschkurs. Wie wäre es um drei?=De manhã eu tenho curso de alemão. Que tal às três?|Um drei kann ich leider nicht. Geht es um fünf?=Às três infelizmente não posso. Pode ser às cinco?|Ja, gut! Dann treffen wir uns um fünf.=Sim, ótimo! Então nos encontramos às cinco.',
+  cz: '___ wäre es um drei Uhr?=Wie=Was=Wann|Um drei kann ich ___ nicht.=leider=gern=bitte|Dann treffen wir ___ um fünf.=uns=euch=sich',
+  whys: 'Wie wäre es …? = Que tal …? (uma sugestão)|leider deixa a recusa educada|sich treffen com wir: wir treffen uns',
+  pts: 'Quatro partes: Lesen (30 min), Hören (cerca de 30 min), Schreiben (30 min) e Sprechen (cerca de 15 min, em dupla).|A prova escrita leva cerca de 90 minutos, sem pausa. Dicionário e celular não são permitidos.|Sprechen tem três partes: perguntas pessoais, contar algo da sua vida e planejar algo com a dupla.|Treine com a Musterprüfung do site oficial: o formato pode mudar.',
+  ex: 'Wie wäre es mit Samstag?=Que tal sábado?|Können Sie das bitte wiederholen?=O senhor pode repetir, por favor?|Das ist eine gute Idee!=É uma boa ideia!|Leider habe ich da keine Zeit.=Infelizmente não tenho tempo nesse horário.',
+  bd: ['Wie=W|wäre=V^Konjunktiv II de sein: a sugestão educada|es=S|um_drei_Uhr?=T', 'Que tal às três horas?'],
+  rule: 'konj2',
+  hw: 'Baixe a prova-modelo (Musterprüfung) do Goethe-Zertifikat A2 no site oficial do Goethe-Institut e faça uma parte de leitura cronometrando o tempo.',
+  deep: `
+Esta lição mostra como é a prova do **Goethe-Zertifikat A2**, o certificado mais conhecido desse nível. O formato pode mudar: confira sempre o site oficial do Goethe-Institut antes de se inscrever.
+# Passo 1: as quatro partes
+| Parte | Tempo |
+| Lesen: e-mails, avisos e textos curtos | 30 min |
+| Hören: conversas, avisos e recados | cerca de 30 min |
+| Schreiben: mensagens curtas do dia a dia | 30 min |
+| Sprechen: conversa em dupla | cerca de 15 min |
+A prova escrita (Lesen, Hören e Schreiben) leva cerca de **90 minutos**, sem pausa. **Dicionário e celular não são permitidos.**
+~ Die Prüfung hat vier Teile. = A prova tem quatro partes.
+# Passo 2: o Sprechen em três partes
+| Parte | O que acontece |
+| 1 | perguntas e respostas sobre você |
+| 2 | você conta algo da sua vida |
+| 3 | você e a dupla planejam algo juntos |
+Não há tempo de preparação: a conversa começa logo. Existe também uma versão individual, mais curta.
+~ Wie heißt du und woher kommst du? = Como você se chama e de onde vem?
+# Passo 3: planejar juntos (parte 3)
+| Para | Diga |
+| sugerir | Wie wäre es um drei? |
+| recusar | Um drei kann ich leider nicht. |
+| contrapropor | Geht es um fünf? |
+| fechar | Dann treffen wir uns um fünf. |
+~ Wie wäre es mit Samstag? = Que tal sábado?
+# Passo 4: dicas
+- Faça a **Musterprüfung** (prova-modelo) do site oficial, com o tempo marcado.
+- No Schreiben, cumpra **todos os pontos** pedidos na tarefa.
+- Não entendeu? Peça: **Können Sie das bitte wiederholen?**
+BR Os textos das lições de "Ler e escrever" (e-mails, bilhetes, avisos, convites) são exatamente o tipo de texto do Lesen e do Schreiben.
+~ Können Sie das bitte wiederholen? = O senhor pode repetir, por favor?
+> Treine em voz alta a parte 3: proponha um horário, recuse um e feche o combinado.
+? Quantas partes tem o Goethe-Zertifikat A2? || quatro: Lesen, Hören, Schreiben e Sprechen
+? Como se sugere algo com educação? || Wie wäre es …?
+? O Sprechen é feito como? || em dupla (há também uma versão individual)
+`,
+});
+
+NL('n-forum', {
+  de: 'Ein Forumsbeitrag', pt: 'Ler um fórum e escrever uma opinião curta', gt: 'weil, deshalb, trotzdem',
+  gx: 'Opinião no fórum: a posição (Ich bin dafür / dagegen), um motivo com weil (verbo no fim), uma consequência com deshalb e uma objeção com trotzdem (verbo logo depois) e a conclusão.',
+  ge: 'Ich bin dagegen, weil Autos laut sind.=Eu sou contra, porque carros são barulhentos.|Die Luft ist schlecht, deshalb fahre ich Rad.=O ar está ruim, por isso eu ando de bicicleta.|Es regnet oft, trotzdem fahre ich Rad.=Chove muito, mesmo assim eu ando de bicicleta.',
+  v: 'das Forum=o fórum=💬|die Innenstadt=o centro da cidade=🏙️|autofrei=sem carros=🚳|die Luft=o ar=🌬️|der Verkehr=o trânsito=🚦|der Radweg=a ciclovia=🚲|öffentliche Verkehrsmittel=o transporte público=🚌|die Umwelt=o meio ambiente=🌍|parken=estacionar=🅿️|zusammenfassend=resumindo=📌',
+  x: 'der Parkplatz=a vaga, o estacionamento|die Abgase=os gases de escapamento|die Fußgängerzone=o calçadão|der Geschäftsinhaber / die Geschäftsinhaberin=o dono / a dona de loja|erreichbar=acessível|das Klima=o clima|umweltfreundlich=ecológico|die Mehrheit=a maioria|abstimmen=votar|der Nutzer / die Nutzerin=o usuário / a usuária',
+  dlg: 'Hast du das Forum über die autofreie Innenstadt gelesen?=Você leu o fórum sobre o centro sem carros?|Ja! Viele sind dafür, weil die Luft besser wird.=Sim! Muitos são a favor, porque o ar fica melhor.|Und die Geschäfte? Die Kunden kommen oft mit dem Auto.=E as lojas? Os clientes vêm muitas vezes de carro.|Das stimmt. Trotzdem bin ich dafür.=É verdade. Mesmo assim, eu sou a favor.',
+  cz: 'Ich bin dafür, weil die Luft besser ___.=wird=werden=wirst|Es regnet, ___ fahre ich mit dem Rad.=trotzdem=weil=dass|Die Straße ist laut, ___ wohne ich nicht gern hier.=deshalb=weil=trotzdem',
+  whys: 'depois de weil, o verbo conjugado vai para o fim: wird|trotzdem = mesmo assim; o verbo vem logo depois|deshalb = por isso; o verbo vem logo depois',
+  pts: 'Posição: Ich bin dafür / dagegen. · Ich finde, dass …|Motivo com weil (verbo no fim): …, weil die Luft besser wird.|deshalb (por isso) e trotzdem (mesmo assim): o verbo vem logo depois.|Conclusão: Zusammenfassend finde ich … / Deshalb bin ich dafür.',
+  ex: 'Ich finde, dass wir mehr Radwege brauchen.=Eu acho que precisamos de mais ciclovias.|Der Verkehr ist schlimm, deshalb nehme ich den Bus.=O trânsito está horrível, por isso eu pego o ônibus.|Busse sind teuer. Trotzdem fahre ich jeden Tag Bus.=Os ônibus são caros. Mesmo assim, ando de ônibus todo dia.|Zusammenfassend bin ich dafür.=Resumindo, eu sou a favor.',
+  bd: ['Die_Luft_ist_schlecht,=C^a primeira oração|deshalb=ADV^deshalb ocupa a 1ª posição da segunda oração|fahre=V^o verbo vem logo depois|ich=S|Rad.=M', 'O ar está ruim, por isso eu ando de bicicleta.'],
+  rule: 'conectores',
+  hw: 'Escolha um tema de debate da sua cidade e escreva um post de fórum com cinco frases: a posição, weil, deshalb, trotzdem e a conclusão.',
+  le: {
+    texto: {
+      t: 'Forum: Autofreie Innenstadt – ja oder nein?', kind: 'leitura',
+      intro: 'Num fórum da cidade, duas pessoas opinam sobre fechar o centro para carros. Leia e responda.',
+      paras: ['Sabine_K: Ich bin dafür! Die Luft ist schlecht und es ist sehr laut. Deshalb fahre ich schon jetzt nur mit dem Rad in die Stadt. Wir brauchen mehr Radwege und Platz für Menschen.', 'Murat72: Ich bin dagegen, weil viele Geschäfte Kunden mit Auto brauchen. Meine Mutter ist alt und kann nicht gut laufen. Trotzdem finde ich, dass wir weniger Autos brauchen. Vielleicht nur am Wochenende?'],
+      qs: [
+        { q: 'Por que a Sabine é a favor?', o: ['porque o ar é ruim e há muito barulho', 'porque não tem carro', 'porque mora longe do centro'], a: 0 },
+        { q: 'Como a Sabine vai ao centro hoje?', o: ['só de bicicleta', 'de carro', 'de ônibus'], a: 0 },
+        { q: 'Por que o Murat é contra?', o: ['porque muitas lojas precisam de clientes de carro', 'porque gosta de dirigir', 'porque o ônibus é caro'], a: 0 },
+        { q: 'O que o Murat sugere?', o: ['fechar o centro para carros só no fim de semana', 'construir mais estacionamentos', 'não mudar nada'], a: 0 },
+      ],
+    },
+    escrita: {
+      t: 'Escreva a sua opinião no fórum', tipo: 'form', ok: 'Post escrito corretamente.',
+      pede: 'Escreva a sua resposta no fórum sobre o centro sem carros, uma frase em cada linha.',
+      campos: [
+        { l: 'Position', d: 'a sua posição: Ich bin dafür / dagegen.', re: '\\b(dafür|dagegen)\\b', f: 'iu', err: 'Diga a sua posição: Ich bin dafür. / Ich bin dagegen.' },
+        { l: 'Weil', d: 'um motivo com weil', re: ',\\s*weil\\s+\\p{L}+.*\\s\\p{L}+[.!]?$', f: 'iu', err: 'Dê um motivo com weil, depois de uma vírgula: …, weil die Luft besser wird.', bad: [['weil (die|der|das|es|ich|wir|autos|viele)\\s+(\\S+\\s+)?(ist|sind|wird|werden|hat|haben|brauchen|braucht)\\s+\\S+', 'Depois de <b>weil</b> o verbo vai <b>para o fim</b>: …, weil die Luft besser <b>wird</b>.']] },
+        { l: 'Deshalb', d: 'uma consequência com deshalb', re: '\\bdeshalb\\s+\\p{L}+\\s+', f: 'iu', err: 'Use deshalb com o verbo logo depois: Es ist laut, deshalb fahre ich Rad.', bad: [['deshalb (ich|wir|man|es|die)\\b', 'Depois de <b>deshalb</b> vem o verbo: deshalb <b>fahre</b> ich …']] },
+        { l: 'Trotzdem', d: 'uma objeção com trotzdem', re: '\\btrotzdem\\s+\\p{L}+', f: 'iu', err: 'Use trotzdem com o verbo logo depois: Das stimmt, trotzdem bin ich dafür.', bad: [['trotzdem (ich|wir|man|es|die)\\b', 'Depois de <b>trotzdem</b> vem o verbo: trotzdem <b>bin</b> ich …']] },
+        { l: 'Fazit', d: 'uma conclusão: Zusammenfassend …', re: '\\b(zusammenfassend|deshalb|also|insgesamt|meiner meinung nach|ich finde)\\b', f: 'iu', err: 'Feche com uma conclusão: Zusammenfassend bin ich dafür.' },
+      ],
+      modelo: 'Ich bin dafür. · Ich fahre gern Rad, weil die Luft dann besser ist. · Die Stadt ist sehr laut, deshalb wohne ich nicht gern im Zentrum. · Autos sind praktisch, trotzdem brauchen wir weniger Autos. · Zusammenfassend finde ich die Idee gut.',
+    },
+  },
+  deep: `
+Esta é a última lição do A2: **ler e escrever** num fórum de opinião. Você vai ler duas opiniões sobre fechar o centro da cidade para carros e escrever a sua, juntando os conectores do módulo: **weil**, **deshalb** e **trotzdem**.
+# Passo 1: como ler uma opinião
+Procure a **posição** (dafür ou dagegen) e os **motivos** (depois de weil, antes de deshalb). Os nomes de usuário (Sabine_K, Murat72) não importam.
+~ Ich bin dafür, weil die Luft besser wird. = Eu sou a favor, porque o ar fica melhor.
+# Passo 2: três conectores, duas ordens
+| Conector | O verbo |
+| weil | no fim: …, weil die Luft schlecht ist. |
+| deshalb | logo depois: …, deshalb fahre ich Rad. |
+| trotzdem | logo depois: …, trotzdem bin ich dafür. |
+! **weil** é conjunção: manda o verbo para o fim. **deshalb** e **trotzdem** são advérbios: ocupam a 1ª posição, e o verbo vem logo depois.
+~ Die Luft ist schlecht, deshalb fahre ich Rad. = O ar está ruim, por isso eu ando de bicicleta.
+# Passo 3: a objeção com trotzdem
+**trotzdem** = mesmo assim. Serve para admitir um argumento contrário e manter a sua posição.
+~ Das stimmt. Trotzdem bin ich dafür. = É verdade. Mesmo assim, eu sou a favor.
+# Passo 4: o post de opinião
+| Parte | Exemplo |
+| Posição | Ich bin dafür. |
+| Motivo | …, weil die Luft besser wird. |
+| Consequência | …, deshalb fahre ich Rad. |
+| Objeção | …, trotzdem brauchen wir weniger Autos. |
+| Conclusão | Zusammenfassend finde ich die Idee gut. |
+BR É a mesma estrutura das redações escolares no Brasil, em miniatura: tese, argumento, contra-argumento e conclusão.
+~ Zusammenfassend bin ich dafür. = Resumindo, eu sou a favor.
+> No exercício, leia as duas opiniões e escreva a sua, uma frase por linha.
+? Depois de weil, onde vai o verbo? || no fim
+? Depois de deshalb, onde vai o verbo? || logo depois, na 2ª posição
+? O que significa trotzdem? || mesmo assim
+`,
+});
+
+V('Medien im Alltag',
+  'M:Com que frequência?;Alemão|Português;täglich / jeden Tag|todo dia;zweimal pro Woche|duas vezes por semana;selten|raramente;nie|nunca',
+  'V:am ou im?;am · o aparelho|am Handy|am Computer;im · o meio|im Internet|im Fernsehen');
+V('Ich bin dafür!',
+  'V:Concordar ou discordar?;Concordar|Das stimmt.|Da hast du recht.|Ich bin dafür.;Discordar|Das sehe ich anders.|Ich bin dagegen.|Ich bin nicht sicher.',
+  'E:Meiner Meinung nach + verbo;Meiner Meinung nach^c|ist^v|das^s|gut.^p');
+V('Kurze Nachrichten',
+  'M:Perfekt ou Präteritum?;Na conversa|Na notícia;es hat geregnet|es regnete;er ist gekommen|er kam;es hat gegeben|es gab;es hat stattgefunden|es fand statt',
+  'P:Como ler uma notícia;Wer?=quem;Was?=o quê;Wann?=quando;Wo?=onde');
+V('Prüfungstraining A2',
+  'M:O Goethe-Zertifikat A2;Parte|Tempo;Lesen|30 min;Hören|cerca de 30 min;Schreiben|30 min;Sprechen, em dupla|cerca de 15 min',
+  'P:Sprechen, parte 3: planejar juntos;Sugerir=Wie wäre es um drei?;Recusar=Um drei kann ich leider nicht.;Contrapropor=Geht es um fünf?;Fechar=Dann treffen wir uns um fünf.');
+V('Ein Forumsbeitrag',
+  'M:Três conectores, duas ordens;Conector|O verbo;weil|no fim;deshalb|logo depois;trotzdem|logo depois',
+  'P:O post de opinião;Posição=Ich bin dafür.;Motivo=…, weil die Luft besser wird.;Consequência=…, deshalb fahre ich Rad.;Objeção=…, trotzdem brauchen wir weniger Autos.;Conclusão=Zusammenfassend finde ich die Idee gut.');
+
+S_('Medien im Alltag', 'ausmachen (mache … aus)=desligar (aparelho)');
+S_('Ich bin dafür!', 'sparen (man spart)=economizar');
+S_('Kurze Nachrichten', 'ganz (in ganz Deutschland)=inteiro (na Alemanha inteira)|der Stadtpark=o parque da cidade|eröffnen (eröffnete)=inaugurar (inaugurou)|die Autobahn=a rodovia|das Fest=a festa|ausfallen (fielen aus)=ser cancelado (foram cancelados)|zum Glück=felizmente');
+S_('Prüfungstraining A2', 'vormittags=de manhã');
+S_('Ein Forumsbeitrag', 'schlimm=ruim, grave|der Bus (die Busse)=o ônibus (os ônibus)');
 // Esquemas visuais (mesmo formato de data/visuals.js) e palavras de apoio (data/support.js) das lições novas.
 V('Wie schreibt man das?',
   'V:As letras que mais enganam;V se chama "fau"|Vera: fau · e · er · a;W se chama "vê"|Wien: vê · i · e · en;Z se chama "tsét"|Zoo: tsét · o · o',
@@ -2317,7 +2596,7 @@ const SEQ = [
   { lv: 'A2', n: 'Saúde', l: [33, 'n-termin2', 'n-apotheke', 'n-gesund', 'n-notfall', 'n-krankmelden'] },
   { lv: 'A2', n: 'Viagens', l: [29, 34, 'n-bahnhof', 25, 'n-reiseprobleme', 'n-hotelbewertung'] },
   { lv: 'A2', n: 'Festas e relações', l: [39, 40, 36, 37, 24, 'n-blog'] },
-  { lv: 'A2', n: 'Opinião e mídia', l: [41, '?Medien im Alltag', '?Dafür oder dagegen?', '?Kurze Nachrichten', '?Prüfungstraining A2', '?Ler e escrever: Ein Forumsbeitrag'] },
+  { lv: 'A2', n: 'Opinião e mídia', l: [41, 'n-medien', 'n-meinung', 'n-nachrichten', 'n-pruefung', 'n-forum'] },
 ];
 // B1 a C2 continuam como estão: cada semana antiga vira um módulo, com o nível da semana.
 for (let w = 7; w < 35; w++) SEQ.push({ lv: PHASES.find((p) => w >= p.weeks[0] && w < p.weeks[1]).id, l: [0, 1, 2, 3, 4, 5].map((r) => w * 6 + r) });
