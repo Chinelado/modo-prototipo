@@ -230,12 +230,12 @@ function go(v, arg) {
   const due = dueKeys().length;
   nav.hidden = !S.start;
   document.body.classList.toggle('has-nav', !!S.start);
-  nav.innerHTML = `<div class="brand"><svg viewBox="0 0 64 64" width="26" height="26" aria-hidden="true">${isoCube(32, 22, 26, 24, '#ff8a3d')}</svg>Deutsch-Trilha</div>` +
+  if (typeof modoNav === 'function') nav.innerHTML = modoNav(v, due); else nav.innerHTML = `<div class="brand"><svg viewBox="0 0 64 64" width="26" height="26" aria-hidden="true">${isoCube(32, 22, 26, 24, '#ff8a3d')}</svg>Deutsch-Trilha</div>` +
     tabs.map(([id, e, n]) => `<button data-v="${id}" class="${id === v || (v === 'intro' && id === 'trilha') ? 'on' : ''}"><b>${e}</b><span>${n}</span>${id === 'cards' && due ? `<em>${due}</em>` : ''}</button>`).join('') +
     `<div class="nav-foot">🔥 ${shownStreak()} · ⭐ ${S.xp} XP</div>`;
   $$('button', nav).forEach((b) => (b.onclick = () => go(b.dataset.v)));
   stopRead();
-  ({ home, trilha, cards, perfil, intro, onboard, extras, guide, nivel, texto, pocket })[v](arg);
+  ({ home, trilha, cards, perfil, intro, onboard, extras, guide, nivel, texto, pocket, praticar: (a) => praticar(a) })[v](arg);
   if (v !== 'trilha') scrollTo(0, 0);
   updateBadge();
 }
@@ -644,14 +644,15 @@ function newWordsCard(l) {
 /* ---------- sessão de exercícios ---------- */
 let sess = null;
 const newCard = () => { const t = new Date(); t.setHours(24, 0, 0, 0); return { due: t.getTime(), int: 0, ease: 2.3, reps: 0, lapses: 0, mods: {} }; };
-function startSession(kind, day) {
+function startSession(kind, day, opt = {}) {
   let ctxs;
   if (kind === 'lesson') ctxs = [LESSONS[dayInfo(day).li]];
   else if (kind === 'review') { const w = dayInfo(day).w; ctxs = LESSONS.slice(w * 6, w * 6 + 6); }
   else ctxs = sample(doneLessons(), 6);
   if (kind === 'lesson') { ctxs[0].v.forEach((v) => { if (!S.cards[v.k]) S.cards[v.k] = newCard(); }); addSupCards(ctxs[0].i); }
   const n = kind === 'lesson' ? 14 : kind === 'review' ? 18 : 10;
-  sess = { kind, day, ctxs, queue: planInt(n), doneN: 0, first: 0, firstOk: 0, combo: 0, maxCombo: 0, xp: 0, re: 0, by: {}, onEnter: null };
+  const queue = opt.kinds ? shuffle(Array.from({ length: n }, (_, i) => ({ k: opt.kinds[i % opt.kinds.length] }))) : planInt(n);
+  sess = { kind, day, ctxs, queue, noFala: !!opt.noFala, forceFala: !!opt.forceFala, doneN: 0, first: 0, firstOk: 0, combo: 0, maxCombo: 0, xp: 0, re: 0, by: {}, onEnter: null };
   view = 'run'; nav.hidden = true; nextEx();
 }
 const PRAISE = ['Richtig!', 'Sehr gut!', 'Genau!', 'Super!', 'Prima!', 'Toll!'];
@@ -941,7 +942,7 @@ const GEN = {
   // Musical: reconhecer pelo som.
   mus(les, el, done) {
     const sents = [...les.ge, ...les.ex, ...les.dlg].filter((s) => { const n = s.de.split(' ').length; return n >= 3 && n <= 9; });
-    if (FALA_SR && falaOn() && sess && !sess.noFala && sents.length && Math.random() < 0.35) {
+    if (FALA_SR && falaOn() && sess && !sess.noFala && sents.length && (sess.forceFala || Math.random() < 0.35)) {
       // Fale a frase: até 3 tentativas; passa com 80% da frase entendida
       const s = pick(sents);
       el.innerHTML = `<p class="q">🎤 Fale a frase em voz alta<b>${esc(falaAlvo(s.de))}</b></p><p class="hint">${esc(s.pt)} · ouça o modelo antes, se quiser</p>${falaPanel(s.de, s.pt, 'exercicio')}`;
@@ -1152,7 +1153,7 @@ function perfil() {
 /* ---------- aparência (tema claro ou escuro) ---------- */
 // Preferência deste aparelho: 'dark' (padrão), 'light' ou 'auto' (segue o sistema). O index.html aplica antes de desenhar a tela.
 const THEME_KEY = 'deutschTrilha.theme';
-const themePref = () => { try { return localStorage.getItem(THEME_KEY) || 'dark'; } catch (e) { return 'dark'; } };
+const themePref = () => { try { return localStorage.getItem(THEME_KEY) || 'light'; } catch (e) { return 'light'; } }; // MODO: claro por padrão
 const mqLight = window.matchMedia ? matchMedia('(prefers-color-scheme: light)') : null;
 function applyTheme(pref = themePref()) {
   const t = pref === 'auto' ? (mqLight && mqLight.matches ? 'light' : 'dark') : pref;
