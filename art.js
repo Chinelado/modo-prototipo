@@ -213,7 +213,8 @@ function guideImgs(root) {
   });
 }
 // Ilustrações de uma lição: images/aulas/licao-001.webp (principal) e licao-001-b.webp (detalhe), se existirem.
-const lessonImgs = (l) => { if (l.oi == null) return ''; const n = 'licao-' + String(l.oi + 1).padStart(3, '0'); return `<div class="limgs">${[n, n + '-b'].map((x) => `<figure class="gimg" data-gimg="${x}" data-dir="aulas" hidden><img alt="${esc(l.pt)}" decoding="async">${typeof IMG_CAP !== 'undefined' && IMG_CAP[x] ? `<figcaption>${inl(IMG_CAP[x])}</figcaption>` : ''}</figure>`).join('')}</div>`; };
+// Lições novas da trilha MODO (sem índice original) usam o id: licao-n-bahnhof.webp.
+const lessonImgs = (l) => { if (l.oi == null && !l.nova) return ''; const n = 'licao-' + (l.oi == null ? l.sid : String(l.oi + 1).padStart(3, '0')); return `<div class="limgs">${[n, n + '-b'].map((x) => `<figure class="gimg" data-gimg="${x}" data-dir="aulas" hidden><img alt="${esc(l.pt)}" decoding="async">${typeof IMG_CAP !== 'undefined' && IMG_CAP[x] ? `<figcaption>${inl(IMG_CAP[x])}</figcaption>` : ''}</figure>`).join('')}</div>`; };
 
 /* ---------- facilitação gráfica: esquemas por lição ---------- */
 const VICON = { F: '🧱', T: '⏳', S: '📏', P: '🔀', V: '⚖️', M: '📊', E: '🧮' };

@@ -173,3 +173,113 @@ Das 48 imagens, ficaram **8**. Elas saíram do topo da lição e foram para um b
 | Mülltrennung | As **cores** das lixeiras. |
 
 As outras 40 eram cenas de clima (pessoas sorrindo no hotel, no cinema, na academia) ou repetiam o painel, a etiqueta ou o cartão de embarque que o app já desenha com áudio. Os PNG originais continuam na sua pasta `images/pocket/`, caso queira alguma de volta.
+
+---
+
+# Lições novas do A1–A2 (trilha MODO, 21/11/2026)
+
+O mesmo critério valeu para as 42 lições novas: só entra imagem que mostra uma regra espacial ou física, que faz reconhecer algo do mundo real ou que cria um gancho de memória que o português não dá.
+
+## Decisão por lição
+
+### Ganham imagem nova (4 prompts abaixo)
+
+| Lição | Arquivo | Estilo | Função didática |
+| --- | --- | --- | --- |
+| Die Wohnungsanzeige | `licao-n-wohnungsanzeige.png` | Diagrama | O que conta como **Zimmer** é uma regra espacial: na planta, sala e quarto contam; cozinha, banheiro e corredor não. É a confusão nº 1 de quem procura apartamento ("2 Zimmer" não são 2 quartos). |
+| Die Wohnungsanzeige (detalhe) | `licao-n-wohnungsanzeige-b.png` | Diagrama | **EBK / Einbauküche**: muitos apartamentos alugados vêm sem cozinha nenhuma, só com os canos. O brasileiro não imagina isso, e a sigla do anúncio só faz sentido vendo. |
+| Am Bahnhof und am Flughafen | `licao-n-bahnhof.png` | Diagrama | **Gleis × Bahnsteig**: na Alemanha o número é do trilho, e cada plataforma fica entre dois números. É espacial, e o português usa "plataforma" para os dois. |
+| Schilder und Zettel | `licao-n-schilder.png` | Diagrama | **ziehen × drücken**: a direção da porta é uma ação física que nenhum emoji mostra, e as duas palavras estão em toda porta alemã. |
+
+### Reaproveitam uma imagem que já existe (já estão no app)
+
+| Lição | Imagem | Por quê |
+| --- | --- | --- |
+| Die Hausordnung | a das lixeiras do Pocket (`muell`), copiada para `licao-n-hausordnung.webp` | As **cores** das lixeiras são o que se precisa reconhecer no pátio do prédio. |
+| In der Apotheke | a da farmácia do Pocket (`apotheke`), copiada para `licao-n-apotheke.webp` | O **A** vermelho e a placa **Notdienst**, que a lição cita. |
+
+### Ficam sem imagem (36)
+
+| Lições | Motivo |
+| --- | --- |
+| Wie schreibt man das?, Wie alt bist du?, Zwei Bücher drei Stühle, Am Montag um zehn, Was isst du gern?, Zur Post zum Bahnhof, Mein Lebenslauf, Schule und Ausbildung, Mein Arbeitstag, Gesund bleiben, Kurze Nachrichten | Regra de gramática ou de números que os esquemas coloridos (tabela, fórmula, linha do tempo, comparação) já mostram, com áudio. |
+| Was sind Sie von Beruf?, Auf dem Markt, Einen Termin machen, Umtauschen, Auf der Bank und der Post, Am Telefon, Ich brauche einen Termin, Im Notfall, Probleme auf der Reise, Medien im Alltag, Ich bin dafür! | Vocabulário e frases que o emoji e o áudio cobrem, ou distinção que o português já tem ("grande demais", "cancelar / remarcar"). Uma foto seria cena de clima. |
+| Ein Formular, Eine kurze Nachricht, Eine Einladung, Speisekarte und Einkaufszettel, Eine Postkarte, Eine E-Mail über mich, Ein Zettel an die Nachbarn, Eine Online-Bestellung, Eine Stellenanzeige, Krank melden, Eine Hotelbewertung, Ein Blogbeitrag, Ein Forumsbeitrag | Lições de Ler e escrever: o conteúdo é o texto, que o app mostra com áudio. Uma imagem com texto erraria o alemão; uma sem texto seria decoração. |
+| Mein Wochenende, Prüfungstraining A2 | Cena de clima (fim de semana, sala de prova): bonita, mas não ensina. |
+
+## Como gerar e salvar
+
+1. Abra uma conversa **nova** no ChatGPT e cole primeiro o **Bloco de estilo A** (diagrama ilustrado, mais acima neste arquivo). Espere o "ok".
+2. Cole um prompt por vez e gere em **paisagem 3:2 (1536 × 1024)**.
+3. Confira a imagem com a **lista de conferência** de cada prompt antes de salvar. Se vier qualquer letra ou palavra, peça: *"Remove all text, keep only the circled numbers."*
+4. Salve como **PNG** em `images/aulas/` com o nome indicado e me avise. Eu converto para WebP e ponho no app. A legenda já está escrita (em `data/imagens.js`), com áudio em cada palavra.
+
+## Prompts
+
+### Die Wohnungsanzeige — `licao-n-wohnungsanzeige.png` (estilo A)
+```
+Didactic diagram: a top-down architectural floor plan of ONE small rental apartment, as a clean flat vector illustration.
+
+Layout (seen exactly from above; walls as thick navy #0e1525 lines; door openings as gaps with a thin quarter-circle door-swing arc; windows as gaps with two thin parallel lines on the outer walls):
+- Space 1, bottom-left, the largest room: the living room. Fill it with soft orange (#ff8a3d at about 35% opacity). Inside, simple top-view furniture icons in navy outline: a three-seat sofa against the wall, a small coffee table, a low TV cabinet on the opposite wall.
+- Space 2, top-left: the bedroom. Same soft orange fill as space 1. Inside, top-view icons: a double bed with two pillows, a wardrobe against the wall, one small nightstand.
+- Space 3, top-right: the kitchen. Light gray fill (#d9dee5). Top-view icons along one wall: a counter with a sink and a four-burner stove, and a fridge.
+- Space 4, middle-right, small: the bathroom. Light gray fill. Top-view icons: toilet, washbasin and a square shower tray.
+- Space 5, bottom-right, narrow: the entrance hallway that connects all four rooms. Light gray fill. The apartment's front door is on its outer wall, drawn as a door gap with a swing arc.
+- Space 6: a small balcony attached to the OUTSIDE of the living room's bottom wall, drawn with a dashed navy outline and a white fill, reached through a door from the living room.
+
+Numbering: a navy circle (white number inside, all circles the same size) in the center of each space: 1 living room, 2 bedroom, 3 kitchen, 4 bathroom, 5 hallway, 6 balcony.
+
+Important: ONLY spaces 1 and 2 are orange. Kitchen, bathroom and hallway must be gray. The two orange rooms should clearly look like the two biggest "real rooms" of the flat.
+
+Style: plain off-white background (#f5f9fc), the plan centered and filling about 80% of the image, very subtle shadow under the plan. No textures, no people, no plants, no compass, no measurements, no dimension lines, no scale bar, no letters or words anywhere. The only characters allowed are the numbers 1 to 6 inside the circles. Landscape 3:2 (1536x1024).
+```
+**Conferir antes de salvar:** só a sala (1) e o quarto (2) estão em laranja; a cozinha (3), o banheiro (4) e o corredor (5) estão em cinza; há exatamente os números 1 a 6; nenhuma palavra nem medida.
+**Legenda (já no app):** Só 1 e 2, em laranja, contam como **Zimmer**: esta é uma **Zwei-Zimmer-Wohnung**, com sala e um quarto. 3 **die Küche** · 4 **das Bad** · 5 **der Flur** · 6 **der Balkon** não entram na conta.
+
+### Die Wohnungsanzeige (detalhe) — `licao-n-wohnungsanzeige-b.png` (estilo A)
+```
+Didactic diagram, two side-by-side panels of the SAME empty rental kitchen room, seen from the doorway at eye level, in clean flat vector style. Both panels: identical room shape, a window on the back wall, plain light gray floor, white walls, same viewpoint and same size.
+
+LEFT panel (number 1): the kitchen as it is handed over in many German rental apartments, completely EMPTY. On the back wall only: a short strip of white wall tiles, two capped water pipes sticking out of the wall, a capped drain pipe below them, one electrical junction box for a stove with loose cable ends, and two wall sockets. No cabinets, no sink, no stove, no fridge, no furniture at all. Highlight the pipes and the junction box with a thin orange outline (#ff8a3d).
+
+RIGHT panel (number 2): the same room with a complete fitted kitchen installed along the back wall: lower cabinets with a continuous countertop, a sink with tap exactly where the pipes were, a built-in stove with oven where the junction box was, upper wall cabinets, and a tall fridge cabinet at the end. Cabinets in a simple light teal tone (#1aa3a3 at about 40%) so the new kitchen stands out.
+
+A thin vertical divider line between the panels. A navy circle with a white number at the top-left corner of each panel: 1 left, 2 right.
+
+Style: plain off-white background (#f5f9fc) around the panels, navy outlines (#0e1525), no textures, no people, no brands, no letters or words anywhere; the only characters allowed are the circled numbers 1 and 2. Landscape 3:2 (1536x1024).
+```
+**Conferir antes de salvar:** o painel 1 está realmente vazio (só canos, caixa elétrica e tomadas); o painel 2 é o mesmo cômodo, com a cozinha montada; nenhuma marca nem palavra.
+**Legenda (já no app):** 1 Muitos apartamentos alugados na Alemanha vêm sem cozinha: só os canos e as tomadas na parede. 2 Com **Einbauküche** (**EBK** no anúncio), armários, pia e fogão já estão lá.
+
+### Am Bahnhof und am Flughafen — `licao-n-bahnhof.png` (estilo A)
+```
+Didactic diagram of a German railway platform, clean flat vector, seen from a slightly elevated three-quarter view looking along the tracks, so the layout is easy to read.
+
+In the center: ONE long island platform (a raised concrete strip), filled with soft teal (#1aa3a3 at about 40%), with a simple flat roof canopy on a row of thin pillars, two plain benches and two small standing figures waiting (simple geometric people, no faces). Along both long edges of the platform, a thin white safety line.
+
+On EACH side of the platform runs ONE railway track: two steel rails on wooden sleepers and gravel, outlined in orange (#ff8a3d) so both tracks clearly stand out from the platform. On the LEFT track stands a modern red-and-white regional train with its doors open toward the platform. The RIGHT track is empty.
+
+Above each platform edge, hanging from the canopy, a small square sign plate facing the viewer, one for each track. These sign plates must be completely BLANK (plain white squares with a navy border): no numbers, no letters, no symbols on them.
+
+Numbering with navy circles (white number inside), placed clearly next to what they mark: circle 1 on the teal platform surface between the two waiting people; circle 2 on the gravel next to the left track; circle 3 on the gravel next to the right track.
+
+Style: plain off-white sky and background (#f5f9fc), no station building, no city, no clock, no departure board with text, no brands or logos on the train, no letters or words anywhere. The only characters allowed are the circled numbers 1, 2 and 3. Landscape 3:2 (1536x1024).
+```
+**Conferir antes de salvar:** a plataforma (1) está no meio, entre dois trilhos (2 e 3); as placas penduradas estão em branco; o trem não tem marca nem letreiro.
+**Legenda (já no app):** 1 **der Bahnsteig**: onde você espera o trem. 2 e 3 **das Gleis**: os trilhos, cada um com o seu número. O painel diz o número do Gleis (**Der Zug fährt von Gleis 7.**), e cada Bahnsteig fica entre dois Gleise.
+
+### Schilder und Zettel — `licao-n-schilder.png` (estilo A)
+```
+Didactic diagram, two side-by-side panels showing the SAME single glass entrance door of a shop, in clean flat vector style, seen from a slightly elevated three-quarter angle so the floor in front of the door is visible. Same door, same size, same angle in both panels. Each door has a navy metal frame and a large glass pane; the glass is completely blank (no stickers, no signs, no letters).
+
+LEFT panel (number 1), PULL: the door has a vertical bar handle. A simple stylized hand and forearm (geometric, cut off at the shoulder, no face) grips the bar and pulls. The door is half open TOWARD the viewer. On the floor, a dashed navy quarter-circle shows the door's swing path on the viewer's side, and a thick curved orange arrow (#ff8a3d) points from the door toward the viewer.
+
+RIGHT panel (number 2), PUSH: instead of a bar, the door has a flat rectangular metal push plate. An open palm presses flat against the plate. The door is half open AWAY from the viewer, into the shop. On the floor, a dashed navy quarter-circle shows the swing path on the FAR side of the door, and a thick straight teal arrow (#1aa3a3) points from the hand away from the viewer into the door.
+
+A thin vertical divider between the panels. A navy circle with a white number at the top-left corner of each panel: 1 left, 2 right.
+
+Style: plain off-white background (#f5f9fc), navy outlines (#0e1525), no shop interior details, no brands, no letters, words or symbols on the doors, no other text. The only characters allowed are the circled numbers 1 and 2. Landscape 3:2 (1536x1024).
+```
+**Conferir antes de salvar:** no painel 1 a porta abre **para fora**, na direção de quem olha; no painel 2 abre **para dentro**, longe de quem olha; não há nenhuma palavra no vidro.
+**Legenda (já no app):** 1 **ziehen**: puxar, a porta vem na sua direção. 2 **drücken**: empurrar, a porta vai para longe de você. É o que está escrito nas portas alemãs.
