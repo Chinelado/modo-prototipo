@@ -351,3 +351,7 @@ html[data-fs="g"] body { font-size: 18px; }
 .mo-vg .mo-vgk + p { margin: 0; line-height: 1.55; }
 .mo-vg .mo-vgex p { margin: 6px 0; }
 .mo-vg .mo-vgnext { margin-top: 14px; font-size: .85rem; }
+/* Logo MODO: o nome em roxo-escuro da marca no tema claro, branco no escuro e no topo colorido da abertura */
+.mo-logo { display: block; color: #260747; }
+:root[data-theme="dark"] .mo-logo, .mo-ob .mo-brand .mo-logo { color: #fff; }
+.mo-ob .mo-brand .mo-logo path { fill: currentColor; } /* no topo colorido, a versão toda branca da marca */

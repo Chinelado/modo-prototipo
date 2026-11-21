@@ -30,15 +30,19 @@ const ICON = {
   lock: '<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
 };
 const ic = (n, s = 20, cls = '') => `<svg class="ic ${cls}" viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[n] || ''}</svg>`;
-let mGid = 0;
-const modoLogo = (s = 30) => { const id = 'mg' + ++mGid; return `<svg viewBox="0 0 48 40" width="${s}" height="${Math.round(s * 0.83)}" aria-hidden="true"><defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7A5CFF"/><stop offset=".55" stop-color="#A55BEF"/><stop offset="1" stop-color="#FF6BA6"/></linearGradient></defs><path d="M7 33V9.5L24 25 41 9.5V33" fill="none" stroke="url(#${id})" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg>`; };
+// Logo MODO (images/logo/SVG: Ativo 3 = símbolo, Ativo 2 = símbolo + nome). O nome usa currentColor:
+// roxo-escuro da marca no tema claro e branco no escuro (.mo-logo em modo.css).
+const LOGO_SYM = '<path fill="#fb548a" d="M324.1,391.54l-47.06-27.7c42.25-28.71,73.39-79.57,70.05-131.92-2.15-47.79-31.68-87.04-68.99-115.27L432.4,20.73l19.23-11.73c19.86-11.91,43.37-11.67,63.5-.09,22.65,13.03,37.45,37.13,37.45,63.9l.06,325.66c0,12.84-2.9,24.51-8.17,35.88-16.27,35.12-59.26,52.29-93.96,31.94l-45.07-26.44-81.34-48.31Z"/><path fill="#7646fa" d="M212.61,289.66c12.85,29.92,35.85,56.7,63.92,74.11l-175.73,100.53c-17.71,10.13-37.73,12.31-56.56,3.91C15.49,455.41-.04,426.79,0,395.57L.4,71.33C.44,40.18,22.25,12.64,51.05,3.37c16.97-5.46,35.25-4.53,50.34,4.7l162.17,99.23,14.14,9.42c-29.13,16.45-53.61,44.96-65.9,75.65-12.54,31.33-11.9,66.31.81,97.3Z"/>';
+const LOGO_WORD = '<path d="M958.7,344.56l.22-34.54-.63-90.45-57.49,84.59c-5.84,8.6-14.47,12.37-24.68,10.12-4.9-1.08-9.46-3.05-12.5-7.45l-24.75-36.24c-11.67-17.08-22.04-34.31-35.05-50.99l-.44,133.35c-.04,13.22-10.32,22.55-22.88,24.06-6.15.74-11.82.12-18.06.39-16.37.69-30.07-8-30.05-26.6l.15-225.36c0-12.21,7.87-20.67,18.57-24.37,6.06-2.09,11.99-.97,18.4-1.5,11.48-.96,22.78,2.37,29.84,11.69l25,33.02,46.93,62.94,10.32,13.6c6.84-7.97,11.8-15.65,17.86-23.79l60.32-81.05c6.28-8.43,13.85-15.39,24.91-16.05,7.07-.42,14.05-.98,21.44.12,11.18,1.66,22.12,10.82,22.13,23.51l.11,229.21c0,12.63-9.28,22.24-21.29,23.75-8.84,1.11-17.67.98-26.62.07-7.76-.79-15.46-6.18-18.8-12.9-2.84-5.72-3-12.32-2.95-19.14Z"/><path d="M1337.88,236.22c0,80.8-65.56,146.31-146.44,146.31s-146.44-65.5-146.44-146.31,65.56-146.31,146.44-146.31,146.44,65.5,146.44,146.31ZM1266.17,235.27c0-41.53-33.7-75.19-75.26-75.19s-75.26,33.67-75.26,75.19,33.7,75.19,75.26,75.19,75.26-33.67,75.26-75.19Z"/><path d="M1922.86,237.5c0,82.15-66.66,148.74-148.88,148.74s-148.88-66.59-148.88-148.74,66.66-148.74,148.88-148.74,148.88,66.59,148.88,148.74ZM1848.81,236.8c0-42.24-34.27-76.48-76.55-76.48s-76.55,34.24-76.55,76.48,34.27,76.48,76.55,76.48,76.55-34.24,76.55-76.48Z"/><path d="M1603.22,280.25c-16.91,57.46-69.35,96.87-128.11,96.9l-91.25.05c-13.25,0-23.14-10.79-24.34-23.12-.67-6.85.06-12.29.05-19.27l-.26-208.36c-.02-17.36,11.25-29.7,29.1-29.67l85.85.15c28.15.05,55.57,8.8,78.66,24.61,25.73,17.62,43.5,43.63,51.28,73.53,7.42,28.53,7.32,57.01-.97,85.18ZM1536.35,249.43c7.81-44.34-23.56-84.83-68.64-87.63-12.16-.76-23.91-.11-36.67-.16l-.33,24.69.02,55.91.36,68.66,32.15.02c37.26.02,66.71-25.16,73.11-61.48Z"/>';
+const modoLogo = (s = 30) => `<svg viewBox="0 0 552.64 475.01" width="${s}" height="${Math.round(s * 0.86)}" aria-hidden="true">${LOGO_SYM}</svg>`;
+const modoLockup = (h = 26) => `<svg class="mo-logo" viewBox="0 0 1922.86 475.01" height="${h}" width="${Math.round(h * 4.048)}" role="img" aria-label="MODO">${LOGO_SYM}<g fill="currentColor">${LOGO_WORD}</g></svg>`;
 
 /* ---------- navegação ---------- */
 const MODO_NAV = [['home', 'home', 'Hoje'], ['trilha', 'book', 'Aprender'], ['praticar', 'target', 'Praticar'], ['extras', 'compass', 'Explorar'], ['cards', 'layers', 'Cartas'], ['perfil', 'user', 'Perfil']];
 const NAV_OF = { intro: 'trilha', guide: 'trilha', nivel: 'trilha', modulo: 'trilha', curriculo: 'trilha', pocket: 'extras', texto: 'extras' };
 function modoNav(v, due) {
   const on = NAV_OF[v] || v;
-  return `<div class="brand">${modoLogo(30)}MODO</div>` +
+  return `<div class="brand">${modoLockup(26)}</div>` +
     MODO_NAV.map(([id, i, n], k) => `${k === 5 ? '<div class="mo-sep"></div>' : ''}<button data-v="${id}" class="${id === on ? 'on' : ''}">${ic(i, 20)}<span>${n}</span>${id === 'cards' && due ? `<em>${due}</em>` : ''}</button>`).join('') +
     `<div class="mo-lang"><span class="mo-code">DE</span>Alemão<small>${curLevel()}</small></div>
     <div class="mo-foot"><span>${ic('flame', 16)} ${shownStreak()} dias</span><span>${ic('star', 16)} ${S.xp} XP</span></div>`;
@@ -139,7 +143,7 @@ const LANGS = [['DE', 'Alemão', `A1 a C2 · ${LESSONS.length} lições`, true],
 onboard = function (step = 1) {
   const steps = `<div class="mo-steps">${[1, 2, 3].map((i) => `<i class="${i <= step ? 'on' : ''}"></i>`).join('')}</div>`;
   if (step === 1) {
-    app.innerHTML = `<div class="mo-ob"><section class="mo-hero"><span class="mo-brand">${modoLogo(28)}MODO</span>
+    app.innerHTML = `<div class="mo-ob"><section class="mo-hero"><span class="mo-brand">${modoLockup(26)}</span>
       <h1>Aprenda idiomas no seu ritmo.</h1><p>Um método completo, prático e conectado à vida real: aulas guiadas, prática variada, revisão na hora certa e situações do dia a dia.</p>
       <div class="row" style="margin-top:14px"><button class="mo-cta" id="ob1">Começar ${ic('arrow', 18)}</button></div></section></div>`;
     $('#ob1').onclick = () => onboard(2); return;
