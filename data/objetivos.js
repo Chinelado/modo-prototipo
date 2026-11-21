@@ -42,3 +42,12 @@ const MOD_OBJ = {
   4: ['Consigo descrever a minha casa e dizer onde as coisas estão.', 'Consigo ler um anúncio de apartamento.', 'Consigo pedir o caminho e entender placas e avisos.'],
   5: ['Consigo explicar ao médico o que sinto e marcar uma consulta.', 'Consigo contar o que fiz ontem, no fim de semana e nas férias.', 'Consigo escrever um cartão-postal curto.'],
 };
+// Módulos 5 e 6 (21/11/2026)
+Object.assign(OBJ, {
+  'n-wohnungsanzeige': { o: 'Consigo entender um anúncio de apartamento simples e perguntar sobre o aluguel e a visita.', a: 'Você consegue entender um anúncio de apartamento e perguntar sobre o aluguel?', ref: 'Reading for orientation · A1 (fronteira com A2)' },
+  'n-zurpost': { o: 'Consigo dizer aonde vou na cidade e perguntar como chegar a um lugar.', a: 'Você consegue dizer aonde vai e perguntar como chegar a um lugar?', ref: 'Information exchange · A1' },
+  'n-schilder': { o: 'Consigo entender placas e avisos comuns e escrever um bilhete curto para um vizinho.', a: 'Você consegue entender placas comuns e escrever um bilhete curto?', ref: 'Reading for orientation · A1; Notes, messages and forms · A1' },
+  'n-arzttermin': { o: 'Consigo marcar uma consulta por telefone: dizer quem sou, o que sinto e combinar um horário.', a: 'Você consegue marcar uma consulta por telefone?', ref: 'Obtaining goods and services · A1–A2 (a lição antecipa)' },
+  'n-wochenende': { o: 'Consigo contar o que fiz no fim de semana, em ordem, com zuerst, dann e danach.', a: 'Você consegue contar o seu fim de semana em ordem?', ref: 'Sustained monologue: describing experience · A2 (a lição antecipa)' },
+  'n-postkarte': { o: 'Consigo ler e escrever um cartão-postal simples de férias.', a: 'Você consegue escrever um cartão-postal contando onde está e o que fez?', ref: 'Correspondence · A1' },
+});

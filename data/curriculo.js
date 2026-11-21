@@ -694,6 +694,366 @@ Procure primeiro as partes (Vorspeisen, Hauptgerichte…) e os preços. Palavras
 `,
 });
 
+/* Módulo 5 (21/11/2026): anúncio de apartamento, zum/zur e a lição de Ler e escrever "Schilder und Zettel". */
+NL('n-wohnungsanzeige', {
+  de: 'Die Wohnungsanzeige', pt: 'Procurar apartamento', gt: 'Abreviações de anúncio · Zimmer, Miete, Nebenkosten',
+  gx: 'Anúncios alemães usam abreviações: 2-Zi.-Whg. (apartamento de 2 cômodos), qm (metros quadrados), KM (aluguel sem despesas), NK (despesas), WM (aluguel com despesas), EG (térreo). Zimmer conta sala e quartos juntos.',
+  ge: 'Ich suche eine Zwei-Zimmer-Wohnung.=Eu procuro um apartamento de dois cômodos.|Wie hoch ist die Miete?=Quanto é o aluguel?|Die Wohnung hat 60 Quadratmeter.=O apartamento tem 60 metros quadrados.',
+  v: 'die Anzeige=o anúncio=📰|der Quadratmeter=o metro quadrado=📐|die Nebenkosten=as despesas (água, aquecimento…)=💧|die Kaltmiete=o aluguel sem despesas=🧊|die Warmmiete=o aluguel com despesas=🔥|die Kaution=o depósito caução=💰|frei ab=livre a partir de=📅|die Besichtigung=a visita ao imóvel=👀|der Vermieter / die Vermieterin=o locador / a locadora=🔑|das Erdgeschoss=o térreo=⬇️',
+  x: 'der Mieter / die Mieterin=o inquilino / a inquilina|die Heizung=o aquecimento|der Aufzug=o elevador|die Einbauküche=a cozinha planejada|renoviert=reformado|der Stellplatz=a vaga de garagem|die WG=a república (apartamento dividido)|das Dachgeschoss=o último andar|mieten=alugar|die Provision=a comissão do corretor',
+  dlg: 'Guten Tag! Ist die Wohnung in der Lindenstraße noch frei?=Bom dia! O apartamento na Lindenstraße ainda está livre?|Ja. Sie hat zwei Zimmer und 55 Quadratmeter.=Sim. Ele tem dois cômodos e 55 metros quadrados.|Wie hoch sind die Nebenkosten?=Quanto são as despesas?|150 Euro. Möchten Sie die Wohnung besichtigen?=150 euros. A senhora gostaria de visitar o apartamento?',
+  cz: 'Die Wohnung ___ drei Zimmer.=hat=ist=gibt|Wie hoch ___ die Nebenkosten?=sind=ist=hat|Die Wohnung ist ___ Mai frei.=ab=um=am',
+  whys: 'o apartamento "tem" cômodos: haben (hat)|die Nebenkosten é plural: sind|ab = a partir de: ab Mai',
+  pts: 'Zimmer conta os cômodos de morar, sem cozinha e banheiro: uma 2-Zimmer-Wohnung tem sala e um quarto.|Kaltmiete (KM) é o aluguel sem despesas; com as Nebenkosten (NK: água, aquecimento, lixo) vira Warmmiete (WM).|Abreviações: Zi. (Zimmer), Whg. (Wohnung), qm ou m² (Quadratmeter), EG (térreo), OG (andar), Blk. (Balkon), EBK (Einbauküche).|Para perguntar: Ist die Wohnung noch frei? · Wie hoch ist die Miete? · Wann kann ich die Wohnung besichtigen?',
+  ex: 'Die Kaltmiete ist 600 Euro.=O aluguel sem despesas é 600 euros.|Gibt es einen Balkon?=Tem varanda?|Die Wohnung liegt im Erdgeschoss.=O apartamento fica no térreo.|Ist die Wohnung noch frei?=O apartamento ainda está livre?',
+  bd: ['Wie_hoch=W^wie hoch = quanto (para valores)|ist=V|die_Miete?=S^na pergunta, o sujeito vem depois do verbo', 'Quanto é o aluguel?'],
+  rule: 'wohnung',
+  hw: 'Procure um anúncio de apartamento num site alemão (de uma cidade que você gostaria de conhecer) e traduza as abreviações. Depois descreva o apartamento em três frases.',
+  deep: `
+Procurar apartamento na Alemanha é quase um esporte. Os anúncios são curtos e cheios de abreviações. Hoje você aprende a decifrar um anúncio e a ligar para perguntar.
+# Passo 1: o que conta como Zimmer
+**Zimmer** são os cômodos de morar: sala e quartos. Cozinha (Küche) e banheiro (Bad) não entram na conta.
+| Anúncio | Significa |
+| 1-Zimmer-Wohnung | sala e quarto num só cômodo |
+| 2-Zimmer-Wohnung | sala + 1 quarto |
+| 3-Zimmer-Wohnung | sala + 2 quartos |
+~ Die Wohnung hat drei Zimmer. = O apartamento tem três cômodos.
+# Passo 2: o preço
+| Sigla | Significa |
+| KM · Kaltmiete | aluguel sem despesas |
+| NK · Nebenkosten | água, aquecimento, lixo |
+| WM · Warmmiete | aluguel + despesas |
+BR No Brasil o condomínio vem à parte. Na Alemanha, compare sempre a **Warmmiete**: é o que você paga de fato por mês. A **Kaution** (caução) costuma ser de até três aluguéis sem despesas.
+~ Die Warmmiete ist 750 Euro. = O aluguel com despesas é 750 euros.
+# Passo 3: as outras abreviações
+| Sigla | Significa |
+| qm / m² | Quadratmeter |
+| EG | Erdgeschoss (térreo) |
+| 2. OG | segundo andar |
+| Blk. | Balkon |
+| EBK | Einbauküche |
+| ab sof. | ab sofort (livre já) |
+~ Die Wohnung liegt im Erdgeschoss. = O apartamento fica no térreo.
+# Passo 4: ligar e perguntar
+~ Ist die Wohnung noch frei? = O apartamento ainda está livre?
+~ Wie hoch sind die Nebenkosten? = Quanto são as despesas?
+~ Wann kann ich die Wohnung besichtigen? = Quando posso visitar o apartamento?
+> Leia um anúncio de verdade e diga em voz alta: quantos Zimmer, quantos m² e qual é a Warmmiete.
+? O que significa NK? || Nebenkosten (as despesas)
+? Uma 2-Zimmer-Wohnung tem quantos quartos? || um quarto, mais a sala
+? Como se pergunta "O apartamento ainda está livre?" || Ist die Wohnung noch frei?
+`,
+});
+
+NL('n-zurpost', {
+  de: 'Zur Post, zum Bahnhof', pt: 'Lugares e serviços da cidade', gt: 'zu + Dativ (zum, zur)',
+  gx: 'Para dizer aonde você vai (a um lugar ou a uma pessoa): zu + Dativ. zu + dem = zum (der e das), zu + der = zur (die): zum Bahnhof, zum Kino, zur Post. Cidades e países: nach (nach Berlin). Para casa: nach Hause.',
+  ge: 'Ich gehe zur Post.=Eu vou ao correio.|Wie komme ich zum Bahnhof?=Como eu chego à estação?|Wir fahren zum Supermarkt.=Nós vamos ao supermercado.',
+  v: 'zum (zu dem)=ao, à (der e das)=➡️|zur (zu der)=à, ao (die)=➡️|die Bäckerei=a padaria=🥐|die Bibliothek=a biblioteca=📚|die Polizei=a polícia=🚓|das Museum=o museu=🏛️|der Park=o parque=🌳|die Tankstelle=o posto de gasolina=⛽|das Schwimmbad=a piscina pública=🏊|nach Hause=para casa=🏠',
+  x: 'das Kino=o cinema|das Stadion=o estádio|der Zoo=o zoológico|die Universität=a universidade|das Kaufhaus=a loja de departamentos|die Metzgerei=o açougue|das Theater=o teatro|die Reinigung=a lavanderia|der Kiosk=a banca (jornais e bebidas)|zu Hause=em casa',
+  dlg: 'Wohin gehst du?=Aonde você vai?|Ich gehe zur Bäckerei. Und du?=Eu vou à padaria. E você?|Ich gehe zur Post und dann zum Bahnhof.=Eu vou ao correio e depois à estação.|Gut, bis später! Ich gehe nach Hause.=Certo, até mais tarde! Eu vou para casa.',
+  cz: 'Ich gehe ___ Post.=zur=zum=zu die|Wie komme ich ___ Bahnhof?=zum=zur=nach|Wir fahren ___ Berlin.=nach=zu=zum',
+  whys: 'die Post é feminino: zu + der = zur|der Bahnhof é masculino: zu + dem = zum|com cidades e países se usa nach: nach Berlin',
+  pts: 'zu indica o destino (lugar ou pessoa) e pede Dativ: der e das → dem, die → der.|Quase sempre se junta com o artigo: zu dem = zum, zu der = zur. Zum Bahnhof, zum Kino, zur Post.|Cidades e países sem artigo usam nach: nach Berlin, nach Brasilien. Para casa: nach Hause; em casa: zu Hause.|Com pessoas também: Ich gehe zum Arzt, zur Ärztin, zu Anna.',
+  ex: 'Ich fahre mit dem Bus zur Arbeit.=Eu vou de ônibus para o trabalho.|Am Samstag gehen wir zum Markt.=No sábado nós vamos à feira.|Ich gehe heute zum Arzt.=Hoje eu vou ao médico.|Wann kommst du nach Hause?=Quando você vem para casa?',
+  bd: ['Ich=S|gehe=V|zur_Post.=L^zu + der = zur, porque Post é feminino', 'Eu vou ao correio.'],
+  rule: 'destino',
+  hw: 'Pense nos lugares aonde você vai esta semana e escreva cinco frases com zum, zur ou nach (ex.: Am Montag gehe ich zur Bank.).',
+  deep: `
+Padaria, correio, estação, médico: no dia a dia a gente vive dizendo aonde vai. Em alemão isso tem uma palavrinha própria, **zu**, que se junta com o artigo e vira **zum** ou **zur**.
+# Passo 1: zu + artigo = zum, zur
+| Gênero | zu + artigo | Exemplo |
+| der | zum | zum Bahnhof |
+| das | zum | zum Kino |
+| die | zur | zur Post |
+! Depois de **zu** vem o Dativ: der e das viram **dem**, die vira **der**. Por isso zu + dem = zum e zu + der = zur.
+~ Ich gehe zur Post. = Eu vou ao correio.
+# Passo 2: os lugares da cidade
+| der | die | das |
+| der Bahnhof | die Bäckerei | das Kino |
+| der Park | die Bibliothek | das Museum |
+| der Supermarkt | die Tankstelle | das Schwimmbad |
+~ Wie komme ich zum Bahnhof? = Como eu chego à estação?
+# Passo 3: zu ou nach?
+- **zu**: lugares com artigo e pessoas: zum Park, zur Bank, zu Anna
+- **nach**: cidades e países sem artigo: nach Berlin, nach Brasilien
+- **nach Hause** = para casa · **zu Hause** = em casa
+BR Em português tudo é "a" ou "para": vou ao correio, vou a Berlim, vou para casa. Em alemão são três jeitos diferentes.
+~ Wir fahren nach Berlin. = Nós vamos para Berlim.
+# Passo 4: pedir e dar o caminho
+Com o imperativo da lição anterior, você já consegue pedir e dar o caminho até um lugar.
+~ Wie komme ich zur Bibliothek? = Como eu chego à biblioteca?
+~ Gehen Sie geradeaus und dann links. = Siga em frente e depois à esquerda.
+> Diga em voz alta aonde você vai hoje: Ich gehe zum … / zur …
+? Por que se diz zur Post? || Post é feminino: zu + der = zur
+? Como se diz "para casa"? || nach Hause
+? Complete: Wir fahren ___ Berlin. || nach
+`,
+});
+
+NL('n-schilder', {
+  de: 'Schilder und Zettel', pt: 'Ler placas e avisos e escrever um bilhete curto', gt: 'geöffnet, geschlossen, bitte nicht …',
+  gx: 'Placas usam poucas palavras: geöffnet (aberto), geschlossen (fechado), Eingang / Ausgang, Bitte nicht rauchen (verbo no infinitivo). Bilhete curto: para quem, o quê, onde ou quando, e o seu nome.',
+  ge: 'Die Apotheke ist heute geschlossen.=A farmácia está fechada hoje.|Bitte nicht rauchen!=Por favor, não fume!|Ihr Paket ist bei mir.=O seu pacote está comigo.',
+  v: 'das Schild=a placa=🪧|der Zettel=o bilhete, o papelzinho=🗒️|geöffnet=aberto=🟢|geschlossen=fechado=🔴|der Eingang=a entrada=➡️|der Ausgang=a saída=⬅️|rauchen=fumar=🚭|das Paket=o pacote, a encomenda=📦|die Öffnungszeiten=o horário de funcionamento=🕘|Achtung!=Atenção!=⚠️',
+  x: 'drücken=empurrar|ziehen=puxar|der Notausgang=a saída de emergência|besetzt=ocupado|außer Betrieb=fora de serviço|Betreten verboten=proibido entrar|die Toilette=o banheiro|der Ruhetag=o dia de descanso (fechado)|klingeln=tocar a campainha|der Briefkasten=a caixa de correio',
+  dlg: 'Ist die Post schon geöffnet?=O correio já está aberto?|Nein, heute ist sie geschlossen.=Não, hoje ele está fechado.|Und morgen? Wann ist sie geöffnet?=E amanhã? Quando ele abre?|Ab neun Uhr. Das steht auf dem Schild.=A partir das nove. Está escrito na placa.',
+  cz: 'Die Bank ist heute ___. (fechada)=geschlossen=geöffnet=geschließt|Bitte nicht ___!=rauchen=raucht=rauche|Das Paket ist ___ mir.=bei=zu=mit',
+  whys: 'geschlossen = fechado; geöffnet é o contrário|depois de bitte nicht vem o verbo no infinitivo: rauchen|bei mir = comigo, na minha casa',
+  pts: 'Placas usam o particípio como adjetivo: geöffnet (aberto), geschlossen (fechado), besetzt (ocupado).|Proibições: Bitte nicht + infinitivo (Bitte nicht rauchen). Mais forte: … verboten (Rauchen verboten).|Na porta: drücken (empurrar), ziehen (puxar); Eingang (entrada), Ausgang (saída).|Bilhete curto: para quem (Liebe …), o que aconteceu, onde ou quando, e o seu nome. Frases curtas, sem rodeios.',
+  ex: 'Montag Ruhetag.=Fechado às segundas.|Der Aufzug ist außer Betrieb.=O elevador está fora de serviço.|Bitte klingeln!=Toque a campainha, por favor!|Ich bin um 18 Uhr wieder da.=Eu volto às 18h.',
+  bd: ['Bitte=PK^bitte deixa o pedido educado|nicht=NEG^a negação vem antes do verbo|rauchen!=INF^na placa, o verbo fica no infinitivo', 'Por favor, não fume!'],
+  rule: 'aviso',
+  hw: 'Lembre três placas da sua rua ou do seu prédio e escreva como elas seriam em alemão. Depois escreva um bilhete curto para um vizinho.',
+  le: {
+    texto: {
+      t: 'Schilder im Haus und in der Stadt', kind: 'leitura',
+      intro: 'Quatro placas e um bilhete que a Ana encontrou nesta semana. Leia e responda.',
+      paras: ['Bäckerei Sommer · Öffnungszeiten: Mo–Fr 6–18 Uhr, Sa 7–13 Uhr · Sonntag geschlossen', 'Achtung! Der Aufzug ist außer Betrieb. Bitte die Treppe benutzen.', 'Bitte nicht rauchen!', 'Eingang → · Bitte klingeln', 'Liebe Frau Souza, Ihr Paket ist bei mir, 3. Stock. Ich bin ab 18 Uhr zu Hause. Viele Grüße, Herr Weber'],
+      qs: [
+        { q: 'A padaria abre no domingo?', o: ['não, no domingo está fechada', 'sim, das 7h às 13h', 'sim, das 6h às 18h'], a: 0 },
+        { q: 'O que a Ana deve fazer no prédio?', o: ['usar a escada', 'usar o elevador', 'tocar a campainha do vizinho'], a: 0 },
+        { q: 'Onde está o pacote da Ana?', o: ['com o Sr. Weber, no 3º andar', 'no correio', 'na padaria'], a: 0 },
+        { q: 'A partir de que horas o Sr. Weber está em casa?', o: ['18h', '13h', '6h'], a: 0 },
+      ],
+    },
+    escrita: {
+      t: 'Escreva um bilhete para a vizinha', tipo: 'form', ok: 'Bilhete escrito corretamente.',
+      pede: 'Um pacote da sua vizinha, Frau Klein, foi entregue para você. Escreva um bilhete curto para a porta dela, uma frase em cada linha.',
+      campos: [
+        { l: 'Anrede', d: 'Liebe Frau Klein,', re: '^(liebe|hallo)\\s+frau\\s+klein\\b', f: 'iu', err: 'Comece com Liebe Frau Klein,', bad: [['^lieber frau', 'Para mulher é <b>Liebe</b> Frau Klein.']] },
+        { l: 'Was?', d: 'o pacote está com você: Ihr Paket ist bei mir.', re: '\\bpaket\\b.*\\bbei mir\\b', f: 'iu', err: 'Diga que o pacote está com você: Ihr Paket ist bei mir.' },
+        { l: 'Wo?', d: 'onde você mora: Ich wohne im 2. Stock.', re: '\\b(stock|wohnung|erdgeschoss|etage|og|eg)\\b', f: 'iu', err: 'Diga onde você mora: Ich wohne im 2. Stock.' },
+        { l: 'Wann?', d: 'quando está em casa: ab 18 Uhr / am Abend', re: '\\b(ab|um|am|bis|heute|morgen)\\b', f: 'iu', err: 'Diga quando está em casa: Ich bin ab 18 Uhr zu Hause.' },
+        { l: 'Gruß', d: 'a despedida e o seu nome', re: '^viele gr(ü|ue)(ß|ss)e\\b', f: 'iu', err: 'Despeça-se com Viele Grüße e o seu nome.' },
+      ],
+      modelo: 'Liebe Frau Klein, · Ihr Paket ist bei mir. · Ich wohne im 2. Stock. · Ich bin ab 18 Uhr zu Hause. · Viele Grüße, Ana',
+    },
+  },
+  deep: `
+Esta lição é de **ler e escrever**. Placas e bilhetes estão por toda parte na Alemanha: na padaria, no elevador, na porta do vizinho. Você vai ler alguns e depois escrever um bilhete curto.
+# Passo 1: aberto ou fechado
+| Placa | Significa |
+| geöffnet | aberto |
+| geschlossen | fechado |
+| Ruhetag | dia em que fecha |
+| Öffnungszeiten | horário de funcionamento |
+Os dias aparecem abreviados: **Mo**, **Di**, **Mi**, **Do**, **Fr**, **Sa**, **So**. "Mo–Fr 9–18 Uhr" = de segunda a sexta, das 9 às 18.
+~ Die Apotheke ist heute geschlossen. = A farmácia está fechada hoje.
+# Passo 2: portas e avisos
+| Placa | Significa |
+| drücken / ziehen | empurrar / puxar |
+| Eingang / Ausgang | entrada / saída |
+| außer Betrieb | fora de serviço |
+| Achtung! | Atenção! |
+~ Der Aufzug ist außer Betrieb. = O elevador está fora de serviço.
+# Passo 3: proibições
+- **Bitte nicht** + infinitivo: Bitte nicht rauchen.
+- Mais forte, com **verboten**: Rauchen verboten. Betreten verboten.
+! Nas placas o verbo fica no **infinitivo**, sem sujeito: Bitte klingeln.
+~ Bitte nicht rauchen! = Por favor, não fume!
+# Passo 4: um bilhete curto
+Bilhete alemão é direto: para quem, o quê, onde ou quando, e quem assina.
+~ Ihr Paket ist bei mir. = O seu pacote está comigo.
+~ Ich bin ab 18 Uhr zu Hause. = Estou em casa a partir das 18h.
+> No exercício, leia as placas e o bilhete e depois escreva o seu bilhete para a Frau Klein, uma frase por linha.
+? O que significa geschlossen? || fechado
+? Na porta está escrito ziehen. Você empurra ou puxa? || puxa
+? Como se escreve "Por favor, não fume" numa placa? || Bitte nicht rauchen!
+`,
+});
+
+/* Módulo 6 (21/11/2026): marcar consulta, contar o fim de semana e a lição de Ler e escrever "Eine Postkarte". */
+NL('n-arzttermin', {
+  de: 'Einen Termin machen', pt: 'Marcar consulta por telefone', gt: 'Modais (revisão) · horários',
+  gx: 'Ao telefone: Hier ist … (quem fala), Ich möchte einen Termin machen (o que quer), Kann ich morgen kommen? (o horário). Modal na 2ª posição, verbo no fim. Para desligar: Auf Wiederhören!',
+  ge: 'Ich möchte einen Termin machen.=Eu gostaria de marcar uma consulta.|Können Sie am Dienstag um neun kommen?=A senhora pode vir na terça às nove?|Haben Sie heute noch einen Termin frei?=Ainda tem um horário livre hoje?',
+  v: 'die Arztpraxis=o consultório=🏥|der Hausarzt / die Hausärztin=o clínico geral=👩‍⚕️|der Zahnarzt / die Zahnärztin=o dentista=🦷|die Gesundheitskarte=o cartão do plano de saúde=🪪|das Wartezimmer=a sala de espera=🪑|sofort=imediatamente=⚡|Hier ist …=Aqui é … (ao telefone)=📞|Was fehlt Ihnen?=O que o senhor está sentindo?=🤒|die Halsschmerzen=a dor de garganta=😷|die Kopfschmerzen=a dor de cabeça=🤕',
+  x: 'die Zahnschmerzen=a dor de dente|die Bauchschmerzen=a dor de barriga|das Fieber=a febre|krankgeschrieben=com atestado médico|die Krankmeldung=o atestado|die Überweisung=o encaminhamento (para especialista)|der Facharzt=o especialista|nüchtern=em jejum|die Sprechzeiten=o horário de atendimento|Auf Wiederhören!=Até logo! (ao telefone)',
+  dlg: 'Praxis Dr. Lang, guten Morgen!=Consultório Dr. Lang, bom dia!|Guten Morgen, hier ist Ana Souza. Ich möchte einen Termin machen.=Bom dia, aqui é Ana Souza. Eu gostaria de marcar uma consulta.|Was fehlt Ihnen?=O que a senhora está sentindo?|Ich habe Halsschmerzen. Kann ich heute kommen?=Estou com dor de garganta. Posso ir hoje?',
+  cz: 'Ich ___ einen Termin machen.=möchte=möchten=möchtet|Können Sie morgen um zehn ___?=kommen=kommt=kommst|Hier ___ Ana Souza.=ist=bin=heißt',
+  whys: 'com ich a forma de möchten é möchte|depois do modal (können) o outro verbo vai para o fim, no infinitivo|ao telefone, para dizer quem fala: Hier ist + nome',
+  pts: 'Quem liga diz o nome logo: Hier ist … O consultório atende com o próprio nome: Praxis Dr. Lang.|Para marcar: Ich möchte einen Termin machen. · Haben Sie heute noch einen Termin frei?|Modal na 2ª posição, outro verbo no fim: Ich muss morgen arbeiten.|Leve a Gesundheitskarte. Ao desligar: Auf Wiederhören!',
+  ex: 'Ich kann leider erst am Freitag.=Infelizmente eu só posso na sexta.|Bringen Sie bitte Ihre Gesundheitskarte mit.=Traga o seu cartão do plano de saúde, por favor.|Sie müssen nüchtern kommen.=O senhor precisa vir em jejum.|Auf Wiederhören!=Até logo!',
+  bd: ['Kann=MOD^na pergunta de sim ou não, o modal vem primeiro|ich=S|heute=T|kommen?=INF^o verbo principal vai para o fim, no infinitivo', 'Posso ir hoje?'],
+  rule: 'modal',
+  hw: 'Escreva o diálogo de uma ligação para marcar consulta: o que você diz, o que a recepção responde e o horário combinado. Depois leia em voz alta, como se fosse real.',
+  deep: `
+Na Alemanha quase toda consulta é marcada por telefone. A ligação é curta e segue sempre o mesmo roteiro. Hoje você aprende esse roteiro e revisa os modais que já conhece.
+# Passo 1: o começo da ligação
+| Quem | Diz |
+| consultório | Praxis Dr. Lang, guten Morgen! |
+| você | Guten Morgen, hier ist Ana Souza. |
+| você | Ich möchte einen Termin machen. |
+BR Em português a gente diz "Alô, quem fala?". Em alemão quem liga já diz o nome logo de cara: **Hier ist** + nome.
+~ Guten Morgen, hier ist Ana Souza. = Bom dia, aqui é Ana Souza.
+# Passo 2: dizer o que tem
+- Ich habe **Kopfschmerzen**, **Halsschmerzen** ou **Fieber**.
+- Es ist **dringend**: é urgente.
+~ Was fehlt Ihnen? = O que a senhora está sentindo?
+~ Ich habe Halsschmerzen. = Estou com dor de garganta.
+# Passo 3: combinar o horário com os modais
+| Modal | Exemplo |
+| können | Können Sie morgen um zehn kommen? |
+| müssen | Sie müssen nüchtern kommen. |
+| möchten | Ich möchte am Nachmittag kommen. |
+! O modal fica na **2ª posição** (ou em 1º, na pergunta) e o outro verbo vai para o **fim**: Ich **kann** morgen **kommen**.
+~ Kann ich heute kommen? = Posso ir hoje?
+# Passo 4: confirmar e desligar
+~ Gut, dann am Dienstag um neun. = Certo, então terça às nove.
+~ Bringen Sie bitte Ihre Gesundheitskarte mit. = Traga o seu cartão do plano de saúde, por favor.
+! Ao telefone a despedida é **Auf Wiederhören!**, "até ouvir de novo".
+> Ensaie em voz alta: diga quem fala, o que tem e peça um horário.
+? Como você se apresenta ao telefone? || Hier ist + o seu nome
+? Como se pede uma consulta? || Ich möchte einen Termin machen.
+? Como se despede ao telefone? || Auf Wiederhören!
+`,
+});
+
+NL('n-wochenende', {
+  de: 'Mein Wochenende', pt: 'Contar o fim de semana em ordem', gt: 'zuerst, dann, danach · Perfekt',
+  gx: 'Em ordem: zuerst, dann, danach, zum Schluss. Quando abrem a frase, o verbo vem logo depois: Dann habe ich gekocht. Perfekt: haben ou sein na 2ª posição, particípio no fim.',
+  ge: 'Zuerst habe ich lange geschlafen.=Primeiro eu dormi bastante.|Dann bin ich in die Stadt gefahren.=Depois eu fui para o centro.|Am Abend haben wir Pizza gegessen.=À noite nós comemos pizza.',
+  v: 'zuerst=primeiro=1️⃣|dann=depois, então=2️⃣|danach=depois disso=3️⃣|zum Schluss=no fim=🏁|ausschlafen=dormir até tarde=😴|putzen=limpar=🧽|das Konzert=o show=🎸|der Flohmarkt=a feira de usados=🛍️|erzählen=contar (uma história)=💬|entspannt=tranquilo, relaxado=😌',
+  x: 'am Samstagabend=no sábado à noite|am Sonntagmorgen=no domingo de manhã|endlich=finalmente|zu Hause bleiben=ficar em casa|die Ausstellung=a exposição|Freunde besuchen=visitar amigos|Wie war dein Wochenende?=Como foi o seu fim de semana?|toll=ótimo|die Serie=a série|faulenzen=ficar à toa',
+  dlg: 'Wie war dein Wochenende?=Como foi o seu fim de semana?|Super! Zuerst habe ich lange geschlafen.=Ótimo! Primeiro eu dormi bastante.|Und dann?=E depois?|Dann bin ich zum Flohmarkt gegangen. Danach habe ich gekocht.=Depois eu fui à feira de usados. Depois disso eu cozinhei.',
+  cz: 'Zuerst ___ ich lange geschlafen.=habe=bin=hat|Dann ___ ich zum Markt gegangen.=bin=habe=ist|Danach habe ich Pizza ___.=gegessen=essen=geesst',
+  whys: 'schlafen faz o Perfekt com haben: habe geschlafen; e depois de zuerst vem o verbo|gehen é movimento: Perfekt com sein (bin gegangen)|o particípio de essen é gegessen e vai para o fim',
+  pts: 'Ordem: zuerst → dann → danach → zum Schluss.|Na 1ª posição, o verbo vem logo depois: Dann habe ich gekocht.|sein com movimento e com bleiben (bin gegangen, bin geblieben); haben no resto (habe gekocht).|Perguntas: Wie war dein Wochenende? · Was hast du am Samstag gemacht?',
+  ex: 'Am Samstag habe ich die Wohnung geputzt.=No sábado eu limpei o apartamento.|Danach bin ich ins Kino gegangen.=Depois disso eu fui ao cinema.|Zum Schluss haben wir eine Serie gesehen.=No fim nós vimos uma série.|Das Wochenende war sehr entspannt.=O fim de semana foi muito tranquilo.',
+  bd: ['Dann=ADV^dann na 1ª posição|habe=AUX^haben na 2ª posição|ich=S^o sujeito vem depois do verbo|Pizza=OA|gegessen.=PT^o particípio vai para o fim', 'Depois eu comi pizza.'],
+  rule: 'perfekt',
+  hw: 'Escreva no diário o seu último fim de semana em cinco frases, com zuerst, dann, danach e zum Schluss, todas no Perfekt.',
+  deep: `
+Segunda-feira, a pergunta é sempre a mesma: **Wie war dein Wochenende?** Hoje você aprende a contar o fim de semana em ordem, com as palavras que ligam uma ação à outra.
+# Passo 1: as palavras de ordem
+| Alemão | Português |
+| zuerst | primeiro |
+| dann | depois, então |
+| danach | depois disso |
+| zum Schluss | no fim |
+~ Zuerst habe ich lange geschlafen. = Primeiro eu dormi bastante.
+# Passo 2: o verbo vem logo depois
+Quando **zuerst**, **dann** ou **danach** abrem a frase, o verbo conjugado vem em seguida e o sujeito depois dele.
+- **Dann** habe ich gekocht.
+- **Danach** bin ich ins Kino gegangen.
+BR Em português dizemos "depois eu cozinhei". Em alemão o "eu" troca de lugar com o verbo: Dann **habe ich** gekocht.
+~ Dann habe ich gekocht. = Depois eu cozinhei.
+# Passo 3: haben ou sein?
+| haben | sein |
+| habe geschlafen | bin gegangen |
+| habe gekocht | bin gefahren |
+| habe gesehen | bin geblieben |
+! **sein** vai com movimento e mudança de lugar (gehen, fahren, kommen) e com **bleiben**. O resto usa **haben**.
+~ Danach bin ich zum Flohmarkt gegangen. = Depois disso eu fui à feira de usados.
+# Passo 4: perguntar e responder
+Responda com duas ou três frases em ordem e termine dizendo como foi: Es war super, ruhig ou langweilig.
+~ Wie war dein Wochenende? = Como foi o seu fim de semana?
+~ Was hast du am Samstag gemacht? = O que você fez no sábado?
+> Conte em voz alta o seu último sábado, com zuerst, dann e danach.
+? Complete: Dann ___ ich gekocht. || habe
+? Gehen faz o Perfekt com haben ou sein? || sein (bin gegangen)
+? Como se pergunta "Como foi o seu fim de semana?" || Wie war dein Wochenende?
+`,
+});
+
+NL('n-postkarte', {
+  de: 'Eine Postkarte', pt: 'Ler e escrever um cartão-postal de férias', gt: 'Perfekt · Grüße aus …',
+  gx: 'Cartão-postal: Liebe … / Lieber …, onde está (Ich bin in …), como é (Das Wetter ist …), o que fez (Perfekt) e Viele Grüße aus … + nome.',
+  ge: 'Viele Grüße aus Hamburg!=Lembranças de Hamburgo!|Das Wetter ist super.=O tempo está ótimo.|Gestern sind wir ans Meer gefahren.=Ontem nós fomos para a praia.',
+  v: 'die Postkarte=o cartão-postal=📮|Grüße aus …=lembranças de …=👋|die Briefmarke=o selo=📬|der Hafen=o porto=⚓|die Altstadt=o centro histórico=🏰|die Aussicht=a vista=🏞️|wunderschön=lindíssimo=😍|das Schiff=o navio, o barco=🚢|die Ferien=as férias=🏖️|Liebe Grüße=beijos, um abraço (mais carinhoso)=💕',
+  x: 'die Ferienwohnung=o apartamento de temporada|die Jugendherberge=o albergue da juventude|die Schifffahrt=o passeio de barco|das Fischbrötchen=o sanduíche de peixe|der Turm=a torre|regnerisch=chuvoso|die Rückreise=a volta (da viagem)|der Absender=o remetente|die Hansestadt=a cidade hanseática (Hamburgo, Bremen…)|Herzliche Grüße=cordiais saudações',
+  dlg: 'Was schreibst du da?=O que você está escrevendo aí?|Eine Postkarte an meine Mutter.=Um cartão-postal para a minha mãe.|Und was schreibst du?=E o que você escreve?|Viele Grüße aus Hamburg! Wir haben den Hafen gesehen.=Lembranças de Hamburgo! Nós vimos o porto.',
+  cz: 'Viele Grüße ___ Hamburg!=aus=von=nach|Gestern ___ wir den Hafen gesehen.=haben=sind=hat|Wir ___ ans Meer gefahren.=sind=haben=hat',
+  whys: 'de onde vêm as lembranças: aus + cidade|sehen faz o Perfekt com haben: haben … gesehen|fahren é movimento: Perfekt com sein',
+  pts: 'Abertura: Liebe (mulher) ou Lieber (homem) + nome.|Agora no presente (Ich bin in Hamburg); o que já fez no Perfekt (Wir haben den Hafen gesehen).|Fechamento: Viele Grüße aus … ou Liebe Grüße + nome.|Endereço à direita: nome, rua e número, CEP e cidade.',
+  ex: 'Liebe Mama, ich bin in Hamburg.=Querida mãe, estou em Hamburgo.|Die Aussicht ist wunderschön.=A vista é lindíssima.|Wir sind mit dem Schiff gefahren.=Nós andamos de barco.|Liebe Grüße, deine Ana=Beijos, sua Ana',
+  bd: ['Gestern=T^o tempo na 1ª posição|haben=AUX^haben na 2ª posição|wir=S|den_Hafen=OA^der Hafen no acusativo: den|gesehen.=PT^o particípio vai para o fim', 'Ontem nós vimos o porto.'],
+  rule: 'perfekt',
+  hw: 'Escreva um cartão-postal de uma viagem que você fez (ou quer fazer): onde está, como está o tempo, duas coisas que fez no Perfekt e a despedida.',
+  le: {
+    texto: {
+      t: 'Eine Postkarte aus Hamburg', kind: 'leitura',
+      intro: 'A Lena está de férias e escreve para a amiga Carla. Leia o cartão e responda.',
+      paras: ['Liebe Carla,', 'viele Grüße aus Hamburg! Ich bin seit Montag hier, in einer Ferienwohnung am Hafen.', 'Das Wetter ist leider regnerisch, aber die Stadt ist wunderschön.', 'Gestern habe ich die Altstadt gesehen und ein Fischbrötchen gegessen.', 'Heute machen wir eine Schifffahrt. Am Samstag fahre ich zurück nach Köln.', 'Liebe Grüße, deine Lena'],
+      qs: [
+        { q: 'Onde a Lena está hospedada?', o: ['num apartamento de temporada perto do porto', 'num hotel no centro', 'na casa da Carla'], a: 0 },
+        { q: 'Como está o tempo?', o: ['chuvoso', 'ensolarado', 'muito quente'], a: 0 },
+        { q: 'O que ela fez ontem?', o: ['viu o centro histórico e comeu um sanduíche de peixe', 'fez um passeio de barco', 'voltou para Colônia'], a: 0 },
+        { q: 'Quando ela volta para casa?', o: ['no sábado', 'na segunda', 'hoje'], a: 0 },
+      ],
+    },
+    escrita: {
+      t: 'Escreva o seu cartão-postal', tipo: 'form', ok: 'Cartão escrito corretamente.',
+      pede: 'Você está de férias numa cidade alemã (escolha uma). Escreva um cartão para a Lena, uma frase em cada linha.',
+      campos: [
+        { l: 'Anrede', d: 'Liebe Lena,', re: '^(liebe|hallo)\\s+lena\\b', f: 'iu', err: 'Comece com Liebe Lena, (Lena é mulher).', bad: [['^lieber lena', 'Lena é mulher: <b>Liebe</b> Lena.']] },
+        { l: 'Wo?', d: 'onde você está: Ich bin in …', re: '\\b(bin|sind)\\b.+\\bin\\s+\\p{L}{3,}', f: 'iu', err: 'Diga onde está: Ich bin in München.' },
+        { l: 'Wetter', d: 'como está o tempo: Das Wetter ist …', re: '\\bwetter\\b.*\\b(ist|war)\\b', f: 'iu', err: 'Diga como está o tempo: Das Wetter ist schön.' },
+        { l: 'Gestern', d: 'o que você fez, no Perfekt: Gestern habe ich … gesehen.', re: '\\b(habe|haben|bin|sind)\\b.+(\\bge\\p{L}+(t|en)|besucht|besichtigt|probiert|fotografiert)[.!]?$', f: 'iu', err: 'Conte o que fez no Perfekt, com o particípio no fim: Gestern habe ich das Museum gesehen.', bad: [['^gestern ich', 'Depois de <b>gestern</b> vem o verbo: Gestern <b>habe</b> ich …']] },
+        { l: 'Gruß', d: 'Viele Grüße aus … e o seu nome', re: '^(viele|liebe) gr(ü|ue)(ß|ss)e\\b', f: 'iu', err: 'Despeça-se: Viele Grüße aus … ou Liebe Grüße, e o seu nome.' },
+      ],
+      modelo: 'Liebe Lena, · ich bin in München. · Das Wetter ist super. · Gestern habe ich das Museum gesehen. · Viele Grüße aus München, Ana',
+    },
+  },
+  deep: `
+Esta lição é de **ler e escrever**. O cartão-postal ainda é tradição nas férias alemãs. Você vai ler o cartão de uma amiga em Hamburgo e depois escrever o seu, juntando o presente e o Perfekt.
+# Passo 1: as partes do cartão
+| Parte | Exemplo |
+| Abertura | Liebe Carla, / Lieber Tim, |
+| Onde estou | Ich bin in Hamburg. |
+| Como é | Das Wetter ist schön. |
+| O que fiz | Gestern habe ich den Hafen gesehen. |
+| Despedida | Viele Grüße aus Hamburg, Lena |
+~ Viele Grüße aus Hamburg! = Lembranças de Hamburgo!
+# Passo 2: agora no presente, antes no Perfekt
+- O que é agora: **presente**. Ich bin in Hamburg. Das Wetter ist super.
+- O que já aconteceu: **Perfekt**. Gestern habe ich ein Fischbrötchen gegessen.
+! Com **gestern**, **heute** ou **am Montag** na 1ª posição, o verbo vem logo depois: Gestern **habe** ich …
+~ Gestern habe ich die Altstadt gesehen. = Ontem eu vi o centro histórico.
+# Passo 3: abertura e despedida
+| Para quem | Abertura |
+| amiga | Liebe Carla, |
+| amigo | Lieber Tim, |
+| família | Liebe Mama, |
+BR Depois da vírgula da abertura, a linha seguinte começa com **minúscula** em alemão: "Liebe Carla, viele Grüße aus …".
+~ Liebe Grüße, deine Ana = Beijos, sua Ana
+# Passo 4: o endereço
+No cartão, o endereço vai à direita, um item por linha: nome, rua e número, CEP e cidade.
+~ Frau Carla Mendes, Lindenstraße 12, 10969 Berlin = Sra. Carla Mendes, Lindenstraße 12, 10969 Berlim
+> No exercício, leia o cartão da Lena e escreva o seu, uma frase por linha.
+? Qual é a abertura para uma amiga? || Liebe + o nome
+? Complete: Gestern ___ ich den Hafen gesehen. || habe
+? Como se diz "Lembranças de Munique"? || Viele Grüße aus München
+`,
+});
+
+V('Die Wohnungsanzeige',
+  'M:Decifrando o anúncio;No anúncio|Significa;3-Zi.-Whg.|apartamento de 3 cômodos;65 qm|65 metros quadrados;KM 600 €|aluguel sem despesas;NK 150 €|as despesas;2. OG, Blk.|2º andar, com varanda;ab sof.|livre já',
+  'E:O que você paga por mês;Kaltmiete^o|+|Nebenkosten^c|=|Warmmiete^v');
+V('Zur Post, zum Bahnhof',
+  'V:zum ou zur?;zum · der e das|zum Bahnhof|zum Park|zum Kino;zur · die|zur Post|zur Bank|zur Bäckerei',
+  'V:zu ou nach?;zu · lugar ou pessoa|zum Arzt|zur Post;nach · cidade ou país|nach Berlin|nach Brasilien;casa|nach Hause (para casa)|zu Hause (em casa)');
+V('Schilder und Zettel',
+  'V:Aberto ou fechado?;geöffnet · aberto|Mo–Fr 9–18 Uhr;geschlossen · fechado|Sonntag Ruhetag',
+  'P:Um bilhete curto;Para quem=Liebe Frau Klein,;O quê=Ihr Paket ist bei mir.;Onde=im 2. Stock;Quando=ab 18 Uhr;Quem=Viele Grüße, Ana');
+V('Einen Termin machen',
+  'P:A ligação para o consultório;Atendem=Praxis Dr. Lang, guten Morgen!;Você se apresenta=Hier ist Ana Souza.;Pede=Ich möchte einen Termin machen.;Combinam=Kann ich morgen um zehn kommen?;Despedida=Auf Wiederhören!',
+  'E:O modal na 2ª posição, o verbo no fim;Ich^s|kann^v|morgen^c|kommen.^v2');
+V('Mein Wochenende',
+  'T:Meu sábado, em ordem;zuerst@-3=habe lange geschlafen;dann@-2=bin zum Markt gegangen;danach@-1=habe gekocht;jetzt@0=bin müde',
+  'E:Depois de dann, o verbo vem logo;Dann^c|habe^v|ich^s|gekocht.^v2');
+V('Eine Postkarte',
+  'P:O cartão-postal;Abertura=Liebe Carla,;Onde estou=Ich bin in Hamburg.;Como é=Das Wetter ist schön.;O que fiz=Gestern habe ich den Hafen gesehen.;Despedida=Viele Grüße aus Hamburg!',
+  'V:Agora ou antes?;Agora: presente|Ich bin in Hamburg.|Das Wetter ist schön.;Antes: Perfekt|Ich habe den Hafen gesehen.|Wir sind ans Meer gefahren.');
+['lena', 'lindenstraße'].forEach((n) => NAMES.add(n));
+
+S_('Die Wohnungsanzeige', 'suchen (ich suche)=procurar|besichtigen=visitar (um imóvel)|hoch (Wie hoch …?)=alto; quanto, para valores');
+S_('Zur Post, zum Bahnhof', 'Wie komme ich …?=Como eu chego …?|die Arbeit (zur Arbeit)=o trabalho (para o trabalho)');
+S_('Schilder und Zettel', 'wieder da=de volta|benutzen=usar (Bitte die Treppe benutzen.)');
+S_('Einen Termin machen', 'erst=só (não antes de)|mitbringen (Bringen Sie … mit)=trazer junto');
+S_('Mein Wochenende', 'putzen (geputzt)=limpar (limpei)|ins (in das)=ao, para o (ins Kino)|war (Wie war …?)=foi (passado de sein)');
+S_('Eine Postkarte', 'die Mama=a mamãe|ans (an das)=para o (ans Meer = para a praia)|seit Montag=desde segunda');
 // Esquemas visuais (mesmo formato de data/visuals.js) e palavras de apoio (data/support.js) das lições novas.
 V('Wie schreibt man das?',
   'V:As letras que mais enganam;V se chama "fau"|Vera: fau · e · er · a;W se chama "vê"|Wien: vê · i · e · en;Z se chama "tsét"|Zoo: tsét · o · o',
@@ -750,8 +1110,8 @@ const SEQ = [
   { lv: 'A1', n: 'Pessoas e coisas', l: [2, 3, 'n-plural', 'n-beruf', 4, 'n-nachricht'] },
   { lv: 'A1', n: 'Horários e rotina', l: [6, 9, 'n-termin', 10, 11, 'n-einladung'] },
   { lv: 'A1', n: 'Comer e comprar', l: [7, 'n-markt', 8, 'n-gern', 14, 'n-einkaufszettel'] },
-  { lv: 'A1', n: 'Casa e cidade', l: [12, 13, '?Die Wohnungsanzeige', 15, '?Zur Post, zum Bahnhof', '?Ler e escrever: Schilder und Zettel'] },
-  { lv: 'A1', n: 'Saúde e fim de semana', l: [16, '?Einen Termin machen', 17, 18, '?Mein Wochenende', '?Ler e escrever: Eine Postkarte'] },
+  { lv: 'A1', n: 'Casa e cidade', l: [12, 13, 'n-wohnungsanzeige', 15, 'n-zurpost', 'n-schilder'] },
+  { lv: 'A1', n: 'Saúde e fim de semana', l: [16, 'n-arzttermin', 17, 18, 'n-wochenende', 'n-postkarte'] },
   { lv: 'A2', n: 'Biografia e passado', l: [19, '?Mein Lebenslauf', 20, '?Schule und Ausbildung', 23, '?Ler e escrever: Eine E-Mail über mich'] },
   { lv: 'A2', n: 'Casa e vizinhança', l: [21, 27, 28, 26, '?Die Hausordnung', '?Ler e escrever: Ein Zettel an die Nachbarn'] },
   { lv: 'A2', n: 'Compras e serviços', l: [22, 31, 32, '?Umtauschen', '?Auf der Bank und der Post', '?Ler e escrever: Eine Online-Bestellung'] },
