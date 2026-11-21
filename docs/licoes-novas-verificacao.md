@@ -82,3 +82,33 @@ Medido do mesmo jeito, comparado a 3 lições antigas do mesmo módulo (Was ist 
 - **Migração da sequência, versão 2:** inserir lições muda o número dos dias. O app agora guarda a ordem das lições (`S.seqDays`) e, quando ela muda, remapeia pelo id da lição: lições feitas, etapa salva de cada lição, tarefas de casa e diário. A avaliação do módulo 2 deixa de contar até as lições novas serem feitas (são obrigatórias). Testado com um progresso salvo na ordem anterior; uma segunda carga não muda nada.
 
 **O que falta no Módulo 2** (igual ao Módulo 1): imagens, áudio gravado e revisão pedagógica. O resumo da regra de "Eine kurze Nachricht" (255 palavras, com a frase desmontada de 7 peças) passa do tamanho das antigas; se incomodar, dá para encurtar a frase desmontada.
+
+---
+
+## Módulo 3 · Horários e rotina (escrito em 21/11/2026)
+O módulo tem só 2 lições novas; as outras 4 já existiam (Wie spät ist es?, Mein Tag, Unterwegs, Kannst du mir helfen?), e são elas a comparação.
+
+| Item do formato | Am Montag um zehn | Eine Einladung | Lições antigas |
+|---|---|---|---|
+| Tema, gramática, regra, pontos, exemplos | ✅ | ✅ | ✅ |
+| Vocabulário: 10 principais + 10 ampliadas | ✅ | ✅ | ✅ |
+| Conversa de 4 falas (com microfone) | ✅ | ✅ | ✅ |
+| 3 lacunas com explicação, frase desmontada, tarefa de casa | ✅ | ✅ | ✅ |
+| Aula passo a passo com teste rápido | ✅ 4 passos | ✅ 4 passos | ✅ 3–5 passos |
+| Verificação em cada passo | ✅ 4/4 | ✅ 4/4 | 2/3 a 3/5 |
+| Objetivo "consigo…" + autoavaliação (rascunho) | ✅ | ✅ | ✅ |
+| Regra da frase livre | ✅ tempo | ✅ convite | 3 de 4 (Wie spät ist es? não tem) |
+| Esquema visual | ✅ 2 | ✅ 2 | ✅ |
+| Palavras de apoio (🆕) | ✅ 2 | ✅ 3 | ✅ 2–7 |
+| Ler e escrever | não se aplica | ✅ 4 perguntas, resposta de 5 linhas | não se aplica |
+| Imagens da aula · áudio gravado | ❌ · ❌ | ❌ · ❌ | ✅ · ✅ |
+| Maior parte da aula no celular | 264 palavras | 258 | 217–256 |
+
+**As 2 lições**
+- **Am Montag um zehn** (marcar um compromisso): um + hora, am + dia e parte do dia (com a exceção in der Nacht), im + mês, von … bis e ab; perguntar (Hast du am … Zeit?), aceitar (Das geht), recusar (Das geht nicht) e propor outro dia.
+- **Eine Einladung** (Ler e escrever): convite da vizinha Julia para um churrasco no pátio, com 4 perguntas (quando, onde, o que levar, até quando responder). Depois a aluna responde em 5 linhas, aceitando ou recusando: abertura (e "Lieber Julia" recebe a dica de que é Liebe), agradecimento, resposta com gern ou leider (e "Leider ich kann" recebe a dica de que o verbo vem logo depois de leider), um detalhe com am ou um e a despedida. As duas respostas, aceitar e recusar, passam.
+- Nenhuma palavra das duas lições aparece antes de ser ensinada. As palavras de apoio são as que ajudam a ler o convite (mitbringen, ihr, die Nachbarn) e duas expressões de hora.
+
+**Migração:** testada vindo da versão 1 e da versão 2 da sequência. As lições Unterwegs e Kannst du mir helfen? andam uma posição; a avaliação do Módulo 3 deixa de contar até as 2 lições novas serem feitas.
+
+**O que falta no Módulo 3:** imagens, áudio gravado e revisão pedagógica, como nos Módulos 1 e 2.

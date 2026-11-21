@@ -3,7 +3,7 @@
 **Status:** para aprovação da direção · 20/11/2026
 **Decisões (20/11/2026):** A1 com 6 módulos e A2 com 8 (de 42 para 84 lições) · sequência redesenhada do zero, reaproveitando as lições atuais onde couberem · cada módulo tem uma lição de **leitura + escrita guiada** · inserção direta no protótipo (o site real não é tocado).
 
-**Andamento (21/11/2026):** Módulos 1 e 2 escritos no protótipo (6 lições novas, marcadas "escrita ✅"); faltam 36 lições novas, do Módulo 3 em diante.
+**Andamento (21/11/2026):** Módulos 1 a 3 escritos no protótipo (8 lições novas, marcadas "escrita ✅"); faltam 34 lições novas, do Módulo 4 em diante.
 
 **Como ler:** **R** = lição atual reaproveitada (com a posição de hoje); **NOVA** = a escrever. A 6ª lição de cada módulo é sempre **Ler e escrever**: um texto curto com perguntas e uma tarefa de escrita guiada (formulário, mensagem, cartão, e-mail).
 
@@ -44,10 +44,10 @@ A única lição que muda de nível é **Im Urlaub** (Perfekt com sein), que des
 |---|---|---|---|---|
 | 13 | Wie spät ist es? | horas | números 21–100 · Uhrzeit | R · A1 L7 |
 | 14 | Mein Tag | rotina e dias da semana | verbos separáveis | R · A1 L10 |
-| 15 | Am Montag um zehn | marcar um compromisso | am, um, im (tempo) | NOVA |
+| 15 | Am Montag um zehn | marcar um compromisso | am, um, im (tempo) | NOVA · escrita ✅ |
 | 16 | Unterwegs | transporte | verbos com mudança de vogal | R · A1 L11 |
 | 17 | Kannst du mir helfen? | pedir ajuda | können e möchten | R · A1 L12 |
-| 18 | **Ler e escrever:** Eine Einladung | ler um convite e responder aceitando ou recusando | Hast du Zeit? · leider | NOVA |
+| 18 | **Ler e escrever:** Eine Einladung | ler um convite e responder aceitando ou recusando | Hast du Zeit? · leider | NOVA · escrita ✅ |
 
 ### Módulo 4 · Comer e comprar
 | # | Lição | Tema | Gramática | Origem |

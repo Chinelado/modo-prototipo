@@ -396,6 +396,123 @@ Leia primeiro o que você reconhece: nomes, cidades, números e profissões. Dep
 `,
 });
 
+/* Módulo 3 (21/11/2026): marcar um compromisso e a lição de Ler e escrever "Eine Einladung". */
+NL('n-termin', {
+  de: 'Am Montag um zehn', pt: 'Marcar um compromisso', gt: 'am, um, im (tempo)',
+  gx: 'um + hora (um zehn Uhr), am + dia ou parte do dia (am Montag, am Abend), im + mês ou estação (im Mai). Para marcar: Hast du am … Zeit? Para responder: Das geht. / Das geht nicht.',
+  ge: 'Hast du am Freitag Zeit?=Você tem tempo na sexta?|Der Termin ist um halb drei.=O compromisso é às duas e meia.|Ab Mai arbeite ich von neun bis fünf.=A partir de maio eu trabalho das nove às cinco.',
+  v: 'der Termin=o compromisso, a hora marcada=📅|Zeit haben=ter tempo, estar livre=🙆|Das geht.=Dá, está bom.=👍|Das geht nicht.=Não dá.=👎|vielleicht=talvez=🤔|der Kalender=a agenda, o calendário=🗓️|von … bis=de … até=↔️|ab=a partir de=▶️|übermorgen=depois de amanhã=📆|der Vormittag=a manhã (até o meio-dia)=🌤️',
+  x: 'der Nachmittag=a tarde|der Januar=janeiro|der März=março|der Mai=maio|der Juli=julho|der Dezember=dezembro|die Verabredung=o encontro marcado|nächste Woche=na semana que vem|zu spät=atrasado, tarde demais|die Mittagspause=o intervalo do almoço',
+  dlg: 'Hast du am Montag Zeit?=Você tem tempo na segunda?|Am Montag? Nein, das geht nicht. Und am Dienstag?=Na segunda? Não, não dá. E na terça?|Ja, das geht. Um wie viel Uhr?=Sim, dá. A que horas?|Um zehn Uhr, im Café?=Às dez, no café?',
+  cz: 'Hast du ___ Freitag Zeit?=am=um=im|Der Termin ist ___ halb drei.=um=am=im|Der Kurs beginnt ___ März.=im=am=um',
+  whys: 'dias da semana usam am: am Freitag|horas usam um: um halb drei|meses usam im: im März',
+  pts: 'um + hora: um acht Uhr, um halb drei.|am + dia ou parte do dia: am Montag, am Abend, am Wochenende. Exceção: in der Nacht.|im + mês ou estação: im Mai, im Sommer. Intervalo: von neun bis fünf. Início: ab Montag.|Para marcar: Hast du am … Zeit? Para responder: Das geht. / Das geht nicht. / Vielleicht.',
+  ex: 'Der Termin ist am Donnerstag um neun.=O compromisso é na quinta às nove.|Ich arbeite von acht bis vier.=Eu trabalho das oito às quatro.|Wann hast du Zeit?=Quando você tem tempo?|Der Kurs beginnt im März.=O curso começa em março.',
+  bd: ['Am_Montag=T^am + dia da semana|habe=V^o verbo fica na 2ª posição, logo depois do tempo|ich=S^o sujeito vem depois do verbo|um_zehn=T^um + hora|einen_Termin.=OA^einen porque Termin é masculino (der Termin)', 'Na segunda, às dez, eu tenho um compromisso.'],
+  rule: 'tempo',
+  hw: 'Escreva a sua semana como numa agenda, em alemão: um compromisso por dia, com am e um (ex.: Am Montag um neun: Deutschkurs). Depois leia tudo em voz alta.',
+  deep: `
+Combinar um café, marcar o médico, saber quando começa o curso: tudo depende de três palavrinhas, **um**, **am** e **im**. Hoje você aprende quando usar cada uma e como marcar um compromisso.
+# Passo 1: um para a hora
+Para dizer a que horas algo acontece, use **um**. Para perguntar: **Um wie viel Uhr …?** ou **Wann …?**
+~ Der Kurs beginnt um zehn Uhr. = O curso começa às dez horas.
+~ Der Termin ist um halb drei. = O compromisso é às duas e meia.
+# Passo 2: am para dias e partes do dia
+| Quando | Exemplo |
+| dia da semana | am Montag, am Freitag |
+| parte do dia | am Morgen, am Vormittag, am Abend |
+| fim de semana | am Wochenende |
+BR Em português dizemos "na segunda" e "à noite". Em alemão os dois são **am**. Só a madrugada foge à regra: **in der Nacht**.
+~ Hast du am Freitag Zeit? = Você tem tempo na sexta?
+# Passo 3: im para meses, e os intervalos
+- **im** + mês ou estação: im Mai, im Dezember, im Sommer
+- **von … bis**: von neun bis fünf (das nove às cinco)
+- **ab**: ab Montag (a partir de segunda)
+~ Der Kurs beginnt im März. = O curso começa em março.
+~ Ich arbeite von acht bis vier. = Eu trabalho das oito às quatro.
+# Passo 4: marcar, aceitar e recusar
+| Para | Diga |
+| perguntar | Hast du am Montag Zeit? |
+| aceitar | Ja, das geht. |
+| recusar | Nein, das geht nicht. |
+| propor outro | Und am Dienstag? |
+~ Nein, das geht nicht. Und am Dienstag? = Não, não dá. E na terça?
+> Marque um compromisso imaginário em voz alta: o dia com am e a hora com um.
+? Qual palavra vai antes de uma hora: um, am ou im? || um
+? Como se diz "em maio"? || im Mai
+? Como se diz "Não dá"? || Das geht nicht.
+`,
+});
+
+NL('n-einladung', {
+  de: 'Eine Einladung', pt: 'Ler um convite e responder aceitando ou recusando', gt: 'Hast du Zeit? · leider',
+  gx: 'Para aceitar: Ich komme gern! Para recusar com educação: Leider kann ich nicht kommen, e o motivo (Ich arbeite am Samstag). Depois de leider vem o verbo: Leider kann ich nicht.',
+  ge: 'Hast du am Samstag Zeit?=Você tem tempo no sábado?|Ich komme gern!=Eu vou com prazer!|Leider kann ich nicht kommen.=Infelizmente não posso ir.',
+  v: 'die Einladung=o convite=💌|leider=infelizmente=😕|Schade!=Que pena!=😢|Ich komme gern.=Eu vou com prazer.=😊|die Feier=a comemoração, a festa=🥳|grillen=fazer churrasco=🔥|der Grillabend=a noite de churrasco=🍖|bei mir=na minha casa=🏠|der Salat=a salada=🥗|das Getränk=a bebida=🥤',
+  x: 'Bis dann!=Até lá!|Danke für die Einladung!=Obrigado pelo convite!|die Wurst=a salsicha, a linguiça|der Nachtisch=a sobremesa|der Hof=o pátio|die Freunde=os amigos|sicher=com certeza|bestimmt=com certeza, sem dúvida|ein anderes Mal=outro dia, outra vez|nächsten Samstag=no próximo sábado',
+  dlg: 'Hallo Tim! Hast du am Samstag Zeit?=Oi, Tim! Você tem tempo no sábado?|Am Samstag? Warum?=No sábado? Por quê?|Ich mache einen Grillabend bei mir. Kommst du?=Vou fazer um churrasco na minha casa. Você vem?|Leider kann ich nicht. Ich arbeite am Samstag. Schade!=Infelizmente não posso. Eu trabalho no sábado. Que pena!',
+  cz: '___ kann ich nicht kommen.=Leider=Gern=Bitte|Ich komme ___! Danke für die Einladung.=gern=leider=nicht|___ du am Samstag Zeit?=Hast=Bist=Hat',
+  whys: 'leider (infelizmente) abre a recusa educada; depois dele vem o verbo: Leider kann ich…|gern depois do verbo mostra que você aceita com prazer|Zeit haben: com du, a forma de haben é hast',
+  pts: 'Convidar: Hast du am … Zeit? / Ich mache … Kommst du? / Möchtest du kommen?|Aceitar: Ja, gern! / Ich komme gern. / Danke für die Einladung!|Recusar: Leider kann ich nicht (kommen). Depois de leider vem o verbo. Diga o motivo e, se quiser, proponha outro dia.|"Ir à festa" em alemão é kommen, do ponto de vista de quem convida: Kommst du? – Ja, ich komme.',
+  ex: 'Möchtest du am Freitag kommen?=Você gostaria de vir na sexta?|Danke für die Einladung!=Obrigado pelo convite!|Leider kann ich nicht, ich arbeite am Freitag.=Infelizmente não posso, eu trabalho na sexta.|Vielleicht ein anderes Mal!=Quem sabe outro dia!',
+  bd: ['Leider=ADV^leider ocupa a 1ª posição|kann=MOD^o modal vem logo depois, na 2ª posição|ich=S^o sujeito vem depois do verbo|nicht=NEG|kommen.=INF^o infinitivo vai para o fim', 'Infelizmente não posso ir.'],
+  rule: 'convite',
+  hw: 'Escreva no diário um convite curto para um amigo (dia, hora e lugar) e duas respostas: uma aceitando e outra recusando com leider e o motivo.',
+  le: {
+    texto: {
+      t: 'Einladung zum Grillabend', kind: 'leitura',
+      intro: 'A Julia convida os vizinhos para um churrasco. Leia o convite e responda.',
+      paras: ['Liebe Nachbarn,', 'am Samstag mache ich einen Grillabend bei mir im Hof.', 'Wir beginnen um 18 Uhr.', 'Ich mache Wurst und Salat. Bitte bringt Getränke mit!', 'Habt ihr Zeit? Bitte antwortet bis Mittwoch.', 'Viele Grüße, Julia'],
+      qs: [
+        { q: 'Quando é o churrasco?', o: ['no sábado, às 18h', 'na quarta, às 18h', 'no sábado, às 8h'], a: 0 },
+        { q: 'Onde é?', o: ['no pátio do prédio da Julia', 'num restaurante', 'num parque'], a: 0 },
+        { q: 'O que os convidados devem levar?', o: ['bebidas', 'salada', 'linguiça'], a: 0 },
+        { q: 'Até quando é preciso responder?', o: ['até quarta-feira', 'até sábado', 'até as 18h'], a: 0 },
+      ],
+    },
+    escrita: {
+      t: 'Responda ao convite da Julia', tipo: 'form', ok: 'Resposta escrita corretamente.',
+      pede: 'Você escolhe: aceitar ou recusar. Escreva uma frase em cada linha. Pode inventar o motivo.',
+      campos: [
+        { l: 'Anrede', d: 'a abertura: Liebe Julia, / Hallo Julia,', re: '^(liebe|hallo)\\s+julia\\b', f: 'iu', err: 'Comece com Liebe Julia, ou Hallo Julia,', bad: [['^lieber julia', 'Julia é mulher: <b>Liebe</b> Julia.']] },
+        { l: 'Dank', d: 'agradeça o convite', re: '\\bdanke\\b', f: 'iu', err: 'Agradeça o convite: Danke für die Einladung!' },
+        { l: 'Antwort', d: 'aceite com gern ou recuse com leider', re: '\\b(gern|gerne|leider)\\b', f: 'iu', err: 'Aceite (Ich komme gern!) ou recuse com leider (Leider kann ich nicht kommen.).', bad: [['^leider ich', 'Depois de <b>leider</b> vem o verbo: Leider <b>kann</b> ich nicht.']] },
+        { l: 'Detail', d: 'um detalhe com dia ou hora (am …, um …)', re: '\\b(am|um|ab|bis)\\b', f: 'iu', err: 'Use am (dia) ou um (hora): Ich komme um 18 Uhr. / Ich arbeite am Samstag.' },
+        { l: 'Gruß', d: 'a despedida e o seu nome', re: '^(viele gr(ü|ue)(ß|ss)e|bis (dann|samstag|bald))\\b', f: 'iu', err: 'Despeça-se: Viele Grüße, e o seu nome (ou Bis Samstag!).' },
+      ],
+      modelo: 'Liebe Julia, · Danke für die Einladung! · Ich komme gern. · Ich komme um 18 Uhr. · Viele Grüße, Ana',
+    },
+  },
+  deep: `
+Esta lição é de **ler e escrever**. Você vai ler o convite de uma vizinha que faz um churrasco e depois responder, aceitando ou recusando com educação. A palavra-chave da recusa é **leider**.
+# Passo 1: convidar
+~ Hast du am Samstag Zeit? = Você tem tempo no sábado?
+~ Möchtest du kommen? = Você gostaria de vir?
+BR Em português a gente "vai" à festa. Em alemão quem é convidado **kommt** (vem), porque se fala do ponto de vista de quem convida: Kommst du? – Ja, ich komme!
+# Passo 2: aceitar
+| Alemão | Português |
+| Ja, gern! | Sim, com prazer! |
+| Ich komme gern. | Eu vou com prazer. |
+| Danke für die Einladung! | Obrigado pelo convite! |
+| Bis dann! | Até lá! |
+~ Ich komme gern. = Eu vou com prazer.
+# Passo 3: recusar com leider
+**leider** = infelizmente. Quando ele abre a frase, o verbo vem logo depois: **Leider kann ich nicht.**
+- Diga o motivo: Ich arbeite am Samstag.
+- Lamente: Schade!
+- Proponha outra vez: Vielleicht ein anderes Mal!
+! Recusar só com "Nein." soa seco em alemão também. Agradeça, use **leider** e dê o motivo.
+~ Leider kann ich nicht kommen. = Infelizmente não posso ir.
+# Passo 4: como ler um convite
+Procure quatro coisas: **was** (o quê), **wann** (quando), **wo** (onde) e o que levar. No convite da Julia aparece **Bitte bringt Getränke mit**: mitbringen = levar junto, com o mit no fim, como os verbos separáveis da lição Mein Tag.
+~ Wann beginnt die Feier? = Quando começa a festa?
+> No exercício, leia o convite da Julia, responda às perguntas e escreva a sua resposta, uma frase por linha.
+? Como se diz "infelizmente"? || leider
+? Como se aceita um convite? || Ich komme gern!
+? Depois de leider, vem o verbo ou o sujeito? || o verbo (Leider kann ich nicht.)
+`,
+});
+
 // Esquemas visuais (mesmo formato de data/visuals.js) e palavras de apoio (data/support.js) das lições novas.
 V('Wie schreibt man das?',
   'V:As letras que mais enganam;V se chama "fau"|Vera: fau · e · er · a;W se chama "vê"|Wien: vê · i · e · en;Z se chama "tsét"|Zoo: tsét · o · o',
@@ -410,9 +527,17 @@ S_('Wie schreibt man das?', 'oder=ou|at=arroba (@), dito como em inglês');
 S_('Wie alt bist du?', 'die Tochter=a filha|dein / deine=seu, sua (informal)|die Nummer=o número');
 S_('Ein Formular', 'ausfüllen (Sie füllen … aus)=preencher (o aus vai para o fim)|unterschreiben=assinar');
 S_('Zwei Bücher, drei Stühle', 'die Kinder=os filhos, as crianças (plural de das Kind)|die Brüder=os irmãos (plural de der Bruder)');
+V('Am Montag um zehn',
+  'V:um, am ou im?;um · a hora|um acht Uhr|um halb drei;am · o dia|am Montag|am Abend;im · o mês|im Mai|im Dezember',
+  'P:Marcar um compromisso;Perguntar=Hast du am Montag Zeit?;Recusar=Nein, das geht nicht.;Propor outro dia=Und am Dienstag?;Aceitar=Ja, das geht!;Combinar a hora=Um zehn Uhr?');
+V('Eine Einladung',
+  'V:Aceitar ou recusar;Aceitar|Ja, gern!|Ich komme gern.|Bis dann!;Recusar|Leider kann ich nicht.|Ich arbeite am Samstag.|Schade!',
+  'E:Depois de leider, o verbo vem logo;Leider^c|kann^v|ich^s|nicht kommen.^n');
+S_('Am Montag um zehn', 'Um wie viel Uhr?=A que horas?|in der Nacht=de madrugada (a exceção do am)');
+S_('Eine Einladung', 'mitbringen (bringt … mit)=levar junto|ihr (habt ihr, antwortet)=vocês|die Nachbarn=os vizinhos');
 S_('Was sind Sie von Beruf?', 'beruflich=profissionalmente (Was machst du beruflich?)|aber=mas');
 S_('Eine kurze Nachricht', 'super=ótimo, legal');
-['oliveira', 'vera', 'carla', 'mendes', 'web', 'recife', 'tim', 'max', 'lima', 'lukas', 'curitiba'].forEach((n) => NAMES.add(n));
+['oliveira', 'vera', 'carla', 'mendes', 'web', 'recife', 'tim', 'max', 'lima', 'lukas', 'curitiba', 'julia'].forEach((n) => NAMES.add(n));
 NEW_LESSONS['n-buchstabieren'].rule = 'soletrar';
 V('Zwei Bücher, drei Stühle',
   'V:No plural, o artigo é sempre die;Singular|der Stuhl|die Lampe|das Buch;Plural|die Stühle|die Lampen|die Bücher',
@@ -430,7 +555,7 @@ V('Eine kurze Nachricht',
 const SEQ = [
   { lv: 'A1', n: 'Primeiros contatos', l: [0, 1, 'n-buchstabieren', 'n-alter', 5, 'n-formular'] },
   { lv: 'A1', n: 'Pessoas e coisas', l: [2, 3, 'n-plural', 'n-beruf', 4, 'n-nachricht'] },
-  { lv: 'A1', n: 'Horários e rotina', l: [6, 9, '?Am Montag um zehn', 10, 11, '?Ler e escrever: Eine Einladung'] },
+  { lv: 'A1', n: 'Horários e rotina', l: [6, 9, 'n-termin', 10, 11, 'n-einladung'] },
   { lv: 'A1', n: 'Comer e comprar', l: [7, '?Auf dem Markt', 8, '?Was isst du gern?', 14, '?Ler e escrever: Speisekarte und Einkaufszettel'] },
   { lv: 'A1', n: 'Casa e cidade', l: [12, 13, '?Die Wohnungsanzeige', 15, '?Zur Post, zum Bahnhof', '?Ler e escrever: Schilder und Zettel'] },
   { lv: 'A1', n: 'Saúde e fim de semana', l: [16, '?Einen Termin machen', 17, 18, '?Mein Wochenende', '?Ler e escrever: Eine Postkarte'] },
@@ -482,9 +607,9 @@ const firstDayOf = (w) => { const i = DAYS.findIndex((x) => x.w === w); return i
 
 // Progresso salvo antes da reordenação: dias, tarefas de casa e diário passam para as posições novas.
 // As cartas não mudam: as chaves já usam o índice original. O registro antigo fica em S.doneOld.
-// Lições inseridas depois da versão 1 da sequência (Módulo 2, 21/11/2026). Servem para reconstruir a ordem antiga
-// de quem já tinha migrado antes de S.seqDays existir.
-const SEQ_ADDED_V2 = ['n-plural', 'n-beruf', 'n-nachricht'];
+// Lições inseridas depois da versão 1 da sequência (Módulos 2 e 3, 21/11/2026). Servem para reconstruir a ordem
+// antiga de quem migrou antes de S.seqDays existir. Depois disso, S.seqDays basta: novas inserções não entram aqui.
+const SEQ_ADDED_V2 = ['n-plural', 'n-beruf', 'n-nachricht', 'n-termin', 'n-einladung'];
 const seqKeys = () => DAYS.map((d) => (d.review ? 'r' + d.w : LESSONS[d.li].sid));
 // Quando a sequência muda (lições inseridas), os dias e os índices de lição mudam: tudo é remapeado pelo sid.
 function remapSeq(S, oldKeys) {

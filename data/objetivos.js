@@ -1,6 +1,6 @@
 // Objetivos "consigo…" (decisão 10, 20/11/2026) — RASCUNHO, ainda sem revisão pedagógica.
 // OBJ: por lição, pelo id estável (sid): o = objetivo, a = pergunta de autoavaliação, ref = escala do Quadro Europeu e nível.
-// Vêm do piloto do A1 (docs/objetivos-A1-piloto.md) mais as lições novas dos Módulos 1 e 2 e "Im Urlaub", que desceu para o A1.
+// Vêm do piloto do A1 (docs/objetivos-A1-piloto.md) mais as lições novas dos Módulos 1 a 3 e "Im Urlaub", que desceu para o A1.
 // MOD_OBJ: por módulo (índice na trilha nova). Só o A1 tem objetivos por enquanto; o A2 em diante mostra "em redação".
 const OBJ = {
   0: { o: 'Consigo cumprimentar, me despedir, dizer meu nome e perguntar o nome de alguém.', a: 'Você consegue cumprimentar alguém, dizer seu nome e perguntar o nome da pessoa?', ref: 'Conversation · A1' },
@@ -17,8 +17,10 @@ const OBJ = {
   'n-nachricht': { o: 'Consigo ler um perfil curto e escrever uma mensagem simples de apresentação, ligando as frases com und, aber e oder.', a: 'Você consegue escrever uma mensagem curta se apresentando?', ref: 'Correspondence · A1; Reading correspondence · A1' },
   6: { o: 'Consigo perguntar e dizer as horas, combinar um horário e usar os números até 100.', a: 'Você consegue perguntar as horas e combinar um horário?', ref: 'Information exchange · A1' },
   9: { o: 'Consigo contar a minha rotina: a que horas acordo e o que faço em cada dia da semana.', a: 'Você consegue contar como é o seu dia e a sua semana?', ref: 'Sustained monologue: describing experience · A1 (fronteira com A2)' },
+  'n-termin': { o: 'Consigo marcar um compromisso: perguntar se a pessoa tem tempo, dizer o dia e a hora e aceitar ou propor outro horário.', a: 'Você consegue marcar um compromisso com dia e hora?', ref: 'Information exchange · A1; Conversation · A1' },
   10: { o: 'Consigo dizer como vou para algum lugar e perguntar como alguém se desloca.', a: 'Você consegue dizer como vai para os lugares e perguntar isso a alguém?', ref: 'Information exchange · A1' },
   11: { o: 'Consigo pedir ajuda, dizer que não entendi e pedir para repetirem ou falarem mais devagar.', a: 'Quando não entende, você consegue pedir para repetirem ou falarem mais devagar?', ref: 'Asking for clarification · A1–A2 (conferir)' },
+  'n-einladung': { o: 'Consigo ler um convite simples e responder aceitando ou recusando com educação.', a: 'Você consegue responder a um convite, aceitando ou recusando?', ref: 'Correspondence · A1; Reading correspondence · A1' },
   7: { o: 'Consigo dizer o que quero comer e pedir alimentos numa compra simples.', a: 'Você consegue dizer o que quer comer e pedir alimentos numa loja?', ref: 'Obtaining goods and services · A1' },
   8: { o: 'Consigo pedir comida e bebida num restaurante, recusar algo educadamente e pedir a conta.', a: 'Você consegue fazer um pedido num restaurante e pedir a conta?', ref: 'Obtaining goods and services · A2 (a lição antecipa)' },
   14: { o: 'Consigo perguntar o preço de uma roupa, falar da cor e dizer se está cara ou barata.', a: 'Você consegue perguntar quanto custa uma roupa e dizer se está caro?', ref: 'Obtaining goods and services · A1' },
