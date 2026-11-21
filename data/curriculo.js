@@ -1054,6 +1054,314 @@ S_('Schilder und Zettel', 'wieder da=de volta|benutzen=usar (Bitte die Treppe be
 S_('Einen Termin machen', 'erst=só (não antes de)|mitbringen (Bringen Sie … mit)=trazer junto');
 S_('Mein Wochenende', 'putzen (geputzt)=limpar (limpei)|ins (in das)=ao, para o (ins Kino)|war (Wie war …?)=foi (passado de sein)');
 S_('Eine Postkarte', 'die Mama=a mamãe|ans (an das)=para o (ans Meer = para a praia)|seit Montag=desde segunda');
+/* Módulo 7 (21/11/2026): currículo e datas, formação e a lição de Ler e escrever "Eine E-Mail über mich". */
+NL('n-lebenslauf', {
+  de: 'Mein Lebenslauf', pt: 'Datas e etapas da vida', gt: 'Anos (im Jahr …) · Perfekt (revisão)',
+  gx: 'Anos: 1995 = neunzehnhundertfünfundneunzig; 2015 = zweitausendfünfzehn. O ano vem sozinho ou com im Jahr, nunca com "in". Etapas no Perfekt: geboren, studiert, gezogen.',
+  ge: 'Ich bin 1995 in Recife geboren.=Eu nasci em 1995, em Recife.|2015 habe ich in São Paulo studiert.=Em 2015 eu estudei em São Paulo.|Seit 2022 wohne ich in Deutschland.=Desde 2022 eu moro na Alemanha.',
+  v: 'der Lebenslauf=o currículo=📄|geboren=nascido=👶|das Studium=a faculdade, o curso superior=🎓|umziehen=mudar de casa (ich ziehe um)=📦|heiraten=casar=💍|der Abschluss=a formatura, o diploma=📜|das Praktikum=o estágio=🧑‍💼|der Umzug=a mudança=🚚|neunzehnhundert=mil e novecentos (nos anos)=🗓️|zweitausend=dois mil=🗓️',
+  x: 'die Geburt=o nascimento|die Scheidung=o divórcio|geschieden=divorciado|tabellarisch=em forma de tabela|die Lücke=a lacuna (no currículo)|die Elternzeit=a licença parental|der Ruhestand=a aposentadoria|aktuell=atual, atualmente|das Jahrzehnt=a década|die Sprachkenntnisse=os conhecimentos de idiomas',
+  dlg: 'Wann bist du geboren?=Quando você nasceu?|Neunzehnhundertneunzig, in Fortaleza.=Em mil novecentos e noventa, em Fortaleza.|Und wann bist du nach Deutschland gekommen?=E quando você veio para a Alemanha?|Im Jahr 2019. Zuerst habe ich in Köln gewohnt.=Em 2019. Primeiro eu morei em Colônia.',
+  cz: 'Ich bin 1995 ___.=geboren=gebären=geborgen|___ 2019 wohne ich in Berlin.=Seit=Im=Um|2010 ___ ich nach Köln gezogen.=bin=habe=war',
+  whys: 'nascer em alemão: ich bin … geboren|seit + ano: algo que começou e continua|ziehen (mudar de cidade) faz o Perfekt com sein: bin … gezogen',
+  pts: 'Até 1999: neunzehnhundert + o resto (1995 = neunzehnhundertfünfundneunzig). Desde 2000: zweitausend + o resto.|O ano vem sozinho (2015 habe ich …) ou com im Jahr. Nunca "in 2015".|Nascer: Ich bin 1990 geboren. Mudar de cidade: Ich bin nach Berlin gezogen.|seit + ano para o que continua: Seit 2022 wohne ich hier.',
+  ex: 'Im Jahr 2010 habe ich geheiratet.=Em 2010 eu me casei.|2018 bin ich nach Berlin gezogen.=Em 2018 eu me mudei para Berlim.|Ich habe ein Praktikum gemacht.=Eu fiz um estágio.|Mein Abschluss war 2016.=Minha formatura foi em 2016.',
+  bd: ['2018=T^o ano sozinho, sem "in"|bin=AUX^ziehen (mudar) faz o Perfekt com sein|ich=S|nach_Berlin=L|gezogen.=PT^particípio de ziehen', 'Em 2018 eu me mudei para Berlim.'],
+  rule: 'perfekt',
+  hw: 'Escreva o seu currículo em forma de tabela: cinco linhas com ano e etapa (ex.: 2012 – Abschluss). Depois diga cada linha numa frase no Perfekt.',
+  deep: `
+Para um emprego, um curso ou uma conversa de apresentação, você vai precisar contar a sua vida em etapas, com datas. Hoje: como dizer os anos em alemão e como montar um currículo simples.
+# Passo 1: como se dizem os anos
+| Ano | Em alemão |
+| 1990 | neunzehnhundertneunzig |
+| 2008 | zweitausendacht |
+| 2015 | zweitausendfünfzehn |
+BR Em português dizemos "mil novecentos e noventa". Em alemão, até 1999, é "dezenove cem noventa": **neunzehnhundert**neunzig. A partir de 2000 é como em português: **zweitausend**fünfzehn.
+~ Ich bin 1995 geboren. = Eu nasci em 1995.
+# Passo 2: o ano na frase
+- Sozinho, no começo: **2015** habe ich geheiratet.
+- Com **im Jahr**: **Im Jahr** 2015 habe ich geheiratet.
+! Nunca "in 2015". E quando o ano abre a frase, o verbo vem logo depois.
+~ Im Jahr 2010 habe ich geheiratet. = Em 2010 eu me casei.
+# Passo 3: as etapas da vida no Perfekt
+| Etapa | Perfekt |
+| nascer | Ich bin … geboren. |
+| estudar | Ich habe … studiert. |
+| mudar de cidade | Ich bin nach … gezogen. |
+| casar | Ich habe … geheiratet. |
+~ 2018 bin ich nach Berlin gezogen. = Em 2018 eu me mudei para Berlim.
+# Passo 4: o currículo alemão
+O **Lebenslauf** costuma ser uma tabela: à esquerda o período, à direita a etapa, do mais recente para o mais antigo.
+| Período | Etapa |
+| seit 2022 | Verkäuferin, Berlin |
+| 2016 – 2021 | Studium, São Paulo |
+~ Seit 2022 arbeite ich in Berlin. = Desde 2022 eu trabalho em Berlim.
+> Conte em voz alta três etapas da sua vida, com o ano: Ich bin … geboren. … habe ich … / bin ich …
+? Como se diz 1998? || neunzehnhundertachtundneunzig
+? Complete: ___ 2022 wohne ich hier. || Seit
+? "Em 2015" se diz "in 2015"? || Não: 2015 ou im Jahr 2015
+`,
+});
+
+NL('n-ausbildung', {
+  de: 'Schule und Ausbildung', pt: 'Estudos e formação', gt: 'Perfekt dos separáveis e inseparáveis',
+  gx: 'Separáveis: o ge- entra no meio (angefangen, aufgehört, eingekauft). Inseparáveis (be-, ver-, er-, ent-, emp-, zer-) e verbos em -ieren ficam sem ge- (bestanden, verstanden, studiert).',
+  ge: 'Ich habe 2010 mit dem Studium angefangen.=Eu comecei a faculdade em 2010.|Er hat die Prüfung bestanden.=Ele passou na prova.|Ich habe Informatik studiert.=Eu estudei informática.',
+  v: 'die Grundschule=a escola primária (1º ao 4º ano)=🏫|das Gymnasium=o ensino médio preparatório=📚|das Abitur=o diploma do ensino médio=📜|die Prüfung=a prova, o exame=📝|bestehen (bestanden)=passar (na prova)=✅|die Note=a nota=💯|aufhören (aufgehört)=parar, terminar=⏹️|das Fach=a matéria=📐|die Berufsschule=a escola técnica=🔧|durchfallen (durchgefallen)=ser reprovado=❌',
+  x: 'die Ausbildung=a formação profissional (técnica)|der Azubi=o aprendiz (em formação)|die Hochschule=a faculdade|das Semester=o semestre|die Hausaufgabe=a lição de casa|das Zeugnis=o boletim, o certificado|die Fortbildung=o curso de aperfeiçoamento|der Studiengang=o curso (da faculdade)|die Informatik=a informática|die Mathe=a matemática',
+  dlg: 'Was hast du nach der Schule gemacht?=O que você fez depois da escola?|Ich habe eine Ausbildung als Köchin angefangen.=Eu comecei uma formação de cozinheira.|Und hast du die Prüfung bestanden?=E você passou na prova?|Ja! Danach habe ich in einem Restaurant gearbeitet.=Sim! Depois disso eu trabalhei num restaurante.',
+  cz: 'Ich habe mit dem Kurs ___.=angefangen=geanfangen=anfangengt|Sie hat die Prüfung ___.=bestanden=gebestanden=bestehen|Er hat Informatik ___.=studiert=gestudiert=studieren',
+  whys: 'anfangen é separável: o ge- entra entre an e fangen|bestehen é inseparável (be-): sem ge-|verbos em -ieren não têm ge-: studiert',
+  pts: 'Separáveis: ge- entre o prefixo e o verbo: angefangen, eingekauft, aufgehört.|Inseparáveis (be-, ver-, er-, ent-, emp-, zer-): sem ge-: bestanden, verstanden.|Verbos em -ieren também sem ge-: studiert, fotografiert.|Escola alemã: Grundschule, depois Gymnasium (até o Abitur) ou outra escola; depois Studium ou Ausbildung.',
+  ex: 'Ich habe die Hausaufgaben vergessen.=Eu esqueci a lição de casa.|Er ist durchgefallen.=Ele foi reprovado.|Wann hast du mit dem Deutschkurs angefangen?=Quando você começou o curso de alemão?|Ich habe das Wort nicht verstanden.=Eu não entendi a palavra.',
+  bd: ['Ich=S|habe=AUX|2010=T|mit_dem_Studium=PP^anfangen mit + dativo|angefangen.=PT^separável: o ge- entra no meio (an-ge-fangen)', 'Eu comecei a faculdade em 2010.'],
+  rule: 'perfekt',
+  hw: 'Escreva cinco frases sobre a sua formação no Perfekt, com pelo menos um verbo separável (angefangen, aufgehört) e um inseparável ou em -ieren (bestanden, studiert).',
+  deep: `
+Escola, faculdade, curso técnico: contar a própria formação exige o Perfekt de verbos como começar, terminar, passar e estudar. Muitos são separáveis ou inseparáveis, e o ge- muda de lugar ou some.
+# Passo 1: separáveis: o ge- entra no meio
+| Infinitivo | Perfekt |
+| anfangen | hat angefangen |
+| aufhören | hat aufgehört |
+| einkaufen | hat eingekauft |
+| umziehen | ist umgezogen |
+~ Ich habe 2010 mit dem Studium angefangen. = Eu comecei a faculdade em 2010.
+# Passo 2: inseparáveis e -ieren: sem ge-
+| Infinitivo | Perfekt |
+| bestehen | hat bestanden |
+| verstehen | hat verstanden |
+| vergessen | hat vergessen |
+| studieren | hat studiert |
+! Os prefixos **be-, ver-, er-, ent-, emp-, zer-** nunca se separam e nunca recebem ge-. Verbos em **-ieren** também não.
+~ Er hat die Prüfung bestanden. = Ele passou na prova.
+# Passo 3: a escola na Alemanha
+| Etapa | Idade |
+| Grundschule | 6 a 10 anos |
+| Gymnasium (até o Abitur) | 10 a 18 anos |
+| Studium ou Ausbildung | depois |
+BR A **Ausbildung** não tem equivalente direto no Brasil: é uma formação técnica de 2 a 3 anos, metade na escola técnica e metade numa empresa, com salário.
+~ Ich habe eine Ausbildung als Köchin gemacht. = Eu fiz uma formação de cozinheira.
+# Passo 4: falar das provas
+- **bestehen** (passar) é inseparável: hat bestanden
+- **durchfallen** (ser reprovado) é separável e usa sein: ist durchgefallen
+~ Hast du die Prüfung bestanden? = Você passou na prova?
+~ Er ist durchgefallen. = Ele foi reprovado.
+> Conte em voz alta como foi a sua formação: Ich habe … angefangen / studiert / bestanden.
+? Qual é o Perfekt de anfangen? || hat angefangen
+? Por que bestanden não tem ge-? || porque be- é inseparável
+? Qual é o Perfekt de studieren? || hat studiert
+`,
+});
+
+NL('n-email', {
+  de: 'Eine E-Mail über mich', pt: 'Ler um e-mail pessoal e responder contando sobre si', gt: 'weil · Perfekt',
+  gx: 'E-mail pessoal: Liebe … / Lieber …, Danke für deine E-Mail!, as novidades (Perfekt para o que mudou, presente para o agora), um motivo com weil (verbo no fim) e Viele Grüße. Antes de weil vai vírgula.',
+  ge: 'Danke für deine E-Mail!=Obrigada pelo seu e-mail!|Ich lerne Deutsch, weil ich in Berlin arbeiten möchte.=Eu aprendo alemão porque quero trabalhar em Berlim.|Letztes Jahr bin ich umgezogen.=No ano passado eu me mudei.',
+  v: 'der Brieffreund / die Brieffreundin=o amigo / a amiga por correspondência=✉️|die Neuigkeit=a novidade=🆕|Mir geht es gut.=Eu estou bem.=🙂|berichten=relatar=🗞️|der Alltag=o dia a dia=📅|momentan=no momento=⏱️|vermissen=sentir falta de=💭|hoffentlich=tomara, espero que=🤞|Schreib bald!=Escreva logo!=✍️|die Stelle=o emprego, a vaga=💼',
+  x: 'die Mail=o e-mail (informal)|Mach’s gut!=Se cuida!|Was gibt’s Neues?=Quais são as novidades?|stressig=estressante|die Heimat=a terra natal|das Heimweh=a saudade de casa|der Mitbewohner / die Mitbewohnerin=o colega / a colega de apartamento|der Sprachkurs=o curso de idiomas|unternehmen=fazer programas, sair|die Zeitverschiebung=o fuso horário',
+  dlg: 'Hast du Jonas schon geantwortet?=Você já respondeu ao Jonas?|Noch nicht. Er hat mir eine lange E-Mail geschrieben.=Ainda não. Ele me escreveu um e-mail longo.|Was erzählt er?=O que ele conta?|Er ist umgezogen, weil er eine neue Stelle hat.=Ele se mudou porque tem um emprego novo.',
+  cz: 'Ich lerne Deutsch, weil ich in Berlin ___.=wohne=wohnen=wohnst|Ich bin müde, ___ ich habe viel gearbeitet.=denn=weil=dass|Danke ___ deine E-Mail!=für=von=mit',
+  whys: 'depois de weil o verbo conjugado vai para o fim: weil ich in Berlin wohne|denn não muda a ordem (denn ich habe…); com weil o verbo iria para o fim|agradecer por algo: danke für + acusativo',
+  pts: 'Abertura: Liebe / Lieber + nome. Depois agradeça: Danke für deine E-Mail!|weil manda o verbo conjugado para o fim: …, weil ich viel arbeite. Com Perfekt: …, weil ich umgezogen bin.|O que mudou no Perfekt; como está agora no presente.|Termine com uma pergunta e Viele Grüße. Schreib bald!',
+  ex: 'Wie geht es dir? Mir geht es gut.=Como você está? Eu estou bem.|Momentan habe ich viel Stress, weil ich umziehe.=No momento estou muito estressada porque estou me mudando.|Ich vermisse dich!=Sinto sua falta!|Schreib bald!=Escreva logo!',
+  bd: ['Ich_lerne_Deutsch,=C^a oração principal|weil=C^weil abre a oração do motivo|ich=S|in_Berlin=L|arbeiten=INF|möchte.=MOD^com weil, o verbo conjugado vai para o fim', 'Eu aprendo alemão porque quero trabalhar em Berlim.'],
+  rule: 'weil',
+  hw: 'Escreva no diário um e-mail curto para um amigo que mora longe: o que mudou na sua vida (Perfekt), como está agora e um motivo com weil.',
+  le: {
+    texto: {
+      t: 'E-Mail von Jonas', kind: 'leitura',
+      intro: 'O Jonas, um amigo alemão, escreve depois de muito tempo. Leia e responda.',
+      paras: ['Liebe Ana,', 'wie geht es dir? Lange nichts gehört! Bei mir gibt es viele Neuigkeiten.', 'Im März bin ich nach München gezogen, weil ich dort eine neue Stelle habe. Ich arbeite jetzt in einem Hotel.', 'Die Arbeit ist interessant, aber ich vermisse meine Freunde in Hamburg.', 'Am Wochenende gehe ich oft in die Berge. Das ist toll!', 'Und du? Wie ist dein Deutschkurs? Schreib bald! Viele Grüße, Jonas'],
+      qs: [
+        { q: 'Por que o Jonas se mudou para Munique?', o: ['porque tem um emprego novo lá', 'porque a família dele mora lá', 'porque quer estudar'], a: 0 },
+        { q: 'Onde ele trabalha agora?', o: ['num hotel', 'num restaurante', 'numa escola'], a: 0 },
+        { q: 'Do que ele sente falta?', o: ['dos amigos em Hamburgo', 'do mar', 'do trabalho antigo'], a: 0 },
+        { q: 'O que ele faz nos fins de semana?', o: ['vai muitas vezes para as montanhas', 'trabalha no hotel', 'visita Hamburgo'], a: 0 },
+      ],
+    },
+    escrita: {
+      t: 'Responda ao Jonas', tipo: 'form', ok: 'E-mail escrito corretamente.',
+      pede: 'Responda ao e-mail do Jonas contando sobre você. Uma frase em cada linha; use o Perfekt e weil.',
+      campos: [
+        { l: 'Anrede', d: 'Lieber Jonas,', re: '^(lieber|hallo)\\s+jonas\\b', f: 'iu', err: 'Comece com Lieber Jonas, (Jonas é homem).', bad: [['^liebe jonas', 'Jonas é homem: <b>Lieber</b> Jonas.']] },
+        { l: 'Dank', d: 'agradeça: Danke für deine E-Mail!', re: '\\bdanke\\b.*\\bf(ü|ue)r\\b', f: 'iu', err: 'Agradeça: Danke für deine E-Mail!' },
+        { l: 'Neuigkeit', d: 'uma novidade no Perfekt: Ich habe … / Ich bin …', re: '\\b(habe|hat|haben|bin|ist|sind)\\b.+(ge\\p{L}+(t|en)|iert|(be|ver|er|ent)\\p{L}+(t|en))[.!]?$', f: 'iu', err: 'Conte uma novidade no Perfekt, com o particípio no fim: Ich habe eine neue Stelle gefunden.' },
+        { l: 'Weil', d: 'um motivo: …, weil …', re: ',\\s*weil\\s+\\p{L}+.*\\s\\p{L}+[.!]?$', f: 'iu', err: 'Dê um motivo com weil, depois de uma vírgula: Ich lerne viel, weil ich in Berlin arbeite.', bad: [['weil (ich|er|sie|wir) (bin|habe|ist|hat|arbeite|wohne|lerne|möchte|muss|kann)\\b', 'Depois de <b>weil</b> o verbo vai <b>para o fim</b>: …, weil ich in Berlin <b>wohne</b>.'], ['[^,]\\s+weil\\b', 'Antes de <b>weil</b> vai vírgula.']] },
+        { l: 'Gruß', d: 'Schreib bald! / Viele Grüße, + seu nome', re: '(gr(ü|ue)(ß|ss)e|schreib bald)', f: 'iu', err: 'Termine com Schreib bald! ou Viele Grüße e o seu nome.' },
+      ],
+      modelo: 'Lieber Jonas, · danke für deine E-Mail! · Ich habe einen neuen Job gefunden. · Ich lerne viel Deutsch, weil ich in Berlin arbeite. · Schreib bald! Viele Grüße, Ana',
+    },
+  },
+  deep: `
+Esta lição é de **ler e escrever**. Um amigo alemão escreveu depois de muito tempo, contando as novidades. Você vai ler o e-mail dele e responder, contando as suas, com o Perfekt e com **weil**.
+# Passo 1: começo e fim de um e-mail pessoal
+| Parte | Exemplo |
+| Abertura | Lieber Jonas, / Liebe Ana, |
+| Primeira frase | Danke für deine E-Mail! |
+| Despedida | Schreib bald! Viele Grüße, Ana |
+~ Danke für deine E-Mail! = Obrigada pelo seu e-mail!
+# Passo 2: contar novidades
+- O que mudou: **Perfekt**. Ich bin umgezogen. Ich habe eine neue Stelle gefunden.
+- Como está agora: **presente**. Ich wohne jetzt in München.
+~ Letztes Jahr bin ich umgezogen. = No ano passado eu me mudei.
+# Passo 3: o motivo com weil
+**weil** manda o verbo conjugado para o **fim** da oração. Antes dele vai vírgula.
+- …, weil ich eine neue Stelle **habe**.
+- …, weil ich in Berlin arbeiten **möchte**.
+- …, weil ich umgezogen **bin**.
+BR Em português o "porque" não mexe em nada. Em alemão, depois de **weil**, guarde o verbo para o final.
+~ Ich lerne viel, weil ich hier arbeite. = Eu estudo muito porque trabalho aqui.
+# Passo 4: como ler um e-mail pessoal
+Procure primeiro as novidades (os verbos no Perfekt) e os motivos (depois de **weil**): eles dizem o que aconteceu e por quê.
+~ Er ist umgezogen, weil er Arbeit hat. = Ele se mudou porque tem trabalho.
+> No exercício, leia o e-mail do Jonas e escreva a sua resposta, uma frase por linha.
+? Qual é a abertura para um amigo? || Lieber + o nome
+? Depois de weil, onde fica o verbo conjugado? || no fim
+? Complete: Danke ___ deine E-Mail! || für
+`,
+});
+
+/* Módulo 8 (21/11/2026): regras do prédio e a lição de Ler e escrever "Ein Zettel an die Nachbarn". */
+NL('n-hausordnung', {
+  de: 'Die Hausordnung', pt: 'Regras do prédio', gt: 'man + modais (man darf nicht, man muss)',
+  gx: 'Regras: man + modal. Man muss den Müll trennen. Man darf hier nicht rauchen. man conjuga como er/sie. Atenção: man muss nicht = não precisa.',
+  ge: 'Man muss den Müll trennen.=É preciso separar o lixo.|Hier darf man nicht rauchen.=Aqui não se pode fumar.|Ab 22 Uhr muss man leise sein.=A partir das 22h é preciso fazer silêncio.',
+  v: 'die Hausordnung=o regulamento do prédio=📋|der Müll=o lixo=🗑️|trennen=separar=♻️|die Ruhezeit=o horário de silêncio=🤫|leise=baixo, silencioso=🔉|der Hausmeister / die Hausmeisterin=o zelador / a zeladora=🧰|das Treppenhaus=a escada do prédio=🪜|erlaubt=permitido=✅|verboten=proibido=⛔|die Mülltonne=a lixeira (contêiner)=🗑️',
+  x: 'der Biomüll=o lixo orgânico|das Altpapier=o papel para reciclar|der Gelbe Sack=o saco amarelo (embalagens)|das Altglas=o vidro para reciclar|die Nachtruhe=o silêncio noturno|die Mittagsruhe=o silêncio do meio-dia|der Kinderwagen=o carrinho de bebê|abstellen=deixar (um objeto)|lüften=arejar, abrir as janelas|die Waschküche=a lavanderia do prédio',
+  dlg: 'Darf man im Hof grillen?=Pode fazer churrasco no pátio?|Nein, das ist verboten. Das steht in der Hausordnung.=Não, é proibido. Está no regulamento.|Schade! Und wo muss man den Müll trennen?=Que pena! E onde é preciso separar o lixo?|Unten im Hof. Da stehen die Mülltonnen.=Lá embaixo, no pátio. Lá ficam as lixeiras.',
+  cz: 'Hier ___ man nicht rauchen.=darf=dürfen=darfst|Man ___ den Müll trennen.=muss=müssen=musst|Nach 22 Uhr muss man leise ___.=sein=ist=sind',
+  whys: 'man se conjuga como er: man darf|com man o verbo fica como er/sie: man muss|depois do modal, o verbo vai para o fim no infinitivo: sein',
+  pts: 'man = "a gente", "se". Conjuga como er/sie: man muss, man darf, man kann.|man muss (obrigatório), man darf (permitido), man darf nicht (proibido). man muss nicht = não precisa.|Modal na 2ª posição, outro verbo no fim: Man darf hier nicht parken.|Na Hausordnung: Ruhezeiten, separação do lixo e uso das áreas comuns.',
+  ex: 'Im Treppenhaus darf man keine Fahrräder abstellen.=Na escada do prédio não se pode deixar bicicletas.|Papier kommt in die blaue Tonne.=O papel vai na lixeira azul.|Am Sonntag darf man keine laute Musik machen.=No domingo não se pode pôr música alta.|Der Hausmeister hilft bei Problemen.=O zelador ajuda quando há problemas.',
+  bd: ['Hier=L|darf=MOD^man se conjuga como er: darf|man=S^man = "se", a gente|nicht=NEG|rauchen.=INF^o verbo vai para o fim, no infinitivo', 'Aqui não se pode fumar.'],
+  rule: 'man_modal',
+  hw: 'Escreva cinco regras da sua casa ou do seu prédio com man muss, man darf e man darf nicht.',
+  deep: `
+Todo prédio alemão tem a sua **Hausordnung**, o regulamento com horários de silêncio, separação do lixo e regras das áreas comuns. Para entender e falar dessas regras, o alemão usa **man** com os modais.
+# Passo 1: man, o sujeito de todo mundo
+**man** = "a gente", "se", "as pessoas". Conjuga como **er/sie**.
+| Modal | Com man |
+| müssen | man muss |
+| dürfen | man darf |
+| können | man kann |
+~ Man muss den Müll trennen. = É preciso separar o lixo.
+# Passo 2: obrigatório, permitido, proibido
+| Regra | Exemplo |
+| obrigatório | Man muss leise sein. |
+| permitido | Man darf im Hof sitzen. |
+| proibido | Man darf hier nicht rauchen. |
+! **muss nicht** não é proibição: quer dizer "não precisa". Man **muss nicht** … = não é obrigatório.
+~ Hier darf man nicht rauchen. = Aqui não se pode fumar.
+# Passo 3: as Ruhezeiten
+Na maioria dos prédios: **Nachtruhe** das 22h às 6h, às vezes **Mittagsruhe** das 13h às 15h, e o domingo é de silêncio.
+BR No Brasil o barulho depois das 22h também incomoda, mas na Alemanha a regra é levada muito a sério: furadeira no domingo pode render reclamação.
+~ Ab 22 Uhr muss man leise sein. = A partir das 22h é preciso fazer silêncio.
+# Passo 4: a separação do lixo
+| Lixeira | O que vai nela |
+| Biomüll | restos de comida |
+| Altpapier | papel e papelão |
+| Gelber Sack | embalagens de plástico e metal |
+| Restmüll | o resto |
+~ Papier kommt in die blaue Tonne. = O papel vai na lixeira azul.
+> Diga em voz alta três regras do seu prédio: Man muss … / Man darf nicht …
+? Como se diz "Aqui não se pode fumar"? || Hier darf man nicht rauchen.
+? man se conjuga como qual pessoa? || como er/sie
+? O que significa "Man muss nicht …"? || não é obrigatório, não precisa
+`,
+});
+
+NL('n-zettel-nachbarn', {
+  de: 'Ein Zettel an die Nachbarn', pt: 'Ler avisos do prédio e escrever um bilhete aos vizinhos', gt: 'Könnten Sie …? (fórmula)',
+  gx: 'Pedido educado: Könnten Sie bitte …? com o infinitivo no fim (Könnten Sie bitte leiser sein?). Bilhete aos vizinhos: Liebe Nachbarn, o que acontece e quando, desculpas ou pedido, agradecimento e o seu nome com o andar.',
+  ge: 'Könnten Sie bitte die Musik leiser machen?=Os senhores poderiam abaixar a música, por favor?|Am Samstag feiere ich meinen Geburtstag.=No sábado eu comemoro o meu aniversário.|Vielen Dank für Ihr Verständnis!=Muito obrigado pela compreensão!',
+  v: 'Liebe Nachbarn=Queridos vizinhos=🏘️|Könnten Sie bitte …?=Os senhores poderiam, por favor…?=🙏|das Verständnis=a compreensão=🤝|stören=incomodar=😣|Entschuldigung für …=Desculpem por …=😅|der Lärm=o barulho=🔊|leiser=mais baixo=🔉|der Hausflur=o corredor do prédio=🚪|die Renovierung=a reforma=🛠️|vorher=antes=⏮️',
+  x: 'bohren=furar (com furadeira)|der Umzugskarton=a caixa de mudança|rücksichtsvoll=atencioso|die Rücksicht=a consideração|sich beschweren=reclamar|die Beschwerde=a reclamação|die Klingel=a campainha|gießen=regar|leeren=esvaziar|die Nachbarschaft=a vizinhança',
+  dlg: 'Hast du den Zettel im Treppenhaus gelesen?=Você leu o bilhete na escada do prédio?|Ja, die Nachbarn im 3. Stock renovieren ihre Wohnung.=Sim, os vizinhos do 3º andar estão reformando o apartamento.|Und was schreiben sie?=E o que eles escrevem?|Sie bohren bis Freitag und entschuldigen sich für den Lärm.=Eles vão furar até sexta e pedem desculpas pelo barulho.',
+  cz: '___ Sie bitte leiser sein?=Könnten=Könnt=Konnte|Vielen Dank ___ Ihr Verständnis!=für=von=mit|Entschuldigung ___ den Lärm!=für=von=über',
+  whys: 'Könnten Sie …? é a fórmula mais educada para pedir algo|agradecer por algo: Dank für + acusativo|desculpar-se por algo: Entschuldigung für + acusativo',
+  pts: 'Pedido educado: Könnten Sie bitte … + infinitivo no fim?|Bilhete: Liebe Nachbarn, o que acontece e quando, desculpas ou pedido, agradecimento.|Fórmulas: Entschuldigung für den Lärm! · Vielen Dank für Ihr Verständnis!|Assine com nome e andar: Ana Souza, 2. Stock.',
+  ex: 'Liebe Nachbarn, am Samstag feiern wir eine Party.=Queridos vizinhos, no sábado vamos fazer uma festa.|Entschuldigung für den Lärm!=Desculpem o barulho!|Könnten Sie bitte Ihr Fahrrad in den Keller stellen?=O senhor poderia, por favor, pôr a sua bicicleta no porão?|Vielen Dank für Ihr Verständnis!=Muito obrigado pela compreensão!',
+  bd: ['Könnten=MOD^Könnten Sie …? é a fórmula do pedido educado|Sie=S|bitte=PK|leiser=M^mais baixo|sein?=INF^o infinitivo vai para o fim', 'Os senhores poderiam fazer menos barulho, por favor?'],
+  rule: 'konj2',
+  hw: 'Escreva um bilhete para os seus vizinhos avisando de uma festa ou de uma reforma: o que, quando, um pedido com Könnten Sie bitte …? e o agradecimento.',
+  le: {
+    texto: {
+      t: 'Zettel im Treppenhaus', kind: 'leitura',
+      intro: 'Dois avisos na escada do prédio: um do regulamento e um dos vizinhos. Leia e responda.',
+      paras: ['Hausordnung · Wichtig!', 'Ruhezeiten: Mo–Sa 22–6 Uhr und 13–15 Uhr, Sonntag ganztags.', 'Fahrräder bitte nicht im Treppenhaus abstellen, sondern im Fahrradkeller.', 'Liebe Nachbarn, wir renovieren ab Montag unsere Wohnung (3. Stock links). Bis Freitag bohren wir leider manchmal.', 'Entschuldigung für den Lärm! Bei Fragen: einfach klingeln. Vielen Dank für Ihr Verständnis! Familie Berger'],
+      qs: [
+        { q: 'Quando é o horário de silêncio no domingo?', o: ['o dia inteiro', 'das 22h às 6h', 'das 13h às 15h'], a: 0 },
+        { q: 'Onde se deve deixar a bicicleta?', o: ['no bicicletário do porão', 'na escada do prédio', 'no pátio'], a: 0 },
+        { q: 'Por que a família Berger escreveu?', o: ['porque vai reformar o apartamento', 'porque vai fazer uma festa', 'porque perdeu a chave'], a: 0 },
+        { q: 'Até quando vai o barulho?', o: ['até sexta-feira', 'até segunda-feira', 'até domingo'], a: 0 },
+      ],
+    },
+    escrita: {
+      t: 'Escreva um bilhete aos vizinhos', tipo: 'form', ok: 'Bilhete escrito corretamente.',
+      pede: 'Você vai comemorar o seu aniversário no sábado à noite. Escreva um bilhete para o mural do prédio, uma frase em cada linha.',
+      campos: [
+        { l: 'Anrede', d: 'Liebe Nachbarn,', re: '^liebe\\s+nachbarn\\b', f: 'iu', err: 'Comece com Liebe Nachbarn,', bad: [['^lieber nachbarn', 'Nachbarn é plural: <b>Liebe</b> Nachbarn.']] },
+        { l: 'Was und wann?', d: 'o quê e quando: Am Samstag feiere ich …', re: '\\b(am|ab|um|von)\\b.+\\b(feiere|feiern|mache|machen|party|geburtstag)\\b|\\b(feiere|feiern)\\b.+\\b(am|ab|um)\\b', f: 'iu', err: 'Diga o quê e quando: Am Samstag feiere ich meinen Geburtstag.' },
+        { l: 'Bitte', d: 'um pedido educado ou desculpas: Könnten Sie …? / Entschuldigung für …!', re: '\\b(könnten|entschuldigung|entschuldigen)\\b', f: 'iu', err: 'Peça com educação (Könnten Sie bitte …?) ou peça desculpas (Entschuldigung für den Lärm!).', bad: [['^können sie', 'Mais educado: <b>Könnten</b> Sie bitte …?']] },
+        { l: 'Dank', d: 'agradeça: Vielen Dank für Ihr Verständnis!', re: '\\bdank(e)?\\b.*\\bf(ü|ue)r\\b', f: 'iu', err: 'Agradeça: Vielen Dank für Ihr Verständnis!' },
+        { l: 'Name', d: 'o seu nome e o andar', re: '\\p{L}+.*\\b(stock|wohnung|etage|og|eg|links|rechts|erdgeschoss|nr)\\b', f: 'iu', err: 'Assine com nome e andar: Ana Souza, 2. Stock.' },
+      ],
+      modelo: 'Liebe Nachbarn, · am Samstag feiere ich ab 20 Uhr meinen Geburtstag. · Entschuldigung für den Lärm! · Vielen Dank für Ihr Verständnis! · Ana Souza, 2. Stock',
+    },
+  },
+  deep: `
+Esta lição é de **ler e escrever**. Na escada de todo prédio alemão há avisos: do regulamento e dos próprios vizinhos. Você vai ler dois deles e depois escrever o seu bilhete, com a fórmula de pedido mais educada do alemão: **Könnten Sie bitte …?**
+# Passo 1: a fórmula do pedido educado
+**Könnten Sie bitte …?** = "Os senhores poderiam, por favor…?". O outro verbo vai para o **fim**, no infinitivo.
+! Por enquanto, guarde como fórmula pronta. A forma **könnten** (Konjunktiv II) é explicada no Módulo 10.
+~ Könnten Sie bitte leiser sein? = Os senhores poderiam fazer menos barulho, por favor?
+# Passo 2: desculpas e agradecimento
+| Fórmula | Significa |
+| Entschuldigung für den Lärm! | Desculpem o barulho! |
+| Vielen Dank für Ihr Verständnis! | Muito obrigado pela compreensão! |
+| Bei Fragen: einfach klingeln. | Dúvidas? É só tocar a campainha. |
+~ Entschuldigung für den Lärm! = Desculpem o barulho!
+# Passo 3: as partes do bilhete
+| Parte | Exemplo |
+| Para quem | Liebe Nachbarn, |
+| O quê e quando | am Samstag feiere ich meinen Geburtstag. |
+| Desculpas | Entschuldigung für den Lärm! |
+| Agradecimento | Vielen Dank für Ihr Verständnis! |
+| Quem | Ana Souza, 2. Stock |
+BR Como no cartão-postal, depois da vírgula de **Liebe Nachbarn,** a frase seguinte começa com minúscula.
+~ Am Samstag feiere ich meinen Geburtstag. = No sábado eu comemoro o meu aniversário.
+# Passo 4: como ler os avisos do prédio
+Procure as horas (Ruhezeiten), o que é proibido (**nicht**, **verboten**) e onde fazer cada coisa (**im Keller**, **im Hof**).
+~ Fahrräder bitte nicht im Treppenhaus abstellen. = Por favor, não deixem bicicletas na escada do prédio.
+> No exercício, leia os avisos do prédio e escreva o seu bilhete, uma frase por linha.
+? Como se pede algo com a máxima educação? || Könnten Sie bitte …?
+? Como se diz "Desculpem o barulho!"? || Entschuldigung für den Lärm!
+? Como começa um bilhete para todos os vizinhos? || Liebe Nachbarn,
+`,
+});
+
+V('Mein Lebenslauf',
+  'E:1995 em alemão;neunzehn^s|hundert^v|fünfundneunzig^p',
+  'T:A vida da Ana;1995@-4=in Recife geboren;2016@-3=Studium in São Paulo;2020@-2=geheiratet;2022@-1=nach Berlin gezogen;heute@0=Verkäuferin in Berlin');
+V('Schule und Ausbildung',
+  'V:Onde fica o ge-?;Separáveis: no meio|angefangen|aufgehört|eingekauft;Inseparáveis e -ieren: sem ge-|bestanden|verstanden|studiert',
+  'P:A escola na Alemanha;Grundschule=6 a 10 anos;Gymnasium=10 a 18 anos;Abitur=o diploma do ensino médio;Studium ou Ausbildung=depois');
+V('Eine E-Mail über mich',
+  'E:Depois de weil, o verbo vai para o fim;…, weil^w|ich^s|in Berlin^c|arbeite.^v',
+  'P:Um e-mail pessoal;Abertura=Lieber Jonas,;Agradecer=Danke für deine E-Mail!;Novidades=Ich bin umgezogen.;Motivo=…, weil ich eine neue Stelle habe.;Despedida=Schreib bald! Viele Grüße');
+V('Die Hausordnung',
+  'V:Obrigatório, permitido, proibido;man muss|den Müll trennen|leise sein;man darf|im Hof sitzen|Fahrräder in den Keller stellen;man darf nicht|im Treppenhaus rauchen|nach 22 Uhr laut sein',
+  'M:Para onde vai o lixo;Lixeira|O que vai nela;Biomüll|restos de comida;Altpapier|papel e papelão;Gelber Sack|embalagens;Restmüll|o resto');
+V('Ein Zettel an die Nachbarn',
+  'E:O pedido mais educado;Könnten Sie^v|bitte^c|leiser^p|sein?^v2',
+  'P:O bilhete aos vizinhos;Para quem=Liebe Nachbarn,;O quê e quando=am Samstag feiere ich meinen Geburtstag.;Desculpas=Entschuldigung für den Lärm!;Agradecimento=Vielen Dank für Ihr Verständnis!;Quem=Ana Souza, 2. Stock');
+['fortaleza', 'jonas'].forEach((n) => NAMES.add(n));
+
+S_('Mein Lebenslauf', 'wohnen (gewohnt)=morar (Perfekt: habe gewohnt)');
+S_('Schule und Ausbildung', 'der Deutschkurs=o curso de alemão');
+S_('Eine E-Mail über mich', 'der Stress=o estresse|antworten (geantwortet)=responder (Perfekt: hat geantwortet)');
+S_('Die Hausordnung', 'die Tonne=a lixeira, o contêiner|helfen (er hilft)=ajudar (ele ajuda)');
+S_('Ein Zettel an die Nachbarn', 'die Party=a festa|sich entschuldigen=pedir desculpas');
 // Esquemas visuais (mesmo formato de data/visuals.js) e palavras de apoio (data/support.js) das lições novas.
 V('Wie schreibt man das?',
   'V:As letras que mais enganam;V se chama "fau"|Vera: fau · e · er · a;W se chama "vê"|Wien: vê · i · e · en;Z se chama "tsét"|Zoo: tsét · o · o',
@@ -1112,8 +1420,8 @@ const SEQ = [
   { lv: 'A1', n: 'Comer e comprar', l: [7, 'n-markt', 8, 'n-gern', 14, 'n-einkaufszettel'] },
   { lv: 'A1', n: 'Casa e cidade', l: [12, 13, 'n-wohnungsanzeige', 15, 'n-zurpost', 'n-schilder'] },
   { lv: 'A1', n: 'Saúde e fim de semana', l: [16, 'n-arzttermin', 17, 18, 'n-wochenende', 'n-postkarte'] },
-  { lv: 'A2', n: 'Biografia e passado', l: [19, '?Mein Lebenslauf', 20, '?Schule und Ausbildung', 23, '?Ler e escrever: Eine E-Mail über mich'] },
-  { lv: 'A2', n: 'Casa e vizinhança', l: [21, 27, 28, 26, '?Die Hausordnung', '?Ler e escrever: Ein Zettel an die Nachbarn'] },
+  { lv: 'A2', n: 'Biografia e passado', l: [19, 'n-lebenslauf', 20, 'n-ausbildung', 23, 'n-email'] },
+  { lv: 'A2', n: 'Casa e vizinhança', l: [21, 27, 28, 26, 'n-hausordnung', 'n-zettel-nachbarn'] },
   { lv: 'A2', n: 'Compras e serviços', l: [22, 31, 32, '?Umtauschen', '?Auf der Bank und der Post', '?Ler e escrever: Eine Online-Bestellung'] },
   { lv: 'A2', n: 'Trabalho', l: [30, '?Mein Arbeitstag', 35, 38, '?Am Telefon', '?Ler e escrever: Eine Stellenanzeige'] },
   { lv: 'A2', n: 'Saúde', l: [33, '?Ich brauche einen Termin', '?In der Apotheke', '?Gesund leben', '?Im Notfall', '?Ler e escrever: Krank melden'] },

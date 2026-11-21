@@ -51,3 +51,22 @@ Object.assign(OBJ, {
   'n-wochenende': { o: 'Consigo contar o que fiz no fim de semana, em ordem, com zuerst, dann e danach.', a: 'Você consegue contar o seu fim de semana em ordem?', ref: 'Sustained monologue: describing experience · A2 (a lição antecipa)' },
   'n-postkarte': { o: 'Consigo ler e escrever um cartão-postal simples de férias.', a: 'Você consegue escrever um cartão-postal contando onde está e o que fez?', ref: 'Correspondence · A1' },
 });
+// Módulos 7 e 8 (21/11/2026)
+Object.assign(OBJ, {
+  'n-lebenslauf': { o: 'Consigo contar as etapas da minha vida com os anos e montar um currículo simples em tabela.', a: 'Você consegue contar as etapas da sua vida com os anos?', ref: 'Sustained monologue: describing experience · A2' },
+  'n-ausbildung': { o: 'Consigo contar a minha formação, a escola, os cursos e as provas, no Perfekt.', a: 'Você consegue contar como foi a sua formação?', ref: 'Sustained monologue: describing experience · A2' },
+  'n-email': { o: 'Consigo ler um e-mail pessoal e responder contando novidades e dando motivos com weil.', a: 'Você consegue responder a um e-mail pessoal contando novidades?', ref: 'Correspondence · A2' },
+  'n-hausordnung': { o: 'Consigo entender as regras de um prédio e dizer o que é obrigatório, permitido ou proibido.', a: 'Você consegue explicar as regras do seu prédio com man muss e man darf?', ref: 'Understanding announcements and instructions · A2' },
+  'n-zettel-nachbarn': { o: 'Consigo ler avisos do prédio e escrever um bilhete educado aos vizinhos.', a: 'Você consegue escrever um bilhete educado para os vizinhos?', ref: 'Notes, messages and forms · A2' },
+});
+// Objetivos dos módulos do A2 (21/11/2026, rascunho). As lições antigas do A2 ainda não têm objetivo próprio.
+Object.assign(MOD_OBJ, {
+  6: ['Consigo contar como era antes e as etapas da minha vida, com datas.', 'Consigo falar da minha formação e dar motivos com weil.', 'Consigo ler e responder a um e-mail pessoal.'],
+  7: ['Consigo arrumar e descrever a casa e as pessoas, com adjetivos.', 'Consigo contar a minha rotina com verbos reflexivos.', 'Consigo entender as regras do prédio e escrever um bilhete aos vizinhos.'],
+  8: ['Consigo comparar produtos e falar de presentes.', 'Consigo trocar um produto e resolver coisas no banco e no correio.', 'Consigo ler a confirmação de um pedido e escrever uma reclamação curta.'],
+  9: ['Consigo falar do meu trabalho e da minha rotina na empresa.', 'Consigo pedir informações e fazer pedidos com educação.', 'Consigo telefonar, deixar recado e ler um anúncio de emprego.'],
+  10: ['Consigo marcar e remarcar consultas e seguir conselhos médicos.', 'Consigo pedir remédio na farmácia e entender a dose.', 'Consigo agir numa emergência simples e avisar que estou doente.'],
+  11: ['Consigo planejar uma viagem e falar do tempo.', 'Consigo entender avisos de atraso e resolver imprevistos.', 'Consigo ler e escrever uma avaliação de hotel.'],
+  12: ['Consigo falar de festas e datas e dizer o que sinto.', 'Consigo descrever pessoas e coisas com orações relativas.', 'Consigo dar opiniões simples e comentar um post.'],
+  13: ['Consigo ligar ideias e falar dos meus hábitos com a mídia.', 'Consigo concordar, discordar e entender notícias curtas.', 'Consigo escrever uma opinião curta num fórum e sei como é a prova do A2.'],
+});
