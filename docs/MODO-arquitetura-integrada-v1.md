@@ -260,7 +260,7 @@ O roadmap do documento-mestre começa pelas fases 2 a 5 (Home, Trilha, motor, ca
 | 2 | ~~Currículo e Certificações: áreas próprias ou destinos contextuais~~ ✅ Currículo = aba de Aprender; Certificações = destino contextual (20/11/2026) | Produto + UX |
 | 3 | ~~Unidade opcional no alemão~~ ✅ Módulo = semana, Unidade invisível; Cartas no celular dentro de Praticar + atalho na Home (20/11/2026) | Pedagogia |
 | 4 | ~~Evidência mínima para mostrar uma competência~~ ✅ 20 respostas no total, taxa das 30 últimas; acerto + volume, sem nível por competência; Interaction e Mediation fora (20/11/2026) | Pedagogia |
-| 5 | Variante do inglês e idioma de interface | Produto |
+| 5 | ~~Variante do inglês~~ ✅ americano (21/11/2026); estrutura proposta em `ingles-estrutura.md`. Idioma de interface: português | Produto |
 | 6 | ~~Ampliar o A1–A2 alemão~~ ✅ A1 6 módulos, A2 8 (84 lições); sequência redesenhada reaproveitando as atuais; lição "Ler e escrever" em todo módulo; inserção direta no protótipo. Proposta de sequência em `A1-A2-redesenho.md` (20/11/2026). **Alunos que já estudavam:** as lições novas inseridas antes do ponto onde pararam são **obrigatórias** (a trilha volta para a primeira lição nova; o que já foi feito continua feito e aberto) (20/11/2026) | Produto + pedagogia |
 | 7 | Tokens finais (com os tons de texto acessíveis do protótipo) e cores de gênero | Design |
 | 8 | Infraestrutura: manter o app estático + Supabase ou adotar um back-end com API de conteúdo | Arquitetura |

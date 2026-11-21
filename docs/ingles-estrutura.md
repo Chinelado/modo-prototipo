@@ -3,6 +3,8 @@
 **Status:** rascunho para aprovação da direção · 21/11/2026
 **Base:** a arquitetura comum do MODO (`MODO-arquitetura-integrada-v1.md`: Idioma → Nível CEFR → Módulo → Lição; currículo próprio por idioma) e o formato do alemão redesenhado (`A1-A2-redesenho.md`: módulos de 6 lições, a 6ª sempre de Ler e escrever).
 
+**Decidido (21/11/2026):** inglês **americano** (voz, ortografia e reconhecimento de fala); o britânico aparece como variante a partir do A2.
+
 **Como ler:** 🔴 = decisão sua antes de escrever conteúdo · 🟡 = proposta desta análise · cada lição tem título em inglês, tema e o ponto de gramática. Nenhuma lição está escrita ainda: este documento é o mapa.
 
 ---
@@ -11,7 +13,7 @@
 
 | # | Decisão | Proposta | Por quê |
 |---|---|---|---|
-| 1 | 🔴 **Variante:** americano ou britânico | **Americano**, com o britânico apresentado como variante a partir do A2 (vocabulário: apartment/flat, elevator/lift) e uma lição própria no C2 | É o inglês que o brasileiro mais ouve (séries, música, trabalho remoto), tem mais vozes nativas de qualidade e define ortografia (color, center) e reconhecimento de fala de uma vez só |
+| 1 | ✅ **Variante:** americano (decidido em 21/11/2026) | **Americano**, com o britânico apresentado como variante a partir do A2 (vocabulário: apartment/flat, elevator/lift) e uma lição própria no C2 | É o inglês que o brasileiro mais ouve (séries, música, trabalho remoto), tem mais vozes nativas de qualidade e define ortografia (color, center) e reconhecimento de fala de uma vez só |
 | 2 | 🔴 **Tamanho** | **42 módulos e 252 lições**, como o alemão, mas com outra distribuição: A1 6 · A2 8 · **B1 8** · **B2 10** · C1 6 · C2 4 | O brasileiro costuma travar no "intermediário eterno" (B1–B2). Os módulos que no alemão ficam no B2 (12) passam em parte para o B1 |
 | 3 | 🟡 **Provas de referência** | **Cambridge** (A2 Key, B1 Preliminary, B2 First, C1 Advanced, C2 Proficiency), com menção a TOEFL e IELTS no C1 | São as provas CEFR mais conhecidas e se alinham a cada nível. A estrutura de cada prova será conferida na fonte oficial antes de escrever, como foi feito com o Goethe |
 | 4 | 🟡 **Ponto de partida** | Nivelamento logo na entrada, além do "Comece aqui" | Muitos brasileiros não são iniciantes de verdade. Quem já sabe o básico não deve refazer o A1 |
@@ -261,7 +263,7 @@ O motor, as telas e o formato de lição são os mesmos. O que é específico do
 
 ## 7. Próximos passos propostos
 
-1. Você decide as questões 🔴 da seção 1, sobretudo a **variante**.
+1. ~~Variante~~ ✅ americano. Faltam as outras questões 🔴 da seção 1 (tamanho e revisão).
 2. **Piloto:** escrever o Módulo 1 (6 lições + avaliação) no formato completo, com áudio, e testar com 5 a 7 adultos, como prevê a arquitetura.
 3. Revisão por professor(a) de inglês.
 4. Escrever o restante do A1, módulo a módulo, com o mesmo teste automático usado no alemão (formato, palavras desconhecidas, verificação em cada passo, escrita guiada).
