@@ -82,7 +82,8 @@ function say(t, rate = 0.9, slot) {
   const k = S.slow ? 0.75 : 1; // velocidade escolhida pelo aluno na lição (Normal ou Devagar)
   if (!playClip(t, slot, (rate < 0.85 ? 0.9 : 1) * k, null, () => ttsSay(t, rate * k))) ttsSay(t, rate * k);
 }
-const spk = (t, slot) => ((hasTTS || AUD) && S.audio ? `<button class="spk" data-say="${esc(t)}"${slot ? ` data-v="${slot}"` : ''} aria-label="Ouvir">🔊</button>` : '');
+// texto sem nenhuma letra (só algarismos) não ganha som: a voz do navegador leria o número em outra língua
+const spk = (t, slot) => ((hasTTS || AUD) && S.audio && /\p{L}/u.test(String(t)) ? `<button class="spk" data-say="${esc(t)}"${slot ? ` data-v="${slot}"` : ''} aria-label="Ouvir">🔊</button>` : '');
 document.addEventListener('click', (e) => { const b = e.target.closest('[data-say]'); if (b) say(b.dataset.say, b.dataset.say.split(' ').length < 3 ? 0.8 : 0.9, b.dataset.v); });
 // Toda vez que algo novo aparece na tela, as palavras alemãs ganham áudio.
 let enhRaf = 0;
@@ -757,6 +758,8 @@ function typed(el, html, answer, cb) {
   inp.onkeydown = (e) => { if (e.key === 'Enter') { e.stopPropagation(); goChk(); } };
 }
 const fill = (c) => c.q.replace('___', c.a);
+// dica da lacuna de digitar: a palavra e a forma pedidas (data/lacunas.js); sem dica escrita, o tema da lição
+const czHint = (les, c) => { const h = typeof CZH !== 'undefined' && CZH[les.sid] && CZH[les.sid][les.cz.indexOf(c)]; return h ? 'Dica: ' + esc(h) : esc(les.gt); };
 
 /* ---------- respostas alternativas ----------
    Muitas lacunas têm mais de uma resposta certa ("Ich ___ Anna." aceita bin e heiße). czOk aceita a resposta da lição,
@@ -916,7 +919,7 @@ const GEN = {
       typed(el, `<p class="q">Como se diz em alemão?<b>${v.em} ${esc(v.pt)}</b></p>${gender(v.de) ? '<p class="hint">Substantivo: escreva com o artigo.</p>' : ''}`, v.de, (ok, g) => done(ok, [v.k], v.de + ' = ' + v.pt + (ok && gender(v.de) && g !== v.de && g.toLowerCase() === v.de.toLowerCase() ? ' · Lembre: substantivos levam inicial maiúscula.' : ''), v.de, whyVocab(g, v, les)));
     } else {
       const c = pick(les.cz);
-      typed(el, `<p class="q">Complete a lacuna:<b>${esc(c.q)}</b></p><p class="hint">${esc(les.gt)}</p>`, (g) => czOk(c, g), (ok, g) => done(ok, [], fill(c) + (ok ? czAlt(c, g) : ''), fill(c), whyCloze(les, c, g)));
+      typed(el, `<p class="q">Complete a lacuna:<b>${esc(c.q)}</b></p><p class="hint">${czHint(les, c)}</p>`, (g) => czOk(c, g), (ok, g) => done(ok, [], fill(c) + (ok ? czAlt(c, g) : ''), fill(c), whyCloze(les, c, g)));
     }
   },
   // Lógico-matemática: aplicar a regra ou reconstruir a estrutura da frase.

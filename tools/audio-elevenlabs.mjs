@@ -47,7 +47,7 @@ function loadApp() {
     + '\n;this.__app = { LESSONS, SUP, TEXTS, GUIDE, GLOSS: typeof GLOSS === "undefined" ? [] : GLOSS, PHASES, VIS: typeof VIS === "undefined" ? {} : VIS, IMG_CAP: typeof IMG_CAP === "undefined" ? {} : IMG_CAP, KATZE: typeof KATZE === "undefined" ? [] : KATZE, ZEITEN: typeof ZEITEN === "undefined" ? [] : ZEITEN, DEKL: typeof DEKL === "undefined" ? {} : DEKL, BRIEF: typeof BRIEF === "undefined" ? [] : BRIEF, GEWISS: typeof GEWISS === "undefined" ? [] : GEWISS, uhrText: typeof uhrText === "undefined" ? null : uhrText, isGerman, falavel, visHTML, vozDe, splitFala,'
     + ' POCKETS: typeof POCKETS === "undefined" ? [] : POCKETS, pocketTexts: typeof pocketTexts === "undefined" ? () => [] : pocketTexts,'
     // trilha MODO (data/curriculo.js): o nível vem do módulo da lição, porque os módulos têm tamanhos diferentes
-    + ' lvOf: typeof LMOD === "undefined" ? null : (i) => (MODS[LMOD[i]] || {}).lv };';
+    + ' lvOf: typeof LMOD === "undefined" ? null : (i) => (MODS[LMOD[i]] || {}).lv, VG: typeof VG === "undefined" ? null : VG };';
   vm.runInContext(code, ctx, { filename: 'deutsch-trilha' });
   return ctx.__app;
 }
@@ -58,10 +58,12 @@ const decode = (s) => s.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&qu
 function inventory(A) {
   const items = new Map();
   let grupo = 'A1'; // nível (A1…C2) ou "Pocket": define em que pacote o áudio entra no download offline
+  let sid = ''; // lição atual: cada áudio guarda as lições em que aparece (comando refazer-licao)
   const add = (text, _slot, cat = '') => {
     const t = sayText(text); if (t.length < 2 || t.startsWith('-') || !/\p{L}/u.test(t)) return;
     const slot = A.vozDe(t);
-    const key = audioKey(t, slot); if (!items.has(key)) items.set(key, { key, text: t, slot, cat, grupo, hash: cyrb53(key) });
+    const key = audioKey(t, slot); if (!items.has(key)) items.set(key, { key, text: t, slot, cat, grupo, hash: cyrb53(key), sids: new Set() });
+    if (sid) items.get(key).sids.add(sid);
   };
   const deepLines = (md, cat) => {
     md.split('\n').map((x) => x.trim()).forEach((x) => {
@@ -88,7 +90,9 @@ function inventory(A) {
   A.GUIDE.forEach((g) => deepLines(g.body, 'guia'));
   (A.GLOSS || []).forEach(([, , e]) => { if (A.isGerman(e)) add(e, 'a', 'guia'); }); // exemplos do Dicionário de termos
   A.LESSONS.forEach((l) => {
-    grupo = levelOf(l.i);
+    grupo = levelOf(l.i); sid = String(l.sid != null ? l.sid : l.i);
+    // visão geral (data/visao.js): as palavras em negrito que são alemão tocam ao toque
+    if (A.VG && A.VG[sid]) ['o', 'q', 'p'].forEach((k) => (String(A.VG[sid][k] || '').match(/\*\*(.+?)\*\*/g) || []).forEach((b) => { b = b.slice(2, -2); if (A.isGerman(b)) add(b, 'a', 'visão geral'); }));
     l.v.forEach((v) => add(v.de, 'a', 'vocabulário'));
     [...l.ge, ...l.ex].forEach((e) => add(e.de, 'a', 'exemplos'));
     l.dlg.forEach((e) => add(e.de, '', 'diálogos'));
@@ -101,6 +105,7 @@ function inventory(A) {
     // (com vozes, "Nome: fala" grava só a fala, como o app mostra)
     if (l.le && l.le.texto) { const T = l.le.texto; T.paras.forEach((p) => { const { who, txt } = A.splitFala(p); add(who && T.vozes && T.vozes[who] ? txt : p, '', 'leitura'); }); }
   });
+  sid = '';
   A.TEXTS.forEach((t) => {
     grupo = t.lv;
     t.paras.forEach((p) => add(A.splitFala(p).txt, '', 'textos longos'));
@@ -166,6 +171,7 @@ async function credits() {
   } catch (e) { return null; }
 }
 let realCost = 0; // créditos realmente cobrados (cabeçalho character-cost da resposta)
+let noLangCode = false; // o modelo recusou language_code uma vez: não manda mais
 // o que a voz lê: a barra de alternativas ("bin / heiße") vira pausa, para não ser pronunciada
 let spoken = (t) => t; // trocado por falavel() de art.js quando o app é carregado (mesma regra do navegador)
 async function tts(cfg, item) {
@@ -174,7 +180,9 @@ async function tts(cfg, item) {
     text: spoken(item.text), model_id: cfg.modelo,
     voice_settings: { stability: cfg.estabilidade, similarity_boost: cfg.similaridade, speed: cfg.velocidade },
   };
-  if (/flash|turbo/i.test(cfg.modelo)) body.language_code = 'de';
+  // pede alemão explícito: palavras soltas que existem em inglês (null, elf) saíam lidas em inglês.
+  // Se o modelo não aceitar o parâmetro, o gerador tenta de novo sem ele e lembra para os próximos.
+  if (/flash|turbo/i.test(cfg.modelo) || !noLangCode) body.language_code = 'de';
   for (let attempt = 1; ; attempt++) {
     try {
       const res = await api(`/text-to-speech/${voice}?output_format=${cfg.formato}`, {
@@ -186,6 +194,9 @@ async function tts(cfg, item) {
       if (/quota_exceeded|insufficient/i.test(e.detail || '')) throw Object.assign(new Error('Créditos da ElevenLabs esgotados.'), { fatal: true });
       if (e.status === 402) throw Object.assign(new Error('Esta voz exige plano pago na ElevenLabs (o plano grátis não usa vozes da Voice Library pela API).'), { fatal: true });
       if (e.status === 401 || e.status === 403) throw Object.assign(new Error('Chave recusada pela ElevenLabs (' + e.message + ').'), { fatal: true });
+      if ((e.status === 422 || e.status === 400) && body.language_code && /language/i.test(e.detail || '') && !/flash|turbo/i.test(cfg.modelo)) {
+        noLangCode = true; delete body.language_code; console.log('  (o modelo não aceita language_code; seguindo sem ele)'); continue;
+      }
       if (e.status === 422 || e.status === 400) throw e; // problema neste texto: pula
       if (attempt >= 5) throw e;
       const wait = (e.status === 429 ? 4000 : 1500) * attempt;
@@ -360,6 +371,15 @@ try {
   }
   else if (cmd === 'barras') { const hit = items.filter((x) => x.text.includes('/')); hit.forEach((x) => { const f = fileOf(x.hash); if (fs.existsSync(f)) fs.unlinkSync(f); }); console.log(hit.length + ' áudios com barra serão regravados'); await generate(hit, cfg, 'tudo'); }
   else if (cmd === 'listar') { const re = new RegExp(rest.filter((x) => !x.startsWith('--')).join(' ') || '/'); const hit = items.filter((x) => re.test(x.text)); hit.forEach((x) => console.log('[' + x.slot + '] ' + x.text)); console.log(hit.length + ' textos'); }
+  else if (cmd === 'refazer-licao') {
+    // apaga e grava de novo todos os áudios das lições pedidas (ids separados por vírgula: n-alter,6)
+    const want = new Set((rest.find((x) => !x.startsWith('--')) || '').split(',').filter(Boolean));
+    const hit = items.filter((x) => [...x.sids].some((s) => want.has(s)));
+    if (!hit.length) { console.error('Nenhum áudio encontrado para: ' + [...want].join(', ')); process.exit(1); }
+    console.log(`${hit.length} áudios das lições ${[...want].join(', ')} (${fmt(hit.reduce((s, x) => s + x.text.length, 0))} caracteres)`);
+    if (rest.includes('--simular')) hit.forEach((x) => console.log('  [' + x.slot + '] ' + x.text));
+    else { hit.forEach((x) => { const f = fileOf(x.hash); if (fs.existsSync(f)) fs.unlinkSync(f); }); await generate(hit, cfg, 'tudo'); }
+  }
   else if (cmd === 'indice') console.log(`Índice com ${writeIndex(items)} áudios.`);
   else { console.error(`Comando desconhecido: ${cmd}. Use simular, vozes, amostra, gerar, refazer, conferir, limpar ou indice.`); process.exit(1); }
 } catch (e) {

@@ -127,7 +127,7 @@ Unidade + **zehn**: drei + zehn = **dreizehn**, vier + zehn = **vierzehn**.
 | 18 | achtzehn |
 | 19 | neunzehn |
 ! Duas exceções: **sechzehn** (sem o s de sechs) e **siebzehn** (sem o en de sieben).
-~ 20 = zwanzig · 30 = dreißig · 40 = vierzig · 50 = fünfzig
+~ zwanzig, dreißig, vierzig, fünfzig = 20, 30, 40, 50
 Os números como 34 ou 57 chegam na lição de horas. Por enquanto, as dezenas redondas bastam.
 # Passo 3: a idade se diz com sein
 BR Em português a gente **tem** trinta anos. Em alemão a gente **é** trinta anos: Ich **bin** dreißig. Nunca "Ich habe dreißig".
@@ -136,7 +136,7 @@ BR Em português a gente **tem** trinta anos. Em alemão a gente **é** trinta a
 ~ Ich bin zwanzig (Jahre alt). = Eu tenho vinte anos.
 # Passo 4: o número de telefone
 Os alemães costumam ditar o telefone dígito por dígito ou em pares.
-~ 0151 1219 = null eins fünf eins, zwölf, neunzehn
+~ null eins fünf eins, zwölf, neunzehn = 0151 1219
 ~ Meine Nummer ist null eins fünf eins. = Meu número é zero um cinco um.
 > Ao telefone, **zwei** e **drei** se confundem. Por isso muita gente diz **zwo** no lugar de zwei.
 ? Como se diz 17? || siebzehn

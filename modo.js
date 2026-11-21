@@ -520,6 +520,17 @@ intro = function (day) {
     p.nodes.forEach((n) => { const w = wc(n), cur2 = chunks[chunks.length - 1]; if (acc + w > 150 && !isHead(n) && cur2.some((x) => !isHead(x))) { chunks.push([]); acc = 0; } chunks[chunks.length - 1].push(n); acc += w; });
     if (chunks.length > 1) parts.splice(k, 1, ...chunks.map((nodes, i) => ({ t: i ? p.t + ' (continuação)' : p.t, nodes, chk: i === chunks.length - 1 ? p.chk : null })));
   }
+  // 1ª parte: visão geral da regra (o que é, quando usar, exemplos, por que aprender), antes de qualquer detalhe.
+  // Texto em data/visao.js; sem ele, a regra resumida da lição (l.gx). Os exemplos são as frases de gramática (l.ge).
+  {
+    const vg = typeof VG !== 'undefined' ? VG[l.sid] : null;
+    const vin = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, (m, w) => (isGerman(w) ? `<b class="sayw" data-say="${w}" title="Toque para ouvir">${w}</b>` : `<b>${w}</b>`));
+    const sec = (k, v) => (v ? `<p class="mo-vgk">${k}</p><p>${vin(v)}</p>` : '');
+    const exs = l.ge.length ? `<p class="mo-vgk">Exemplos</p><div class="exs mo-vgex">${l.ge.map((e) => `<p>${spk(e.de)}<span class="de" lang="de">${esc(e.de)}</span><br><small>${esc(e.pt)}</small></p>`).join('')}</div>` : '';
+    parts.unshift({ t: '🧭 Visão geral', nodes: [elOf(`<div class="mo-vg"><div class="mo-card-h">${ic('compass', 22)}<h3>Visão geral</h3><span class="mo-vgt">${esc(l.gt)}</span></div>
+      ${vg ? sec('O que é', vg.o) + sec('Quando usar', vg.q) + exs + sec('Por que aprender', vg.p) : sec('A regra em poucas palavras', l.gx) + exs}
+      <p class="mut mo-vgnext">Nas próximas partes, a regra passo a passo, com esquemas e exercícios rápidos.</p></div>`)] });
+  }
   if (resumo || bd) parts.push({ t: '🧩 Resumo da lição', nodes: [resumo, bd].filter(Boolean), solta: true });
   if (!parts.length) parts.push({ t: 'Aula', nodes: [] });
   // estrutura nova

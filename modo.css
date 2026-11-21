@@ -344,3 +344,10 @@ html[data-fs="g"] body { font-size: 18px; }
 .mo-hidept .bubble small.on { filter: none; user-select: auto; }
 .mo-hidept .bubble small:focus-visible { outline: 2px solid var(--p600); outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { .mo-hidept .bubble small { transition: none; } }
+/* Visão geral: 1ª parte do Entender */
+.mo-vg .mo-card-h { flex-wrap: wrap; }
+.mo-vg .mo-vgt { flex-basis: 100%; font-size: .82rem; color: var(--mut, #64748b); margin-top: -4px; }
+.mo-vg .mo-vgk { margin: 14px 0 2px; font-size: .78rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--p600); }
+.mo-vg .mo-vgk + p { margin: 0; line-height: 1.55; }
+.mo-vg .mo-vgex p { margin: 6px 0; }
+.mo-vg .mo-vgnext { margin-top: 14px; font-size: .85rem; }

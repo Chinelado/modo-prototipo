@@ -88,7 +88,7 @@ L("Kannst du mir helfen?", "Pedir ajuda", "Modalverben: können e möchten",
 // Semana 3
 L("Meine Wohnung", "Casa e moradia", "es gibt + Akkusativ",
   "es gibt = há / tem, sempre com acusativo: Es gibt einen Balkon. Adjetivo depois de sein não muda: Die Wohnung ist klein.",
-  "Es gibt einen Schrank.=Tem um armário.|Die Küche ist groß.=A cozinha é grande.|Es gibt zwei Zimmer.=Tem dois quartos.",
+  "Es gibt einen Schrank.=Tem um armário.|Die Küche ist groß.=A cozinha é grande.|Es gibt zwei Zimmer.=Tem dois cômodos.",
   "die Wohnung=o apartamento=🏢|das Haus=a casa=🏠|das Zimmer=o quarto / cômodo|die Küche=a cozinha=🍳|das Bad=o banheiro=🛁|das Bett=a cama=🛏️|der Schrank=o armário=🗄️|die Miete=o aluguel=💶|groß=grande|klein=pequeno",
   "Wie ist deine Wohnung?=Como é o seu apartamento?|Sie ist klein, aber schön.=É pequeno, mas bonito.|Gibt es einen Balkon?=Tem varanda?|Nein, aber es gibt zwei Zimmer.=Não, mas tem dois quartos.",
   "Es gibt ___ Schrank.=einen=ein=eine|Die Wohnung hat zwei ___.=Zimmer=Zimmers=Zimmern|Das Haus ist ___.=groß=große=großen");
