@@ -3,6 +3,8 @@
 **Status:** para aprovação da direção · 20/11/2026
 **Decisões (20/11/2026):** A1 com 6 módulos e A2 com 8 (de 42 para 84 lições) · sequência redesenhada do zero, reaproveitando as lições atuais onde couberem · cada módulo tem uma lição de **leitura + escrita guiada** · inserção direta no protótipo (o site real não é tocado).
 
+**Andamento (21/11/2026):** Módulos 1 e 2 escritos no protótipo (6 lições novas, marcadas "escrita ✅"); faltam 36 lições novas, do Módulo 3 em diante.
+
 **Como ler:** **R** = lição atual reaproveitada (com a posição de hoje); **NOVA** = a escrever. A 6ª lição de cada módulo é sempre **Ler e escrever**: um texto curto com perguntas e uma tarefa de escrita guiada (formulário, mensagem, cartão, e-mail).
 
 | | Hoje | Proposta |
@@ -22,20 +24,20 @@ A única lição que muda de nível é **Im Urlaub** (Perfekt com sein), que des
 |---|---|---|---|---|
 | 1 | Hallo! Ich bin … | cumprimentos e apresentação | sein e heißen | R · A1 L1 |
 | 2 | Woher kommst du? | origem e moradia | kommen aus / wohnen in | R · A1 L2 |
-| 3 | Wie schreibt man das? | soletrar nome, e-mail e cidade | alfabeto e sons das letras | NOVA |
-| 4 | Wie alt bist du? | idade, telefone, números até 20 | números 0–20 · sein + idade | NOVA |
+| 3 | Wie schreibt man das? | soletrar nome, e-mail e cidade | alfabeto e sons das letras | NOVA · escrita ✅ |
+| 4 | Wie alt bist du? | idade, telefone, números até 20 | números 0–20 · sein + idade | NOVA · escrita ✅ |
 | 5 | Fragen stellen | conhecer alguém | W-Fragen e perguntas sim/não | R · A1 L6 |
-| 6 | **Ler e escrever:** Ein Formular | ler e preencher um formulário com dados pessoais | Sie e du · dados pessoais | NOVA |
+| 6 | **Ler e escrever:** Ein Formular | ler e preencher um formulário com dados pessoais | Sie e du · dados pessoais | NOVA · escrita ✅ |
 
 ### Módulo 2 · Pessoas e coisas
 | # | Lição | Tema | Gramática | Origem |
 |---|---|---|---|---|
 | 7 | Was ist das? | objetos | der / die / das · ein / eine | R · A1 L3 |
 | 8 | Meine Familie | família | mein / dein | R · A1 L4 |
-| 9 | Zwei Bücher, drei Stühle | quantidades e objetos | plural dos substantivos | NOVA |
-| 10 | Was sind Sie von Beruf? | profissões | sein + profissão sem artigo · feminino com -in | NOVA |
+| 9 | Zwei Bücher, drei Stühle | quantidades e objetos | plural dos substantivos | NOVA · escrita ✅ |
+| 10 | Was sind Sie von Beruf? | profissões | sein + profissão sem artigo · feminino com -in | NOVA · escrita ✅ |
 | 11 | Was machst du gern? | lazer e gostos | presente dos verbos regulares · gern | R · A1 L5 |
-| 12 | **Ler e escrever:** Eine kurze Nachricht | ler um perfil e escrever uma mensagem de apresentação | und, aber, oder | NOVA |
+| 12 | **Ler e escrever:** Eine kurze Nachricht | ler um perfil e escrever uma mensagem de apresentação | und, aber, oder | NOVA · escrita ✅ |
 
 ### Módulo 3 · Horários e rotina
 | # | Lição | Tema | Gramática | Origem |

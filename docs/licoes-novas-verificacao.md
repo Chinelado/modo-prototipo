@@ -46,3 +46,39 @@
 2. **Imagens** didáticas, se fizerem sentido (critério: só imagem que ensina, sem texto).
 3. **Partes longas no celular:** o maior bloco das novas (269 palavras) é a tabela do alfabeto, que não dá para cortar no meio. As antigas têm o mesmo limite (até ~208). Se incomodar, a tabela pode virar duas.
 4. **Revisão pedagógica** dos objetivos e do conteúdo (todos estão como rascunho).
+
+---
+
+## Módulo 2 · Pessoas e coisas (escrito em 21/11/2026)
+Medido do mesmo jeito, comparado a 3 lições antigas do mesmo módulo (Was ist das?, Meine Familie, Was machst du gern?).
+
+| Item do formato | Zwei Bücher, drei Stühle | Was sind Sie von Beruf? | Eine kurze Nachricht | Lições antigas |
+|---|---|---|---|---|
+| Tema, gramática, regra resumida | ✅ | ✅ | ✅ | ✅ |
+| Pontos da regra (4), exemplos (3) e do dia a dia (4) | ✅ | ✅ | ✅ | ✅ |
+| Vocabulário: 10 principais + 10 ampliadas | ✅ | ✅ | ✅ | ✅ |
+| Conversa de 4 falas (com microfone) | ✅ | ✅ | ✅ | ✅ |
+| 3 lacunas com explicação do erro | ✅ | ✅ | ✅ | ✅ |
+| Frase desmontada | ✅ | ✅ | ✅ | ✅ |
+| Aula passo a passo com teste rápido | ✅ 4 passos | ✅ 4 passos | ✅ 4 passos | ✅ 3–5 passos |
+| Verificação em cada passo | ✅ 4/4 | ✅ 4/4 | ✅ 4/4 | 2/4 a 4/5 |
+| Tarefa de casa | ✅ | ✅ | ✅ | ✅ |
+| Objetivo "consigo…" + autoavaliação (rascunho) | ✅ | ✅ | ✅ | ✅ |
+| Regra da frase livre | ✅ plural | ✅ beruf | ✅ und_aber | 2 de 3 (Was ist das? não tem) |
+| Esquema visual | ✅ 2 | ✅ 2 | ✅ 2 | ✅ 1 |
+| Palavras de apoio (🆕) | ✅ 2 | ✅ 2 | ✅ 1 | ✅ 1–4 |
+| Ler e escrever | não se aplica | não se aplica | ✅ 4 perguntas, escrita de 6 linhas | não se aplica |
+| Imagens da aula | ❌ | ❌ | ❌ | ✅ |
+| Áudio gravado (ElevenLabs) | ❌ voz do navegador | ❌ | ❌ | ✅ |
+| Maior parte da aula no celular | 222 palavras | 193 | 255 | 180–195 |
+
+**As 3 lições**
+- **Zwei Bücher, drei Stühle** (plural): o artigo do plural é sempre die; as cinco terminações e as pistas para adivinhar; número + plural sem artigo; Wie viele …? O vocabulário mostra o plural de cada palavra (ex.: der Hund = o cachorro · plural: die Hunde).
+- **Was sind Sie von Beruf?** (profissões): sein + profissão sem artigo; feminino com -in (Lehrerin, Köchin, Ärztin); arbeiten als; studieren × lernen. As profissões aparecem no par masculino / feminino.
+- **Eine kurze Nachricht** (Ler e escrever): perfil do Lukas num aplicativo de troca de idiomas, com 4 perguntas; depois a resposta da aluna em 6 linhas, cada uma conferida: nome e idade com und (e "habe 30" recebe a dica de sein), origem e moradia, profissão sem artigo (e "eine Lehrerin" recebe a dica), gostos com vírgula antes de aber, pergunta com oder e a despedida Viele Grüße.
+
+**Mudanças no motor**
+- A escrita guiada aceita uma mensagem própria de acerto (`ok`): "Mensagem escrita corretamente." no lugar de "Ficha preenchida".
+- **Migração da sequência, versão 2:** inserir lições muda o número dos dias. O app agora guarda a ordem das lições (`S.seqDays`) e, quando ela muda, remapeia pelo id da lição: lições feitas, etapa salva de cada lição, tarefas de casa e diário. A avaliação do módulo 2 deixa de contar até as lições novas serem feitas (são obrigatórias). Testado com um progresso salvo na ordem anterior; uma segunda carga não muda nada.
+
+**O que falta no Módulo 2** (igual ao Módulo 1): imagens, áudio gravado e revisão pedagógica. O resumo da regra de "Eine kurze Nachricht" (255 palavras, com a frase desmontada de 7 peças) passa do tamanho das antigas; se incomodar, dá para encurtar a frase desmontada.

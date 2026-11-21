@@ -404,7 +404,7 @@ GEN.lew = function (les, el, done) {
     const bad = errs.filter(Boolean).length;
     if (bad && tries++ < 2) { $('#lwRes', el).innerHTML = `<p class="warn">Quase! Ajuste ${bad === 1 ? 'o campo marcado' : `os ${bad} campos marcados`} e confira de novo.</p>`; return; }
     ins.forEach((i) => (i.disabled = true)); $('#lwChk', el).disabled = true; $('#lwRes', el).innerHTML = '';
-    done(!bad, [], bad ? 'Exemplo: ' + E.modelo : 'Ficha preenchida corretamente.', '',
+    done(!bad, [], bad ? 'Exemplo: ' + E.modelo : (E.ok || 'Ficha preenchida corretamente.'), '',
       `<p>O que faltou:</p><ul>${E.campos.map((c, j) => (errs[j] ? `<li><b>${esc(c.l)}</b>: ${errs[j]}</li>` : '')).join('')}</ul><p>Exemplo: ${esc(E.modelo)}</p>`);
   };
 };
@@ -527,7 +527,7 @@ intro = function (day) {
     <div class="mo-lp" data-lp="1"><div class="mo-partnav"></div></div>
     <div class="mo-lp" data-lp="2"><p class="mut mo-lhint">Toque em 🔊, ouça e repita cada palavra em voz alta. Elas entram nas suas cartas de revisão quando você praticar.</p></div>
     <div class="mo-lp" data-lp="3"><div class="card mo-cola"><div class="mo-card-h">${ic('bulb', 22)}<h3>Antes de praticar, relembre</h3></div><p>${esc(l.gx)}</p>
-      <p class="mut">${l.le ? 'Primeiro as perguntas do texto e a ficha, depois exercícios do vocabulário.' : '14 exercícios em formatos variados.'} Cerca de 15 minutos. Os erros voltam no fim para uma nova chance.</p></div></div>
+      <p class="mut">${l.le ? 'Primeiro as perguntas do texto e a escrita, depois exercícios do vocabulário.' : '14 exercícios em formatos variados.'} Cerca de 15 minutos. Os erros voltam no fim para uma nova chance.</p></div></div>
     <div class="mo-lp" data-lp="4"></div>
     <div class="mo-lnav"><button class="ghost" id="lsPrev">${ic('chevron', 16, 'flip')} Voltar</button><button class="pri" id="lsNext"></button></div></div>`);
   const P = (k) => box.querySelector(`[data-lp="${k}"]`);

@@ -1,6 +1,6 @@
 // Objetivos "consigo…" (decisão 10, 20/11/2026) — RASCUNHO, ainda sem revisão pedagógica.
 // OBJ: por lição, pelo id estável (sid): o = objetivo, a = pergunta de autoavaliação, ref = escala do Quadro Europeu e nível.
-// Vêm do piloto do A1 (docs/objetivos-A1-piloto.md) mais as lições novas do Módulo 1 e "Im Urlaub", que desceu para o A1.
+// Vêm do piloto do A1 (docs/objetivos-A1-piloto.md) mais as lições novas dos Módulos 1 e 2 e "Im Urlaub", que desceu para o A1.
 // MOD_OBJ: por módulo (índice na trilha nova). Só o A1 tem objetivos por enquanto; o A2 em diante mostra "em redação".
 const OBJ = {
   0: { o: 'Consigo cumprimentar, me despedir, dizer meu nome e perguntar o nome de alguém.', a: 'Você consegue cumprimentar alguém, dizer seu nome e perguntar o nome da pessoa?', ref: 'Conversation · A1' },
@@ -11,7 +11,10 @@ const OBJ = {
   'n-formular': { o: 'Consigo ler uma ficha de inscrição e preencher a minha com os meus dados.', a: 'Você consegue preencher um formulário simples com os seus dados?', ref: 'Notes, messages and forms · A1; Reading for orientation · A1' },
   2: { o: 'Consigo perguntar o que é um objeto e nomear objetos do dia a dia com o artigo certo.', a: 'Você consegue perguntar o que é um objeto e dizer o nome dele com o artigo?', ref: 'Vocabulary range · A1' },
   3: { o: 'Consigo apresentar as pessoas da minha família e dizer de quem é alguma coisa.', a: 'Você consegue apresentar as pessoas da sua família?', ref: 'Sustained monologue: describing experience · A1' },
+  'n-plural': { o: 'Consigo dizer quantos objetos ou animais tenho, no plural, e perguntar quantos alguém tem.', a: 'Você consegue dizer quantos objetos ou animais tem e perguntar isso a alguém?', ref: 'Vocabulary range · A1; Information exchange · A1' },
+  'n-beruf': { o: 'Consigo dizer a minha profissão e perguntar a de alguém, na forma masculina ou feminina.', a: 'Você consegue dizer a sua profissão e perguntar a profissão de alguém?', ref: 'Information exchange · A1' },
   4: { o: 'Consigo dizer o que gosto de fazer no tempo livre e perguntar do que a outra pessoa gosta.', a: 'Você consegue dizer o que gosta de fazer e perguntar os gostos de alguém?', ref: 'Conversation · A1' },
+  'n-nachricht': { o: 'Consigo ler um perfil curto e escrever uma mensagem simples de apresentação, ligando as frases com und, aber e oder.', a: 'Você consegue escrever uma mensagem curta se apresentando?', ref: 'Correspondence · A1; Reading correspondence · A1' },
   6: { o: 'Consigo perguntar e dizer as horas, combinar um horário e usar os números até 100.', a: 'Você consegue perguntar as horas e combinar um horário?', ref: 'Information exchange · A1' },
   9: { o: 'Consigo contar a minha rotina: a que horas acordo e o que faço em cada dia da semana.', a: 'Você consegue contar como é o seu dia e a sua semana?', ref: 'Sustained monologue: describing experience · A1 (fronteira com A2)' },
   10: { o: 'Consigo dizer como vou para algum lugar e perguntar como alguém se desloca.', a: 'Você consegue dizer como vai para os lugares e perguntar isso a alguém?', ref: 'Information exchange · A1' },
