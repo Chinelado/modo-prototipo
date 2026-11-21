@@ -129,7 +129,7 @@ A única lição que muda de nível é **Im Urlaub** (Perfekt com sein), que des
 | 61 | Gute Besserung! | no consultório | sollen e conselhos | R · A2 L16 |
 | 62 | Ich brauche einen Termin | marcar e remarcar consultas | dias e horários · verschieben, absagen | NOVA |
 | 63 | In der Apotheke | pedir remédio e entender a dose | zweimal täglich · vor/nach dem Essen | NOVA |
-| 64 | Gesund leben | hábitos e conselhos | Imperativ (revisão) · Komparativ | NOVA |
+| 64 | Gesund bleiben | hábitos e conselhos | Imperativ (revisão) · Komparativ | NOVA |
 | 65 | Im Notfall | emergência e acidente simples | Perfekt · Hilfe! · rufen Sie … | NOVA |
 | 66 | **Ler e escrever:** Krank melden | ler uma bula simples e escrever uma mensagem avisando que está doente | Ich kann heute nicht …, weil … | NOVA |
 

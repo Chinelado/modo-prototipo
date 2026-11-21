@@ -79,3 +79,11 @@ Object.assign(OBJ, {
   'n-telefon': { o: 'Consigo fazer uma ligação de trabalho simples: pedir para falar com alguém e deixar ou anotar um recado.', a: 'Você consegue pedir para falar com alguém ao telefone e deixar recado?', ref: 'Using telecommunications · A2' },
   'n-stellenanzeige': { o: 'Consigo ler um anúncio de emprego simples e escrever um e-mail curto de interesse.', a: 'Você consegue ler um anúncio de emprego e escrever um e-mail de interesse?', ref: 'Reading for orientation · A2; Correspondence · A2' },
 });
+// Módulo 11 (21/11/2026)
+Object.assign(OBJ, {
+  'n-termin2': { o: 'Consigo cancelar e remarcar uma consulta, propondo outro dia e horário.', a: 'Você consegue cancelar e remarcar uma consulta?', ref: 'Obtaining goods and services · A2; Using telecommunications · A2' },
+  'n-apotheke': { o: 'Consigo pedir um remédio na farmácia e entender a dose e quando tomar.', a: 'Você consegue pedir um remédio e entender como tomar?', ref: 'Obtaining goods and services · A2; Understanding instructions · A2' },
+  'n-gesund': { o: 'Consigo dar conselhos simples de saúde e comparar hábitos.', a: 'Você consegue dar conselhos de saúde a alguém?', ref: 'Conversation · A2' },
+  'n-notfall': { o: 'Consigo pedir ajuda numa emergência, chamar uma ambulância e dizer o que aconteceu.', a: 'Você consegue pedir ajuda e explicar uma emergência?', ref: 'Obtaining goods and services · A2 (emergências)' },
+  'n-krankmelden': { o: 'Consigo ler uma bula simples e escrever uma mensagem avisando que estou doente.', a: 'Você consegue avisar o trabalho que está doente?', ref: 'Notes, messages and forms · A2; Reading for orientation · A2' },
+});

@@ -1728,6 +1728,276 @@ S_('Eine Online-Bestellung', 'ankommen (angekommen)=chegar (Perfekt: ist angekom
 S_('Mein Arbeitstag', 'joggen gehen=ir correr');
 S_('Am Telefon', 'gerade=neste momento');
 S_('Eine Stellenanzeige', 'die Kellnerin=a garçonete|das Gespräch=a conversa; aqui, a entrevista|die Servicekraft=o atendente (em café ou restaurante)|du bewirbst dich=você se candidata (de sich bewerben)');
+/* Módulo 11 (21/11/2026): remarcar consultas, farmácia, hábitos, emergência e a lição de Ler e escrever "Krank melden". */
+NL('n-termin2', {
+  de: 'Ich brauche einen Termin', pt: 'Marcar e remarcar consultas', gt: 'Dias e horários · verschieben, absagen',
+  gx: 'Para mudar um compromisso: absagen (cancelar; separável: ich sage ab) e verschieben (remarcar: auf Freitag). Ich muss den Termin leider absagen. Können wir den Termin verschieben? Passt Ihnen Donnerstag?',
+  ge: 'Ich muss meinen Termin leider absagen.=Infelizmente preciso cancelar a minha consulta.|Können wir den Termin auf Freitag verschieben?=Podemos remarcar a consulta para sexta?|Passt Ihnen Donnerstag um zehn?=Quinta às dez fica bom para a senhora?',
+  v: 'verschieben=adiar, remarcar=↔️|absagen (ich sage ab)=cancelar=❌|der nächste freie Termin=o próximo horário livre=📅|die Terminvergabe=o agendamento=🗓️|die Wartezeit=o tempo de espera=⏳|die Online-Buchung=o agendamento on-line=💻|bestätigen=confirmar=✔️|die Absage=o cancelamento=🚫|kurzfristig=em cima da hora=⚡|vorbeikommen=passar (por aqui)=🚶',
+  x: 'die Vertretung=o médico substituto|die Akutsprechstunde=o atendimento de urgência|der Kontrolltermin=a consulta de retorno|die Vorsorge=o check-up preventivo|das Labor=o laboratório|die Blutabnahme=a coleta de sangue|die Impfung=a vacina|der Befund=o resultado do exame|die Telefonsprechstunde=a consulta por telefone|die Ausfallgebühr=a taxa por falta',
+  dlg: 'Praxis Dr. Meier, guten Tag.=Consultório Dr. Meier, bom dia.|Hier ist Paulo Lima. Ich muss meinen Termin morgen leider absagen.=Aqui é Paulo Lima. Infelizmente preciso cancelar a minha consulta de amanhã.|Kein Problem. Möchten Sie einen neuen Termin?=Sem problema. O senhor quer um novo horário?|Ja, gern. Geht es nächste Woche am Dienstag?=Sim, por favor. Pode ser na terça da semana que vem?',
+  cz: 'Ich muss den Termin leider ___.=absagen=absage=sage ab|Können wir den Termin ___?=verschieben=verschiebt=verschoben|___ Ihnen Donnerstag?=Passt=Passen=Passe',
+  whys: 'depois de muss, o verbo vai para o fim no infinitivo, e o separável fica junto: absagen|depois de können, infinitivo no fim|Donnerstag é o sujeito: passt (e Ihnen no dativo)',
+  pts: 'Cancelar: Ich muss den Termin leider absagen. Remarcar: Können wir den Termin verschieben?|Propor: Geht es am …? · Passt Ihnen Donnerstag?|Responder: Das passt mir gut. · Das geht leider nicht.|Cancele com antecedência: alguns consultórios cobram a falta (Ausfallgebühr).',
+  ex: 'Haben Sie nächste Woche etwas frei?=Vocês têm algum horário na semana que vem?|Der nächste freie Termin ist in zwei Wochen.=O próximo horário livre é daqui a duas semanas.|Können Sie den Termin bestätigen?=Pode confirmar o horário?|Das passt mir gut.=Para mim fica bom.',
+  bd: ['Können=MOD^na pergunta, o modal vem primeiro|wir=S|den_Termin=OA|auf_Freitag=T^verschieben auf: a nova data|verschieben?=INF^o infinitivo vai para o fim', 'Podemos remarcar a consulta para sexta?'],
+  rule: 'modal',
+  hw: 'Escreva duas ligações curtas: numa você cancela uma consulta; na outra você remarca e propõe um novo dia e horário.',
+  deep: `
+Imprevisto acontece: a consulta marcada não dá mais. Na Alemanha, avisar com antecedência é obrigação, e alguns consultórios cobram a falta. Hoje você aprende a cancelar e a remarcar, com **absagen** e **verschieben**.
+# Passo 1: cancelar com absagen
+**absagen** é separável: ich **sage** den Termin **ab**. Com modal, fica junto no fim: Ich muss den Termin **absagen**.
+~ Ich muss meinen Termin leider absagen. = Infelizmente preciso cancelar a minha consulta.
+# Passo 2: remarcar com verschieben
+**verschieben** = empurrar para outra data. **auf** + o novo dia: auf Freitag, auf nächste Woche.
+~ Können wir den Termin verschieben? = Podemos remarcar a consulta?
+# Passo 3: propor e combinar
+| Para | Diga |
+| propor | Geht es am Dienstag? |
+| perguntar | Passt Ihnen Donnerstag um zehn? |
+| aceitar | Das passt mir gut. |
+| recusar | Das geht leider nicht. |
+! **passen** pede **dativo**: Passt **Ihnen** …? Das passt **mir**.
+~ Das passt mir gut. = Para mim fica bom.
+# Passo 4: marcar on-line
+Muitos consultórios usam a **Online-Buchung**: você escolhe o horário num site e recebe a confirmação por e-mail. Para urgências, existe a **Akutsprechstunde**.
+BR Diferente do Brasil, especialistas costumam ter **Wartezeit** de semanas. Para casos simples, comece pelo **Hausarzt**.
+~ Haben Sie nächste Woche etwas frei? = Vocês têm algum horário na semana que vem?
+> Ensaie em voz alta: cancele uma consulta e peça um novo horário.
+? Como se diz "cancelar um compromisso"? || absagen
+? Complete: Können wir den Termin ___ Freitag verschieben? || auf
+? Passt Ihnen …? pede qual caso? || Dativ
+`,
+});
+
+NL('n-apotheke', {
+  de: 'In der Apotheke', pt: 'Pedir remédio e entender a dose', gt: 'zweimal täglich · vor/nach dem Essen',
+  gx: 'Pedir: Ich brauche etwas gegen + o problema (gegen Husten). Dose: einmal / zweimal / dreimal täglich, vor ou nach dem Essen. Alguns remédios são rezeptpflichtig (só com receita).',
+  ge: 'Ich brauche etwas gegen Kopfschmerzen.=Eu preciso de algo para dor de cabeça.|Nehmen Sie dreimal täglich eine Tablette.=Tome um comprimido três vezes ao dia.|Am besten nach dem Essen.=De preferência depois de comer.',
+  v: 'gegen (+ Akkusativ)=contra, para (um problema)=🛡️|einmal täglich=uma vez ao dia=1️⃣|zweimal täglich=duas vezes ao dia=2️⃣|vor dem Essen=antes de comer=⏮️|nach dem Essen=depois de comer=⏭️|rezeptpflichtig=vendido só com receita=📋|die Nebenwirkung=o efeito colateral=⚠️|die Packungsbeilage=a bula=📄|die Tropfen=as gotas=💧|der Hustensaft=o xarope para tosse=🍯',
+  x: 'das Schmerzmittel=o analgésico|die Allergie=a alergia|allergisch gegen=alérgico a|die Dosis=a dose|einnehmen=tomar (remédio)|schlucken=engolir|das Pflaster=o curativo adesivo|der Notdienst=o plantão|rezeptfrei=vendido sem receita|die Salbe=a pomada',
+  dlg: 'Guten Tag, ich brauche etwas gegen Husten.=Bom dia, preciso de algo para tosse.|Haben Sie auch Fieber?=O senhor também está com febre?|Nein, nur Husten und Halsschmerzen.=Não, só tosse e dor de garganta.|Dann nehmen Sie diesen Hustensaft, dreimal täglich nach dem Essen.=Então tome este xarope, três vezes ao dia, depois de comer.',
+  cz: 'Ich brauche etwas ___ Kopfschmerzen.=gegen=für=mit|Nehmen Sie die Tabletten zweimal ___.=täglich=Tag=tags|Nehmen Sie das ___ dem Essen.=nach=nachher=hinter',
+  whys: 'remédio contra um problema: gegen + acusativo|täglich = por dia: zweimal täglich|depois de comer: nach dem Essen (nach + Dativ)',
+  pts: 'Pedir: Ich brauche etwas gegen + o problema (gegen Husten, gegen Fieber).|Frequência: einmal, zweimal, dreimal täglich. Momento: vor / nach dem Essen, morgens, abends.|rezeptpflichtig = só com receita; rezeptfrei = sem receita.|Na Packungsbeilage: Dosierung (dose) e Nebenwirkungen (efeitos colaterais).',
+  ex: 'Ich bin allergisch gegen Penicillin.=Eu sou alérgica a penicilina.|Haben Sie das auch ohne Rezept?=Vocês têm isso também sem receita?|Nehmen Sie morgens und abends zehn Tropfen.=Tome dez gotas de manhã e à noite.|Gute Besserung!=Melhoras!',
+  bd: ['Nehmen=V^imperativo formal: o verbo abre a frase|Sie=S|dreimal_täglich=T^a frequência|eine_Tablette.=OA', 'Tome um comprimido três vezes ao dia.'],
+  rule: 'apotheke',
+  hw: 'Pegue a caixa de um remédio da sua casa e escreva em alemão, em duas frases, para que ele serve e como se toma (ex.: zweimal täglich nach dem Essen).',
+  deep: `
+Na Alemanha, até um analgésico simples se compra na **Apotheke**, e o farmacêutico explica como tomar. Hoje você aprende a pedir e, principalmente, a entender a dose.
+# Passo 1: pedir com gegen
+**gegen** + o problema = "para", "contra".
+| Problema | Pedido |
+| Kopfschmerzen | etwas gegen Kopfschmerzen |
+| Husten | etwas gegen Husten |
+| Fieber | etwas gegen Fieber |
+~ Ich brauche etwas gegen Kopfschmerzen. = Eu preciso de algo para dor de cabeça.
+# Passo 2: quantas vezes e quando
+| Alemão | Português |
+| einmal täglich | uma vez ao dia |
+| dreimal täglich | três vezes ao dia |
+| vor dem Essen | antes de comer |
+| nach dem Essen | depois de comer |
+~ Nehmen Sie dreimal täglich eine Tablette. = Tome um comprimido três vezes ao dia.
+# Passo 3: receita e bula
+- **rezeptpflichtig**: só com receita · **rezeptfrei**: sem receita
+- **die Packungsbeilage**: a bula · **die Nebenwirkung**: o efeito colateral
+BR No Brasil muita coisa se compra no balcão. Na Alemanha a lista de remédios **rezeptpflichtig** é maior, e mesmo os sem receita só se vendem na farmácia.
+~ Haben Sie das auch ohne Rezept? = Vocês têm isso também sem receita?
+# Passo 4: alergias e o plantão
+À noite e no domingo, uma farmácia da região fica de plantão (**Notdienst**). A lista fica na porta de todas as farmácias.
+~ Ich bin allergisch gegen Penicillin. = Eu sou alérgica a penicilina.
+> Ensaie em voz alta: peça algo para tosse e repita a dose que o farmacêutico disser.
+? Como se pede algo para febre? || Ich brauche etwas gegen Fieber.
+? O que significa zweimal täglich? || duas vezes ao dia
+? O que é a Packungsbeilage? || a bula
+`,
+});
+
+NL('n-gesund', {
+  de: 'Gesund bleiben', pt: 'Hábitos e conselhos', gt: 'Imperativ (revisão) · Komparativ',
+  gx: 'Conselho direto, com o imperativo: Trink mehr Wasser! (du) · Trinken Sie mehr Wasser! (Sie). Conselho delicado: Du solltest … Comparar hábitos com o Komparativ: Obst ist gesünder als Schokolade.',
+  ge: 'Trink mehr Wasser!=Beba mais água!|Gemüse ist gesünder als Pizza.=Legumes são mais saudáveis que pizza.|Du solltest mehr schlafen.=Você deveria dormir mais.',
+  v: 'die Gesundheit=a saúde=💚|sich bewegen=se mexer, fazer atividade física=🏃|die Ernährung=a alimentação=🥦|ungesund=não saudável=🍟|regelmäßig=regularmente=🔁|abnehmen=emagrecer=⚖️|zunehmen=engordar=⚖️|das Fitnessstudio=a academia=🏋️|der Schlaf=o sono=😴|die Vitamine=as vitaminas=🍊',
+  x: 'das Gewicht=o peso|zuckerfrei=sem açúcar|die Bewegung=a atividade física|die Entspannung=o relaxamento|meditieren=meditar|die Haltung=a postura|Rad fahren=andar de bicicleta|zu Fuß gehen=ir a pé|der Alkohol=o álcool|fit=em forma',
+  dlg: 'Ich bin immer so müde.=Estou sempre tão cansada.|Du solltest mehr schlafen und dich mehr bewegen.=Você deveria dormir mais e se mexer mais.|Ich habe keine Zeit für Sport.=Não tenho tempo para esporte.|Dann geh zu Fuß zur Arbeit! Das ist gesünder als der Bus.=Então vá a pé para o trabalho! É mais saudável que o ônibus.',
+  cz: '___ mehr Wasser! (du)=Trink=Trinkst=Trinken|Obst ist ___ als Schokolade.=gesünder=gesunder=mehr gesund|Du ___ mehr schlafen.=solltest=sollst du=sollte',
+  whys: 'imperativo de du: o verbo sem -st e sem du: Trink!|gesund ganha trema no comparativo: gesünder|conselho delicado: du solltest + infinitivo no fim',
+  pts: 'Imperativo de du: sem -st e sem du (Trink! Iss!). De Sie: Trinken Sie! Essen Sie!|Conselho delicado: Du solltest / Sie sollten + infinitivo no fim.|Comparar: Komparativ + als (Obst ist gesünder als Schokolade).|e → i fica no imperativo de du: essen → Iss!, nehmen → Nimm!',
+  ex: 'Iss mehr Obst und Gemüse!=Coma mais frutas e legumes!|Bewegen Sie sich regelmäßig!=Faça atividade física regularmente!|Zu Fuß gehen ist gesünder als Auto fahren.=Andar a pé é mais saudável que andar de carro.|Ich möchte mit dem Rauchen aufhören.=Eu quero parar de fumar.',
+  bd: ['Gemüse=S|ist=V|gesünder=ADJ^Komparativ: gesund → gesünder|als_Pizza.=X^als introduz o segundo termo', 'Legumes são mais saudáveis que pizza.'],
+  rule: 'conselho',
+  hw: 'Escreva cinco conselhos de saúde para um amigo: dois no imperativo, dois com Du solltest … e um comparando duas coisas com als.',
+  deep: `
+Comer melhor, dormir mais, se mexer: conselhos de saúde aparecem em toda conversa e todo consultório. Hoje você revisa duas ferramentas para aconselhar, o **imperativo** e **sollte**, e usa o **comparativo** para comparar hábitos.
+# Passo 1: o imperativo com du e Sie
+| Infinitivo | du | Sie |
+| trinken | Trink! | Trinken Sie! |
+| schlafen | Schlaf mehr! | Schlafen Sie mehr! |
+| essen | Iss! | Essen Sie! |
+! Com du: o verbo sem **-st** e sem **du**. Verbos que trocam e → i mantêm o i: essen → **Iss!**, nehmen → **Nimm!**
+~ Trink mehr Wasser! = Beba mais água!
+# Passo 2: conselho delicado com sollte
+**Du solltest** / **Sie sollten** + infinitivo no fim = "você deveria".
+BR É o nosso "você deveria": mais suave que a ordem do imperativo.
+~ Du solltest mehr schlafen. = Você deveria dormir mais.
+# Passo 3: comparar hábitos
+| Adjetivo | Komparativ |
+| gesund | gesünder |
+| gut | besser |
+| viel | mehr |
+~ Gemüse ist gesünder als Pizza. = Legumes são mais saudáveis que pizza.
+# Passo 4: os hábitos
+- **sich bewegen**: se mexer · **regelmäßig**: regularmente
+- **abnehmen / zunehmen**: emagrecer / engordar
+- **aufhören mit**: parar de (Ich höre mit dem Rauchen auf.)
+~ Ich möchte mit dem Rauchen aufhören. = Eu quero parar de fumar.
+> Dê em voz alta três conselhos a um amigo: um imperativo, um com solltest e uma comparação.
+? Qual é o imperativo de du para essen? || Iss!
+? Complete: Du ___ mehr schlafen. || solltest
+? Qual é o comparativo de gesund? || gesünder
+`,
+});
+
+NL('n-notfall', {
+  de: 'Im Notfall', pt: 'Emergência e acidente simples', gt: 'Perfekt · Hilfe! · Rufen Sie …',
+  gx: 'Emergência: 112 (ambulância e bombeiros), 110 (polícia). Peça ajuda: Hilfe! Rufen Sie einen Krankenwagen! Conte o que aconteceu no Perfekt: Ich bin gefallen. Er hat sich verletzt. Diga onde: in der … Straße.',
+  ge: 'Hilfe! Rufen Sie einen Krankenwagen!=Socorro! Chame uma ambulância!|Ich bin gefallen und mein Bein tut weh.=Eu caí e minha perna está doendo.|Wo ist das nächste Krankenhaus?=Onde fica o hospital mais próximo?',
+  v: 'der Notfall=a emergência=🚨|Hilfe!=Socorro!=🆘|der Krankenwagen=a ambulância=🚑|die Feuerwehr=os bombeiros=🚒|der Unfall=o acidente=💥|verletzt=ferido=🩹|bluten=sangrar=🩸|fallen (ist gefallen)=cair=⬇️|die Notaufnahme=o pronto-socorro=🏥|bewusstlos=inconsciente=😵',
+  x: 'der Notruf=a chamada de emergência|brechen (gebrochen)=quebrar|sich verletzen=machucar-se|das Feuer=o fogo|brennen=queimar, pegar fogo|stürzen=cair (de mau jeito)|ausrutschen=escorregar|der Rettungsdienst=o serviço de resgate|die Unfallstelle=o local do acidente|Erste Hilfe=os primeiros socorros',
+  dlg: 'Notruf 112. Wo ist der Notfall?=Emergência 112. Onde é a emergência?|In der Lindenstraße 12. Ein Mann ist gefallen.=Na Lindenstraße 12. Um homem caiu.|Ist er verletzt?=Ele está ferido?|Ja, er blutet am Kopf.=Sim, ele está sangrando na cabeça.',
+  cz: 'Ich ___ gefallen.=bin=habe=war|Rufen Sie ___ Krankenwagen!=einen=ein=einem|Mein Bein tut ___ weh.=mir=mich=ich',
+  whys: 'fallen é mudança de posição: Perfekt com sein|der Krankenwagen no acusativo: einen|wehtun pede dativo: tut mir weh',
+  pts: 'Números: 112 (ambulância e bombeiros), 110 (polícia). Plantão médico sem urgência: 116 117.|Ao ligar: wo (onde), was (o que aconteceu), wie viele (quantos feridos). Espere as perguntas.|O que aconteceu, no Perfekt: Ich bin gefallen. Er hat sich verletzt.|Pedir ajuda: Hilfe! Rufen Sie einen Krankenwagen! Können Sie mir helfen?',
+  ex: 'Hier ist ein Unfall passiert.=Aconteceu um acidente aqui.|Sie hat sich am Arm verletzt.=Ela machucou o braço.|Er ist bewusstlos!=Ele está inconsciente!|Wo ist die Notaufnahme?=Onde é o pronto-socorro?',
+  bd: ['Ich=S|bin=AUX^fallen faz o Perfekt com sein|auf_der_Straße=L|gefallen.=PT^o particípio vai para o fim', 'Eu caí na rua.'],
+  rule: 'perfekt',
+  hw: 'Anote no celular os números 112, 110 e 116 117 e escreva o que você diria ao ligar para o 112: onde, o que aconteceu e quantas pessoas.',
+  deep: `
+Tomara que você nunca precise, mas saber pedir ajuda em alemão é essencial. Hoje: os números de emergência, como pedir socorro e como contar, no Perfekt, o que aconteceu.
+# Passo 1: os números
+| Número | Para |
+| 112 | ambulância e bombeiros |
+| 110 | polícia |
+| 116 117 | plantão médico, sem urgência |
+BR No Brasil são vários números (192, 193, 190). Na Alemanha, o **112** resolve ambulância e bombeiros.
+~ Rufen Sie einen Krankenwagen! = Chame uma ambulância!
+# Passo 2: pedir ajuda
+- **Hilfe!** Socorro!
+- **Rufen Sie die Polizei!** Chame a polícia!
+- **Können Sie mir helfen?** O senhor pode me ajudar?
+~ Hilfe! Können Sie mir helfen? = Socorro! O senhor pode me ajudar?
+# Passo 3: contar o que aconteceu
+| Alemão | Português |
+| Ich bin gefallen. | Eu caí. |
+| Er hat sich verletzt. | Ele se machucou. |
+| Sie hat das Bein gebrochen. | Ela quebrou a perna. |
+! **fallen** usa **sein** no Perfekt (mudança de posição); **sich verletzen** e **brechen** usam **haben**.
+~ Sie hat sich am Arm verletzt. = Ela machucou o braço.
+# Passo 4: a ligação para o 112
+Diga primeiro **onde** (rua e número), depois **o que** aconteceu e **quantas** pessoas estão feridas. Não desligue: espere as perguntas.
+~ Ein Mann ist gefallen. = Um homem caiu.
+> Ensaie em voz alta a ligação para o 112: onde, o que aconteceu, quantos feridos.
+? Qual número chama a ambulância? || 112
+? Qual é o Perfekt de fallen? || ist gefallen
+? Como se diz "Socorro!"? || Hilfe!
+`,
+});
+
+NL('n-krankmelden', {
+  de: 'Krank melden', pt: 'Ler uma bula e avisar que está doente', gt: 'Ich kann heute nicht …, weil …',
+  gx: 'Avisar: Ich kann heute leider nicht kommen, weil ich krank bin (depois de weil, verbo no fim). Diga até quando (voraussichtlich bis Freitag) e fale do atestado (die Krankmeldung).',
+  ge: 'Ich kann heute leider nicht kommen, weil ich krank bin.=Infelizmente não posso ir hoje, porque estou doente.|Ich habe Fieber und bleibe zu Hause.=Estou com febre e vou ficar em casa.|Die Krankmeldung schicke ich morgen.=O atestado eu mando amanhã.',
+  v: 'sich krank melden=avisar que está doente=🤒|die AU=o atestado médico (para o trabalho)=📄|arbeitsunfähig=sem condições de trabalhar=🛌|Bescheid geben=avisar=📢|bis einschließlich=até, inclusive=📅|erkältet=resfriado=🤧|übernehmen=assumir (uma tarefa)=🤝|ausfallen=não acontecer, ser cancelado=🚫|die Dosierung=a dose=💊|die Anwendung=o uso, para que serve=📖',
+  x: 'sich schonen=se poupar, descansar|die Wirkung=o efeito|die Gegenanzeige=a contraindicação|Kinder unter 12 Jahren=crianças menores de 12 anos|unzerkaut=sem mastigar|mit Wasser=com água|höchstens=no máximo|die Tageshöchstdosis=a dose máxima por dia|geeignet=indicado, adequado|wieder gesund=recuperado',
+  dlg: 'Hallo Frau Berger, hier ist Paulo.=Olá, sra. Berger, aqui é o Paulo.|Ich kann heute leider nicht kommen, weil ich Fieber habe.=Infelizmente não posso ir hoje, porque estou com febre.|Oh, gute Besserung! Gehen Sie zum Arzt?=Ah, melhoras! O senhor vai ao médico?|Ja, heute Nachmittag. Dann schicke ich Ihnen die Krankmeldung.=Sim, hoje à tarde. Depois eu mando o atestado para a senhora.',
+  cz: 'Ich kann nicht kommen, weil ich krank ___.=bin=habe=ist|Ich ___ heute leider nicht kommen.=kann=könne=kannst|Ich bleibe bis Freitag ___ Hause.=zu=nach=in',
+  whys: 'depois de weil o verbo conjugado vai para o fim: weil ich krank bin|com ich: kann; o outro verbo vai para o fim|ficar em casa: zu Hause (nach Hause é para casa)',
+  pts: 'Avisar: Ich kann heute leider nicht kommen, weil ich krank bin. Depois de weil, verbo no fim.|Até quando: voraussichtlich bis Freitag. E o atestado: Die Krankmeldung schicke ich morgen.|Doença de mais de três dias: em geral, atestado médico; o empregador pode pedir antes.|Na bula: Anwendung (para que serve), Dosierung (dose), Nebenwirkungen.',
+  ex: 'Ich bin erkältet und habe Kopfschmerzen.=Estou resfriada e com dor de cabeça.|Voraussichtlich bin ich bis Mittwoch krank.=Provavelmente fico doente até quarta.|Kann jemand meine Termine übernehmen?=Alguém pode assumir os meus compromissos?|Viele Grüße und danke!=Um abraço e obrigado!',
+  bd: ['Ich_kann_heute_nicht_kommen,=C^a oração principal|weil=C^weil abre o motivo|ich=S|krank=PR|bin.=V^com weil, o verbo conjugado vai para o fim', 'Não posso ir hoje porque estou doente.'],
+  rule: 'weil',
+  hw: 'Escreva duas mensagens curtas avisando que você está doente: uma para o chefe (com Sie) e outra para um colega (com du). Use weil nas duas.',
+  le: {
+    texto: {
+      t: 'Packungsbeilage · Erkältungstabletten', kind: 'leitura',
+      intro: 'Um trecho da bula de um remédio para resfriado. Leia e responda.',
+      paras: ['Anwendung: bei Erkältung, Kopfschmerzen und Fieber.', 'Dosierung: Erwachsene nehmen dreimal täglich 1 Tablette, nach dem Essen, mit einem Glas Wasser.', 'Höchstens 3 Tabletten pro Tag. Nicht länger als 5 Tage nehmen.', 'Kinder unter 12 Jahren: nicht geeignet.', 'Nebenwirkungen: selten Müdigkeit oder Bauchschmerzen.'],
+      qs: [
+        { q: 'Para que serve o remédio?', o: ['resfriado, dor de cabeça e febre', 'dor de barriga', 'alergias'], a: 0 },
+        { q: 'Como um adulto deve tomar?', o: ['1 comprimido três vezes ao dia, depois de comer', '3 comprimidos de uma vez', '1 comprimido antes de dormir'], a: 0 },
+        { q: 'Por quantos dias no máximo?', o: ['5 dias', '3 dias', '12 dias'], a: 0 },
+        { q: 'Uma criança de 8 anos pode tomar?', o: ['não', 'sim, meio comprimido', 'sim, com água'], a: 0 },
+      ],
+    },
+    escrita: {
+      t: 'Avise que está doente', tipo: 'form', ok: 'Mensagem escrita corretamente.',
+      pede: 'Você acordou com febre. Escreva uma mensagem curta para a sua chefe, Frau Weber, uma frase em cada linha.',
+      campos: [
+        { l: 'Anrede', d: 'Liebe Frau Weber, / Hallo Frau Weber,', re: '^(liebe|hallo|sehr geehrte)\\s+frau\\s+weber\\b', f: 'iu', err: 'Comece com Liebe Frau Weber, ou Hallo Frau Weber,', bad: [['^lieber frau', 'Para mulher: <b>Liebe</b> Frau Weber.']] },
+        { l: 'Absage', d: 'Ich kann heute leider nicht kommen, weil …', re: '\\bkann\\b.*\\bnicht\\b.*,\\s*weil\\b.+\\s\\p{L}+[.!]?$', f: 'iu', err: 'Avise e dê o motivo: Ich kann heute leider nicht kommen, weil ich krank bin.', bad: [['weil ich (bin|habe)\\b', 'Depois de <b>weil</b> o verbo vai <b>para o fim</b>: …, weil ich krank <b>bin</b>.']] },
+        { l: 'Bis wann?', d: 'até quando: voraussichtlich bis …', re: '\\bbis\\b', f: 'iu', err: 'Diga até quando: Voraussichtlich bin ich bis Freitag krank.' },
+        { l: 'Krankmeldung', d: 'o atestado ou o médico', re: '\\b(krankmeldung|krankschreibung|au|attest|arzt|ärztin)\\b', f: 'iu', err: 'Fale do atestado ou do médico: Die Krankmeldung schicke ich morgen.' },
+        { l: 'Gruß', d: 'Viele Grüße + o seu nome', re: '^(viele|beste|liebe) gr(ü|ue)(ß|ss)e\\b', f: 'iu', err: 'Despeça-se: Viele Grüße e o seu nome.' },
+      ],
+      modelo: 'Liebe Frau Weber, · ich kann heute leider nicht kommen, weil ich Fieber habe. · Voraussichtlich bin ich bis Freitag krank. · Die Krankmeldung schicke ich morgen. · Viele Grüße, Ana',
+    },
+  },
+  deep: `
+Esta lição é de **ler e escrever**. Você vai ler um trecho de bula e depois escrever a mensagem que todo mundo um dia precisa mandar: avisar o trabalho que está doente.
+# Passo 1: como ler uma bula
+| Na bula | Significa |
+| Anwendung | para que serve |
+| Dosierung | quanto e quando tomar |
+| höchstens | no máximo |
+| Nebenwirkungen | efeitos colaterais |
+| nicht geeignet | não indicado |
+~ Erwachsene nehmen dreimal täglich eine Tablette. = Adultos tomam um comprimido três vezes ao dia.
+# Passo 2: avisar com weil
+- …, weil ich Fieber **habe**.
+- …, weil ich erkältet **bin**.
+! Depois de **weil**, o verbo conjugado vai para o **fim**.
+~ Ich kann heute leider nicht kommen, weil ich krank bin. = Infelizmente não posso ir hoje, porque estou doente.
+# Passo 3: até quando e o atestado
+- **voraussichtlich bis Freitag**: provavelmente até sexta
+- **die Krankmeldung** ou **die AU**: o atestado médico
+BR Se a doença durar mais de três dias, em geral é preciso atestado médico, e o empregador pode pedir antes. Para quem tem plano público, o médico hoje envia o atestado eletronicamente à Krankenkasse.
+~ Die Krankmeldung schicke ich morgen. = O atestado eu mando amanhã.
+# Passo 4: formal ou informal?
+| Para | Abertura | Despedida |
+| a chefe | Liebe Frau Weber, | Viele Grüße |
+| um colega | Hallo Tim, | Liebe Grüße |
+| a empresa | Sehr geehrte Damen und Herren, | Mit freundlichen Grüßen |
+~ Viele Grüße und danke! = Um abraço e obrigado!
+> No exercício, leia a bula e escreva a sua mensagem para a Frau Weber, uma frase por linha.
+? Na bula, o que significa Dosierung? || a dose: quanto e quando tomar
+? Depois de weil, onde vai o verbo? || no fim
+? Como se diz "provavelmente até sexta"? || voraussichtlich bis Freitag
+`,
+});
+
+V('Ich brauche einen Termin',
+  'V:Cancelar ou remarcar?;absagen · cancelar|Ich muss den Termin absagen.|Ich sage den Termin ab.;verschieben · remarcar|Können wir den Termin verschieben?|auf Freitag',
+  'P:Remarcar por telefone;Avisar=Ich muss meinen Termin leider absagen.;Pedir outro=Haben Sie nächste Woche etwas frei?;Propor=Passt Ihnen Dienstag um zehn?;Confirmar=Das passt mir gut.');
+V('In der Apotheke',
+  'M:Como tomar;Na receita|Significa;1-0-1|de manhã e à noite;3 × täglich|três vezes ao dia;vor dem Essen|antes de comer;nach dem Essen|depois de comer',
+  'E:Pedir um remédio;Ich brauche^v|etwas^o|gegen^c|Husten.^p');
+V('Gesund bleiben',
+  'V:Ordem ou conselho?;Imperativo|Trink mehr Wasser!|Iss mehr Obst!;Conselho delicado|Du solltest mehr trinken.|Du solltest mehr Obst essen.',
+  'E:Comparar hábitos;Gemüse^s|ist^v|gesünder^p|als Pizza.^c');
+V('Im Notfall',
+  'M:Números de emergência;Número|Para;112|ambulância e bombeiros;110|polícia;116 117|plantão médico',
+  'P:A ligação para o 112;Onde=In der Lindenstraße 12.;O quê=Ein Mann ist gefallen.;Quantos=Eine Person ist verletzt.;Esperar=Bleiben Sie am Telefon.');
+V('Krank melden',
+  'M:Na bula;Palavra|Significa;Anwendung|para que serve;Dosierung|a dose;höchstens|no máximo;Nebenwirkungen|efeitos colaterais',
+  'P:Avisar que está doente;Abertura=Liebe Frau Weber,;O aviso=ich kann heute leider nicht kommen,;O motivo=weil ich Fieber habe.;Até quando=voraussichtlich bis Freitag;O atestado=Die Krankmeldung schicke ich morgen.');
+
+S_('Ich brauche einen Termin', 'Geht es …?=Pode ser …? Dá …?');
+S_('In der Apotheke', 'das Penicillin=a penicilina');
+S_('Gesund bleiben', 'keine Zeit für …=sem tempo para …');
+S_('Im Notfall', 'passieren (ist passiert)=acontecer');
+S_('Krank melden', 'jemand=alguém|die Erwachsenen=os adultos');
 // Esquemas visuais (mesmo formato de data/visuals.js) e palavras de apoio (data/support.js) das lições novas.
 V('Wie schreibt man das?',
   'V:As letras que mais enganam;V se chama "fau"|Vera: fau · e · er · a;W se chama "vê"|Wien: vê · i · e · en;Z se chama "tsét"|Zoo: tsét · o · o',
@@ -1790,7 +2060,7 @@ const SEQ = [
   { lv: 'A2', n: 'Casa e vizinhança', l: [21, 27, 28, 26, 'n-hausordnung', 'n-zettel-nachbarn'] },
   { lv: 'A2', n: 'Compras e serviços', l: [22, 31, 32, 'n-umtauschen', 'n-bankpost', 'n-bestellung'] },
   { lv: 'A2', n: 'Trabalho', l: [30, 'n-arbeitstag', 35, 38, 'n-telefon', 'n-stellenanzeige'] },
-  { lv: 'A2', n: 'Saúde', l: [33, '?Ich brauche einen Termin', '?In der Apotheke', '?Gesund leben', '?Im Notfall', '?Ler e escrever: Krank melden'] },
+  { lv: 'A2', n: 'Saúde', l: [33, 'n-termin2', 'n-apotheke', 'n-gesund', 'n-notfall', 'n-krankmelden'] },
   { lv: 'A2', n: 'Viagens', l: [29, 34, '?Am Bahnhof und am Flughafen', 25, '?Probleme auf der Reise', '?Ler e escrever: Eine Hotelbewertung'] },
   { lv: 'A2', n: 'Festas e relações', l: [39, 40, 36, 37, 24, '?Ler e escrever: Ein Blogbeitrag'] },
   { lv: 'A2', n: 'Opinião e mídia', l: [41, '?Medien im Alltag', '?Dafür oder dagegen?', '?Kurze Nachrichten', '?Prüfungstraining A2', '?Ler e escrever: Ein Forumsbeitrag'] },
