@@ -107,7 +107,7 @@ const RULE_OF = {
   42: 'praet', 43: 'plusq', 44: 'quando', 45: 'relativa', 47: 'finalidade', 48: 'passiv', 49: 'passiv', 50: 'konj2', 51: 'konj2', 52: 'wohl', 54: 'obwohl', 58: 'zu_inf',
   59: 'lassen', 61: 'konj2', 62: 'konj2', 63: 'relativa', 86: 'indem', 92: 'als_ob', 93: 'futur2',
 };
-const ruleOfLesson = (les) => RULES[RULE_OF[les.i]] || null;
+const ruleOfLesson = (les) => RULES[les.rule || RULE_OF[les.oi]] || null;
 
 // Conferência completa. Devolve { pt, struct: true|false|null, msg, conc: {ok,msg}|null, word }.
 function checkFrase(text, les, sug) {

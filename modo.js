@@ -88,7 +88,7 @@ home = function () {
   const gNext = !nDone() && GUIDE.find((g) => !S.guide[g.id]);
   let H;
   if (gNext) { const k = GUIDE.indexOf(gNext); H = { e: `Comece aqui · aula ${k + 1} de ${GUIDE.length}`, t: gNext.t, meta: [['clock', '3–5 min'], ['book', guideCat(gNext).t]], cta: k ? 'Continuar a aula' : 'Começar a primeira aula', act: () => go('guide', gNext.id), alt: ['Pular para o dia 1', () => go('intro', 1)] }; }
-  else if (d) H = { e: d.review ? `${d.level} · Módulo ${d.w + 1} · Avaliação` : `${d.level} · Módulo ${d.w + 1} · Lição ${d.r + 1} de 6`, t: d.review ? `Avaliação do módulo ${d.w + 1}` : L.de, meta: [['clock', d.review ? '25–35 min' : '30–45 min'], ['book', d.review ? 'Revisão das 6 lições do módulo' : L.pt + ' · ' + L.gt]], cta: m.lesson ? 'Adiantar a próxima lição' : d.review ? 'Fazer a avaliação' : 'Continuar a lição', act: () => go('intro', cur), alt: ['Ver o módulo', () => go('modulo', d.w)] };
+  else if (d) H = { e: d.review ? `${d.level} · Módulo ${d.w + 1} · Avaliação` : `${d.level} · Módulo ${d.w + 1} · Lição ${d.r + 1} de ${d.n}`, t: d.review ? `Avaliação do módulo ${d.w + 1}` : L.de, meta: [['clock', d.review ? '25–35 min' : '30–45 min'], ['book', d.review ? 'Revisão das 6 lições do módulo' : L.pt + ' · ' + L.gt]], cta: m.lesson ? 'Adiantar a próxima lição' : d.review ? 'Fazer a avaliação' : 'Continuar a lição', act: () => go('intro', cur), alt: ['Ver o módulo', () => go('modulo', d.w)] };
   else H = { e: 'Trilha concluída', t: 'Todas as lições feitas', meta: [['layers', 'Mantenha as cartas em dia']], cta: 'Revisar cartas', act: () => go('cards') };
   const sug = homeSuggestion(due);
   const pk = POCKETS.filter((p) => !(S.pockets || {})[p.id]).slice(0, 3);
@@ -135,7 +135,7 @@ const _extras = extras;
 extras = function (arg) { _extras(arg); const h = app.querySelector('h1'); if (h) { h.textContent = 'Explorar'; if (!app.querySelector('.mo-sub')) h.insertAdjacentHTML('afterend', '<p class="mut mo-sub">Situações reais, leitura e conteúdos para usar o alemão fora da trilha.</p>'); } };
 
 /* ---------- boas-vindas: idioma → nível → começar ---------- */
-const LANGS = [['DE', 'Alemão', 'A1 a C2 · 210 lições', true], ['EN', 'Inglês', 'em preparação', false], ['ES', 'Espanhol', 'em preparação', false], ['FR', 'Francês', 'em preparação', false], ['IT', 'Italiano', 'em preparação', false]];
+const LANGS = [['DE', 'Alemão', `A1 a C2 · ${LESSONS.length} lições`, true], ['EN', 'Inglês', 'em preparação', false], ['ES', 'Espanhol', 'em preparação', false], ['FR', 'Francês', 'em preparação', false], ['IT', 'Italiano', 'em preparação', false]];
 onboard = function (step = 1) {
   const steps = `<div class="mo-steps">${[1, 2, 3].map((i) => `<i class="${i <= step ? 'on' : ''}"></i>`).join('')}</div>`;
   if (step === 1) {
@@ -161,22 +161,26 @@ onboard = function (step = 1) {
   $('#ob3').onclick = () => { S.name = $('#nm').value.trim(); S.goal = +$('#goal').value; S.start = today(); save(); go(lvSel === 'teste' ? 'nivel' : 'home'); };
 };
 
-/* ---------- Módulo (= semana: 6 lições + avaliação) ---------- */
-// Decisão de 20/11/2026: Módulo = semana, a Unidade fica só no modelo de dados.
-// As semanas ainda não têm nome nem objetivos "consigo…": a tela mostra isso como pendência em vez de inventar.
-const modDays = (w) => Array.from({ length: 7 }, (_, r) => w * 7 + r + 1);
-const modLessons = (w) => LESSONS.slice(w * 6, w * 6 + 6);
+/* ---------- Módulo (lições + avaliação) ---------- */
+// Decisão de 20/11/2026: a Unidade fica só no modelo de dados. Os módulos vêm de data/curriculo.js; enquanto o A1–A2
+// novo é escrito, alguns têm menos de 6 lições e mostram as que faltam como "em preparação".
+// Os módulos ainda não têm objetivos "consigo…": a tela mostra isso como pendência em vez de inventar.
+const modDays = (w) => { const f = firstDayOf(w); return Array.from({ length: MODS[w].li.length + 1 }, (_, r) => f + r); };
+const modLessons = modLs;
 function modState(w) {
   const cur = currentDay() || TOTAL + 1, ds = modDays(w), n = ds.filter((d) => S.done[d]).length;
-  return { cur, ds, n, locked: ds[0] > cur, done: n === 7 };
+  return { cur, ds, n, locked: ds[0] > cur, done: n === ds.length };
 }
+const modName = (w) => (MODS[w].n ? `Módulo ${w + 1} · ${MODS[w].n}` : `Módulo ${w + 1}`);
+const faltam = (w) => MODS[w].plan.filter((x) => x.falta);
+const prepRow = (t) => `<div class="mo-pr mo-lrow mo-prep"><span class="mo-tile mo-off">${ic('clock', 18)}</span><span><b>${esc(t)}</b><small>Lição nova em preparação</small></span></div>`;
 const stars = (s) => `<span class="mo-stars" aria-label="${s} de 3 estrelas">${'★'.repeat(s)}<i>${'★'.repeat(3 - s)}</i></span>`;
 function modRow(d, w) {
-  const { cur } = modState(w), info = dayInfo(d), L = info.review ? null : LESSONS[info.li], dn = S.done[d], locked = d > cur;
+  const { cur } = modState(w), info = dayInfo(d), L = info.review ? null : LESSONS[info.li], dn = S.done[d], locked = d > cur && !dn; // o que já foi feito continua aberto, mesmo depois de lições novas entrarem antes
   const tile = dn ? `<span class="mo-tile g">${ic('check', 20)}</span>` : locked ? `<span class="mo-tile mo-off">${ic('lock', 18)}</span>` : `<span class="mo-tile">${L ? `<b class="mo-n">${info.r + 1}</b>` : ic('target', 20)}</span>`;
   const meta = dn ? stars(dn.s) : d === cur ? '<span class="mo-badge">agora</span>' : '';
   return `<button class="mo-pr mo-lrow ${d === cur ? 'mo-cur' : ''}" data-day="${d}" ${locked ? 'disabled' : ''}>${tile}
-    <span><b>${L ? esc(L.de) : 'Avaliação do módulo'}</b><small>${L ? esc(L.pt) + ' · ' + esc(L.gt) : '18 exercícios com as 6 lições do módulo'}</small></span>
+    <span><b>${L ? esc(L.de) : 'Avaliação do módulo'}</b><small>${L ? esc(L.pt) + ' · ' + esc(L.gt) : `18 exercícios com as ${info.n} lições do módulo`}</small></span>
     <span class="mo-meta">${meta}${locked ? '' : ic('chevron', 18)}</span></button>`;
 }
 function modulo(w) {
@@ -190,14 +194,14 @@ function modulo(w) {
   const cta = !nextD ? 'Módulo concluído' : !canGo ? `Conclua o dia ${cur} para liberar` : nextD === ds[0] && !n ? 'Começar o módulo' : dayInfo(nextD).review ? 'Fazer a avaliação' : 'Continuar o módulo';
   app.innerHTML = `<nav class="mo-crumbs" aria-label="Você está em"><button class="link" data-crumb="trilha">Aprender</button>${ic('chevron', 14)}<button class="link" data-crumb="lv">${p.id}</button>${ic('chevron', 14)}<span>Módulo ${w + 1}</span></nav>
   <section class="mo-modh card" style="--lc:${LVCOL[p.id]}">${levelBadge(p.id, 64)}
-    <div class="mo-modt"><span class="eyebrow">${p.id} · módulo ${pos} de ${tot} do nível · ${w + 1} de ${WEEKS} na trilha</span><h1>Módulo ${w + 1}</h1>
-      <p class="mut">6 lições + avaliação · ${words.length} palavras novas</p>
-      <div class="row"><div class="bar"><i style="width:${Math.round((n / 7) * 100)}%"></i></div><small>${n}/7</small></div></div>
+    <div class="mo-modt"><span class="eyebrow">${p.id} · módulo ${pos} de ${tot} do nível · ${w + 1} de ${WEEKS} na trilha</span><h1>Módulo ${w + 1}</h1>${MODS[w].n ? `<p class="mo-modn">${esc(MODS[w].n)}</p>` : ''}
+      <p class="mut">${ls.length} lições + avaliação${faltam(w).length ? ` · ${faltam(w).length} em preparação` : ''} · ${words.length} palavras novas</p>
+      <div class="row"><div class="bar"><i style="width:${Math.round((n / ds.length) * 100)}%"></i></div><small>${n}/${ds.length}</small></div></div>
     <button class="pri mo-modgo" id="mGo" ${canGo ? '' : 'disabled'}>${canGo ? ic('play', 18) : ''}${cta}</button></section>
   <div class="mo-modgrid">
     <div>
       <div class="mo-sec"><h2>Lições</h2></div>
-      <div class="mo-lessons">${ds.map((d) => modRow(d, w)).join('')}</div>
+      <div class="mo-lessons">${MODS[w].plan.map((x) => (x.falta ? prepRow(x.falta) : modRow(LDAY[x.i], w))).join('')}${modRow(ds[ds.length - 1], w)}</div>
       ${tx ? `<button class="mo-pr mo-lrow mo-tx" id="mTx"><span class="mo-tile a">${ic(tx.kind === 'escuta' ? 'headphones' : 'book', 20)}</span><span><b>${esc(tx.t)}</b><small>Texto ${tx.kind === 'escuta' ? 'de escuta' : 'de leitura'} do módulo · opcional</small></span><span class="mo-meta">${(S.reads || {})[tx.id] ? ic('check', 18) : ''}${ic('chevron', 18)}</span></button>` : ''}
     </div>
     <div>
@@ -234,12 +238,13 @@ function curriculo() {
     const html = PHASES.map((p) => {
       const mods = [];
       for (let w = p.weeks[0]; w < p.weeks[1]; w++) {
-        const rows = modDays(w).filter((d) => { if (!q) return true; const i = dayInfo(d); return !i.review && norm([LESSONS[i.li].de, LESSONS[i.li].pt, LESSONS[i.li].gt].join(' ')).includes(q); });
+        const items = MODS[w].plan.map((x) => (x.falta ? { falta: x.falta } : { d: LDAY[x.i] })).concat({ d: modDays(w).slice(-1)[0] });
+        const rows = items.filter((it) => { if (!q) return true; if (it.falta) return norm(it.falta).includes(q); const i = dayInfo(it.d); return !i.review && norm([LESSONS[i.li].de, LESSONS[i.li].pt, LESSONS[i.li].gt].join(' ')).includes(q); });
         if (!rows.length) continue;
-        hits += rows.filter((d) => !dayInfo(d).review).length;
+        hits += rows.filter((it) => it.falta || !dayInfo(it.d).review).length;
         const st = modState(w);
-        mods.push(`<div class="mo-cmod"><button class="mo-cmh" data-mod="${w}"><b>Módulo ${w + 1}</b><span class="mut">${st.n}/7</span>${st.done ? ic('check', 16, 'okc') : st.locked ? ic('lock', 14, 'mutc') : ''}${ic('chevron', 16, 'arr')}</button>
-          <ol>${rows.map((d) => { const i = dayInfo(d), L = i.review ? null : LESSONS[i.li], lock = d > cur;
+        mods.push(`<div class="mo-cmod"><button class="mo-cmh" data-mod="${w}"><b>${esc(modName(w))}</b><span class="mut">${st.n}/${st.ds.length}</span>${st.done ? ic('check', 16, 'okc') : st.locked ? ic('lock', 14, 'mutc') : ''}${ic('chevron', 16, 'arr')}</button>
+          <ol>${rows.map((it) => { if (it.falta) return `<li><span class="mo-cl mo-prep"><span class="mo-cn">${ic('clock', 14)}</span><span><b lang="de">${esc(it.falta)}</b> <small>em preparação</small></span></span></li>`; const d = it.d, i = dayInfo(d), L = i.review ? null : LESSONS[i.li], lock = d > cur && !S.done[d];
             return `<li><button class="mo-cl ${S.done[d] ? 'mo-done' : ''}" data-day="${d}" ${lock ? 'disabled' : ''}><span class="mo-cn">${S.done[d] ? ic('check', 14) : L ? i.r + 1 : ic('target', 14)}</span><span><b lang="de">${L ? esc(L.de) : 'Avaliação do módulo'}</b> <small>${L ? esc(L.pt) + ' · ' + esc(L.gt) : '18 exercícios'}</small></span></button></li>`; }).join('')}</ol></div>`);
       }
       if (!mods.length) return '';
@@ -264,7 +269,7 @@ trilha = function (lv) {
     const det = wl.closest('details'), p = PHASES.find((x) => x.id === trLevel);
     det.open = true; det.querySelector('summary').textContent = 'Módulos deste nível';
     wl.outerHTML = `<div class="mo-modlist">${Array.from({ length: p.weeks[1] - p.weeks[0] }, (_, k) => { const w = p.weeks[0] + k, st = modState(w);
-      return `<button class="mo-ml" data-mod="${w}"><span><b>Módulo ${w + 1}</b><small>${modLessons(w).map((l) => esc(l.gt)).join(' · ')}</small></span><span class="mo-meta">${st.done ? ic('check', 16, 'okc') : st.locked ? ic('lock', 14) : `${st.n}/7`}${ic('chevron', 16)}</span></button>`; }).join('')}</div>`;
+      return `<button class="mo-ml" data-mod="${w}"><span><b>${esc(modName(w))}</b><small>${modLessons(w).map((l) => esc(l.gt)).join(' · ')}${faltam(w).length ? ` · +${faltam(w).length} em preparação` : ''}</small></span><span class="mo-meta">${st.done ? ic('check', 16, 'okc') : st.locked ? ic('lock', 14) : `${st.n}/${st.ds.length}`}${ic('chevron', 16)}</span></button>`; }).join('')}</div>`;
     $$('[data-mod]', app).forEach((b) => (b.onclick = () => go('modulo', +b.dataset.mod)));
   }
   const ceb = app.querySelector('.ccard .eyebrow'); if (ceb) ceb.textContent = ceb.textContent.replace(/Semanas? (\d+)/, (_, a) => (ceb.textContent.includes('–') ? 'Módulos ' : 'Módulo ') + a);
@@ -273,7 +278,7 @@ trilha = function (lv) {
   const patch = (d) => {
     const pop = $('#pop'); if (!pop || pop.hidden) return; const w = dayInfo(d).w;
     const i = dayInfo(d), eb = pop.querySelector('.eyebrow');
-    if (eb) eb.textContent = `${i.level} · Módulo ${w + 1} · ${i.review ? 'Avaliação' : `Lição ${i.r + 1} de 6`}`;
+    if (eb) eb.textContent = `${i.level} · Módulo ${w + 1} · ${i.review ? 'Avaliação' : `Lição ${i.r + 1} de ${i.n}`}`;
     const h = pop.querySelector('h3'); if (h) h.textContent = h.textContent.replace(/🏁 Checkpoint da semana (\d+)/, 'Avaliação do módulo $1');
     pop.insertAdjacentHTML('beforeend', `<button class="ghost mo-popm" id="pmod">Ver o módulo ${w + 1} ${ic('arrow', 16)}</button>`);
     $('#pmod').onclick = () => go('modulo', w);
@@ -284,7 +289,7 @@ const _intro = intro;
 intro = function (day) {
   _intro(day);
   const d = dayInfo(day), eb = app.querySelector('.lhead .eyebrow'), h = app.querySelector('.lhead h1'), bk = $('#bk');
-  if (eb) eb.textContent = d.review ? `${d.level} · Módulo ${d.w + 1}` : `${d.level} · Módulo ${d.w + 1} · Lição ${d.r + 1} de 6`;
+  if (eb) eb.textContent = d.review ? `${d.level} · Módulo ${d.w + 1}` : `${d.level} · Módulo ${d.w + 1} · Lição ${d.r + 1} de ${d.n}`;
   if (h && d.review) h.textContent = `Avaliação do módulo ${d.w + 1}`;
   if (d.review) { const p = app.querySelector('.lhead + p'); if (p) p.textContent = '18 exercícios misturando tudo o que você viu neste módulo:'; const st = $('#st'); if (st) st.textContent = 'Começar a avaliação'; }
   if (bk) { bk.innerHTML = `← Módulo ${d.w + 1}`; bk.onclick = () => go('modulo', d.w); }
@@ -308,7 +313,8 @@ function compsOf(k, keys = [], fala = false) {
   if (k === 'mus') return fala ? ['S', 'pro'] : ['L'];
   if (k === 'lin') return keys.length ? ['voc'] : ['gra'];
   if (k === 'log') return ['gra'];
-  if (k === 'int') return ['R'];
+  if (k === 'int' || k === 'leq') return ['R'];
+  if (k === 'lew') return ['W'];
   if (k === 'intra') return ['W', 'gra'];
   return ['voc']; // esp, nat, cor
 }
@@ -342,7 +348,7 @@ perfil = function () {
   // o radar e a explicação das inteligências saem do Perfil (continuam no motor)
   const cards = $$('.card', app).slice(0, 2); cards.forEach((el) => el.remove());
   const cur = currentDay(), d = cur && dayInfo(cur), wk = compWeakest(), done = nDone();
-  const pos = d ? `${d.level} · Módulo ${d.w + 1} · ${d.review ? 'avaliação' : 'lição ' + (d.r + 1) + ' de 6'}` : 'Trilha concluída';
+  const pos = d ? `${d.level} · Módulo ${d.w + 1} · ${d.review ? 'avaliação' : 'lição ' + (d.r + 1) + ' de ' + d.n}` : 'Trilha concluída';
   h.insertAdjacentHTML('afterend', `
   <div class="mo-pos card"><span class="mo-code">DE</span><div><b>Alemão · Trilha ${d ? d.level : 'C2'}</b><small>${pos} · ${done} de ${TOTAL} etapas</small></div>
     <p class="mut">A posição na trilha mostra o que você já estudou. Não é um nível de proficiência nem uma certificação.</p></div>
@@ -357,6 +363,51 @@ perfil = function () {
   </div>
   <p class="mut mo-how">Como ler: a porcentagem é o acerto nas ${ATT_WIN} respostas mais recentes de cada competência e aparece a partir de ${ATT_MIN} respostas. XP e sequência medem dedicação, não domínio.</p>`);
   if ($('#mWeak')) $('#mWeak').onclick = () => (wk.c.pr === 'textos' ? go('extras', 'textos') : pratRun(PRAT.find((p) => p.id === wk.c.pr)));
+};
+
+/* ---------- Lição de "Ler e escrever" ---------- */
+// Formato novo do A1–A2 redesenhado: um texto curto com perguntas (leq) e uma escrita guiada (lew).
+// As perguntas contam como evidência de Leitura e a escrita como evidência de Escrita (ver compsOf).
+const leTextHTML = (T) => `<div class="mo-ltx">${T.paras.map((p) => `<p>${spk(p)}<span lang="de">${esc(p)}</span></p>`).join('')}</div>`;
+GEN.leq = function (les, el, done, it) {
+  const T = les.le.texto, q = T.qs[it.j], right = q.o[q.a];
+  mcq(el, `<p class="q">${ic('book', 18)} Leia e responda <small class="mut">(${it.j + 1} de ${T.qs.length})</small></p>
+    <div class="mo-lecard"><b>${esc(T.t)}</b>${leTextHTML(T)}</div><p class="q">${esc(q.q)}</p>`, shuffle(q.o.slice()), right,
+    (ok) => done(ok, [], right, '', `<p>A resposta está no texto. Procure a linha que fala disso e compare: <b>${esc(right)}</b>.</p>`), 'col');
+};
+GEN.lew = function (les, el, done) {
+  const E = les.le.escrita, rx = (s, f = 'iu') => new RegExp(s, f);
+  el.innerHTML = `<p class="q">${ic('chat', 18)} ${esc(E.t)}</p><p class="hint">${esc(E.pede)}</p>
+    <div class="mo-form">${E.campos.map((c, j) => `<label class="mo-fl"><span><b lang="de">${esc(c.l)}</b><small>${esc(c.d)}</small></span><input data-f="${j}" autocomplete="off" spellcheck="false"><em class="mo-fe" data-e="${j}"></em></label>`).join('')}</div>
+    ${UML}<button class="pri" id="lwChk">Conferir</button><div id="lwRes"></div>`;
+  const ins = $$('[data-f]', el); let last = ins[0], tries = 0;
+  ins.forEach((i) => (i.onfocus = () => { last = i; })); ins[0].focus(); wireUml(el, { get value() { return last.value; }, set value(v) { last.value = v; }, focus: () => last.focus() });
+  $('#lwChk', el).onclick = () => {
+    const errs = E.campos.map((c, j) => {
+      const v = ins[j].value.trim();
+      if (!v) return 'Preencha este campo.';
+      const b = (c.bad || []).find(([re]) => rx(re, 'i').test(v)); if (b) return b[1];
+      return rx(c.re, c.f || 'u').test(v) ? '' : c.err; // maiúsculas importam: só os campos com f: 'iu' ignoram
+    });
+    errs.forEach((e, j) => { $(`[data-e="${j}"]`, el).innerHTML = e ? '✗ ' + e : '✓'; ins[j].classList.toggle('bad', !!e); ins[j].classList.toggle('good', !e); });
+    const bad = errs.filter(Boolean).length;
+    if (bad && tries++ < 2) { $('#lwRes', el).innerHTML = `<p class="warn">Quase! Ajuste ${bad === 1 ? 'o campo marcado' : `os ${bad} campos marcados`} e confira de novo.</p>`; return; }
+    ins.forEach((i) => (i.disabled = true)); $('#lwChk', el).disabled = true; $('#lwRes', el).innerHTML = '';
+    done(!bad, [], bad ? 'Exemplo: ' + E.modelo : 'Ficha preenchida corretamente.', '',
+      `<p>O que faltou:</p><ul>${E.campos.map((c, j) => (errs[j] ? `<li><b>${esc(c.l)}</b>: ${errs[j]}</li>` : '')).join('')}</ul><p>Exemplo: ${esc(E.modelo)}</p>`);
+  };
+};
+const _intro2 = intro;
+intro = function (day) {
+  _intro2(day);
+  const d = dayInfo(day); if (d.review) return;
+  const l = LESSONS[d.li];
+  if (l.nova) $('.lhead h1', app)?.insertAdjacentHTML('afterend', '<span class="mo-new">Lição nova · protótipo</span>');
+  if (!l.le) return;
+  const T = l.le.texto, E = l.le.escrita;
+  app.querySelector('.lhead').insertAdjacentHTML('afterend', `<div class="card mo-leplan"><div class="mo-card-h">${ic('book', 22)}<h3>Lição de ler e escrever</h3></div>
+    <ol><li><b>Ler:</b> ${esc(T.t)}. ${esc(T.intro)} (${T.qs.length} perguntas)</li><li><b>Escrever:</b> ${esc(E.t)}.</li><li><b>Praticar</b> o vocabulário da lição.</li></ol></div>`);
+  const st = $('#st'); if (st) st.textContent = 'Começar: ler, escrever e praticar';
 };
 
 // app.js já desenhou a primeira tela com a versão antiga: redesenha com a camada MODO.

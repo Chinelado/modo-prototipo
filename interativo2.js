@@ -7,7 +7,7 @@
    G  medidor de certeza                     "G:título;jetzt|past"
    Textos com áudio em data/interativos.js; sayBtn/setSay vêm de interativo.js. */
 
-const dayOfLesson = (li) => Math.floor(li / 6) * 7 + (li % 6) + 1;
+const dayOfLesson = (li) => LDAY[LBYSID[String(li)].i];
 const pickOne = (a) => a[Math.floor(Math.random() * a.length)];
 
 /* ---------- Z: linha do tempo ---------- */

@@ -35,7 +35,7 @@ function pathSVG(days, cur, step = 100) {
     lines += `<line x1="${a.x}" y1="${a.y + 10}" x2="${b.x}" y2="${b.y + 10}" class="pl ${S.done[a.d] ? 'pl-done' : ''}"/>`;
   }
   P.forEach((p, i) => {
-    if (p.info.r === 0 && i > 0) marks += `<line x1="8" x2="${PATH_W - 8}" y1="${p.y - step / 2}" y2="${p.y - step / 2}" class="wk"/><text x="${PATH_W / 2}" y="${p.y - step / 2 - 6}" class="wkt" text-anchor="middle">SEMANA ${p.info.w + 1}</text>`;
+    if (p.info.r === 0 && i > 0) marks += `<line x1="8" x2="${PATH_W - 8}" y1="${p.y - step / 2}" y2="${p.y - step / 2}" class="wk"/><text x="${PATH_W / 2}" y="${p.y - step / 2 - 6}" class="wkt" text-anchor="middle">MÓDULO ${p.info.w + 1}</text>`;
     const st = S.done[p.d] ? 'done' : p.d === cur ? 'cur' : p.d > cur ? 'lock' : 'open';
     const col = st === 'done' ? '#ffcf4a' : st === 'cur' ? '#ff8a3d' : st === 'open' ? '#57abff' : '#3c445c';
     const label = p.info.review ? '🏁 Checkpoint' : LESSONS[p.info.li].de;
@@ -208,7 +208,7 @@ function guideImgs(root) {
   });
 }
 // Ilustrações de uma lição: images/aulas/licao-001.webp (principal) e licao-001-b.webp (detalhe), se existirem.
-const lessonImgs = (l) => { const n = 'licao-' + String(l.i + 1).padStart(3, '0'); return `<div class="limgs">${[n, n + '-b'].map((x) => `<figure class="gimg" data-gimg="${x}" data-dir="aulas" hidden><img alt="${esc(l.pt)}" decoding="async">${typeof IMG_CAP !== 'undefined' && IMG_CAP[x] ? `<figcaption>${inl(IMG_CAP[x])}</figcaption>` : ''}</figure>`).join('')}</div>`; };
+const lessonImgs = (l) => { if (l.oi == null) return ''; const n = 'licao-' + String(l.oi + 1).padStart(3, '0'); return `<div class="limgs">${[n, n + '-b'].map((x) => `<figure class="gimg" data-gimg="${x}" data-dir="aulas" hidden><img alt="${esc(l.pt)}" decoding="async">${typeof IMG_CAP !== 'undefined' && IMG_CAP[x] ? `<figcaption>${inl(IMG_CAP[x])}</figcaption>` : ''}</figure>`).join('')}</div>`; };
 
 /* ---------- facilitação gráfica: esquemas por lição ---------- */
 const VICON = { F: '🧱', T: '⏳', S: '📏', P: '🔀', V: '⚖️', M: '📊', E: '🧮' };

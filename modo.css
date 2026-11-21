@@ -214,3 +214,23 @@ button.ghost { color: var(--p600); }
 .mo-weak small { color: var(--mut); } .mo-weak button { display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; }
 .mo-how { font-size: .85rem; margin: 12px 0 18px; }
 .mo-pos > div { flex: 1; min-width: 0; }
+
+/* ---------- sequência nova: módulos em construção e lição de ler e escrever ---------- */
+.mo-modn { margin: 0; font: 600 1.05rem "Space Grotesk", sans-serif; color: var(--p700); }
+:root[data-theme="dark"] .mo-modn { color: var(--p600); }
+.mo-prep { opacity: .7; border-style: dashed; box-shadow: none; cursor: default; }
+.mo-cl.mo-prep { opacity: .55; cursor: default; }
+.mo-new { display: inline-block; margin-top: 4px; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--a700); background: var(--a50); border-radius: 999px; padding: 2px 10px; }
+.mo-leplan ol { margin: 4px 0 0; padding-left: 20px; } .mo-leplan li { margin: 4px 0; }
+.mo-lecard { max-width: 720px; margin: 8px auto 12px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg2); }
+.mo-lecard > b { display: block; font-family: "Space Grotesk", sans-serif; margin-bottom: 6px; }
+.mo-ltx p { margin: 3px 0; font-size: .95rem; }
+.mo-form { max-width: 720px; margin: 8px auto; display: grid; gap: 8px; }
+.mo-fl { display: grid; grid-template-columns: 180px 1fr; gap: 4px 12px; align-items: center; }
+.mo-fl small { display: block; color: var(--mut); font-size: .78rem; }
+.mo-fl input { width: 100%; } .mo-fl input.bad { border-color: var(--no); } .mo-fl input.good { border-color: var(--ok); }
+.mo-fe { grid-column: 2; font-style: normal; font-size: .82rem; color: var(--no); margin-top: -2px; } .mo-fe:empty { display: none; }
+.mo-form { gap: 10px; }
+.mo-fl input.good + .mo-fe { color: var(--ok); }
+#ex #lwChk { display: block; margin: 10px auto 0; }
+@media (max-width: 640px) { .mo-fl { grid-template-columns: 1fr; } .mo-fe { grid-column: 1; } }

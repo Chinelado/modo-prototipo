@@ -18,7 +18,7 @@ const app = $('#app'), nav = $('#nav');
 
 /* ---------- estado ---------- */
 const KEY = 'deutschTrilha.v1';
-const WEEKS = LESSONS.length / 6, TOTAL = WEEKS * 7;
+const WEEKS = MODS.length, TOTAL = DAYS.length; // módulos e dias vêm de data/curriculo.js
 const fresh = () => ({
   name: '', goal: 60, audio: true, sfx: true, fala: true, start: null, xp: 0, streak: 0, best: 0, lastDay: null, freezes: 0,
   done: {}, cards: {}, stats: Object.fromEntries(IK.map((k) => [k, { n: 0, ok: 0, rn: 0, rok: 0, t: 0 }])),
@@ -27,6 +27,7 @@ const fresh = () => ({
 let S = fresh();
 try { const raw = localStorage.getItem(KEY); if (raw) S = Object.assign(fresh(), JSON.parse(raw)); } catch (e) { console.error('Falha ao ler o progresso salvo:', e); }
 migrateGuide(S);
+migrateSeq(S);
 function save() { S.updatedAt = Date.now(); if (typeof cloudQueue === 'function') cloudQueue(); try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { console.error('Falha ao salvar o progresso:', e); toast('⚠️ Não consegui salvar o progresso neste navegador'); } }
 const daily = () => (S.daily[today()] = S.daily[today()] || { lesson: false, cards: 0, perfect: false });
 
@@ -88,21 +89,21 @@ new MutationObserver(() => { cancelAnimationFrame(enhRaf); enhRaf = requestAnima
 
 /* ---------- trilha ---------- */
 function dayInfo(d) {
-  const w = Math.floor((d - 1) / 7), r = (d - 1) % 7;
-  return { d, w, r, review: r === 6, li: w * 6 + r, level: phaseOf(w).id };
+  const x = DAYS[Math.min(Math.max(d, 1), DAYS.length) - 1];
+  return { d, w: x.w, r: x.r, review: x.review, li: x.li, n: MODS[x.w].li.length, level: phaseOf(x.w).id };
 }
 const phaseOf = (w) => PHASES.find((p) => w >= p.weeks[0] && w < p.weeks[1]) || PHASES[PHASES.length - 1];
-const phaseDays = (p) => Array.from({ length: (p.weeks[1] - p.weeks[0]) * 7 }, (_, i) => p.weeks[0] * 7 + i + 1);
+const phaseDays = (p) => DAYS.map((x, i) => (x.w >= p.weeks[0] && x.w < p.weeks[1] ? i + 1 : 0)).filter(Boolean);
 function currentDay() { for (let d = 1; d <= TOTAL; d++) if (!S.done[d]) return d; return null; }
 const doneLessons = () => Object.keys(S.done).map(Number).map(dayInfo).filter((i) => !i.review).map((i) => LESSONS[i.li]);
 const vocab = (k) => {
   if (k.startsWith('p:')) { const [, id, j] = k.split(':'), p = POCKETS.find((x) => x.id === id), f = p ? pkPairs(p.frases)[j] : null; return { k, de: f ? f.de : '?', pt: f ? f.pt : '?', em: p ? p.e : '' }; }
-  if (k.startsWith('s:')) { const [, i, j] = k.split(':'), sp = (SUP[LESSONS[i].de] || [])[j] || { de: '?', pt: '?' }; return { k, de: sp.de, pt: sp.pt, em: '' }; }
-  const [i, j] = k.split(':'); return LESSONS[i].v[j];
+  if (k.startsWith('s:')) { const [, i, j] = k.split(':'), l = LBYSID[i], sp = (l && SUP[l.de] || [])[j] || { de: '?', pt: '?' }; return { k, de: sp.de, pt: sp.pt, em: '' }; }
+  const c = k.lastIndexOf(':'), l = LBYSID[k.slice(0, c)]; return (l && l.v[k.slice(c + 1)]) || { k, de: '?', pt: '?', em: '' };
 };
 const supOn = () => S.supCards !== false;
 // Palavras de apoio da lição entram nas cartas (se a opção estiver ligada).
-function addSupCards(i) { if (supOn()) (SUP[LESSONS[i].de] || []).forEach((_, j) => { const k = 's:' + i + ':' + j; if (!S.cards[k]) S.cards[k] = newCard(); }); }
+function addSupCards(i) { if (supOn()) (SUP[LESSONS[i].de] || []).forEach((_, j) => { const k = 's:' + LESSONS[i].sid + ':' + j; if (!S.cards[k]) S.cards[k] = newCard(); }); }
 const dueKeys = () => { const now = Date.now(); return Object.keys(S.cards).filter((k) => S.cards[k].due <= now && (supOn() || !k.startsWith('s:'))); };
 
 /* ---------- perfil de inteligências ---------- */
@@ -167,7 +168,7 @@ function checkDaily() {
   const m = mission(), d = daily();
   if (m.lesson && m.cards && m.time && m.extra && !d.perfect) { d.perfect = true; S.perfect++; addXP(30); toast('🌟 Dia perfeito! +30 XP'); sfx('conquista'); checkBadges(); save(); }
 }
-const levelDone = (a, b) => { for (let d = a * 7 + 1; d <= b * 7; d++) if (!S.done[d]) return false; return true; };
+const levelDone = (id) => phaseDays(PHASES.find((p) => p.id === id)).every((d) => S.done[d]);
 const nDone = () => Object.keys(S.done).length;
 const nWords = () => Object.keys(S.cards).length;
 const BADGES = [
@@ -190,12 +191,12 @@ const BADGES = [
   ['diary', '📔', 'Tagebuch', '10 frases no diário', () => S.diary.length >= 10],
   ['speak', '🎤', 'Laut!', '10 frases faladas em voz alta', () => S.spoken >= 10],
   ['perfect', '🌟', 'Dia perfeito', 'Cumpriu as 3 missões do dia', () => S.perfect >= 1],
-  ['a1', '🥉', 'A1', 'Nível A1 concluído', () => levelDone(0, 3)],
-  ['a2', '🥈', 'A2', 'Nível A2 concluído', () => levelDone(3, 7)],
-  ['b1', '🥇', 'B1', 'Nível B1 concluído', () => levelDone(7, 13)],
-  ['b2', '🏆', 'B2', 'Nível B2 concluído', () => levelDone(13, 25)],
-  ['c1', '💎', 'C1', 'Nível C1 concluído', () => levelDone(25, 31)],
-  ['c2', '👑', 'C2', 'Nível C2 concluído: trilha completa', () => levelDone(31, 35)],
+  ['a1', '🥉', 'A1', 'Nível A1 concluído', () => levelDone('A1')],
+  ['a2', '🥈', 'A2', 'Nível A2 concluído', () => levelDone('A2')],
+  ['b1', '🥇', 'B1', 'Nível B1 concluído', () => levelDone('B1')],
+  ['b2', '🏆', 'B2', 'Nível B2 concluído', () => levelDone('B2')],
+  ['c1', '💎', 'C1', 'Nível C1 concluído', () => levelDone('C1')],
+  ['c2', '👑', 'C2', 'Nível C2 concluído: trilha completa', () => levelDone('C2')],
   ['hw10', '🏠', 'Mão na massa', '10 tarefas de casa feitas', () => hwTotal() >= 10],
   ['hw50', '🏡', 'Rotina alemã', '50 tarefas de casa feitas', () => hwTotal() >= 50],
   ['wq1', '🎯', 'Semana completa', 'Cumpriu uma missão da semana', () => Object.keys(S.wq).length >= 1],
@@ -300,7 +301,7 @@ function wireSeen(root, rerender) {
 }
 
 /* ---------- tarefas de casa e missão da semana ---------- */
-const lessonLevel = (i) => phaseOf(Math.floor(i / 6)).id;
+const lessonLevel = (i) => phaseOf(LMOD[i]).id;
 function lessonExtra(i) { const pool = EXTRAS.filter((x) => x.lvs.includes(lessonLevel(i))); return pool[(i * 7) % pool.length]; }
 const XVERB = { yt: 'Assista a um vídeo do canal', mus: 'Ouça a música', film: 'Assista a um trecho do filme', serie: 'Assista a um episódio de', pod: 'Ouça um episódio de', book: 'Leia algumas páginas de', site: 'Leia um texto em', ref: 'Explore', app: 'Converse 10 minutos usando', doc: 'Assista a um trecho de' };
 function hwTasks(i) {
@@ -441,13 +442,13 @@ function trilha(lvId) {
   const p = PHASES.find((x) => x.id === trLevel), days = phaseDays(p), nw = p.weeks[1] - p.weeks[0];
   const doneN = days.filter((d) => S.done[d]).length;
   const { svg, P } = pathSVG(days, cur);
-  const weeks = Array.from({ length: nw }, (_, k) => { const w = p.weeks[0] + k; return `<li><b>Semana ${w + 1}:</b> ${LESSONS.slice(w * 6, w * 6 + 6).map((l) => esc(l.gt)).join(' · ')}</li>`; }).join('');
+  const weeks = Array.from({ length: nw }, (_, k) => { const w = p.weeks[0] + k; return `<li><b>Módulo ${w + 1}:</b> ${modLs(w).map((l) => esc(l.gt)).join(' · ')}</li>`; }).join('');
   app.innerHTML = `<h1>Sua jornada A1 → C2</h1><p class="mut">Níveis do Quadro Europeu, na estrutura do Goethe-Institut. Toque num bloco para abrir a lição. Já sabe alemão? <button class="link" id="toP">Faça o teste de nível</button>.</p>
   ${lvTabs(trLevel, 'data-lv')}
   <div class="course">
     <aside class="ccard" style="--lc:${LVCOL[p.id]}">${levelBadge(p.id, 76)}
       <span class="eyebrow">${p.when} · ${p.ue}</span><h2>${p.n}</h2><p class="mut">${p.can}</p>
-      <p>🧩 ${nw * 6} lições · 🏁 ${nw} checkpoints</p>
+      <p>🧩 ${days.length - nw} lições · 🏁 ${nw} checkpoints</p>
       <div class="row"><div class="bar"><i style="width:${Math.round((doneN / days.length) * 100)}%"></i></div><small>${doneN}/${days.length}</small></div>
       ${p.id === 'A1' ? `<div class="prep"><b>🧭 Antes do dia 1: Comece aqui</b>${GUIDE_CATS.map((c) => { const gs = GUIDE.filter((g) => g.cat === c.id), nx = gs.find((g) => !S.guide[g.id]) || gs[0], n = gs.filter((g) => S.guide[g.id]).length; return `<button class="gmini ${n === gs.length ? 'ok' : ''}" data-g="${nx.id}"><span>${n === gs.length ? '✓' : c.e}</span>${c.t} <small class="mut">${n}/${gs.length}</small></button>`; }).join('')}</div>` : ''}
       <details><summary>Gramática por semana</summary><ul class="wklist">${weeks}</ul></details>
@@ -462,7 +463,7 @@ function trilha(lvId) {
   $('#toP').onclick = () => go('nivel');
   const pop = $('#pop');
   const open = (d) => {
-    const info = dayInfo(d), pp = P.find((x) => x.d === d), L = info.review ? null : LESSONS[info.li], locked = d > cur;
+    const info = dayInfo(d), pp = P.find((x) => x.d === d), L = info.review ? null : LESSONS[info.li], locked = d > cur && !S.done[d];
     pop.innerHTML = `<button class="x" id="pclose" aria-label="Fechar">✕</button><span class="eyebrow">${info.level} · Semana ${info.w + 1} · Dia ${d}</span>
       <h3>${L ? esc(L.de) : '🏁 Checkpoint da semana ' + (info.w + 1)}</h3>
       <p class="mut">${L ? esc(L.pt) + ' · ' + esc(L.gt) : '18 exercícios misturando as 6 lições da semana.'}</p>
@@ -593,7 +594,7 @@ function contentPage() {
 function intro(day) {
   const d = dayInfo(day);
   if (d.review) {
-    const ls = LESSONS.slice(d.w * 6, d.w * 6 + 6);
+    const ls = modLs(d.w);
     app.innerHTML = `<button class="ghost back" id="bk">← Trilha</button><div class="lhead" style="--lc:${LVCOL[d.level]}">${levelBadge(d.level, 60)}<div><span class="eyebrow">${d.level} · Dia ${day}</span><h1>🏁 Checkpoint da semana ${d.w + 1}</h1></div></div>
     <p>18 exercícios misturando tudo o que você viu nesta semana:</p><ul>${ls.map((l) => `<li><b>${esc(l.de)}</b> — ${esc(l.gt)}</li>`).join('')}</ul>
     <button class="pri big" id="st">Começar o checkpoint</button>
@@ -647,34 +648,36 @@ const newCard = () => { const t = new Date(); t.setHours(24, 0, 0, 0); return { 
 function startSession(kind, day, opt = {}) {
   let ctxs;
   if (kind === 'lesson') ctxs = [LESSONS[dayInfo(day).li]];
-  else if (kind === 'review') { const w = dayInfo(day).w; ctxs = LESSONS.slice(w * 6, w * 6 + 6); }
+  else if (kind === 'review') ctxs = modLs(dayInfo(day).w);
   else ctxs = sample(doneLessons(), 6);
   if (kind === 'lesson') { ctxs[0].v.forEach((v) => { if (!S.cards[v.k]) S.cards[v.k] = newCard(); }); addSupCards(ctxs[0].i); }
   const n = kind === 'lesson' ? 14 : kind === 'review' ? 18 : 10;
-  const queue = opt.kinds ? shuffle(Array.from({ length: n }, (_, i) => ({ k: opt.kinds[i % opt.kinds.length] }))) : planInt(n);
+  let queue = opt.kinds ? shuffle(Array.from({ length: n }, (_, i) => ({ k: opt.kinds[i % opt.kinds.length] }))) : planInt(n);
+  // Lição de "Ler e escrever": primeiro as perguntas do texto, depois a escrita guiada, depois a prática de sempre.
+  if (kind === 'lesson' && ctxs[0].le) { const le = ctxs[0].le; queue = [...le.texto.qs.map((_, j) => ({ k: 'leq', j })), { k: 'lew' }, ...planInt(n - le.texto.qs.length - 1)]; }
   sess = { kind, day, ctxs, queue, noFala: !!opt.noFala, forceFala: !!opt.forceFala, doneN: 0, first: 0, firstOk: 0, combo: 0, maxCombo: 0, xp: 0, re: 0, by: {}, onEnter: null };
   view = 'run'; nav.hidden = true; nextEx();
 }
 const PRAISE = ['Richtig!', 'Sehr gut!', 'Genau!', 'Super!', 'Prima!', 'Toll!'];
 function nextEx() {
   if (!sess.queue.length) return finish();
-  const it = sess.queue.shift(), les = pick(sess.ctxs), I = INT[it.k], my = sess;
+  const it = sess.queue.shift(), les = pick(sess.ctxs), I = INT[it.k] || { leq: { e: '📖', n: 'Leitura' }, lew: { e: '✍️', n: 'Escrita guiada' } }[it.k], my = sess;
   const pct = Math.round((sess.doneN / (sess.doneN + sess.queue.length + 1)) * 100);
   app.innerHTML = `<div class="runtop"><button class="x" id="quit" aria-label="Sair">✕</button><div class="bar"><i style="width:${pct}%"></i></div><span class="combo">${sess.combo > 1 ? '🔥' + sess.combo : ''}</span></div>
   <div class="chip">${I.e} ${I.n}${it.retry ? ' · mais uma chance' : ''}</div><div id="ex"></div><div id="fb"></div>`;
   $('#quit').onclick = () => { if (confirm('Sair da sessão? O que você já respondeu fica registrado.')) go('home'); };
   const t0 = Date.now();
-  GEN[it.k](les, $('#ex'), (ok, keys = [], ans = '', sayT = '', why = '', fala = false) => {
+  GEN[it.k](it.k === 'leq' || it.k === 'lew' ? sess.ctxs[0] : les, $('#ex'), (ok, keys = [], ans = '', sayT = '', why = '', fala = false) => {
     it.fala = fala;
     if (sess !== my) return;
-    const st = S.stats[it.k]; st.n++; if (ok) st.ok++; st.t += (Date.now() - t0) / 1000;
+    const st = S.stats[it.k]; if (st) { st.n++; if (ok) st.ok++; st.t += (Date.now() - t0) / 1000; }
     if (typeof logAtt === 'function') logAtt(compsOf(it.k, keys, fala), ok);
     keys.forEach((k) => { const c = S.cards[k]; if (c) c.mods[it.k] = (c.mods[it.k] || 0) + 1; });
     if (!it.retry) { sess.first++; if (ok) sess.firstOk++; }
     const by = (sess.by[it.k] = sess.by[it.k] || [0, 0]); by[1]++; if (ok) by[0]++;
     let gain = 0;
     if (ok) { sess.combo++; sess.maxCombo = Math.max(sess.maxCombo, sess.combo); S.maxCombo = Math.max(S.maxCombo, sess.combo); gain = 10 + Math.min(sess.combo, 5) * 2; sess.xp += gain; addXP(gain); if (sess.combo === 5 || sess.combo === 10) toast('🔥 Combo de ' + sess.combo + '!'); }
-    else { sess.combo = 0; if (sess.re < 6) { sess.re++; sess.queue.push({ k: it.k, retry: true }); } }
+    else { sess.combo = 0; if (sess.re < 6 && INT[it.k]) { sess.re++; sess.queue.push({ k: it.k, retry: true }); } }
     sess.doneN++; checkBadges(); save();
     $('#fb').innerHTML = `<div class="fb ${ok ? 'ok' : 'no'}"><b>${ok ? pick(PRAISE) + ' +' + gain + ' XP' : 'Quase! Essa volta no fim da sessão.'}</b>
     ${ans ? `<p>${ok ? '' : '<b>Certo:</b> '}${esc(ans)}</p>` : ''}
@@ -684,7 +687,7 @@ function nextEx() {
     setTimeout(() => { if (sess === my) sess.onEnter = nextEx; }, 250);
     if ($('#mic')) $('#mic').onclick = () => { $('#mic').remove(); $('#micres').innerHTML = falaPanel(sayT); if (FALA_SR) falaStart($('#micres .fala')); };
     $('#next').scrollIntoView({ block: 'nearest' });
-  });
+  }, it);
 }
 addEventListener('keydown', (e) => { if (e.key === 'Enter' && sess && sess.onEnter) { const f = sess.onEnter; sess.onEnter = null; f(); } });
 // Frase dita direito (80% ou mais) em qualquer painel de fala: +5 XP uma vez por painel e conta para a conquista "Laut!".
@@ -714,7 +717,7 @@ function finish() {
   <h1 style="text-align:center">${s.kind === 'extra' ? 'Treino concluído!' : s.kind === 'review' ? 'Checkpoint concluído!' : 'Lição concluída!'}</h1>
   <div class="stats"><div class="stat"><b>+${s.xp + bonus}</b><small>XP</small></div><div class="stat"><b>${Math.round(acc * 100)}%</b><small>de primeira</small></div><div class="stat"><b>🔥 ${s.maxCombo}</b><small>maior combo</small></div></div>
   <div class="card"><h3>Como você foi em cada caminho</h3>
-  ${Object.entries(s.by).map(([k, [o, n]]) => `<div class="prow"><span>${INT[k].e} ${INT[k].n}</span><div class="bar"><i style="width:${Math.round((o / n) * 100)}%"></i></div><small>${o}/${n}</small></div>`).join('')}
+  ${Object.entries(s.by).map(([k, [o, n]]) => { const I = INT[k] || { leq: { e: '📖', n: 'Leitura' }, lew: { e: '✍️', n: 'Escrita guiada' } }[k]; return `<div class="prow"><span>${I.e} ${I.n}</span><div class="bar"><i style="width:${Math.round((o / n) * 100)}%"></i></div><small>${o}/${n}</small></div>`; }).join('')}
   ${s.kind === 'lesson' ? '<small>As ' + s.ctxs[0].v.length + ' palavras da lição entram nas suas cartas a partir de amanhã. É nessa revisão que eu meço a retenção.</small>' : ''}</div>
   ${s.kind === 'lesson' ? hwCard(dayInfo(s.day).li, '🏠 Agora, a tarefa de casa') : ''}
   ${left > 0 ? `<p class="mut">Faltam ${left} min para a sua meta de hoje.</p>` : '<p class="mut">Meta de tempo de hoje cumprida. 👏</p>'}
@@ -1307,7 +1310,7 @@ async function downloadPack(ids) {
 function wireOffline() { if (offOK()) renderOffline(); }
 
 /* ---------- textos longos: leitura e escuta ---------- */
-const textOpen = (t) => { const c = currentDay() || TOTAL + 1; return (t.w - 1) * 7 + 1 <= c || !!S.reads[t.id]; };
+const textOpen = (t) => { const c = currentDay() || TOTAL + 1; return firstDayOf(t.w - 1) <= c || !!S.reads[t.id]; };
 function textsList(list = TEXTS) {
   return `<div class="txlist">${list.map((t) => { const o = textOpen(t), r = S.reads[t.id];
     return `<button class="txi ${o ? '' : 'lock'}" ${o ? `data-tx="${t.id}"` : 'disabled'}><span class="tag">${t.lv}</span><span class="grow"><b>${t.kind === 'escuta' ? '🎧' : '📖'} ${esc(t.t)}</b><small>${o ? (r ? `✓ ${r.ok}/${r.n} acertos` : 'Semana ' + t.w) : '🔒 libera na semana ' + t.w}</small></span></button>`; }).join('')}</div>`;
@@ -1385,7 +1388,7 @@ function texto(id) {
 const PQ = 6, PASS = 5;
 let PT = null;
 function levelQuestions(lv) {
-  const p = PHASES.find((x) => x.id === lv), ls = LESSONS.slice(p.weeks[0] * 6, p.weeks[1] * 6);
+  const p = PHASES.find((x) => x.id === lv), ls = phaseDays(p).map(dayInfo).filter((x) => !x.review).map((x) => LESSONS[x.li]);
   const cz = sample(ls.flatMap((l) => l.cz.map((c) => ({ q: c.q, a: c.a, w: c.w, why: c.why, l }))), PQ - 2);
   const vs = sample(ls.flatMap((l) => l.v.filter((v) => !/\(/.test(v.de)).map((v) => ({ v, l }))), 2).map(({ v, l }) => {
     const others = sample(ls.flatMap((x) => x.v).filter((x) => x.pt !== v.pt), 2).map((x) => x.pt);
@@ -1422,7 +1425,7 @@ function nivel() {
 }
 function nivelResult() {
   const passed = PT.res.filter((r) => r.ok >= PASS).map((r) => r.lv), top = passed[passed.length - 1];
-  const next = PHASES.find((p) => !passed.includes(p.id)), startDay = next ? next.weeks[0] * 7 + 1 : TOTAL;
+  const next = PHASES.find((p) => !passed.includes(p.id)), startDay = next ? firstDayOf(next.weeks[0]) : TOTAL;
   app.innerHTML = `<h1>🎯 Resultado</h1>
   <div class="card">${PT.res.map((r) => `<div class="prow"><span>${r.lv} ${r.ok >= PASS ? '✅' : '—'}</span><div class="bar"><i style="width:${Math.round((r.ok / PQ) * 100)}%"></i></div><small>${r.ok}/${PQ}</small></div>`).join('')}</div>
   <div class="card"><h2 style="margin-top:0">${top ? 'Você domina o ' + top : 'Comece do início'}</h2>
