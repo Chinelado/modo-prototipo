@@ -263,3 +263,10 @@ button.ghost { color: var(--p600); }
 }
 
 .mo-partcard .limgs:not(:has(figure:not([hidden]))) { display: none; }
+
+/* ---------- verificação rápida em cada passo ---------- */
+.mo-verif { border-left: 4px solid var(--p500); }
+.mo-verif .mo-card-h small { margin-left: auto; font-size: .78rem; }
+.mo-verif .q { margin: 0 0 8px; } .mo-verif .q b { display: block; margin-top: 4px; }
+.mo-verif .opts { margin: 0; } .mo-verif .line, .mo-verif .pool { max-width: none; }
+.mo-chkr p { margin: 10px 0 0; } .mo-ok2 { color: var(--ok); font-weight: 600; display: flex; align-items: center; gap: 6px; } .mo-no2 { color: var(--no); }

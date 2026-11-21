@@ -21,7 +21,7 @@ A lição deixou de ser uma página única e passou a ter **5 etapas**, com a ba
 ## Sugestões (ainda não feitas)
 
 ### Aprendizado
-1. **Prática dentro da aula.** Depois de cada passo, 1 ou 2 exercícios rápidos daquele passo, em vez de 14 exercícios só no fim. Lembrar logo depois de entender fixa mais que reler.
+1. ~~**Prática dentro da aula.**~~ ✅ Feito: cada passo da aula termina com uma verificação rápida, sem nota (uma lacuna da lição ligada àquele passo ou montar uma frase-exemplo do passo). Cobre 612 dos 781 passos; os demais são passos sem exemplo nem lacuna correspondente.
 2. **Objetivo no início e autoavaliação no fim** (já decidido; depende dos objetivos "consigo…").
 3. **Revisão no começo da lição.** Abrir com 3 cartas ou perguntas da lição anterior antes da conversa nova.
 4. **Vocabulário em grupos de 5** com um minijogo de memória antes de praticar, em vez da tabela inteira de uma vez.

@@ -443,6 +443,20 @@ intro = function (day) {
   });
   // parte sem texto (só as imagens, que carregam depois ou nem existem) junta com a seguinte
   for (let k = parts.length - 2; k >= 0; k--) if (parts[k].nodes.every((n) => n.matches('.limgs, figure'))) { parts[k + 1].nodes.unshift(...parts[k].nodes); parts.splice(k, 1); }
+  // verificação rápida em cada passo: uma lacuna da lição que aparece naquele passo ou, se não houver,
+  // montar uma das frases-exemplo do passo. Cada lacuna é usada uma vez só.
+  const secs = {};
+  (l.deep || '').split(/\n# /).slice(1).forEach((s) => { const [h, ...rest] = s.split('\n'); secs[norm(h.replace(/\*\*/g, ''))] = rest.join('\n'); });
+  const usedCz = new Set(), escRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  parts.forEach((p) => {
+    const txt = secs[norm(p.t)]; if (txt == null) return;
+    const low = norm(txt);
+    const j = l.cz.findIndex((c, k) => !usedCz.has(k) && (low.includes(norm(fill(c))) || (norm(c.a).length >= 3 && new RegExp('(^| )' + escRe(norm(c.a)) + '( |$)').test(low))));
+    if (j >= 0) { usedCz.add(j); p.chk = { cz: l.cz[j] }; return; }
+    const ex = txt.split('\n').filter((x) => x.startsWith('~ ') && x.includes(' = ')).map((x) => { const k = x.indexOf(' = '); return { de: x.slice(2, k).replace(/\*\*/g, '').trim(), pt: x.slice(k + 3).replace(/\*\*/g, '').trim() }; })
+      .filter((s) => { const n = s.de.split(' ').length; return n >= 3 && n <= 8 && !/[=·|]/.test(s.de); });
+    if (ex.length) p.chk = { ord: ex[ex.length - 1] };
+  });
   if (resumo || bd) parts.push({ t: '🧩 Resumo da lição', nodes: [resumo, bd].filter(Boolean), solta: true });
   if (!parts.length) parts.push({ t: 'Aula', nodes: [] });
   // estrutura nova
@@ -465,6 +479,14 @@ intro = function (day) {
     const el = elOf(`<div class="mo-part" data-part="${k}"></div>`);
     if (p.solta) el.append(...p.nodes);
     else { const c = elOf('<div class="card deep mo-partcard"></div>'); c.append(...p.nodes); el.append(c); }
+    if (p.chk) {
+      const box2 = elOf(`<div class="card mo-verif"><div class="mo-card-h">${ic('target', 20)}<h3>Verifique o que entendeu</h3><small class="mut">sem nota, só para fixar</small></div><div class="mo-chkq"></div><div class="mo-chkr"></div></div>`);
+      const q = $('.mo-chkq', box2), r = $('.mo-chkr', box2);
+      const res = (ok, right, why) => { r.innerHTML = ok ? `<p class="mo-ok2">${ic('check', 16)} Isso mesmo!</p>` : `<p class="mo-no2">Resposta: <b>${esc(right)}</b></p>${why ? `<p class="mut">${esc(why)}</p>` : ''}`; if (ok) sfx('tarefa'); };
+      if (p.chk.cz) { const c = p.chk.cz; mcq(q, `<p class="q">Complete:<b>${esc(c.q)}</b></p>`, shuffle([c.a, ...c.w]), (o) => czOk(c, o), (ok) => res(ok, fill(c), c.why), ''); }
+      else order(q, p.chk.ord, (ok) => res(ok, p.chk.ord.de, ''));
+      el.append(box2);
+    }
     P(1).append(el);
   });
   [voc, ...nw].filter(Boolean).forEach((n) => P(2).append(n));
