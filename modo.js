@@ -421,6 +421,45 @@ const LSTEP = [
   { t: 'Praticar', i: 'target', min: '15 min' },
   { t: 'Ir além', i: 'compass', min: 'opcional' },
 ];
+// ritmo do aluno, em minutos: média móvel por etapa (0, 2, 3) e por parte da aula ('p'); vale a partir de 2 medidas
+const PACE_DEF = [3, 12, 5, 15, 0];
+const paceOf = (k) => { const p = (S.pace || {})[k]; return p && p.n >= 2 ? p.m : null; };
+const paceAdd = (k, min) => { if (!(min > 0.15 && min < 40)) return; S.pace = S.pace || {}; const p = (S.pace[k] = S.pace[k] || { n: 0, m: 0 }); p.m = p.n ? p.m * 0.7 + min * 0.3 : min; p.n++; };
+// Palavras em grupos de 5, cada grupo com um jogo de pares; o vocabulário ampliado fica recolhido
+function vocabGroupsEl(l, st) {
+  const core = l.v.filter((v) => !v.x), ext = l.v.filter((v) => v.x), G = [];
+  for (let i = 0; i < core.length; i += 5) G.push(core.slice(i, i + 5));
+  if (G.length > 1 && G[G.length - 1].length < 3) G[G.length - 2].push(...G.pop());
+  st.vg = st.vg || {}; let g = Math.min(st.vgI || 0, Math.max(0, G.length - 1));
+  const el = elOf(`<div><div class="card mo-vgrp"></div>${ext.length ? `<details class="card mo-vext"><summary><b>Vocabulário ampliado</b> <span class="mut">${ext.length} palavras, opcional</span></summary><ul class="mo-vlist">${ext.map((v) => `<li>${spk(v.de)}<b class="${gcls(v.de)}" lang="de">${esc(v.de)}</b><span>${esc(v.pt)}</span></li>`).join('')}</ul></details>` : ''}</div>`);
+  const box = $('.mo-vgrp', el);
+  if (!G.length) { box.remove(); return el; }
+  const draw = () => {
+    st.vgI = g; const ws = G[g];
+    box.innerHTML = `<div class="mo-card-h">${ic('layers', 22)}<h3>Grupo ${g + 1} de ${G.length}</h3><span class="mo-dots">${G.map((_, k) => `<button data-vg="${k}" class="${k === g ? 'on' : st.vg[k] ? 'ok' : ''}" aria-label="Grupo ${k + 1}"></button>`).join('')}</span></div>
+      <p class="mut">Ouça e repita cada palavra; depois teste o grupo num jogo rápido de pares. <small>Cores: <span class="g-m">der</span> · <span class="g-f">die</span> · <span class="g-n">das</span></small></p>
+      <ul class="mo-vlist">${ws.map((v) => `<li>${spk(v.de)}<b class="${gcls(v.de)}" lang="de">${esc(v.de)}</b><span>${v.em ? v.em + ' ' : ''}${esc(v.pt)}</span></li>`).join('')}</ul>
+      <div class="mo-vgame"></div>
+      <div class="row mo-vact"><button class="pri" type="button" data-vplay>${st.vg[g] ? 'Jogar de novo' : 'Testar este grupo'}</button>${g < G.length - 1 ? `<button class="ghost" type="button" data-vnext>Próximo grupo ${ic('arrow', 16)}</button>` : ''}</div>`;
+    $$('[data-vg]', box).forEach((b) => (b.onclick = () => { g = +b.dataset.vg; draw(); }));
+    if ($('[data-vnext]', box)) $('[data-vnext]', box).onclick = () => { g++; draw(); };
+    $('[data-vplay]', box).onclick = () => game(ws);
+  };
+  const game = (ws) => {
+    const area = $('.mo-vgame', box), L = shuffle(ws.slice()), R = shuffle(ws.slice()); let sel = null, left = ws.length, miss = 0;
+    $('.mo-vlist', box).hidden = true; $('.mo-vact', box).hidden = true;
+    area.innerHTML = `<p class="q">Ligue cada palavra à tradução</p><div class="mo-pairs"><div>${L.map((v) => `<button type="button" data-pl="${v.k}" lang="de" class="${gcls(v.de)}">${esc(v.de)}</button>`).join('')}</div><div>${R.map((v) => `<button type="button" data-pr="${v.k}">${esc(v.pt)}</button>`).join('')}</div></div>`;
+    $$('[data-pl]', area).forEach((b) => (b.onclick = () => { $$('[data-pl]', area).forEach((x) => x.classList.remove('sel')); sel = b; b.classList.add('sel'); say(ws.find((v) => v.k === b.dataset.pl).de); }));
+    $$('[data-pr]', area).forEach((b) => (b.onclick = () => {
+      if (!sel) return;
+      if (sel.dataset.pl === b.dataset.pr) { [sel, b].forEach((x) => { x.classList.remove('sel'); x.classList.add('ok'); x.disabled = true; }); sel = null; if (!--left) fim(); }
+      else { miss++; const a = sel; [a, b].forEach((x) => x.classList.add('no')); setTimeout(() => [a, b].forEach((x) => x.classList.remove('no')), 450); }
+    }));
+    const fim = () => { st.vg[g] = 1; save(); sfx('tarefa'); draw(); $('.mo-vgame', box).innerHTML = `<p class="mo-ok2">${ic('check', 16)} Grupo fixado${miss ? ` (${miss} ${miss === 1 ? 'troca' : 'trocas'} no caminho)` : ' de primeira'}!</p>`; };
+  };
+  draw();
+  return el;
+}
 const lsGet = (day) => { S.lstep = S.lstep || {}; return (S.lstep[day] = S.lstep[day] || { s: 0, c: 0, seen: [0] }); };
 const elOf = (html) => { const t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstElementChild; };
 const _intro3 = intro;
@@ -457,14 +496,23 @@ intro = function (day) {
       .filter((s) => { const n = s.de.split(' ').length; return n >= 3 && n <= 8 && !/[=·|]/.test(s.de); });
     if (ex.length) p.chk = { ord: ex[ex.length - 1] };
   });
+  // celular: parte com mais de ~150 palavras vira duas ou mais telas, sem cortar um bloco no meio; a verificação fica na última
+  if (innerWidth < 700) for (let k = parts.length - 1; k >= 0; k--) {
+    const p = parts[k], wc = (n) => (n.textContent || '').split(/\s+/).filter(Boolean).length, isHead = (n) => n.matches('h3.step, .limgs');
+    if (p.nodes.reduce((a, n) => a + wc(n), 0) <= 170) continue;
+    const chunks = [[]]; let acc = 0;
+    p.nodes.forEach((n) => { const w = wc(n), cur2 = chunks[chunks.length - 1]; if (acc + w > 150 && !isHead(n) && cur2.some((x) => !isHead(x))) { chunks.push([]); acc = 0; } chunks[chunks.length - 1].push(n); acc += w; });
+    if (chunks.length > 1) parts.splice(k, 1, ...chunks.map((nodes, i) => ({ t: i ? p.t + ' (continuação)' : p.t, nodes, chk: i === chunks.length - 1 ? p.chk : null })));
+  }
   if (resumo || bd) parts.push({ t: '🧩 Resumo da lição', nodes: [resumo, bd].filter(Boolean), solta: true });
   if (!parts.length) parts.push({ t: 'Aula', nodes: [] });
   // estrutura nova
-  const words = l.v.filter((v) => !v.x).length;
+  const words = l.v.filter((v) => !v.x).length, ob = typeof OBJ !== 'undefined' ? OBJ[l.sid] : null;
   const box = elOf(`<div class="mo-ls"><nav class="mo-steps2" aria-label="Etapas da lição">${LSTEP.map((x, k) => `<button data-ls="${k}"><span class="mo-sn">${k + 1}</span><span><b>${x.t}</b><small>${x.min}</small></span></button>`).join('')}</nav>
-    <div class="mo-lp" data-lp="0"><div class="card mo-lsum"><div class="mo-card-h">${ic('headphones', 22)}<h3>Comece ouvindo</h3></div>
+    <div class="mo-ltools"><span class="mo-left"></span><span class="mo-speed" role="group" aria-label="Velocidade do áudio">${ic('headphones', 16)} Áudio <button type="button" data-sp="1">Normal</button><button type="button" data-sp="0">Devagar</button></span></div>
+    <div class="mo-lp" data-lp="0"><div class="card mo-lsum">${ob ? `<div class="mo-obj1"><span class="mo-pend">objetivo · rascunho</span><b>${esc(ob.o)}</b></div>` : ''}<div class="mo-card-h">${ic('headphones', 22)}<h3>Comece ouvindo</h3></div>
       <p>Nesta lição: <b>${esc(l.pt)}</b> · ${esc(l.gt)} · ${words} palavras novas.</p>
-      <p class="mut">Ouça a conversa duas vezes e tente entender pelo contexto. As traduções ficam escondidas: toque numa fala para conferir. A explicação vem na próxima etapa.</p></div></div>
+      <p class="mut">Para cada fala da conversa: ouça (🔊), repita em voz alta (🎤) e só depois confira a tradução, que se abre quando você termina de falar. Sem microfone, toque na tradução para ver. A explicação vem na próxima etapa.</p></div></div>
     <div class="mo-lp" data-lp="1"><div class="mo-partnav"></div></div>
     <div class="mo-lp" data-lp="2"><p class="mut mo-lhint">Toque em 🔊, ouça e repita cada palavra em voz alta. Elas entram nas suas cartas de revisão quando você praticar.</p></div>
     <div class="mo-lp" data-lp="3"><div class="card mo-cola"><div class="mo-card-h">${ic('bulb', 22)}<h3>Antes de praticar, relembre</h3></div><p>${esc(l.gx)}</p>
@@ -487,6 +535,10 @@ intro = function (day) {
       sm.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tog(sm); upd(); } };
     });
     all.onclick = () => { const open = bs.every((x) => x.classList.contains('on')); bs.forEach((x) => tog(x, !open)); upd(); };
+    // fala guiada: cada fala ganha o microfone; ao terminar de falar (ou pular), a tradução daquela fala se abre
+    $$('.bubble', conv).forEach((bb) => { const de = bb.querySelector('.de')?.textContent || '', pt = bb.querySelector('small')?.textContent || ''; bb.querySelector('.spk')?.insertAdjacentHTML('afterend', micBtn(sayText(de), pt)); });
+    const reveal = (e) => { const bb = e.target.closest('.fala')?.previousElementSibling, sm = bb && bb.matches('.bubble') ? bb.querySelector('small') : null; if (sm) { tog(sm, true); upd(); } };
+    conv.addEventListener('fala', reveal); conv.addEventListener('falaskip', reveal);
     P(0).append(conv);
   }
   if (how) { how.open = false; P(0).append(how); }
@@ -504,17 +556,35 @@ intro = function (day) {
     }
     P(1).append(el);
   });
-  [voc, ...nw].filter(Boolean).forEach((n) => P(2).append(n));
-  if (stb) P(3).append(stb);
-  [hw, xh, xg].filter(Boolean).forEach((n) => P(4).append(n));
+  P(2).append(vocabGroupsEl(l, st)); nw.forEach((n) => P(2).append(n));
+  if (stb) { stb.addEventListener('click', () => { st.pt0 = Date.now(); save(); }); P(3).append(stb); } // mede o tempo real da prática
+  // Ir além enxuto: uma tarefa sugerida (a primeira ainda não feita); as outras e os conteúdos ficam recolhidos
+  if (hw) {
+    const ts = $$('.hwt', hw), fst = ts.find((t) => !t.classList.contains('ok')) || ts[0];
+    ts.forEach((t) => { if (t !== fst) t.hidden = true; });
+    const pm = hw.querySelector('p.mut'); if (pm) pm.textContent = 'Uma sugestão para levar o alemão para o seu dia. Faça hoje ou amanhã e marque aqui.';
+    if (ts.length > 1) { const more = elOf(`<button class="link mo-hwmore" type="button">Ver as outras ${ts.length - 1} opções</button>`); more.onclick = () => { ts.forEach((t) => (t.hidden = false)); more.remove(); }; hw.append(more); }
+    P(4).append(hw);
+  }
+  if (xg && xg.children.length) { const det = elOf(`<details class="card mo-xmore"><summary><b>Conteúdos para ir além</b> <span class="mut">${xg.children.length} ${xg.children.length === 1 ? 'sugestão' : 'sugestões'}</span></summary></details>`); det.append(xg); P(4).append(det); }
   if (!P(4).children.length) P(4).append(elOf('<p class="mut">Nada extra nesta lição.</p>'));
   const lhead = app.querySelector('.lhead');
   [...app.children].forEach((c) => { if (c !== lhead && !c.matches('.back') && c !== box) c.remove(); });
   lhead.after(box);
   // navegação
   const last = parts.length - 1;
+  const est = (k) => (k === 1 ? (paceOf('p') ? paceOf('p') * parts.length : PACE_DEF[1]) : paceOf(k) || PACE_DEF[k]);
+  const mine = (k) => !!(k === 1 ? paceOf('p') : paceOf(k));
   const show = (s, c, scroll = true) => {
+    // ritmo real: o tempo em cada etapa (e em cada parte da aula) alimenta as estimativas das próximas lições
+    const now = Date.now();
+    if (box._t != null) { const m = (now - box._t) / 60000; if (box._s === 1) paceAdd('p', m); else if (box._s !== 3) paceAdd(box._s, m); }
+    box._t = now; box._s = s;
     st.s = s; st.c = Math.max(0, Math.min(last, c)); if (!st.seen.includes(s)) st.seen.push(s); save();
+    $$('[data-ls] small', box).forEach((sm, k) => { sm.textContent = k === 4 ? 'opcional' : `~${Math.max(1, Math.round(est(k)))} min`; sm.classList.toggle('mo-real', mine(k)); sm.title = mine(k) ? 'Pelo seu ritmo nas lições anteriores' : 'Estimativa inicial'; });
+    const left = S.done[day] ? 0 : [0, 1, 2, 3].reduce((a, k) => a + (k < s ? 0 : k === 1 && s === 1 ? est(1) * (parts.length - st.c) / parts.length : est(k)), 0);
+    $('.mo-left', box).innerHTML = S.done[day] ? `${ic('check', 16)} Lição concluída` : `${ic('clock', 16)} Faltam cerca de ${Math.max(1, Math.round(left))} min${[0, 1, 2, 3].some(mine) ? ' <small>(pelo seu ritmo)</small>' : ''}`;
+    $$('[data-sp]', box).forEach((b) => b.classList.toggle('on', (b.dataset.sp === '0') === !!S.slow));
     $$('[data-lp]', box).forEach((p) => (p.hidden = +p.dataset.lp !== s));
     $$('[data-part]', box).forEach((p) => (p.hidden = +p.dataset.part !== st.c));
     $$('[data-ls]', box).forEach((b) => { const k = +b.dataset.ls; b.classList.toggle('on', k === s); b.classList.toggle('ok', k !== s && (k === 3 ? !!S.done[day] : st.seen.includes(k) && k < Math.max(...st.seen))); b.setAttribute('aria-current', k === s ? 'step' : 'false'); });
@@ -527,6 +597,7 @@ intro = function (day) {
     nx.className = s === 3 ? 'ghost' : 'pri'; // na etapa Praticar, o botão principal é o de começar os exercícios
     if (scroll) box.scrollIntoView({ block: 'start', behavior: 'instant' });
   };
+  $$('[data-sp]', box).forEach((b) => (b.onclick = () => { S.slow = b.dataset.sp === '0'; save(); $$('[data-sp]', box).forEach((x) => x.classList.toggle('on', x === b)); }));
   $$('[data-ls]', box).forEach((b) => (b.onclick = () => { const k = +b.dataset.ls; show(k, k === 1 && st.s === 1 ? st.c : 0); }));
   $('#lsNext', box).onclick = () => (st.s === 1 && st.c < last ? show(1, st.c + 1) : show(st.s + 1, 0));
   $('#lsPrev', box).onclick = () => (st.s === 1 && st.c > 0 ? show(1, st.c - 1) : show(st.s - 1, st.s - 1 === 1 ? last : 0));

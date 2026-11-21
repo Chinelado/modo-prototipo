@@ -79,7 +79,8 @@ function say(t, rate = 0.9, slot) {
   if (!S.audio) return;
   slot = slot || vozDe(t); // a voz de quem fala a frase (diálogos e textos têm personagem)
   // palavras soltas tocam um pouco mais devagar
-  if (!playClip(t, slot, rate < 0.85 ? 0.9 : 1, null, () => ttsSay(t, rate))) ttsSay(t, rate);
+  const k = S.slow ? 0.75 : 1; // velocidade escolhida pelo aluno na lição (Normal ou Devagar)
+  if (!playClip(t, slot, (rate < 0.85 ? 0.9 : 1) * k, null, () => ttsSay(t, rate * k))) ttsSay(t, rate * k);
 }
 const spk = (t, slot) => ((hasTTS || AUD) && S.audio ? `<button class="spk" data-say="${esc(t)}"${slot ? ` data-v="${slot}"` : ''} aria-label="Ouvir">🔊</button>` : '');
 document.addEventListener('click', (e) => { const b = e.target.closest('[data-say]'); if (b) say(b.dataset.say, b.dataset.say.split(' ').length < 3 ? 0.8 : 0.9, b.dataset.v); });
