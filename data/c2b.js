@@ -63,7 +63,7 @@ BR O ensaio alemão tem tradição forte (Montaigne foi muito traduzido). O tom 
 `);
 
 L("Grüß Gott und Moin", "Dialetos e regionalismos", "Reconhecer variedades regionais",
-  "Além dos padrões nacionais (C2, semana 32), a Alemanha tem dialetos fortes. Você não precisa falar nenhum, mas precisa reconhecer: Moin (norte), Grüß Gott (sul), Servus (Baviera, Áustria), nee e icke (Berlim), nu (Saxônia), schaffen = arbeiten (Suábia).",
+  "Além dos padrões nacionais (lição Servus und Grüezi), a Alemanha tem dialetos fortes. Você não precisa falar nenhum, mas precisa reconhecer: Moin (norte), Grüß Gott (sul), Servus (Baviera, Áustria), nee e icke (Berlim), nu (Saxônia), schaffen = arbeiten (Suábia).",
   "Moin! Wie geht's?=Olá! Tudo bem? (norte)|Grüß Gott, was darf's sein?=Bom dia, o que deseja? (sul)|Icke bin aus Berlin.=Eu sou de Berlim. (berlinense)",
   "Moin=olá (norte da Alemanha)|Grüß Gott=bom dia (sul, Áustria)|der Dialekt=o dialeto|die Mundart=o dialeto (falar regional)|Plattdeutsch=baixo-alemão|Bairisch=bávaro|Schwäbisch=suábio|Sächsisch=saxão|Berlinerisch=berlinense|das Hochdeutsch=o alemão padrão",
   "Verstehst du den Kollegen aus München?=Você entende o colega de Munique?|Wenn er Hochdeutsch spricht, ja. Wenn er Bairisch redet, kaum.=Quando fala alemão padrão, sim. Quando fala bávaro, quase nada.|Und die Kollegin aus Hamburg?=E a colega de Hamburgo?|Die sagt den ganzen Tag „Moin“, sogar abends!=Ela diz „Moin“ o dia inteiro, até à noite!",
@@ -133,7 +133,7 @@ L("Wortspiele", "Humor e jogos de palavras", "Ambiguidade e trocadilhos",
   "das Wortspiel=o jogo de palavras|der Kalauer=o trocadilho infame|der Doppelsinn=o duplo sentido|mehrdeutig=ambíguo|die Pointe=a graça, o desfecho|der Witz=a piada|witzig=engraçado|schmunzeln=sorrir de leve|auf die Schippe nehmen=tirar sarro|der Galgenhumor=o humor negro",
   "Hast du den Werbespruch gesehen? „Wir machen den Weg frei.“=Viu o slogan? „Nós abrimos o caminho.“|Ja, das passt gut zu einer Bank, die Kredite gibt.=Sim, combina com um banco que dá crédito.|Und das Plakat vom Bäcker: „Hier wird nicht gekleckert, hier wird geklotzt“?=E o cartaz da padaria: „aqui não se economiza“?|Ein typischer Wortspielwitz. Ich musste schmunzeln.=Um jogo de palavras típico. Tive que sorrir.",
   "Ein schlechter, aber lustiger Wortwitz ist ein ___.=Kalauer=Kommentar=Kalender|Ein Wort mit zwei Bedeutungen ist ___.=mehrdeutig=eindeutig=deutlich|Ich verstehe die ___ nicht.=Pointe=Punkt=Spitze");
-D("Fontes de trocadilho: palavras com dois sentidos (Bank = banco de sentar e banco financeiro; Schloss = castelo e fechadura), compostos lidos ao contrário e sons parecidos.|Kalauer é o trocadilho infame, de propósito ruim; os alemães gemem e riem ao mesmo tempo.|Galgenhumor é rir de situações difíceis. Ironia e understatement (C2, semana 32) também fazem parte do humor alemão.|Se não entender uma piada, pergunte: Wo ist der Witz? É normal até para quem está no C2.",
+D("Fontes de trocadilho: palavras com dois sentidos (Bank = banco de sentar e banco financeiro; Schloss = castelo e fechadura), compostos lidos ao contrário e sons parecidos.|Kalauer é o trocadilho infame, de propósito ruim; os alemães gemem e riem ao mesmo tempo.|Galgenhumor é rir de situações difíceis. Ironia e understatement (lição Nicht gerade billig) também fazem parte do humor alemão.|Se não entender uma piada, pergunte: Wo ist der Witz? É normal até para quem está no C2.",
   "Die Bank im Park und die Bank in der Stadt sind zwei verschiedene Dinge.=O banco do parque e o banco da cidade são coisas diferentes.|Das Schloss hat ein altes Schloss.=O castelo tem uma fechadura velha.|Wo ist der Witz?=Qual é a graça?");
 W("o trocadilho infame é o Kalauer|com dois sentidos: mehrdeutig; eindeutig é inequívoco|a graça de uma piada é a Pointe");
 B("Das_Schloss=S^Schloss: castelo|hat=V|ein_altes_Schloss.=OA^Schloss: fechadura (o mesmo som, outro sentido)", "O castelo tem uma fechadura velha.");
@@ -149,7 +149,7 @@ Hoje você aprende a entender jogos de palavras, um dos testes finais de domíni
 # Passo 2: tipos de humor
 | Tipo | O que é |
 | Kalauer | trocadilho infame, ruim de propósito |
-| Ironie | dizer o contrário (C2, semana 32) |
+| Ironie | dizer o contrário (lição Nicht gerade billig) |
 | Galgenhumor | rir do que é difícil |
 | Understatement | dizer menos para dizer mais |
 # Passo 3: onde aparecem
