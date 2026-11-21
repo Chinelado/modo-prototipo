@@ -176,7 +176,7 @@ Com estes módulos, as **42 lições novas** do redesenho estão no protótipo: 
 
 **Prüfungstraining A2:** a estrutura da prova foi conferida no site do Goethe-Institut (21/11/2026): quatro partes, Lesen 30 min, Hören cerca de 30 min, Schreiben 30 min, Sprechen cerca de 15 min em dupla (há versão individual), prova escrita de cerca de 90 min sem pausa, sem dicionário e sem celular. A lição avisa que o formato pode mudar e manda conferir o site oficial. Não cita nota mínima nem número de questões de cada parte.
 
-**Objetivos:** as 42 lições novas têm objetivo "consigo…" e os 8 módulos do A2 ganharam objetivos de módulo. As 24 lições antigas do A2 ainda não têm objetivo próprio (aparecem sem ele na lista do módulo).
+**Objetivos:** as 42 lições novas têm objetivo "consigo…" e os 8 módulos do A2 ganharam objetivos de módulo. As 23 lições antigas do A2 ganharam objetivo em 21/11/2026 (ver "Objetivos das lições antigas do A2" no fim). Com isso, as 84 lições do A1–A2 têm objetivo.
 
 **O que falta em todas as lições novas:** imagens. O áudio gravado foi feito em 21/11/2026 (ver "Áudio" no fim) e a revisão de conteúdo também (ver a seção abaixo).
 
@@ -232,3 +232,10 @@ Li as 42 lições inteiras: vocabulário, diálogos, lacunas e explicações, po
 - **O que a voz lê:** placas e horários ("Mo–Fr 6–18 Uhr") são lidos por extenso ("Montag bis Freitag 6 bis 18 Uhr"), e estrelas e sublinhados de nomes de usuário não são lidos. Isso vale também para a voz do navegador.
 - **Pacotes offline:** cada áudio entra no pacote do nível do seu módulo (A1 ou A2).
 - **Conferência:** num navegador limpo, o app toca os MP3 gravados no fórum, nas placas, na ficha e na aula de idade, sem cair na voz do navegador. Só um áudio ficou com duração fora do esperado: o telefone da ficha da Carla (6,8 s). A duração bate com a leitura dígito por dígito, mas ainda precisa ser ouvido por uma pessoa.
+
+---
+
+## Objetivos das lições antigas do A2 (21/11/2026)
+As 23 lições antigas que ficaram no A2 (Früher, Mit wem?, Warum?, Wohin damit?, os adjetivos, os reflexivos, Komparativ, Dativ, pronomes, Präteritum dos modais, perguntas indiretas, Konjunktiv II, sollen, Futur, o tempo, wenn, datas, verbos com preposição, relativas, dass e os conectores) ganharam objetivo "Consigo…", pergunta de autoavaliação e a escala do Quadro Europeu, no mesmo formato das novas. O relatório anterior falava em 24 porque contava "Im Urlaub", que desceu para o A1 e já tinha objetivo.
+
+Cada objetivo diz o que a pessoa consegue fazer com a língua, não a gramática: "Consigo pedir informações com educação a um desconhecido", e não "Sei fazer perguntas indiretas". Com isso, a lista "Objetivo de cada lição" mostra as 6 lições em todos os módulos do A2. Estão em rascunho, como os demais.

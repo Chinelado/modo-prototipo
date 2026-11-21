@@ -1,7 +1,7 @@
 // Objetivos "consigo…" (decisão 10, 20/11/2026) — RASCUNHO, ainda sem revisão pedagógica.
 // OBJ: por lição, pelo id estável (sid): o = objetivo, a = pergunta de autoavaliação, ref = escala do Quadro Europeu e nível.
 // Vêm do piloto do A1 (docs/objetivos-A1-piloto.md), mais as 42 lições novas do A1–A2 e "Im Urlaub", que desceu para o A1.
-// MOD_OBJ: por módulo (índice na trilha nova). A1 e A2 têm objetivos; as lições antigas do A2 ainda não têm objetivo próprio.
+// MOD_OBJ: por módulo (índice na trilha nova). A1 e A2 têm objetivos, e todas as lições do A1–A2 também (as antigas do A2 desde 21/11/2026).
 const OBJ = {
   0: { o: 'Consigo cumprimentar, me despedir, dizer meu nome e perguntar o nome de alguém.', a: 'Você consegue cumprimentar alguém, dizer seu nome e perguntar o nome da pessoa?', ref: 'Conversation · A1' },
   1: { o: 'Consigo dizer de onde sou e onde moro, e perguntar isso a alguém.', a: 'Você consegue dizer de onde é e onde mora, e perguntar isso a alguém?', ref: 'Information exchange · A1' },
@@ -101,4 +101,30 @@ Object.assign(OBJ, {
   'n-nachrichten': { o: 'Consigo entender o essencial de uma notícia curta: quem, o quê, quando e onde.', a: 'Você consegue entender o essencial de uma notícia curta?', ref: 'Reading for information and argument · A2' },
   'n-pruefung': { o: 'Sei como é a prova do A2 e consigo planejar algo junto com outra pessoa, como na parte oral.', a: 'Você sabe como é a prova do A2 e consegue combinar um horário com alguém?', ref: 'Goal-oriented co-operation · A2' },
   'n-forum': { o: 'Consigo ler opiniões num fórum e escrever a minha, com motivo, consequência e objeção.', a: 'Você consegue escrever uma opinião curta num fórum?', ref: 'Online conversation and discussion · A2; Reading for information and argument · A2' },
+});
+// Lições antigas do A2, na trilha nova (21/11/2026). Chave = índice original da lição.
+Object.assign(OBJ, {
+  19: { o: 'Consigo contar como foi um dia ou um acontecimento no passado, com war e hatte.', a: 'Você consegue contar como foi o seu fim de semana ou um dia especial?', ref: 'Sustained monologue: describing experience · A2' },
+  20: { o: 'Consigo dizer com quem faço as coisas, com quem moro e desde quando.', a: 'Você consegue dizer com quem mora, com quem viaja e desde quando?', ref: 'Information exchange · A2' },
+  23: { o: 'Consigo explicar por que faço algo e dar um motivo ao recusar um convite.', a: 'Você consegue dizer por que faz algo, com weil ou denn?', ref: 'Sustained monologue: putting a case · A2' },
+  21: { o: 'Consigo dizer onde as coisas estão e onde vou colocá-las ao arrumar a casa.', a: 'Você consegue dizer onde ficam as coisas e onde vai colocar cada uma?', ref: 'Goal-oriented co-operation · A2' },
+  27: { o: 'Consigo descrever uma casa ou um apartamento com adjetivos: um quarto grande, uma varanda tranquila.', a: 'Você consegue descrever um apartamento com adjetivos?', ref: 'Sustained monologue: describing experience · A2' },
+  28: { o: 'Consigo descrever pessoas que conheço, como os meus vizinhos, e deixar claro de quem estou falando.', a: 'Você consegue descrever os seus vizinhos ou colegas?', ref: 'Sustained monologue: describing experience · A2' },
+  26: { o: 'Consigo contar a minha rotina pessoal (me levantar, me arrumar, me apressar) e dizer como me sinto.', a: 'Você consegue contar como se arruma de manhã e dizer como se sente?', ref: 'Sustained monologue: describing experience · A2' },
+  22: { o: 'Consigo comparar pessoas, lugares e coisas e dizer o que prefiro e o que é o melhor.', a: 'Você consegue comparar duas cidades ou duas coisas e dizer qual prefere?', ref: 'Sustained monologue: describing experience · A2' },
+  31: { o: 'Consigo dizer o que vou dar de presente e para quem, e dizer se algo me agrada.', a: 'Você consegue dizer o que vai dar a alguém e se gostou de um presente?', ref: 'Conversation · A2' },
+  32: { o: 'Consigo pedir algo emprestado e dizer que vou dar, mostrar ou mandar algo a alguém, sem repetir o nome das coisas.', a: 'Você consegue pedir algo emprestado e dizer "eu te dou isso amanhã"?', ref: 'Goal-oriented co-operation · A2' },
+  30: { o: 'Consigo contar o que eu queria, precisava ou podia fazer no passado, na escola e no trabalho.', a: 'Você consegue contar o que queria ser quando criança e o que precisou fazer no trabalho?', ref: 'Sustained monologue: describing experience · A2' },
+  35: { o: 'Consigo pedir informações com educação a um desconhecido: Wissen Sie, wo …? Können Sie mir sagen, ob …?', a: 'Você consegue pedir uma informação com educação a alguém na rua?', ref: 'Information exchange · A2' },
+  38: { o: 'Consigo fazer pedidos educados em lojas e serviços, com Könnten Sie …?, Ich hätte gern … e Wäre das …?', a: 'Você consegue pedir algo numa loja com Ich hätte gern … ou Könnten Sie …?', ref: 'Obtaining goods and services · A2' },
+  33: { o: 'Consigo dizer ao médico o que sinto e desde quando, e entender os conselhos que ele dá.', a: 'Você consegue explicar ao médico o que sente e entender o que ele recomenda?', ref: 'Information exchange · A2' },
+  29: { o: 'Consigo reservar um quarto de hotel e falar dos meus planos de viagem.', a: 'Você consegue reservar um quarto e dizer o que vai fazer na viagem?', ref: 'Obtaining goods and services · A2' },
+  34: { o: 'Consigo falar do tempo que está fazendo e de como são as estações onde moro.', a: 'Você consegue dizer como está o tempo e como é cada estação na sua cidade?', ref: 'Conversation · A2' },
+  25: { o: 'Consigo falar de planos que dependem de uma condição: Wenn es regnet, bleibe ich zu Hause.', a: 'Você consegue dizer o que faz se chover ou se tiver tempo livre?', ref: 'Informal discussion (with friends) · A2' },
+  39: { o: 'Consigo dizer datas, convidar para uma festa e combinar o que cada um leva.', a: 'Você consegue dizer a data de uma festa e combinar o que levar?', ref: 'Goal-oriented co-operation · A2' },
+  40: { o: 'Consigo falar dos meus interesses, do que estou esperando e do que sonho fazer.', a: 'Você consegue dizer pelo que se interessa e com o que sonha?', ref: 'Conversation · A2' },
+  36: { o: 'Consigo explicar quem é uma pessoa, dizendo o que ela faz, de onde vem ou onde está.', a: 'Você consegue explicar quem é alguém numa foto ou numa festa?', ref: 'Sustained monologue: describing experience · A2' },
+  37: { o: 'Consigo dizer de qual coisa estou falando: o filme que vi, a música de que gosto, os óculos que comprei.', a: 'Você consegue falar de um filme ou de uma música de que gosta, dizendo qual é?', ref: 'Sustained monologue: describing experience · A2' },
+  24: { o: 'Consigo dar a minha opinião de forma simples e contar o que outra pessoa disse.', a: 'Você consegue dizer o que acha de algo e contar o que alguém disse?', ref: 'Informal discussion (with friends) · A2' },
+  41: { o: 'Consigo dizer o que faço por causa de algo, o que faço mesmo assim e o que acontece se não fizer (deshalb, trotzdem, sonst).', a: 'Você consegue ligar duas ideias com deshalb ou trotzdem?', ref: 'Coherence and cohesion · A2' },
 });
