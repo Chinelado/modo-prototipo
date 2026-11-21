@@ -183,6 +183,19 @@ function modRow(d, w) {
     <span><b>${L ? esc(L.de) : 'Avaliação do módulo'}</b><small>${L ? esc(L.pt) + ' · ' + esc(L.gt) : `18 exercícios com as ${info.n} lições do módulo`}</small></span>
     <span class="mo-meta">${meta}${locked ? '' : ic('chevron', 18)}</span></button>`;
 }
+// Objetivos do módulo (rascunho) e, por lição, o objetivo com a autoavaliação do aluno.
+// Módulo ainda sem objetivos escritos mostra o que cada lição treina, marcado como pendente.
+function modObjCard(w, ls) {
+  const mo = typeof MOD_OBJ !== 'undefined' ? MOD_OBJ[w] : null, lo = ls.filter((l) => typeof OBJ !== 'undefined' && OBJ[l.sid]);
+  if (!mo && !lo.length) return `<div class="card mo-obj"><div class="mo-card-h">${ic('target', 22)}<h3>Objetivos do módulo</h3><span class="mo-pend">pendente</span></div>
+    <p class="mut">Os objetivos "consigo…" deste módulo ainda não foram escritos. Por enquanto, o que cada lição treina:</p>
+    <ul class="mo-gt">${ls.map((l) => `<li>${esc(l.gt)}</li>`).join('')}</ul></div>`;
+  const au = S.auto || {}, sim = lo.filter((l) => (au[l.sid] || {}).r === 'sim').length;
+  return `<div class="card mo-obj"><div class="mo-card-h">${ic('target', 22)}<h3>Objetivos do módulo</h3><span class="mo-pend">rascunho</span></div>
+    ${mo ? `<p class="mut">Ao fim deste módulo:</p><ul class="mo-gt">${mo.map((o) => `<li>${esc(o)}</li>`).join('')}</ul>` : ''}
+    ${lo.length ? `<details class="mo-lobj"><summary>Objetivo de cada lição <span class="mut">· ${sim} de ${lo.length} marcados como "já consigo"</span></summary><ul class="mo-lobjs">${lo.map((l) => { const r = (au[l.sid] || {}).r;
+      return `<li class="${r === 'sim' ? 'sim' : r === 'nao' ? 'nao' : ''}"><span class="mo-lob">${r === 'sim' ? ic('check', 14) : r === 'nao' ? '…' : '·'}</span><span><b lang="de">${esc(l.de)}</b><small>${esc(OBJ[l.sid].o)}</small></span></li>`; }).join('')}</ul></details>` : ''}</div>`;
+}
 function modulo(w) {
   w = Math.max(0, Math.min(WEEKS - 1, Number.isFinite(+w) ? +w : 0));
   const p = phaseOf(w), { cur, ds, n } = modState(w), ls = modLessons(w);
@@ -205,9 +218,7 @@ function modulo(w) {
       ${tx ? `<button class="mo-pr mo-lrow mo-tx" id="mTx"><span class="mo-tile a">${ic(tx.kind === 'escuta' ? 'headphones' : 'book', 20)}</span><span><b>${esc(tx.t)}</b><small>Texto ${tx.kind === 'escuta' ? 'de escuta' : 'de leitura'} do módulo · opcional</small></span><span class="mo-meta">${(S.reads || {})[tx.id] ? ic('check', 18) : ''}${ic('chevron', 18)}</span></button>` : ''}
     </div>
     <div>
-      <div class="card mo-obj"><div class="mo-card-h">${ic('target', 22)}<h3>Objetivos do módulo</h3><span class="mo-pend">pendente</span></div>
-        <p class="mut">Os objetivos "consigo…" deste módulo ainda não foram escritos. Por enquanto, o que cada lição treina:</p>
-        <ul class="mo-gt">${ls.map((l) => `<li>${esc(l.gt)}</li>`).join('')}</ul></div>
+      ${modObjCard(w, ls)}
       <div class="card"><div class="mo-card-h">${ic('layers', 22)}<h3>Vocabulário</h3></div>
         <p><b>${words.length} palavras</b> · <span class="mut">${inCards} já nas suas cartas</span></p>
         <div class="mo-words">${words.slice(0, 12).map((v) => `<span class="mo-w">${spk(v.de)}<span class="${gcls(v.de)}">${esc(v.de)}</span></span>`).join('')}</div>
@@ -644,6 +655,21 @@ finish = function () {
       ${keys.length ? `<p class="mut mo-cnext">${ic('layers', 16)} ${keys.length} ${keys.length === 1 ? 'palavra que você errou volta' : 'palavras que você errou voltam'} na revisão de cartas amanhã.</p>` : ''}</div>`
     : `<div class="card mo-concl"><div class="mo-card-h">${ic('check', 22)}<h3>Nada para rever</h3></div><p class="mut">Você não errou nenhum exercício nesta sessão.</p></div>`;
   app.querySelector('.stats')?.insertAdjacentHTML('afterend', html);
+  // autoavaliação do objetivo "consigo…": fica guardada à parte e não entra no acerto das competências (decisão 10)
+  const ob = s.kind === 'lesson' && typeof OBJ !== 'undefined' ? OBJ[s.ctxs[0].sid] : null;
+  if (ob) {
+    const sid = s.ctxs[0].sid, prev = (S.auto || {})[sid];
+    app.querySelector('.stats').insertAdjacentHTML('afterend', `<div class="card mo-auto"><div class="mo-card-h">${ic('target', 22)}<h3>Autoavaliação</h3><small class="mut">não vale nota</small></div>
+      <p class="mo-obj2">Objetivo: ${esc(ob.o)}</p><p><b>${esc(ob.a)}</b></p>
+      <div class="row"><button class="pri" type="button" data-au="sim">Já consigo</button><button type="button" data-au="nao">Ainda não</button></div><div class="mo-aur">${prev ? `<p class="mut">Da última vez você marcou: ${prev.r === 'sim' ? 'já consigo' : 'ainda não'}.</p>` : ''}</div></div>`);
+    $$('[data-au]', app).forEach((b) => (b.onclick = () => {
+      const r = b.dataset.au; S.auto = S.auto || {}; S.auto[sid] = { r, d: today() }; save();
+      $$('[data-au]', app).forEach((x) => { x.disabled = true; x.classList.toggle('sel', x === b); });
+      $('.mo-aur', app).innerHTML = r === 'sim' ? `<p class="mo-ok2">${ic('check', 16)} Registrado. Esse objetivo aparece como alcançado na tela do módulo.</p>`
+        : `<p>Sem problema: é para isso que serve. Reveja a aula e faça a prática de novo amanhã.</p><button class="ghost" type="button" id="auRev">Rever a aula ${ic('arrow', 14)}</button>`;
+      if ($('#auRev', app)) $('#auRev', app).onclick = () => { const day = LDAY[s.ctxs[0].i], st = lsGet(day); st.goS = 1; st.go = null; go('intro', day); };
+    }));
+  }
   $$('[data-rev]', app).forEach((b) => (b.onclick = () => { const r = rows[+b.dataset.rev], day = LDAY[r.e.li], st = lsGet(day); st.goS = r.t.s; st.go = r.t.go || null; go('intro', day); }));
 };
 
@@ -685,6 +711,20 @@ intro = function (day) {
   };
   $('.mo-wskip', card).onclick = () => { st.warm = true; save(); card.remove(); };
   next();
+};
+
+/* ---------- Tamanho do texto (Perfil › Ajustes) ---------- */
+const applyFs = () => { document.documentElement.dataset.fs = S.fs === 'g' ? 'g' : ''; };
+applyFs();
+const _perfil2 = perfil;
+perfil = function () {
+  _perfil2();
+  const h = [...app.querySelectorAll('h2')].find((x) => /Ajustes/.test(x.textContent)), card = h && h.nextElementSibling;
+  if (!card) return;
+  card.insertAdjacentHTML('afterbegin', `<div class="mo-fsrow"><span><b>Tamanho do texto</b><small>Para ler as aulas com conforto no celular.</small></span><span class="mo-seg" role="group" aria-label="Tamanho do texto"><button type="button" data-fs="">Normal</button><button type="button" data-fs="g">Grande</button></span></div>`);
+  const upd = () => $$('[data-fs]', card).forEach((b) => b.classList.toggle('on', b.dataset.fs === (S.fs === 'g' ? 'g' : '')));
+  $$('[data-fs]', card).forEach((b) => (b.onclick = () => { S.fs = b.dataset.fs; save(); applyFs(); upd(); }));
+  upd();
 };
 
 // app.js já desenhou a primeira tela com a versão antiga: redesenha com a camada MODO.

@@ -18,20 +18,20 @@ A lição deixou de ser uma página única e passou a ter **5 etapas**, com a ba
 - Etapas visitadas ficam marcadas; Praticar só fica marcada quando a lição foi concluída.
 - O conteúdo é o mesmo de antes, apenas redistribuído. Nada foi removido.
 
-## Sugestões (ainda não feitas)
+## Sugestões (todas feitas no protótipo)
 
 ### Aprendizado
 1. ~~**Prática dentro da aula.**~~ ✅ Feito: cada passo da aula termina com uma verificação rápida, sem nota (uma lacuna da lição ligada àquele passo ou montar uma frase-exemplo do passo). Cobre 612 dos 781 passos; os demais são passos sem exemplo nem lacuna correspondente.
-2. **Objetivo no início e autoavaliação no fim** (já decidido; depende dos objetivos "consigo…").
+2. ~~**Objetivo no início e autoavaliação no fim**~~ ✅ Feito para o A1 (rascunho): objetivo no topo da etapa Ouvir, "Já consigo / Ainda não" na conclusão, objetivos do módulo e de cada lição na tela do Módulo. Do A2 em diante: em redação.
 3. ~~**Revisão no começo da lição.**~~ ✅ Feito: "Aquecimento · 1 min" no topo da etapa Ouvir, com 2 palavras e 1 lacuna da lição anterior da trilha. Aparece uma vez por lição, só se a anterior foi concluída e a atual ainda não; dá para pular. Palavra errada volta nas cartas no dia seguinte.
-4. **Vocabulário em grupos de 5** com um minijogo de memória antes de praticar, em vez da tabela inteira de uma vez.
+4. ~~**Vocabulário em grupos de 5**~~ ✅ Feito: grupos de 5 com áudio e jogo de pares; o ampliado fica recolhido.
 5. ~~**Conclusão que ensina**~~ ✅ Feito: a tela final mostra "O que rever desta sessão", com a resposta certa de cada erro e um botão que abre a lição no ponto que o explica (o passo da aula, as palavras ou a conversa). As cartas das palavras erradas voltam no dia seguinte.
-6. **Fala guiada na etapa Ouvir:** ouvir, repetir com o microfone e só depois ver a tradução (sombra).
+6. ~~**Fala guiada na etapa Ouvir**~~ ✅ Feito: microfone em cada fala; a tradução se abre depois que o aluno fala (ou pula).
 
 ### Usabilidade
-7. **Limite de texto por tela** na aula (cerca de 150 palavras no celular); passos longos viram duas partes.
+7. ~~**Limite de texto por tela**~~ ✅ Feito: no celular, parte com mais de ~150 palavras vira duas ou mais telas (um bloco único, como uma tabela, não é cortado).
 8. ~~**Tradução escondida por padrão** na conversa~~ ✅ Feito: na etapa Ouvir as traduções aparecem borradas; um toque (ou Enter) mostra cada uma, e "Mostrar todas as traduções" abre ou fecha todas.
-9. **Controle de velocidade do áudio** visível em toda a lição (normal e devagar), não só nos exercícios.
-10. **Tamanho do texto ajustável** no Perfil (normal, grande), para leitura longa no celular.
-11. **Indicador de tempo restante** na barra de etapas, a partir do ritmo real do aluno.
-12. **Etapa Ir além mais enxuta:** uma tarefa sugerida por vez, com as outras recolhidas.
+9. ~~**Velocidade do áudio**~~ ✅ Feito: "Normal / Devagar" no topo da lição, vale para todo áudio (Devagar = 75%).
+10. ~~**Tamanho do texto**~~ ✅ Feito: Perfil › Ajustes › Normal ou Grande.
+11. ~~**Tempo restante**~~ ✅ Feito: "Faltam cerca de N min"; depois de 2 medidas, a estimativa de cada etapa segue o ritmo do aluno.
+12. ~~**Ir além enxuto**~~ ✅ Feito: uma tarefa sugerida; as outras e os conteúdos ficam recolhidos.

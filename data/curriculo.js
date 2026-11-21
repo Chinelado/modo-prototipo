@@ -41,6 +41,7 @@ NL('n-buchstabieren', {
 No Brasil a gente soletra o tempo todo: no telefone, na farmácia, no cadastro. Na Alemanha também, e o seu nome provavelmente vai precisar ser soletrado muitas vezes. Hoje você aprende o alfabeto e as perguntas para isso.
 # Passo 1: as letras que se dizem igual
 Boa parte das letras soa parecida com o português: A (a), B (bê), D (dê), F (éf), K (ká), L (él), M (ém), N (én), O (ô), P (pê), S (és), T (tê), U (u), X (iks).
+~ Mein Name ist Ana: A-N-A. = Meu nome é Ana: A-N-A.
 # Passo 2: as letras que enganam
 | Letra | Nome em alemão | Como soa para nós |
 | E | e | "ê" |
@@ -53,6 +54,7 @@ Boa parte das letras soa parecida com o português: A (a), B (bê), D (dê), F (
 | Y | ypsilon | "üpsilon" |
 | Z | zet | "tsét" |
 BR Atenção especial a **V** e **W**: em alemão, V se chama "fau" e W se chama "vê". É o contrário do que a intuição manda.
+~ Ich heiße Vera, mit V. = Eu me chamo Vera, com V.
 # Passo 3: as letras só do alemão
 | Letra | Nome | Sem teclado alemão |
 | Ä | ä | ae |
@@ -61,6 +63,7 @@ BR Atenção especial a **V** e **W**: em alemão, V se chama "fau" e W se chama
 | ß | Eszett | ss |
 ~ Müller = M-Ü-L-L-E-R (ou Mueller)
 ~ Straße = S-T-R-A-Eszett-E (ou Strasse)
+~ Ich heiße Müller, mit Ü. = Eu me chamo Müller, com Ü.
 # Passo 4: as perguntas para soletrar
 ~ Wie schreibt man das? = Como se escreve isso?
 ~ Können Sie das bitte buchstabieren? = O senhor pode soletrar, por favor?
@@ -72,6 +75,7 @@ BR Atenção especial a **V** e **W**: em alemão, V se chama "fau" e W se chama
 - - se diz **Bindestrich**
 - maiúscula: **großes** A · minúscula: **kleines** a
 ~ ana.souza@web.de = ana Punkt souza at web Punkt de
+~ Das schreibt man mit Punkt. = Isso se escreve com ponto.
 > Treine agora com o seu próprio nome: diga cada letra em voz alta, devagar.
 ? Como se chama a letra W em alemão? || vê (we)
 ? E a letra V? || fau (vau)
@@ -110,6 +114,7 @@ Hoje você aprende a dizer e perguntar a idade e a passar um número de telefone
 | 10 | zehn |
 | 11 | elf |
 | 12 | zwölf |
+~ Das sind zwölf Euro. = São doze euros.
 # Passo 2: de 13 a 19, uma regra só
 Unidade + **zehn**: drei + zehn = **dreizehn**, vier + zehn = **vierzehn**.
 | 13 | dreizehn |
@@ -130,6 +135,7 @@ BR Em português a gente **tem** trinta anos. Em alemão a gente **é** trinta a
 # Passo 4: o número de telefone
 Os alemães costumam ditar o telefone dígito por dígito ou em pares.
 ~ 0151 1219 = null eins fünf eins, zwölf, neunzehn
+~ Meine Nummer ist null eins fünf eins. = Meu número é zero um cinco um.
 > Ao telefone, **zwei** e **drei** se confundem. Por isso muita gente diz **zwo** no lugar de zwei.
 ? Como se diz 17? || siebzehn
 ? Complete: Ich ___ dreißig Jahre alt. || bin
@@ -198,12 +204,15 @@ Esta lição é de **ler e escrever**. Você vai ler a ficha de inscrição de u
 | Staatsangehörigkeit | nacionalidade |
 | Unterschrift | assinatura |
 BR Cuidado: **Name** no formulário é o **sobrenome**, não o nome. O nome vai em **Vorname**.
+~ Mein Vorname ist Carla. = Meu nome é Carla.
 # Passo 3: como se escrevem os dados
 - Data: dia.mês.ano, com pontos: **05.03.1990**
 - Endereço: rua + número, depois CEP + cidade: **Lindenstraße 12, 10969 Berlin**
 - Países e línguas têm nome próprio: Brasilien, Deutschland · Portugiesisch, Englisch
+~ Ich wohne in der Lindenstraße 12. = Eu moro na Lindenstraße 12.
 # Passo 4: como ler um formulário
 Você não precisa entender cada palavra. Procure primeiro os campos que você conhece (Name, Vorname, Telefon) e use o que está escrito ao lado para deduzir o resto.
+~ Was bedeutet Geburtsort? = O que significa Geburtsort?
 > No exercício, leia a ficha da Carla com calma. As perguntas estão em português e a resposta está sempre no texto.
 ? Em "Name: Mendes", Mendes é o nome ou o sobrenome? || o sobrenome
 ? Como se pergunta o nome de alguém de forma formal? || Wie heißen Sie?

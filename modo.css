@@ -284,6 +284,58 @@ button.ghost { color: var(--p600); }
 .mo-wr p { margin: 10px 0 0; }
 @media (max-width: 640px) { .mo-crow button { white-space: normal; text-align: left; } }
 
+/* ---------- ferramentas da lição: tempo restante e velocidade do áudio ---------- */
+.mo-ltools { display: flex; align-items: center; justify-content: space-between; gap: 8px 14px; flex-wrap: wrap; margin: -4px 0 12px; max-width: 860px; font-size: .88rem; color: var(--mut); }
+.mo-left { display: inline-flex; align-items: center; gap: 6px; } .mo-left small { font-size: .78rem; }
+.mo-speed, .mo-seg { display: inline-flex; align-items: center; gap: 4px; }
+.mo-speed button, .mo-seg button { padding: 4px 12px; font-size: .84rem; border-radius: 999px; border: 1px solid var(--line); background: var(--bg2); color: var(--ink); }
+.mo-speed button.on, .mo-seg button.on { background: var(--p600); border-color: var(--p600); color: #fff; }
+.mo-steps2 small.mo-real { color: var(--p700); font-weight: 600; }
+:root[data-theme="dark"] .mo-steps2 small.mo-real { color: var(--p600); }
+
+/* ---------- objetivo e autoavaliação ---------- */
+.mo-obj1 { margin: 0 0 12px; padding: 10px 12px; border-radius: 12px; background: var(--p50); }
+.mo-obj1 .mo-pend { display: inline-block; margin: 0 0 4px; }
+.mo-obj1 b { display: block; font-size: 1.02rem; }
+.mo-auto { border-left: 4px solid var(--p600); }
+.mo-auto .mo-card-h small { margin-left: auto; font-size: .78rem; }
+.mo-obj2 { margin: 0 0 4px; color: var(--mut); font-size: .9rem; }
+.mo-auto .row { gap: 8px; margin-top: 8px; } .mo-auto button.sel { outline: 2px solid var(--p600); }
+.mo-aur p { margin: 10px 0 0; } .mo-aur button { margin-top: 8px; display: inline-flex; align-items: center; gap: 6px; }
+.mo-lobj { margin-top: 10px; } .mo-lobj summary { cursor: pointer; font-weight: 600; }
+.mo-lobjs { list-style: none; margin: 8px 0 0; padding: 0; }
+.mo-lobjs li { display: flex; gap: 10px; padding: 6px 0; border-top: 1px solid var(--line); }
+.mo-lobjs li small { display: block; color: var(--mut); }
+.mo-lob { flex: none; display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--bg3); color: var(--mut); font-size: .8rem; }
+.mo-lobjs li.sim .mo-lob { background: var(--okbg); color: var(--ok); }
+
+/* ---------- palavras em grupos ---------- */
+.mo-ls [hidden] { display: none !important; } /* .row e .card definem display e venciam o atributo hidden */
+.mo-vgrp .mo-card-h .mo-dots { margin-left: auto; }
+.mo-vlist { list-style: none; margin: 8px 0; padding: 0; }
+.mo-vlist li { display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid var(--line); }
+.mo-vlist li b { font-size: 1.05rem; }
+.mo-vlist li span { color: var(--mut); }
+.mo-vact { gap: 8px; margin-top: 6px; } .mo-vact button { display: inline-flex; align-items: center; gap: 6px; }
+.mo-pairs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.mo-pairs > div { display: grid; gap: 8px; align-content: start; }
+.mo-pairs button { padding: 10px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg2); color: var(--ink); font-weight: 600; }
+.mo-pairs button.sel { border: 2px solid var(--p600); background: var(--p50); }
+.mo-pairs button.ok { background: var(--okbg); border-color: var(--ok); color: var(--ok); }
+.mo-pairs button.no { background: var(--nobg); border-color: var(--no); }
+.mo-vext summary, .mo-xmore summary { cursor: pointer; }
+.mo-hwmore { margin-top: 8px; }
+.mo-xmore .xgrid { margin-top: 10px; }
+
+/* ---------- fala na conversa ---------- */
+.mo-hidept .bubble .mic { margin-right: 4px; }
+
+/* ---------- tamanho do texto ---------- */
+.mo-fsrow { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid var(--line); }
+.mo-fsrow small { display: block; color: var(--mut); }
+html[data-fs="g"] { font-size: 112.5%; }
+html[data-fs="g"] body { font-size: 18px; }
+
 /* ---------- tradução escondida na conversa ---------- */
 .mo-hidept h3 { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .mo-ptall { margin-left: auto; font-size: .85rem; font-weight: 500; }
