@@ -290,5 +290,74 @@ intro = function (day) {
   if (bk) { bk.innerHTML = `← Módulo ${d.w + 1}`; bk.onclick = () => go('modulo', d.w); }
 };
 
+/* ---------- Perfil por competências ---------- */
+// Decisões de 20/11/2026: inteligências só no motor; competência = acerto recente + volume, sem nível A1–C2;
+// aparece com 20 respostas no total e a taxa usa as 30 últimas; Interação e Mediação ficam fora até haver atividades que as avaliem.
+const ATT_MIN = 20, ATT_WIN = 30;
+const COMP = [
+  { id: 'L', g: 'c', n: 'Compreensão auditiva', i: 'headphones', fonte: 'ouça e escolha, textos de escuta', pr: 'escuta' },
+  { id: 'R', g: 'c', n: 'Leitura', i: 'book', fonte: 'textos de leitura, diálogos', pr: 'textos' },
+  { id: 'S', g: 'c', n: 'Fala', i: 'mic', fonte: 'fale a frase, repita em voz alta', pr: 'fala' },
+  { id: 'W', g: 'c', n: 'Escrita', i: 'chat', fonte: 'frases sobre você', pr: 'conversa' },
+  { id: 'voc', g: 'k', n: 'Vocabulário', i: 'library', fonte: 'pares, classificar, resposta rápida, cartas', pr: 'vocab' },
+  { id: 'gra', g: 'k', n: 'Gramática', i: 'puzzle', fonte: 'lacunas, montar frases, regra', pr: 'gram' },
+  { id: 'pro', g: 'k', n: 'Pronúncia', i: 'mic', fonte: 'exercícios de fala', pr: 'fala' },
+];
+// Qual competência cada formato de exercício evidencia (o mesmo formato pode alimentar uma comunicativa e uma de conhecimento).
+function compsOf(k, keys = [], fala = false) {
+  if (k === 'mus') return fala ? ['S', 'pro'] : ['L'];
+  if (k === 'lin') return keys.length ? ['voc'] : ['gra'];
+  if (k === 'log') return ['gra'];
+  if (k === 'int') return ['R'];
+  if (k === 'intra') return ['W', 'gra'];
+  return ['voc']; // esp, nat, cor
+}
+function logAtt(cs, ok) {
+  S.att = S.att || {};
+  cs.forEach((c) => { const a = (S.att[c] = S.att[c] || { n: 0, r: [] }); a.n++; a.r.push(ok ? 1 : 0); if (a.r.length > ATT_WIN) a.r.splice(0, a.r.length - ATT_WIN); });
+}
+// Antes do registro por resposta só existem totais por formato: viram uma estimativa marcada como tal.
+function histOf(id) {
+  const st = (ks) => ks.reduce((a, k) => [a[0] + S.stats[k].ok, a[1] + S.stats[k].n], [0, 0]);
+  const rd = Object.entries(S.reads || {}).reduce((a, [tid, r]) => { const t = TEXTS.find((x) => x.id === tid); return t && (id === 'R') === (t.kind === 'leitura') ? [a[0] + r.ok, a[1] + r.n] : a; }, [0, 0]);
+  const m = { L: st(['mus']).map((v, i) => v + rd[i]), R: st(['int']).map((v, i) => v + rd[i]), W: st(['intra']), voc: st(['esp', 'nat', 'cor']), gra: st(['log']) }[id];
+  return m && m[1] >= ATT_MIN ? Math.round((m[0] / m[1]) * 100) : null;
+}
+function compRow(c) {
+  const a = (S.att || {})[c.id] || { n: 0, r: [] }, has = a.n >= ATT_MIN, pct = has ? Math.round((a.r.reduce((x, y) => x + y, 0) / a.r.length) * 100) : 0, h = has ? null : histOf(c.id);
+  return `<div class="mo-comp ${has ? '' : 'mo-nodata'}"><span class="mo-tile ${c.g === 'k' ? 'a' : ''}">${ic(c.i, 20)}</span>
+    <div class="mo-ct"><div class="mo-cl1"><b>${c.n}</b>${has ? `<span class="mo-pct">${pct}%</span>` : ''}</div>
+      ${has ? `<div class="bar"><i style="width:${pct}%"></i></div><small>acerto nas últimas ${a.r.length} · ${a.n} respostas no total</small>`
+        : `<small>Ainda sem dados suficientes (${a.n} de ${ATT_MIN} respostas)${h !== null ? ` · estimativa do histórico antigo: ~${h}%` : ''}</small>`}
+      <small class="mo-src">Vem de: ${c.fonte}</small></div></div>`;
+}
+function compWeakest() {
+  const r = COMP.map((c) => { const a = (S.att || {})[c.id]; return a && a.n >= ATT_MIN ? { c, p: a.r.reduce((x, y) => x + y, 0) / a.r.length } : null; }).filter(Boolean).sort((x, y) => x.p - y.p);
+  return r[0] || null;
+}
+const _perfil = perfil;
+perfil = function () {
+  _perfil();
+  const h = app.querySelector('h1'); if (h) h.textContent = 'Perfil';
+  // o radar e a explicação das inteligências saem do Perfil (continuam no motor)
+  const cards = $$('.card', app).slice(0, 2); cards.forEach((el) => el.remove());
+  const cur = currentDay(), d = cur && dayInfo(cur), wk = compWeakest(), done = nDone();
+  const pos = d ? `${d.level} · Módulo ${d.w + 1} · ${d.review ? 'avaliação' : 'lição ' + (d.r + 1) + ' de 6'}` : 'Trilha concluída';
+  h.insertAdjacentHTML('afterend', `
+  <div class="mo-pos card"><span class="mo-code">DE</span><div><b>Alemão · Trilha ${d ? d.level : 'C2'}</b><small>${pos} · ${done} de ${TOTAL} etapas</small></div>
+    <p class="mut">A posição na trilha mostra o que você já estudou. Não é um nível de proficiência nem uma certificação.</p></div>
+  <div class="mo-compgrid">
+    <section class="card"><div class="mo-card-h">${ic('target', 22)}<h3>Competências</h3></div>
+      <p class="mut mo-lead">O que você consegue fazer com o alemão.</p>${COMP.filter((c) => c.g === 'c').map(compRow).join('')}
+      <p class="mut mo-foot2">Interação e mediação aparecem aqui quando houver atividades que as avaliem.</p></section>
+    <section class="card"><div class="mo-card-h">${ic('puzzle', 22)}<h3>Conhecimento da língua</h3></div>
+      <p class="mut mo-lead">A base que sustenta as competências.</p>${COMP.filter((c) => c.g === 'k').map(compRow).join('')}
+      ${wk ? `<div class="mo-weak"><b>Ponto para reforçar: ${wk.c.n}</b><small>${Math.round(wk.p * 100)}% de acerto nas últimas respostas.</small><button class="pri" id="mWeak">Praticar ${wk.c.n.toLowerCase()} ${ic('arrow', 16)}</button></div>` : ''}
+    </section>
+  </div>
+  <p class="mut mo-how">Como ler: a porcentagem é o acerto nas ${ATT_WIN} respostas mais recentes de cada competência e aparece a partir de ${ATT_MIN} respostas. XP e sequência medem dedicação, não domínio.</p>`);
+  if ($('#mWeak')) $('#mWeak').onclick = () => (wk.c.pr === 'textos' ? go('extras', 'textos') : pratRun(PRAT.find((p) => p.id === wk.c.pr)));
+};
+
 // app.js já desenhou a primeira tela com a versão antiga: redesenha com a camada MODO.
 go(view === "run" ? "home" : view);

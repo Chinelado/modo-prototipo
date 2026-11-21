@@ -32,6 +32,9 @@ DEMO = r"""
   ['flughafen', 'weg', 'restaurant', 'kneipe', 'einkaufen', 'bahnhof'].forEach((p, i) => { s.pockets[p] = { ok: 4, n: 5, d: ago(20 - i) }; });
   TEXTS.slice(0, 5).forEach((t, i) => { s.reads[t.id] = { ok: 3, n: 4, d: ago(30 - i * 6) }; });
   for (let li = 0; li < 27; li++) s.hw[li] = { a: ago(39 - li) };
+  // registro por resposta (Perfil por competências): taxa nas 30 últimas e total de respostas
+  const att = (n, rate) => ({ n, r: Array.from({ length: Math.min(n, 30) }, () => (rnd() < rate ? 1 : 0)) });
+  s.att = { L: att(146, 0.82), R: att(23, 0.74), S: att(8, 0.6), W: att(31, 0.66), voc: att(420, 0.88), gra: att(190, 0.7), pro: att(8, 0.6) };
   s.diary = [{ d: ago(2), t: 'Ich heiße Ana und ich wohne in Curitiba.', l: 0 }];
   localStorage.setItem('deutschTrilha.theme', 'light');
   localStorage.setItem('deutschTrilha.badgesOpen', '1');
@@ -60,6 +63,8 @@ def shots(mobile):
     add('05-explorar', "go('extras', 'pocket')")
     add('06-cartas', "go('cards')")
     add('07-perfil', "go('perfil')", False, 1000)
+    add('07-perfil-pagina-inteira', "go('perfil')", True, 1000)
+    add('07-perfil-sem-dados', "S.att = {}; go('perfil')", False, 1000)
     add('08-tema-escuro-hoje', "setTheme('dark'); go('home')")
     return S
 def run():

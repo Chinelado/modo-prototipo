@@ -668,6 +668,7 @@ function nextEx() {
     it.fala = fala;
     if (sess !== my) return;
     const st = S.stats[it.k]; st.n++; if (ok) st.ok++; st.t += (Date.now() - t0) / 1000;
+    if (typeof logAtt === 'function') logAtt(compsOf(it.k, keys, fala), ok);
     keys.forEach((k) => { const c = S.cards[k]; if (c) c.mods[it.k] = (c.mods[it.k] || 0) + 1; });
     if (!it.retry) { sess.first++; if (ok) sess.firstOk++; }
     const by = (sess.by[it.k] = sess.by[it.k] || [0, 0]); by[1]++; if (ok) by[0]++;
@@ -690,6 +691,12 @@ addEventListener('keydown', (e) => { if (e.key === 'Enter' && sess && sess.onEnt
 document.addEventListener('fala', (e) => {
   const el = e.target; if (e.detail.score < 0.8 || el.dataset.xp) return;
   el.dataset.xp = '1'; S.spoken++; addXP(5); toast('🎤 Frase dita! +5 XP'); checkBadges(); save();
+});
+// Fala fora dos exercícios ("Repita em voz alta"): a primeira tentativa de cada painel vira evidência de Fala e Pronúncia.
+// O exercício "Fale a frase" já registra pelo done() da sessão, por isso fica de fora aqui.
+document.addEventListener('fala', (e) => {
+  const el = e.target; if (typeof logAtt !== 'function' || el.dataset.att || el.closest('#ex')) return;
+  el.dataset.att = '1'; logAtt(['S', 'pro'], e.detail.score >= 0.8); save();
 });
 function finish() {
   const s = sess, acc = s.first ? s.firstOk / s.first : 1, stars = acc >= 0.9 ? 3 : acc >= 0.7 ? 2 : 1;
@@ -1088,6 +1095,7 @@ function rate(k, c, q) {
     const t = new Date(); t.setHours(0, 0, 0, 0); c.due = t.getTime() + Math.round(c.int) * 864e5;
   }
   c.reps++; S.reviews++; daily().cards++; addXP(ok ? 5 : 2);
+  if (typeof logAtt === 'function') logAtt(['voc'], ok);
 }
 
 /* ---------- perfil ---------- */
@@ -1361,6 +1369,7 @@ function texto(id) {
       const right = q.o ? q.a : q.a ? 0 : 1, qe = document.querySelector(`.tq[data-q="${i}"]`);
       $$('button', qe).forEach((b) => { b.disabled = true; if (+b.dataset.a === right) b.classList.add('ok'); else if (+b.dataset.a === ans[i]) b.classList.add('no'); });
       if (ans[i] === right) ok++;
+      if (typeof logAtt === 'function') logAtt([t.kind === 'escuta' ? 'L' : 'R'], ans[i] === right);
     });
     const first = !S.reads[id], xp = first ? ok * 10 + (ok === t.qs.length ? 20 : 0) : 0;
     sfx('conclusao'); S.reads[id] = { ok, n: t.qs.length, d: today() };
