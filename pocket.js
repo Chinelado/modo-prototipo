@@ -23,7 +23,7 @@ let pkGroup = 'viagem';
 function pocketList() {
   const done = S.pockets || {}, n = Object.keys(done).filter((id) => POCKETS.some((p) => p.id === id)).length;
   const card = (p) => { const r = done[p.id];
-    return `<button class="pkc ${r ? 'ok' : ''}" data-pk="${p.id}"><span class="pke">${p.e}</span><span class="grow"><b>${esc(p.t)}</b><small>${esc(p.pt)} · ${p.lv}${r ? ` · ✓ ${r.ok}/${r.n}` : ''}</small></span></button>`; };
+    return `<button class="pkc ${r ? 'ok' : ''}" data-pk="${p.id}">${typeof pkThumb === 'function' ? pkThumb(p) : `<span class="pke">${p.e}</span>`}<span class="grow"><b>${esc(p.t)}</b><small>${esc(p.pt)} · ${p.lv}${r ? ` · ✓ ${r.ok}/${r.n}` : ''}</small></span></button>`; };
   const groups = { viagem: ['✈️', 'Viagem e passeio', POCKETS.filter((p) => PK_VIAGEM.has(p.id))], vida: ['🏠', 'Morar na Alemanha', POCKETS.filter((p) => !PK_VIAGEM.has(p.id))] };
   const [, , list] = groups[pkGroup] || groups.viagem;
   return `<p class="mut">Situações reais em 5 a 10 minutos: painéis, placas, cardápios e etiquetas com áudio em cada palavra.</p>

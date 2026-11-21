@@ -355,3 +355,7 @@ html[data-fs="g"] body { font-size: 18px; }
 .mo-logo { display: block; color: #260747; }
 :root[data-theme="dark"] .mo-logo, .mo-ob .mo-brand .mo-logo { color: #fff; }
 .mo-ob .mo-brand .mo-logo path { fill: currentColor; } /* no topo colorido, a versão toda branca da marca */
+/* Miniaturas das ilustrações dos pockets (Para explorar e Explorar) */
+.mo-thumb { flex: none; display: grid; place-items: center; width: 76px; height: 57px; border-radius: 12px; overflow: hidden; background: var(--p50); font-size: 1.6rem; }
+.mo-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pkc .mo-thumb { width: 72px; height: 54px; }
