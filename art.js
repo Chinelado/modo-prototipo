@@ -89,7 +89,12 @@ function isGerman(t) {
 }
 // O que a voz lê de fato: setas, barras, pontos médios, sinais de igual e de mais, traços e marcadores viram pausa
 // (vírgula); depois de ponto final a pausa já existe. Nenhum símbolo é pronunciado. A chave do áudio não muda (sayText).
-const falavel = (t) => String(t).replace(/___/g, ' ').replace(/[\p{Extended_Pictographic}\u{FE0F}\u{200D}]/gu, '')
+const DIA_ABR = { Mo: 'Montag', Di: 'Dienstag', Mi: 'Mittwoch', Do: 'Donnerstag', Fr: 'Freitag', Sa: 'Samstag', So: 'Sonntag' };
+const falavel = (t) => String(t).replace(/___/g, ' ').replace(/[\p{Extended_Pictographic}\u{FE0F}\u{200D}★☆]/gu, '')
+  // placas e horários: "Mo–Fr 6–18 Uhr" se lê "Montag bis Freitag 6 bis 18 Uhr"
+  .replace(/\b(Mo|Di|Mi|Do|Fr|Sa|So)\s*[–-]\s*(Mo|Di|Mi|Do|Fr|Sa|So)\b/g, (m, a, b) => DIA_ABR[a] + ' bis ' + DIA_ABR[b])
+  .replace(/\b(Mo|Di|Mi|Do|Fr|Sa|So)(?=\s+\d)/g, (m) => DIA_ABR[m]).replace(/(\d)\s*–\s*(\d)/g, '$1 bis $2')
+  .replace(/(\p{L})_(?=\p{L})/gu, '$1 ')
   .replace(/([.!?…:])\s*(?:→|->|⇒|←|·|•|×|\||\/|=|\+|–|—)\s*/g, '$1 ')
   .replace(/\s*(?:→|->|⇒|←|·|•|×|\||\/|=|\+|–|—)\s*/g, ', ')
   .replace(/\s+([,.!?;:])/g, '$1').replace(/,(\s*,)+/g, ',').replace(/^[\s,]+|[\s,]+$/g, '').replace(/\s+/g, ' ');

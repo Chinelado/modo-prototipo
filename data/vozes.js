@@ -62,6 +62,11 @@ function vozMapa() {
       put(txt, s);
     });
   });
+  // textos das lições de Ler e escrever (trilha MODO): voz = narração, vozes = { personagem: voz } para "Nome: fala"
+  LESSONS.forEach((l) => {
+    const T = l.le && l.le.texto; if (!T || !(T.voz || T.vozes)) return;
+    T.paras.forEach((p) => { const { who, txt } = splitFala(p); if (who && T.vozes && T.vozes[who]) put(txt, T.vozes[who]); else put(p, T.voz || 'a'); });
+  });
   return (VOZ_MAPA = m);
 }
 const vozDe = (t) => vozMapa().get(vozKey(t)) || 'a';

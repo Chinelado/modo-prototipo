@@ -45,7 +45,9 @@ function loadApp() {
   vm.createContext(ctx);
   const code = files.map((f) => fs.readFileSync(path.join(ROOT, f), 'utf8')).join('\n;\n')
     + '\n;this.__app = { LESSONS, SUP, TEXTS, GUIDE, GLOSS: typeof GLOSS === "undefined" ? [] : GLOSS, PHASES, VIS: typeof VIS === "undefined" ? {} : VIS, IMG_CAP: typeof IMG_CAP === "undefined" ? {} : IMG_CAP, KATZE: typeof KATZE === "undefined" ? [] : KATZE, ZEITEN: typeof ZEITEN === "undefined" ? [] : ZEITEN, DEKL: typeof DEKL === "undefined" ? {} : DEKL, BRIEF: typeof BRIEF === "undefined" ? [] : BRIEF, GEWISS: typeof GEWISS === "undefined" ? [] : GEWISS, uhrText: typeof uhrText === "undefined" ? null : uhrText, isGerman, falavel, visHTML, vozDe, splitFala,'
-    + ' POCKETS: typeof POCKETS === "undefined" ? [] : POCKETS, pocketTexts: typeof pocketTexts === "undefined" ? () => [] : pocketTexts };';
+    + ' POCKETS: typeof POCKETS === "undefined" ? [] : POCKETS, pocketTexts: typeof pocketTexts === "undefined" ? () => [] : pocketTexts,'
+    // trilha MODO (data/curriculo.js): o nível vem do módulo da lição, porque os módulos têm tamanhos diferentes
+    + ' lvOf: typeof LMOD === "undefined" ? null : (i) => (MODS[LMOD[i]] || {}).lv };';
   vm.runInContext(code, ctx, { filename: 'deutsch-trilha' });
   return ctx.__app;
 }
@@ -81,7 +83,7 @@ function inventory(A) {
       const t = decode(m[2].replace(/<[^>]+>/g, '')).trim(); if (t && A.isGerman(t)) add(t, 'a', 'esquemas');
     }
   };
-  const levelOf = (i) => { const w = Math.floor(i / 6); return (A.PHASES.find((p) => w >= p.weeks[0] && w < p.weeks[1]) || A.PHASES[A.PHASES.length - 1]).id; };
+  const levelOf = (i) => { if (A.lvOf && A.lvOf(i)) return A.lvOf(i); const w = Math.floor(i / 6); return (A.PHASES.find((p) => w >= p.weeks[0] && w < p.weeks[1]) || A.PHASES[A.PHASES.length - 1]).id; };
   grupo = 'A1';
   A.GUIDE.forEach((g) => deepLines(g.body, 'guia'));
   (A.GLOSS || []).forEach(([, , e]) => { if (A.isGerman(e)) add(e, 'a', 'guia'); }); // exemplos do Dicionário de termos
@@ -95,6 +97,9 @@ function inventory(A) {
     if (l.deep) deepLines(l.deep, 'aulas');
     (A.SUP[l.de] || []).forEach((s) => add(s.de, 'a', 'palavras de apoio'));
     (A.VIS[l.de] || []).forEach(visSpec);
+    // lições de Ler e escrever: cada parágrafo do texto tem botão de áudio (leTextHTML em modo.js)
+    // (com vozes, "Nome: fala" grava só a fala, como o app mostra)
+    if (l.le && l.le.texto) { const T = l.le.texto; T.paras.forEach((p) => { const { who, txt } = A.splitFala(p); add(who && T.vozes && T.vozes[who] ? txt : p, '', 'leitura'); }); }
   });
   A.TEXTS.forEach((t) => {
     grupo = t.lv;

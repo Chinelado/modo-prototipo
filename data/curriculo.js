@@ -340,7 +340,7 @@ NL('n-nachricht', {
   hw: 'Escreva no diário uma mensagem de apresentação de cinco linhas para um parceiro de tandem: nome e idade, de onde você é, profissão, um gosto com aber e uma pergunta com oder. Termine com Viele Grüße.',
   le: {
     texto: {
-      t: 'Tandem-Profil · Lukas', kind: 'leitura',
+      t: 'Tandem-Profil · Lukas', kind: 'leitura', voz: 'b',
       intro: 'O Lukas procura alguém para trocar idiomas. Leia o perfil dele e responda.',
       paras: ['Hallo! Ich heiße Lukas und ich bin 28 Jahre alt.', 'Ich komme aus Hamburg, aber ich wohne jetzt in Köln.', 'Ich bin Koch von Beruf. Ich koche sehr gern, aber ich tanze nicht gern.', 'Meine Muttersprache ist Deutsch. Ich spreche auch Englisch.', 'Ich lerne Portugiesisch und suche eine Person aus Brasilien.', 'Kochst du gern oder machst du gern Musik? Viele Grüße, Lukas'],
       qs: [
@@ -1171,7 +1171,7 @@ NL('n-email', {
   hw: 'Escreva no diário um e-mail curto para um amigo que mora longe: o que mudou na sua vida (Perfekt), como está agora e um motivo com weil.',
   le: {
     texto: {
-      t: 'E-Mail von Jonas', kind: 'leitura',
+      t: 'E-Mail von Jonas', kind: 'leitura', voz: 'b',
       intro: 'O Jonas, um amigo alemão, escreve depois de muito tempo. Leia e responda.',
       paras: ['Liebe Ana,', 'wie geht es dir? Lange nichts gehört! Bei mir gibt es viele Neuigkeiten.', 'Im März bin ich nach München gezogen, weil ich dort eine neue Stelle habe. Ich arbeite jetzt in einem Hotel.', 'Die Arbeit ist interessant, aber ich vermisse meine Freunde in Hamburg.', 'Am Wochenende gehe ich oft in die Berge. Das ist toll!', 'Und du? Wie ist dein Deutschkurs? Schreib bald! Viele Grüße, Jonas'],
       qs: [
@@ -2109,7 +2109,7 @@ NL('n-hotelbewertung', {
   hw: 'Escreva uma avaliação curta de um hotel, restaurante ou lugar onde você esteve: duas coisas boas, uma ruim (com leider ou zu) e se você recomenda.',
   le: {
     texto: {
-      t: 'Bewertungen · Hotel Am Park, Wien', kind: 'leitura',
+      t: 'Bewertungen · Hotel Am Park, Wien', kind: 'leitura', vozes: { '★★★★★ Marta, Lissabon': 'a', '★★☆☆☆ Peter, Köln': 'b' },
       intro: 'Duas avaliações de um hotel em Viena. Leia e responda.',
       paras: ['★★★★★ Marta, Lissabon: Super Lage! Das Hotel ist ruhig, und die U-Bahn ist nur fünf Minuten entfernt. Das Personal war sehr freundlich. Ich kann das Hotel empfehlen.', '★★☆☆☆ Peter, Köln: Das Zimmer war sauber, aber sehr klein und leider hellhörig. Das Frühstück war teuer und nicht so gut. Für den Preis bin ich enttäuscht.'],
       qs: [
@@ -2459,7 +2459,7 @@ NL('n-forum', {
   hw: 'Escolha um tema de debate da sua cidade e escreva um post de fórum com cinco frases: a posição, weil, deshalb, trotzdem e a conclusão.',
   le: {
     texto: {
-      t: 'Forum: Autofreie Innenstadt – ja oder nein?', kind: 'leitura',
+      t: 'Forum: Autofreie Innenstadt – ja oder nein?', kind: 'leitura', vozes: { Sabine_K: 'a', Murat72: 'b' },
       intro: 'Num fórum da cidade, duas pessoas opinam sobre fechar o centro para carros. Leia e responda.',
       paras: ['Sabine_K: Ich bin dafür! Die Luft ist schlecht und es ist sehr laut. Deshalb fahre ich schon jetzt nur mit dem Rad in die Stadt. Wir brauchen mehr Radwege und Platz für Menschen.', 'Murat72: Ich bin dagegen, weil viele Geschäfte Kunden mit Auto brauchen. Meine Mutter ist alt und kann nicht gut laufen. Trotzdem finde ich, dass wir weniger Autos brauchen. Vielleicht nur am Wochenende?'],
       qs: [

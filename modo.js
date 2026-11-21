@@ -379,7 +379,12 @@ perfil = function () {
 /* ---------- Lição de "Ler e escrever" ---------- */
 // Formato novo do A1–A2 redesenhado: um texto curto com perguntas (leq) e uma escrita guiada (lew).
 // As perguntas contam como evidência de Leitura e a escrita como evidência de Escrita (ver compsOf).
-const leTextHTML = (T) => `<div class="mo-ltx">${T.paras.map((p) => `<p>${spk(p)}<span lang="de">${esc(p)}</span></p>`).join('')}</div>`;
+// Com T.vozes, "Nome: fala" mostra o nome à parte e só a fala tem áudio (a voz de cada pessoa vem de data/vozes.js).
+const leTextHTML = (T) => `<div class="mo-ltx">${T.paras.map((p) => {
+  const { who, txt } = splitFala(p);
+  if (who && T.vozes && T.vozes[who]) return `<p>${spk(txt)}<b class="twho">${esc(who)}:</b> <span lang="de">${esc(txt)}</span></p>`;
+  return `<p>${spk(p)}<span lang="de">${esc(p)}</span></p>`;
+}).join('')}</div>`;
 GEN.leq = function (les, el, done, it) {
   const T = les.le.texto, q = T.qs[it.j], right = q.o[q.a];
   mcq(el, `<p class="q">${ic('book', 18)} Leia e responda <small class="mut">(${it.j + 1} de ${T.qs.length})</small></p>
