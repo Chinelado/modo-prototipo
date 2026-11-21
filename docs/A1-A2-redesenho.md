@@ -3,7 +3,7 @@
 **Status:** para aprovação da direção · 20/11/2026
 **Decisões (20/11/2026):** A1 com 6 módulos e A2 com 8 (de 42 para 84 lições) · sequência redesenhada do zero, reaproveitando as lições atuais onde couberem · cada módulo tem uma lição de **leitura + escrita guiada** · inserção direta no protótipo (o site real não é tocado).
 
-**Andamento (21/11/2026):** Módulos 1 a 3 escritos no protótipo (8 lições novas, marcadas "escrita ✅"); faltam 34 lições novas, do Módulo 4 em diante.
+**Andamento (21/11/2026):** Módulos 1 a 4 escritos no protótipo (11 lições novas, marcadas "escrita ✅"); faltam 31 lições novas, do Módulo 5 em diante.
 
 **Como ler:** **R** = lição atual reaproveitada (com a posição de hoje); **NOVA** = a escrever. A 6ª lição de cada módulo é sempre **Ler e escrever**: um texto curto com perguntas e uma tarefa de escrita guiada (formulário, mensagem, cartão, e-mail).
 
@@ -53,11 +53,11 @@ A única lição que muda de nível é **Im Urlaub** (Perfekt com sein), que des
 | # | Lição | Tema | Gramática | Origem |
 |---|---|---|---|---|
 | 19 | Ich habe Hunger | comida | haben + Akkusativ | R · A1 L8 |
-| 20 | Auf dem Markt | quantidades, embalagens e preços | números até 1000 · ein Kilo, eine Flasche | NOVA |
+| 20 | Auf dem Markt | quantidades, embalagens e preços | números até 1000 · ein Kilo, eine Flasche | NOVA · escrita ✅ |
 | 21 | Im Restaurant | pedir no restaurante | nicht e kein | R · A1 L9 |
-| 22 | Was isst du gern? | preferências | mögen · lieber · immer, oft, nie | NOVA |
+| 22 | Was isst du gern? | preferências | mögen · lieber · immer, oft, nie | NOVA · escrita ✅ |
 | 23 | Einkaufen | roupas, cores e preços | dieser / diese / dieses · kosten | R · A1 L15 |
-| 24 | **Ler e escrever:** Speisekarte und Einkaufszettel | ler um cardápio e escrever uma lista de compras | quantidades no Akkusativ | NOVA |
+| 24 | **Ler e escrever:** Speisekarte und Einkaufszettel | ler um cardápio e escrever uma lista de compras | quantidades no Akkusativ | NOVA · escrita ✅ |
 
 ### Módulo 5 · Casa e cidade
 | # | Lição | Tema | Gramática | Origem |

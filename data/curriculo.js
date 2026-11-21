@@ -513,6 +513,187 @@ Procure quatro coisas: **was** (o quê), **wann** (quando), **wo** (onde) e o qu
 `,
 });
 
+/* Módulo 4 (21/11/2026): feira e preços, gostos na comida e a lição de Ler e escrever "Speisekarte und Einkaufszettel". */
+NL('n-markt', {
+  de: 'Auf dem Markt', pt: 'Quantidades, embalagens e preços', gt: 'Números até 1000 · ein Kilo, eine Packung',
+  gx: 'Quantidade + produto, sem "de": ein Kilo Tomaten, eine Packung Reis, 200 Gramm Käse. Preço: Das kostet zwei Euro fünfzig (2,50 €). Centenas: zweihundert; 350 = dreihundertfünfzig.',
+  ge: 'Ich möchte ein Kilo Tomaten, bitte.=Eu queria um quilo de tomates, por favor.|Was kostet das?=Quanto custa isso?|Das macht sieben Euro zwanzig.=Dá sete euros e vinte.',
+  v: 'der Markt=a feira, o mercado ao ar livre=🧺|das Kilo=o quilo=⚖️|das Gramm=o grama=⚖️|die Packung=o pacote=📦|die Dose=a lata=🥫|das Stück=o pedaço, a unidade=🍰|kosten=custar=💶|der Preis=o preço=🏷️|die Tomate=o tomate=🍅|der Cent=o centavo (de euro)=🪙',
+  x: 'die Banane=a banana|die Orange=a laranja|die Erdbeere=o morango|die Zwiebel=a cebola|der Liter=o litro|ein halbes Kilo=meio quilo|Das macht …=Dá … (no total)|Sonst noch etwas?=Mais alguma coisa?|frisch=fresco|die Kasse=o caixa',
+  dlg: 'Guten Tag! Was möchten Sie?=Bom dia! O que a senhora deseja?|Ein Kilo Tomaten und eine Packung Käse, bitte.=Um quilo de tomates e um pacote de queijo, por favor.|Sonst noch etwas?=Mais alguma coisa?|Nein, danke. Was kostet das?=Não, obrigada. Quanto custa?',
+  cz: 'Ich möchte ein Kilo ___. (tomates)=Tomaten=Tomate=von Tomaten|Was ___ die Äpfel?=kosten=kostet=koste|Das kostet drei ___ fünfzig.=Euro=Euros=Cent',
+  whys: 'depois da quantidade vem o produto direto, sem "von", e no plural: ein Kilo Tomaten|die Äpfel é plural, então o verbo é kosten|Euro não vai para o plural no preço: drei Euro fünfzig',
+  pts: 'Quantidade + produto, sem preposição: ein Kilo Äpfel, eine Flasche Wasser, 200 Gramm Käse. O que se conta vai no plural (Tomaten).|Preço: 2,50 € = zwei Euro fünfzig. Euro e Cent não vão para o plural: drei Euro.|Centenas: hundert, zweihundert … neunhundert. 350 = dreihundertfünfzig; 1000 = tausend.|Na feira: Ich möchte … · Was kostet …? · Sonst noch etwas? · Das macht … Euro.',
+  ex: 'Eine Dose Tomaten, bitte.=Uma lata de tomates, por favor.|Die Erdbeeren sind sehr frisch.=Os morangos estão muito frescos.|Das macht vier Euro achtzig.=Dá quatro euros e oitenta.|Ein Stück Kuchen kostet zwei Euro.=Um pedaço de bolo custa dois euros.',
+  bd: ['Ich=S|möchte=MOD^möchten: o jeito educado de pedir|ein_Kilo_Tomaten,=OA^quantidade + produto, sem "von"|bitte.=PK^bitte deixa o pedido educado', 'Eu queria um quilo de tomates, por favor.'],
+  rule: 'quantidade',
+  hw: 'Pegue uma nota fiscal do mercado e leia em voz alta, em alemão, cinco itens com quantidade e preço (ex.: ein Kilo Reis, vier Euro zwanzig).',
+  deep: `
+Na feira alemã (der Markt) tudo se pede por quantidade: um quilo, um pacote, uma lata. Hoje você aprende a pedir, a perguntar o preço e a entender a resposta, com os números até mil.
+# Passo 1: quantidade + produto
+| Quantidade | Exemplo |
+| das Kilo | ein Kilo Tomaten |
+| das Gramm | 200 Gramm Käse |
+| die Packung | eine Packung Reis |
+| die Dose | eine Dose Tomaten |
+| das Stück | ein Stück Kuchen |
+BR Em português dizemos "um quilo **de** tomates". Em alemão não há "de": ein Kilo Tomaten. E o que se conta vai no plural.
+~ Ich möchte ein Kilo Tomaten, bitte. = Eu queria um quilo de tomates, por favor.
+# Passo 2: os preços
+- 2,50 € = **zwei Euro fünfzig**
+- 0,80 € = **achtzig Cent**
+- 12,99 € = **zwölf Euro neunundneunzig**
+! **Euro** e **Cent** não vão para o plural no preço: drei Euro, e não "drei Euros".
+~ Was kostet das? = Quanto custa isso?
+~ Das kostet zwei Euro fünfzig. = Custa dois euros e cinquenta.
+# Passo 3: os números até 1000
+| Número | Alemão |
+| 100 | hundert |
+| 200 | zweihundert |
+| 350 | dreihundertfünfzig |
+| 999 | neunhundertneunundneunzig |
+| 1000 | tausend |
+A centena vem primeiro e o resto segue a regra que você já conhece: 24 = vierundzwanzig, então 124 = **hundertvierundzwanzig**.
+~ Das macht hundertzwanzig Euro. = Dá cento e vinte euros.
+# Passo 4: a conversa na feira
+| Quem | Diz |
+| vendedor | Was möchten Sie? / Sonst noch etwas? |
+| você | Ich möchte … / Was kostet …? |
+| vendedor | Das macht … Euro. |
+~ Sonst noch etwas? = Mais alguma coisa?
+~ Nein, danke. Das ist alles. = Não, obrigada. É só isso.
+> Diga em voz alta três coisas da sua lista de compras com quantidade: ein Kilo …, eine Packung …
+? Como se pede "um quilo de maçãs"? || ein Kilo Äpfel
+? Como se lê 3,50 €? || drei Euro fünfzig
+? Como se diz 500? || fünfhundert
+`,
+});
+
+NL('n-gern', {
+  de: 'Was isst du gern?', pt: 'Gostos e preferências na comida', gt: 'mögen · lieber · immer, oft, nie',
+  gx: 'mögen = gostar de (uma coisa): Ich mag Käse. É irregular: ich mag, du magst, er mag. Com ação, gern; para preferir, lieber; o favorito, am liebsten. Frequência: immer, oft, manchmal, nie.',
+  ge: 'Ich mag Pizza.=Eu gosto de pizza.|Ich trinke lieber Tee.=Eu prefiro beber chá.|Ich esse nie Fleisch.=Eu nunca como carne.',
+  v: 'mögen (ich mag)=gostar de=❤️|lieber=de preferência (preferir)=⚖️|am liebsten=o que mais gosta=🏆|immer=sempre=🔁|manchmal=às vezes=🎲|nie=nunca=🚫|das Lieblingsessen=a comida preferida=🍝|die Pizza=a pizza=🍕|süß=doce=🍬|scharf=apimentado=🌶️',
+  x: 'selten=raramente|meistens=na maioria das vezes|salzig=salgado|sauer=azedo|vegetarisch=vegetariano|das Lieblingsgetränk=a bebida preferida|die Schokolade=o chocolate|die Nudeln=o macarrão|der Vegetarier / die Vegetarierin=o vegetariano / a vegetariana|probieren=experimentar (provar)',
+  dlg: 'Was isst du gern?=O que você gosta de comer?|Ich esse gern Pizza. Und du?=Eu gosto de comer pizza. E você?|Ich mag Pizza, aber am liebsten esse ich Sushi.=Eu gosto de pizza, mas o que eu mais gosto de comer é sushi.|Sushi? Das esse ich nie!=Sushi? Isso eu nunca como!',
+  cz: 'Ich ___ Käse. (gosto de queijo)=mag=mage=mögen|Kaffee oder Tee? – Ich trinke ___ Tee.=lieber=gern=mag|Er ___ keine Schokolade.=mag=magt=mögt',
+  whys: 'mögen é irregular: ich mag, sem terminação|lieber mostra a escolha entre duas opções: prefiro chá|com er/sie a forma de mögen é mag, igual a ich',
+  pts: 'mögen (gostar de algo) é irregular: ich mag, du magst, er/sie mag, wir mögen, ihr mögt, sie/Sie mögen.|Com uma coisa, mögen (Ich mag Käse); com uma ação, gern depois do verbo (Ich esse gern Käse).|Para preferir: lieber (Ich trinke lieber Tee). O favorito: am liebsten (Am liebsten esse ich Pizza).|Frequência: immer, meistens, oft, manchmal, selten, nie. Elas vêm logo depois do verbo: Ich esse oft Reis.',
+  ex: 'Magst du Schokolade?=Você gosta de chocolate?|Am liebsten trinke ich Kaffee.=O que eu mais gosto de beber é café.|Ich esse manchmal Fisch.=Às vezes eu como peixe.|Mein Lieblingsessen ist Feijoada.=Minha comida preferida é feijoada.',
+  bd: ['Am_liebsten=ADV^am liebsten na 1ª posição: o que mais gosto|esse=V^o verbo continua na 2ª posição|ich=S^o sujeito vem depois do verbo|Pizza.=OA', 'O que eu mais gosto de comer é pizza.'],
+  rule: 'gosto',
+  hw: 'Escreva cinco frases sobre o que você come: uma com mag, uma com gern, uma com lieber, uma com am liebsten e uma com nie.',
+  deep: `
+Falar de comida é um dos jeitos mais fáceis de puxar conversa. Hoje você aprende a dizer do que gosta, o que prefere e com que frequência come cada coisa.
+# Passo 1: mögen, gostar de algo
+| Pessoa | mögen |
+| ich | mag |
+| du | magst |
+| er / sie | mag |
+| wir | mögen |
+| ihr | mögt |
+| sie / Sie | mögen |
+! Como nos modais, **ich** e **er** são iguais e sem terminação: ich mag, er mag.
+~ Ich mag Pizza. = Eu gosto de pizza.
+# Passo 2: mögen ou gern?
+- Com uma **coisa**: mögen. Ich **mag** Käse.
+- Com uma **ação**: verbo + **gern**. Ich esse **gern** Käse.
+BR Em português "gostar" serve para os dois. Em alemão, **Ich mag Käse** e **Ich esse gern Käse** estão certos; o segundo fala da ação de comer.
+~ Was isst du gern? = O que você gosta de comer?
+# Passo 3: lieber e am liebsten
+| gern | lieber | am liebsten |
+| gosto | prefiro | gosto mais que tudo |
+~ Ich trinke gern Kaffee, aber lieber Tee. = Eu gosto de café, mas prefiro chá.
+~ Am liebsten esse ich Pizza. = O que eu mais gosto de comer é pizza.
+# Passo 4: com que frequência
+| Alemão | Português |
+| immer | sempre |
+| oft | muitas vezes |
+| manchmal | às vezes |
+| selten | raramente |
+| nie | nunca |
+A palavra de frequência vem logo depois do verbo: Ich esse **oft** Reis.
+~ Ich esse nie Fleisch. = Eu nunca como carne.
+> Diga em voz alta a sua comida preferida: Am liebsten esse ich …
+? Como se diz "eu gosto de queijo" com mögen? || Ich mag Käse.
+? Como se diz "eu prefiro chá"? || Ich trinke lieber Tee.
+? Qual é o contrário de immer? || nie
+`,
+});
+
+NL('n-einkaufszettel', {
+  de: 'Speisekarte und Einkaufszettel', pt: 'Ler um cardápio e escrever uma lista de compras', gt: 'Quantidades no Akkusativ',
+  gx: 'Na lista e no pedido, o produto é objeto direto: Ich brauche einen Liter Milch, eine Packung Reis, ein Kilo Mehl. Só o masculino muda (einen). Cardápio: Vorspeisen, Hauptgerichte, Beilagen, Nachspeisen, Getränke.',
+  ge: 'Ich brauche einen Liter Milch.=Eu preciso de um litro de leite.|Wir kaufen ein Kilo Kartoffeln.=Nós compramos um quilo de batatas.|Was ist das Tagesgericht?=Qual é o prato do dia?',
+  v: 'der Einkaufszettel=a lista de compras=📝|die Vorspeise=a entrada=🥗|das Hauptgericht=o prato principal=🍽️|die Beilage=o acompanhamento=🍚|das Tagesgericht=o prato do dia=📋|brauchen=precisar de=🛒|das Mehl=a farinha=🌾|das Öl=o óleo, o azeite=🫒|der Joghurt=o iogurte=🥛|vergessen=esquecer=🤔',
+  x: 'die Soße=o molho|das Hähnchen=o frango|das Schnitzel=o bife empanado|die Pommes=as batatas fritas|gemischt=misto (salada mista)|ohne=sem|die Nachspeise=a sobremesa|das Mineralwasser=a água mineral|die Apfelschorle=o suco de maçã com água com gás|die Liste=a lista',
+  dlg: 'Was brauchen wir noch?=Do que ainda precisamos?|Wir brauchen einen Liter Milch und Eier.=Precisamos de um litro de leite e de ovos.|Und Nudeln? Ich koche heute Abend.=E macarrão? Eu cozinho hoje à noite.|Gut, ich schreibe einen Einkaufszettel.=Certo, eu faço uma lista de compras.',
+  cz: 'Ich brauche ___ Liter Milch.=einen=ein=eine|Wir kaufen ___ Packung Reis.=eine=einen=ein|Als Hauptgericht nehme ich ___ Schnitzel.=ein=einen=eine',
+  whys: 'der Liter é masculino: no acusativo ein vira einen|die Packung é feminino: eine não muda no acusativo|das Schnitzel é neutro: ein não muda no acusativo',
+  pts: 'Na lista e no pedido, o produto é objeto direto (acusativo). Só o masculino muda: einen Liter, einen Apfel.|Feminino e neutro ficam iguais: eine Packung Reis, ein Kilo Mehl, ein Schnitzel.|Cardápio alemão: Vorspeisen (entradas), Hauptgerichte (pratos principais), Beilagen, Nachspeisen (sobremesas) e Getränke.|Lista de compras: só a quantidade e o produto, um por linha: 1 l Milch, 500 g Mehl, 6 Eier.',
+  ex: 'Als Vorspeise nehme ich eine Suppe.=De entrada eu quero uma sopa.|Ich brauche einen Joghurt und ein Kilo Mehl.=Eu preciso de um iogurte e de um quilo de farinha.|Das Tagesgericht ist Hähnchen mit Reis.=O prato do dia é frango com arroz.|Wir haben kein Öl mehr.=Não temos mais óleo.',
+  bd: ['Ich=S|brauche=V^brauchen pede acusativo|einen_Liter=OA^der Liter é masculino: ein vira einen|Milch.=OA^o produto vem logo depois, sem "de"', 'Eu preciso de um litro de leite.'],
+  rule: 'quantidade',
+  hw: 'Escreva a sua lista de compras desta semana em alemão (quantidade + produto) e depois diga cada item numa frase: Ich brauche einen …',
+  le: {
+    texto: {
+      t: 'Speisekarte · Gasthaus Linde', kind: 'leitura',
+      intro: 'O cardápio de um restaurante simples, com o prato do dia. Leia e responda.',
+      paras: ['Tagesgericht: Hähnchen mit Reis und Salat · 9,50 €', 'Vorspeisen: Tomatensuppe · 4,20 € / Gemischter Salat · 3,80 €', 'Hauptgerichte: Schnitzel mit Pommes · 12,90 € / Nudeln mit Tomatensoße (vegetarisch) · 8,50 €', 'Nachspeisen: Apfelkuchen · 3,50 € / Schokoladeneis · 2,90 €', 'Getränke: Mineralwasser · 2,20 € / Apfelschorle · 2,60 € / Kaffee · 2,40 €'],
+      qs: [
+        { q: 'Quanto custa o prato do dia?', o: ['9,50 €', '12,90 €', '8,50 €'], a: 0 },
+        { q: 'Qual prato principal é vegetariano?', o: ['o macarrão com molho de tomate', 'o schnitzel com batata frita', 'o frango com arroz'], a: 0 },
+        { q: 'Qual é a sobremesa mais barata?', o: ['o sorvete de chocolate', 'a torta de maçã', 'o café'], a: 0 },
+        { q: 'Quanto custa uma água mineral?', o: ['2,20 €', '2,60 €', '2,40 €'], a: 0 },
+      ],
+    },
+    escrita: {
+      t: 'Escreva a sua lista de compras', tipo: 'form', ok: 'Lista escrita corretamente.',
+      pede: 'Você vai fazer em casa o macarrão com molho de tomate do cardápio. Escreva a lista de compras, quantidade + produto em cada linha, e no fim uma frase com brauche.',
+      campos: [
+        { l: 'Nudeln', d: 'macarrão: 500 g Nudeln / eine Packung Nudeln', re: '^(\\d+\\s*(g|gramm|kg|kilo)|ein(e)?\\s+(packung|kilo))\\s+nudeln\\.?$', f: 'iu', err: 'Quantidade + produto: 500 g Nudeln ou eine Packung Nudeln.', bad: [['von nudeln|de nudeln', 'Sem "von": eine Packung <b>Nudeln</b>.']] },
+        { l: 'Tomaten', d: 'tomates: ein Kilo Tomaten / eine Dose Tomaten', re: '^(\\d+\\s*(g|gramm|kg|kilo)?|ein(e)?\\s+(kilo|dose|packung))\\s+tomaten\\.?$', f: 'iu', err: 'Quantidade + Tomaten, no plural: ein Kilo Tomaten.', bad: [['tomate\\.?$', 'O que se conta vai no plural: <b>Tomaten</b>.'], ['von tomaten|de tomaten', 'Sem "von": ein Kilo <b>Tomaten</b>.']] },
+        { l: 'Zwiebeln', d: 'cebolas: 2 Zwiebeln', re: '^(\\d+|zwei|drei|vier)\\s+zwiebeln\\.?$', f: 'iu', err: 'Número + Zwiebeln, no plural: 2 Zwiebeln.' },
+        { l: 'Öl', d: 'óleo: eine Flasche Öl', re: '^(eine\\s+flasche|\\d+\\s*(l|ml|liter))\\s+(ö|oe)l\\.?$', f: 'iu', err: 'Quantidade + Öl: eine Flasche Öl (ou 1 l Öl).' },
+        { l: 'Satz', d: 'uma frase: Ich brauche einen Liter … / Ich kaufe …', re: '^ich (brauche|kaufe|nehme)\\s+(einen|eine|ein|\\d+)\\s+\\p{L}', f: 'iu', err: 'Uma frase com o verbo e a quantidade: Ich brauche einen Liter Milch.', bad: [['\\bbrauche ein liter|\\bkaufe ein liter', 'der Liter é masculino: Ich brauche <b>einen</b> Liter …']] },
+      ],
+      modelo: '500 g Nudeln · eine Dose Tomaten · 2 Zwiebeln · eine Flasche Öl · Ich brauche einen Liter Milch.',
+    },
+  },
+  deep: `
+Esta lição é de **ler e escrever**. Você vai ler o cardápio de um restaurante e depois escrever uma lista de compras para fazer um prato em casa. O ponto de gramática é um velho conhecido: o **acusativo**, agora com quantidades.
+# Passo 1: o cardápio alemão
+| Parte | Significa |
+| Vorspeisen | entradas |
+| Hauptgerichte | pratos principais |
+| Beilagen | acompanhamentos |
+| Nachspeisen | sobremesas |
+| Getränke | bebidas |
+O **Tagesgericht** (prato do dia) costuma ser o mais barato e vem em destaque.
+~ Das Tagesgericht ist Hähnchen mit Reis. = O prato do dia é frango com arroz.
+# Passo 2: pedir com o acusativo
+! Só o masculino muda: **einen** Salat, **einen** Kaffee. Feminino e neutro ficam iguais: eine Suppe, ein Schnitzel.
+~ Als Vorspeise nehme ich eine Suppe. = De entrada eu quero uma sopa.
+~ Als Hauptgericht nehme ich einen Salat. = De prato principal eu quero uma salada.
+# Passo 3: a lista de compras
+Na lista vão só a quantidade e o produto, um por linha, muitas vezes abreviados:
+| Na lista | Lê-se |
+| 500 g | fünfhundert Gramm |
+| 1 kg | ein Kilo |
+| 1 l | ein Liter |
+| 1 Pck. | eine Packung |
+BR Como em português, ninguém escreve frases na lista. Mas na hora de falar o acusativo aparece: Ich brauche **einen** Liter Milch.
+~ Ich brauche einen Liter Milch. = Eu preciso de um litro de leite.
+# Passo 4: como ler um cardápio
+Procure primeiro as partes (Vorspeisen, Hauptgerichte…) e os preços. Palavras compostas se leem de trás para frente: **Tomatensuppe** = Tomaten + Suppe = sopa de tomate.
+~ Was ist das Tagesgericht? = Qual é o prato do dia?
+> No exercício, leia o cardápio do Gasthaus Linde e depois escreva a lista de compras do macarrão, uma linha por item.
+? Como se diz "o prato do dia"? || das Tagesgericht
+? Complete: Ich brauche ___ Liter Milch. || einen
+? O que é uma Tomatensuppe? || uma sopa de tomate
+`,
+});
+
 // Esquemas visuais (mesmo formato de data/visuals.js) e palavras de apoio (data/support.js) das lições novas.
 V('Wie schreibt man das?',
   'V:As letras que mais enganam;V se chama "fau"|Vera: fau · e · er · a;W se chama "vê"|Wien: vê · i · e · en;Z se chama "tsét"|Zoo: tsét · o · o',
@@ -535,9 +716,21 @@ V('Eine Einladung',
   'E:Depois de leider, o verbo vem logo;Leider^c|kann^v|ich^s|nicht kommen.^n');
 S_('Am Montag um zehn', 'Um wie viel Uhr?=A que horas?|in der Nacht=de madrugada (a exceção do am)');
 S_('Eine Einladung', 'mitbringen (bringt … mit)=levar junto|ihr (habt ihr, antwortet)=vocês|die Nachbarn=os vizinhos');
+V('Auf dem Markt',
+  'V:Embalagens e medidas;das Kilo|ein Kilo Äpfel|ein Kilo Tomaten;die Packung|eine Packung Reis|eine Packung Käse;die Dose|eine Dose Tomaten|eine Dose Suppe',
+  'M:Como se lê o preço;Preço|Em alemão;2,50 €|zwei Euro fünfzig;0,80 €|achtzig Cent;12,99 €|zwölf Euro neunundneunzig;350 €|dreihundertfünfzig Euro');
+V('Was isst du gern?',
+  'E:Do gosto ao favorito;gern^p|→|lieber^v|→|am liebsten^s',
+  'P:Com que frequência?;immer=sempre;oft=muitas vezes;manchmal=às vezes;selten=raramente;nie=nunca');
+V('Speisekarte und Einkaufszettel',
+  'P:O cardápio alemão, de cima para baixo;Vorspeisen=as entradas;Hauptgerichte=os pratos principais;Beilagen=os acompanhamentos;Nachspeisen=as sobremesas;Getränke=as bebidas',
+  'M:No acusativo, só o masculino muda;Gênero|Sujeito|Objeto;der|ein Liter|**einen** Liter;die|eine Packung|eine Packung;das|ein Kilo|ein Kilo');
+S_('Auf dem Markt', 'hundertzwanzig=cento e vinte (hundert + zwanzig)|alles (Das ist alles.)=tudo (É só isso.)');
+S_('Was isst du gern?', 'das Sushi=o sushi');
+S_('Speisekarte und Einkaufszettel', 'kein … mehr=não … mais (Wir haben kein Öl mehr.)|die Kartoffeln=as batatas (plural de die Kartoffel)');
 S_('Was sind Sie von Beruf?', 'beruflich=profissionalmente (Was machst du beruflich?)|aber=mas');
 S_('Eine kurze Nachricht', 'super=ótimo, legal');
-['oliveira', 'vera', 'carla', 'mendes', 'web', 'recife', 'tim', 'max', 'lima', 'lukas', 'curitiba', 'julia'].forEach((n) => NAMES.add(n));
+['oliveira', 'vera', 'carla', 'mendes', 'web', 'recife', 'tim', 'max', 'lima', 'lukas', 'curitiba', 'julia', 'feijoada', 'linde', 'gasthaus'].forEach((n) => NAMES.add(n));
 NEW_LESSONS['n-buchstabieren'].rule = 'soletrar';
 V('Zwei Bücher, drei Stühle',
   'V:No plural, o artigo é sempre die;Singular|der Stuhl|die Lampe|das Buch;Plural|die Stühle|die Lampen|die Bücher',
@@ -556,7 +749,7 @@ const SEQ = [
   { lv: 'A1', n: 'Primeiros contatos', l: [0, 1, 'n-buchstabieren', 'n-alter', 5, 'n-formular'] },
   { lv: 'A1', n: 'Pessoas e coisas', l: [2, 3, 'n-plural', 'n-beruf', 4, 'n-nachricht'] },
   { lv: 'A1', n: 'Horários e rotina', l: [6, 9, 'n-termin', 10, 11, 'n-einladung'] },
-  { lv: 'A1', n: 'Comer e comprar', l: [7, '?Auf dem Markt', 8, '?Was isst du gern?', 14, '?Ler e escrever: Speisekarte und Einkaufszettel'] },
+  { lv: 'A1', n: 'Comer e comprar', l: [7, 'n-markt', 8, 'n-gern', 14, 'n-einkaufszettel'] },
   { lv: 'A1', n: 'Casa e cidade', l: [12, 13, '?Die Wohnungsanzeige', 15, '?Zur Post, zum Bahnhof', '?Ler e escrever: Schilder und Zettel'] },
   { lv: 'A1', n: 'Saúde e fim de semana', l: [16, '?Einen Termin machen', 17, 18, '?Mein Wochenende', '?Ler e escrever: Eine Postkarte'] },
   { lv: 'A2', n: 'Biografia e passado', l: [19, '?Mein Lebenslauf', 20, '?Schule und Ausbildung', 23, '?Ler e escrever: Eine E-Mail über mich'] },
@@ -607,9 +800,10 @@ const firstDayOf = (w) => { const i = DAYS.findIndex((x) => x.w === w); return i
 
 // Progresso salvo antes da reordenação: dias, tarefas de casa e diário passam para as posições novas.
 // As cartas não mudam: as chaves já usam o índice original. O registro antigo fica em S.doneOld.
-// Lições inseridas depois da versão 1 da sequência (Módulos 2 e 3, 21/11/2026). Servem para reconstruir a ordem
-// antiga de quem migrou antes de S.seqDays existir. Depois disso, S.seqDays basta: novas inserções não entram aqui.
-const SEQ_ADDED_V2 = ['n-plural', 'n-beruf', 'n-nachricht', 'n-termin', 'n-einladung'];
+// A versão 1 da sequência só tinha estas lições novas (Módulo 1). Para quem migrou antes de S.seqDays existir,
+// a ordem antiga é a atual sem as outras lições novas. Depois disso, S.seqDays guarda a ordem e basta.
+const SEQ_V1_NEW = ['n-buchstabieren', 'n-alter', 'n-formular'];
+const SEQ_ADDED_V2 = Object.keys(NEW_LESSONS).filter((k) => !SEQ_V1_NEW.includes(k));
 const seqKeys = () => DAYS.map((d) => (d.review ? 'r' + d.w : LESSONS[d.li].sid));
 // Quando a sequência muda (lições inseridas), os dias e os índices de lição mudam: tudo é remapeado pelo sid.
 function remapSeq(S, oldKeys) {

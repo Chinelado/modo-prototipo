@@ -1,6 +1,6 @@
 // Objetivos "consigo…" (decisão 10, 20/11/2026) — RASCUNHO, ainda sem revisão pedagógica.
 // OBJ: por lição, pelo id estável (sid): o = objetivo, a = pergunta de autoavaliação, ref = escala do Quadro Europeu e nível.
-// Vêm do piloto do A1 (docs/objetivos-A1-piloto.md) mais as lições novas dos Módulos 1 a 3 e "Im Urlaub", que desceu para o A1.
+// Vêm do piloto do A1 (docs/objetivos-A1-piloto.md) mais as lições novas dos Módulos 1 a 4 e "Im Urlaub", que desceu para o A1.
 // MOD_OBJ: por módulo (índice na trilha nova). Só o A1 tem objetivos por enquanto; o A2 em diante mostra "em redação".
 const OBJ = {
   0: { o: 'Consigo cumprimentar, me despedir, dizer meu nome e perguntar o nome de alguém.', a: 'Você consegue cumprimentar alguém, dizer seu nome e perguntar o nome da pessoa?', ref: 'Conversation · A1' },
@@ -22,8 +22,11 @@ const OBJ = {
   11: { o: 'Consigo pedir ajuda, dizer que não entendi e pedir para repetirem ou falarem mais devagar.', a: 'Quando não entende, você consegue pedir para repetirem ou falarem mais devagar?', ref: 'Asking for clarification · A1–A2 (conferir)' },
   'n-einladung': { o: 'Consigo ler um convite simples e responder aceitando ou recusando com educação.', a: 'Você consegue responder a um convite, aceitando ou recusando?', ref: 'Correspondence · A1; Reading correspondence · A1' },
   7: { o: 'Consigo dizer o que quero comer e pedir alimentos numa compra simples.', a: 'Você consegue dizer o que quer comer e pedir alimentos numa loja?', ref: 'Obtaining goods and services · A1' },
+  'n-markt': { o: 'Consigo comprar alimentos numa feira: pedir quantidades, perguntar o preço e entender os números até mil.', a: 'Você consegue pedir quantidades e perguntar o preço numa feira?', ref: 'Obtaining goods and services · A1' },
   8: { o: 'Consigo pedir comida e bebida num restaurante, recusar algo educadamente e pedir a conta.', a: 'Você consegue fazer um pedido num restaurante e pedir a conta?', ref: 'Obtaining goods and services · A2 (a lição antecipa)' },
+  'n-gern': { o: 'Consigo dizer do que gosto, o que prefiro e com que frequência como ou bebo algo.', a: 'Você consegue dizer do que gosta e o que prefere comer?', ref: 'Conversation · A1' },
   14: { o: 'Consigo perguntar o preço de uma roupa, falar da cor e dizer se está cara ou barata.', a: 'Você consegue perguntar quanto custa uma roupa e dizer se está caro?', ref: 'Obtaining goods and services · A1' },
+  'n-einkaufszettel': { o: 'Consigo ler um cardápio simples e escrever uma lista de compras com quantidades.', a: 'Você consegue ler um cardápio e escrever uma lista de compras?', ref: 'Reading for orientation · A1; Notes, messages and forms · A1' },
   12: { o: 'Consigo descrever a minha casa: quantos cômodos tem, o que há nela e como ela é.', a: 'Você consegue descrever a sua casa ou apartamento?', ref: 'Sustained monologue: describing experience · A1 (fronteira com A2)' },
   13: { o: 'Consigo perguntar onde está um objeto e dizer onde ele está.', a: 'Você consegue perguntar e dizer onde as coisas estão?', ref: 'Information exchange · A1' },
   15: { o: 'Consigo perguntar como chegar a um lugar e entender instruções curtas de caminho.', a: 'Você consegue pedir informação de caminho e entender a resposta?', ref: 'Understanding announcements and instructions · A1' },

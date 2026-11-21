@@ -112,3 +112,33 @@ O módulo tem só 2 lições novas; as outras 4 já existiam (Wie spät ist es?,
 **Migração:** testada vindo da versão 1 e da versão 2 da sequência. As lições Unterwegs e Kannst du mir helfen? andam uma posição; a avaliação do Módulo 3 deixa de contar até as 2 lições novas serem feitas.
 
 **O que falta no Módulo 3:** imagens, áudio gravado e revisão pedagógica, como nos Módulos 1 e 2.
+
+---
+
+## Módulo 4 · Comer e comprar (escrito em 21/11/2026)
+Comparado às 3 lições antigas do módulo (Ich habe Hunger, Im Restaurant, Einkaufen).
+
+| Item do formato | Auf dem Markt | Was isst du gern? | Speisekarte und Einkaufszettel | Lições antigas |
+|---|---|---|---|---|
+| Tema, gramática, regra, pontos, exemplos | ✅ | ✅ | ✅ | ✅ |
+| Vocabulário: 10 principais + 10 ampliadas | ✅ | ✅ | ✅ | ✅ |
+| Conversa de 4 falas (com microfone) | ✅ | ✅ | ✅ | ✅ |
+| 3 lacunas com explicação, frase desmontada, tarefa de casa | ✅ | ✅ | ✅ | ✅ |
+| Aula passo a passo com teste rápido | ✅ 4 passos | ✅ 4 passos | ✅ 4 passos | ✅ 4 passos |
+| Verificação em cada passo | ✅ 4/4 | ✅ 4/4 | ✅ 4/4 | 3/4 a 4/4 |
+| Objetivo "consigo…" + autoavaliação (rascunho) | ✅ | ✅ | ✅ | ✅ |
+| Regra da frase livre | ✅ quantidade | ✅ gosto | ✅ quantidade | ✅ |
+| Esquema visual | ✅ 2 | ✅ 2 | ✅ 2 | ✅ |
+| Palavras de apoio (🆕) | ✅ 2 | ✅ 1 | ✅ 2 | ✅ 2–7 |
+| Ler e escrever | não se aplica | não se aplica | ✅ 4 perguntas, lista de 5 linhas | não se aplica |
+| Imagens da aula · áudio gravado | ❌ · ❌ | ❌ · ❌ | ❌ · ❌ | ✅ · ✅ |
+| Maior parte da aula no celular | 231 palavras | 228 | 240 | 192–209 |
+
+**As 3 lições**
+- **Auf dem Markt** (feira): quantidade + produto sem "de" (ein Kilo Tomaten, eine Packung Reis), preços (zwei Euro fünfzig; Euro e Cent sem plural), números até 1000 e a conversa na feira (Sonst noch etwas? · Das macht … Euro). Vem antes de Im Restaurant, então não usa kein.
+- **Was isst du gern?** (gostos): mögen com a conjugação irregular, mögen × gern, lieber e am liebsten, e a frequência (immer, oft, manchmal, selten, nie). Vem depois de Im Restaurant, então já pode usar kein.
+- **Speisekarte und Einkaufszettel** (Ler e escrever): cardápio do Gasthaus Linde (prato do dia, entradas, pratos principais, sobremesas e bebidas, com preços) e 4 perguntas. Depois a aluna escreve a lista de compras do macarrão do cardápio, conferida linha a linha: "von Nudeln" recebe a dica de que não há "de", "Tomate" a dica do plural, e "ein Liter" a dica de que Liter é masculino (einen). Aceita formas diferentes: 500 g, eine Packung, 1 kg, drei, 1 l.
+
+**Migração:** a reconstrução da ordem da versão 1 agora considera todas as lições novas criadas depois dela (antes era uma lista fixa, que teria de crescer a cada módulo). Testado vindo da versão 1 e de uma ordem salva sem o Módulo 4.
+
+**O que falta no Módulo 4:** imagens, áudio gravado e revisão pedagógica. A maior tela das 3 lições (o resumo da regra) passa em 20 a 30 palavras a das antigas do módulo.
