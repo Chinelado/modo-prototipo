@@ -410,5 +410,91 @@ intro = function (day) {
   const st = $('#st'); if (st) st.textContent = 'Começar: ler, escrever e praticar';
 };
 
+/* ---------- Lição em etapas ---------- */
+// A lição deixa de ser uma página única e vira 5 etapas: Ouvir → Entender → Palavras → Praticar → Ir além.
+// A aula passo a passo é mostrada uma parte por vez (cada "# Passo" é uma tela). O conteúdo é o mesmo de antes:
+// os blocos já desenhados pela lição são só redistribuídos. A etapa e a parte ficam salvas para retomar.
+const LSTEP = [
+  { t: 'Ouvir', i: 'headphones', min: '3 min' },
+  { t: 'Entender', i: 'bulb', min: '10–15 min' },
+  { t: 'Palavras', i: 'layers', min: '5 min' },
+  { t: 'Praticar', i: 'target', min: '15 min' },
+  { t: 'Ir além', i: 'compass', min: 'opcional' },
+];
+const lsGet = (day) => { S.lstep = S.lstep || {}; return (S.lstep[day] = S.lstep[day] || { s: 0, c: 0, seen: [0] }); };
+const elOf = (html) => { const t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstElementChild; };
+const _intro3 = intro;
+intro = function (day) {
+  _intro3(day);
+  const d = dayInfo(day); if (d.review) return;
+  const l = LESSONS[d.li], kids = [...app.children], st = lsGet(day);
+  const byH = (re) => kids.find((c) => c.matches('.card') && re.test((c.querySelector('h2,h3')?.textContent || '').trim()));
+  const how = app.querySelector('details.how'), deep = app.querySelector('.card.deep'), resumo = byH(/^🧩/), bd = byH(/^🔎/), voc = byH(/^📚/), conv = byH(/^💬/);
+  const plan = app.querySelector('.mo-leplan'), hw = app.querySelector('.card.hw'), stb = $('#st');
+  const xh = kids.find((c) => c.tagName === 'H2' && /ir além/i.test(c.textContent)), xg = app.querySelector('.xgrid');
+  const nw = voc && conv ? kids.slice(kids.indexOf(voc) + 1, kids.indexOf(conv)).filter((c) => c.matches('.card')) : [];
+  // a aula em partes: cada passo, o esquema e o teste rápido viram uma tela
+  const parts = []; let cur = null;
+  [...(deep ? deep.children : [])].forEach((n) => {
+    if (n.matches('h2.dh')) return;
+    const head = n.matches('h3.step') ? n.textContent.trim() : n.matches('.quiz') ? (n.querySelector('h4')?.textContent || 'Teste rápido').trim() : null;
+    if (head || !cur) { cur = { t: head || 'Introdução', nodes: [] }; parts.push(cur); }
+    cur.nodes.push(n);
+  });
+  // parte sem texto (só as imagens, que carregam depois ou nem existem) junta com a seguinte
+  for (let k = parts.length - 2; k >= 0; k--) if (parts[k].nodes.every((n) => n.matches('.limgs, figure'))) { parts[k + 1].nodes.unshift(...parts[k].nodes); parts.splice(k, 1); }
+  if (resumo || bd) parts.push({ t: '🧩 Resumo da lição', nodes: [resumo, bd].filter(Boolean), solta: true });
+  if (!parts.length) parts.push({ t: 'Aula', nodes: [] });
+  // estrutura nova
+  const words = l.v.filter((v) => !v.x).length;
+  const box = elOf(`<div class="mo-ls"><nav class="mo-steps2" aria-label="Etapas da lição">${LSTEP.map((x, k) => `<button data-ls="${k}"><span class="mo-sn">${k + 1}</span><span><b>${x.t}</b><small>${x.min}</small></span></button>`).join('')}</nav>
+    <div class="mo-lp" data-lp="0"><div class="card mo-lsum"><div class="mo-card-h">${ic('headphones', 22)}<h3>Comece ouvindo</h3></div>
+      <p>Nesta lição: <b>${esc(l.pt)}</b> · ${esc(l.gt)} · ${words} palavras novas.</p>
+      <p class="mut">Ouça a conversa duas vezes antes de ler a tradução. Tente adivinhar o sentido pelo contexto: a explicação vem na próxima etapa.</p></div></div>
+    <div class="mo-lp" data-lp="1"><div class="mo-partnav"></div></div>
+    <div class="mo-lp" data-lp="2"><p class="mut mo-lhint">Toque em 🔊, ouça e repita cada palavra em voz alta. Elas entram nas suas cartas de revisão quando você praticar.</p></div>
+    <div class="mo-lp" data-lp="3"><div class="card mo-cola"><div class="mo-card-h">${ic('bulb', 22)}<h3>Antes de praticar, relembre</h3></div><p>${esc(l.gx)}</p>
+      <p class="mut">${l.le ? 'Primeiro as perguntas do texto e a ficha, depois exercícios do vocabulário.' : '14 exercícios em formatos variados.'} Cerca de 15 minutos. Os erros voltam no fim para uma nova chance.</p></div></div>
+    <div class="mo-lp" data-lp="4"></div>
+    <div class="mo-lnav"><button class="ghost" id="lsPrev">${ic('chevron', 16, 'flip')} Voltar</button><button class="pri" id="lsNext"></button></div></div>`);
+  const P = (k) => box.querySelector(`[data-lp="${k}"]`);
+  if (plan) P(0).append(plan);
+  if (conv) P(0).append(conv);
+  if (how) { how.open = false; P(0).append(how); }
+  parts.forEach((p, k) => {
+    const el = elOf(`<div class="mo-part" data-part="${k}"></div>`);
+    if (p.solta) el.append(...p.nodes);
+    else { const c = elOf('<div class="card deep mo-partcard"></div>'); c.append(...p.nodes); el.append(c); }
+    P(1).append(el);
+  });
+  [voc, ...nw].filter(Boolean).forEach((n) => P(2).append(n));
+  if (stb) P(3).append(stb);
+  [hw, xh, xg].filter(Boolean).forEach((n) => P(4).append(n));
+  if (!P(4).children.length) P(4).append(elOf('<p class="mut">Nada extra nesta lição.</p>'));
+  const lhead = app.querySelector('.lhead');
+  [...app.children].forEach((c) => { if (c !== lhead && !c.matches('.back') && c !== box) c.remove(); });
+  lhead.after(box);
+  // navegação
+  const last = parts.length - 1;
+  const show = (s, c, scroll = true) => {
+    st.s = s; st.c = Math.max(0, Math.min(last, c)); if (!st.seen.includes(s)) st.seen.push(s); save();
+    $$('[data-lp]', box).forEach((p) => (p.hidden = +p.dataset.lp !== s));
+    $$('[data-part]', box).forEach((p) => (p.hidden = +p.dataset.part !== st.c));
+    $$('[data-ls]', box).forEach((b) => { const k = +b.dataset.ls; b.classList.toggle('on', k === s); b.classList.toggle('ok', k !== s && (k === 3 ? !!S.done[day] : st.seen.includes(k) && k < Math.max(...st.seen))); b.setAttribute('aria-current', k === s ? 'step' : 'false'); });
+    $('.mo-partnav', box).innerHTML = `<span>Parte ${st.c + 1} de ${parts.length}</span><span class="mo-dots">${parts.map((p, k) => `<button data-pd="${k}" class="${k === st.c ? 'on' : k < st.c ? 'ok' : ''}" aria-label="${esc(p.t)}" title="${esc(p.t)}"></button>`).join('')}</span>`;
+    $$('[data-pd]', box).forEach((b) => (b.onclick = () => show(1, +b.dataset.pd)));
+    const nx = $('#lsNext', box), pv = $('#lsPrev', box);
+    pv.style.visibility = s === 0 ? 'hidden' : '';
+    nx.hidden = s === 4;
+    nx.innerHTML = s === 1 && st.c < last ? `Próxima parte ${ic('arrow', 16)}` : s === 3 ? `Pular para Ir além ${ic('arrow', 16)}` : s < 4 ? `Ir para ${LSTEP[s + 1].t} ${ic('arrow', 16)}` : '';
+    nx.className = s === 3 ? 'ghost' : 'pri'; // na etapa Praticar, o botão principal é o de começar os exercícios
+    if (scroll) box.scrollIntoView({ block: 'start', behavior: 'instant' });
+  };
+  $$('[data-ls]', box).forEach((b) => (b.onclick = () => { const k = +b.dataset.ls; show(k, k === 1 && st.s === 1 ? st.c : 0); }));
+  $('#lsNext', box).onclick = () => (st.s === 1 && st.c < last ? show(1, st.c + 1) : show(st.s + 1, 0));
+  $('#lsPrev', box).onclick = () => (st.s === 1 && st.c > 0 ? show(1, st.c - 1) : show(st.s - 1, st.s - 1 === 1 ? last : 0));
+  show(Math.min(st.s, 4), st.c, false);
+};
+
 // app.js já desenhou a primeira tela com a versão antiga: redesenha com a camada MODO.
 go(view === "run" ? "home" : view);

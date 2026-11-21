@@ -234,3 +234,32 @@ button.ghost { color: var(--p600); }
 .mo-fl input.good + .mo-fe { color: var(--ok); }
 #ex #lwChk { display: block; margin: 10px auto 0; }
 @media (max-width: 640px) { .mo-fl { grid-template-columns: 1fr; } .mo-fe { grid-column: 1; } }
+
+/* ---------- lição em etapas ---------- */
+.mo-steps2 { display: flex; gap: 8px; position: sticky; top: 0; z-index: 5; background: var(--bg); padding: 10px 0; margin: 6px 0 12px; overflow-x: auto; }
+.mo-steps2 button { flex: 1; min-width: 118px; display: flex; align-items: center; gap: 10px; padding: 9px 12px; background: var(--bg2); border: 1px solid var(--line); border-radius: 12px; text-align: left; color: var(--ink); }
+.mo-steps2 button b { display: block; font-size: .92rem; } .mo-steps2 button small { display: block; color: var(--mut); font-size: .74rem; }
+.mo-sn { flex: none; display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--bg3); color: var(--mut); font: 700 .8rem "Space Grotesk", sans-serif; }
+.mo-steps2 button.on { border: 2px solid var(--p600); background: var(--p50); } .mo-steps2 button.on .mo-sn { background: var(--p600); color: #fff; }
+.mo-steps2 button.ok .mo-sn { background: var(--ok); color: #fff; }
+.mo-lp { max-width: 860px; }
+.mo-lp > .card, .mo-part > .card { margin: 0 0 14px; }
+.mo-lsum p { margin: 4px 0; }
+.mo-partnav { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin: 0 0 10px; color: var(--mut); font-size: .88rem; }
+.mo-dots { display: flex; gap: 6px; } .mo-dots button { width: 22px; height: 6px; padding: 0; border: 0; border-radius: 3px; background: var(--p100); }
+.mo-dots button.ok { background: var(--p500); } .mo-dots button.on { background: var(--p700); width: 34px; }
+.mo-partcard { font-size: 1.02rem; line-height: 1.6; }
+.mo-partcard > h3.step:first-child, .mo-partcard > .limgs:first-child + h3.step { margin-top: 0; padding-top: 0; border-top: 0; }
+.mo-lhint { margin: 0 0 10px; }
+.mo-cola p { margin: 4px 0; }
+.mo-lp #st { width: 100%; }
+.mo-lnav { display: flex; justify-content: space-between; gap: 10px; margin: 16px 0 28px; max-width: 860px; }
+.mo-lnav button { display: inline-flex; align-items: center; gap: 6px; }
+@media (max-width: 640px) {
+  .mo-steps2 { gap: 6px; margin-left: -4px; margin-right: -4px; padding: 8px 4px; }
+  .mo-steps2 button { min-width: 0; flex-direction: column; gap: 4px; padding: 8px 4px; text-align: center; }
+  .mo-steps2 button b { font-size: .74rem; } .mo-steps2 button small { display: none; }
+  .mo-lnav button.pri { flex: 1; justify-content: center; }
+}
+
+.mo-partcard .limgs:not(:has(figure:not([hidden]))) { display: none; }
