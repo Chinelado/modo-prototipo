@@ -30,7 +30,7 @@ A lição deixou de ser uma página única e passou a ter **5 etapas**, com a ba
 
 ### Usabilidade
 7. **Limite de texto por tela** na aula (cerca de 150 palavras no celular); passos longos viram duas partes.
-8. **Tradução escondida por padrão** na conversa, com um toque para mostrar. Força a tentar entender primeiro.
+8. ~~**Tradução escondida por padrão** na conversa~~ ✅ Feito: na etapa Ouvir as traduções aparecem borradas; um toque (ou Enter) mostra cada uma, e "Mostrar todas as traduções" abre ou fecha todas.
 9. **Controle de velocidade do áudio** visível em toda a lição (normal e devagar), não só nos exercícios.
 10. **Tamanho do texto ajustável** no Perfil (normal, grande), para leitura longa no celular.
 11. **Indicador de tempo restante** na barra de etapas, a partir do ritmo real do aluno.

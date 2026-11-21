@@ -270,3 +270,12 @@ button.ghost { color: var(--p600); }
 .mo-verif .q { margin: 0 0 8px; } .mo-verif .q b { display: block; margin-top: 4px; }
 .mo-verif .opts { margin: 0; } .mo-verif .line, .mo-verif .pool { max-width: none; }
 .mo-chkr p { margin: 10px 0 0; } .mo-ok2 { color: var(--ok); font-weight: 600; display: flex; align-items: center; gap: 6px; } .mo-no2 { color: var(--no); }
+
+/* ---------- tradução escondida na conversa ---------- */
+.mo-hidept h3 { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.mo-ptall { margin-left: auto; font-size: .85rem; font-weight: 500; }
+.mo-hidept .bubble small { cursor: pointer; filter: blur(5px); user-select: none; transition: filter .2s; border-radius: 4px; }
+.mo-hidept .bubble small:hover { filter: blur(3px); }
+.mo-hidept .bubble small.on { filter: none; user-select: auto; }
+.mo-hidept .bubble small:focus-visible { outline: 2px solid var(--p600); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .mo-hidept .bubble small { transition: none; } }

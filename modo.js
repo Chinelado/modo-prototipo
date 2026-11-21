@@ -464,7 +464,7 @@ intro = function (day) {
   const box = elOf(`<div class="mo-ls"><nav class="mo-steps2" aria-label="Etapas da lição">${LSTEP.map((x, k) => `<button data-ls="${k}"><span class="mo-sn">${k + 1}</span><span><b>${x.t}</b><small>${x.min}</small></span></button>`).join('')}</nav>
     <div class="mo-lp" data-lp="0"><div class="card mo-lsum"><div class="mo-card-h">${ic('headphones', 22)}<h3>Comece ouvindo</h3></div>
       <p>Nesta lição: <b>${esc(l.pt)}</b> · ${esc(l.gt)} · ${words} palavras novas.</p>
-      <p class="mut">Ouça a conversa duas vezes antes de ler a tradução. Tente adivinhar o sentido pelo contexto: a explicação vem na próxima etapa.</p></div></div>
+      <p class="mut">Ouça a conversa duas vezes e tente entender pelo contexto. As traduções ficam escondidas: toque numa fala para conferir. A explicação vem na próxima etapa.</p></div></div>
     <div class="mo-lp" data-lp="1"><div class="mo-partnav"></div></div>
     <div class="mo-lp" data-lp="2"><p class="mut mo-lhint">Toque em 🔊, ouça e repita cada palavra em voz alta. Elas entram nas suas cartas de revisão quando você praticar.</p></div>
     <div class="mo-lp" data-lp="3"><div class="card mo-cola"><div class="mo-card-h">${ic('bulb', 22)}<h3>Antes de praticar, relembre</h3></div><p>${esc(l.gx)}</p>
@@ -473,7 +473,22 @@ intro = function (day) {
     <div class="mo-lnav"><button class="ghost" id="lsPrev">${ic('chevron', 16, 'flip')} Voltar</button><button class="pri" id="lsNext"></button></div></div>`);
   const P = (k) => box.querySelector(`[data-lp="${k}"]`);
   if (plan) P(0).append(plan);
-  if (conv) P(0).append(conv);
+  if (conv) {
+    // tradução escondida: o aluno tenta entender primeiro e toca na fala para conferir
+    conv.classList.add('mo-hidept');
+    const bs = $$('.bubble small', conv);
+    bs.forEach((sm) => { sm.tabIndex = 0; sm.setAttribute('role', 'button'); sm.setAttribute('aria-label', 'Mostrar tradução'); });
+    conv.querySelector('h3')?.insertAdjacentHTML('beforeend', '<button class="link mo-ptall" type="button">Mostrar todas as traduções</button>');
+    const all = $('.mo-ptall', conv);
+    const upd = () => { const n = bs.filter((x) => x.classList.contains('on')).length; all.textContent = n === bs.length ? 'Esconder as traduções' : 'Mostrar todas as traduções'; };
+    const tog = (sm, on = !sm.classList.contains('on')) => { sm.classList.toggle('on', on); sm.setAttribute('aria-label', on ? 'Esconder tradução' : 'Mostrar tradução'); };
+    bs.forEach((sm) => {
+      sm.onclick = (e) => { e.stopPropagation(); tog(sm); upd(); };
+      sm.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tog(sm); upd(); } };
+    });
+    all.onclick = () => { const open = bs.every((x) => x.classList.contains('on')); bs.forEach((x) => tog(x, !open)); upd(); };
+    P(0).append(conv);
+  }
   if (how) { how.open = false; P(0).append(how); }
   parts.forEach((p, k) => {
     const el = elOf(`<div class="mo-part" data-part="${k}"></div>`);
