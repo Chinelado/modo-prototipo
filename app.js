@@ -235,7 +235,7 @@ function go(v, arg) {
     `<div class="nav-foot">🔥 ${shownStreak()} · ⭐ ${S.xp} XP</div>`;
   $$('button', nav).forEach((b) => (b.onclick = () => go(b.dataset.v)));
   stopRead();
-  ({ home, trilha, cards, perfil, intro, onboard, extras, guide, nivel, texto, pocket, praticar: (a) => praticar(a) })[v](arg);
+  ({ home, trilha, cards, perfil, intro, onboard, extras, guide, nivel, texto, pocket, praticar: (a) => praticar(a), modulo: (a) => modulo(a), curriculo: (a) => curriculo(a) })[v](arg);
   if (v !== 'trilha') scrollTo(0, 0);
   updateBadge();
 }

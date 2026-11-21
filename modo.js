@@ -35,7 +35,7 @@ const modoLogo = (s = 30) => { const id = 'mg' + ++mGid; return `<svg viewBox="0
 
 /* ---------- navegação ---------- */
 const MODO_NAV = [['home', 'home', 'Hoje'], ['trilha', 'book', 'Aprender'], ['praticar', 'target', 'Praticar'], ['extras', 'compass', 'Explorar'], ['cards', 'layers', 'Cartas'], ['perfil', 'user', 'Perfil']];
-const NAV_OF = { intro: 'trilha', guide: 'trilha', nivel: 'trilha', pocket: 'extras', texto: 'extras' };
+const NAV_OF = { intro: 'trilha', guide: 'trilha', nivel: 'trilha', modulo: 'trilha', curriculo: 'trilha', pocket: 'extras', texto: 'extras' };
 function modoNav(v, due) {
   const on = NAV_OF[v] || v;
   return `<div class="brand">${modoLogo(30)}MODO</div>` +
@@ -88,7 +88,7 @@ home = function () {
   const gNext = !nDone() && GUIDE.find((g) => !S.guide[g.id]);
   let H;
   if (gNext) { const k = GUIDE.indexOf(gNext); H = { e: `Comece aqui · aula ${k + 1} de ${GUIDE.length}`, t: gNext.t, meta: [['clock', '3–5 min'], ['book', guideCat(gNext).t]], cta: k ? 'Continuar a aula' : 'Começar a primeira aula', act: () => go('guide', gNext.id), alt: ['Pular para o dia 1', () => go('intro', 1)] }; }
-  else if (d) H = { e: `${d.level} · Semana ${d.w + 1} · Dia ${cur} de ${TOTAL}`, t: d.review ? `Checkpoint da semana ${d.w + 1}` : L.de, meta: [['clock', d.review ? '25–35 min' : '30–45 min'], ['book', d.review ? 'Revisão das 6 lições da semana' : L.pt + ' · ' + L.gt]], cta: m.lesson ? 'Adiantar o próximo dia' : 'Continuar a lição', act: () => go('intro', cur) };
+  else if (d) H = { e: d.review ? `${d.level} · Módulo ${d.w + 1} · Avaliação` : `${d.level} · Módulo ${d.w + 1} · Lição ${d.r + 1} de 6`, t: d.review ? `Avaliação do módulo ${d.w + 1}` : L.de, meta: [['clock', d.review ? '25–35 min' : '30–45 min'], ['book', d.review ? 'Revisão das 6 lições do módulo' : L.pt + ' · ' + L.gt]], cta: m.lesson ? 'Adiantar a próxima lição' : d.review ? 'Fazer a avaliação' : 'Continuar a lição', act: () => go('intro', cur), alt: ['Ver o módulo', () => go('modulo', d.w)] };
   else H = { e: 'Trilha concluída', t: 'Todas as lições feitas', meta: [['layers', 'Mantenha as cartas em dia']], cta: 'Revisar cartas', act: () => go('cards') };
   const sug = homeSuggestion(due);
   const pk = POCKETS.filter((p) => !(S.pockets || {})[p.id]).slice(0, 3);
@@ -123,7 +123,7 @@ home = function () {
 };
 
 /* ---------- Aprender: abas Trilha e Comece aqui ---------- */
-const aprTabs = (on) => `<div class="mo-tabs"><button data-apr="trilha" class="${on === 'trilha' ? 'on' : ''}">Trilha A1–C2</button><button data-apr="guide" class="${on === 'guide' ? 'on' : ''}">Comece aqui e dicionário</button></div>`;
+const aprTabs = (on) => `<div class="mo-tabs">${[['trilha', 'Trilha'], ['curriculo', 'Currículo'], ['guide', 'Comece aqui']].map(([id, t]) => `<button data-apr="${id}" class="${on === id ? 'on' : ''}">${t}</button>`).join('')}</div>`;
 const wireApr = () => $$('[data-apr]').forEach((b) => (b.onclick = () => go(b.dataset.apr)));
 const _trilha = trilha;
 trilha = function (lv) { _trilha(lv); const h = app.querySelector('h1'); if (h) { h.textContent = 'Aprender'; h.insertAdjacentHTML('afterend', aprTabs('trilha')); wireApr(); } };
@@ -159,6 +159,135 @@ onboard = function (step = 1) {
   let lvSel = 'zero';
   $$('[data-lv]').forEach((b) => (b.onclick = () => { lvSel = b.dataset.lv; $$('[data-lv]').forEach((x) => { const on = x === b; x.classList.toggle('on', on); x.querySelector('.mo-ok').innerHTML = on ? ic('check', 20) : ''; }); }));
   $('#ob3').onclick = () => { S.name = $('#nm').value.trim(); S.goal = +$('#goal').value; S.start = today(); save(); go(lvSel === 'teste' ? 'nivel' : 'home'); };
+};
+
+/* ---------- Módulo (= semana: 6 lições + avaliação) ---------- */
+// Decisão de 20/11/2026: Módulo = semana, a Unidade fica só no modelo de dados.
+// As semanas ainda não têm nome nem objetivos "consigo…": a tela mostra isso como pendência em vez de inventar.
+const modDays = (w) => Array.from({ length: 7 }, (_, r) => w * 7 + r + 1);
+const modLessons = (w) => LESSONS.slice(w * 6, w * 6 + 6);
+function modState(w) {
+  const cur = currentDay() || TOTAL + 1, ds = modDays(w), n = ds.filter((d) => S.done[d]).length;
+  return { cur, ds, n, locked: ds[0] > cur, done: n === 7 };
+}
+const stars = (s) => `<span class="mo-stars" aria-label="${s} de 3 estrelas">${'★'.repeat(s)}<i>${'★'.repeat(3 - s)}</i></span>`;
+function modRow(d, w) {
+  const { cur } = modState(w), info = dayInfo(d), L = info.review ? null : LESSONS[info.li], dn = S.done[d], locked = d > cur;
+  const tile = dn ? `<span class="mo-tile g">${ic('check', 20)}</span>` : locked ? `<span class="mo-tile mo-off">${ic('lock', 18)}</span>` : `<span class="mo-tile">${L ? `<b class="mo-n">${info.r + 1}</b>` : ic('target', 20)}</span>`;
+  const meta = dn ? stars(dn.s) : d === cur ? '<span class="mo-badge">agora</span>' : '';
+  return `<button class="mo-pr mo-lrow ${d === cur ? 'mo-cur' : ''}" data-day="${d}" ${locked ? 'disabled' : ''}>${tile}
+    <span><b>${L ? esc(L.de) : 'Avaliação do módulo'}</b><small>${L ? esc(L.pt) + ' · ' + esc(L.gt) : '18 exercícios com as 6 lições do módulo'}</small></span>
+    <span class="mo-meta">${meta}${locked ? '' : ic('chevron', 18)}</span></button>`;
+}
+function modulo(w) {
+  w = Math.max(0, Math.min(WEEKS - 1, Number.isFinite(+w) ? +w : 0));
+  const p = phaseOf(w), { cur, ds, n } = modState(w), ls = modLessons(w);
+  const nextD = ds.find((d) => !S.done[d]), canGo = nextD && nextD <= cur;
+  const words = ls.flatMap((l) => l.v.filter((v) => !v.x)), inCards = words.filter((v) => S.cards[v.k]).length;
+  const weak = ds.filter((d) => S.done[d] && S.done[d].s < 3);
+  const tx = TEXTS.find((t) => t.w === w + 1);
+  const pos = w - p.weeks[0] + 1, tot = p.weeks[1] - p.weeks[0];
+  const cta = !nextD ? 'Módulo concluído' : !canGo ? `Conclua o dia ${cur} para liberar` : nextD === ds[0] && !n ? 'Começar o módulo' : dayInfo(nextD).review ? 'Fazer a avaliação' : 'Continuar o módulo';
+  app.innerHTML = `<nav class="mo-crumbs" aria-label="Você está em"><button class="link" data-crumb="trilha">Aprender</button>${ic('chevron', 14)}<button class="link" data-crumb="lv">${p.id}</button>${ic('chevron', 14)}<span>Módulo ${w + 1}</span></nav>
+  <section class="mo-modh card" style="--lc:${LVCOL[p.id]}">${levelBadge(p.id, 64)}
+    <div class="mo-modt"><span class="eyebrow">${p.id} · módulo ${pos} de ${tot} do nível · ${w + 1} de ${WEEKS} na trilha</span><h1>Módulo ${w + 1}</h1>
+      <p class="mut">6 lições + avaliação · ${words.length} palavras novas</p>
+      <div class="row"><div class="bar"><i style="width:${Math.round((n / 7) * 100)}%"></i></div><small>${n}/7</small></div></div>
+    <button class="pri mo-modgo" id="mGo" ${canGo ? '' : 'disabled'}>${canGo ? ic('play', 18) : ''}${cta}</button></section>
+  <div class="mo-modgrid">
+    <div>
+      <div class="mo-sec"><h2>Lições</h2></div>
+      <div class="mo-lessons">${ds.map((d) => modRow(d, w)).join('')}</div>
+      ${tx ? `<button class="mo-pr mo-lrow mo-tx" id="mTx"><span class="mo-tile a">${ic(tx.kind === 'escuta' ? 'headphones' : 'book', 20)}</span><span><b>${esc(tx.t)}</b><small>Texto ${tx.kind === 'escuta' ? 'de escuta' : 'de leitura'} do módulo · opcional</small></span><span class="mo-meta">${(S.reads || {})[tx.id] ? ic('check', 18) : ''}${ic('chevron', 18)}</span></button>` : ''}
+    </div>
+    <div>
+      <div class="card mo-obj"><div class="mo-card-h">${ic('target', 22)}<h3>Objetivos do módulo</h3><span class="mo-pend">pendente</span></div>
+        <p class="mut">Os objetivos "consigo…" deste módulo ainda não foram escritos. Por enquanto, o que cada lição treina:</p>
+        <ul class="mo-gt">${ls.map((l) => `<li>${esc(l.gt)}</li>`).join('')}</ul></div>
+      <div class="card"><div class="mo-card-h">${ic('layers', 22)}<h3>Vocabulário</h3></div>
+        <p><b>${words.length} palavras</b> · <span class="mut">${inCards} já nas suas cartas</span></p>
+        <div class="mo-words">${words.slice(0, 12).map((v) => `<span class="mo-w">${spk(v.de)}<span class="${gcls(v.de)}">${esc(v.de)}</span></span>`).join('')}</div>
+        ${words.length > 12 ? `<details><summary>Ver as ${words.length}</summary><div class="mo-words">${words.slice(12).map((v) => `<span class="mo-w">${spk(v.de)}<span class="${gcls(v.de)}">${esc(v.de)}</span></span>`).join('')}</div></details>` : ''}</div>
+      <div class="card"><div class="mo-card-h">${ic('bulb', 22)}<h3>O que revisar</h3></div>
+        ${weak.length ? `<p class="mut">Lições com menos de 3 estrelas. Refazer conta de novo para as estrelas.</p>${weak.map((d) => { const i = dayInfo(d); return `<button class="mo-ex mo-rev" data-day="${d}"><span><b>${i.review ? 'Avaliação do módulo' : esc(LESSONS[i.li].de)}</b><small>${stars(S.done[d].s)}</small></span>${ic('chevron', 18, 'arr')}</button>`; }).join('')}`
+          : `<p class="mut">${n ? 'Tudo o que você fez aqui está com 3 estrelas.' : 'Aparece aqui o que vale refazer depois que você concluir lições deste módulo.'}</p>`}</div>
+    </div>
+  </div>
+  <div class="mo-modnav">${w > 0 ? `<button class="ghost" data-mod="${w - 1}">${ic('chevron', 16, 'flip')} Módulo ${w}</button>` : '<span></span>'}${w < WEEKS - 1 ? `<button class="ghost" data-mod="${w + 1}">Módulo ${w + 2} ${ic('chevron', 16)}</button>` : ''}</div>`;
+  $$('[data-day]').forEach((b) => (b.onclick = () => go('intro', +b.dataset.day)));
+  $$('[data-mod]').forEach((b) => (b.onclick = () => go('modulo', +b.dataset.mod)));
+  $$('[data-crumb]').forEach((b) => (b.onclick = () => go('trilha', b.dataset.crumb === 'lv' ? p.id : undefined)));
+  if (canGo) $('#mGo').onclick = () => go('intro', nextD);
+  if ($('#mTx')) $('#mTx').onclick = () => go('texto', tx.id);
+}
+
+/* ---------- Currículo (aba de Aprender) ---------- */
+// A árvore inteira da trilha: Nível → Módulo → Lição, com busca por título, tema ou gramática.
+function curriculo() {
+  app.innerHTML = `<h1>Aprender</h1>${aprTabs('curriculo')}
+  <p class="mut">Tudo o que a trilha de alemão cobre, do A1 ao C2: ${PHASES.length} níveis, ${WEEKS} módulos, ${LESSONS.length} lições.</p>
+  <input id="cq" class="mo-search" type="search" placeholder="Buscar tema, gramática ou título" aria-label="Buscar no currículo">
+  <div id="ctree"></div>`;
+  const draw = () => {
+    const q = norm($('#cq').value.trim()), cur = currentDay() || TOTAL + 1, cl = curLevel();
+    let hits = 0;
+    const html = PHASES.map((p) => {
+      const mods = [];
+      for (let w = p.weeks[0]; w < p.weeks[1]; w++) {
+        const rows = modDays(w).filter((d) => { if (!q) return true; const i = dayInfo(d); return !i.review && norm([LESSONS[i.li].de, LESSONS[i.li].pt, LESSONS[i.li].gt].join(' ')).includes(q); });
+        if (!rows.length) continue;
+        hits += rows.filter((d) => !dayInfo(d).review).length;
+        const st = modState(w);
+        mods.push(`<div class="mo-cmod"><button class="mo-cmh" data-mod="${w}"><b>Módulo ${w + 1}</b><span class="mut">${st.n}/7</span>${st.done ? ic('check', 16, 'okc') : st.locked ? ic('lock', 14, 'mutc') : ''}${ic('chevron', 16, 'arr')}</button>
+          <ol>${rows.map((d) => { const i = dayInfo(d), L = i.review ? null : LESSONS[i.li], lock = d > cur;
+            return `<li><button class="mo-cl ${S.done[d] ? 'mo-done' : ''}" data-day="${d}" ${lock ? 'disabled' : ''}><span class="mo-cn">${S.done[d] ? ic('check', 14) : L ? i.r + 1 : ic('target', 14)}</span><span><b lang="de">${L ? esc(L.de) : 'Avaliação do módulo'}</b> <small>${L ? esc(L.pt) + ' · ' + esc(L.gt) : '18 exercícios'}</small></span></button></li>`; }).join('')}</ol></div>`);
+      }
+      if (!mods.length) return '';
+      const days = phaseDays(p), dn = days.filter((d) => S.done[d]).length;
+      return `<details class="mo-clv" ${q || p.id === cl ? 'open' : ''} style="--lc:${LVCOL[p.id]}"><summary><span class="mo-lvd">${p.id}</span><span class="mo-lvt"><b>${esc(p.n)}</b><small>${esc(p.can)}</small></span><span class="mo-lvp"><span class="bar"><i style="width:${Math.round((dn / days.length) * 100)}%"></i></span><small>${dn}/${days.length}</small></span></summary>
+        <div class="mo-cmods">${mods.join('')}</div></details>`;
+    }).join('');
+    $('#ctree').innerHTML = (q ? `<p class="mut">${hits} ${hits === 1 ? 'lição encontrada' : 'lições encontradas'}</p>` : '') + (html || '<p class="mut">Nada encontrado. Tente outra palavra.</p>');
+    $$('#ctree [data-mod]').forEach((b) => (b.onclick = () => go('modulo', +b.dataset.mod)));
+    $$('#ctree [data-day]').forEach((b) => (b.onclick = () => go('intro', +b.dataset.day)));
+  };
+  $('#cq').oninput = draw; draw();
+  wireApr();
+}
+
+/* ---------- Trilha e lição apontam para o módulo ---------- */
+const _trilha2 = trilha;
+trilha = function (lv) {
+  _trilha2(lv);
+  const wl = app.querySelector('.wklist');
+  if (wl) {
+    const det = wl.closest('details'), p = PHASES.find((x) => x.id === trLevel);
+    det.open = true; det.querySelector('summary').textContent = 'Módulos deste nível';
+    wl.outerHTML = `<div class="mo-modlist">${Array.from({ length: p.weeks[1] - p.weeks[0] }, (_, k) => { const w = p.weeks[0] + k, st = modState(w);
+      return `<button class="mo-ml" data-mod="${w}"><span><b>Módulo ${w + 1}</b><small>${modLessons(w).map((l) => esc(l.gt)).join(' · ')}</small></span><span class="mo-meta">${st.done ? ic('check', 16, 'okc') : st.locked ? ic('lock', 14) : `${st.n}/7`}${ic('chevron', 16)}</span></button>`; }).join('')}</div>`;
+    $$('[data-mod]', app).forEach((b) => (b.onclick = () => go('modulo', +b.dataset.mod)));
+  }
+  const ceb = app.querySelector('.ccard .eyebrow'); if (ceb) ceb.textContent = ceb.textContent.replace(/Semanas? (\d+)/, (_, a) => (ceb.textContent.includes('–') ? 'Módulos ' : 'Módulo ') + a);
+  $$('.ccard p', app).forEach((el) => { if (el.textContent.includes('checkpoints')) el.textContent = el.textContent.replace(/🏁 (\d+) checkpoints/, '🏁 $1 módulos com avaliação'); });
+  // balão do bloco: "Semana" vira "Módulo" e ganha o atalho para a tela do módulo
+  const patch = (d) => {
+    const pop = $('#pop'); if (!pop || pop.hidden) return; const w = dayInfo(d).w;
+    const i = dayInfo(d), eb = pop.querySelector('.eyebrow');
+    if (eb) eb.textContent = `${i.level} · Módulo ${w + 1} · ${i.review ? 'Avaliação' : `Lição ${i.r + 1} de 6`}`;
+    const h = pop.querySelector('h3'); if (h) h.textContent = h.textContent.replace(/🏁 Checkpoint da semana (\d+)/, 'Avaliação do módulo $1');
+    pop.insertAdjacentHTML('beforeend', `<button class="ghost mo-popm" id="pmod">Ver o módulo ${w + 1} ${ic('arrow', 16)}</button>`);
+    $('#pmod').onclick = () => go('modulo', w);
+  };
+  $$('.node', app).forEach((nd) => { nd.addEventListener('click', () => patch(+nd.dataset.d)); nd.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') patch(+nd.dataset.d); }); });
+};
+const _intro = intro;
+intro = function (day) {
+  _intro(day);
+  const d = dayInfo(day), eb = app.querySelector('.lhead .eyebrow'), h = app.querySelector('.lhead h1'), bk = $('#bk');
+  if (eb) eb.textContent = d.review ? `${d.level} · Módulo ${d.w + 1}` : `${d.level} · Módulo ${d.w + 1} · Lição ${d.r + 1} de 6`;
+  if (h && d.review) h.textContent = `Avaliação do módulo ${d.w + 1}`;
+  if (d.review) { const p = app.querySelector('.lhead + p'); if (p) p.textContent = '18 exercícios misturando tudo o que você viu neste módulo:'; const st = $('#st'); if (st) st.textContent = 'Começar a avaliação'; }
+  if (bk) { bk.innerHTML = `← Módulo ${d.w + 1}`; bk.onclick = () => go('modulo', d.w); }
 };
 
 // app.js já desenhou a primeira tela com a versão antiga: redesenha com a camada MODO.
