@@ -178,4 +178,48 @@ Com estes módulos, as **42 lições novas** do redesenho estão no protótipo: 
 
 **Objetivos:** as 42 lições novas têm objetivo "consigo…" e os 8 módulos do A2 ganharam objetivos de módulo. As 24 lições antigas do A2 ainda não têm objetivo próprio (aparecem sem ele na lista do módulo).
 
-**O que falta em todas as lições novas:** imagens, áudio gravado (hoje é a voz do navegador; os textos de Ler e escrever também precisam entrar no gerador de áudio) e a revisão pedagógica de todo o conteúdo, que continua em rascunho.
+**O que falta em todas as lições novas:** imagens, áudio gravado (hoje é a voz do navegador; os textos de Ler e escrever também precisam entrar no gerador de áudio) e a revisão pedagógica de todo o conteúdo (feita em 21/11/2026; ver a seção abaixo).
+
+---
+
+## Revisão de conteúdo das 42 lições (21/11/2026)
+Li as 42 lições inteiras: vocabulário, diálogos, lacunas e explicações, pontos, exemplos, frases desmontadas, aula passo a passo, textos de leitura, perguntas e escritas guiadas. Também conferi se as remissões a outras lições batem com a ordem dos módulos (Mein Tag antes do convite, o imperativo antes de zum/zur, a lição de horas antes dos preços, Könnten Sie …? no Módulo 10). Foram 36 correções:
+
+**Erros de conteúdo**
+- **Alfabeto:** a lista das letras que enganam trazia o I (que se diz como em português) e deixava de fora C (tsê), G (guê), H e Q (ku). A tabela, os pontos e o resumo foram refeitos.
+- **Plural:** dizia que palavras em -er, -el e -en "não mudam", mas der Vogel → die Vögel e der Bruder → die Brüder (que aparece nos exemplos) ganham trema. Agora: não ganham terminação, às vezes só o trema.
+- **in der Nacht** estava explicado como "madrugada". É a noite alta, a hora de dormir.
+- **Ausbildung:** não é "metade na escola e metade na empresa". São aulas na Berufsschule e a maior parte do tempo na empresa, durante 2 a 3 anos e meio.
+- **Gymnasium** não é só o ensino médio: começa por volta dos 10 anos e leva ao Abitur.
+- **Dachgeschoss** é o andar sob o telhado, não "o último andar".
+- **Farmácia:** nem todo remédio sem receita é vendido só na farmácia. Agora: "muitos".
+- **Atestado eletrônico:** acrescentado que a empresa consulta o atestado na Krankenkasse, mas é preciso avisar o trabalho no primeiro dia.
+
+**Lacunas com duas respostas certas**
+- "Kaffee oder Tee? – Ich trinke ___ Tee.": gern também cabia. A lacuna agora diz "(prefiro)".
+- "Das Fest ___ am Samstag statt.": findet também estava certo (presente com sentido de futuro). Agora é "gestern".
+- Distrator sem sentido ("anfangengt") trocado por "anfangen", no mesmo padrão das outras lacunas.
+
+**Alemão pouco natural**
+- "Sie hat das Bein gebrochen" → **Sie hat sich das Bein gebrochen**.
+- "Das ist gesünder als der Bus" → **gesünder als Bus fahren** (andar a pé se compara com andar de ônibus, não com o ônibus).
+- "nur fünf Minuten von der U-Bahn" → **die U-Bahn ist nur fünf Minuten entfernt** (entfernt entrou como palavra de apoio).
+- "Da bin ich nicht einverstanden" → **Damit bin ich nicht einverstanden**.
+- "Was ist Ihr Geburtsdatum?" → **Wie ist Ihr Geburtsdatum?**, como Name e Adresse.
+- Na conversa sobre o temporal, "Viele Züge fielen aus" → **Viele Züge sind ausgefallen**: na fala se usa o Perfekt, e a própria lição ensina isso.
+- "Und wo muss man den Müll trennen?" → **Und wohin kommt der Müll?**
+- Na feira, "eine Packung Käse" → **200 Gramm Käse**.
+- No exemplo de e-mail soletrado, "punkt" → **Punkt**, com maiúscula, como no resto da lição.
+- "Queridos vizinhos" → **Caros vizinhos**, mais natural para um aviso.
+
+**Explicações**
+- A lacuna do telefone dizia que "a gente pensa em ter" no número de telefone, o que não acontece em português. Agora explica pelo sujeito: die Telefonnummer → ist.
+- "auf dem Handy" aparecia na lição de mídia sem explicação. Entrou ao lado de am Handy / im Internet.
+
+**Frases desmontadas**
+- Em 5 lições (weil, dass, deshalb), a oração principal inteira aparecia pintada como "conector". Agora cada palavra tem o seu papel, como nas lições antigas: Ich = sujeito, lerne = verbo, Deutsch = objeto…
+- "gesünder" usava o papel de adjetivo antes do substantivo. Agora é predicativo (depois de ist).
+
+**Depois das correções:** o teste automático das 42 lições passa como antes: formato, esquemas sem corte no celular, verificação em todos os passos, nenhuma palavra desconhecida, as escritas guiadas com o modelo e a migração do progresso. A tela do alfabeto ficou com 276 palavras, por causa de 2 letras a mais na tabela.
+
+**Limite desta revisão:** foi feita por IA, não por professora nativa. Vale uma leitura de alguém nativo, sobretudo nos diálogos e nos textos de leitura, antes de publicar.

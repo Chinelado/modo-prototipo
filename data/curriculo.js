@@ -26,28 +26,30 @@ function NL(id, o) {
 
 NL('n-buchstabieren', {
   de: 'Wie schreibt man das?', pt: 'Soletrar nome, e-mail e cidade', gt: 'Alfabeto e sons das letras',
-  gx: 'Cada letra tem um nome: A (a), E (ê), I (i), J (iót), V (fau), W (vê), Z (tsét). Ä, Ö, Ü têm nome próprio e ß se chama Eszett. Para soletrar: Wie schreibt man das?',
+  gx: 'Cada letra tem um nome, e várias enganam: C (tsê), E (ê), G (guê), J (iót), V (fau), W (vê), Z (tsét). Ä, Ö, Ü têm nome próprio e ß se chama Eszett. Para soletrar: Wie schreibt man das?',
   ge: 'Wie schreibt man das?=Como se escreve isso?|Können Sie das bitte buchstabieren?=O senhor pode soletrar isso, por favor?|Mein Nachname ist Souza: S-O-U-Z-A.=Meu sobrenome é Souza: S-O-U-Z-A.',
   v: 'das Alphabet=o alfabeto=🔤|der Buchstabe=a letra=🅰️|buchstabieren=soletrar=🗣️|schreiben=escrever=✍️|der Vorname=o nome (primeiro nome)=🪪|der Nachname=o sobrenome=👪|die Adresse=o endereço=🏠|die E-Mail=o e-mail=📧|die Straße=a rua=🛣️|noch einmal=mais uma vez=🔁',
   x: 'groß=grande / maiúsculo|klein=pequeno / minúsculo|der Punkt=o ponto|der Bindestrich=o hífen|das Eszett=a letra ß|der Umlaut=o trema (ä, ö, ü)|die Hausnummer=o número da casa|richtig=certo|falsch=errado|Wie bitte?=Como? / Perdão?',
   dlg: 'Wie ist Ihr Name, bitte?=Qual é o seu nome, por favor?|Mein Name ist Oliveira.=Meu nome é Oliveira.|Wie schreibt man das?=Como se escreve isso?|O-L-I-V-E-I-R-A.=O-L-I-V-E-I-R-A.',
   cz: 'Wie ___ man das?=schreibt=schreiben=schreibe|Können Sie das bitte ___?=buchstabieren=buchstabiert=buchstabierst|Wie ___ Ihr Name?=ist=sind=bist',
   whys: 'com man o verbo leva -t, como com er/sie (man schreibt); schreiben é o infinitivo|depois de können o outro verbo vai para o fim no infinitivo: buchstabieren|Name é singular (der Name), então o verbo é ist; sind é plural e bist é de du',
-  pts: 'No alfabeto alemão, sete letras enganam quem fala português: E (ê), I (i), J (iót), V (fau), W (vê), Y (üpsilon) e Z (tsét).|Ä, Ö e Ü são letras com nome próprio (ä, ö, ü), e ß se chama Eszett. Sem teclado alemão, escreve-se ae, oe, ue e ss.|Para soletrar com clareza, diga letra por letra, devagar. Maiúscula é groß (großes A) e minúscula é klein.|man é o sujeito genérico (como "se" ou "a gente"): Wie schreibt man das? = Como se escreve isso?',
-  ex: 'Wie bitte? Noch einmal, bitte.=Como? Mais uma vez, por favor.|Mit V oder mit W?=Com V ou com W?|Das schreibt man mit Eszett.=Isso se escreve com ß.|Meine E-Mail ist ana punkt souza at web punkt de.=Meu e-mail é ana ponto souza arroba web ponto de.',
+  pts: 'No alfabeto alemão, várias letras enganam quem fala português: C (tsê), E (ê), G (guê), H (rá), J (iót), V (fau), W (vê), Y (üpsilon) e Z (tsét).|Ä, Ö e Ü são letras com nome próprio (ä, ö, ü), e ß se chama Eszett. Sem teclado alemão, escreve-se ae, oe, ue e ss.|Para soletrar com clareza, diga letra por letra, devagar. Maiúscula é groß (großes A) e minúscula é klein.|man é o sujeito genérico (como "se" ou "a gente"): Wie schreibt man das? = Como se escreve isso?',
+  ex: 'Wie bitte? Noch einmal, bitte.=Como? Mais uma vez, por favor.|Mit V oder mit W?=Com V ou com W?|Das schreibt man mit Eszett.=Isso se escreve com ß.|Meine E-Mail ist ana Punkt souza at web Punkt de.=Meu e-mail é ana ponto souza arroba web ponto de.',
   bd: ['Wie=W^a palavra interrogativa abre a pergunta|schreibt=V^verbo na 2ª posição, com -t porque o sujeito é man|man=S^man é o sujeito genérico: "se", "a gente"|das?=OA^aquilo que se escreve', 'Como se escreve isso?'],
   hw: 'Soletre em voz alta o seu nome completo, o nome da sua rua e o seu e-mail. Grave e confira cada letra com a tabela da aula.',
   deep: `
 No Brasil a gente soletra o tempo todo: no telefone, na farmácia, no cadastro. Na Alemanha também, e o seu nome provavelmente vai precisar ser soletrado muitas vezes. Hoje você aprende o alfabeto e as perguntas para isso.
 # Passo 1: as letras que se dizem igual
-Boa parte das letras soa parecida com o português: A (a), B (bê), D (dê), F (éf), K (ká), L (él), M (ém), N (én), O (ô), P (pê), S (és), T (tê), U (u), X (iks).
+Boa parte das letras soa parecida com o português: A (a), B (bê), D (dê), F (éf), I (i), K (ká), L (él), M (ém), N (én), O (ô), P (pê), S (és), T (tê), U (u), X (iks).
 ~ Mein Name ist Ana: A-N-A. = Meu nome é Ana: A-N-A.
 # Passo 2: as letras que enganam
 | Letra | Nome em alemão | Como soa para nós |
+| C | ce | "tsê" |
 | E | e | "ê" |
+| G | ge | "guê" |
 | H | ha | "rá" |
-| I | i | "i" |
 | J | jot | "iót" |
+| Q | qu | "ku" |
 | R | er | "ér", com o r no fundo da garganta |
 | V | vau | "fau" |
 | W | we | "vê" |
@@ -91,7 +93,7 @@ NL('n-alter', {
   x: 'neun=nove|vierzehn=catorze|fünfzehn=quinze|achtzehn=dezoito|neunzehn=dezenove|dreißig=trinta|vierzig=quarenta|fünfzig=cinquenta|die Handynummer=o número do celular|jung=jovem',
   dlg: 'Wie alt bist du, Tim?=Quantos anos você tem, Tim?|Ich bin siebzehn. Und du?=Eu tenho dezessete. E você?|Ich bin zwanzig. Wie ist deine Handynummer?=Eu tenho vinte. Qual é o seu celular?|Null eins fünf eins, zwölf, neunzehn.=Zero um cinco um, doze, dezenove.',
   cz: 'Wie alt ___ du?=bist=bin=ist|Er ist ___ Jahre alt. (17)=siebzehn=siebenzehn=siebzig|Meine Telefonnummer ___ 0151 1219.=ist=bin=hat',
-  whys: 'idade se pergunta com sein; com du a forma é bist|17 é siebzehn: o "en" de sieben cai antes de zehn; siebzig é 70|o número "é": a frase usa sein (ist), não haben, mesmo que em português a gente pense em "ter"',
+  whys: 'idade se pergunta com sein; com du a forma é bist|17 é siebzehn: o "en" de sieben cai antes de zehn; siebzig é 70|o sujeito é die Telefonnummer (ela), então sein fica ist; bin é de ich e hat é de haben',
   pts: 'Em alemão a idade se diz com sein (ser): Ich bin dreißig = eu tenho trinta anos. Jahre alt no fim é opcional.|De 13 a 19 a regra é unidade + zehn: dreizehn, vierzehn, fünfzehn, achtzehn, neunzehn.|Duas exceções: sechzehn (perde o s de sechs) e siebzehn (perde o en de sieben).|No telefone, os números costumam ser ditos dígito por dígito ou em pares. Para não confundir zwei com drei, muita gente diz zwo.',
   ex: 'Ich bin dreißig.=Eu tenho trinta anos.|Meine Tochter ist zwölf.=A minha filha tem doze anos.|Wie ist Ihre Telefonnummer?=Qual é o seu telefone?|Zwo, nicht drei!=Dois, não três!',
   bd: ['Ich=S|bin=V^sein: a idade se diz com "ser"|zwanzig_Jahre_alt.=PR^literalmente "vinte anos velho"', 'Eu tenho vinte anos.'],
@@ -153,7 +155,7 @@ NL('n-formular', {
   cz: 'Wie ___ Sie?=heißen=heißt=heiße|Woher ___ Sie?=kommen=kommst=kommt|Wo ___ du?=wohnst=wohnen=wohnt',
   whys: 'com Sie (formal) o verbo fica igual ao infinitivo: heißen; heißt é de du ou er/sie|Sie pede a forma do infinitivo: kommen; kommst é de du|com du o verbo leva -st: wohnst; wohnen seria com Sie ou wir',
   pts: 'Sie (formal) é usado com desconhecidos, no trabalho, em lojas e repartições. du é para amigos, família e crianças.|Com Sie, o verbo fica igual ao infinitivo: Sie heißen, Sie kommen, Sie wohnen. É a mesma forma de wir e de sie (eles).|Em formulários, Name é o sobrenome e Vorname é o nome. A data vem no formato dia.mês.ano: 05.03.1990.|O possessivo formal é Ihr / Ihre, também com maiúscula: Ihr Name, Ihre Adresse.',
-  ex: 'Wie ist Ihr Vorname?=Qual é o seu nome?|Wo wohnen Sie?=Onde o senhor mora?|Unterschreiben Sie hier, bitte.=Assine aqui, por favor.|Was ist Ihr Geburtsdatum?=Qual é a sua data de nascimento?',
+  ex: 'Wie ist Ihr Vorname?=Qual é o seu nome?|Wo wohnen Sie?=Onde o senhor mora?|Unterschreiben Sie hier, bitte.=Assine aqui, por favor.|Wie ist Ihr Geburtsdatum?=Qual é a sua data de nascimento?',
   bd: ['Wie=W^abre a pergunta|heißen=V^com Sie o verbo fica igual ao infinitivo|Sie?=S^Sie formal, sempre com maiúscula', 'Como o senhor se chama?'],
   rule: 'kommen_wohnen',
   hw: 'Escreva os seus dados como num formulário alemão (Name, Vorname, Geburtsdatum, Adresse, Telefon, Sprachen) e depois diga cada linha numa frase completa: Mein Vorname ist …',
@@ -230,7 +232,7 @@ NL('n-plural', {
   dlg: 'Hast du einen Hund?=Você tem um cachorro?|Nein, ich habe zwei Katzen.=Não, eu tenho dois gatos.|Zwei Katzen? Wie heißen sie?=Dois gatos? Como eles se chamam?|Mia und Max. Hier sind die Fotos!=Mia e Max. Aqui estão as fotos!',
   cz: 'Ich habe zwei ___. (das Buch)=Bücher=Buchs=Buchen|Wie viele ___ hast du? (die Katze)=Katzen=Katze=Katzes|___ Stühle sind neu.=Die=Der=Das',
   whys: 'das Buch faz o plural com -er e trema: die Bücher|feminina terminada em -e ganha -n: die Katze → die Katzen|no plural o artigo é sempre die, mesmo quando o singular é der Stuhl',
-  pts: 'No plural o artigo é sempre die: der Stuhl → die Stühle, das Buch → die Bücher.|Há cinco terminações: -e, -(e)n, -er, -s ou nenhuma, muitas vezes com trema: der Ball → die Bälle.|Pistas: femininas em -e ganham -n (die Lampe → die Lampen); palavras em -a, -i, -o ganham -s (das Foto → die Fotos); em -er, -el, -en não mudam (das Fenster).|Depois de número, sem artigo: zwei Bücher. Quantidade: Wie viele …? O verbo vai para o plural: Die Bücher sind neu.',
+  pts: 'No plural o artigo é sempre die: der Stuhl → die Stühle, das Buch → die Bücher.|Há cinco terminações: -e, -(e)n, -er, -s ou nenhuma, muitas vezes com trema: der Ball → die Bälle.|Pistas: femininas em -e ganham -n (die Lampe → die Lampen); palavras em -a, -i, -o ganham -s (das Foto → die Fotos); em -er, -el, -en não ganham terminação (das Fenster), às vezes só trema (der Vogel → die Vögel).|Depois de número, sem artigo: zwei Bücher. Quantidade: Wie viele …? O verbo vai para o plural: Die Bücher sind neu.',
   ex: 'Ich habe drei Brüder.=Eu tenho três irmãos.|Die Fotos sind alt.=As fotos são antigas.|Wie viele Kinder hast du?=Quantos filhos você tem?|Ich habe nur einen Kuli.=Eu só tenho uma caneta.',
   bd: ['Ich=S|habe=V^haben: ich habe|zwei_Bücher.=OA^número + plural, sem artigo: das Buch → die Bücher', 'Eu tenho dois livros.'],
   rule: 'plural',
@@ -256,7 +258,7 @@ Muitas vezes vem junto um **trema**: der Ball → die Bälle, das Buch → die B
 # Passo 3: pistas para adivinhar
 - Feminina terminada em **-e** ganha **-n**: die Katze → die Katzen, die Tasse → die Tassen
 - Palavra terminada em **-a, -i, -o** ou estrangeira ganha **-s**: das Foto → die Fotos, der Kuli → die Kulis
-- Masculina ou neutra em **-er, -el, -en** não muda: das Fenster → die Fenster
+- Masculina ou neutra em **-er, -el, -en** não ganha terminação: das Fenster → die Fenster. Às vezes ganha só o trema: der Vogel → die Vögel
 - Muitas palavras curtas, de uma sílaba, ganham **-e**: der Hund → die Hunde
 BR Nenhuma regra funciona sempre. Por isso o vocabulário desta lição mostra o plural de cada palavra: decore os dois juntos, como "der Hund, die Hunde".
 ~ Ich habe zwei Katzen. = Eu tenho dois gatos.
@@ -422,7 +424,7 @@ Para dizer a que horas algo acontece, use **um**. Para perguntar: **Um wie viel 
 | dia da semana | am Montag, am Freitag |
 | parte do dia | am Morgen, am Vormittag, am Abend |
 | fim de semana | am Wochenende |
-BR Em português dizemos "na segunda" e "à noite". Em alemão os dois são **am**. Só a madrugada foge à regra: **in der Nacht**.
+BR Em português dizemos "na segunda" e "à noite". Em alemão os dois são **am**: am Montag, am Abend. A exceção é a noite alta, a hora de dormir: **in der Nacht**.
 ~ Hast du am Freitag Zeit? = Você tem tempo na sexta?
 # Passo 3: im para meses, e os intervalos
 - **im** + mês ou estação: im Mai, im Dezember, im Sommer
@@ -520,7 +522,7 @@ NL('n-markt', {
   ge: 'Ich möchte ein Kilo Tomaten, bitte.=Eu queria um quilo de tomates, por favor.|Was kostet das?=Quanto custa isso?|Das macht sieben Euro zwanzig.=Dá sete euros e vinte.',
   v: 'der Markt=a feira, o mercado ao ar livre=🧺|das Kilo=o quilo=⚖️|das Gramm=o grama=⚖️|die Packung=o pacote=📦|die Dose=a lata=🥫|das Stück=o pedaço, a unidade=🍰|kosten=custar=💶|der Preis=o preço=🏷️|die Tomate=o tomate=🍅|der Cent=o centavo (de euro)=🪙',
   x: 'die Banane=a banana|die Orange=a laranja|die Erdbeere=o morango|die Zwiebel=a cebola|der Liter=o litro|ein halbes Kilo=meio quilo|Das macht …=Dá … (no total)|Sonst noch etwas?=Mais alguma coisa?|frisch=fresco|die Kasse=o caixa',
-  dlg: 'Guten Tag! Was möchten Sie?=Bom dia! O que a senhora deseja?|Ein Kilo Tomaten und eine Packung Käse, bitte.=Um quilo de tomates e um pacote de queijo, por favor.|Sonst noch etwas?=Mais alguma coisa?|Nein, danke. Was kostet das?=Não, obrigada. Quanto custa?',
+  dlg: 'Guten Tag! Was möchten Sie?=Bom dia! O que a senhora deseja?|Ein Kilo Tomaten und 200 Gramm Käse, bitte.=Um quilo de tomates e 200 gramas de queijo, por favor.|Sonst noch etwas?=Mais alguma coisa?|Nein, danke. Was kostet das?=Não, obrigada. Quanto custa?',
   cz: 'Ich möchte ein Kilo ___. (tomates)=Tomaten=Tomate=von Tomaten|Was ___ die Äpfel?=kosten=kostet=koste|Das kostet drei ___ fünfzig.=Euro=Euros=Cent',
   whys: 'depois da quantidade vem o produto direto, sem "von", e no plural: ein Kilo Tomaten|die Äpfel é plural, então o verbo é kosten|Euro não vai para o plural no preço: drei Euro fünfzig',
   pts: 'Quantidade + produto, sem preposição: ein Kilo Äpfel, eine Flasche Wasser, 200 Gramm Käse. O que se conta vai no plural (Tomaten).|Preço: 2,50 € = zwei Euro fünfzig. Euro e Cent não vão para o plural: drei Euro.|Centenas: hundert, zweihundert … neunhundert. 350 = dreihundertfünfzig; 1000 = tausend.|Na feira: Ich möchte … · Was kostet …? · Sonst noch etwas? · Das macht … Euro.',
@@ -576,7 +578,7 @@ NL('n-gern', {
   v: 'mögen (ich mag)=gostar de=❤️|lieber=de preferência (preferir)=⚖️|am liebsten=o que mais gosta=🏆|immer=sempre=🔁|manchmal=às vezes=🎲|nie=nunca=🚫|das Lieblingsessen=a comida preferida=🍝|die Pizza=a pizza=🍕|süß=doce=🍬|scharf=apimentado=🌶️',
   x: 'selten=raramente|meistens=na maioria das vezes|salzig=salgado|sauer=azedo|vegetarisch=vegetariano|das Lieblingsgetränk=a bebida preferida|die Schokolade=o chocolate|die Nudeln=o macarrão|der Vegetarier / die Vegetarierin=o vegetariano / a vegetariana|probieren=experimentar (provar)',
   dlg: 'Was isst du gern?=O que você gosta de comer?|Ich esse gern Pizza. Und du?=Eu gosto de comer pizza. E você?|Ich mag Pizza, aber am liebsten esse ich Sushi.=Eu gosto de pizza, mas o que eu mais gosto de comer é sushi.|Sushi? Das esse ich nie!=Sushi? Isso eu nunca como!',
-  cz: 'Ich ___ Käse. (gosto de queijo)=mag=mage=mögen|Kaffee oder Tee? – Ich trinke ___ Tee.=lieber=gern=mag|Er ___ keine Schokolade.=mag=magt=mögt',
+  cz: 'Ich ___ Käse. (gosto de queijo)=mag=mage=mögen|Kaffee oder Tee? – Ich trinke ___ Tee. (prefiro)=lieber=gern=mag|Er ___ keine Schokolade.=mag=magt=mögt',
   whys: 'mögen é irregular: ich mag, sem terminação|lieber mostra a escolha entre duas opções: prefiro chá|com er/sie a forma de mögen é mag, igual a ich',
   pts: 'mögen (gostar de algo) é irregular: ich mag, du magst, er/sie mag, wir mögen, ihr mögt, sie/Sie mögen.|Com uma coisa, mögen (Ich mag Käse); com uma ação, gern depois do verbo (Ich esse gern Käse).|Para preferir: lieber (Ich trinke lieber Tee). O favorito: am liebsten (Am liebsten esse ich Pizza).|Frequência: immer, meistens, oft, manchmal, selten, nie. Elas vêm logo depois do verbo: Ich esse oft Reis.',
   ex: 'Magst du Schokolade?=Você gosta de chocolate?|Am liebsten trinke ich Kaffee.=O que eu mais gosto de beber é café.|Ich esse manchmal Fisch.=Às vezes eu como peixe.|Mein Lieblingsessen ist Feijoada.=Minha comida preferida é feijoada.',
@@ -700,7 +702,7 @@ NL('n-wohnungsanzeige', {
   gx: 'Anúncios alemães usam abreviações: 2-Zi.-Whg. (apartamento de 2 cômodos), qm (metros quadrados), KM (aluguel sem despesas), NK (despesas), WM (aluguel com despesas), EG (térreo). Zimmer conta sala e quartos juntos.',
   ge: 'Ich suche eine Zwei-Zimmer-Wohnung.=Eu procuro um apartamento de dois cômodos.|Wie hoch ist die Miete?=Quanto é o aluguel?|Die Wohnung hat 60 Quadratmeter.=O apartamento tem 60 metros quadrados.',
   v: 'die Anzeige=o anúncio=📰|der Quadratmeter=o metro quadrado=📐|die Nebenkosten=as despesas (água, aquecimento…)=💧|die Kaltmiete=o aluguel sem despesas=🧊|die Warmmiete=o aluguel com despesas=🔥|die Kaution=o depósito caução=💰|frei ab=livre a partir de=📅|die Besichtigung=a visita ao imóvel=👀|der Vermieter / die Vermieterin=o locador / a locadora=🔑|das Erdgeschoss=o térreo=⬇️',
-  x: 'der Mieter / die Mieterin=o inquilino / a inquilina|die Heizung=o aquecimento|der Aufzug=o elevador|die Einbauküche=a cozinha planejada|renoviert=reformado|der Stellplatz=a vaga de garagem|die WG=a república (apartamento dividido)|das Dachgeschoss=o último andar|mieten=alugar|die Provision=a comissão do corretor',
+  x: 'der Mieter / die Mieterin=o inquilino / a inquilina|die Heizung=o aquecimento|der Aufzug=o elevador|die Einbauküche=a cozinha planejada|renoviert=reformado|der Stellplatz=a vaga de garagem|die WG=a república (apartamento dividido)|das Dachgeschoss=o andar sob o telhado|mieten=alugar|die Provision=a comissão do corretor',
   dlg: 'Guten Tag! Ist die Wohnung in der Lindenstraße noch frei?=Bom dia! O apartamento na Lindenstraße ainda está livre?|Ja. Sie hat zwei Zimmer und 55 Quadratmeter.=Sim. Ele tem dois cômodos e 55 metros quadrados.|Wie hoch sind die Nebenkosten?=Quanto são as despesas?|150 Euro. Möchten Sie die Wohnung besichtigen?=150 euros. A senhora gostaria de visitar o apartamento?',
   cz: 'Die Wohnung ___ drei Zimmer.=hat=ist=gibt|Wie hoch ___ die Nebenkosten?=sind=ist=hat|Die Wohnung ist ___ Mai frei.=ab=um=am',
   whys: 'o apartamento "tem" cômodos: haben (hat)|die Nebenkosten é plural: sind|ab = a partir de: ab Mai',
@@ -1107,10 +1109,10 @@ NL('n-ausbildung', {
   de: 'Schule und Ausbildung', pt: 'Estudos e formação', gt: 'Perfekt dos separáveis e inseparáveis',
   gx: 'Separáveis: o ge- entra no meio (angefangen, aufgehört, eingekauft). Inseparáveis (be-, ver-, er-, ent-, emp-, zer-) e verbos em -ieren ficam sem ge- (bestanden, verstanden, studiert).',
   ge: 'Ich habe 2010 mit dem Studium angefangen.=Eu comecei a faculdade em 2010.|Er hat die Prüfung bestanden.=Ele passou na prova.|Ich habe Informatik studiert.=Eu estudei informática.',
-  v: 'die Grundschule=a escola primária (1º ao 4º ano)=🏫|das Gymnasium=o ensino médio preparatório=📚|das Abitur=o diploma do ensino médio=📜|die Prüfung=a prova, o exame=📝|bestehen (bestanden)=passar (na prova)=✅|die Note=a nota=💯|aufhören (aufgehört)=parar, terminar=⏹️|das Fach=a matéria=📐|die Berufsschule=a escola técnica=🔧|durchfallen (durchgefallen)=ser reprovado=❌',
+  v: 'die Grundschule=a escola primária (1º ao 4º ano)=🏫|das Gymnasium=a escola secundária que leva ao Abitur=📚|das Abitur=o diploma do ensino médio=📜|die Prüfung=a prova, o exame=📝|bestehen (bestanden)=passar (na prova)=✅|die Note=a nota=💯|aufhören (aufgehört)=parar, terminar=⏹️|das Fach=a matéria=📐|die Berufsschule=a escola técnica=🔧|durchfallen (durchgefallen)=ser reprovado=❌',
   x: 'die Ausbildung=a formação profissional (técnica)|der Azubi=o aprendiz (em formação)|die Hochschule=a faculdade|das Semester=o semestre|die Hausaufgabe=a lição de casa|das Zeugnis=o boletim, o certificado|die Fortbildung=o curso de aperfeiçoamento|der Studiengang=o curso (da faculdade)|die Informatik=a informática|die Mathe=a matemática',
   dlg: 'Was hast du nach der Schule gemacht?=O que você fez depois da escola?|Ich habe eine Ausbildung als Köchin angefangen.=Eu comecei uma formação de cozinheira.|Und hast du die Prüfung bestanden?=E você passou na prova?|Ja! Danach habe ich in einem Restaurant gearbeitet.=Sim! Depois disso eu trabalhei num restaurante.',
-  cz: 'Ich habe mit dem Kurs ___.=angefangen=geanfangen=anfangengt|Sie hat die Prüfung ___.=bestanden=gebestanden=bestehen|Er hat Informatik ___.=studiert=gestudiert=studieren',
+  cz: 'Ich habe mit dem Kurs ___.=angefangen=geanfangen=anfangen|Sie hat die Prüfung ___.=bestanden=gebestanden=bestehen|Er hat Informatik ___.=studiert=gestudiert=studieren',
   whys: 'anfangen é separável: o ge- entra entre an e fangen|bestehen é inseparável (be-): sem ge-|verbos em -ieren não têm ge-: studiert',
   pts: 'Separáveis: ge- entre o prefixo e o verbo: angefangen, eingekauft, aufgehört.|Inseparáveis (be-, ver-, er-, ent-, emp-, zer-): sem ge-: bestanden, verstanden.|Verbos em -ieren também sem ge-: studiert, fotografiert.|Escola alemã: Grundschule, depois Gymnasium (até o Abitur) ou outra escola; depois Studium ou Ausbildung.',
   ex: 'Ich habe die Hausaufgaben vergessen.=Eu esqueci a lição de casa.|Er ist durchgefallen.=Ele foi reprovado.|Wann hast du mit dem Deutschkurs angefangen?=Quando você começou o curso de alemão?|Ich habe das Wort nicht verstanden.=Eu não entendi a palavra.',
@@ -1139,7 +1141,7 @@ Escola, faculdade, curso técnico: contar a própria formação exige o Perfekt 
 | Grundschule | 6 a 10 anos |
 | Gymnasium (até o Abitur) | 10 a 18 anos |
 | Studium ou Ausbildung | depois |
-BR A **Ausbildung** não tem equivalente direto no Brasil: é uma formação técnica de 2 a 3 anos, metade na escola técnica e metade numa empresa, com salário.
+BR A **Ausbildung** não tem equivalente direto no Brasil: é uma formação técnica de 2 a 3 anos e meio, com aulas na escola técnica (Berufsschule) e a maior parte do tempo numa empresa, com salário.
 ~ Ich habe eine Ausbildung als Köchin gemacht. = Eu fiz uma formação de cozinheira.
 # Passo 4: falar das provas
 - **bestehen** (passar) é inseparável: hat bestanden
@@ -1164,7 +1166,7 @@ NL('n-email', {
   whys: 'depois de weil o verbo conjugado vai para o fim: weil ich in Berlin wohne|denn não muda a ordem (denn ich habe…); com weil o verbo iria para o fim|agradecer por algo: danke für + acusativo',
   pts: 'Abertura: Liebe / Lieber + nome. Depois agradeça: Danke für deine E-Mail!|weil manda o verbo conjugado para o fim: …, weil ich viel arbeite. Com Perfekt: …, weil ich umgezogen bin.|O que mudou no Perfekt; como está agora no presente.|Termine com uma pergunta e Viele Grüße. Schreib bald!',
   ex: 'Wie geht es dir? Mir geht es gut.=Como você está? Eu estou bem.|Momentan habe ich viel Stress, weil ich umziehe.=No momento estou muito estressada porque estou me mudando.|Ich vermisse dich!=Sinto sua falta!|Schreib bald!=Escreva logo!',
-  bd: ['Ich_lerne_Deutsch,=C^a oração principal|weil=C^weil abre a oração do motivo|ich=S|in_Berlin=L|arbeiten=INF|möchte.=MOD^com weil, o verbo conjugado vai para o fim', 'Eu aprendo alemão porque quero trabalhar em Berlim.'],
+  bd: ['Ich=S|lerne=V|Deutsch,=OA|weil=C^weil abre a oração do motivo|ich=S|in_Berlin=L|arbeiten=INF|möchte.=MOD^com weil, o verbo conjugado vai para o fim', 'Eu aprendo alemão porque quero trabalhar em Berlim.'],
   rule: 'weil',
   hw: 'Escreva no diário um e-mail curto para um amigo que mora longe: o que mudou na sua vida (Perfekt), como está agora e um motivo com weil.',
   le: {
@@ -1228,7 +1230,7 @@ NL('n-hausordnung', {
   ge: 'Man muss den Müll trennen.=É preciso separar o lixo.|Hier darf man nicht rauchen.=Aqui não se pode fumar.|Ab 22 Uhr muss man leise sein.=A partir das 22h é preciso fazer silêncio.',
   v: 'die Hausordnung=o regulamento do prédio=📋|der Müll=o lixo=🗑️|trennen=separar=♻️|die Ruhezeit=o horário de silêncio=🤫|leise=baixo, silencioso=🔉|der Hausmeister / die Hausmeisterin=o zelador / a zeladora=🧰|das Treppenhaus=a escada do prédio=🪜|erlaubt=permitido=✅|verboten=proibido=⛔|die Mülltonne=a lixeira (contêiner)=🗑️',
   x: 'der Biomüll=o lixo orgânico|das Altpapier=o papel para reciclar|der Gelbe Sack=o saco amarelo (embalagens)|das Altglas=o vidro para reciclar|die Nachtruhe=o silêncio noturno|die Mittagsruhe=o silêncio do meio-dia|der Kinderwagen=o carrinho de bebê|abstellen=deixar (um objeto)|lüften=arejar, abrir as janelas|die Waschküche=a lavanderia do prédio',
-  dlg: 'Darf man im Hof grillen?=Pode fazer churrasco no pátio?|Nein, das ist verboten. Das steht in der Hausordnung.=Não, é proibido. Está no regulamento.|Schade! Und wo muss man den Müll trennen?=Que pena! E onde é preciso separar o lixo?|Unten im Hof. Da stehen die Mülltonnen.=Lá embaixo, no pátio. Lá ficam as lixeiras.',
+  dlg: 'Darf man im Hof grillen?=Pode fazer churrasco no pátio?|Nein, das ist verboten. Das steht in der Hausordnung.=Não, é proibido. Está no regulamento.|Schade! Und wohin kommt der Müll?=Que pena! E para onde vai o lixo?|Unten im Hof. Da stehen die Mülltonnen.=Lá embaixo, no pátio. Lá ficam as lixeiras.',
   cz: 'Hier ___ man nicht rauchen.=darf=dürfen=darfst|Man ___ den Müll trennen.=muss=müssen=musst|Nach 22 Uhr muss man leise ___.=sein=ist=sind',
   whys: 'man se conjuga como er: man darf|com man o verbo fica como er/sie: man muss|depois do modal, o verbo vai para o fim no infinitivo: sein',
   pts: 'man = "a gente", "se". Conjuga como er/sie: man muss, man darf, man kann.|man muss (obrigatório), man darf (permitido), man darf nicht (proibido). man muss nicht = não precisa.|Modal na 2ª posição, outro verbo no fim: Man darf hier nicht parken.|Na Hausordnung: Ruhezeiten, separação do lixo e uso das áreas comuns.',
@@ -1274,13 +1276,13 @@ NL('n-zettel-nachbarn', {
   de: 'Ein Zettel an die Nachbarn', pt: 'Ler avisos do prédio e escrever um bilhete aos vizinhos', gt: 'Könnten Sie …? (fórmula)',
   gx: 'Pedido educado: Könnten Sie bitte …? com o infinitivo no fim (Könnten Sie bitte leiser sein?). Bilhete aos vizinhos: Liebe Nachbarn, o que acontece e quando, desculpas ou pedido, agradecimento e o seu nome com o andar.',
   ge: 'Könnten Sie bitte die Musik leiser machen?=Os senhores poderiam abaixar a música, por favor?|Am Samstag feiere ich meinen Geburtstag.=No sábado eu comemoro o meu aniversário.|Vielen Dank für Ihr Verständnis!=Muito obrigado pela compreensão!',
-  v: 'Liebe Nachbarn=Queridos vizinhos=🏘️|Könnten Sie bitte …?=Os senhores poderiam, por favor…?=🙏|das Verständnis=a compreensão=🤝|stören=incomodar=😣|Entschuldigung für …=Desculpem por …=😅|der Lärm=o barulho=🔊|leiser=mais baixo=🔉|der Hausflur=o corredor do prédio=🚪|die Renovierung=a reforma=🛠️|vorher=antes=⏮️',
+  v: 'Liebe Nachbarn=Caros vizinhos=🏘️|Könnten Sie bitte …?=Os senhores poderiam, por favor…?=🙏|das Verständnis=a compreensão=🤝|stören=incomodar=😣|Entschuldigung für …=Desculpem por …=😅|der Lärm=o barulho=🔊|leiser=mais baixo=🔉|der Hausflur=o corredor do prédio=🚪|die Renovierung=a reforma=🛠️|vorher=antes=⏮️',
   x: 'bohren=furar (com furadeira)|der Umzugskarton=a caixa de mudança|rücksichtsvoll=atencioso|die Rücksicht=a consideração|sich beschweren=reclamar|die Beschwerde=a reclamação|die Klingel=a campainha|gießen=regar|leeren=esvaziar|die Nachbarschaft=a vizinhança',
   dlg: 'Hast du den Zettel im Treppenhaus gelesen?=Você leu o bilhete na escada do prédio?|Ja, die Nachbarn im 3. Stock renovieren ihre Wohnung.=Sim, os vizinhos do 3º andar estão reformando o apartamento.|Und was schreiben sie?=E o que eles escrevem?|Sie bohren bis Freitag und entschuldigen sich für den Lärm.=Eles vão furar até sexta e pedem desculpas pelo barulho.',
   cz: '___ Sie bitte leiser sein?=Könnten=Könnt=Konnte|Vielen Dank ___ Ihr Verständnis!=für=von=mit|Entschuldigung ___ den Lärm!=für=von=über',
   whys: 'Könnten Sie …? é a fórmula mais educada para pedir algo|agradecer por algo: Dank für + acusativo|desculpar-se por algo: Entschuldigung für + acusativo',
   pts: 'Pedido educado: Könnten Sie bitte … + infinitivo no fim?|Bilhete: Liebe Nachbarn, o que acontece e quando, desculpas ou pedido, agradecimento.|Fórmulas: Entschuldigung für den Lärm! · Vielen Dank für Ihr Verständnis!|Assine com nome e andar: Ana Souza, 2. Stock.',
-  ex: 'Liebe Nachbarn, am Samstag feiern wir eine Party.=Queridos vizinhos, no sábado vamos fazer uma festa.|Entschuldigung für den Lärm!=Desculpem o barulho!|Könnten Sie bitte Ihr Fahrrad in den Keller stellen?=O senhor poderia, por favor, pôr a sua bicicleta no porão?|Vielen Dank für Ihr Verständnis!=Muito obrigado pela compreensão!',
+  ex: 'Liebe Nachbarn, am Samstag feiern wir eine Party.=Caros vizinhos, no sábado vamos fazer uma festa.|Entschuldigung für den Lärm!=Desculpem o barulho!|Könnten Sie bitte Ihr Fahrrad in den Keller stellen?=O senhor poderia, por favor, pôr a sua bicicleta no porão?|Vielen Dank für Ihr Verständnis!=Muito obrigado pela compreensão!',
   bd: ['Könnten=MOD^Könnten Sie …? é a fórmula do pedido educado|Sie=S|bitte=PK|leiser=M^mais baixo|sein?=INF^o infinitivo vai para o fim', 'Os senhores poderiam fazer menos barulho, por favor?'],
   rule: 'konj2',
   hw: 'Escreva um bilhete para os seus vizinhos avisando de uma festa ou de uma reforma: o que, quando, um pedido com Könnten Sie bitte …? e o agradecimento.',
@@ -1803,7 +1805,7 @@ Na Alemanha, até um analgésico simples se compra na **Apotheke**, e o farmacê
 # Passo 3: receita e bula
 - **rezeptpflichtig**: só com receita · **rezeptfrei**: sem receita
 - **die Packungsbeilage**: a bula · **die Nebenwirkung**: o efeito colateral
-BR No Brasil muita coisa se compra no balcão. Na Alemanha a lista de remédios **rezeptpflichtig** é maior, e mesmo os sem receita só se vendem na farmácia.
+BR No Brasil muita coisa se compra no balcão. Na Alemanha a lista de remédios **rezeptpflichtig** é maior, e muitos remédios sem receita também só se vendem na farmácia.
 ~ Haben Sie das auch ohne Rezept? = Vocês têm isso também sem receita?
 # Passo 4: alergias e o plantão
 À noite e no domingo, uma farmácia da região fica de plantão (**Notdienst**). A lista fica na porta de todas as farmácias.
@@ -1821,12 +1823,12 @@ NL('n-gesund', {
   ge: 'Trink mehr Wasser!=Beba mais água!|Gemüse ist gesünder als Pizza.=Legumes são mais saudáveis que pizza.|Du solltest mehr schlafen.=Você deveria dormir mais.',
   v: 'die Gesundheit=a saúde=💚|sich bewegen=se mexer, fazer atividade física=🏃|die Ernährung=a alimentação=🥦|ungesund=não saudável=🍟|regelmäßig=regularmente=🔁|abnehmen=emagrecer=⚖️|zunehmen=engordar=⚖️|das Fitnessstudio=a academia=🏋️|der Schlaf=o sono=😴|die Vitamine=as vitaminas=🍊',
   x: 'das Gewicht=o peso|zuckerfrei=sem açúcar|die Bewegung=a atividade física|die Entspannung=o relaxamento|meditieren=meditar|die Haltung=a postura|Rad fahren=andar de bicicleta|zu Fuß gehen=ir a pé|der Alkohol=o álcool|fit=em forma',
-  dlg: 'Ich bin immer so müde.=Estou sempre tão cansada.|Du solltest mehr schlafen und dich mehr bewegen.=Você deveria dormir mais e se mexer mais.|Ich habe keine Zeit für Sport.=Não tenho tempo para esporte.|Dann geh zu Fuß zur Arbeit! Das ist gesünder als der Bus.=Então vá a pé para o trabalho! É mais saudável que o ônibus.',
+  dlg: 'Ich bin immer so müde.=Estou sempre tão cansada.|Du solltest mehr schlafen und dich mehr bewegen.=Você deveria dormir mais e se mexer mais.|Ich habe keine Zeit für Sport.=Não tenho tempo para esporte.|Dann geh zu Fuß zur Arbeit! Das ist gesünder als Bus fahren.=Então vá a pé para o trabalho! É mais saudável que andar de ônibus.',
   cz: '___ mehr Wasser! (du)=Trink=Trinkst=Trinken|Obst ist ___ als Schokolade.=gesünder=gesunder=mehr gesund|Du ___ mehr schlafen.=solltest=sollst du=sollte',
   whys: 'imperativo de du: o verbo sem -st e sem du: Trink!|gesund ganha trema no comparativo: gesünder|conselho delicado: du solltest + infinitivo no fim',
   pts: 'Imperativo de du: sem -st e sem du (Trink! Iss!). De Sie: Trinken Sie! Essen Sie!|Conselho delicado: Du solltest / Sie sollten + infinitivo no fim.|Comparar: Komparativ + als (Obst ist gesünder als Schokolade).|e → i fica no imperativo de du: essen → Iss!, nehmen → Nimm!',
   ex: 'Iss mehr Obst und Gemüse!=Coma mais frutas e legumes!|Bewegen Sie sich regelmäßig!=Faça atividade física regularmente!|Zu Fuß gehen ist gesünder als Auto fahren.=Andar a pé é mais saudável que andar de carro.|Ich möchte mit dem Rauchen aufhören.=Eu quero parar de fumar.',
-  bd: ['Gemüse=S|ist=V|gesünder=ADJ^Komparativ: gesund → gesünder|als_Pizza.=X^als introduz o segundo termo', 'Legumes são mais saudáveis que pizza.'],
+  bd: ['Gemüse=S|ist=V|gesünder=PR^Komparativ: gesund → gesünder|als_Pizza.=X^als introduz o segundo termo', 'Legumes são mais saudáveis que pizza.'],
   rule: 'conselho',
   hw: 'Escreva cinco conselhos de saúde para um amigo: dois no imperativo, dois com Du solltest … e um comparando duas coisas com als.',
   deep: `
@@ -1892,7 +1894,7 @@ BR No Brasil são vários números (192, 193, 190). Na Alemanha, o **112** resol
 | Alemão | Português |
 | Ich bin gefallen. | Eu caí. |
 | Er hat sich verletzt. | Ele se machucou. |
-| Sie hat das Bein gebrochen. | Ela quebrou a perna. |
+| Sie hat sich das Bein gebrochen. | Ela quebrou a perna. |
 ! **fallen** usa **sein** no Perfekt (mudança de posição); **sich verletzen** e **brechen** usam **haben**.
 ~ Sie hat sich am Arm verletzt. = Ela machucou o braço.
 # Passo 4: a ligação para o 112
@@ -1916,7 +1918,7 @@ NL('n-krankmelden', {
   whys: 'depois de weil o verbo conjugado vai para o fim: weil ich krank bin|com ich: kann; o outro verbo vai para o fim|ficar em casa: zu Hause (nach Hause é para casa)',
   pts: 'Avisar: Ich kann heute leider nicht kommen, weil ich krank bin. Depois de weil, verbo no fim.|Até quando: voraussichtlich bis Freitag. E o atestado: Die Krankmeldung schicke ich morgen.|Doença de mais de três dias: em geral, atestado médico; o empregador pode pedir antes.|Na bula: Anwendung (para que serve), Dosierung (dose), Nebenwirkungen.',
   ex: 'Ich bin erkältet und habe Kopfschmerzen.=Estou resfriada e com dor de cabeça.|Voraussichtlich bin ich bis Mittwoch krank.=Provavelmente fico doente até quarta.|Kann jemand meine Termine übernehmen?=Alguém pode assumir os meus compromissos?|Viele Grüße und danke!=Um abraço e obrigado!',
-  bd: ['Ich_kann_heute_nicht_kommen,=C^a oração principal|weil=C^weil abre o motivo|ich=S|krank=PR|bin.=V^com weil, o verbo conjugado vai para o fim', 'Não posso ir hoje porque estou doente.'],
+  bd: ['Ich=S|kann=MOD|heute=T|nicht=NEG|kommen,=INF|weil=C^weil abre o motivo|ich=S|krank=PR|bin.=V^com weil, o verbo conjugado vai para o fim', 'Não posso ir hoje porque estou doente.'],
   rule: 'weil',
   hw: 'Escreva duas mensagens curtas avisando que você está doente: uma para o chefe (com Sie) e outra para um colega (com du). Use weil nas duas.',
   le: {
@@ -1962,7 +1964,7 @@ Esta lição é de **ler e escrever**. Você vai ler um trecho de bula e depois 
 # Passo 3: até quando e o atestado
 - **voraussichtlich bis Freitag**: provavelmente até sexta
 - **die Krankmeldung** ou **die AU**: o atestado médico
-BR Se a doença durar mais de três dias, em geral é preciso atestado médico, e o empregador pode pedir antes. Para quem tem plano público, o médico hoje envia o atestado eletronicamente à Krankenkasse.
+BR Se a doença durar mais de três dias, em geral é preciso atestado médico, e o empregador pode pedir antes. Para quem tem plano público, o médico hoje envia o atestado eletronicamente à Krankenkasse, e a empresa consulta lá. Mesmo assim, avise o trabalho logo no primeiro dia.
 ~ Die Krankmeldung schicke ich morgen. = O atestado eu mando amanhã.
 # Passo 4: formal ou informal?
 | Para | Abertura | Despedida |
@@ -2056,7 +2058,7 @@ NL('n-reiseprobleme', {
   whys: 'verlieren faz o Perfekt com haben: habe … verloren|ankommen é separável: an-ge-kommen|depois de weil, o verbo conjugado vai para o fim: hatte',
   pts: 'O que aconteceu, no Perfekt: Ich habe meinen Pass verloren. Mein Koffer ist nicht angekommen.|O motivo, com weil (verbo no fim): …, weil der Zug Verspätung hatte.|Pedir ajuda: Können Sie mir helfen? · Was kann ich jetzt machen?|Aonde ir: Fundbüro (achados e perdidos), Polizei (roubo), Botschaft ou Konsulat (passaporte).',
   ex: 'Man hat meine Tasche gestohlen.=Roubaram a minha bolsa.|Die Klimaanlage im Zimmer funktioniert nicht.=O ar-condicionado do quarto não funciona.|Ich muss meine Kreditkarte sperren.=Preciso bloquear o meu cartão de crédito.|Ich habe den Zug verpasst, weil der Bus zu spät war.=Perdi o trem porque o ônibus atrasou.',
-  bd: ['Ich_komme_zu_spät,=C^a oração principal|weil=C^weil abre o motivo|der_Zug=S|Verspätung=OA|hatte.=V^com weil, o verbo conjugado vai para o fim', 'Eu chego atrasada porque o trem atrasou.'],
+  bd: ['Ich=S|komme=V|zu_spät,=M|weil=C^weil abre o motivo|der_Zug=S|Verspätung=OA|hatte.=V^com weil, o verbo conjugado vai para o fim', 'Eu chego atrasada porque o trem atrasou.'],
   rule: 'weil',
   hw: 'Pense num problema que você já teve numa viagem (ou invente) e conte em quatro frases: o que aconteceu (Perfekt), por quê (weil) e como resolveu.',
   deep: `
@@ -2109,7 +2111,7 @@ NL('n-hotelbewertung', {
     texto: {
       t: 'Bewertungen · Hotel Am Park, Wien', kind: 'leitura',
       intro: 'Duas avaliações de um hotel em Viena. Leia e responda.',
-      paras: ['★★★★★ Marta, Lissabon: Super Lage! Das Hotel ist ruhig und nur fünf Minuten von der U-Bahn. Das Personal war sehr freundlich. Ich kann das Hotel empfehlen.', '★★☆☆☆ Peter, Köln: Das Zimmer war sauber, aber sehr klein und leider hellhörig. Das Frühstück war teuer und nicht so gut. Für den Preis bin ich enttäuscht.'],
+      paras: ['★★★★★ Marta, Lissabon: Super Lage! Das Hotel ist ruhig, und die U-Bahn ist nur fünf Minuten entfernt. Das Personal war sehr freundlich. Ich kann das Hotel empfehlen.', '★★☆☆☆ Peter, Köln: Das Zimmer war sauber, aber sehr klein und leider hellhörig. Das Frühstück war teuer und nicht so gut. Für den Preis bin ich enttäuscht.'],
       qs: [
         { q: 'O que a Marta achou da localização?', o: ['ótima', 'barulhenta', 'longe do metrô'], a: 0 },
         { q: 'Qual foi o problema do quarto do Peter?', o: ['era pequeno e dava para ouvir tudo', 'estava sujo', 'não tinha janela'], a: 0 },
@@ -2175,7 +2177,7 @@ NL('n-blog', {
   whys: 'depois de dass, o verbo conjugado vai para o fim: dass die Party toll war|der Kuchen é objeto na relativa: den|dass introduz a opinião; das sem o segundo s é artigo ou pronome',
   pts: 'Opinião com dass: Ich finde, dass … (vírgula antes, verbo no fim).|Relativa para descrever: Die Torte, die du gebacken hast, … O pronome tem o gênero do substantivo.|Reação: Toller Beitrag! · Super Fotos! · Danke fürs Teilen!|Termine com uma pergunta: Wo hast du die Deko gekauft?',
   ex: 'Toller Beitrag!=Post incrível!|Ich glaube, dass alle viel Spaß hatten.=Eu acho que todo mundo se divertiu muito.|Wer ist die Frau, die neben dir steht?=Quem é a mulher que está do seu lado?|Danke fürs Teilen!=Obrigada por compartilhar!',
-  bd: ['Ich_finde,=C^a oração principal|dass=C^dass introduz a opinião|die_Fotos=S|sehr_schön=PR|sind.=V^com dass, o verbo conjugado vai para o fim', 'Eu acho que as fotos estão muito bonitas.'],
+  bd: ['Ich=S|finde,=V|dass=C^dass introduz a opinião|die_Fotos=S|sehr_schön=PR|sind.=V^com dass, o verbo conjugado vai para o fim', 'Eu acho que as fotos estão muito bonitas.'],
   rule: 'dass',
   hw: 'Escreva um comentário de três frases para o post de um amigo (real ou inventado): uma reação, uma opinião com dass e uma pergunta.',
   le: {
@@ -2250,7 +2252,7 @@ V('Ein Blogbeitrag',
 
 S_('Am Bahnhof und am Flughafen', 'verpassen (verpasst)=perder (o trem, a conexão)|der Infoschalter=o balcão de informações');
 S_('Probleme auf der Reise', 'die Flugnummer=o número do voo');
-S_('Eine Hotelbewertung', 'weich=macio|insgesamt=no geral');
+S_('Eine Hotelbewertung', 'weich=macio|insgesamt=no geral|entfernt (fünf Minuten entfernt)=distante (a cinco minutos)');
 S_('Ein Blogbeitrag', 'die Oma=a avó|aussehen (sieht … aus)=parecer, ter cara de');
 /* Módulo 14 (21/11/2026): mídia, opinião, notícias, a prova do A2 e a lição de Ler e escrever "Ein Forumsbeitrag". */
 NL('n-medien', {
@@ -2286,6 +2288,7 @@ Celular, streaming, redes sociais: a relação com a mídia é tema de conversa 
 # Passo 3: am ou im?
 - **am** Handy, **am** Computer: o aparelho
 - **im** Internet, **im** Fernsehen: o meio
+- **auf dem** Handy: o que está nele (Ich lese die Nachrichten auf dem Handy.)
 BR "No celular", quando é o tempo que você passa usando, vira **am Handy**: Ich bin zu viel am Handy.
 ~ Am Wochenende streame ich Serien. = No fim de semana eu assisto a séries.
 # Passo 4: a opinião com dass
@@ -2329,7 +2332,7 @@ Concordar e discordar com educação é uma habilidade importante, na vida e na 
 # Passo 3: concordar e discordar
 | Concordar | Discordar |
 | Das stimmt. | Das sehe ich anders. |
-| Da hast du recht. | Da bin ich nicht einverstanden. |
+| Da hast du recht. | Damit bin ich nicht einverstanden. |
 | Genau! | Auf keinen Fall! |
 BR Em alemão discordar diretamente não é falta de educação, mas **Das sehe ich anders** soa mais suave que um simples "Nein".
 ~ Das sehe ich anders. = Eu vejo isso de outro jeito.
@@ -2351,8 +2354,8 @@ NL('n-nachrichten', {
   ge: 'Gestern regnete es in ganz Deutschland.=Ontem choveu na Alemanha inteira.|Der Zug kam mit einer Stunde Verspätung an.=O trem chegou com uma hora de atraso.|Das Konzert fand im Stadtpark statt.=O show aconteceu no parque da cidade.',
   v: 'die Meldung=a notícia curta=📰|die Schlagzeile=a manchete=🗞️|der Bericht=a reportagem=📝|stattfinden (fand statt)=acontecer, realizar-se=📅|es gab=houve=✔️|das Ereignis=o acontecimento=⚡|die Eröffnung=a inauguração=✂️|der Stau=o congestionamento=🚗|das Unwetter=o temporal=⛈️|die Besucher=os visitantes=👥',
   x: 'der Bürgermeister / die Bürgermeisterin=o prefeito / a prefeita|die Temperatur=a temperatura|gewinnen (gewann)=ganhar (ganhou)|sagen (sagte)=dizer (disse)|beginnen (begann)=começar (começou)|fahren (fuhr)=ir de veículo (foi)|gehen (ging)=ir a pé (foi)|die Region=a região|laut Polizei=segundo a polícia|niemand=ninguém',
-  dlg: 'Hast du die Nachrichten gehört?=Você ouviu as notícias?|Nein, was ist passiert?=Não, o que aconteceu?|Gestern gab es ein Unwetter in Köln. Viele Züge fielen aus.=Ontem houve um temporal em Colônia. Muitos trens foram cancelados.|Zum Glück gab es keine Verletzten.=Felizmente não houve feridos.',
-  cz: 'Gestern ___ es ein Konzert im Park.=gab=gibt=gebte|Der Bürgermeister ___ die Brücke.=eröffnete=eröffnen=eröffnetet|Das Fest ___ am Samstag statt.=fand=findet=fandet',
+  dlg: 'Hast du die Nachrichten gehört?=Você ouviu as notícias?|Nein, was ist passiert?=Não, o que aconteceu?|Gestern gab es ein Unwetter in Köln. Viele Züge sind ausgefallen.=Ontem houve um temporal em Colônia. Muitos trens foram cancelados.|Zum Glück gab es keine Verletzten.=Felizmente não houve feridos.',
+  cz: 'Gestern ___ es ein Konzert im Park.=gab=gibt=gebte|Der Bürgermeister ___ die Brücke.=eröffnete=eröffnen=eröffnetet|Das Fest ___ gestern statt.=fand=findet=fandet',
   whys: 'es gab é o Präteritum de es gibt: houve|Präteritum regular: radical + -te (eröffnete)|stattfinden no Präteritum: fand … statt',
   pts: 'Notícias escritas usam o Präteritum, não o Perfekt. Basta reconhecer as formas.|Regulares: radical + -te (machte, eröffnete); no plural, -ten.|Irregulares mudam a vogal: kommen → kam, geben → gab, finden → fand, gehen → ging.|Leia procurando wer, was, wann e wo.',
   ex: 'Am Montag eröffnete die Stadt eine neue Bibliothek.=Na segunda, a cidade inaugurou uma nova biblioteca.|Es gab einen langen Stau auf der Autobahn.=Houve um longo congestionamento na rodovia.|Über 5000 Besucher kamen zum Fest.=Mais de 5000 visitantes vieram à festa.|Das Wetter war schön und warm.=O tempo estava bonito e quente.',
@@ -2451,7 +2454,7 @@ NL('n-forum', {
   whys: 'depois de weil, o verbo conjugado vai para o fim: wird|trotzdem = mesmo assim; o verbo vem logo depois|deshalb = por isso; o verbo vem logo depois',
   pts: 'Posição: Ich bin dafür / dagegen. · Ich finde, dass …|Motivo com weil (verbo no fim): …, weil die Luft besser wird.|deshalb (por isso) e trotzdem (mesmo assim): o verbo vem logo depois.|Conclusão: Zusammenfassend finde ich … / Deshalb bin ich dafür.',
   ex: 'Ich finde, dass wir mehr Radwege brauchen.=Eu acho que precisamos de mais ciclovias.|Der Verkehr ist schlimm, deshalb nehme ich den Bus.=O trânsito está horrível, por isso eu pego o ônibus.|Busse sind teuer. Trotzdem fahre ich jeden Tag Bus.=Os ônibus são caros. Mesmo assim, ando de ônibus todo dia.|Zusammenfassend bin ich dafür.=Resumindo, eu sou a favor.',
-  bd: ['Die_Luft_ist_schlecht,=C^a primeira oração|deshalb=ADV^deshalb ocupa a 1ª posição da segunda oração|fahre=V^o verbo vem logo depois|ich=S|Rad.=M', 'O ar está ruim, por isso eu ando de bicicleta.'],
+  bd: ['Die_Luft=S|ist=V|schlecht,=PR|deshalb=ADV^deshalb ocupa a 1ª posição da segunda oração|fahre=V^o verbo vem logo depois|ich=S|Rad.=M', 'O ar está ruim, por isso eu ando de bicicleta.'],
   rule: 'conectores',
   hw: 'Escolha um tema de debate da sua cidade e escreva um post de fórum com cinco frases: a posição, weil, deshalb, trotzdem e a conclusão.',
   le: {
@@ -2528,7 +2531,7 @@ V('Ein Forumsbeitrag',
 
 S_('Medien im Alltag', 'ausmachen (mache … aus)=desligar (aparelho)');
 S_('Ich bin dafür!', 'sparen (man spart)=economizar');
-S_('Kurze Nachrichten', 'ganz (in ganz Deutschland)=inteiro (na Alemanha inteira)|der Stadtpark=o parque da cidade|eröffnen (eröffnete)=inaugurar (inaugurou)|die Autobahn=a rodovia|das Fest=a festa|ausfallen (fielen aus)=ser cancelado (foram cancelados)|zum Glück=felizmente');
+S_('Kurze Nachrichten', 'ganz (in ganz Deutschland)=inteiro (na Alemanha inteira)|der Stadtpark=o parque da cidade|eröffnen (eröffnete)=inaugurar (inaugurou)|die Autobahn=a rodovia|das Fest=a festa|ausfallen (sind ausgefallen)=ser cancelado (foram cancelados)|zum Glück=felizmente');
 S_('Prüfungstraining A2', 'vormittags=de manhã');
 S_('Ein Forumsbeitrag', 'schlimm=ruim, grave|der Bus (die Busse)=o ônibus (os ônibus)');
 // Esquemas visuais (mesmo formato de data/visuals.js) e palavras de apoio (data/support.js) das lições novas.
@@ -2551,7 +2554,7 @@ V('Am Montag um zehn',
 V('Eine Einladung',
   'V:Aceitar ou recusar;Aceitar|Ja, gern!|Ich komme gern.|Bis dann!;Recusar|Leider kann ich nicht.|Ich arbeite am Samstag.|Schade!',
   'E:Depois de leider, o verbo vem logo;Leider^c|kann^v|ich^s|nicht kommen.^n');
-S_('Am Montag um zehn', 'Um wie viel Uhr?=A que horas?|in der Nacht=de madrugada (a exceção do am)');
+S_('Am Montag um zehn', 'Um wie viel Uhr?=A que horas?|in der Nacht=de noite, na hora de dormir (a exceção do am)');
 S_('Eine Einladung', 'mitbringen (bringt … mit)=levar junto|ihr (habt ihr, antwortet)=vocês|die Nachbarn=os vizinhos');
 V('Auf dem Markt',
   'V:Embalagens e medidas;das Kilo|ein Kilo Äpfel|ein Kilo Tomaten;die Packung|eine Packung Reis|eine Packung Käse;die Dose|eine Dose Tomaten|eine Dose Suppe',
