@@ -93,7 +93,7 @@ button.ghost { color: var(--p600); }
 .mo-grid .card { margin: 0; }
 .mo-card-h { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; } .mo-card-h h3 { margin: 0; font-size: 1.05rem; } .mo-card-h .ic { color: var(--p600); }
 .mo-check { display: flex; align-items: center; gap: 10px; padding: 6px 0; }
-.mo-box { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 6px; border: 2px solid var(--n200); flex: none; }
+.mo-box { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 6px; border: 2px solid var(--n200, #4B5578); flex: none; }
 .mo-check.ok .mo-box { background: var(--ok); border-color: var(--ok); color: #fff; } .mo-check.ok span:last-child { color: var(--mut); }
 .mo-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
 .mo-actions button { display: inline-flex; align-items: center; gap: 8px; }

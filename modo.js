@@ -101,7 +101,7 @@ home = function () {
   const pk = POCKETS.filter((p) => !(S.pockets || {})[p.id]).slice(0, 3);
   const chk = (ok, t) => `<div class="mo-check ${ok ? 'ok' : ''}"><span class="mo-box">${ok ? ic('check', 14) : ''}</span><span>${t}</span></div>`;
   app.innerHTML = `<div class="mo-hello"><h1>Olá${S.name ? ', ' + esc(S.name) : ''}!</h1><p>${nDone() ? 'Que bom te ver de volta. Vamos continuar?' : 'Vamos dar o primeiro passo?'}</p></div>
-  <section class="mo-hero"><svg class="mo-deco" viewBox="0 0 48 40" aria-hidden="true"><path d="M7 33V9.5L24 25 41 9.5V33" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <section class="mo-hero"><svg class="mo-deco" viewBox="0 0 552.64 475.01" aria-hidden="true">${LOGO_SYM.replace(/fill="#[0-9a-f]+"/g, 'fill="#fff"')}</svg>
     <span class="eyebrow">${H.e}</span><h2>${esc(H.t)}</h2>
     <div class="meta">${H.meta.map(([i, t]) => `<span>${ic(i, 16)}${esc(t)}</span>`).join('')}</div>
     <div class="row"><button class="mo-cta" id="moGo">${ic('play', 18)}${H.cta}${ic('arrow', 18)}</button>${H.alt ? `<button class="mo-alt" id="moAlt">${H.alt[0]}</button>` : ''}</div></section>
