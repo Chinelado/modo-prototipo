@@ -178,7 +178,7 @@ Com estes módulos, as **42 lições novas** do redesenho estão no protótipo: 
 
 **Objetivos:** as 42 lições novas têm objetivo "consigo…" e os 8 módulos do A2 ganharam objetivos de módulo. As 24 lições antigas do A2 ainda não têm objetivo próprio (aparecem sem ele na lista do módulo).
 
-**O que falta em todas as lições novas:** imagens, áudio gravado (hoje é a voz do navegador; os textos de Ler e escrever também precisam entrar no gerador de áudio) e a revisão pedagógica de todo o conteúdo (feita em 21/11/2026; ver a seção abaixo).
+**O que falta em todas as lições novas:** imagens. O áudio gravado foi feito em 21/11/2026 (ver "Áudio" no fim) e a revisão de conteúdo também (ver a seção abaixo).
 
 ---
 
@@ -223,3 +223,12 @@ Li as 42 lições inteiras: vocabulário, diálogos, lacunas e explicações, po
 **Depois das correções:** o teste automático das 42 lições passa como antes: formato, esquemas sem corte no celular, verificação em todos os passos, nenhuma palavra desconhecida, as escritas guiadas com o modelo e a migração do progresso. A tela do alfabeto ficou com 276 palavras, por causa de 2 letras a mais na tabela.
 
 **Limite desta revisão:** foi feita por IA, não por professora nativa. Vale uma leitura de alguém nativo, sobretudo nos diálogos e nos textos de leitura, antes de publicar.
+
+---
+
+## Áudio gravado (21/11/2026)
+- **1.607 áudios** gravados na ElevenLabs para as 42 lições novas, com o mesmo modelo e as mesmas vozes do resto do app (eleven_v4; Livia e Daniel). Foram 16.321 créditos e nenhum erro. O app tem agora 12.826 áudios.
+- **Textos de Ler e escrever:** o gerador passou a incluir os parágrafos dos 14 textos. Nos textos com personagem, o nome aparece à parte e cada pessoa tem a sua voz: Lukas, Jonas, Murat e Peter com voz masculina; Sabine e Marta com voz feminina.
+- **O que a voz lê:** placas e horários ("Mo–Fr 6–18 Uhr") são lidos por extenso ("Montag bis Freitag 6 bis 18 Uhr"), e estrelas e sublinhados de nomes de usuário não são lidos. Isso vale também para a voz do navegador.
+- **Pacotes offline:** cada áudio entra no pacote do nível do seu módulo (A1 ou A2).
+- **Conferência:** num navegador limpo, o app toca os MP3 gravados no fórum, nas placas, na ficha e na aula de idade, sem cair na voz do navegador. Só um áudio ficou com duração fora do esperado: o telefone da ficha da Carla (6,8 s). A duração bate com a leitura dígito por dígito, mas ainda precisa ser ouvido por uma pessoa.
