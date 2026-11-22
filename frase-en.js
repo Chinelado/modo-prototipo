@@ -1170,6 +1170,33 @@ const RULES = {
     if (/\b(disgusting|useless|a joke|awful|pathetic)\b/.test(c)) return 'Isso soa agressivo. Troque o julgamento por um fato ou suavize: <b>was not clean</b> / <b>slightly disappointed</b>.';
     return need(/\b(unfortunately|slightly|a little|a bit|i'd appreciate|i would appreciate|i was wondering|would it be possible|look into|look forward|not as|did not|was not|were not|were unable|while|although|but|disappointed|regards|address)\b/.test(c), "Ajuste o tom: <b>Unfortunately</b>, … / <b>I'd appreciate it if</b> … / <b>I was slightly disappointed</b> …");
   }),
+  // ---------- Módulo 36 ----------
+  emocao: R('uma frase que convide a imaginar ou conte uma história (Imagine … / Picture this … / When I was …)', (t, k) => need(/^(imagine|picture|close your eyes|think of|let me tell you)\b/.test(k.join(' ')) || /\b(when i was|last year,? i|every single day|every day|behind every|one of|real person|statistic)\b/.test(k.join(' ')), 'Envolva o público: <b>Imagine a world where</b> … / <b>Picture this</b>: … / <b>When I was</b> …')),
+  retorica: R("uma pergunta retórica ou um apelo ao bom senso (Isn't it time we …? / Who wouldn't …? / Surely …)", (t, k) => {
+    const c = k.join(' ');
+    if (/\b(isn't it time|it's time|it is time) we (take|stop|act|start|do|make|invest)\b/.test(c)) return "Depois de it's time we, o verbo vai no passado: it's time we <b>took</b> / <b>stopped</b>.";
+    return need(/\?\s*$/.test(t) || /\b(surely|it's time we|isn't it time|let's face it|after all|enough is enough)\b/.test(c), "Use a retórica: <b>Isn't it time we</b> …? / <b>Who wouldn't</b> …? / <b>Surely</b> …");
+  }),
+  credibilidade: R('uma frase de credibilidade (As someone who … / Experts agree … / The figures show …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bas someone which\b/.test(c)) return 'Para pessoas: As someone <b>who</b> …';
+    return need(/\b(as someone who|having worked|in my experience|first-hand|first hand|experts|according to|the figures|studies|survey|found that|evidence|speak for themselves|beyond doubt|scientists)\b/.test(c), 'Mostre credibilidade: <b>As someone who</b> … / <b>Experts agree</b> … / <b>The figures show</b> …');
+  }),
+  conceder_rebater: R('uma concessão seguida de rebate (Granted, … but … / Be that as it may … / Even if …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\beven if that (was|is) the case\b/.test(c)) return 'Para hipótese irreal: Even if that <b>were</b> the case.';
+    if (/\bbe that like it may\b|\bbe that so it may\b/.test(c)) return 'A expressão é <b>Be that as it may</b>.';
+    return need(/\b(granted|admittedly|may well be true|be that as it may|even if|with all due respect|beside the point|misses the point|real question|you have a point|even so|at the end of the day|bigger picture|take your point)\b/.test(c), 'Conceda e rebata: <b>Granted</b>, …, <b>but</b> … / <b>Be that as it may</b>, …');
+  }),
+  apelo_acao: R("um contraste, um paralelismo ou um apelo à ação (It's not …, it's … / Join us / If not now, when?)", (t, k) => {
+    const c = k.join(' ');
+    return need(/\b(it's not|it is not|not for)\b.*\b(it's|it is|but)\b/.test(c) || /\b(act now|join us|sign|together|if not now|if not us|the time is now|make a difference|we will|we must)\b/.test(c) || /(\b\w+\b).*, \1\b.*\band \1\b/.test(t.toLowerCase()), "Feche com força: <b>It's not a cost, it's an investment.</b> / <b>Join us.</b> / <b>If not now, when?</b>");
+  }),
+  carta_persuasiva: R('uma frase de carta persuasiva (I am writing to urge you to … / Granted … but … / I urge you to …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\burge you (keep|reconsider|vote|stop|save|create)\b/.test(c)) return 'Depois de urge you, use <b>to</b>: I urge you <b>to</b> reconsider.';
+    return need(/\b(urge|on behalf of|residents|petition|reconsider|lifeline|granted|where else|signed|yours sincerely|dear editor|i am writing|vote against|more than)\b/.test(c) || /\?\s*$/.test(t), 'Use a linguagem da carta: <b>I am writing to urge you to</b> … / <b>I urge you to reconsider</b> …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
