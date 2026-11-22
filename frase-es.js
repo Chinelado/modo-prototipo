@@ -683,6 +683,43 @@ const RULES = {
     if (/ la gente (usarían|tendrían|caminarían|serían) /.test(c)) return '<b>la gente</b> é singular: la gente <b>usaría</b>.';
     return need(has(k, /\p{L}+(ría|rían|ríamos)$/u) || / (si|ojalá|así|de esta manera|en conclusión|lo primero) /.test(c), 'Escreva: <b>Si yo fuera</b> … / <b>Lo primero que haría</b> … / <b>Si hubiera</b> …');
   }),
+  // ---------- Módulo 19 ----------
+  trayectoria: R('uma frase de trajetória (me gradué, llevo … + gerúndio, desde hace, estuve a cargo de…)', (t, k) => {
+    const c = C(k);
+    if (/ hay (\p{L}+ )?(años|meses) /u.test(c)) return 'Para tempo, use <b>hace</b>: <b>hace</b> tres años, <b>desde hace</b> tres años.';
+    if (/ llevo (\p{L}+ )?(años|meses) (trabajo|estudio|vivo) /u.test(c)) return 'Com <b>llevar</b>, o gerúndio: llevo tres años <b>trabajando</b>.';
+    if (/ me formé (en|como) /.test(c)) return 'O natural é <b>me gradué en</b> (ou me licencié en, na Espanha).';
+    return need(/ (me gradué|me licencié|llevo|desde hace|hace|estuve a cargo|me encargaba|coordiné|lideré|empecé como|me ascendieron|me especialicé|hice una maestría) /.test(c), 'Conte: <b>Me gradué en</b> … / <b>Llevo</b> tres años <b>trabajando</b> …');
+  }),
+  carta_formal: R('uma fórmula de e-mail formal (estimado/a, le escribo para, quedo a su disposición…)', (t, k) => {
+    const c = C(k);
+    if (/ (te escribo|tu respuesta|quedo a tu disposición) /.test(c)) return 'No e-mail formal, use <b>usted</b>: <b>le</b> escribo, <b>su</b> respuesta.';
+    if (/ (prezad[oa]|atenciosamente|fico à disposição) /.test(c)) return 'Isso é português. Em espanhol: <b>Estimado/a</b>, <b>Atentamente</b>, <b>Quedo a su disposición</b>.';
+    return need(/ (estimado|estimada|estimados|le escribo|me pongo en contacto|en relación con|le agradecería|podría|quedo a su disposición|quedo a la espera|atentamente|saludos cordiales|adjunto|solicitar) /.test(c), 'Use as fórmulas: <b>Estimada señora</b> …: / <b>Le escribo para</b> … / <b>Atentamente</b>.');
+  }),
+  pedido_formal: R('um pedido formal (le ruego que, le agradecería que, ¿le importa que …?)', (t, k) => {
+    const c = C(k);
+    if (/ le agradecería que (me )?(confirme|envíe|responda|llame|tenga|envíen|confirmen) /.test(c)) return 'Depois de <b>le agradecería que</b>, o imperfeito do subjuntivo: <b>confirmara</b>, <b>enviara</b>, <b>respondiera</b>.';
+    if (/ le (ruego|importa) que (me )?(disculpa|abro|cambiamos|uso) /.test(c)) return 'Depois de <b>le ruego que</b> / <b>le importa que</b>, o subjuntivo: <b>disculpe</b>, <b>abra</b>, <b>cambiemos</b>.';
+    return need(/ (le ruego|le agradecería|le importa|le importaría|me permite|sería posible|disculpe|le pido disculpas|por supuesto|con mucho gusto|no hay problema) /.test(c), 'Peça com formalidade: <b>Le agradecería que</b> … / ¿<b>Le importa que</b> …?');
+  }),
+  entrevista_b1: R('uma resposta de entrevista (creo que encajo, puedo aportar, cuando trabajaba … tuve que …)', (t, k) => {
+    const c = C(k);
+    if (/ (me encaixo|consegui) /.test(c)) return 'Isso é português. Em espanhol: <b>encajo</b>, <b>logré</b> / <b>conseguí</b>.';
+    return need(/ (creo que|encajo|puedo aportar|por ejemplo|una vez|cuando trabajaba|tuve que|logramos|logré|al final|mi mayor|fortaleza|debilidad|cómo es|próximos pasos|equipo|organizada|organizado|aprendo) /.test(c), 'Responda: <b>Creo que encajo</b> bien porque … / <b>Una vez tuve que</b> …');
+  }),
+  estudios: R('uma frase sobre estudos (carrera, beca, aprobar, reprobar, sacar una nota…)', (t, k) => {
+    const c = C(k);
+    if (/ (una|la) bolsa (de estudios|para estudiar) /.test(c)) return 'Bolsa de estudos é <b>beca</b>.';
+    if (/ (tiré|tire) (un|una) /.test(c)) return 'Tirar nota é <b>sacar</b>: <b>saqué</b> un nueve.';
+    return need(/ (carrera|licenciatura|maestría|máster|doctorado|beca|matriculé|matricularse|aprobé|aprobar|reprobé|reprobar|suspendí|saqué|nota|promedio|semestre|materia|materias|tesis|intercambio|universidad|estudio|estudias) /.test(c), 'Fale dos estudos: <b>Estudio la carrera de</b> … / <b>Conseguí una beca</b> …');
+  }),
+  motivacion: R('uma frase de carta de motivação (me dirijo a ustedes, me gradué, puedo aportar, les agradecería que…)', (t, k) => {
+    const c = C(k);
+    if (/ me dirigo /.test(c)) return 'Em espanhol: <b>me dirijo</b> (com j).';
+    if (/ (le|les) agradecería que (tengan|tienen|tendrían) /.test(c)) return 'Depois de <b>agradecería que</b>, o imperfeito do subjuntivo: <b>tuvieran</b>.';
+    return need(/ (me dirijo|candidatura|solicitud|me gradué|llevo|estuve a cargo|me gustaría|me permitiría|puedo aportar|al regresar|les agradecería|le agradecería|quedo a su disposición|atentamente|estimados) /.test(c), 'Escreva: <b>Me dirijo a ustedes</b> … / <b>Puedo aportar</b> … / <b>Les agradecería que</b> …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
