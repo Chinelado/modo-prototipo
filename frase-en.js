@@ -488,6 +488,37 @@ const RULES = {
     if (/\b(i'm|i am|we're|we are) (totally |completely )?agree\b/.test(c)) return 'agree é verbo: <b>I agree</b> (e não "I am agree").';
     return need(has(k, /^(agree|disagree|opinion|think|however|because|example|also|post|sharing|personally)$/), 'Comente: I <b>agree</b> … / In my <b>opinion</b>, … <b>because</b> … / <b>However</b>, …');
   }),
+  // ---------- Módulo 14 ----------
+  midia: R('a mídia na sua vida, com <b>-ing como sujeito</b> (Watching series is …) ou <b>spend</b> (I spend two hours …)', (t, k) => {
+    const c = k.join(' ');
+    if (/^\s*(watch|read|follow|listen|scroll|play|use) \p{L}+.* (is|are) /iu.test(norm(t))) return 'A atividade como sujeito vai com -ing: <b>Watching</b> series is …';
+    if (/\bi pass (\p{L}+ )?(hours|hour|minutes|time)\b/u.test(c)) return 'Passar tempo é <b>spend</b>: I spend two hours …';
+    return need(/^\s*\p{L}+ing\b/iu.test(norm(t)) || has(k, /^(spend|spent|series|news|podcasts|podcast|media|social|watch|watching|online|screen|scrolling)$/), 'Fale da mídia: <b>Watching</b> series is … / I <b>spend</b> … a day on …');
+  }),
+  concordar: R("uma reação: <b>So do I / Neither do I</b> (com o auxiliar certo) ou <b>I agree / I see your point, but …</b>", (t, k) => {
+    const c = k.join(' ');
+    if (/\bneither (don't|doesn't|can't|didn't)\b/.test(c)) return 'Depois de neither, o auxiliar é afirmativo: Neither <b>do</b> I.';
+    if (/\bso don't i\b|\bi too\b/.test(c)) return 'Eu também: <b>So do I</b> ou <b>Me too</b>.';
+    if (/\b(i'm|i am) agree\b/.test(c)) return 'agree é verbo: <b>I agree</b>.';
+    return need(/\b(so (do|am|can|did|have|was|will) i|neither (do|am|can|did|have|was|will) i|me too|me neither|i agree|i disagree|see your point|not so sure|that's true|exactly)\b/.test(c), "Reaja: <b>So do I!</b> / <b>Neither can I.</b> / <b>I see your point, but</b> …");
+  }),
+  passiva: R('uma notícia com a <b>passiva</b>: was / were + particípio (The bridge was built in 1937.)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(was|were) (build|arrest|steal|find|open|close|elect|cancel|destroy|injure)\b/.test(c)) return 'Na passiva, use o <b>particípio</b>: was <b>built</b>, were <b>arrested</b>, was <b>stolen</b>.';
+    if (/\b(two|three|many|several|\d+) \p{L}+s was \p{L}+(ed|en|t)\b/u.test(c)) return 'Com plural, use <b>were</b>: Two men <b>were</b> arrested.';
+    return need(/\b(was|were) (\p{L}+ed|built|stolen|found|born|done|made|taken|given|seen|written|sold|hit|hurt|shot|known)\b/u.test(c), 'Use a passiva: The bridge <b>was built</b> … / Two men <b>were arrested</b> …');
+  }),
+  conectores2: R('duas ideias ligadas por <b>because, so, although ou however</b>', (t, k) => {
+    if (/\balthough\b.*\bbut\b/i.test(norm(t))) return 'Com although, não use but: Although it\'s expensive<b>,</b> I love it.';
+    if (/[a-z]\s+however\s+[a-z]/i.test(norm(t)) && !/[.;]\s*however|,\s*however,/i.test(norm(t))) return 'however abre uma frase nova, com vírgula: It\'s expensive. <b>However,</b> I love it.';
+    return need(has(k, /^(because|so|although|however|though|but)$/), 'Ligue as ideias com because, so, although ou however.');
+  }),
+  prova_a2: R('uma frase sobre a <b>prova</b> ou uma estratégia (The exam has … / I will practice …)', (t, k) => need(has(k, /^(exam|test|reading|writing|listening|speaking|practice|instructions|words|minutes|hour|pairs|parts|part|timer|pass)$/), 'Fale da prova: The <b>exam</b> has … / I will <b>practice</b> …')),
+  forum: R('uma frase de <b>opinião</b> organizada (I think … because … / Although … / In conclusion, …)', (t, k) => {
+    if (/\b(i'm|i am) agree\b/.test(k.join(' '))) return 'agree é verbo: <b>I agree</b>.';
+    if (/\balthough\b.*\bbut\b/i.test(norm(t))) return 'Com although, não use but.';
+    return need(has(k, /^(think|opinion|because|so|although|however|example|conclusion|agree|disagree|sum|that's|why)$/), 'Dê a sua opinião: I <b>think</b> … <b>because</b> … / <b>Although</b> … / In <b>conclusion</b>, …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
