@@ -266,7 +266,8 @@ O motor, as telas e o formato de lição são os mesmos. O que é específico do
 1. ~~Variante~~ ✅ americano. Faltam as outras questões 🔴 da seção 1 (tamanho e revisão).
 2. **Piloto:** escrever o Módulo 1 (6 lições + avaliação) no formato completo, com áudio, e testar com 5 a 7 adultos, como prevê a arquitetura.
    - ✅ **Escrito em 21/11/2026** (rascunho, aguardando revisão): `ingles.html`, `en/base.js` (pacote do idioma), `en/curso.js` (6 lições, trilha e níveis Cambridge), `en/apoio.js` (visão geral, dicas das lacunas, objetivos), `frase-en.js` (frase livre: to be com o sujeito, idade com to be, a / an antes da profissão). Progresso separado do alemão (`modo.en.v1`).
-   - Adaptações ao inglês: passo "Som da lição" em cada aula (h aspirado, th de the, E × I, thirteen × thirty, a × an); sem cores de gênero e sem teclado de tremas; data americana e maiúsculas na lição de Ler e escrever; "Comece aqui", Pockets e textos longos ainda não existem e ficam escondidos.
+   - Adaptações ao inglês: passo "Som da lição" em cada aula (h aspirado, th de the, E × I, thirteen × thirty, a × an); sem cores de gênero e sem teclado de tremas; data americana e maiúsculas na lição de Ler e escrever; Pockets e textos longos ainda não existem e ficam escondidos.
+   - ✅ **Comece aqui do inglês** (21/11/2026, rascunho): as 10 aulas da seção 3 em `en/guia.js`, em quatro blocos (Primeiros passos · O inglês que você já sabe · Os sons do inglês · Como o inglês funciona), com desafios de ouvir e escolher nos pares mínimos (ship × sheep, three × tree).
    - Áudio: `node tools/audio-elevenlabs.mjs gerar --lang en` grava em `audio-en/` com as vozes de `tools/elevenlabs-en.json` (Sarah e Brian, americanos). Enquanto isso, o app usa a voz do navegador (en-US).
 3. Revisão por professor(a) de inglês.
 4. Escrever o restante do A1, módulo a módulo, com o mesmo teste automático usado no alemão (formato, palavras desconhecidas, verificação em cada passo, escrita guiada).

@@ -8,7 +8,7 @@ const LANG_PACKS = {
     code: 'en', sigla: 'EN', nome: 'Inglês', lingua: 'inglês', ref: 'com as provas Cambridge como referência', tts: 'en-US', audio: 'audio-en', key: 'modo.en.v1', page: 'ingles.html',
     // títulos de nível e conquistas com nome na língua estudada (no alemão eles estão em app.js)
     titles: ['Beginner', 'Explorer', 'Speaker', 'Storyteller', 'Thinker', 'Achiever', 'Master'],
-    badges: { first: 'First step', diary: 'Dear diary', speak: 'Out loud!', rd5: 'Reader', rd15: 'Bookworm', hw50: 'Rotina em inglês', pkall: 'Pronta para viajar' },
+    badges: { guide: 'Ready!', first: 'First step', diary: 'Dear diary', speak: 'Out loud!', rd5: 'Reader', rd15: 'Bookworm', hw50: 'Rotina em inglês', pkall: 'Pronta para viajar' },
     // palavras gramaticais do inglês: contam como "inglês" ao decidir o que ganha botão de som e o que é palavra estrangeira
     extra: ('i you he she it we they me him her us them my your his its our their mine yours am is are was were be been being ' +
       'do does did done have has had will would can could should must may might shall the a an this that these those ' +

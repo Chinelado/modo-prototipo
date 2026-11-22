@@ -1,6 +1,6 @@
 // Inglês · base de dados (carregada logo depois de data/core.js, só em ingles.html).
 // Define as mesmas funções e listas que o motor usa no alemão (data/visuals.js, known.js, guide.js, vozes.js,
-// pockets.js, extras.js, interativos.js…), com o conteúdo do inglês. O que o inglês ainda não tem (Comece aqui,
+// pockets.js, extras.js, interativos.js…), com o conteúdo do inglês. O que o inglês ainda não tem (
 // textos longos, pockets, interativos) fica vazio, e o motor simplesmente não mostra.
 
 /* ---------- esquemas visuais (mesmo formato de data/visuals.js) ---------- */
@@ -13,14 +13,7 @@ const IMG_CAP = {};
 // respostas alternativas das lacunas (chave = texto exato da lacuna)
 const CZ_ALT = {};
 
-/* ---------- Comece aqui (ainda não escrito no inglês) ---------- */
-const GUIDE_CATS = [
-  { id: 'start', e: '🚀', t: 'Primeiros passos' },
-  { id: 'sons', e: '🔊', t: 'Os sons do inglês' },
-  { id: 'frases', e: '💬', t: 'Primeiras frases' },
-  { id: 'base', e: '🧩', t: 'Como o inglês funciona' },
-];
-const GUIDE = [];
+/* ---------- Comece aqui: as aulas estão em en/guia.js ---------- */
 const GUIDE_OLD = {};
 function migrateGuide(st) { st.guide = st.guide || {}; }
 const GLOSS = [
