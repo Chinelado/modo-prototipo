@@ -371,6 +371,46 @@ const RULES = {
     if (/ anexo (mi|el) /.test(c)) return 'Em espanhol: <b>adjunto</b> mi currículum.';
     return need(/ (se busca|se requiere|se ofrece|me interesa|adjunto|quedo|atentamente|estimados|estimado|estimada|puesto|currículum|requisitos|indispensable) /.test(c), 'Escreva: <b>Se busca</b> … / <b>Me interesa</b> el puesto … / <b>Adjunto</b> mi currículum.');
   }),
+  // ---------- Módulo 11 ----------
+  doler: R('onde dói ou um sintoma (me duele, me duelen, tengo fiebre…)', (t, k) => {
+    const c = C(k);
+    if (/ (me|te|le|nos|les) duele (mi|tu|su) /.test(c)) return 'Com partes do corpo, use o artigo: me duele <b>la</b> cabeza.';
+    if (/ (me|te|le|nos|les) duele (los|las) /.test(c)) return 'Com plural, <b>duelen</b>: me <b>duelen</b> los pies.';
+    if (/ (me|te|le) duelen (la|el) /.test(c)) return 'Com singular, <b>duele</b>: me <b>duele</b> la cabeza.';
+    if (/ (yo )?(dolo|duelo) /.test(c)) return 'doler funciona como gustar: <b>me duele</b> la cabeza.';
+    return need(/ (duele|duelen|dolor|fiebre|tos|gripe|resfriado|resfriada|mareado|mareada) /.test(c), 'Diga onde dói: <b>Me duele</b> la cabeza. / <b>Tengo fiebre</b>.');
+  }),
+  farmacia: R('uma frase na farmácia (¿tiene algo para …?, cada ocho horas, receta…)', (t, k) => {
+    const c = C(k);
+    if (/ a cada \p{L}+ horas /u.test(c)) return 'Em espanhol é só <b>cada</b>: <b>cada</b> ocho horas.';
+    if (/ algo por (el|la) /.test(c)) return 'Objetivo leva <b>para</b>: algo <b>para</b> la tos.';
+    return need(/ (tiene algo|para la|para el|pastilla|pastillas|jarabe|crema|curitas|receta|cada|tome|tómelo|alérgico|alérgica|caja) /.test(c), 'Na farmácia: ¿<b>Tiene algo para</b> la tos? / <b>cada</b> ocho horas.');
+  }),
+  imperativo: R('um conselho no imperativo (toma, bebe, haz, ve / tome, beba…)', (t, k) => {
+    const c = C(k);
+    if (/ (faz|vai|tem|vem|põe|diz|sai) /.test(c)) return 'Isso é português. Com tú: <b>haz</b>, <b>ve</b>, <b>ten</b>, <b>ven</b>, <b>pon</b>, <b>di</b>, <b>sal</b>.';
+    if (/ (hace|va|tiene|viene|pone|dice|sale) (ejercicio|al médico|paciencia|aquí|a casa) /.test(c) && !/ (usted|él|ella) /.test(c)) return 'Com tú, esse imperativo é irregular: <b>haz</b>, <b>ve</b>, <b>ten</b>, <b>ven</b>.';
+    return need(/ (toma|tome|bebe|beba|descansa|descanse|haz|haga|ve|vaya|ten|tenga|ven|venga|acuéstate|abríguese|duerme|duerma) /.test(c) || has(k, /\p{L}+(lo|la|te|se|me)$/u), 'Dê um conselho: <b>Toma</b> mucha agua. / <b>Tome</b> este jarabe.');
+  }),
+  imperativo_neg: R('uma proibição (no tomes, no comas, no hagas, no te preocupes…)', (t, k) => {
+    const c = C(k);
+    if (/ no (toma|come|hace|haz|vai|va|sale|fuma|bebe) (café|eso|esto|dulces|alcohol|sin|tanto|al) /.test(c)) return 'O negativo muda a vogal: <b>no tomes</b>, <b>no comas</b>, <b>no hagas</b>, <b>no vayas</b>.';
+    if (/ no (preocúpate|tómalo|hazlo|dímelo) /.test(c)) return 'No negativo, o pronome vai antes: <b>no te preocupes</b>, <b>no lo hagas</b>.';
+    return need(/ no (\p{L}+ )?(\p{L}+(es|as)|tome|coma|haga|vaya|toque|salga|fume) /u.test(c), 'Proíba: <b>No tomes</b> café. <b>No hagas</b> eso. <b>No te preocupes</b>.');
+  }),
+  emergencia: R('uma frase de emergência (¡Ayuda!, llame a …, se cayó, urgencias…)', (t, k) => {
+    const c = C(k);
+    if (/ (caió|caiu|desmaiou) /.test(c)) return 'Em espanhol: se <b>cayó</b> (caiu), se <b>desmayó</b> (desmaiou).';
+    if (/ (llama|chame) a (una ambulancia|la policía) /.test(c) && / (usted|señor|señora) /.test(c)) return 'Com usted: <b>llame</b> a una ambulancia.';
+    return need(/ (ayuda|auxilio|llame|ambulancia|emergencia|urgencias|se cayó|se desmayó|se cortó|sangrando|respirar|respira|contesta|accidente|policía|seguro) /.test(c), 'Peça ajuda: ¡<b>Ayuda</b>! ¡<b>Llame a una ambulancia</b>! <b>Se cayó</b>.');
+  }),
+  ausencia: R('uma frase de aviso de ausência (no voy a poder ir, reposo, perdón por las molestias…)', (t, k) => {
+    const c = C(k);
+    if (/ (me|te) duele (mi|tu) /.test(c)) return 'Com partes do corpo, use o artigo: me duele <b>la</b> cabeza.';
+    if (/ perdón para /.test(c)) return 'Desculpas levam <b>por</b>: perdón <b>por</b> las molestias.';
+    if (/ no vou /.test(c)) return 'Em espanhol, <b>voy</b>: no <b>voy</b> a poder ir.';
+    return need(/ (no voy a poder|no puedo|avisarte|avisarle|me siento|duele|duelen|fiebre|reposo|justificante|médico|te mando|perdón|molestias|comprensión|volver|enferma|enfermo) /.test(c), 'Avise: Hoy <b>no voy a poder</b> ir. / <b>Perdón por las molestias</b>.');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
