@@ -1345,6 +1345,34 @@ const RULES = {
     if (/ pas(ó|aron) de (\p{L}+ |\d+ ?%? )+para /u.test(c)) return 'Em espanhol: pasar de X <b>a</b> Y.';
     return need(/ (el gráfico|muestra|pasó|frente a|se debe|a raíz de|en suma|los datos|sugieren|se mantuvo|bajaron|depende|renovable|la cifra|viste el gráfico|cambió) /.test(c), 'Comente: <b>El gráfico muestra</b> … / La cifra <b>pasó de</b> … <b>a</b> … / <b>En suma</b>, …');
   }),
+  // ---------- Módulo 38 ----------
+  dele_c1: R('uma frase sobre a prova (dura, pruebas integradas, uso de la lengua, grupos…)', (t, k) => need(/ (examen|prueba|pruebas|integradas|uso de la lengua|grupo|grupos|aprobar|apto|dura|horas|minutos|exposición|audio|notas|modelo|dele|especial|conferencia|descansado) /.test(C(k)), 'Fale da prova: El <b>examen</b> dura … / Hay <b>pruebas integradas</b> …')),
+  c1_lectura: R('uma estratégia de leitura e uso da língua (lee el párrafo, la preposición, el conector, descarta…)', (t, k) => {
+    const c = C(k);
+    if (/ consiste de /.test(c)) return 'Regência: consiste <b>en</b>.';
+    return need(/ (lee|párrafo|opción|opciones|preposición|verbo|conector|contraste|regencia|hueco|huecos|descarta|depende|consiste|vuelve|dudo|miras|hazlo) /.test(c), 'Dê uma estratégia: <b>Lee el párrafo</b> entero … / <b>Fíjate en la preposición</b> …');
+  }),
+  c1_integrada: R('uma estratégia da prova integrada (toma notas, flechas, esquema, según la conferenciante, reformula…)', (t, k) => {
+    const c = C(k);
+    if (/ segundo (la|el) (conferenciante|ponente|audio) /.test(c)) return '"Segundo" (a fonte) é <b>según</b>.';
+    if (/ con setas /.test(c)) return '"Setas" (sinal) é <b>flechas</b>.';
+    return need(/ (notas|abreviaturas|flechas|flecha|esquema|según|conferenciante|conferencia|reformula|propias palabras|fuente|copies|audio|género|escucho|ordena) /.test(c), 'Dê uma estratégia: <b>Toma notas</b> con <b>flechas</b> … / <b>Según la conferenciante</b>, …');
+  }),
+  c1_oral: R('uma frase da exposição ou negociação (me gustaría empezar, para resumir, podríamos llegar a un acuerdo…)', (t, k) => {
+    const c = C(k);
+    if (/ siempre que (\p{L}+ )?(se )?(respeta|cumple|reduce|hay|es) /u.test(c)) return 'Com sentido de condição, <b>siempre que</b> pede subjuntivo: se <b>respete</b>.';
+    return need(/ (me gustaría|señalando|en primer lugar|por otra parte|para resumir|plantean|posturas|acuerdo|ceder|dispuesta|dispuesto|siempre que|se refiere|matizar|propondría|exposición|coinciden) /.test(c), 'Na oral: <b>Me gustaría empezar</b> … / <b>Para resumir</b>, … / <b>Podríamos llegar a un acuerdo</b> …');
+  }),
+  siele: R('uma frase sobre o SIELE (ordenador, puntuación, nivel, DELE o SIELE…)', (t, k) => {
+    const c = C(k);
+    if (/ (reprovado|computador) /.test(c)) return 'Em espanhol: <b>suspenso</b> / <b>reprobado</b>; <b>ordenador</b> / <b>computadora</b>.';
+    return need(/ (siele|dele|ordenador|computadora|puntuación|puntos|nivel|aprobado|suspenso|graba|caduca|certifica|beca|universidad|resultado|examen|depende) /.test(c), 'Fale do SIELE: El <b>SIELE</b> se hace en el <b>ordenador</b>. / La <b>puntuación</b> …');
+  }),
+  c1_simulado: R('uma frase do artigo (según la conferenciante, si bien…, sería conveniente que…, todo indica que…)', (t, k) => {
+    const c = C(k);
+    if (/ sería (conveniente|necesario) que (\p{L}+ )*?(tiene|tienen|hay|adapta|adaptan) /u.test(c)) return 'Com <b>sería conveniente que</b>, o imperfeito do subjuntivo: <b>tuviera</b>, <b>adaptara</b>.';
+    return need(/ (según|conferencia|conferenciante|urbanista|si bien|no es menos cierto|cabe preguntarse|sería conveniente|en definitiva|todo indica|asimismo|en primer lugar|planteó|ciudad|barrio|simulacro|artículo|notas|cité) /.test(c), 'Escreva como no artigo: <b>Según la conferenciante</b>, … / <b>Si bien</b> … / <b>Todo indica que</b> …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
