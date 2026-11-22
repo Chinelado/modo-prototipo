@@ -564,6 +564,46 @@ const RULES = {
     if (/ me (quedé|quede) (nervios[oa]|triste) /.test(c)) return 'Para emoções, use <b>ponerse</b>: <b>me puse</b> nerviosa.';
     return need(has(k, /\p{L}+(aba|ía|ían|é|ó|ió|aron|ieron)$/u) || / (había|era|fue|fui|hice|tuve|vi|desde entonces|al final|de pronto|al principio|nunca olvidaré|aquella|aquel) /.test(c), 'Conte o relato: <b>Aquella mañana</b> … / … ya se <b>había</b> ido / <b>Desde entonces</b> …');
   }),
+  // ---------- Módulo 16 ----------
+  subjuntivo: R('uma frase com o presente do <b>subjuntivo</b> (que tengas, espero que sea, ojalá…)', (t, k) => {
+    const c = C(k);
+    if (/ (conosca|conoscas|tenas|hacas|salas|dormas|seja|esteja|tenha) /.test(c)) return 'Confira a forma: <b>conozca</b>, <b>tengas</b>, <b>hagas</b>, <b>salgas</b>, <b>duermas</b>, <b>sea</b>, <b>esté</b>.';
+    if (/ (espero que|ojalá|que) (tienes|eres|estás|puedes|haces|conoces|sabes|vas) /.test(c) && / (espero que|ojalá) /.test(c)) return 'Depois de <b>espero que</b> e <b>ojalá</b>, o subjuntivo: <b>tengas</b>, <b>seas</b>, <b>estés</b>, <b>puedas</b>.';
+    return need(/ (que|ojalá) /.test(c), 'Use o subjuntivo: <b>Que tengas</b> suerte. / <b>Espero que sea</b> verdad.');
+  }),
+  influencia: R('um pedido sobre outra pessoa (quiero que, necesito que, te pido que + subjuntivo)', (t, k) => {
+    const c = C(k);
+    if (/ (quiero|quieres|quiere|queremos|quieren|necesito|necesitas|prefiero|pido|pide|piden|digo) que (vienes|me ayudas|me llamas|llegan|estudio|te preocupas|vas|haces|tienes|eres|estás) /.test(c)) return 'Quando outra pessoa faz, o subjuntivo: que <b>vengas</b>, que me <b>ayudes</b>, que <b>lleguen</b>.';
+    if (/ (quiero|necesito|prefiero) que (vaya|ir) a /.test(c) && / yo /.test(c)) return 'Se é você mesma, use o infinitivo: <b>quiero ir</b>.';
+    if (/ (digo|pido) para (él|ella|ellos|ti|usted) /.test(c)) return 'Em espanhol: <b>le digo que</b> venga, <b>te pido que</b> esperes.';
+    return need(/ (quiero que|quieres que|quiere que|quieren que|necesito que|prefiero que|te pido que|le pido que|les pido que|me piden que|les digo que|le digo que|no quiero que|quiero|prefiero|necesito) /.test(c), 'Peça: <b>Quiero que</b> vengas. / <b>Te pido que</b> me ayudes.');
+  }),
+  emocion_sub: R('uma emoção sobre o outro (me alegra que, me molesta que, me preocupa que + subjuntivo)', (t, k) => {
+    const c = C(k);
+    if (/ me (alegra|molesta|preocupa|encanta|sorprende|da pena) que (estás|llegas|duermes|hay|te vas|vienes|tienes|eres) /.test(c)) return 'Com emoção sobre o outro, o subjuntivo: que <b>estés</b>, <b>llegues</b>, <b>duermas</b>, <b>haya</b>.';
+    if (/ (yo )?(alegro|molesto|preocupo) que /.test(c) && !/ me /.test(c)) return 'Funciona como gustar: <b>me alegra</b>, <b>me molesta</b>, <b>me preocupa</b>.';
+    return need(/ (alegra|molesta|preocupa|encanta|sorprende|da pena|miedo de que|odio que|siento que|da igual que|pone nervioso|pone nerviosa) /.test(c), 'Reaja: <b>Me alegra que</b> estés aquí. / <b>Me molesta que</b> llegues tarde.');
+  }),
+  valoracion: R('uma expressão impessoal (es importante que + subjuntivo / es verdad que + indicativo)', (t, k) => {
+    const c = C(k);
+    if (/ es (importante|necesario|mejor|normal|posible|raro|una pena) que (duermes|sales|salimos|estás|llueve|puedes|vienes|tienes|es) /.test(c)) return 'Expressões de valor pedem subjuntivo: que <b>duermas</b>, <b>salgamos</b>, <b>estés</b>, <b>llueva</b>, <b>puedas</b>.';
+    if (/ (es verdad|es cierto|está claro|es evidente) que (sea|tengas|estés|haya|puedas) /.test(c) && !/ no (es verdad|es cierto|está claro) /.test(c)) return 'Fato afirmado pede indicativo: es verdad que <b>es</b>, que <b>tienes</b>.';
+    return need(/ (es importante|es necesario|es mejor|es normal|es posible|es raro|es una pena|es verdad|es cierto|está claro|es evidente|hace falta) /.test(c), 'Use: <b>Es importante que</b> … / <b>Es verdad que</b> …');
+  }),
+  aconsejar: R('um conselho (te aconsejo que + subjuntivo, yo que tú + condicional, ¿por qué no …?)', (t, k) => {
+    const c = C(k);
+    if (/ te (aconsejo|recomiendo|sugiero) que (hablas|descansas|buscas|esperas|llamas|vas|le dices|piensas) /.test(c)) return 'Depois de <b>te aconsejo que</b>, o subjuntivo: <b>hables</b>, <b>descanses</b>, <b>busques</b>.';
+    if (/ yo que tú (busco|hablo|hago|digo|voy|busque|hable|haga) /.test(c)) return 'Depois de <b>yo que tú</b>, o condicional: <b>buscaría</b>, <b>hablaría</b>, <b>haría</b>.';
+    if (/ te aconsejo a /.test(c)) return 'Em espanhol: <b>te aconsejo que</b> + subjuntivo.';
+    return need(/ (te aconsejo|te recomiendo|te sugiero|yo que tú|yo en tu lugar|por qué no|lo mejor es) /.test(c) || has(k, /\p{L}+ría$/u), 'Aconselhe: <b>Te aconsejo que</b> hables … / <b>Yo que tú</b>, buscaría …');
+  }),
+  consultorio: R('uma frase de resposta de conselhos (es normal que, te aconsejo que, yo que tú, espero que…)', (t, k) => {
+    const c = C(k);
+    if (/ es normal que (te sientes|estás|tienes) /.test(c)) return 'Depois de <b>es normal que</b>, o subjuntivo: te <b>sientas</b>, <b>estés</b>, <b>tengas</b>.';
+    if (/ yo que tu /.test(c)) return '<b>tú</b> leva acento: yo que <b>tú</b>.';
+    if (/ te aconsejo que (hablas|le dices|esperas) /.test(c)) return 'Depois de <b>te aconsejo que</b>, o subjuntivo: <b>hables</b>, <b>le digas</b>.';
+    return need(/ (querido|querida|es normal que|entiendo que|te aconsejo|te recomiendo|yo que tú|yo en tu lugar|lo mejor es|es importante que|es necesario que|espero que|ojalá|un abrazo) /.test(c), 'Responda: <b>Es normal que</b> … / <b>Te aconsejo que</b> … / <b>Espero que</b> …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
