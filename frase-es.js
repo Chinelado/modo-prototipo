@@ -644,6 +644,45 @@ const RULES = {
     if (/ si (estés|tengas|vivas|sigas|seas) /.test(c)) return 'Depois de <b>si</b>, o indicativo: si <b>estás</b>, si <b>tienes</b>.';
     return need(has(k, /\p{L}+(ré|rás|rá|remos|rán)$/u) || / (cuando|seguramente|es probable|a lo mejor|tengo pensado|pienso|si|espero que|ojalá|no olvides|no te rindas|con cariño|querida|querido) /.test(c), 'Escreva: <b>Cuando leas</b> esta carta, … / <b>Espero que</b> …');
   }),
+  // ---------- Módulo 18 ----------
+  imperf_sub: R('uma frase com o imperfeito do subjuntivo (tuviera, fuera, pudiera…)', (t, k) => {
+    const c = C(k);
+    if (/ (pudieramos|tuvieramos|fueramos|hablaramos|hicieramos) /.test(c)) return 'Com nosotros, acento: <b>pudiéramos</b>, <b>tuviéramos</b>, <b>fuéramos</b>.';
+    if (/ (tenería|tenera|podiera|hacera|sabiera|decera) /.test(c)) return 'Use o ellos do indefinido: <b>tuviera</b>, <b>pudiera</b>, <b>hiciera</b>, <b>supiera</b>, <b>dijera</b>.';
+    if (/ si (tendría|sería|podría|haría|estaría|sabría) /.test(c)) return 'Depois de <b>si</b>, o imperfeito do subjuntivo: si <b>tuviera</b>, si <b>fuera</b>.';
+    return need(has(k, /\p{L}+(ra|ras|ramos|ran|se|ses|semos|sen)$/u) && / (si|ojalá|que|como si) /.test(c), 'Use o imperfeito do subjuntivo: Si <b>tuviera</b> …, Si <b>fuera</b> …');
+  }),
+  si_irreal: R('uma hipótese (si + imperfeito do subjuntivo, condicional)', (t, k) => {
+    const c = C(k);
+    if (/ si (tendría|sería|podría|haría|estaría|habría|ganaría|viviría|hablaría) /.test(c)) return 'Depois de <b>si</b>, nunca o condicional: si <b>tuviera</b>, si <b>fuera</b>, si <b>ganara</b>.';
+    if (/ si (tenga|sea|pueda|gane|viva|hable) /.test(c)) return 'Na hipótese, o imperfeito do subjuntivo: si <b>tuviera</b>, si <b>fuera</b>, si <b>ganara</b>.';
+    return need(has(k, /\p{L}+(ría|rías|ríamos|rían)$/u) || / si /.test(c), 'Faça a hipótese: <b>Si ganara</b> la lotería, <b>dejaría</b> de trabajar.');
+  }),
+  ojala_imperf: R('um desejo improvável (ojalá + imperfeito do subjuntivo) ou como si', (t, k) => {
+    const c = C(k);
+    if (/ como si (es|sea|está|esté|tiene|tenga|conoce|conozca|pasa|pase|hay|haya) /.test(c)) return 'Depois de <b>como si</b>, sempre o imperfeito do subjuntivo: como si <b>fuera</b>, <b>estuviera</b>, <b>tuviera</b>.';
+    if (/ quem dera /.test(c)) return 'Em espanhol: <b>ojalá</b> + imperfeito do subjuntivo, ou <b>¡quién pudiera!</b>';
+    return need(/ (ojalá|como si|quién pudiera) /.test(c), 'Use: <b>Ojalá fuera</b> verdad. / Habla <b>como si fuera</b> el jefe.');
+  }),
+  me_gustaria_que: R('um desejo ou pedido com a concordância dos tempos (me gustaría que vinieras, me pidió que…)', (t, k) => {
+    const c = C(k);
+    if (/ (me gustaría|preferiría|sería mejor|quisiera|quería|me pidió|le dije|le pedí|me dijo) que (\p{L}+ )?(vengas|fumes|llames|esperes|expliques|tengas|vengan|hables|acompañes|digas) /u.test(c)) return 'Com condicional ou passado, o imperfeito do subjuntivo: que <b>vinieras</b>, <b>fumaras</b>, <b>llamara</b>.';
+    if (/ (me gustaría|preferiría) que (\p{L}+(rías|ría|ríamos|rían)) /u.test(c)) return 'Depois de que, o imperfeito do subjuntivo (e não o condicional): que <b>vinieras</b>.';
+    return need(/ (me gustaría que|preferiría que|sería mejor que|quisiera que|quería que|me pidió que|le dije que|le pedí que|me dijo que|me gustaría|preferiría|quisiera) /.test(c), 'Use: <b>Me gustaría que</b> vinieras. / <b>Me pidió que</b> lo llamara.');
+  }),
+  dilemas: R('uma resposta a um dilema (condicional, en ese caso, si + imperfeito do subjuntivo…)', (t, k) => {
+    const c = C(k);
+    if (/ si (no )?(lo |la |me |te )?(devolvería|haría|diría|mentiría|quedaría) /.test(c)) return 'Depois de <b>si</b>, o imperfeito do subjuntivo: si no lo <b>devolviera</b>, si <b>mintiera</b>.';
+    if (/ aunque nadie me (ve|vea|verá) .*\p{L}+ría /u.test(c)) return 'Na hipótese, <b>aunque</b> + imperfeito do subjuntivo: aunque nadie me <b>viera</b>.';
+    return need(has(k, /\p{L}+(ría|rías|ríamos|rían)$/u) || / (en ese caso|dependería|imagina|en tu lugar|en mi lugar|si|aunque) /.test(c), 'Responda: <b>Yo, en ese caso, devolvería</b> … / <b>Dependería de</b> …');
+  }),
+  mundo_ideal: R('uma frase de texto hipotético (si yo fuera, lo primero que haría, si hubiera, ojalá…)', (t, k) => {
+    const c = C(k);
+    if (/ si (yo )?(sería|sea|soy) /.test(c)) return 'Depois de <b>si</b>, o imperfeito do subjuntivo: si yo <b>fuera</b>.';
+    if (/ si (habría|haya) /.test(c)) return 'Depois de <b>si</b>: si <b>hubiera</b> (houvesse).';
+    if (/ la gente (usarían|tendrían|caminarían|serían) /.test(c)) return '<b>la gente</b> é singular: la gente <b>usaría</b>.';
+    return need(has(k, /\p{L}+(ría|rían|ríamos)$/u) || / (si|ojalá|así|de esta manera|en conclusión|lo primero) /.test(c), 'Escreva: <b>Si yo fuera</b> … / <b>Lo primero que haría</b> … / <b>Si hubiera</b> …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
