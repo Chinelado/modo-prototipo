@@ -640,7 +640,7 @@ const RULES = {
     const c = k.join(' ');
     if (/\bif i (am|was|would be) you\b/.test(c)) return 'O padrão é <b>If I were you</b>.';
     if (/\bif i were you,? (i will|i'll)\b/.test(c)) return "Com If I were you, use <b>I'd</b>: If I were you, I'd …";
-    return need(/\b(if i were you|you should|you could|why don't you|i understand|must be|i'd|i would)\b/.test(c), "Aconselhe: <b>If I were you, I'd</b> … / <b>You could</b> …");
+    return need(/\b(if i were you|you should|you could|why don't you|i understand|must be|i'd|i would|would|deserve)\b/.test(c), "Aconselhe: <b>If I were you, I'd</b> … / <b>You could</b> …");
   }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
