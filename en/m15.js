@@ -44,6 +44,7 @@ BR É como no português: "eu **estava andando** quando um carro **parou**". O i
 | And then … | No way! |
 | In the end … | What happened next? |
 ~ You won't believe what happened to me last night! = Você não vai acreditar no que me aconteceu ontem à noite!
+~ No way! What happened next? = Não acredito! E o que aconteceu depois?
 > Treine agora: conte em voz alta, em quatro frases, algo que aconteceu ontem: cenário primeiro, depois os fatos.
 ? Qual passado monta o cenário? || o passado contínuo: It was raining…
 ? E qual conta os fatos? || o passado simples
@@ -184,6 +185,7 @@ BR Em inglês, quem ouve reage o tempo todo: **No way!**, **Really?**, **Oh my G
 Na fala, muitos americanos contam casos **no presente**, para dar vida:
 ~ So I'm standing there, and this guy comes up to me. = Aí eu estou lá parada, e esse cara vem até mim.
 ! É informal e só na fala. Na escrita, use os tempos do passado.
+~ So this guy comes up to me. = Aí esse cara vem até mim.
 # Passo 5: embarrassed, o falso amigo
 | Em inglês | Em português |
 | embarrassed | envergonhada |
@@ -233,6 +235,7 @@ Quando entram a hora, o lugar e a sequência, o tempo muda para o passado simple
 | a spokesperson said … | um porta-voz disse … |
 ~ According to witnesses, the fire started in the kitchen. = Segundo testemunhas, o incêndio começou na cozinha.
 BR Nas notícias americanas, a fonte aparece sempre: **according to**. Notícia sem fonte deve ser lida com cuidado.
+~ According to the police, nobody was hurt. = Segundo a polícia, ninguém se feriu.
 > Treine agora: conte uma notícia que você viu esta semana, começando com o present perfect.
 ? Qual tempo verbal abre uma notícia? || o present perfect: A fire has destroyed…
 ? E qual conta os detalhes com hora? || o passado simples

@@ -80,6 +80,7 @@ BR Em português, "quando eu **chegar**" usa o futuro do subjuntivo. Em inglês,
 # Passo 4: by the time
 ~ By the time you arrive, dinner will be ready. = Quando você chegar, o jantar vai estar pronto.
 @ V:if e when, a mesma regra;if + presente|If it rains, we'll stay home.;when + presente|When it stops, we'll go out.
+~ By the time you arrive, I'll be ready. = Quando você chegar, já vou estar pronta.
 > Treine agora: diga três coisas que você vai fazer quando terminar de estudar hoje.
 ? Está certo "When I will arrive, I'll call you"? || Não: When I arrive, I'll call you.
 ? Como se diz "assim que eu terminar, te mando"? || As soon as I finish, I'll send it.
@@ -159,6 +160,7 @@ Hoje você fala das suas metas: aprender, viajar, mudar de emprego. Os verbos de
 # Passo 2: by × until
 @ V:by ou until?;by: prazo, no máximo|Finish it by Friday.|by the end of the year;until: duração, até lá|I'll wait until Friday.|until the end of the year
 BR Os dois são "até" em português. **by** = no máximo até (um prazo); **until** = durante todo o tempo até (uma duração).
+~ Finish it by Friday. = Termine até sexta.
 # Passo 3: metas que funcionam
 | Meta vaga | Meta clara |
 | Read more. | Read twenty books by December. |
@@ -215,6 +217,7 @@ BR É o nosso "**vou estar** + -ndo": vou estar voando = **I'll be flying**.
 ! **Will you be …ing?** pergunta dos planos da pessoa sem parecer que você quer algo. Muito usado com colegas e desconhecidos.
 # Passo 4: o futuro da sua vida
 ~ In ten years, I'll be living by the sea. = Daqui a dez anos, vou estar morando à beira-mar.
+~ In ten years, I'll be living abroad. = Daqui a dez anos, vou estar morando no exterior.
 > Treine agora: diga o que você vai estar fazendo amanhã às dez e daqui a um ano.
 ? Como se diz "vou estar trabalhando"? || I'll be working.
 ? Como se diz "a esta hora amanhã"? || this time tomorrow

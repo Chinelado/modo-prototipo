@@ -117,6 +117,7 @@ Hoje você desembaraça três expressões que parecem iguais e confundem até qu
 | be used to | -ing ou coisa | I'm used to **waking** up early. |
 | get used to | -ing ou coisa | I got used to **the food**. |
 BR "I'm used to **work**" está errado: depois de be used to, o **to** é preposição e pede **-ing**: I'm used to **working**.
+~ I'm used to working at night. = Estou acostumada a trabalhar à noite.
 # Passo 3: estar ou ficar acostumado
 @ V:Estado ou processo?;be used to (já está)|I'm used to the cold.|She's used to it.;get used to (está ficando)|I'm getting used to the cold.|You'll get used to it.
 ~ You'll get used to it. = Você vai se acostumar.
@@ -292,6 +293,7 @@ Esta lição é de **ler e escrever** e fecha o módulo das mudanças. Você vai
 ~ It hasn't been easy, but I don't regret it. = Não tem sido fácil, mas não me arrependo.
 ~ Looking back, it was the best decision of my life. = Olhando para trás, foi a melhor decisão da minha vida.
 BR Um post de blog fala com o leitor. Uma pergunta no fim (**Have you ever made a big change?**) convida os comentários.
+~ Looking back, it was worth it. = Olhando para trás, valeu a pena.
 > Agora leia o post da Carol e escreva o seu.
 ? Qual tempo para "há dois anos larguei o emprego"? || passado simples: Two years ago, I quit my job.
 ? Como se diz "estou me acostumando"? || I'm getting used to it.

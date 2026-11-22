@@ -60,6 +60,7 @@ Nos Estados Unidos, o mais comum é dizer a hora e os minutos, como no relógio 
 | eigh**TEEN** (18) | **EIGH**ty (80) |
 ~ fifteen, fifty = quinze, cinquenta
 ~ sixteen, sixty = dezesseis, sessenta
+~ It's six fifteen. = São seis e quinze.
 > Treine agora: olhe a hora agora e diga em voz alta, das duas formas.
 ? Como se diz 8:45 do jeito fácil? || eight forty-five
 ? E do jeito clássico? || quarter to nine
@@ -152,6 +153,7 @@ O -s de he, she e it vai para o **does**, e o verbo volta à forma básica.
 | She works. | Does she work? | She doesn't work. |
 | He has a car. | Does he have a car? | He doesn't have a car. |
 ! "Does she **works**?" e "He doesn't **has**" estão errados. O -s só aparece uma vez: no does.
+~ Does she live here? = Ela mora aqui?
 # Passo 3: negar com don't e doesn't
 ~ I don't drink beer. = Eu não bebo cerveja.
 ~ He doesn't like coffee. = Ele não gosta de café.
@@ -346,6 +348,7 @@ BR Em português às vezes dizemos "vou ver" para não recusar de cara. Nos Esta
 | O que levar | Please bring drinks! |
 | Resposta | RSVP by Wednesday |
 ! **RSVP** vem do francês e quer dizer "responda, por favor". Num convite americano, é educado responder até a data pedida.
+~ Would you like to come to my party? = Você gostaria de vir à minha festa?
 > Agora leia o convite da Lisa e escreva a sua resposta.
 ? Como se convida com educação? || Would you like to …?
 ? Como se aceita com entusiasmo? || Yes, I'd love to!

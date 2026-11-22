@@ -24,6 +24,7 @@ BR É o nosso "**é feito**", "**são vendidos**". Em inglês, **is / are** + o 
 # Passo 2: ativa ou passiva?
 @ V:Quem faz ou o que é feito?;Ativa: foco em quem faz|Farmers grow coffee in Brazil.;Passiva: foco no que é feito|Coffee is grown in Brazil.
 ! Use a passiva quando **quem faz** não importa, é óbvio ou ninguém sabe: The streets **are cleaned** every night.
+~ Coffee is grown in Brazil. = O café é cultivado no Brasil.
 # Passo 3: os particípios
 | Verbo | Particípio |
 | make | made |

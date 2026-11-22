@@ -86,6 +86,7 @@ BR Em português, "eu também" serve para tudo. Em inglês, o auxiliar muda com 
 | Neither do I. | Me neither. |
 ~ Me too! = Eu também!
 ! **Me too** e **Me neither** são certos e muito comuns na conversa. So do I e Neither do I soam mais cuidadosos.
+~ I love pizza. Me too! = Eu amo pizza. Eu também!
 # Passo 4: discordar com educação
 | Mais direto | Mais educado |
 | I disagree. | I see your point, but … |
@@ -186,6 +187,7 @@ BR Em português, "embora" pede subjuntivo ("embora **seja**"). Em inglês, não
 | useful | útil |
 | addictive | viciante |
 | harmful | prejudicial |
+~ It's expensive. However, it's very good. = É caro. Porém, é muito bom.
 > Treine agora: diga uma vantagem e uma desvantagem do celular, ligadas por although ou however.
 ? although ou however: "___ it's cheap, it's good"? || Although
 ? Onde vai o however? || abrindo uma frase nova, com vírgula: However, …

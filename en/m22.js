@@ -40,6 +40,7 @@ BR **Despite** vem com um substantivo ou -ing: despite **the cost**, despite **b
 # Passo 4: na fala e na escrita
 @ V:Escrita ou fala?;Escrita, mais formal|Firstly, Moreover, Therefore, In conclusion;Fala, mais leve|First, Also, So, All in all
 ! Na conversa, **Moreover** e **Therefore** soam formais. Use **also** e **so**. Na prova escrita, prefira os formais.
+~ So, all in all, it's great. = Então, no geral, é ótimo.
 > Treine agora: dê a sua opinião sobre trabalhar de casa em quatro frases, com firstly, in addition, however e therefore.
 ? Como se diz "além disso" (formal)? || in addition / moreover
 ? Como se diz "portanto"? || therefore
@@ -81,6 +82,7 @@ Hoje você aprende os **phrasal verbs** mais usados no dia a dia. Eles parecem d
 # Passo 2: sentido próprio
 @ V:O sentido não se soma;Literal|give + up = "dar para cima"?;Real|give up = desistir
 BR Não tente traduzir palavra por palavra: **give up** não tem nada de "dar" nem de "para cima". Aprenda o bloco inteiro, com um exemplo.
+~ Don't give up now! = Não desista agora!
 # Passo 3: separáveis
 | Junto | Separado | Com pronome |
 | put off the meeting | put the meeting off | put it off |
@@ -133,6 +135,7 @@ Hoje você aprende a discutir um tema com **prós e contras**, mostrando o grau 
 | Exactly! | Exatamente! |
 ~ I see what you mean, but that's not always true. = Entendo o que você quer dizer, mas nem sempre é verdade.
 BR Reconhecer o argumento do outro antes de discordar (**That's a fair point, but…**) soa maduro e educado, em conversas e provas.
+~ That's a fair point. = É um ponto justo.
 # Passo 4: pesar e concluir
 ~ On balance, the benefits outweigh the drawbacks. = Pesando tudo, os benefícios superam as desvantagens.
 ~ It depends on the person. = Depende da pessoa.
@@ -180,6 +183,7 @@ BR No e-mail, você fala com **uma** pessoa. No artigo, com **todos** os leitore
 | e-mail | uma pessoa | conversa, resposta a perguntas |
 | artigo | os leitores | opinião, animado, com título |
 | história | os leitores | narrativa, no passado |
+~ Let me tell you why I love it. = Deixa eu te contar por que eu adoro.
 > Treine agora: crie um título e uma primeira frase com pergunta para um artigo sobre o seu hobby.
 ? Como começar um artigo? || com uma pergunta ao leitor ou "Imagine…"
 ? O artigo tem título? || Sim, curto e chamativo.
