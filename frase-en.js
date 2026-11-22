@@ -380,6 +380,41 @@ const RULES = {
     if (/\binterested (on|for|about)\b/.test(c)) return 'Interessado em: interested <b>in</b>.';
     return need(has(k, /^(apply|applying|position|experience|interested|résumé|resume|fluent|skills|available|attached|interview)$/), 'Use uma frase de candidatura: I am writing to <b>apply for</b> … / I have … of <b>experience in</b> …');
   }),
+  // ---------- Módulo 11 ----------
+  consulta: R('uma frase para <b>marcar, remarcar ou cancelar</b> uma consulta (I\'d like to make an appointment …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(mark|do|take) an appointment\b/.test(c)) return 'Marcar consulta é <b>make</b> an appointment.';
+    if (/\bdoes (it|that|monday|tuesday|wednesday|thursday|friday|\p{L}+) works\b/u.test(c)) return 'Depois de does, o verbo fica no básico: Does it <b>work</b> for you?';
+    return need(has(k, /^(appointment|reschedule|cancel|work|works|available|earliest|insurance|patient)$/), "Use uma frase da consulta: I'd like to <b>make an appointment</b> … / I need to <b>reschedule</b> …");
+  }),
+  farmacia: R('uma frase de <b>farmácia</b>: pedir um remédio (Do you have anything for …?) ou a dose (twice a day)', (t, k) => {
+    const c = k.join(' ');
+    if (/\btwo times a day\b/.test(c)) return 'Duas vezes é <b>twice</b>: twice a day.';
+    if (/\ballergic (of|with|from)\b/.test(c)) return 'Alérgico a: allergic <b>to</b>.';
+    if (/\banything (to|against) (a )?(cold|cough|headache|fever|pain)\b/.test(c)) return 'Remédio para algo: anything <b>for</b> a cold.';
+    return need(has(k, /^(pill|pills|tablet|tablets|dose|twice|once|times|meals|prescription|counter|allergic|syrup|drops|medicine|anything|every)$/), 'Fale do remédio: Do you have anything <b>for</b> a cold? / Take one pill <b>twice a day</b>.');
+  }),
+  conselho: R("um <b>conselho</b> com should, ought to ou o imperativo (You should … / Don't …)", (t, k) => {
+    const c = k.join(' ');
+    if (/\bshould to\b/.test(c)) return 'should vem sem to: You should <b>sleep</b> more.';
+    if (/\bought (sleep|eat|drink|go|see|rest|walk|exercise|try|stop|avoid)\b/.test(c)) return 'ought sempre leva to: You ought <b>to</b> rest.';
+    if (/\bmore healthy\b/.test(c)) return 'healthy termina em -y: <b>healthier</b>.';
+    return need(has(k, /^(should|shouldn't|ought|don't|try|drink|eat|sleep|avoid|stop|healthier|better)$/), 'Dê um conselho: You <b>should</b> … / <b>Don\'t</b> … / <b>Try to</b> …');
+  }),
+  emergencia: R('uma frase de <b>emergência</b>: o que aconteceu (no passado), onde você está ou o que precisa', (t, k) => {
+    const c = k.join(' ');
+    if (/\bwhat did happen\b|\bwhat did it happen\b/.test(c)) return 'O what é o sujeito: <b>What happened?</b>, sem did.';
+    if (has(k, /^(falled|hitted|breaked|bleeded)$/)) return 'Esse verbo é irregular: fell, hit, broke, bled.';
+    return need(has(k, /^(help|ambulance|police|fire|emergency|accident|happened|fell|hit|bleeding|breathing|hurt|stolen|crashed|broke|need)$/) || /\d+ \p{L}+ (street|avenue|road)/iu.test(t), 'Diga o que aconteceu, onde está ou do que precisa: I need an <b>ambulance</b>! / My friend <b>fell</b>.');
+  }),
+  ed_ing: R('um sentimento (-ed) ou como algo é (-ing): I\'m bored. / The movie was boring.', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(i'm|i am|i was|we're|we are|we were) (so |very |really )?(boring|tiring|interesting|exciting|confusing|annoying|embarrassing|surprising|relaxing)\b/.test(c) && !/\b(i'm|i am) (so |very |really )?(interesting)\b/.test('')) return 'Para como você se sente, use <b>-ed</b>: I\'m <b>bored</b>. (I\'m boring = eu sou chata!)';
+    if (/\b(movie|class|book|trip|day|meeting|news|show|game|traffic|job|film) (is|was|are|were) (so |very |really )?(bored|tired|interested|excited|confused|annoyed|surprised|relaxed)\b/.test(c)) return 'Para como a coisa é, use <b>-ing</b>: The movie was <b>boring</b>.';
+    if (/\binterested (on|about|for)\b/.test(c)) return 'Interessado em: interested <b>in</b>.';
+    return need(k.some((w) => /^\p{L}{3,}(ed|ing)$/u.test(w) && /^(bor|tir|interest|excit|worr|relax|surpris|confus|embarrass|annoy|stress)/.test(w)), 'Use um adjetivo de sentimento: I\'m <b>bored</b>. / It was <b>boring</b>.');
+  }),
+  doente: R('um aviso de que está doente, com <b>because</b> ou <b>so</b> (I can\'t come in because …)', (t, k) => need(has(k, /^(because|so|sick|flu|fever|note|home|can't|calling|cold|dizzy)$/), "Avise com o motivo: I can't come in today <b>because</b> I'm sick. / I have a fever, <b>so</b> …")),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
