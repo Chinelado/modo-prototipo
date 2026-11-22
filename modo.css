@@ -369,3 +369,13 @@ html[data-fs="g"] body { font-size: 18px; }
 .lang-opt { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; text-align: left; font-size: 1rem; background: var(--bg2); }
 .lang-opt:hover { border-color: var(--p600); }
 .lang-x { justify-self: end; }
+
+/* imagens das cartas de memorização (data/cartas.js): no lugar do emoji, com o mesmo canto arredondado do ladrilho */
+.cardpic { display: block; width: 128px; height: 128px; margin: 6px auto 0; border-radius: 22px; object-fit: cover; }
+.cardpic + .word { margin-top: 12px; }
+@media (max-width: 640px) { .cardpic { width: 112px; height: 112px; border-radius: 20px; } }
+
+/* aviso de versão nova (app.js · updReady): aparece só quando a atualização chega no meio de uma lição */
+.upd-bar { position: fixed; top: 12px; left: 50%; transform: translateX(-50%); z-index: 20; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center;
+  width: max-content; max-width: calc(100% - 24px); padding: 10px 12px 10px 16px; border-radius: 16px; background: var(--bg2); border: 1px solid var(--line); box-shadow: 0 8px 28px rgba(38, 7, 71, .18); font-weight: 600; animation: pop .25s; }
+.upd-bar button { padding: 8px 14px; margin: 0; width: auto; }

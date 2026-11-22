@@ -487,3 +487,11 @@ Me avise quando as folhas estiverem em `images/cartas/`. Eu faço o resto:
 - ligo a imagem à carta: no lugar do emoji, na frente da carta (português → alemão) e no verso.
 
 Palavras sem imagem continuam como hoje, com o emoji.
+
+## Feito (22/11/2026)
+
+- As 16 folhas foram recortadas em 144 imagens WebP de 256 × 256 (cerca de 6 KB cada) em `images/cartas/webp/`, e cada uma foi conferida contra a palavra.
+- `data/cartas.js` liga cada imagem à palavra nos três idiomas (alemão, inglês e espanhol). A imagem só aparece quando a palavra **e** o sentido em português batem, para evitar trocas como "chair" (conduzir uma reunião) ou "tiempo" (horas).
+- Na carta, a imagem entra no lugar do emoji: na frente quando a pergunta é em português, e no verso quando a pergunta é na língua estudada (assim a imagem não entrega a resposta).
+- Uso hoje: alemão 167 palavras (as 144 imagens), inglês 136, espanhol 113.
+- As folhas originais (`folha-01.png` … `folha-16.png`) ficam só no computador (`.gitignore`).

@@ -1,8 +1,9 @@
 /* Deutsch-Trilha · service worker: guarda o app no aparelho para funcionar sem internet.
-   Estratégia do app: responde com o que está guardado e atualiza em segundo plano (a versão nova vale na próxima abertura).
+   Estratégia do app: responde com o que está guardado e atualiza em segundo plano. Quando este arquivo muda (CACHE), o app avisa ou recarrega sozinho (app.js · updReady).
+   Por isso: a cada publicação, mude CACHE.
    Áudios (audio/xx/*.mp3): ficam num cache separado, que não é apagado quando o app atualiza. Entram ali quando você
    toca um áudio pela primeira vez ou quando baixa um nível inteiro no Perfil. */
-const CACHE = 'deutsch-trilha-v14'; // v14: A2 do espanhol · v13: A1 do espanhol · v12: página do espanhol · v11: troca de idioma no Perfil e verificação em todos os passos · v10: inglês A1 a C2 completo · v9: C1 do inglês completo · v8: B2 do inglês completo · v7: B1 do inglês completo · v6: A2 do inglês · v5: A1 do inglês · v4: Comece aqui do inglês · v3 (21/11/2026): página do inglês (piloto); v2: logo e ícones novos do MODO
+const CACHE = 'deutsch-trilha-v15'; // v15: atualização automática, imagens nas cartas e B1 do espanhol (M15–21) · v14: A2 do espanhol · v13: A1 do espanhol · v12: página do espanhol · v11: troca de idioma no Perfil e verificação em todos os passos · v10: inglês A1 a C2 completo · v9: C1 do inglês completo · v8: B2 do inglês completo · v7: B1 do inglês completo · v6: A2 do inglês · v5: A1 do inglês · v4: Comece aqui do inglês · v3 (21/11/2026): página do inglês (piloto); v2: logo e ícones novos do MODO
 const AUDIO = 'deutsch-trilha-audio';
 const BASE = ['./', './index.html', './ingles.html', './espanhol.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png'];
 
@@ -13,7 +14,8 @@ self.addEventListener('install', (e) => {
     let html = '';
     for (const p of ['./index.html', './ingles.html', './espanhol.html']) html += await (await fetch(p, { cache: 'no-cache' })).text();
     const local = [...html.matchAll(/(?:src|href)="([^"#:?]+)(?:\?[^"]*)?"/g)].map((m) => './' + m[1].replace(/^\.\//, ''));
-    await c.addAll([...new Set([...BASE, ...local])]);
+    // cache: 'reload' passa por cima do cache do navegador (o GitHub Pages guarda cópias por 10 minutos): a versão nova vem inteira
+    await c.addAll([...new Set([...BASE, ...local])].map((u) => new Request(u, { cache: 'reload' })));
     await self.skipWaiting();
   })());
 });
