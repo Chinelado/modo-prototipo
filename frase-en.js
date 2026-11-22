@@ -1245,6 +1245,22 @@ const RULES = {
     if (/\bthe most (effective|important|useful) of the two\b/.test(c)) return 'Comparando dois, use <b>the more</b>: the more effective.';
     return need(/\b(of the two|the more|more \w+ than|while|although|on balance|crucially|what matters most|in the long term|lasting|immediate|deterrent|on the other hand|however|target|outweigh|i believe)\b/.test(c), 'Avalie e escolha: <b>Of the two</b>, I believe … is <b>the more</b> effective. / <b>On balance</b>, …');
   }),
+  // ---------- Módulo 39 ----------
+  atenuacao: R('uma frase com understatement (not exactly …, a bit of a …, not ideal, not bad at all…)', (t, k) => need(/(\bnot|n't) exactly\b|\b(a bit of a|not bad|not ideal|overjoyed|could have gone better|a little|slightly|rather|quite|seen better|could be worse|cup of tea|not the best|took a while|interesting idea|bear it in mind)\b/.test(k.join(' ')), 'Atenue: It was<b>n\'t exactly</b> cheap. / It was <b>a bit of a</b> disaster. / <b>Not bad at all!</b>')),
+  ironia: R('uma frase irônica (Oh, great … / Lovely weather! / That went well / Yeah, right)', (t, k) => need(/\b(oh,? (great|wonderful|brilliant|lovely|perfect)|just what i needed|that went well|yeah,? right|as if|thanks a lot|nice one|what a surprise|brilliant|lovely|wonderful|sarcastic\w*|queen of england)\b/.test(k.join(' ')), 'Use a ironia: <b>Oh, great. Just what I needed.</b> / <b>Yeah, right.</b>')),
+  ordem_estilo: R('uma frase com ordem expressiva (Strange as it may seem / Much as I … / Try as I might / Gone are the days / So … was …)', (t, k) => {
+    const c = k.join(' ');
+    if (/^so (tired|great|loud|happy|bad) (she|he|it|i|they|we) (was|were)\b/.test(c)) return 'Depois de So + adjetivo, inverta: So tired <b>was she</b> that …';
+    if (/^gone (is|are) the days that\b/.test(c)) return 'Use <b>when</b>: Gone are the days <b>when</b> …';
+    return need(/^(\w+ as (it|i|she|he|they|we) (may|might|was|were|am|is|are|like|love|admire|tried)|much as|try as|gone are the days|here comes|there goes|so \w+ (was|were|is|did)|such (was|were|is))\b/.test(c), 'Use a ordem como estilo: <b>Strange as it may seem</b>, … / <b>Gone are the days when</b> …');
+  }),
+  elipse: R('uma resposta com substituição ou elipse (I hope so / I\'m afraid not / If so / Sounds good)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bi (hope|think|suppose|guess) no\b|\bi'm afraid no\b/.test(c)) return 'A negativa é <b>not</b>: I hope <b>not</b> / I\'m afraid <b>not</b>.';
+    return need(/\b(hope|think|suppose|guess|expect|afraid) (so|not)\b|\bif (so|not)\b|\bdon't think so\b|^(sounds|want|got|never heard|can't complain|could be worse|told you|looks like|see you)\b/.test(c), 'Economize palavras: <b>I hope so</b> / <b>I\'m afraid not</b> / <b>If so</b>, … / <b>Sounds good.</b>');
+  }),
+  figurado: R('uma metáfora ou hipérbole (drowning in work, a heart of gold, a million times, I\'m starving…)', (t, k) => need(/\b(drowning|a sea of|heart of gold|rollercoaster|roller coaster|breath of fresh air|flood of|backbone|million times|starving|dying to|weighs a ton|took forever|literally|crystal clear|collapsed|war zone|waste\w* time|spend\w* time|build\w* an argument|time is money)\b/.test(k.join(' ')), 'Use linguagem figurada: I\'m <b>drowning in work</b> / I\'ve told you <b>a million times</b> …')),
+  cronica: R('uma frase de crônica de humor (What could possibly go wrong? / It was not, perhaps, my finest hour / Big mistake.)', (t, k) => need(/\b(go wrong|finest hour|turned out|gone are the days|needless to say|in my defence|in my defense|to be fair|let us say|big mistake|huge|so much for|next (time|year)|at least|what a brilliant|like millions|how hard could it be|war zone)\b/.test(k.join(' ')) || /^\p{L}+( \p{L}+){0,2}[.!]$/u.test(t.trim()), 'Escreva com humor: <b>What could possibly go wrong?</b> / <b>It was not, perhaps, my finest hour.</b>')),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
