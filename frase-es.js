@@ -1242,6 +1242,42 @@ const RULES = {
     if (/ el objetivo de este (estudio|trabajo) es de /.test(c)) return 'Sem "de": El objetivo … <b>es analizar</b>.';
     return need(/ (el objetivo|tiene como objetivo|para ello|se realizó|se realizaron|se entrevistó|se analizaron|los resultados|los datos|muestran|sugieren|indican|se concluye|permiten|palabras clave|tiende) /.test(c), 'Escreva como num resumo: <b>El objetivo</b> … / <b>Para ello, se realizó</b> … / <b>Se concluye que</b> …');
   }),
+  // ---------- Módulo 35 ----------
+  registro_c1: R('uma frase num registro claro (plata / dinero / recursos, arrancar / iniciar, residir, abonar…)', (t, k) => {
+    const c = C(k);
+    if (/ (solicito|le agradecería|estimado) /.test(c) && / (plata|chamba|laburo|curro|arrancar) /.test(c)) return 'Registros misturados: no formal, <b>recursos</b>, <b>empleo</b>, <b>iniciar</b>.';
+    if (/ dispono /.test(c)) return 'Disponer se conjuga como poner: <b>dispongo</b>.';
+    return need(/ (plata|dinero|recursos|chamba|laburo|curro|camello|trabajo|empleo|arrancar|empezar|iniciar|manifestó|manifestar|resido|residir|adquirir|abonar|abonarse|percibe|percibir|dispongo|disponer|sale|solicito|importe) /.test(c), 'Escolha o registro: <b>plata</b> / <b>dinero</b> / <b>recursos</b> … / <b>iniciar</b> el proyecto.');
+  }),
+  verbos_precisos: R('uma frase com verbo preciso (elaborar, llevar a cabo, plantear, contar con, establecer…)', (t, k) => {
+    const c = C(k);
+    if (/ (hice|hicimos|hacer) un (informe|estudio) /.test(c)) return 'Mais preciso: <b>elaborar</b> un informe / <b>realizar</b> un estudio.';
+    if (/ plantó una (solución|idea|pregunta) /.test(c)) return 'Propor é <b>plantear</b>: planteó una solución.';
+    return need(/ (elaborar|elaboramos|elaboró|realizar|realizó|llevar a cabo|llevamos a cabo|llevé a cabo|celebrar|celebrará|plantear|planteó|expresar|expresó|contar con|cuenta con|cuento con|poseer|posee|disponemos|disponer|establecer|estableció|fijar|efectuar|efectuó|afirmar|señalar|comunicar) /.test(c), 'Use um verbo preciso: <b>elaborar</b> un informe / <b>contar con</b> experiencia / <b>plantear</b> una idea.');
+  }),
+  refranes: R('um refrão (más vale tarde que nunca, no hay mal que por bien no venga…)', (t, k) => {
+    const c = C(k);
+    if (/ no hay mal que por bien no viene /.test(c)) return 'No refrão, subjuntivo: no hay mal que por bien no <b>venga</b>.';
+    if (/ antes tarde (do|de) que nunca /.test(c)) return 'Em espanhol: <b>Más vale tarde que nunca</b>.';
+    return need(/ (más vale|no hay mal|caballo regalado|boca cerrada|dime con quién|madruga|no arriesga|refrán|dicho) /.test(c), 'Use um refrão: <b>Más vale tarde que nunca</b>. / <b>No hay mal que por bien no venga</b>.');
+  }),
+  colocavanz: R('uma colocação culta (asumir una responsabilidad, desempeñar un papel, contraer una deuda…)', (t, k) => {
+    const c = C(k);
+    if (/ (no puedo|no consigo) dormir el sueño /.test(c)) return 'Use <b>conciliar el sueño</b>.';
+    return need(/ (asumir|asumió|asume|desempeñar|desempeña|desempeñan|contraer|contrajo|saldar|entablar|entablamos|cumplir|cumplir el plazo|cumpliríamos|conciliar|formular|plantear una duda|acarrear|acarreó|conllevar|surtir|surtió|ocupar un puesto) /.test(c), 'Use uma colocação: <b>asumir</b> una responsabilidad / <b>desempeñar</b> un papel / <b>contraer</b> una deuda.');
+  }),
+  falsos_amigos: R('uma frase com um falso amigo bem usado (presunto, polvo, cola, taller, sitio, largo…)', (t, k) => {
+    const c = C(k);
+    if (/ (comí|pedí|como|quiero) (un |el |)?(polvo|presunto) /.test(c)) return 'Cuidado: o polvo de comer é <b>pulpo</b>; o presunto de comer é <b>jamón</b>.';
+    if (/ (hice|hicimos|hacer) fila /.test(c)) return 'Fila é <b>cola</b>: hacer cola.';
+    return need(/ (pretendo|pretender|presunto|raro|polvo|pulpo|jamón|borracho|borracha|goma|late|latir|ladra|largo|larga|ancho|cola|taller|sitio|estrecha) /.test(c), 'Use um falso amigo bem: Hicimos <b>cola</b> … / Llevé el carro al <b>taller</b>. / El <b>presunto</b> culpable …');
+  }),
+  reescribir: R('uma frase de e-mail formal (le escribo para, quisiera solicitarle, adjunto, quedo a su disposición…)', (t, k) => {
+    const c = C(k);
+    if (/ (me gustaría de|quería de) /.test(c)) return 'Sem "de": <b>quisiera solicitarle</b> / me gustaría solicitarle.';
+    if (/ (oye|qué lío|pídele) /.test(c)) return 'Isso é do chat. No e-mail formal: <b>Le escribo para</b> … / <b>Quisiera</b> …';
+    return need(/ (le escribo|me dirijo|comunicarle|quisiera|le agradecería|adjunto|quedo a su disposición|atentamente|cordial saludo|lamento|lamentablemente|inconveniente|prórroga|presupuesto|estimado) /.test(c), 'Escreva formal: <b>Le escribo para</b> … / <b>Quisiera solicitarle</b> … / <b>Quedo a su disposición</b>.');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
