@@ -908,6 +908,41 @@ const RULES = {
     if (/ me arrepiento (no|haber) /.test(c)) return 'arrepentirse pede <b>de</b>.';
     return need(/ (querida|querido|hace años|te acuerdas|arrepiento|hubiera|habría|habríamos|debería|ojalá|perdón|perdóname|echo de menos|extraño|seríamos|ahora) /.test(c), 'Escreva: <b>Me arrepiento de</b> … / <b>Si te hubiera</b> … / <b>Ojalá</b> …');
   }),
+  // ---------- Módulo 25 ----------
+  futuro_prob: R('uma suposição com o futuro (estará, serán, tendrá…)', (t, k) => {
+    const c = C(k);
+    if (/ (debe|deben) (estar|ser|tener) /.test(c) && !/ debe de /.test(c)) return 'Funciona, mas o espanhol prefere o futuro para supor: <b>estará</b>, <b>será</b>, <b>tendrá</b>.';
+    return need(has(k, /\p{L}+r(á|án|ás|é|emos)$/u), 'Suponha com o futuro: <b>Estará</b> en el tráfico. / <b>Serán</b> las ocho.');
+  }),
+  futuro_comp_prob: R('uma suposição sobre o que já aconteceu (habrá + particípio)', (t, k) => {
+    const c = C(k);
+    if (/ (debe|deben) (tener|haber) \p{L}*(ado|ido) /u.test(c)) return 'Para "deve ter + particípio", use <b>habrá</b> + particípio: <b>habrá</b> salido.';
+    if (/ (habría|habrían) \p{L}*(ado|ido) /u.test(c) && !/ (cuando|anoche|ayer) /.test(c)) return 'Para supor sobre o que acabou de acontecer, o futuro composto: <b>habrá</b> salido.';
+    return need(/ (habrá|habrán|habrás|habré|habremos) /.test(c), 'Use <b>habrá</b> + particípio: No contesta; <b>habrá salido</b>.');
+  }),
+  cond_prob: R('uma suposição sobre o passado (serían, tendría, estaría, habría…)', (t, k) => {
+    const c = C(k);
+    if (/ cuando (llegué|llegó|vi|vio|salí) (\p{L}+ )?(serán|tendrá|estará) /u.test(c)) return 'Para um momento passado, o condicional: <b>serían</b>, <b>tendría</b>, <b>estaría</b>.';
+    return need(has(k, /\p{L}+ría(n|s|mos)?$/u), 'Suponha com o condicional: <b>Serían</b> las tres. / <b>Tendría</b> unos veinte años.');
+  }),
+  deber_de: R('deber de (probabilidade), deber (obrigação) ou tener que (dedução)', (t, k) => {
+    const c = C(k);
+    if (/ (debes|debe|deben|debemos) de (estudiar|descansar|trabajar|llegar|hacer|pagar|comer|dormir|ir) (más|temprano|ya|hoy|antes) /.test(c)) return 'Para obrigação, <b>deber</b> sem de: <b>debes estudiar</b>. O <b>deber de</b> é para probabilidade.';
+    return need(/ (debe|deben|debes|debo|debemos|tiene que|tienen que|seguro que|sin duda) /.test(c), 'Use: <b>Debe de</b> estar cansada. / <b>Debes</b> estudiar. / <b>Tiene que</b> estar en casa.');
+  }),
+  certeza: R('um grau de certeza com o modo certo (a lo mejor + indicativo, puede que + subjuntivo…)', (t, k) => {
+    const c = C(k);
+    if (/ a lo mejor (no )?(\p{L}+ )?(sea|esté|tenga|llueva|venga|haya|pueda|vaya|cancelen|suban|vuelva) /u.test(c)) return 'Com <b>a lo mejor</b>, o indicativo: a lo mejor <b>es</b>, <b>llueve</b>, <b>viene</b>.';
+    if (/ (puede que|es posible que|es probable que|capaz que) (no )?(\p{L}+ )?(es|está|tiene|llueve|viene|hay|puede|va|suben|vuelve|cancelan) /u.test(c)) return 'Com <b>puede que</b> / <b>es posible que</b>, o subjuntivo: <b>llueva</b>, <b>venga</b>, <b>haya</b>.';
+    if (/ seguro que (\p{L}+ )?(tenga|sea|esté|llueva|venga) /u.test(c)) return 'Com <b>seguro que</b>, o indicativo: seguro que <b>tiene</b> razón.';
+    return need(/ (a lo mejor|puede que|es posible que|es probable que|quizás|tal vez|seguro que|seguramente|probablemente|capaz que|igual) /.test(c), 'Mostre o grau de certeza: <b>A lo mejor</b> llueve. / <b>Puede que</b> llueva.');
+  }),
+  misterio: R('uma frase de hipótese (tiene que haber sido, habrá dejado, serían, a lo mejor…)', (t, k) => {
+    const c = C(k);
+    if (/ a lo mejor (\p{L}+ )?(sea|esté|tenga|vuelva|venga|haya) /u.test(c)) return 'Com <b>a lo mejor</b>, o indicativo.';
+    if (/ puede que (\p{L}+ )?(es|está|tiene|ha|vuelve|viene) /u.test(c)) return 'Com <b>puede que</b>, o subjuntivo.';
+    return need(has(k, /\p{L}+(ría|rían|rá|rán)$/u) || / (tiene que|seguro que|habrá|habrán|debe de|a lo mejor|puede que|quizás|lo más probable|estaba|había|nadie) /.test(c), 'Faça hipóteses: <b>Tiene que haber sido</b> … / <b>Habrá dejado</b> … / <b>A lo mejor</b> …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
