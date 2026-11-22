@@ -409,7 +409,7 @@ const RULES = {
   }),
   ed_ing: R('um sentimento (-ed) ou como algo é (-ing): I\'m bored. / The movie was boring.', (t, k) => {
     const c = k.join(' ');
-    if (/\b(i'm|i am|i was|we're|we are|we were) (so |very |really )?(boring|tiring|interesting|exciting|confusing|annoying|embarrassing|surprising|relaxing)\b/.test(c) && !/\b(i'm|i am) (so |very |really )?(interesting)\b/.test('')) return 'Para como você se sente, use <b>-ed</b>: I\'m <b>bored</b>. (I\'m boring = eu sou chata!)';
+    if (/\b(i'm|i am|i was|we're|we are|we were) (so |very |really )?(boring|tiring|interesting|exciting|confusing|annoying|embarrassing|surprising|relaxing)\b/.test(c)) return 'Para como você se sente, use <b>-ed</b>: I\'m <b>bored</b>. (I\'m boring = eu sou chata!)';
     if (/\b(movie|class|book|trip|day|meeting|news|show|game|traffic|job|film) (is|was|are|were) (so |very |really )?(bored|tired|interested|excited|confused|annoyed|surprised|relaxed)\b/.test(c)) return 'Para como a coisa é, use <b>-ing</b>: The movie was <b>boring</b>.';
     if (/\binterested (on|about|for)\b/.test(c)) return 'Interessado em: interested <b>in</b>.';
     return need(k.some((w) => /^\p{L}{3,}(ed|ing)$/u.test(w) && /^(bor|tir|interest|excit|worr|relax|surpris|confus|embarrass|annoy|stress)/.test(w)), 'Use um adjetivo de sentimento: I\'m <b>bored</b>. / It was <b>boring</b>.');
@@ -518,6 +518,250 @@ const RULES = {
     if (/\b(i'm|i am) agree\b/.test(k.join(' '))) return 'agree é verbo: <b>I agree</b>.';
     if (/\balthough\b.*\bbut\b/i.test(norm(t))) return 'Com although, não use but.';
     return need(has(k, /^(think|opinion|because|so|although|however|example|conclusion|agree|disagree|sum|that's|why)$/), 'Dê a sua opinião: I <b>think</b> … <b>because</b> … / <b>Although</b> … / In <b>conclusion</b>, …');
+  }),
+  // ---------- Módulo 15 ----------
+  narrativa: R('uma cena de história: o cenário no <b>passado contínuo</b> e o fato no <b>passado simples</b> (I was walking when …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(was|were) (stop|see|open|turn|run|shout|notice|realize|call|walk|go|work|drive|wait|read|cook|eat|sleep|sit|rain|snow|talk|play|watch|study)\b/.test(c)) return 'Depois de was / were, o verbo vai com -ing: I was <b>walking</b>.';
+    if (/\bwhen (a|the|he|she|they|someone|my) \p{L}+ was \p{L}+ing\b/u.test(c) && /\bwas \p{L}+ing .*when\b/u.test(c)) return 'A ação curta, depois de when, vai no passado simples: … when a car <b>stopped</b>.';
+    return need(/\b(was|were) \p{L}+ing\b/u.test(c) || k.some((w) => /\p{L}{3,}ed$/u.test(w)) || has(k, /^(saw|went|ran|came|took|got|found|said|told|heard|felt|left)$/), 'Conte uma cena: I <b>was walking</b> home when a car <b>stopped</b>.');
+  }),
+  past_perfect: R('o passado antes do passado, com <b>had + particípio</b> (When I arrived, the train had already left.)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bhad (already |never |just )?(went|ate|saw|did|took|wrote|forgot|came|began|gave|spoke|broke)\b/.test(c)) return 'Depois de had, use o <b>particípio</b>: had <b>gone</b>, had <b>eaten</b>, had <b>forgotten</b>.';
+    return need(/\b(had|'d)\s+(already |never |just )?\p{L}+/u.test(c) && has(k, /^(had|i'd|she'd|he'd|we'd|they'd|you'd)$/), 'Use o past perfect: … the train <b>had already left</b>.');
+  }),
+  conectores_narrativa: R('uma frase de história com um conector: <b>at first, suddenly, meanwhile, as soon as, eventually, in the end</b>', (t, k) => need(/\b(at first|suddenly|meanwhile|as soon as|eventually|in the end|finally|luckily|unfortunately|then|later|the next)\b/i.test(norm(t)), 'Use um conector: <b>Suddenly</b>, … / <b>Eventually</b>, … / <b>In the end</b>, …')),
+  caso: R("uma frase para <b>contar um caso</b> ou <b>reagir</b> (Did I tell you about …? / No way! / You're kidding!)", (t, k) => {
+    const c = k.join(' ');
+    if (/\b(say|said) (me|you|him|her|us|them)\b/.test(c)) return 'Com a pessoa logo depois, use <b>tell</b>: tell <b>me</b>, told <b>you</b>.';
+    return need(/\b(did i tell you|guess what|no way|you're kidding|you won't believe|what happened|long story short|anyway|to make it worse|hilarious|embarrassing|poor you|that's awful|oh my god)\b/.test(c), "Conte ou reaja: <b>Did I tell you about</b> …? / <b>No way!</b> / <b>You're kidding!</b>");
+  }),
+  noticia: R('uma frase de <b>notícia</b>: a novidade (has + particípio), um detalhe (passado) ou a fonte (according to)', (t, k) => need(has(k, /^(has|have|according|reported|witnesses|police|firefighters|were|was|had|evacuated|rescued|news)$/) || k.some((w) => /\p{L}{3,}ed$/u.test(w)), 'Escreva uma notícia: A fire <b>has destroyed</b> … / <b>According to</b> the police, …')),
+  historia: R('uma frase de <b>história curta</b>, com os tempos do passado e conectores', (t, k) => need(/\b(was|were) \p{L}+ing\b/u.test(k.join(' ')) || /\bhad \p{L}+/u.test(k.join(' ')) || has(k, /^(suddenly|eventually|finally|end|felt|saw|found|decided|realized)$/) || k.some((w) => /\p{L}{3,}ed$/u.test(w)), 'Escreva no passado: I <b>was walking</b> … <b>Suddenly</b>, I <b>saw</b> …')),
+  // ---------- Módulo 16 ----------
+  perfect_continuous: R("algo que começou e continua, com <b>have / has been + -ing</b> (I've been learning English for two years.)", (t, k) => {
+    const c = k.join(' ');
+    if (/\b(i|you|we|they|he|she) (am|is|are|'m|'s|'re) \p{L}+ing\b.*\b(for (\d+|two|three|four|five|six|a|an|many|ten) (years|months|weeks|days|hours|year|month|week|hour)|since)\b/u.test(c) || /\b(i'm|you're|we're|they're|he's|she's) \p{L}+ing\b.*\b(for (\d+|two|three|four|five|six|a|an|many|ten) (years|months|weeks|days|hours|year|month|week|hour)|since)\b/u.test(c)) return "Para algo que começou e continua, use <b>have been + -ing</b>: I've been learning English for two years.";
+    if (/\b(been) (knowing|having|liking|loving|being)\b/.test(c)) return "Verbos de estado ficam no simples: I've <b>known</b> her for years.";
+    return need(/\b(have|has|'ve|'s|i've|you've|we've|they've|she's|he's|it's) ((i|you|we|they|he|she|it) )?been \p{L}+ing\b/u.test(c), "Use have been + -ing: I'<b>ve been learning</b> … for …");
+  }),
+  mudanca: R('uma <b>mudança</b>: present perfect (Prices have gone up.) ou antes e agora (I used to …, but now …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(has|have) (went|become|grew|came|ran)\b/.test(c) && !/\b(has|have) become\b/.test(c)) return 'Depois de has / have, use o particípio: has <b>gone</b>, has <b>grown</b>.';
+    if (/\bnot \p{L}+ anymore\b/u.test(c) === false && /\banymore\b/.test(c) && !/\b(don't|doesn't|didn't|isn't|aren't|wasn't|not|never|no)\b/.test(c)) return 'anymore vai na frase negativa: I <b>don\'t</b> live there anymore.';
+    return need(has(k, /^(changed|grown|become|improved|gone|has|have|used|now|nowadays|anymore|longer)$/), 'Fale de uma mudança: The city <b>has changed</b> … / I <b>used to</b> …, but <b>now</b> …');
+  }),
+  usedto2: R('<b>used to</b> (costumava), <b>be used to</b> (estar acostumado) ou <b>get used to</b> (se acostumar)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(am|is|are|'m|'s|'re|i'm|you're|she's|he's|we're|they're|getting|get|got|was|were) used to (live|work|eat|drive|speak|wake|cook|wear|be|have|go|study|sleep|tip)\b/.test(c)) return 'Depois de be / get used to, o verbo vai com -ing: I\'m used to <b>working</b>.';
+    if (/\bused to (living|working|eating|driving|speaking|waking)\b/.test(c) && !/\b(am|is|are|'m|'s|'re|i'm|you're|she's|he's|we're|they're|getting|get|got|was|were) used to\b/.test(c)) return 'Para "costumava", o verbo vem no básico: I used to <b>live</b>. Para "acostumado", use I\'m used to living.';
+    return need(/\bused to\b/.test(c), 'Use used to, be used to ou get used to.');
+  }),
+  still_yet: R('uma frase de adaptação com <b>still, already, yet ou anymore</b>', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(haven't|hasn't|didn't|don't) \p{L}+ .*\bstill\s*[.!]?$/u.test(c)) return 'Para "ainda não", use <b>yet</b> no fim: I haven\'t found a job <b>yet</b>.';
+    if (/\byet\b/.test(c) && !/\b(haven't|hasn't|have|has|didn't|did|not|don't|isn't|aren't)\b/.test(c)) return 'yet vai na pergunta ou na negativa: I haven\'t … <b>yet</b>. / Have you … <b>yet</b>?';
+    return need(has(k, /^(still|already|yet|anymore|longer)$/), 'Use still, already, yet ou anymore: I <b>still</b> miss … / I\'ve <b>already</b> …');
+  }),
+  perfect_simples_continuo: R("o <b>present perfect</b> simples (resultado: I've saved $2,000) ou contínuo (atividade: I've been saving for a year)", (t, k) => {
+    const c = k.join(' ');
+    if (/\bbeen \p{L}+ing (\d+|two|three|four|five|six|seven|eight|nine|ten|many|several) \p{L}+s\b/u.test(c)) return 'Com um número de coisas (resultado), use o simples: I\'ve <b>read</b> three books.';
+    return need(/\b(have|has|'ve|i've|you've|we've|they've|she's|he's) (been |already |just |never )?\p{L}+/u.test(c) && has(k, /^(have|has|i've|you've|we've|they've|she's|he's|haven't|hasn't)$/), "Use o present perfect: I'<b>ve saved</b> … / I'<b>ve been saving</b> …");
+  }),
+  texto_mudanca: R('uma frase do seu <b>texto sobre uma mudança</b>: used to, passado com data, have been + -ing ou get used to', (t, k) => need(/\b(used to|been \p{L}+ing|getting used|got used|ago|looking back|regret|hasn't been|i've|have)\b/u.test(k.join(' ')) || k.some((w) => /\p{L}{3,}ed$/u.test(w)), "Conte a mudança: I <b>used to</b> … / Two years <b>ago</b>, I … / I'<b>ve been</b> …ing …")),
+  // ---------- Módulo 17 ----------
+  might: R('uma possibilidade com <b>might / may</b> ou um grau de certeza (I\'ll probably … / I definitely won\'t …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(might|may) to\b/.test(c)) return 'might e may vêm sem to: I might <b>go</b>.';
+    if (/\b(mights|mays)\b/.test(c)) return 'might não muda: she <b>might</b>.';
+    if (/\bwon't probably\b/.test(c)) return 'Com won\'t, probably vem antes: I <b>probably won\'t</b> go.';
+    return need(has(k, /^(might|may|probably|definitely|maybe|perhaps)$/), 'Fale de uma possibilidade: I <b>might</b> … / I\'ll <b>probably</b> …');
+  }),
+  tempo_futuro: R("uma frase com <b>when, as soon as, before, after ou until</b> + presente (When I get there, I'll call you.)", (t, k) => {
+    const c = k.join(' ');
+    if (/\b(when|as soon as|before|after|until|once) (i|you|we|they|he|she|it)( will|'ll)\b/.test(c)) return 'Depois de when / as soon as, o futuro vai no presente: When I <b>get</b> there, …';
+    return need(/\b(when|as soon as|before|after|until|once|by the time)\b/.test(c), "Use when, as soon as, before, after ou until: <b>When</b> I get there, I'll call you.");
+  }),
+  previsao: R("uma <b>previsão</b> sobre o futuro (will / won't / likely / I doubt …)", (t, k) => {
+    const c = k.join(' ');
+    if (/\bi think (that )?\p{L}+ (won't|will not)\b/u.test(c)) return "Na opinião negativa, o not vai no think: <b>I don't think</b> … will …";
+    if (/\b(is|are) likely (go|be|happen|change|rise|disappear)\b/.test(c)) return 'be likely pede to: is likely <b>to</b> go up.';
+    return need(has(k, /^(will|won't|likely|unlikely|doubt|future|probably|definitely|predict)$/) || /\b(\p{L}+'ll)\b/u.test(c), 'Faça uma previsão: Cars <b>will</b> … / Prices are <b>likely to</b> … / I <b>doubt</b> …');
+  }),
+  metas: R('uma <b>meta</b> com to + verbo (My goal is to … / I\'m planning to …) e, se quiser, um prazo com by', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(goal is|planning|plan|hope|intend|would like|'d like|want) (reach|finish|travel|learn|save|run|read|change|get|work|go|buy|start)\b/.test(c)) return 'Esse verbo pede to: I\'m planning <b>to</b> travel.';
+    return need(/\b(goal is|goal|plan|planning|hope|intend|would like|'d like|want) to\b/.test(c) || /\bby (the end|next|december|june|\d)/.test(c), 'Diga uma meta: My <b>goal is to</b> … / I\'m <b>planning to</b> … by …');
+  }),
+  future_continuous: R('o que você <b>vai estar fazendo</b>: will be + -ing (This time next year, I\'ll be living …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(will|'ll) be (live|work|fly|study|sleep|drive|travel|sit|wait|use|lie)\b/.test(c)) return 'Depois de will be, o verbo vai com -ing: I\'ll be <b>living</b>.';
+    if (/\b(will|'ll) (living|working|flying|studying|sleeping|driving|traveling)\b/.test(c)) return 'Falta o be: I\'ll <b>be</b> working.';
+    return need(/\b(will|'ll|won't) ((i|you|we|they|he|she|it) )?be \p{L}+ing\b/u.test(c), "Use will be + -ing: I'<b>ll be living</b> …");
+  }),
+  carta_futuro: R('uma frase da <b>carta para o futuro</b> (When you read this, … / I hope you\'ll be … / You might …)', (t, k) => {
+    if (/\bwhen you will (read|open)\b/i.test(norm(t))) return 'Depois de when, o futuro vai no presente: When you <b>read</b> this…';
+    return need(/\b(will|'ll|going to|might|may|hope|when you|don't forget|remember|be kind|take care)\b/i.test(norm(t)), "Escreva para o futuro: When you read this, … / I hope you'<b>ll be</b> … / You <b>might</b> …");
+  }),
+  // ---------- Módulo 18 ----------
+  condicional2: R("uma situação imaginada: <b>if + passado, would + verbo</b> (If I had more money, I'd travel.)", (t, k) => {
+    const c = k.join(' ');
+    if (/\bif (i|you|we|they|he|she|it) would\b/.test(c)) return 'Depois de if, use o passado, e não would: If I <b>had</b> …';
+    if (/\bif i (am|was|would be) you\b/.test(c)) return 'O padrão é <b>If I were you</b>.';
+    if (/\bif (i|you|we|they|he|she) (had|were|won|lived|could|knew)\b/.test(c) && /\b(will|'ll)\b/.test(c) && !/\bwould|'d\b/.test(c)) return 'Com if + passado, o resultado é <b>would</b>: If I had …, I<b>\'d</b> …';
+    return need(/\bif\b/.test(c) && /\b(would|'d|could|might|wouldn't)\b/.test(c), "Imagine: <b>If</b> I had …, I<b>'d</b> …");
+  }),
+  hipotetica: R("uma pergunta ou resposta imaginada (What would you do if …? / I'd … / I'd never …)", (t, k) => {
+    const c = k.join(' ');
+    if (/\bwhat will you do if (you|i) (found|won|saw|had|were|lost)\b/.test(c)) return 'Com if + passado, a pergunta usa <b>would</b>: What would you do if…?';
+    if (/\b(would|'d) (to )?(took|went|told|kept|lied|stole)\b/.test(c)) return 'Depois de would, o verbo vem no básico: I\'d <b>take</b> …';
+    return need(/\b(would|'d|wouldn't|what if|tough one)\b/.test(c), "Use would: What <b>would</b> you do if…? / I<b>'d</b> …");
+  }),
+  wish: R('um desejo sobre o presente: <b>wish + passado</b> (I wish I had …, I wish I could …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bwish (i|you|we|they|he|she|it) (have|has|am|is|are|can|will|know|live|speak)\b/.test(c)) return 'Depois de wish, o verbo vai para o passado: I wish I <b>had</b> / <b>were</b> / <b>could</b> …';
+    return need(/\b(wish|if only)\b/.test(c), 'Use wish: I <b>wish</b> I had … / I <b>wish</b> I could …');
+  }),
+  unless: R('uma condição com <b>unless, as long as, provided that, in case</b> ou <b>even if</b>', (t, k) => {
+    const c = k.join(' ');
+    if (/\bunless (i|you|we|they|he|she|it) (don't|doesn't|do not|does not)\b/.test(c)) return 'unless já é negativo (if not): unless you <b>hurry</b>, sem don\'t.';
+    if (/\b(unless|as long as|in case|provided that|even if) (i|you|we|they|he|she|it) (will|'ll)\b/.test(c)) return 'Depois dessas palavras, o futuro vai no presente: in case it <b>rains</b>.';
+    return need(/\b(unless|as long as|provided that|providing that|in case|even if)\b/.test(c), 'Use unless, as long as, in case ou even if.');
+  }),
+  condicional12: R('uma condição possível (if + presente, will) ou imaginada (if + passado, would)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bif (i|you|we|they|he|she|it) (win|get|pass|have|am|is|are|go|study)\b/.test(c) && /\b(would|'d)\b/.test(c)) return 'Não misture: com if + presente, use <b>will</b> (If I win, I\'ll …).';
+    if (/\bif (i|you|we|they|he|she|it) (won|got|passed|had|were|went|could)\b/.test(c) && /\b(will|'ll)\b/.test(c) && !/\b(would|'d)\b/.test(c)) return 'Não misture: com if + passado, use <b>would</b> (If I won, I\'d …).';
+    if (/\bif (i|you|we|they|he|she|it) (will|would)\b/.test(c)) return 'Depois de if, nunca will ou would.';
+    return need(/\bif\b/.test(c) && /\b(will|won't|would|wouldn't|'ll|'d)\b/.test(c), "Use uma condicional: If I …, I'll … / If I …ed, I'd …");
+  }),
+  conselho_coluna: R("um <b>conselho</b> com empatia (I understand … / If I were you, I'd … / You could …)", (t, k) => {
+    const c = k.join(' ');
+    if (/\bif i (am|was|would be) you\b/.test(c)) return 'O padrão é <b>If I were you</b>.';
+    if (/\bif i were you,? (i will|i'll)\b/.test(c)) return "Com If I were you, use <b>I'd</b>: If I were you, I'd …";
+    return need(/\b(if i were you|you should|you could|why don't you|i understand|must be|i'd|i would|would|deserve)\b/.test(c), "Aconselhe: <b>If I were you, I'd</b> … / <b>You could</b> …");
+  }),
+  // ---------- Módulo 19 ----------
+  obrigacao2: R('uma obrigação no passado ou no futuro (I had to … / You\'ll have to …) ou com be supposed to', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(musted|must to|will must|had must)\b/.test(c)) return 'must não tem passado nem futuro: use <b>had to</b> / <b>will have to</b>.';
+    if (/\b(am|is|are|'m|'s|'re|i'm|we're|you're|she's|he's|they're) suppose to\b/.test(c)) return 'A expressão é <b>supposed</b> to, com -d.';
+    return need(/\b(had to|have to|has to|will have to|'ll have to|supposed to|need to|allowed to|didn't have to|don't need to)\b/.test(c), 'Fale de uma obrigação: I <b>had to</b> … / You\'<b>ll have to</b> … / We\'re <b>supposed to</b> …');
+  }),
+  entrevista: R('uma resposta de <b>entrevista</b>: experiência (I\'ve worked …), um ponto forte ou um fato com data', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(i've|i have) (worked|led|managed)\b.*\bin (19|20)\d\d\b/.test(c)) return 'Com data, use o passado simples: In 2020, I <b>led</b> …';
+    if (/\bi work (in|as|for) \p{L}+.*\bfor (\d+|two|three|four|five|six|ten) years\b/u.test(c)) return "Para há quanto tempo, use o present perfect: I'<b>ve worked</b> … for five years.";
+    return need(has(k, /^(experience|worked|i've|strengths|strength|weakness|weaknesses|skills|led|managed|organized|team|achievement|learned)$/), "Responda como numa entrevista: I'<b>ve worked</b> in … / One of my <b>strengths</b> is …");
+  }),
+  had_better: R("um conselho forte com <b>had better</b> (You'd better … / You'd better not …)", (t, k) => {
+    const c = k.join(' ');
+    if (/\b(don't|doesn't|didn't) had better\b|\bhad not better\b|\bhad better don't\b/.test(c)) return "A negativa é <b>had better not</b>: You'd better not …";
+    if (/\b(had|'d) better to\b/.test(c)) return "had better vem sem to: You'd better <b>hurry</b>.";
+    return need(/\b(had better|'d better|you'd better|i'd better|we'd better)\b/.test(c), "Dê um aviso: You'<b>d better</b> … / You'<b>d better not</b> …");
+  }),
+  estudo: R('uma frase sobre <b>estudos</b> com as expressões (sign up for, take a course, catch up on, drop out of …)', (t, k) => {
+    if (/\b(make|made|making|makes) (a|an|the) (\p{L}+ )?course\b/u.test(k.join(' '))) return 'Fazer um curso é <b>take</b> a course.';
+    return need(/\b(sign(ed)? up|enroll|take a course|taking|took a course|apply|applied|drop(ped)? out|catch(ing)? up|fall(ing)? behind|fell behind|tuition|scholarship|degree|course|class|assignment)\b/.test(k.join(' ')), 'Fale dos seus estudos: I <b>signed up for</b> … / I need to <b>catch up on</b> …');
+  }),
+  reuniao: R("uma fala de <b>reunião</b> (Sorry to interrupt, but … / What if we …? / I see your point, but …)", (t, k) => need(/\b(sorry to interrupt|can i add|what if we|how about|we could|why don't we|i see your point|in my view|good point|let's move on|wrap up|i agree|i disagree)\b/.test(k.join(' ')), "Fale como numa reunião: <b>Sorry to interrupt, but</b> … / <b>What if we</b> …?")),
+  email_formal: R('uma frase de <b>e-mail formal</b> com pergunta indireta (Could you tell me when the course starts?)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(tell me|know|wonder) (when|where|how much|how many|what time|what) (does|do|did|is|are) \p{L}+/u.test(c)) return 'Na pergunta indireta, a ordem é de afirmação: tell me when the course <b>starts</b>.';
+    if (/\b(i'm|i'd|don't|can't|won't|isn't)\b/.test(c)) return 'No e-mail formal, sem contrações: <b>I am</b>, <b>I would</b>.';
+    return need(/\b(inquire|enquire|could you (please )?tell me|i would like to know|i would be grateful|look forward|dear|regards|further information)\b/.test(c), 'Escreva formalmente: I am writing to <b>inquire about</b> … / <b>Could you please tell me</b> …?');
+  }),
+  // ---------- Módulo 20 ----------
+  passiva_presente: R('a <b>passiva no presente</b>: is / are + particípio (Coffee is grown in Brazil.)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(is|are) (make|grow|sell|speak|build|use|produce|export|design)\b/.test(c)) return 'Na passiva, use o particípio: is <b>made</b>, are <b>grown</b>, is <b>spoken</b>.';
+    if (/\b(\p{L}+s|they|these|those) is (made|grown|sold|used|produced|built)\b/u.test(c) && !/\b(this|it|that|news)\b/.test(c)) return 'Com plural, use <b>are</b>: These shoes <b>are</b> made …';
+    return need(/\b(is|are|isn't|aren't) (\p{L}+ed|made|grown|sold|spoken|built|known|written|worn|eaten|done|taken|kept)\b/u.test(c), 'Use a passiva: … <b>is made</b> in … / … <b>are grown</b> …');
+  }),
+  processo: R('uma etapa de <b>processo</b>: conector + passiva (First, the beans are picked.)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(is|are) (pick|dry|roast|grind|mix|heat|cool|pack|ship|cut|wash)\b(?! up| out)/.test(c)) return 'Use o particípio: are <b>picked</b>, are <b>dried</b>, is <b>ground</b>.';
+    return need(/\b(is|are) (\p{L}+(ed|en|wn)|ground|cut|made|sold|built)\b/u.test(c) || /\bmade (from|of)\b/.test(c), 'Descreva uma etapa: <b>First</b>, the beans <b>are picked</b>.');
+  }),
+  passiva_tempos: R('a passiva em outro tempo (has been / will be / is being / was + particípio)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(has|have) been (repair|open|close|cancel|announce|build|finish)\b/.test(c) || /\bwill be (repair|open|close|cancel|announce|build|finish)\b/.test(c) || /\bis being (repair|open|close|build|paint|renovate)\b/.test(c)) return 'Use o particípio: has been <b>repaired</b>, will be <b>opened</b>, is being <b>built</b>.';
+    if (/\bis been\b|\bwill been\b|\bhas being\b/.test(c)) return 'Confira o to be: <b>has been</b>, <b>will be</b>, <b>is being</b>.';
+    return need(/\b(has been|have been|will be|is being|are being|was|were|won't be|hasn't been) (\p{L}+ed|built|done|made|sold|taken|written|given|shown|chosen|found|paid|cut|held)\b/u.test(c), 'Use a passiva num tempo: The bridge <b>has been repaired</b>. / It <b>will be opened</b> …');
+  }),
+  have_done: R('um serviço com <b>have / get + coisa + particípio</b> (I had my hair cut.)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(had|have|has|get|got|getting|having) (my|your|his|her|our|their|the) (\p{L}+ )?(fix|paint|clean|wash|check|test|repair|translate|deliver|install|shorten)\b/u.test(c)) return 'A coisa é seguida do particípio: my car <b>fixed</b>, my house <b>painted</b>.';
+    return need(/\b(had|have|has|get|got|getting|having|get) (my|your|his|her|our|their|the|this|it) (\p{L}+ )?(\p{L}+ed|cut|done|made|taken)\b/u.test(c), 'Diga um serviço: I <b>had my hair cut</b>. / I\'m <b>getting my car fixed</b>.');
+  }),
+  passiva_by: R('uma obra ou invenção com a passiva e <b>by</b> (… was invented by …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bwas (invent|paint|write|wrote|direct|compose|discover|found|build)\b/.test(c)) return 'Use o particípio: was <b>invented</b>, was <b>written</b>, was <b>painted</b>.';
+    if (/\b(invented|painted|written|directed|composed|discovered|founded|built) (from|of) \p{Lu}/u.test(norm(t))) return 'Quem fez vem com <b>by</b>: invented <b>by</b> Edison.';
+    return need(/\b(was|were) ((it|they|this|that|he|she) )?(\p{L}+ed|written|built|drawn|sung|made|taken|shown)\b/u.test(c), 'Use a passiva: The light bulb <b>was invented by</b> Edison.');
+  }),
+  texto_processo: R('uma frase do texto sobre um <b>processo</b> (introdução, etapa com a passiva ou conclusão)', (t, k) => need(/\b(is|are) \p{L}+(ed|en|wn|t)\b/u.test(k.join(' ')) || /\b(have you ever wondered|this way|that's how|first|then|after that|finally|next)\b/.test(k.join(' ')), 'Escreva uma etapa: <b>First</b>, the bottles <b>are collected</b>.')),
+  // ---------- Módulo 21 ----------
+  indireto: R('o que alguém disse, em <b>discurso indireto</b> (She said she was tired.)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bsaid (me|you|him|her|us|them)\b/.test(c)) return 'Com a pessoa logo depois, use <b>told</b>: She <b>told me</b> she was tired.';
+    if (/\bsaid (that )?(i|you|he|she|we|they|it) (will|can|am|is|are)\b/.test(c)) return 'No discurso indireto, o tempo volta um passo: will → <b>would</b>, can → <b>could</b>, am / is → <b>was</b>.';
+    return need(/\b(said|told|mentioned|explained)\b/.test(c), 'Conte o que alguém disse: She <b>said</b> she was …');
+  }),
+  indireto_pedido: R('um pedido ou ordem contado: <b>told / asked + pessoa + (not) to + verbo</b>', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(told|asked|reminded|warned) (me|you|him|her|us|them) (don't|do not)\b/.test(c)) return 'Na negativa, use <b>not to</b>: She told me <b>not to</b> run.';
+    if (/\b(told|asked|reminded|warned) (me|you|him|her|us|them) to not\b/.test(c)) return 'A ordem é <b>not to</b>: told me <b>not to</b> …';
+    if (/\b(told|asked) (me|you|him|her|us|them) (wait|call|come|bring|stay|sit|help|be|go|send)\b/.test(c)) return 'Falta o to: told me <b>to</b> wait.';
+    if (/\b(told|asked) (i|he|she|we|they) to\b/.test(c)) return 'Depois de told / asked, use me, him, her, us, them: told <b>me</b> to …';
+    return need(/\b(told|asked|reminded|warned|advised|invited|ordered) (me|you|him|her|us|them|\p{L}+) (not )?to \p{L}+/u.test(c), 'Conte um pedido: He <b>told me to</b> wait. / She <b>asked me not to</b> …');
+  }),
+  indireto_pergunta: R('uma pergunta contada (She asked where I lived. / He asked if I was married.)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(asked|wanted to know|wondered) (me )?(where|when|why|what|how|who|what time|how long) (do|does|did|are|is|was|were|can|will) (i|you|he|she|we|they|it)\b/.test(c)) return 'Na pergunta contada, a ordem é de afirmação e sem do: She asked where <b>I lived</b>.';
+    if (/\?\s*$/.test(t.trim()) && /\b(asked|wanted to know)\b/.test(c)) return 'A pergunta contada termina com ponto, e não com ?';
+    return need(/\b(asked|wanted to know|wondered)\b.*\b(if|whether|where|when|why|what|how|who)\b/.test(c), 'Conte uma pergunta: She <b>asked where</b> I lived. / He <b>asked if</b> I was …');
+  }),
+  verbos_relato: R('um relato com <b>promise, offer, refuse, suggest, admit, explain</b> …', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(suggested|suggest|admitted|admit|denied|deny) to \p{L}+/u.test(c)) return 'suggest, admit e deny pedem -ing: She suggested <b>taking</b> …';
+    if (/\b(promised|offered|refused|agreed) (\p{L}+ing)\b/u.test(c)) return 'promise, offer, refuse e agree pedem to: He promised <b>to call</b>.';
+    if (/\bapologized (to |)(be|being)? ?(late|for be)\b/.test(c) && !/\bfor being\b/.test(c)) return 'Pedir desculpas por: apologized <b>for being</b> late.';
+    return need(has(k, /^(promised|offered|refused|agreed|suggested|explained|admitted|denied|complained|apologized|insisted|recommended|confirmed)$/), 'Use um verbo de relato: He <b>promised</b> to … / She <b>suggested</b> …ing.');
+  }),
+  say_tell: R('<b>say</b> ou <b>tell</b> do jeito certo (She told me … / He said that …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(said|say|says) (me|you|him|her|us|them)\b/.test(c)) return 'Com a pessoa logo depois, use <b>tell</b>: She <b>told me</b> …';
+    if (/\b(told|tell|tells) that\b/.test(c)) return 'tell precisa da pessoa: She told <b>me</b> that … (ou She said that …).';
+    return need(has(k, /^(said|told|say|tell|says|tells|apparently|heard)$/), 'Conte uma novidade: She <b>told me</b> … / He <b>said</b> …');
+  }),
+  recado: R('uma frase de <b>recado</b> em discurso indireto (She said … / She asked you to … / She asked if …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bsaid (that )?(the meeting |it |she |he )?will\b/.test(c)) return 'No recado, will vira <b>would</b>: She said it <b>would</b> be …';
+    if (/\basked (you|him|her) (bring|call|send|confirm)\b/.test(c)) return 'Falta o to: asked you <b>to</b> bring …';
+    return need(/\b(called|said|asked|wanted to know|mentioned|left a message|call (her|him) back)\b/.test(c), 'Repasse o recado: Rachel <b>called</b>. She <b>said</b> … / She <b>asked you to</b> …');
+  }),
+  // ---------- Módulo 22 ----------
+  conectores_argumento: R('um argumento com conector (<b>Firstly, In addition, However, Therefore, In conclusion</b>)', (t, k) => {
+    if (/\bdespite (it|they|he|she|we|i|you|the \p{L}+ (is|are|was|were))\b/iu.test(norm(t))) return 'despite vem com substantivo ou -ing: despite <b>the cost</b>. Com frase, use although.';
+    return need(/\b(firstly|first of all|secondly|in addition|moreover|furthermore|however|on the other hand|therefore|as a result|in conclusion|to sum up|all in all|despite|finally)\b/i.test(norm(t)), 'Use um conector: <b>Firstly</b>, … / <b>In addition</b>, … / <b>Therefore</b>, …');
+  }),
+  phrasal: R('uma frase com um <b>phrasal verb</b> (give up, find out, look after, put off, run out of …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(turn|put|give|pick|find|set) (down|off|up|out) (it|them)\b/.test(c)) return 'Com pronome, a partícula vai para o fim: turn <b>it down</b>.';
+    if (/\blooking forward to (see|meet|hear|work|visit)\b/.test(c)) return 'Depois de look forward to, use -ing: looking forward to <b>seeing</b>.';
+    return need(/\b(give|gave|giving) up\b|\b(find|found|finding) out\b|\blook(ed|ing|s)? after\b|\blook(ing)? forward to\b|\b(put|putting) off\b|\bturn(ed|ing)? down\b|\bcame? up with\b|\b(run|ran|running) out of\b|\b(get|got|gets|getting) (on |along )?(well )?(on )?with\b|\bset(ting)? up\b|\b(took|take) up\b|\bcarry on\b|\bfigure(d)? out\b|\bbroke down\b|\bshow(ed)? up\b|\bwork(ed)? out\b|\bcall(ed)? off\b/.test(c), 'Use um phrasal verb: I <b>gave up</b> … / We <b>ran out of</b> …');
+  }),
+  pros_contras: R('uma opinião com grau ou com prós e contras (I agree up to a point … / The main advantage is …)', (t, k) => {
+    if (/\b(i'm|i am) (agree|disagree)\b/.test(k.join(' '))) return 'agree é verbo: <b>I agree</b>.';
+    return need(/\b(agree|disagree|up to a point|not so sure|advantage|disadvantage|benefit|drawback|on balance|fair point|it depends|in favor|against|pros|cons)\b/.test(k.join(' ')), 'Dê o grau da opinião ou um prós e contras: I <b>agree up to a point</b>. / The main <b>advantage</b> is …');
+  }),
+  artigo: R('uma frase de <b>artigo</b> (Have you ever …? / In my opinion, … / What are you waiting for?)', (t, k) => need(/\b(have you ever|imagine|in my opinion|in my experience|let me tell you|what are you waiting for|give it a try|the best way|i think|for example)\b/.test(k.join(' ')), 'Escreva como num artigo: <b>Have you ever</b> …? / <b>In my experience</b>, …')),
+  prova_b1: R('uma frase sobre a <b>prova</b> ou uma estratégia (The exam has … / I will practice …)', (t, k) => need(has(k, /^(exam|test|reading|writing|listening|speaking|practice|e-mail|article|story|photo|pairs|parts|minutes|spelling|answers|strategy)$/), 'Fale da prova: The <b>exam</b> has … / I will <b>practice</b> …')),
+  texto_opiniao: R('uma frase de <b>texto de opinião</b> (In my opinion, … should … / Firstly, … / However, … / In conclusion, …)', (t, k) => {
+    if (/\bshould to\b/.test(k.join(' '))) return 'should vem sem to: should <b>ban</b>.';
+    return need(/\b(should|would|in my opinion|firstly|in addition|moreover|however|for example|in conclusion|therefore|on the other hand)\b/.test(k.join(' ')), 'Escreva uma parte do texto: In my opinion, … <b>should</b> … / <b>Firstly</b>, … / <b>However</b>, …');
   }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;

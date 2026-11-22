@@ -10,6 +10,8 @@
 const NEW_LESSONS = {};
 const EN_MODS = [];
 function NL(id, o) {
+  // id e título são chaves (progresso, esquemas, apoio, tarefas): repetir quebraria a trilha
+  if (NEW_LESSONS[id] || LESSONS.some((x) => x.de === o.de)) throw new Error('Lição repetida: ' + id + ' / ' + o.de);
   const l = {
     i: LESSONS.length, sid: id, nova: true, de: o.de, pt: o.pt, gt: o.gt, gx: o.gx,
     pts: o.pts.split('|'), ex: pairs(o.ex), ge: pairs(o.ge), dlg: pairs(o.dlg),
