@@ -662,7 +662,7 @@ const RULES = {
     return need(/\b(had better|'d better|you'd better|i'd better|we'd better)\b/.test(c), "Dê um aviso: You'<b>d better</b> … / You'<b>d better not</b> …");
   }),
   estudo: R('uma frase sobre <b>estudos</b> com as expressões (sign up for, take a course, catch up on, drop out of …)', (t, k) => {
-    if (/\bmake a course\b/.test(k.join(' '))) return 'Fazer um curso é <b>take</b> a course.';
+    if (/\b(make|made|making|makes) (a|an|the) (\p{L}+ )?course\b/u.test(k.join(' '))) return 'Fazer um curso é <b>take</b> a course.';
     return need(/\b(sign(ed)? up|enroll|take a course|taking|took a course|apply|applied|drop(ped)? out|catch(ing)? up|fall(ing)? behind|fell behind|tuition|scholarship|degree|course|class|assignment)\b/.test(k.join(' ')), 'Fale dos seus estudos: I <b>signed up for</b> … / I need to <b>catch up on</b> …');
   }),
   reuniao: R("uma fala de <b>reunião</b> (Sorry to interrupt, but … / What if we …? / I see your point, but …)", (t, k) => need(/\b(sorry to interrupt|can i add|what if we|how about|we could|why don't we|i see your point|in my view|good point|let's move on|wrap up|i agree|i disagree)\b/.test(k.join(' ')), "Fale como numa reunião: <b>Sorry to interrupt, but</b> … / <b>What if we</b> …?")),
