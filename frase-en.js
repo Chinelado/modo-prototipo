@@ -1299,6 +1299,31 @@ const RULES = {
     if (/\b(the tenant shall|hereby|in the event of|prior to|premises)\b/.test(c) && !/\b(plain english|means|instead)\b/.test(c)) return 'Isso ainda é jurídico. Simplifique: <b>you must</b>, <b>if</b>, <b>before</b>, <b>the flat</b>.';
     return need(/^(you|we|if you|before you|normal|ask|in plain english)\b|\b(you must|you can|you may|we will|we may|move out|wear and tear|deposit)\b/.test(c), 'Escreva em linguagem simples: <b>You must</b> … / <b>If you</b> … / <b>We will</b> …');
   }),
+  // ---------- Módulo 42 ----------
+  prova_c2: R('uma frase sobre a prova C2 ou o seu estudo (parts, words, two texts, talk alone…)', (t, k) => need(/\b(exam|test|paper|papers|parts?|questions|minutes|words|texts?|summari[sz]e|evaluate|speaking|writing|reading|listening|recording|heard|twice|alone|card|essays?|topic)\b/.test(k.join(' ')), 'Fale da prova: <b>Reading and Use of English has seven parts.</b> / <b>You talk alone for about two minutes.</b>')),
+  resumir_avaliar: R('uma frase que resuma ou avalie textos (Both writers … / The first text argues … whereas … / raises a valid point …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bboth writers agrees\b|\bthe first writer argue that\b/.test(c)) return 'Confira a concordância: Both writers <b>agree</b>; the first writer <b>argues</b>.';
+    return need(/\b(both writers|both texts|the first (text|writer)|the second|whereas|unlike|argues|claims|convincing|valid point|fails to consider|overlooks|i would argue|in my view|on balance|focuses on)\b/.test(c), 'Resuma e avalie: <b>Both writers agree that</b> … / The first text argues …, <b>whereas</b> … / <b>raises a valid point</b> …');
+  }),
+  fala_longa: R("uma frase para organizar uma fala longa (That's a fascinating question … / Take, for instance … / All things considered …)", (t, k) => need(/\b(fascinating question|several ways|to begin with|another aspect|take,? for instance|for instance|for example|from my own experience|admittedly|it depends|all things considered|i'd say|let me think|interesting point|on the one hand|to sum up)\b/.test(k.join(' ')), "Organize a fala: <b>That's a fascinating question</b> … / <b>Take, for instance</b>, … / <b>So, all things considered</b>, …")),
+  erros_classicos: R('uma frase correta, sem os falsos amigos clássicos (currently, intend, attend, I\'m 30, ask a question…)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bi pretend to (study|move|travel|go|work|live|learn|buy)\b/.test(c)) return 'Para "pretendo", use <b>intend</b> (pretend é "fingir"): I <b>intend</b> to …';
+    if (/\bi have \d+ years\b|\bi have (twenty|thirty|forty|fifty)\w* years\b/.test(c)) return "Idade com to be: I<b>'m</b> 30.";
+    if (/\bmake (a|any) question\b/.test(c)) return 'Fazer uma pergunta: <b>ask</b> a question.';
+    if (/\bdepends of\b/.test(c)) return 'depend pede <b>on</b>: It depends <b>on</b> …';
+    if (/\bdiscuss(ed)? about\b/.test(c)) return 'discuss não leva about: <b>discuss the plan</b>.';
+    if (/\bexplain me\b/.test(c)) return 'Diga: explain it <b>to me</b>.';
+    if (/\b(lost|lose) the (bus|train|flight)\b/.test(c)) return 'Perder o ônibus: <b>miss</b> the bus.';
+    return need(k.length >= 3, 'Escreva uma frase completa, sem os falsos amigos: <b>Currently</b> … / I <b>intend</b> to … / Can I <b>ask</b> a question?');
+  }),
+  manutencao: R('uma frase sobre os seus hábitos em inglês (I read … every day / I listen to podcasts … / once a week …)', (t, k) => need(/\b(every day|every week|once a week|twice a week|daily|habit|routine|read|listen|podcasts?|watch|series|subtitles|journal|write|record|conversation|review|feedback|little and often|keep)\b/.test(k.join(' ')), 'Fale dos seus hábitos: <b>I read</b> for twenty minutes <b>every day</b>. / <b>Once a week</b>, I …')),
+  redacao_c2: R('uma frase da redação final (Both texts discuss whether … / The first writer argues … / On balance …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bdiscuss(es)? about\b/.test(c)) return 'discuss não leva about: Both texts <b>discuss whether</b> …';
+    return need(/\b(both texts|both writers|discuss whether|the first writer|the second writer|argues|maintains|fears|convincing|to some extent|valid point|fails to consider|overlooks|on balance|in my view|strike a balance|at the expense of|completed)\b/.test(c), 'Use a linguagem da redação: <b>Both texts discuss whether</b> … / <b>The first writer argues</b> … / <b>On balance</b>, …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
