@@ -51,7 +51,7 @@ function knownIndex() {
       l.deep ? l.deep.split('\n').filter((x) => x.trim().startsWith('~ ')).map((x) => x.trim().slice(2).split(' = ')[0]) : [])
       .map((t) => t.replace(/\(.*?\)/g, ' '));
     l.usedText = used.join(' ');
-    const unknown = [...new Set(used.flatMap(toks))].filter((w) => w.length > 1 && !isKnown(w) && !/^\d/.test(w) && !NAMES.has(w) && !PT_STOP.has(w) && !/[ãõçáéíóúâêôà]/.test(w));
+    const unknown = [...new Set(used.flatMap(toks))].filter((w) => w.length > 1 && !isKnown(w) && !/^\d/.test(w) && !NAMES.has(w.replace(/'s$/, '')) && !PT_STOP.has(w) && !/[ãõçáéíóúâêôà]/.test(w));
     report.push({ i: l.i, de: l.de, unknown });
     used.forEach(teach);
   });

@@ -448,6 +448,46 @@ const RULES = {
     if (/\b(i'd|i would) (recommending|recommends|to recommend)\b/.test(c)) return "Depois de I'd, o verbo vem no básico: I'd <b>recommend</b>.";
     return need(has(k, /^(was|were|stayed|recommend|recommended|clean|dirty|staff|location|comfortable|noisy|helpful|spotless|disappointing|value|stars)$/), "Avalie: The room <b>was</b> clean. / I'd <b>recommend</b> this hotel.");
   }),
+  // ---------- Módulo 13 ----------
+  comemoracao: R("uma frase sobre uma <b>festa ou data</b> (I'm turning 30. / Happy Thanksgiving! / Congratulations!)", (t, k) => {
+    const c = k.join(' ');
+    if (/\bhappy (wedding|graduation|new job)\b/.test(c)) return 'Para conquistas, diga <b>Congratulations</b> on your wedding!';
+    if (/\b(i'm|i am|she's|he's) doing (\d+|twenty|thirty|forty|fifty|sixty)\b/.test(c)) return '"Fazer anos" é <b>turn</b>: I\'m <b>turning</b> thirty.';
+    return need(has(k, /^(birthday|party|celebrate|holiday|thanksgiving|christmas|halloween|wedding|anniversary|congratulations|turning|turn|happy|cheers|guests)$/), "Fale de uma festa: I'm <b>turning</b> 30. / <b>Happy</b> birthday! / <b>Congratulations</b>!");
+  }),
+  relativa: R('uma descrição com <b>who, which, that ou where</b> (The woman who lives next door …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(man|woman|person|people|friend|guy|girl|boy|teacher|doctor|neighbor|brother|sister) which\b/.test(c)) return 'Para pessoas, use <b>who</b> (ou that).';
+    if (/\b(book|car|cake|house|movie|dress|restaurant|phone|city) who\b/.test(c)) return 'Para coisas, use <b>which</b> ou <b>that</b>.';
+    if (/\b(city|town|place|country|restaurant|house) (that|which) (i|we|you|they|he|she) (was born|live|lived|met|grew up)\b/.test(c)) return 'Para lugares, use <b>where</b>: the city <b>where</b> I was born.';
+    // relativa no meio da frase (the woman who …) ou depois de vírgula (My cousin, who …); a pergunta "Who is …?" não conta
+    return need(clauses(t).some((cl, i) => cl.some((w, p) => (p > 0 || (i > 0 && w !== 'that')) && /^(who|which|that|where|whose)$/.test(w) && !/^(think|know|said|hope|sure|say|believe)$/.test(cl[p - 1] || '') && (w !== 'that' || (cl[p + 1] && !/^(is|was|are|like|do|did)$/.test(cl[p - 1] || ''))))), 'Junte duas informações: The woman <b>who</b> lives next door … / The cake <b>that</b> you made …');
+  }),
+  sugestao: R("uma <b>sugestão</b> (Let's … / How about …? / Why don't we …?)", (t, k) => {
+    const c = k.join(' ');
+    if (/\blet's (going|to go|to)\b/.test(c)) return "Depois de let's, o verbo vem no básico: Let's <b>go</b>!";
+    if (/\bhow about (go|eat|watch|have|stay|order|cook|take|visit)\b/.test(c)) return 'Depois de how about, o verbo vai com -ing: How about <b>going</b>?';
+    if (/\bwhy don't we (going|to go)\b/.test(c)) return "Depois de why don't we, o verbo vem no básico: Why don't we <b>go</b>?";
+    return need(/\b(let's|how about|why don't we|i'd rather|what about|shall we)\b/.test(c), "Sugira: <b>Let's</b> … / <b>How about</b> …? / <b>Why don't we</b> …?");
+  }),
+  opiniao_simples: R("uma <b>opinião</b> com I think / I don't think (ou I think so / I don't think so)", (t, k) => {
+    const c = k.join(' ');
+    if (/\bi think (yes|no|not)\s*[.!]?$/.test(c) || /\bi don't think no\b/.test(c)) return "A resposta curta é <b>I think so</b> / <b>I don't think so</b>.";
+    if (/\bi think (that )?(it|he|she|they|you|this|that) (isn't|aren't|is not|are not|won't|doesn't|don't)\b/.test(c)) return "Em inglês, a negação vai no think: <b>I don't think</b> it's …";
+    return need(/\b(i think|i don't think|in my opinion|i guess|i believe|i hope|i'm not sure)\b/.test(c), "Dê uma opinião: <b>I think</b> … / <b>I don't think</b> …");
+  }),
+  ing_to: R('dois verbos juntos, com <b>-ing</b> ou <b>to</b> (I enjoy dancing. / I want to learn …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(enjoy|enjoys|enjoyed|finish|finished|avoid|avoids|keep|kept|mind|practice|miss|suggest) to \p{L}+/u.test(c)) return 'Esse verbo pede -ing: I enjoy <b>dancing</b>.';
+    if (/\b(want|wants|wanted|need|needs|decide|decided|hope|hoped|plan|planned|promise|agree|learn|would like|'d like) \p{L}+ing\b/u.test(c) && !/\b(need|want)s? (nothing|something|anything|everything)\b/.test(c)) return 'Esse verbo pede to: I want <b>to learn</b>.';
+    if (/\b(enjoy|enjoys|finish|avoid|keep|mind) (dance|cook|read|swim|work|eat|travel|play|go|run|walk|sing)\b/.test(c)) return 'Esse verbo pede -ing: I enjoy <b>dancing</b>.';
+    return need(k.some((w) => /\p{L}{2,}ing$/u.test(w)) || /\bto \p{L}+/u.test(c), 'Junte dois verbos: I enjoy <b>dancing</b>. / I want <b>to learn</b> …');
+  }),
+  comentario: R("uma frase de <b>comentário</b> com opinião (I agree … / In my opinion, … because … / However, …)", (t, k) => {
+    const c = k.join(' ');
+    if (/\b(i'm|i am|we're|we are) (totally |completely )?agree\b/.test(c)) return 'agree é verbo: <b>I agree</b> (e não "I am agree").';
+    return need(has(k, /^(agree|disagree|opinion|think|however|because|example|also|post|sharing|personally)$/), 'Comente: I <b>agree</b> … / In my <b>opinion</b>, … <b>because</b> … / <b>However</b>, …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
