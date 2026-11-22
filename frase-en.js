@@ -1055,6 +1055,32 @@ const RULES = {
     if (/^actually,? (nowadays|these days|today)\b/.test(c)) return '<b>actually</b> é "na verdade". "Atualmente" é <b>nowadays</b>.';
     return need(/\b(well|i mean|actually|you know|kind of|sort of|anyway|to be fair|to be honest|the thing is|basically|long story short|or something|and stuff|let me think|where was i|honestly)\b/.test(c), 'Use um marcador da fala: <b>Well</b>, … / <b>I mean</b>, … / <b>Actually</b>, …');
   }),
+  // ---------- Módulo 32 ----------
+  prova_b2: R('uma frase sobre a prova ou o seu estudo (papers, parts, minutes, essay, recording…)', (t, k) => need(/\b(exam|test|paper|papers|part|parts|minutes|hour|essay|recording|played|twice|speaking|writing|reading|listening|photos?|pairs|answers?|study|practice|words|blank)\b/.test(k.join(' ')), 'Fale da prova: <b>The exam has four papers.</b> / <b>Each recording is played twice.</b>')),
+  transformacao: R('uma frase reescrita ou com uma palavra formada (it\'s a long time since, unless, successful, unexpected…)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bit's a long time since i (have seen|see)\b/.test(c)) return "Depois de it's a long time since, o passado simples: since I <b>saw</b> him.";
+    if (/\b(unpossible|inpossible|unhonest)\b/.test(c)) return 'Confira o prefixo: <b>impossible</b>, <b>dishonest</b>.';
+    return need(/\b(since|unless|wish|apologized|apologised|said to|was built|were|been)\b/.test(c) || has(k, /^(un|im|in|dis|ir)\w{4,}$|\w+(tion|ment|ness|ful|less|ous|able|ly)$/), "Reescreva ou forme uma palavra: It's a long time <b>since</b> … / <b>successful</b> / <b>unexpected</b>.");
+  }),
+  review_escrita: R('uma frase de review (is set in … / the acting is … / I would highly recommend it …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bworth (to see|to try|see|try)\b/.test(c)) return 'Depois de worth, use -ing: worth <b>seeing</b>.';
+    if (/\bis situated in\b/.test(c) && /\b(film|book|story|series)\b/.test(c)) return 'Uma história <b>is set in</b> um lugar.';
+    return need(/\b(is set in|set in|follows|plot|acting|cast|outstanding|gripping|stunning|superb|predictable|disappointing|overrated|recommend|worth|must.?see|give it a miss|you'll love it|special effects|service|food)\b/.test(c), 'Avalie e recomende: The film <b>is set in</b> … / <b>I would highly recommend it</b> …');
+  }),
+  comparar_fotos: R('uma frase para comparar fotos ou decidir em dupla (Both photos show … / whereas … / Shall we choose …?)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bthe both photos\b/.test(c)) return 'Sem the: <b>Both photos</b> show …';
+    return need(/\b(both|whereas|while|in the first|in the second|main difference|might be|look as if|looks as if|i'd say|must be|shall we|what do you think|i agree|let's start|choose|photo|photos|picture|pictures)\b/.test(c), 'Compare ou decida: <b>Both photos show</b> … / … <b>whereas</b> … / <b>Shall we choose</b> …?');
+  }),
+  parafrase: R('uma paráfrase ou uma estratégia de prova (… means … / Read the questions before …)', (t, k) => need(/\b(means|meaning|turned out|i'd rather|rather|couldn't make it|make it|read|underline|check|listen|questions?|key words|second listening|answers|same words|paraphrase|distractor|expensive|cheap)\b/.test(k.join(' ')), 'Parafraseie ou dê uma estratégia: "It wasn\'t cheap" <b>means</b> … / <b>Read the questions</b> before you listen.')),
+  redacao_prova: R('uma frase de redação de prova (Nowadays … / Firstly … / Another important point is … / In conclusion …)', (t, k) => {
+    const c = k.join(' ');
+    if (/^other important point\b/.test(c)) return 'No singular: <b>Another</b> important point is …';
+    if (/^actually,? (many|most|people|students)\b/.test(c)) return '<b>actually</b> é "na verdade". Para "atualmente", use <b>nowadays</b>.';
+    return need(/\b(nowadays|in my view|firstly|in addition|another important point|admittedly|however|in conclusion|in the long term|would|should|notes|own idea|words|word count|check|essay|plan)\b/.test(c), 'Use a linguagem da redação: <b>Firstly</b> … / <b>Another important point is</b> … / <b>In conclusion</b> …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
