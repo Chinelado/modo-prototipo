@@ -87,6 +87,7 @@ BR É igual ao nosso "estar + -ndo": estou cozinha**ndo** = I'm cook**ing**. Só
 @ V:Agora ou sempre?;Agora: presente contínuo|I'm working now.|It's raining today.|She's wearing a dress.;Sempre: presente simples|I work every day.|It rains a lot here.|She usually wears jeans.
 ~ He usually works at home, but today he's working at the office. = Ele normalmente trabalha em casa, mas hoje está trabalhando no escritório.
 ! Em português, "trabalho" pode ser agora ou sempre. Em inglês, não: **I'm working** é agora; **I work** é hábito.
+~ She's working right now. = Ela está trabalhando agora.
 # Passo 4: o -ing na escrita
 | Regra | Exemplo |
 | a maioria: + ing | work → working |
@@ -245,6 +246,7 @@ Hoje você conta o seu fim de semana do começo ao fim. Para isso precisa dos ve
 # Passo 3: contar em ordem
 @ P:Uma história em ordem;First=First, I got up late.;Then=Then, I had breakfast with my family.;After that=After that, we went to the beach.;Finally=Finally, we got home at midnight.
 ~ First I got up late, then I went shopping. = Primeiro levantei tarde, depois fui fazer compras.
+~ Finally, we got home at midnight. = Por fim, chegamos em casa à meia-noite.
 # Passo 4: como foi o fim de semana?
 ~ How was your weekend? = Como foi o seu fim de semana?
 | Resposta | Em português |

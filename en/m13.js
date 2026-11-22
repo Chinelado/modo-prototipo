@@ -88,6 +88,7 @@ Se depois do that vem **outro sujeito**, ele pode sumir:
 # Passo 4: a informação extra, entre vírgulas
 ~ My cousin, who lives in Texas, is getting married. = O meu primo, que mora no Texas, vai se casar.
 ! Entre vírgulas (informação extra), use **who** ou **which**, nunca that.
+~ Ana, who is my cousin, is here. = A Ana, que é minha prima, está aqui.
 > Treine agora: descreva duas pessoas da sua vida com who e uma coisa com that.
 ? Qual palavra para pessoas? || who (ou that)
 ? Como se diz "a cidade onde eu nasci"? || the city where I was born

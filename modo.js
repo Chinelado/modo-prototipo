@@ -372,6 +372,7 @@ perfil = function () {
   const pos = d ? `${d.level} · Módulo ${d.w + 1} · ${d.review ? 'avaliação' : 'lição ' + (d.r + 1) + ' de ' + d.n}` : 'Trilha concluída';
   h.insertAdjacentHTML('afterend', `
   <div class="mo-pos card"><span class="mo-code">${LP.sigla}</span><div><b>${LP.nome} · Trilha ${d ? d.level : LAST_LV}</b><small>${pos} · ${done} de ${TOTAL} etapas</small></div>
+    <button class="ghost mo-poslang" id="mPosLang">${ic('shuffle', 16)} Trocar idioma</button>
     <p class="mut">A posição na trilha mostra o que você já estudou. Não é um nível de proficiência nem uma certificação.</p></div>
   <div class="mo-compgrid">
     <section class="card"><div class="mo-card-h">${ic('target', 22)}<h3>Competências</h3></div>
@@ -383,6 +384,9 @@ perfil = function () {
     </section>
   </div>
   <p class="mut mo-how">Como ler: a porcentagem é o acerto nas ${ATT_WIN} respostas mais recentes de cada competência e aparece a partir de ${ATT_MIN} respostas. XP e sequência medem dedicação, não domínio.</p>`);
+  // troca de idioma também no celular (na tela larga, ela fica na barra lateral)
+  const pl = $('#mPosLang', app), other = LP.code === 'de' ? 'en' : 'de';
+  if (pl && typeof goLang === 'function') pl.onclick = () => { if (confirm(`Trocar para ${LANG_PACKS[other].nome}? O progresso de cada idioma fica guardado separado.`)) goLang(other); };
   if ($('#mWeak')) $('#mWeak').onclick = () => (wk.c.pr === 'textos' ? go('extras', 'textos') : pratRun(PRAT.find((p) => p.id === wk.c.pr)));
 };
 

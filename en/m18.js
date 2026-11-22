@@ -199,6 +199,7 @@ Hoje você compara as duas condicionais e aprende a escolher. A diferença não 
 ~ If I get the job, I'll move to Chicago. = Se eu conseguir o emprego, vou me mudar para Chicago.
 ~ If I got the job, I'd move to Chicago. = Se eu conseguisse o emprego, me mudaria para Chicago.
 BR Em português a diferença também existe: "se eu **conseguir**" (possível) × "se eu **conseguisse**" (improvável). O inglês segue a mesma lógica com presente × passado.
+~ If I got the job, I'd move. = Se eu conseguisse o emprego, me mudaria.
 # Passo 3: não misture
 | Certo | Errado |
 | If I win, I'll … | If I win, I would … |
@@ -207,6 +208,7 @@ BR Em português a diferença também existe: "se eu **conseguir**" (possível) 
 # Passo 4: o impossível
 ~ If I could go back in time, I'd study harder. = Se eu pudesse voltar no tempo, estudaria mais.
 ! Para o impossível no presente, sempre a segunda: voltar no tempo, ser outra pessoa, ter superpoderes.
+~ If I could fly, I'd travel more. = Se eu pudesse voar, viajaria mais.
 > Treine agora: diga uma coisa possível e uma imaginada sobre o próximo ano, cada uma com a sua condicional.
 ? Primeira ou segunda: "se eu passar na prova (acho que passo)"? || primeira: If I pass, I'll…
 ? Primeira ou segunda: "se eu ganhasse na loteria"? || segunda: If I won, I'd…

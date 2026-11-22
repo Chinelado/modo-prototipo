@@ -74,6 +74,7 @@ Em português o verbo já mostra quem é: "sou", "somos". Em inglês, não. Por 
 | É o meu amigo. | He's my friend. |
 | Prazer em te conhecer. | Nice to meet you. |
 ! **I** (eu) se escreve sempre com maiúscula, mesmo no meio da frase: Mark and I.
+~ Hello, Ana. I'm Mark. = Olá, Ana. Eu sou o Mark.
 # Passo 4: perguntar e responder o nome
 ~ What's your name? = Qual é o seu nome?
 ~ My name is Mark. = O meu nome é Mark.
@@ -86,6 +87,7 @@ Em português o h é mudo: "hotel" soa "otel". Em inglês, o **h** do começo da
 ~ he = ele
 ~ Hi! Hello! = Oi! Olá!
 BR Sem o sopro, hi vira "ai" e he vira "i". Ponha a mão na frente da boca: em **hi**, você sente o ar.
+~ Hello! Good morning! = Olá! Bom dia!
 > Treine agora: diga Hi! I'm … com o seu nome, três vezes, com o sopro do h.
 ? Qual é a forma do to be com she? || is (she is = she's)
 ? Como se diz "Eu sou a Ana" em inglês? || I'm Ana. (o I nunca cai)
@@ -192,6 +194,7 @@ Muitas letras se dizem quase como em português: B (bi), C (si), D (di), F (éf)
 BR A troca mais comum: soletrar "Silva" como S-**I**-L-V-A dizendo "i" para o I. Em inglês, o I se diz "ai", e quem ouve "i" escreve **E**.
 ~ Silva: S-I-L-V-A = Silva
 ~ Lee: L-E-E = Lee
+~ Can you spell that, please? = Você pode soletrar, por favor?
 # Passo 3: pedir e repetir
 ~ How do you spell it? = Como se soletra?
 ~ Sorry? Can you say that again? = Como? Pode repetir?
@@ -283,6 +286,7 @@ O que separa 13 de 30 é o **acento**. No -teen, a força vai para o fim; na dez
 ~ fourteen, forty = catorze, quarenta
 ~ fifteen, fifty = quinze, cinquenta
 ! O **th** de thirteen é o th sem voz: língua entre os dentes, só ar, como um "f" feito com a língua.
+~ I'm thirteen. She's thirty. = Eu tenho treze anos. Ela tem trinta.
 > Treine agora: diga a sua idade e a de alguém da sua família, em frases completas.
 ? Como se diz "Eu tenho trinta anos"? || I'm thirty (years old).
 ? Onde cai o acento em fifteen? || no fim: fifTEEN
@@ -408,6 +412,7 @@ Nos Estados Unidos, a data vem com o **mês primeiro**: mês/dia/ano.
 | 03/05/1990 | 05/03/1990 | 5 de março de 1990 |
 | 12/01/2000 | 01/12/2000 | 1º de dezembro de 2000 |
 BR Ler 03/05 como "3 de maio" é um erro clássico. Num formulário americano, o primeiro número é sempre o mês.
+~ What's your date of birth? = Qual é a sua data de nascimento?
 # Passo 3: as maiúsculas do inglês
 Em inglês, várias palavras que são minúsculas em português começam com maiúscula.
 | Português | Inglês |

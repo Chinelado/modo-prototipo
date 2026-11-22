@@ -39,6 +39,7 @@ BR "Tive que" é **had to**. "I musted" não existe: **must** só tem o presente
 | allowed to | permitido, ter permissão |
 | not allowed to | proibido |
 | dress code | código de vestimenta |
+~ We're not allowed to smoke here. = Não é permitido fumar aqui.
 > Treine agora: diga uma coisa que você teve que fazer ontem e uma que vai ter que fazer amanhã.
 ? Como se diz "tive que sair cedo"? || I had to leave early.
 ? Como se diz "não precisei pagar"? || I didn't have to pay.

@@ -23,17 +23,20 @@ Hoje você aprende a imaginar um **passado diferente**: "se eu soubesse, teria l
 BR É o nosso "se eu **tivesse** sabido, **teria** ligado". A ideia é a mesma: falar do passado que **não** aconteceu.
 # Passo 2: as três condicionais
 @ M:Do real ao imaginado;Condicional|Tempo|Exemplo;primeira|futuro possível|If it rains, I'll stay home.;segunda|presente imaginado|If I had money, I'd travel.;terceira|passado imaginado|If I had studied, I would have passed.
+~ If I had studied, I would have passed. = Se eu tivesse estudado, teria passado.
 # Passo 3: could have e might have
 ~ If you had asked me, I could have helped. = Se você tivesse me pedido, eu poderia ter ajudado.
 | Em inglês | Em português |
 | would have | teria |
 | could have | poderia ter |
 | might have | talvez tivesse |
+~ I could have helped you. = Eu poderia ter te ajudado.
 # Passo 4: na fala e o erro clássico
 | Forma completa | Na fala |
 | If I had known, I would have called. | If I'd known, I'd have called. |
 ~ If it hadn't rained, we would have gone to the beach. = Se não tivesse chovido, teríamos ido à praia.
 ! Nunca **would** depois de if: "If I would have known" está errado. O certo é **If I had known**.
+~ If I'd known, I'd have called. = Se eu soubesse, teria ligado.
 > Treine agora: diga uma coisa que você teria feito diferente se soubesse antes.
 ? Como se diz "se eu soubesse, teria vindo"? || If I had known, I would have come.
 ? Está certo "If I would have known"? || Não: If I had known.
@@ -64,6 +67,7 @@ Hoje você aprende a falar de **arrependimentos**: o que você queria ter feito 
 # Passo 2: presente ou passado?
 @ V:Sobre agora ou sobre antes?;Agora: wish + passado|I wish I had more time.|I wish I spoke French.;Antes: wish + past perfect|I wish I had had more time.|I wish I had learned French.
 BR "Queria **ter** tempo" (agora) = I wish I **had** time. "Queria **ter tido** tempo" (antes) = I wish I **had had** time. Um tempo para trás.
+~ I wish I had more time. = Queria ter mais tempo.
 # Passo 3: if only
 ~ If only I had listened to you! = Se ao menos eu tivesse te ouvido!
 ~ If only I hadn't said that! = Se ao menos eu não tivesse dito aquilo!
@@ -109,9 +113,11 @@ BR Pense: o resultado é **naquela época** (would have + particípio) ou **hoje
 ~ If I had saved more money, I would have a house now. = Se eu tivesse economizado mais, teria uma casa agora.
 ~ If we had met earlier, we would be married by now. = Se a gente tivesse se conhecido antes, já estaria casado.
 ~ I would still live in Recife if I hadn't found this job. = Eu ainda moraria em Recife se não tivesse encontrado este emprego.
+~ I would have a house now. = Eu teria uma casa agora.
 # Passo 4: o inverso, presente → passado
 ~ If I were braver, I would have asked her out. = Se eu fosse mais corajoso, teria chamado ela para sair.
 ! Aqui a causa é uma característica **permanente** (ser corajoso) e o efeito, um fato **passado**. É menos comum, mas aparece.
+~ If I were braver, I'd have asked. = Se eu fosse mais corajoso, teria perguntado.
 > Treine agora: diga como a sua vida seria hoje se você tivesse tomado uma decisão diferente.
 ? Efeito no presente: would be ou would have been? || would be (now)
 ? Como se diz "se eu tivesse estudado, seria médica hoje"? || If I had studied, I would be a doctor today.

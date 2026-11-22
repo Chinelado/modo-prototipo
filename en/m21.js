@@ -78,6 +78,7 @@ Hoje você aprende a contar pedidos e ordens: "ele me disse para esperar", "ela 
 BR "Ele me disse **pra não** correr" vira **told me not to run**. "Told me don't run" está errado.
 # Passo 3: told ou asked?
 @ V:Ordem ou pedido?;told: ordem, instrução|"Sit down!" → She told me to sit down.;asked: pedido educado|"Can you help me?" → He asked me to help him.
+~ She told me to sit down. = Ela me mandou sentar.
 # Passo 4: outros verbos
 | Verbo | Em português | Exemplo |
 | remind | lembrar | She reminded me to lock the door. |
@@ -125,6 +126,7 @@ BR Na pergunta contada, **some o do / does / did** e o sujeito vem antes do verb
 | Certo | Errado |
 | She asked where I lived. | She asked where did I live? |
 | He asked if I was OK. | He asked was I OK? |
+~ She asked where I lived. = Ela perguntou onde eu morava.
 # Passo 4: na imigração
 ~ The officer asked what the purpose of my visit was. = O agente perguntou qual era o motivo da minha viagem.
 | Pergunta do agente | Em português |
@@ -288,6 +290,7 @@ Esta lição é de **ler e escrever** e fecha o módulo do discurso indireto. Vo
 | "Is the projector working?" | She asked if the projector was working. |
 ~ He wanted to know if the report was ready. = Ele queria saber se o relatório estava pronto.
 BR No recado, a pergunta vira afirmação (**if the projector was working**) e o pedido vira **asked you to**.
+~ She said she would arrive on Friday. = Ela disse que ia chegar na sexta.
 # Passo 3: frases úteis
 | Em inglês | Em português |
 | … left a message for you. | … deixou um recado para você. |

@@ -37,6 +37,7 @@ Abra com **used to** e continue com **would**:
 | at night | à noite |
 | always / often | sempre / muitas vezes |
 | childhood memory | lembrança de infância |
+~ We would go there every summer. = A gente ia lá todo verão.
 > Treine agora: conte em voz alta, em quatro frases, um hábito da sua infância com used to e would.
 ? would ou used to: "Eu tinha um cachorro"? || used to: I used to have a dog.
 ? would ou used to: "A gente ia à praia todo domingo"? || os dois: We would / used to go…
@@ -77,6 +78,7 @@ BR É o nosso "fazia horas que…", "vinha …-ndo": vinha chovendo = **had been
 # Passo 4: verbos de estado
 ~ We had known each other for years before we started dating. = A gente se conhecia havia anos antes de começar a namorar.
 ! Com know, have (possuir), be, like: past perfect **simples** (had known), e não "had been knowing".
+~ I had known her for years. = Eu a conhecia havia anos.
 > Treine agora: conte um dia em que você chegou exausta e explique o que vinha fazendo.
 ? Como se diz "fazia horas que chovia"? || It had been raining for hours.
 ? Qual tempo para "eu esperava havia uma hora quando ele chegou"? || past perfect continuous: I had been waiting…

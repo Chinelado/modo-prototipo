@@ -23,6 +23,7 @@ Hoje você fala de comida: o que tem em casa, o que falta e como dizer que está
 | Estou com frio. | I'm cold. |
 ~ I'm hungry. = Estou com fome.
 BR Em português "estamos com" fome. Em inglês, a gente **está** faminto: I **am** hungry. "I have hungry" é um erro muito comum.
+~ Are you hungry? = Você está com fome?
 # Passo 2: contável e incontável
 @ V:Conta ou não conta?;Contável: tem plural, aceita a / an|an apple, two apples|an egg, three eggs|a banana, bananas;Incontável: sem plural, sem a / an|rice|water|bread, milk, cheese
 ~ I eat two eggs every morning. = Eu como dois ovos toda manhã.

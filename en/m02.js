@@ -262,6 +262,7 @@ Com essas quatro pessoas, o verbo fica igual ao dicionário, sem mudar nada:
 | adorar café | love coffee |
 | odiar correr | hate running |
 BR Em inglês, **like** não tem "de". "I like of music" está errado: I like music.
+~ I like music. = Eu gosto de música.
 # Passo 3: a atividade com -ing
 Quando você gosta de **fazer** algo, o verbo da atividade ganha **-ing**:
 | Verbo | Atividade |
@@ -349,6 +350,7 @@ BR Em português, "por que" e "porque" mudam só na escrita. Em inglês são pal
 @ P:Uma mensagem curta, parte por parte;Cumprimento=Hi Mark!;Quem sou=My name is Ana and I'm 30.;De onde sou=I'm from Recife, but I live in Curitiba.;Pergunta=Do you like soccer or basketball?;Despedida=Best, Ana
 ~ Best, Ana = Abraço, Ana
 ! **Best,** (ou Best wishes,) é a despedida mais comum em mensagens. Entre amigos: **See you!** ou **Bye!**
+~ Hi Mark! My name is Ana. = Oi, Mark! Meu nome é Ana.
 > Agora leia o perfil do Mark e depois escreva a sua resposta.
 ? Qual palavra dá o motivo? || because
 ? Qual palavra pergunta "por quê"? || why
