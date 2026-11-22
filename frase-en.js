@@ -1003,6 +1003,36 @@ const RULES = {
     if (/\bit was agree\b/.test(c)) return 'Na passiva: It was <b>agreed</b> that …';
     return need(/\b(discussed|agreed|decided|approved|action points|will \w+ .*\bby\b|outstanding|next meeting|missed anything|thanks,? everyone|attendees|summary|for coming)\b/.test(c), 'Resuma: <b>We discussed</b> … / <b>It was agreed that</b> … / Paula <b>will</b> send … <b>by</b> Friday.');
   }),
+  // ---------- Módulo 30 ----------
+  contraste: R('um contraste com <b>despite / in spite of / even though / whereas / nevertheless</b>', (t, k) => {
+    const c = k.join(' ');
+    if (/\bdespite of\b/.test(c)) return 'Sem of: <b>despite</b> the rain (ou <b>in spite of</b>).';
+    if (/\b(despite|in spite of) (i|you|he|she|it|we|they|there) (was|were|is|am|are|had|have|did)\b/.test(c)) return 'Depois de despite, substantivo ou -ing: Despite <b>the rain</b> / Despite <b>being</b> tired. Ou: despite <b>the fact that</b> …';
+    if (/\b(despite|in spite of) (be|have|feel|work)\b/.test(c)) return 'Depois de despite, use -ing: despite <b>being</b> tired.';
+    return need(/\b(despite|in spite of|even though|although|though|whereas|while|nevertheless|however|on the other hand|in contrast)\b/.test(c), 'Contraste: <b>Despite</b> the rain, … / <b>Even though</b> … / … <b>whereas</b> …');
+  }),
+  midia: R('uma frase sobre mídia (reliable, biased, misleading, clickbait, fact-check, go viral…)', (t, k) => need(/\b(source|sources|reliable|trustworthy|biased|misleading|clickbait|fact-check\w*|fact|checked|viral|headline|misinformation|fake|share|shared|spread|spreads|evidence|edited|out of context|article|news)\b/.test(k.join(' ')), 'Use o vocabulário da mídia: a <b>reliable source</b> / <b>misleading</b> / it <b>went viral</b> …')),
+  cautela: R('uma afirmação cautelosa (It could be argued … / tend to / some evidence / arguably / to some extent)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bit could be argue\b/.test(c)) return 'Na passiva: It could be <b>argued</b> that …';
+    if (/\btends? to (spending|being|having)\b/.test(c)) return 'Depois de tend to, o verbo básico: tend to <b>spend</b>.';
+    return need(/\b(could be argued|can be argued|tends? to|appears? to|seems? to|some evidence|studies suggest|suggests?|arguably|to some extent|in (many|some) cases|generally|may|might|can|it seems|likely)\b/.test(c), 'Use linguagem cautelosa: <b>It could be argued that</b> … / … <b>tend to</b> …');
+  }),
+  rebater: R('uma frase que apresente ou rebata o outro lado (Some people claim … / While it is true … / However …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bpeople claims\b|\bcritics argues\b/.test(c)) return 'Com sujeito no plural, sem -s: people <b>claim</b>, critics <b>argue</b>.';
+    return need(/\b(claim|claims|critics|opponents|supporters|argue|argues|while it is true|admittedly|fair point|however|this ignores|does not mean|on the contrary|on balance|outweigh|outweighs|it is often said|say)\b/.test(c), 'Apresente ou rebata: <b>Some people claim that</b> … <b>However</b>, …');
+  }),
+  manchete: R('uma manchete (Storm hits coast / PM to visit China / Man arrested) ou a frase completa dela', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(will to|is to going)\b/.test(c)) return 'Na manchete, o futuro é só <b>to</b> + verbo: PM <b>to visit</b> China.';
+    return need(/\b(hits|to visit|to quit|to resume|arrested|quits|slams|vows|soar|soars|find|finds|killed|closed|talks|row|probe|cuts|boost|headline|headlines|happened|already)\b/.test(c) || /^[\p{Lu}][\p{L}]+ (to \w+|\w+s|\w+ed)\b/u.test(t), 'Escreva como manchete: <b>Storm hits coast</b> / <b>PM to visit China</b> / <b>Man arrested</b>.');
+  }),
+  redacao: R('uma frase de redação argumentativa (Nowadays … / Firstly … / In addition … / In conclusion, I believe …)', (t, k) => {
+    const c = k.join(' ');
+    if (/^actually,? (many|most|a lot of|people|millions)\b/.test(c)) return '<b>actually</b> é "na verdade". Para "atualmente", use <b>nowadays</b>.';
+    return need(/\b(nowadays|these days|question of whether|widely debated|firstly|first of all|to begin with|in addition|furthermore|moreover|for example|for instance|some people claim|while it is true|however|in conclusion|on balance|to conclude|i believe|advantages?|disadvantages?|outweigh)\b/.test(c), 'Use a linguagem da redação: <b>Nowadays</b> … / <b>Firstly</b> … / <b>In conclusion, I believe</b> …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
