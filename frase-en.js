@@ -829,6 +829,37 @@ const RULES = {
     if (/\bapologize (to|of) (forget|miss|be)\b/.test(c)) return 'Pedir desculpas por: apologize <b>for</b> + -ing.';
     return need(/\b(sorry|apologize|apologise|should have|shouldn't have|make it up|forgive|won't happen again|thoughtless|let you down)\b/.test(c), "Peça desculpas: <b>I'm sorry I</b> … / I <b>should have</b> …");
   }),
+  // ---------- Módulo 25 ----------
+  deducao_presente: R("uma dedução sobre o presente com <b>must / can't / might / could</b>", (t, k) => {
+    const c = k.join(' ');
+    if (/\bmustn't be\b/.test(c)) return "Para dedução negativa, use <b>can't</b>: She can't be tired.";
+    if (/\bmust to be\b|\bmust being\b/.test(c)) return 'Depois de must, verbo básico: must <b>be</b>.';
+    return need(/\b(must|can't|cannot|might|could|may) be\b/.test(c), "Deduza: She <b>must be</b> … / That <b>can't be</b> … / He <b>might be</b> …");
+  }),
+  deducao_passado: R("uma dedução sobre o passado: <b>must have / can't have / might have + particípio</b>", (t, k) => {
+    const c = k.join(' ');
+    if (/\bmustn't have\b/.test(c)) return "Para dedução negativa, use <b>can't have</b>.";
+    if (/\b(must|can't|might|could|may) have (forget|miss|take|see|go|leave|steal|fall|eat|do|write)\b/.test(c)) return 'Use o particípio: must have <b>forgotten</b>, can\'t have <b>seen</b>.';
+    if (/\b(must|might|could) of\b/.test(c)) return 'O certo é <b>must have</b>.';
+    return need(/\b(must|can't|couldn't|cannot|might|could|may)( have|'ve)\b/.test(c), "Deduza sobre o passado: He <b>must have</b> … / She <b>can't have</b> …");
+  }),
+  aparencia: R('como algo <b>parece</b>: look / seem / sound + adjetivo, look like + substantivo', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(look|looks|looked|seem|seems|sound|sounds) like (tired|happy|sad|nice|great|terrible|good|bad|upset|worried|angry|delicious|strange|expensive)\b/.test(c) && !/\blike (a|an|the)\b/.test(c)) return 'Antes de adjetivo, sem like: You <b>look tired</b>.';
+    return need(has(k, /^(look|looks|looked|seem|seems|seemed|sound|sounds|sounded|appear|appears|taste|tastes|smell|smells|feel|feels)$/), 'Use look, seem ou sound: You <b>look</b> tired. / That <b>sounds</b> great.');
+  }),
+  especular: R("uma especulação (I bet … / There's no way … / Judging by … / My guess is …)", (t, k) => need(/\b(i bet|there's no way|judging by|judging from|my guess|i suspect|maybe|perhaps|spoilers?|give it away|must have|might have|could have|can't have|must be|might be)\b/.test(k.join(' ')), "Especule: <b>I bet</b> … / <b>There's no way</b> … / <b>Judging by</b> …")),
+  certeza: R('um grau de certeza (bound to / likely to / unlikely to / I doubt / no doubt / chances are)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(bound|likely|unlikely|sure) (win|rain|come|happen|be|make|find|rise)\b/.test(c)) return 'Essas expressões pedem to: bound <b>to</b> win, likely <b>to</b> rain.';
+    return need(/\b(bound to|sure to|likely to|unlikely to|doubt|no doubt|chances are|a safe bet|a long shot|time will tell|definitely|certainly)\b/.test(c), "Mostre a certeza: She's <b>bound to</b> … / <b>I doubt</b> … / <b>Chances are</b> …");
+  }),
+  detetive: R("uma frase de <b>dedução</b> sobre o mistério (… must have … / It can't have been … because …)", (t, k) => {
+    const c = k.join(' ');
+    if (/\bmustn't have\b/.test(c)) return "Para dedução negativa, use <b>can't have</b>.";
+    if (/\bmust have (take|steal|go|lie|hide)\b/.test(c)) return 'Use o particípio: must have <b>taken</b>, <b>stolen</b>.';
+    return need(/\b(must have|can't have|couldn't have|might have|could have|must be|the culprit|evidence|because|solved|clues?|alibi)\b/.test(c), "Deduza: … <b>must have</b> … / It <b>can't have been</b> … because …");
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
