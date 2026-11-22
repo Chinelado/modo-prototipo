@@ -1125,6 +1125,30 @@ const RULES = {
     if (/ se ha (vuelto|hecho) (en )?un /.test(c)) return 'Com substantivo, <b>convertirse en</b>: se ha <b>convertido en</b> un problema.';
     return need(/ (en la era digital|hoy en día|en mi opinión|considero|creo que|como|ya que|de ahí que|por lo que|si bien|no es menos cierto|frente a quienes|cabe objetar|aunque|por más que|por todo ello|en definitiva|se ha convertido) /.test(c), 'Escreva o ensaio: <b>Considero que</b> … / <b>Como</b> …, … / <b>Por todo ello</b>, …');
   }),
+  // ---------- Módulo 31 ----------
+  marcadores: R('uma frase com marcadores da fala (bueno, pues, o sea, es que, a ver, total…)', (t, k) => {
+    const c = C(k);
+    if (/ é que /.test(c)) return 'Em espanhol: <b>es que</b>.';
+    if (/ ou seja /.test(c)) return 'Em espanhol: <b>o sea</b>.';
+    return need(/ (bueno|pues|o sea|es que|a ver|digamos|este|mira|oye|total|en fin|vale|no|verdad|sabes|es decir|quiero decir) /.test(c), 'Use marcadores: <b>Bueno</b>, <b>pues</b> … / <b>Es que</b> … / <b>O sea</b>, …');
+  }),
+  reacciones: R('uma reação (¿en serio?, ¡no me digas!, ¡menos mal!, ¡qué va!, ¡ni modo!…)', (t, k) => {
+    const c = C(k);
+    if (/ (ainda bem|que nada|não me diga) /.test(c)) return 'Isso é português. Em espanhol: <b>¡Menos mal!</b>, <b>¡Qué va!</b>, <b>¡No me digas!</b>';
+    return need(/ (en serio|no me digas|menos mal|qué rabia|qué va|ni modo|qué bárbaro|ojo|vaya|anda|qué suerte|qué pena|qué bien|qué horror|qué asco|qué lindo|no puede ser|ya|claro|obvio|ni idea|qué le vamos a hacer) /.test(c), 'Reaja: ¿<b>En serio</b>? / ¡<b>No me digas</b>! / ¡<b>Menos mal</b>!');
+  }),
+  sinalefa: R('uma frase para treinar o ritmo (qualquer frase em espanhol, lida ligando as palavras)', (t, k) => need(k.length >= 2, 'Escreva uma frase de pelo menos duas palavras para ler ligando as vogais: <b>Mi amigo está aquí.</b>')),
+  acentos: R('uma frase sobre sotaques (seseo, distinción, sho, ese final, entonación…)', (t, k) => need(/ (acento|acentos|seseo|distinción|sho|zeta|ese|jota|caribe|buenos aires|madrid|méxico|mexicano|andino|entonación|suena|pronuncia|se dice|dicen|correctos|yo|calle|se oye|se habla|habla|claro|despacio) /.test(C(k)), 'Fale dos sotaques: En Buenos Aires, "yo" <b>suena</b> como "sho". / Todos los <b>acentos</b> son correctos.')),
+  coloquial: R('uma frase com gírias (chévere, chido, bacán, guay, plata, lana, ¿qué onda?…)', (t, k) => {
+    const c = C(k);
+    if (/ (legal|grana|bora) /.test(c)) return 'Isso é português. Em espanhol: <b>chévere</b> / <b>chido</b> / <b>guay</b>, <b>plata</b> / <b>lana</b>, <b>¡de una!</b>';
+    return need(/ (chévere|chido|chida|padre|bacán|guay|copado|genial|plata|lana|pasta|chamba|laburo|curro|parcero|cuate|güey|pana|che|tío|qué onda|qué más|qué hubo|quiubo|qué tal|de una|dale|órale|vale) /.test(c), 'Use uma gíria: ¡Qué <b>chévere</b>! / No tengo <b>plata</b>. / ¿<b>Qué onda</b>?');
+  }),
+  podcast: R('uma fala natural (marcadores, reações, gírias, ¿no?, ¿viste?…)', (t, k) => {
+    const c = C(k);
+    if (/ (é que|ou seja|que nada) /.test(c)) return 'Isso é português: <b>es que</b>, <b>o sea</b>, <b>qué va</b>.';
+    return need(/ (bueno|pues|o sea|es que|este|a ver|mira|mirá|oye|total|en serio|no me digas|qué bárbaro|menos mal|che|viste|no|verdad|chévere|de una|dale|qué onda|qué tal|contanos|un montón|valió la pena) /.test(c), 'Fale natural: <b>Bueno</b>, <b>pues</b> … / ¿<b>En serio</b>? / …, ¿<b>no</b>?');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
