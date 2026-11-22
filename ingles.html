@@ -24,8 +24,8 @@
   (function () { try { var p = localStorage.getItem('deutschTrilha.theme') || 'light'; var t = p === 'auto' ? (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark') : p; document.documentElement.dataset.theme = t; if (t === 'light') { document.querySelector('meta[name="theme-color"]').content = '#f4f6fb'; document.querySelector('meta[name="color-scheme"]').content = 'only light'; } } catch (e) {} })();
 </script>
 <script>
-  // quem voltou para o alemão abre a página do alemão (lang.js; o progresso de cada idioma é separado)
-  try { if (localStorage.getItem('modo.lang') === 'de') location.replace('index.html' + location.search); } catch (e) { /* fica no inglês */ }
+  // quem escolheu outro idioma abre a página dele (lang.js; o progresso de cada idioma é separado)
+  try { var P = { de: 'index.html', en: 'ingles.html', es: 'espanhol.html' }, L = localStorage.getItem('modo.lang'); if (L && P[L] && L !== 'en') location.replace(P[L] + location.search); } catch (e) { /* fica no inglês */ }
 </script>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="modo.css">

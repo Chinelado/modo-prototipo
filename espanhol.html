@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="pt-BR" data-lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MODO · Espanhol</title>
+<meta name="description" content="Trilha de espanhol latino-americano para quem fala português: lições diárias, falsos amigos, cartas de memorização e escrita guiada.">
+<meta name="theme-color" content="#0e1525">
+<meta name="color-scheme" content="dark">
+<link rel="manifest" href="manifest.webmanifest?v=2">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png?v=2">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MODO">
+<link rel="icon" href="icons/favicon.svg?v=2" type="image/svg+xml">
+<link rel="icon" href="icons/favicon-32.png?v=2" sizes="32x32" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<script>
+  // Tema antes de desenhar a tela (evita piscar escuro ao abrir no modo claro). Detalhes em app.js (applyTheme).
+  (function () { try { var p = localStorage.getItem('deutschTrilha.theme') || 'light'; var t = p === 'auto' ? (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark') : p; document.documentElement.dataset.theme = t; if (t === 'light') { document.querySelector('meta[name="theme-color"]').content = '#f4f6fb'; document.querySelector('meta[name="color-scheme"]').content = 'only light'; } } catch (e) {} })();
+</script>
+<script>
+  // quem escolheu outro idioma abre a página dele (lang.js; o progresso de cada idioma é separado)
+  try { var P = { de: 'index.html', en: 'ingles.html', es: 'espanhol.html' }, L = localStorage.getItem('modo.lang'); if (L && P[L] && L !== 'es') location.replace(P[L] + location.search); } catch (e) { /* fica no espanhol */ }
+</script>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="modo.css">
+</head>
+<body>
+<nav id="nav" hidden></nav>
+<main id="app"></main>
+<div id="toasts" aria-live="polite"></div>
+<script src="lang.js"></script>
+<script src="data/core.js"></script>
+<script src="es/base.js"></script>
+<script src="es/guia.js"></script>
+<script src="es/apoio.js"></script>
+<script src="es/curso.js"></script>
+<script src="es/m02.js"></script>
+<script src="es/m03.js"></script>
+<script src="es/m04.js"></script>
+<script src="es/m05.js"></script>
+<script src="es/m06.js"></script>
+<script src="es/trilha.js"></script>
+<script src="config.js"></script>
+<script src="cloud.js"></script>
+<script src="art.js"></script>
+<script src="interativo.js"></script>
+<script src="interativo2.js"></script>
+<script src="fala.js"></script>
+<script src="frase-es.js"></script>
+<script src="pocket.js"></script>
+<script src="app.js"></script>
+<script src="modo.js"></script>
+</body>
+</html>

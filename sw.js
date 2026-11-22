@@ -2,16 +2,16 @@
    Estratégia do app: responde com o que está guardado e atualiza em segundo plano (a versão nova vale na próxima abertura).
    Áudios (audio/xx/*.mp3): ficam num cache separado, que não é apagado quando o app atualiza. Entram ali quando você
    toca um áudio pela primeira vez ou quando baixa um nível inteiro no Perfil. */
-const CACHE = 'deutsch-trilha-v11'; // v11: troca de idioma no Perfil e verificação em todos os passos · v10: inglês A1 a C2 completo · v9: C1 do inglês completo · v8: B2 do inglês completo · v7: B1 do inglês completo · v6: A2 do inglês · v5: A1 do inglês · v4: Comece aqui do inglês · v3 (21/11/2026): página do inglês (piloto); v2: logo e ícones novos do MODO
+const CACHE = 'deutsch-trilha-v13'; // v13: A1 do espanhol · v12: página do espanhol · v11: troca de idioma no Perfil e verificação em todos os passos · v10: inglês A1 a C2 completo · v9: C1 do inglês completo · v8: B2 do inglês completo · v7: B1 do inglês completo · v6: A2 do inglês · v5: A1 do inglês · v4: Comece aqui do inglês · v3 (21/11/2026): página do inglês (piloto); v2: logo e ícones novos do MODO
 const AUDIO = 'deutsch-trilha-audio';
-const BASE = ['./', './index.html', './ingles.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png'];
+const BASE = ['./', './index.html', './ingles.html', './espanhol.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil((async () => {
     const c = await caches.open(CACHE);
-    // A lista de arquivos vem das próprias páginas (alemão e inglês): todo script e estilo local entra no cache.
+    // A lista de arquivos vem das próprias páginas (alemão, inglês e espanhol): todo script e estilo local entra no cache.
     let html = '';
-    for (const p of ['./index.html', './ingles.html']) html += await (await fetch(p, { cache: 'no-cache' })).text();
+    for (const p of ['./index.html', './ingles.html', './espanhol.html']) html += await (await fetch(p, { cache: 'no-cache' })).text();
     const local = [...html.matchAll(/(?:src|href)="([^"#:?]+)(?:\?[^"]*)?"/g)].map((m) => './' + m[1].replace(/^\.\//, ''));
     await c.addAll([...new Set([...BASE, ...local])]);
     await self.skipWaiting();
@@ -59,7 +59,7 @@ self.addEventListener('fetch', (e) => {
     if (hit) { e.waitUntil(net); return hit; }
     const res = await net;
     if (res) return res;
-    if (req.mode === 'navigate') return (await c.match(/ingles\.html$/.test(url.pathname) ? './ingles.html' : './index.html')) || Response.error();
+    if (req.mode === 'navigate') return (await c.match(/ingles\.html$/.test(url.pathname) ? './ingles.html' : /espanhol\.html$/.test(url.pathname) ? './espanhol.html' : './index.html')) || Response.error();
     return Response.error();
   })());
 });

@@ -239,7 +239,7 @@ function go(v, arg) {
     `<div class="nav-foot">🔥 ${shownStreak()} · ⭐ ${S.xp} XP</div>`;
   $$('button', nav).forEach((b) => (b.onclick = () => go(b.dataset.v)));
   // o idioma no menu lateral troca entre alemão e inglês (cada um com o próprio progresso: lang.js)
-  const ml = $('#moLang', nav); if (ml && typeof goLang === 'function') ml.onclick = () => { if (confirm(`Trocar para ${LP.code === 'de' ? 'Inglês' : 'Alemão'}? O progresso de cada idioma fica guardado separado.`)) goLang(LP.code === 'de' ? 'en' : 'de'); };
+  const ml = $('#moLang', nav); if (ml && typeof goLang === 'function') ml.onclick = () => (typeof pickLang === 'function' ? pickLang() : goLang(LP.code === 'de' ? 'en' : 'de'));
   stopRead();
   ({ home, trilha, cards, perfil, intro, onboard, extras, guide, nivel, texto, pocket, praticar: (a) => praticar(a), modulo: (a) => modulo(a), curriculo: (a) => curriculo(a) })[v](arg);
   if (v !== 'trilha') scrollTo(0, 0);
@@ -755,7 +755,7 @@ function mcq(el, html, opts, correct, cb, cls = '') {
     cb(ok, opts[b.dataset.i]);
   }));
 }
-const UML = LP.code !== 'de' ? '' : `<div class="uml">${['ä', 'ö', 'ü', 'ß'].map((c) => `<button type="button">${c}</button>`).join('')}</div>`; // teclado de tremas só no alemão
+const UML = !(LP.teclas || []).length ? '' : `<div class="uml">${LP.teclas.map((c) => `<button type="button">${c}</button>`).join('')}</div>`; // teclado de tremas (alemão) ou de acentos (espanhol)
 function wireUml(el, inp) { $$('.uml button', el).forEach((b) => (b.onclick = () => { inp.value += b.textContent; inp.focus(); })); }
 function typed(el, html, answer, cb) {
   el.innerHTML = html + `<input id="inp" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Digite em ${LP.lingua}">${UML}<button class="pri" id="chk">Verificar</button>`;
@@ -1152,8 +1152,8 @@ function perfil() {
   <label class="row"><input type="checkbox" id="falaT" ${S.fala !== false ? 'checked' : ''}> Exercícios de fala com microfone (desligue se estiver em lugar público)</label>
   <label class="row"><input type="checkbox" id="supc" ${supOn() ? 'checked' : ''}> Incluir as palavras de apoio (🆕) nas cartas de revisão</label>
   ${AUD ? `<p class="mut">🎙️ ${AUD.size.toLocaleString('pt-BR')} áudios gravados com voz natural (ElevenLabs). O que ainda não foi gravado usa a voz do navegador.</p>` : ''}
-  ${hasTTS && deVoice ? `<p class="mut">Voz do navegador: ${esc(deVoice.name)} ${spk(LP.code === 'en' ? 'Hi! I am your English voice.' : 'Guten Tag! Ich bin deine deutsche Stimme.')}</p>` : ''}
-  ${hasTTS && !deVoice ? '<p class="mut">⚠️ Não encontrei uma voz ' + (LP.code === 'en' ? 'em inglês' : 'alemã') + ' neste navegador; a pronúncia sai errada. Abra a plataforma no Chrome ou no Edge, que trazem voz ' + (LP.code === 'en' ? 'em inglês' : 'alemã') + ' própria, ou instale a voz em Configurações do Windows → Hora e idioma → Fala → Adicionar vozes → Alemão.</p>' : ''}
+  ${hasTTS && deVoice ? `<p class="mut">Voz do navegador: ${esc(deVoice.name)} ${spk(LP.hello || 'Guten Tag! Ich bin deine deutsche Stimme.')}</p>` : ''}
+  ${hasTTS && !deVoice ? '<p class="mut">⚠️ Não encontrei uma voz ' + (LP.vozNome || 'alemã') + ' neste navegador; a pronúncia sai errada. Abra a plataforma no Chrome ou no Edge, que trazem voz ' + (LP.vozNome || 'alemã') + ' própria, ou instale a voz em Configurações do Windows → Hora e idioma → Fala → Adicionar vozes → ' + LP.nome + '.</p>' : ''}
   <div class="row" style="margin-top:10px"><button id="exp">⬇️ Exportar backup</button><button id="imp">⬆️ Importar backup</button><input type="file" id="file" accept=".json" hidden></div>
   <p class="mut">O progresso fica só neste navegador. Use o backup para levar a outro dispositivo.</p>
   <button class="link" id="reset">Apagar todo o progresso</button></div>`;
@@ -1476,7 +1476,7 @@ function reminderLinks(time) {
   t.setDate(t.getDate() + (t.getHours() * 60 + t.getMinutes() >= h * 60 + m ? 1 : 0)); t.setHours(h, m, 0, 0);
   const end = new Date(t.getTime() + S.goal * 60000), pad = (n) => String(n).padStart(2, '0');
   const fmt = (d) => `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`;
-  const url = location.origin + location.pathname, title = (LP.code === 'en' ? '🇺🇸 ' : '🇩🇪 ') + LP.nome + ': lição do dia';
+  const url = location.origin + location.pathname, title = (LP.flag || '🇩🇪') + ' ' + LP.nome + ': lição do dia';
   const desc = `Lição, cartas e missão do dia na Deutsch-Trilha: ${url}`;
   const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Deutsch-Trilha//PT-BR', 'BEGIN:VEVENT', `UID:lembrete-${Date.now()}@deutsch-trilha`,
     `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+/, '')}`, `DTSTART:${fmt(t)}`, `DTEND:${fmt(end)}`, 'RRULE:FREQ=DAILY',
@@ -1507,7 +1507,7 @@ function wireAppCard() {
   t.onchange = upd; upd();
   $('#remI').onclick = () => {
     const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([reminderLinks(t.value).ics], { type: 'text/calendar' }));
-    a.download = 'lembrete-' + (LP.code === 'en' ? 'ingles' : 'alemao') + '.ics'; a.click(); toast('📅 Abra o arquivo baixado para adicionar o lembrete à sua agenda.');
+    a.download = 'lembrete-' + (LP.slug || 'alemao') + '.ics'; a.click(); toast('📅 Abra o arquivo baixado para adicionar o lembrete à sua agenda.');
   };
 }
 
