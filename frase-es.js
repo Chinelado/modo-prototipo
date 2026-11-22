@@ -161,6 +161,39 @@ const RULES = {
     if (/ suco /.test(c)) return 'Suco, na América Latina, é <b>jugo</b>.';
     return need(/ (de primero|de segundo|de postre|para tomar|incluye|incluido|menú|sopa|ensalada|jugo|picante|sin|vegetariana|plato) /.test(c), 'Peça do cardápio: <b>De primero</b>, … / <b>¿Está incluido</b> …?');
   }),
+  // ---------- Módulo 5 ----------
+  dondeesta: R('onde fica algo, com <b>estar</b> (El banco está al lado del hotel…)', (t, k) => {
+    const c = C(k);
+    if (/ (dónde|donde) es (el|la) /.test(c)) return 'Para localização, use <b>estar</b>: ¿Dónde <b>está</b> el banco?';
+    if (/ (do|da|no|na) (hotel|banco|plaza|museo|parque|estación|esquina|calle) /.test(c)) return 'Em espanhol: <b>del</b>, <b>de la</b>, <b>en el</b>, <b>en la</b>.';
+    return need(has(k, /^(está|están|estoy|queda|quedan)$/) || / (al lado|enfrente|cerca|lejos|detrás|delante|entre|esquina|derecha|izquierda|cuadras) /.test(c), 'Diga onde fica: El banco <b>está</b> al lado del hotel.');
+  }),
+  hayesta: R('<b>hay</b> (existe) ou <b>está</b> (onde fica)', (t, k) => {
+    const c = C(k);
+    if (/ hay (el|la|los|las) /.test(c)) return 'Depois de hay, use un / una ou número. Para algo específico, use <b>está</b>: El banco <b>está</b> aquí.';
+    if (/ (un|una) \p{L}+ está /u.test(c) && !/ dónde /.test(c)) return 'Para dizer que algo existe, use <b>hay</b>: <b>Hay</b> un banco en la calle.';
+    return need(has(k, /^(hay|está|están)$/), 'Use <b>hay</b> (existe) ou <b>está</b> (onde fica).');
+  }),
+  direcciones: R('uma direção, com o imperativo (sigue, dobla, cruza / siga, doble, cruce)', (t, k) => {
+    const c = C(k);
+    if (/ (vire|siga em frente|atravesse) /.test(c)) return 'Em espanhol: <b>dobla / doble</b> (vire), <b>sigue / siga</b> (siga), <b>cruza / cruce</b> (atravesse).';
+    return need(has(k, /^(sigue|siga|dobla|doble|gira|gire|cruza|cruce|toma|tome|llego|llega|llegar|recto|derecho|semáforo|perdido|perdida|ayuda|final|esquina|derecha|izquierda)$/), 'Dê uma direção: <b>Sigue</b> todo recto. <b>Dobla</b> a la derecha.');
+  }),
+  transporte: R('como você vai (en autobús, en metro, a pie, tomo el …)', (t, k) => {
+    const c = C(k);
+    if (/ de (autobús|metro|taxi|tren|avión|bicicleta|bus|carro) /.test(c) && / (voy|vas|va|vamos|van) /.test(c)) return 'Com transporte, use <b>en</b>: voy <b>en</b> metro.';
+    if (/ (en|de) pie /.test(c)) return 'A pé é <b>a pie</b>.';
+    if (/ (cojo|coges|coge) /.test(c)) return 'Na América Latina, use <b>tomar</b>: tomo el autobús.';
+    return need(/ (en autobús|en metro|en taxi|en tren|en avión|en bicicleta|en bus|en carro|a pie|tomo|tomas|toma|colectivo|camión|micro|parada|boleto|tarda|bajo|subo) /.test(c), 'Diga como vai: Voy <b>en metro</b>. / Voy <b>a pie</b>. / <b>Tomo</b> el autobús.');
+  }),
+  poder: R('um pedido com <b>poder</b> (¿Puedo …? / ¿Puede …? / No se puede …)', (t, k) => {
+    if (has(k, /^(podo|posso|podes)$/)) return 'Em espanhol: <b>puedo</b>, <b>puedes</b> (o → ue).';
+    return need(has(k, /^(puedo|puedes|puede|podemos|pueden|poder)$/), 'Use poder: <b>¿Puedo</b> pagar con tarjeta? / Aquí no se <b>puede</b> fumar.');
+  }),
+  carteles: R('um aviso ou uma placa (Prohibido …, Salida, Empuje, Fuera de servicio…)', (t, k) => {
+    if (has(k, /^(proibido|proibida|saída|empurre|puxe|banheiro|banheiros)$/)) return 'Escreva o aviso em espanhol: <b>Prohibido</b>, <b>Salida</b>, <b>Empuje</b>, <b>Jale</b>, <b>Baños</b>.';
+    return need(has(k, /^(prohibido|prohibida|salida|entrada|empuje|jale|tire|abierto|abierta|cerrado|cerrada|baños|caja|horario|servicio|permite|ascensor|escalera|aviso|alquila|no)$/), 'Escreva um aviso: <b>Prohibido fumar</b> / <b>Salida</b> / <b>Empuje</b>.');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
