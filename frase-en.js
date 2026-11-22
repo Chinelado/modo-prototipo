@@ -1033,6 +1033,28 @@ const RULES = {
     if (/^actually,? (many|most|a lot of|people|millions)\b/.test(c)) return '<b>actually</b> é "na verdade". Para "atualmente", use <b>nowadays</b>.';
     return need(/\b(nowadays|these days|question of whether|widely debated|firstly|first of all|to begin with|in addition|furthermore|moreover|for example|for instance|some people claim|while it is true|however|in conclusion|on balance|to conclude|i believe|advantages?|disadvantages?|outweigh)\b/.test(c), 'Use a linguagem da redação: <b>Nowadays</b> … / <b>Firstly</b> … / <b>In conclusion, I believe</b> …');
   }),
+  // ---------- Módulo 31 ----------
+  formas_fracas: R('uma frase com palavras gramaticais (of, to, and, can, for, was) que viram formas fracas', (t, k) => need(has(k, /^(of|to|and|can|for|was|a|an|the|than|at|from|some)$/) && k.length >= 3, 'Escreva uma frase completa com of, to, and ou can: A cup <b>of</b> tea <b>and</b> a glass <b>of</b> water.')),
+  fala_conectada: R('uma frase do dia a dia (com want to, going to, got to, did you…)', (t, k) => {
+    const c = k.join(' ');
+    return need(/\b(want to|wanna|going to|gonna|got to|gotta|did you|would you|what do you|don't you|let me|lemme|give me|gimme|don't know|dunno|kind of|kinda|turn it|pick it)\b/.test(c), 'Use uma expressão da fala: <b>want to</b> (wanna), <b>going to</b> (gonna), <b>did you</b> …');
+  }),
+  acento_palavra: R('uma frase com uma palavra de acento importante (record, present, increase, photograph, comfortable…)', (t, k) => need(has(k, /^(record|records|recorded|recording|present|presents|presented|increase|increases|increased|decrease|object|photograph|photographs|photography|photographer|photographic|comfortable|vegetable|vegetables|chocolate|hotel|interesting|economy|economic|develop|event|percent|engineer|japanese|banana|about|teacher)$/), 'Use uma palavra do treino de acento: <b>reCORD</b>, <b>PREsent</b>, <b>COMfortable</b>, <b>hoTEL</b> …')),
+  enfase: R('uma frase com <b>ênfase</b> (uma palavra em MAIÚSCULAS para destacar, ou I DO / I DID)', (t, k) => {
+    if (/\b(do|did|does)\s+(likes|liked|called|went)\b/i.test(t)) return 'Depois de do / did, o verbo básico: I DID <b>call</b> you.';
+    return need(/\b[A-Z]{2,}\b/.test(t.replace(/\bI\b/g, '')) || /\b(not|no),/i.test(t) || /\bI (do|did) \w+/i.test(t), 'Destaque a palavra-chave em MAIÚSCULAS: No, the <b>RED</b> one. / I <b>DO</b> like it!');
+  }),
+  entonacao: R("uma pergunta ou uma question tag (It's nice, isn't it?)", (t, k) => {
+    const c = k.join(' ');
+    if (/\b(it's|it is) \w+.*, is it\?/.test(c) && !/\bnot\b|n't \w+,/.test(c.split(',')[0])) return "Frase afirmativa pede tag negativa: It's nice, <b>isn't it</b>?";
+    if (/\byou're \w+.*, (isn't|don't) you\?/.test(c)) return "A tag de you're é <b>aren't you</b>?";
+    return need(/\?/.test(t) || /,[^,]+,[^,]* and \w+/.test(t) || /\b(isn't|aren't|don't|doesn't|didn't|can't|won't|haven't|wasn't|weren't) (it|you|he|she|we|they|i)\b/.test(c), "Faça uma pergunta ou use uma tag: It's cold, <b>isn't it</b>?");
+  }),
+  marcadores: R('uma frase com um marcador da fala (well, I mean, actually, you know, kind of, anyway…)', (t, k) => {
+    const c = k.join(' ');
+    if (/^actually,? (nowadays|these days|today)\b/.test(c)) return '<b>actually</b> é "na verdade". "Atualmente" é <b>nowadays</b>.';
+    return need(/\b(well|i mean|actually|you know|kind of|sort of|anyway|to be fair|to be honest|the thing is|basically|long story short|or something|and stuff|let me think|where was i|honestly)\b/.test(c), 'Use um marcador da fala: <b>Well</b>, … / <b>I mean</b>, … / <b>Actually</b>, …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
