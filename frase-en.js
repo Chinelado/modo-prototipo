@@ -968,6 +968,41 @@ const RULES = {
     if (/\b(yours faithfully|yours sincerely|dear sir)\b/.test(c)) return 'Isso é formal demais para um amigo. Use <b>Take care</b> / <b>Love</b>.';
     return need(/\b(in touch|get back to|guess what|taken up|took up|catch up|catching up|can't wait|take care|love|anyway|by the way|let me know|come and stay|ran into|moved house|how are things|hear from you|no worries)\b/.test(c), "Escreva como para um amigo: <b>Sorry I haven't been in touch</b> / <b>Guess what?</b> / <b>Can't wait to</b> …");
   }),
+  // ---------- Módulo 29 ----------
+  conduzir_reuniao: R("uma frase para conduzir uma reunião (Let's get started / Let's move on to … / To sum up …)", (t, k) => {
+    const c = k.join(' ');
+    if (/\bmove (to|for) the next\b/.test(c)) return "Passar para: move <b>on</b> to the next point.";
+    return need(/\b(get started|get down to business|agenda|item|move on|brings us to|over to you|stick to|off topic|running out of time|sum up|action points|any other business|wrap up|purpose of this meeting|come back to)\b/.test(c), "Conduza a reunião: <b>Let's get started</b> / <b>Let's move on to</b> … / <b>To sum up</b> …");
+  }),
+  email_trabalho: R("uma frase de e-mail de trabalho (Just following up on … / Could you let me know by … / I'll keep you posted)", (t, k) => {
+    const c = k.join(' ');
+    if (/\buntil (monday|tuesday|wednesday|thursday|friday|tomorrow)\b/.test(c) && /\b(send|let me know|finish|reply)\b/.test(c)) return 'Para prazo final, use <b>by</b>: let me know <b>by</b> Friday.';
+    return need(/\b(follow(ing)? up|let me know|keep you posted|heads|attached|as discussed|thanks in advance|by (monday|tuesday|wednesday|thursday|friday|tomorrow|the end)|quick question|asap|fyi|cc|reminder|any questions)\b/.test(c), "Escreva como num e-mail de trabalho: <b>Just following up on</b> … / <b>Could you let me know by</b> …");
+  }),
+  feedback: R("uma frase de feedback com tato (I really liked … / You might want to … / It might be worth …)", (t, k) => {
+    const c = k.join(' ');
+    if (/\bmight want (add|change|check|make)\b/.test(c)) return 'Falta o to: You might want <b>to</b> add …';
+    if (/\bworth to\b/.test(c)) return 'Depois de worth, use -ing: It might be worth <b>checking</b>.';
+    return need(/\b(might want to|might be worth|could work on|work on|great job|really liked|a bit|slightly|overall|strength|keep up the good work|helpful|great start|have you thought about|maybe you could)\b/.test(c), 'Dê feedback com tato: <b>You might want to</b> … / <b>It might be worth</b> …');
+  }),
+  discordar_diplomacia: R("uma discordância diplomática (I see your point, but … / I'm not convinced … / Wouldn't it be better …?)", (t, k) => {
+    const c = k.join(' ');
+    if (/\bi('m| am) not agree\b/.test(c)) return "Diga <b>I don't agree</b>, ou melhor, com tato: <b>I'm not sure that</b> …";
+    if (/^(you're|you are) wrong\b/.test(c)) return 'Isso soa agressivo. Tente: <b>I see your point, but</b> …';
+    return need(/\b(see your point|good point|fair point|take your point|not sure|not convinced|only concern|wouldn't it be better|have we considered|what if we|meet halfway|compromise|to be honest|doubts|go with)\b/.test(c), "Discorde com tato: <b>I see your point, but</b> … / <b>Wouldn't it be better to</b> …?");
+  }),
+  apresentacao: R("uma frase de apresentação ou de gráfico (Today I'm going to talk about … / sales rose sharply …)", (t, k) => {
+    const c = k.join(' ');
+    if (/\b(rised|falled|raised sharply)\b/.test(c)) return 'Passado irregular: rise → <b>rose</b>, fall → <b>fell</b>.';
+    if (/\b(rose|fell|increased|decreased|dropped) (sharp|slight|steady|dramatic)\b/.test(c)) return 'Depois do verbo, use o advérbio: rose <b>sharply</b>, fell <b>slightly</b>.';
+    return need(/\b(talk about|turn to|moving on|to conclude|any questions|as you can see|this slide|graph|rose|rise|rises|increased?|fell|fall|falls|dropped|drop|decreased?|remained? stable|peak|sharply|steadily|slightly|dramatically|sharp|slight|steady)\b/.test(c), "Apresente: <b>Today I'm going to talk about</b> … / Sales <b>rose sharply</b> …");
+  }),
+  resumo_reuniao: R("uma frase de resumo de reunião (We discussed … / It was agreed that … / X will … by …)", (t, k) => {
+    const c = k.join(' ');
+    if (/\bdiscussed about\b/.test(c)) return 'discuss não leva about: We discussed <b>the budget</b>.';
+    if (/\bit was agree\b/.test(c)) return 'Na passiva: It was <b>agreed</b> that …';
+    return need(/\b(discussed|agreed|decided|approved|action points|will \w+ .*\bby\b|outstanding|next meeting|missed anything|thanks,? everyone|attendees|summary|for coming)\b/.test(c), 'Resuma: <b>We discussed</b> … / <b>It was agreed that</b> … / Paula <b>will</b> send … <b>by</b> Friday.');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
