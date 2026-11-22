@@ -1149,6 +1149,32 @@ const RULES = {
     if (/ (é que|ou seja|que nada) /.test(c)) return 'Isso é português: <b>es que</b>, <b>o sea</b>, <b>qué va</b>.';
     return need(/ (bueno|pues|o sea|es que|este|a ver|mira|mirá|oye|total|en serio|no me digas|qué bárbaro|menos mal|che|viste|no|verdad|chévere|de una|dale|qué onda|qué tal|contanos|un montón|valió la pena) /.test(c), 'Fale natural: <b>Bueno</b>, <b>pues</b> … / ¿<b>En serio</b>? / …, ¿<b>no</b>?');
   }),
+  // ---------- Módulo 32 ----------
+  dele_b2: R('uma frase sobre a prova (prueba, minutos, preparación, grupos, caduca…)', (t, k) => need(/ (examen|prueba|pruebas|aprobar|apto|grupo|grupos|lectura|auditiva|escrita|escritas|oral|orales|preparación|minutos|dele|dura|diploma|caduca|válido|inscripción|modelos|centro de examen|universidad|horas) /.test(C(k)), 'Fale da prova: La <b>prueba</b> escrita dura … / Hay que <b>aprobar</b> los dos grupos.')),
+  b2_lectura: R('uma estratégia de leitura (lee las preguntas, subraya, sinónimos, distractores…)', (t, k) => need(/ (lee|leo|lees|preguntas|texto|subraya|palabras clave|sinónimos|opciones|distractores|respuesta|idea principal|párrafo|marca|hoja|atascado|cuidado|tiempo) /.test(C(k)), 'Dê uma estratégia: <b>Lee</b> primero las <b>preguntas</b>. / Busca <b>sinónimos</b>.')),
+  b2_auditiva: R('uma estratégia de audição (anota palabras clave, la segunda escucha, fíjate en …)', (t, k) => {
+    const c = C(k);
+    if (/ fijate /.test(c)) return 'O imperativo com pronome leva acento: <b>fíjate</b>.';
+    return need(/ (escucha|escuchas|anota|anotas|palabras clave|segunda|primera|confirmar|fíjate|quién dice|números|nombres|podcasts|países|nervioso|preguntas|aprovecha) /.test(c), 'Dê uma estratégia: En la primera <b>escucha</b>, <b>anota</b> solo palabras clave.');
+  }),
+  b2_oral: R('uma frase da prova oral (me parece la mejor propuesta, parece que, estarán, me sorprende que…)', (t, k) => {
+    const c = C(k);
+    if (/ me sorprende que (\p{L}+ )+(trabajan|prefieren|usan|viven|tienen|son|hay) /u.test(c)) return 'Depois de <b>me sorprende que</b>, o subjuntivo: <b>trabajen</b>, <b>prefieran</b>, <b>haya</b>.';
+    if (/ es lógico que (\p{L}+ )+(prefiere|prefieren|quiere|es|hay|tiene) /u.test(c)) return 'Depois de <b>es lógico que</b>, o subjuntivo: <b>prefiera</b>, <b>quiera</b>, <b>sea</b>.';
+    return need(/ (me parece|propuesta|propondría|ventaja|inconveniente|en la foto|se ve|parece que|estarán|serán|tendrán|me imagino|me sorprende|me llama la atención|es lógico|el dato) /.test(c), 'Na oral: <b>Me parece la mejor propuesta</b> … / <b>Parece que</b> … / <b>Me sorprende que</b> …');
+  }),
+  b2_escrita: R('uma estratégia de escrita (toma notas, haz un esquema, revisa, el registro…)', (t, k) => {
+    const c = C(k);
+    if (/ (haz|hacer|hago|hace) notas /.test(c)) return 'Anotar é <b>tomar notas</b>.';
+    if (/ has un /.test(c)) return 'O imperativo de hacer (tú) é <b>haz</b>.';
+    return need(/ (toma notas|tomar notas|esquema|haz|hago|revisa|revisar|registro|destinatario|palabras|conectores|acentos|concordancia|repitas|borrador|ideas principales|tarea|minutos|según la grabación) /.test(c), 'Dê uma estratégia: <b>Toma notas</b> … / <b>Haz un esquema</b> … / <b>Revisa</b> …');
+  }),
+  b2_simulado: R('uma frase da carta formal (me dirijo a, según datos, asimismo, si bien es cierto que, propondría que…)', (t, k) => {
+    const c = C(k);
+    if (/ me dirigo /.test(c)) return 'É <b>me dirijo</b>, com j.';
+    if (/ propondría que (\p{L}+ )+(limite|escuche|cree|construya|controle|ponga|limiten|escuchen) /u.test(c)) return 'Com <b>propondría que</b>, o imperfeito do subjuntivo: <b>limitara</b>, <b>escuchara</b>, <b>creara</b>.';
+    return need(/ (me dirijo|en relación con|señor director|según|datos|en primer lugar|asimismo|si bien|no es menos cierto|propondría|sería conveniente|por todo ello|atentamente|pido|propongo) /.test(c), 'Escreva formalmente: <b>Me dirijo a usted</b> … / <b>Asimismo</b>, … / <b>Propondría que</b> …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
