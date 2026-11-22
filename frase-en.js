@@ -570,6 +570,40 @@ const RULES = {
     return need(/\b(have|has|'ve|i've|you've|we've|they've|she's|he's) (been |already |just |never )?\p{L}+/u.test(c) && has(k, /^(have|has|i've|you've|we've|they've|she's|he's|haven't|hasn't)$/), "Use o present perfect: I'<b>ve saved</b> … / I'<b>ve been saving</b> …");
   }),
   texto_mudanca: R('uma frase do seu <b>texto sobre uma mudança</b>: used to, passado com data, have been + -ing ou get used to', (t, k) => need(/\b(used to|been \p{L}+ing|getting used|got used|ago|looking back|regret|hasn't been|i've|have)\b/u.test(k.join(' ')) || k.some((w) => /\p{L}{3,}ed$/u.test(w)), "Conte a mudança: I <b>used to</b> … / Two years <b>ago</b>, I … / I'<b>ve been</b> …ing …")),
+  // ---------- Módulo 17 ----------
+  might: R('uma possibilidade com <b>might / may</b> ou um grau de certeza (I\'ll probably … / I definitely won\'t …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(might|may) to\b/.test(c)) return 'might e may vêm sem to: I might <b>go</b>.';
+    if (/\b(mights|mays)\b/.test(c)) return 'might não muda: she <b>might</b>.';
+    if (/\bwon't probably\b/.test(c)) return 'Com won\'t, probably vem antes: I <b>probably won\'t</b> go.';
+    return need(has(k, /^(might|may|probably|definitely|maybe|perhaps)$/), 'Fale de uma possibilidade: I <b>might</b> … / I\'ll <b>probably</b> …');
+  }),
+  tempo_futuro: R("uma frase com <b>when, as soon as, before, after ou until</b> + presente (When I get there, I'll call you.)", (t, k) => {
+    const c = k.join(' ');
+    if (/\b(when|as soon as|before|after|until|once) (i|you|we|they|he|she|it)( will|'ll)\b/.test(c)) return 'Depois de when / as soon as, o futuro vai no presente: When I <b>get</b> there, …';
+    return need(/\b(when|as soon as|before|after|until|once|by the time)\b/.test(c), "Use when, as soon as, before, after ou until: <b>When</b> I get there, I'll call you.");
+  }),
+  previsao: R("uma <b>previsão</b> sobre o futuro (will / won't / likely / I doubt …)", (t, k) => {
+    const c = k.join(' ');
+    if (/\bi think (that )?\p{L}+ (won't|will not)\b/u.test(c)) return "Na opinião negativa, o not vai no think: <b>I don't think</b> … will …";
+    if (/\b(is|are) likely (go|be|happen|change|rise|disappear)\b/.test(c)) return 'be likely pede to: is likely <b>to</b> go up.';
+    return need(has(k, /^(will|won't|likely|unlikely|doubt|future|probably|definitely|predict)$/) || /\b(\p{L}+'ll)\b/u.test(c), 'Faça uma previsão: Cars <b>will</b> … / Prices are <b>likely to</b> … / I <b>doubt</b> …');
+  }),
+  metas: R('uma <b>meta</b> com to + verbo (My goal is to … / I\'m planning to …) e, se quiser, um prazo com by', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(goal is|planning|plan|hope|intend|would like|'d like|want) (reach|finish|travel|learn|save|run|read|change|get|work|go|buy|start)\b/.test(c)) return 'Esse verbo pede to: I\'m planning <b>to</b> travel.';
+    return need(/\b(goal is|goal|plan|planning|hope|intend|would like|'d like|want) to\b/.test(c) || /\bby (the end|next|december|june|\d)/.test(c), 'Diga uma meta: My <b>goal is to</b> … / I\'m <b>planning to</b> … by …');
+  }),
+  future_continuous: R('o que você <b>vai estar fazendo</b>: will be + -ing (This time next year, I\'ll be living …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(will|'ll) be (live|work|fly|study|sleep|drive|travel|sit|wait|use|lie)\b/.test(c)) return 'Depois de will be, o verbo vai com -ing: I\'ll be <b>living</b>.';
+    if (/\b(will|'ll) (living|working|flying|studying|sleeping|driving|traveling)\b/.test(c)) return 'Falta o be: I\'ll <b>be</b> working.';
+    return need(/\b(will|'ll|won't) ((i|you|we|they|he|she|it) )?be \p{L}+ing\b/u.test(c), "Use will be + -ing: I'<b>ll be living</b> …");
+  }),
+  carta_futuro: R('uma frase da <b>carta para o futuro</b> (When you read this, … / I hope you\'ll be … / You might …)', (t, k) => {
+    if (/\bwhen you will (read|open)\b/i.test(norm(t))) return 'Depois de when, o futuro vai no presente: When you <b>read</b> this…';
+    return need(/\b(will|'ll|going to|might|may|hope|when you|don't forget|remember|be kind|take care)\b/i.test(norm(t)), "Escreva para o futuro: When you read this, … / I hope you'<b>ll be</b> … / You <b>might</b> …");
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
