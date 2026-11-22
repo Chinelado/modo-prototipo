@@ -1208,6 +1208,40 @@ const RULES = {
     if (/ brindo (a|para) /.test(c)) return 'Em espanhol se brinda <b>por</b>: ¡Brindo <b>por</b> ustedes!';
     return need(/ (queridos|queridas|querido|querida|estimados|lo más|lo mejor|fue|fueron|no es que|sino|sumamente|brindo|brindemos|salud|gracias|agradecid[oa]|agradezco|compañeros|amigos|estos años|echar|extrañar|emocionad[oa]) /.test(c), 'Escreva como num discurso: <b>Queridos</b> compañeros … / <b>Lo más bonito</b> … / ¡<b>Brindo por</b> ustedes!');
   }),
+  // ---------- Módulo 34 ----------
+  impersonal_ac: R('uma frase acadêmica impessoal (se analiza, cabe señalar, conviene recordar, como hemos visto…)', (t, k) => {
+    const c = C(k);
+    if (/ (yo creo|yo pienso|yo analicé|en mi opinión) /.test(c)) return 'No texto acadêmico, evite o "yo": <b>se puede afirmar que</b> … / <b>en este trabajo se analiza</b> …';
+    if (/ habemos /.test(c)) return 'É <b>hemos</b>: como hemos visto.';
+    return need(/ (se analiza|se analizan|se observa|se observan|se propone|se concluye|se puede|cabe|conviene|es preciso|es necesario|hemos|veremos|en este trabajo|a continuación) /.test(c), 'Escreva impessoal: <b>Se observa</b> que … / <b>Cabe señalar</b> que …');
+  }),
+  cautela: R('uma frase com cautela (podría afirmarse, los datos sugieren, en cierta medida, tiende a…)', (t, k) => {
+    const c = C(k);
+    if (/ (sugerem|sugerén|sugeren) /.test(c)) return 'Sugerir: los datos <b>sugieren</b>.';
+    if (/ en certa medida /.test(c)) return 'Em espanhol: en <b>cierta</b> medida.';
+    return need(/ (podría|podrían|cabría|sería|habría|parece|al parecer|aparentemente|en cierta medida|en gran parte|hasta cierto punto|tiende|tienden|sugiere|sugieren|apunta|apuntan|indica|indican|probablemente|posiblemente|en la mayoría) /.test(c), 'Atenue: <b>Podría afirmarse</b> que … / Los datos <b>sugieren</b> … / <b>En cierta medida</b>, …');
+  }),
+  citar: R('uma frase citando uma fonte (según X, como señala X, X sostiene / advierte que…)', (t, k) => {
+    const c = C(k);
+    if (/ segundo (el |la |los |las )?(\p{L}+ )?(autor|autora|informe|estudio|garcía|pérez|lópez|ruiz|datos) /u.test(c)) return '"Segundo" (a fonte) é <b>según</b>: según García …';
+    if (/ sostene /.test(c)) return 'Sostener se conjuga como tener: <b>sostiene</b>.';
+    return need(/ (según|de acuerdo con|como señala|en palabras de|para|afirma|afirmó|señala|señaló|sostiene|sostuvo|plantea|advierte|cuestiona|cuestionan|subraya|indica) /.test(c), 'Cite: <b>Según</b> García (2019), … / López <b>sostiene</b> que …');
+  }),
+  estructurar: R('uma frase que organiza o texto (se divide en, en primer lugar, a continuación, asimismo, en suma…)', (t, k) => {
+    const c = C(k);
+    if (/ (a seguir|em suma|em primeiro lugar) /.test(c)) return 'Isso é português: <b>a continuación</b>, <b>en suma</b>, <b>en primer lugar</b>.';
+    return need(/ (se divide|en primer lugar|en segundo lugar|a continuación|por último|asimismo|además|por otra parte|no obstante|sin embargo|ahora bien|en suma|en definitiva|en conclusión|a modo de conclusión|por todo lo expuesto|apartado|cabe concluir) /.test(c), 'Organize: <b>En primer lugar</b>, … / <b>A continuación</b>, … / <b>En suma</b>, …');
+  }),
+  definir: R('uma definição, classificação ou exemplo (se entiende por, consiste en, se distinguen, es el caso de…)', (t, k) => {
+    const c = C(k);
+    if (/ consiste de /.test(c)) return 'É <b>consiste en</b>.';
+    return need(/ (se entiende|se define|consiste en|se divide|se distinguen|existen|a saber|por ejemplo|tal como|es el caso|un ejemplo|es un|es una|se llama) /.test(c), 'Defina: <b>Se entiende por</b> X … / X <b>consiste en</b> … / <b>Es el caso de</b> …');
+  }),
+  resumen_ac: R('uma frase de resumo acadêmico (el objetivo es, se realizó, los resultados muestran, se concluye…)', (t, k) => {
+    const c = C(k);
+    if (/ el objetivo de este (estudio|trabajo) es de /.test(c)) return 'Sem "de": El objetivo … <b>es analizar</b>.';
+    return need(/ (el objetivo|tiene como objetivo|para ello|se realizó|se realizaron|se entrevistó|se analizaron|los resultados|los datos|muestran|sugieren|indican|se concluye|permiten|palabras clave|tiende) /.test(c), 'Escreva como num resumo: <b>El objetivo</b> … / <b>Para ello, se realizó</b> … / <b>Se concluye que</b> …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
