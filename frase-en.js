@@ -604,6 +604,44 @@ const RULES = {
     if (/\bwhen you will (read|open)\b/i.test(norm(t))) return 'Depois de when, o futuro vai no presente: When you <b>read</b> this…';
     return need(/\b(will|'ll|going to|might|may|hope|when you|don't forget|remember|be kind|take care)\b/i.test(norm(t)), "Escreva para o futuro: When you read this, … / I hope you'<b>ll be</b> … / You <b>might</b> …");
   }),
+  // ---------- Módulo 18 ----------
+  condicional2: R("uma situação imaginada: <b>if + passado, would + verbo</b> (If I had more money, I'd travel.)", (t, k) => {
+    const c = k.join(' ');
+    if (/\bif (i|you|we|they|he|she|it) would\b/.test(c)) return 'Depois de if, use o passado, e não would: If I <b>had</b> …';
+    if (/\bif i (am|was|would be) you\b/.test(c)) return 'O padrão é <b>If I were you</b>.';
+    if (/\bif (i|you|we|they|he|she) (had|were|won|lived|could|knew)\b/.test(c) && /\b(will|'ll)\b/.test(c) && !/\bwould|'d\b/.test(c)) return 'Com if + passado, o resultado é <b>would</b>: If I had …, I<b>\'d</b> …';
+    return need(/\bif\b/.test(c) && /\b(would|'d|could|might|wouldn't)\b/.test(c), "Imagine: <b>If</b> I had …, I<b>'d</b> …");
+  }),
+  hipotetica: R("uma pergunta ou resposta imaginada (What would you do if …? / I'd … / I'd never …)", (t, k) => {
+    const c = k.join(' ');
+    if (/\bwhat will you do if (you|i) (found|won|saw|had|were|lost)\b/.test(c)) return 'Com if + passado, a pergunta usa <b>would</b>: What would you do if…?';
+    if (/\b(would|'d) (to )?(took|went|told|kept|lied|stole)\b/.test(c)) return 'Depois de would, o verbo vem no básico: I\'d <b>take</b> …';
+    return need(/\b(would|'d|wouldn't|what if|tough one)\b/.test(c), "Use would: What <b>would</b> you do if…? / I<b>'d</b> …");
+  }),
+  wish: R('um desejo sobre o presente: <b>wish + passado</b> (I wish I had …, I wish I could …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bwish (i|you|we|they|he|she|it) (have|has|am|is|are|can|will|know|live|speak)\b/.test(c)) return 'Depois de wish, o verbo vai para o passado: I wish I <b>had</b> / <b>were</b> / <b>could</b> …';
+    return need(/\b(wish|if only)\b/.test(c), 'Use wish: I <b>wish</b> I had … / I <b>wish</b> I could …');
+  }),
+  unless: R('uma condição com <b>unless, as long as, provided that, in case</b> ou <b>even if</b>', (t, k) => {
+    const c = k.join(' ');
+    if (/\bunless (i|you|we|they|he|she|it) (don't|doesn't|do not|does not)\b/.test(c)) return 'unless já é negativo (if not): unless you <b>hurry</b>, sem don\'t.';
+    if (/\b(unless|as long as|in case|provided that|even if) (i|you|we|they|he|she|it) (will|'ll)\b/.test(c)) return 'Depois dessas palavras, o futuro vai no presente: in case it <b>rains</b>.';
+    return need(/\b(unless|as long as|provided that|providing that|in case|even if)\b/.test(c), 'Use unless, as long as, in case ou even if.');
+  }),
+  condicional12: R('uma condição possível (if + presente, will) ou imaginada (if + passado, would)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bif (i|you|we|they|he|she|it) (win|get|pass|have|am|is|are|go|study)\b/.test(c) && /\b(would|'d)\b/.test(c)) return 'Não misture: com if + presente, use <b>will</b> (If I win, I\'ll …).';
+    if (/\bif (i|you|we|they|he|she|it) (won|got|passed|had|were|went|could)\b/.test(c) && /\b(will|'ll)\b/.test(c) && !/\b(would|'d)\b/.test(c)) return 'Não misture: com if + passado, use <b>would</b> (If I won, I\'d …).';
+    if (/\bif (i|you|we|they|he|she|it) (will|would)\b/.test(c)) return 'Depois de if, nunca will ou would.';
+    return need(/\bif\b/.test(c) && /\b(will|won't|would|wouldn't|'ll|'d)\b/.test(c), "Use uma condicional: If I …, I'll … / If I …ed, I'd …");
+  }),
+  conselho_coluna: R("um <b>conselho</b> com empatia (I understand … / If I were you, I'd … / You could …)", (t, k) => {
+    const c = k.join(' ');
+    if (/\bif i (am|was|would be) you\b/.test(c)) return 'O padrão é <b>If I were you</b>.';
+    if (/\bif i were you,? (i will|i'll)\b/.test(c)) return "Com If I were you, use <b>I'd</b>: If I were you, I'd …";
+    return need(/\b(if i were you|you should|you could|why don't you|i understand|must be|i'd|i would)\b/.test(c), "Aconselhe: <b>If I were you, I'd</b> … / <b>You could</b> …");
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
