@@ -976,6 +976,45 @@ const RULES = {
     if (/ les ruego que (me )?(responden|envían|devuelven|pagan|informan) /.test(c)) return 'Depois de <b>les ruego que</b>, o subjuntivo: <b>respondan</b>, <b>envíen</b>, <b>devuelvan</b>.';
     return need(/ (me dirijo|descontento|el pasado|adquirí|no obstante|sin embargo|asimismo|solicito|les ruego|devolución|sustitución|importe|en caso contrario|me veré obligad|quedo a la espera|atentamente|dado que|por consiguiente) /.test(c), 'Escreva formalmente: <b>Me dirijo a ustedes</b> … / <b>Solicito</b> … / <b>En caso contrario</b> …');
   }),
+  // ---------- Módulo 27 ----------
+  relativo_prep: R('uma relativa com preposição (en la que, con el que, por el cual, con quien…)', (t, k) => {
+    const c = C(k);
+    if (/ (el|la|los|las) \p{L}+ (el|la) cual (leí|vi|compré|escribí|conocí|tengo) /u.test(c)) return 'Sem preposição, use só <b>que</b>: el libro <b>que</b> leí.';
+    if (/ (en|con|por|para|de) que (trabajo|vivo|hablé|viajé|renuncié) /.test(c)) return 'Depois de preposição, o artigo: en <b>la</b> que, con <b>el</b> que, por <b>el</b> que.';
+    return need(/ (en|con|por|para|de|a|sin|sobre|bajo|desde) (el|la|los|las) (que|cual|cuales) /.test(c) || / (con|a|para|de) (quien|quienes) /.test(c), 'Use: la empresa <b>en la que</b> … / el motivo <b>por el cual</b> … / la amiga <b>con quien</b> …');
+  }),
+  lo_que: R('uma frase com lo que ou lo cual', (t, k) => {
+    const c = C(k);
+    if (/^ (el|la) que (más|menos) /.test(c)) return 'Para a ideia, use <b>lo</b>: <b>lo</b> que más me gusta.';
+    return need(/ (lo que|lo cual|todo lo que) /.test(c), 'Use <b>lo que</b>: <b>Lo que</b> necesito es … / …, <b>lo cual</b> me molestó.');
+  }),
+  cuyo: R('uma relativa de posse com cuyo, cuya, cuyos, cuyas', (t, k) => {
+    const c = C(k);
+    if (/ cuy[oa]s? (el|la|los|las) /.test(c)) return 'Depois de <b>cuyo</b>, sem artigo: <b>cuya</b> novela.';
+    if (/ que (su|sus) (novela|obra|obras|libro|libros|dueño|hijos|padre|madre) /.test(c)) return 'Na escrita, o "que su" vira <b>cuyo</b>: la autora <b>cuya</b> novela …';
+    if (/ cuyo (novela|obra|letra|casa|ciudad|protagonista|carrera) /.test(c)) return '<b>cuyo</b> concorda com o que vem depois: <b>cuya</b> novela.';
+    if (/ cuya (libro|puerto|dueño|nombre|padre) /.test(c)) return '<b>cuyo</b> concorda com o que vem depois: <b>cuyo</b> libro.';
+    return need(/ (cuyo|cuya|cuyos|cuyas) /.test(c), 'Use <b>cuyo</b>: la autora <b>cuya</b> novela … / un pueblo <b>cuyos</b> habitantes …');
+  }),
+  relativo_adv: R('uma relativa de lugar, tempo ou modo (donde, el día en que, la manera en que…)', (t, k) => {
+    const c = C(k);
+    if (/ (la ciudad|el pueblo|la casa|el barrio|el lugar) dónde (nací|vivo|crecí|vivía|trabajo) /.test(c)) return 'Como relativo, <b>donde</b> não tem acento: la ciudad <b>donde</b> nací.';
+    if (/ (el día|el año|la vez|el momento) cuando /.test(c)) return 'Depois de um substantivo de tempo, <b>(en) que</b>: el día <b>en que</b> …';
+    return need(/ (donde|adonde|en que|en el que|en la que|la vez que|el día que|la manera en que|la forma en que|así es como|como) /.test(c), 'Use: la ciudad <b>donde</b> … / el día <b>en que</b> … / la manera <b>en que</b> …');
+  }),
+  relativo_subj: R('uma relativa com subjuntivo (busco a alguien que hable, no hay nadie que…, el que quiera…)', (t, k) => {
+    const c = C(k);
+    if (/ (busco|buscamos|necesito|necesitamos|quiero|queremos) (a )?(un|una|alguien|algo) (\p{L}+ )?que (tiene|habla|sabe|está|acepta|es|puede) /u.test(c)) return 'Antecedente procurado: subjuntivo: que <b>tenga</b>, <b>hable</b>, <b>sepa</b>, <b>esté</b>.';
+    if (/ no (conozco a nadie|hay nadie|hay nada|tengo nada) que (habla|sabe|tiene|me gusta|es|puede) /.test(c)) return 'Antecedente inexistente: subjuntivo: que <b>hable</b>, <b>sepa</b>, <b>me guste</b>.';
+    if (/ el que (quiere|quiera) venir, que (avisa) /.test(c)) return 'É <b>que avise</b>.';
+    return need(/ (busco|buscamos|necesito|necesitamos|quiero|no conozco|no hay|tengo|el que|quien|cuando quieras|lo que sea|donde sea) /.test(c), 'Use: <b>Busco</b> a alguien que <b>hable</b> … / <b>No hay nadie que</b> …');
+  }),
+  resena_libro: R('uma frase de resenha (es una novela cuya …, cuenta la historia de, lo que más me gustó, a quien busque…)', (t, k) => {
+    const c = C(k);
+    if (/ cuy[oa]s? (el|la|los|las) /.test(c)) return 'Depois de <b>cuyo</b>, sem artigo.';
+    if (/ a quien (busca|quiere|tiene|le gusta) /.test(c)) return 'Para o leitor indefinido, o subjuntivo: a quien <b>busque</b>, <b>quiera</b>, <b>le guste</b>.';
+    return need(/ (novela|película|serie|libro|cuenta la historia|trata de|cuyo|cuya|donde|en la que|en el que|lo que más|lo que menos|lo cual|recomiendo|recomendaría|lectura|desenlace|personajes|protagonista|ambientada) /.test(c), 'Escreva a resenha: <b>Cuenta la historia de</b> … / <b>Lo que más me gustó</b> … / <b>Se la recomiendo</b> …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
