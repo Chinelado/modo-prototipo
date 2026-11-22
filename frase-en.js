@@ -672,6 +672,36 @@ const RULES = {
     if (/\b(i'm|i'd|don't|can't|won't|isn't)\b/.test(c)) return 'No e-mail formal, sem contrações: <b>I am</b>, <b>I would</b>.';
     return need(/\b(inquire|enquire|could you (please )?tell me|i would like to know|i would be grateful|look forward|dear|regards|further information)\b/.test(c), 'Escreva formalmente: I am writing to <b>inquire about</b> … / <b>Could you please tell me</b> …?');
   }),
+  // ---------- Módulo 20 ----------
+  passiva_presente: R('a <b>passiva no presente</b>: is / are + particípio (Coffee is grown in Brazil.)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(is|are) (make|grow|sell|speak|build|use|produce|export|design)\b/.test(c)) return 'Na passiva, use o particípio: is <b>made</b>, are <b>grown</b>, is <b>spoken</b>.';
+    if (/\b(\p{L}+s|they|these|those) is (made|grown|sold|used|produced|built)\b/u.test(c) && !/\b(this|it|that|news)\b/.test(c)) return 'Com plural, use <b>are</b>: These shoes <b>are</b> made …';
+    return need(/\b(is|are|isn't|aren't) (\p{L}+ed|made|grown|sold|spoken|built|known|written|worn|eaten|done|taken|kept)\b/u.test(c), 'Use a passiva: … <b>is made</b> in … / … <b>are grown</b> …');
+  }),
+  processo: R('uma etapa de <b>processo</b>: conector + passiva (First, the beans are picked.)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(is|are) (pick|dry|roast|grind|mix|heat|cool|pack|ship|cut|wash)\b(?! up| out)/.test(c)) return 'Use o particípio: are <b>picked</b>, are <b>dried</b>, is <b>ground</b>.';
+    return need(/\b(is|are) (\p{L}+(ed|en|wn)|ground|cut|made|sold|built)\b/u.test(c) || /\bmade (from|of)\b/.test(c), 'Descreva uma etapa: <b>First</b>, the beans <b>are picked</b>.');
+  }),
+  passiva_tempos: R('a passiva em outro tempo (has been / will be / is being / was + particípio)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(has|have) been (repair|open|close|cancel|announce|build|finish)\b/.test(c) || /\bwill be (repair|open|close|cancel|announce|build|finish)\b/.test(c) || /\bis being (repair|open|close|build|paint|renovate)\b/.test(c)) return 'Use o particípio: has been <b>repaired</b>, will be <b>opened</b>, is being <b>built</b>.';
+    if (/\bis been\b|\bwill been\b|\bhas being\b/.test(c)) return 'Confira o to be: <b>has been</b>, <b>will be</b>, <b>is being</b>.';
+    return need(/\b(has been|have been|will be|is being|are being|was|were|won't be|hasn't been) (\p{L}+ed|built|done|made|sold|taken|written|given|shown|chosen|found|paid|cut|held)\b/u.test(c), 'Use a passiva num tempo: The bridge <b>has been repaired</b>. / It <b>will be opened</b> …');
+  }),
+  have_done: R('um serviço com <b>have / get + coisa + particípio</b> (I had my hair cut.)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(had|have|has|get|got|getting|having) (my|your|his|her|our|their|the) (\p{L}+ )?(fix|paint|clean|wash|check|test|repair|translate|deliver|install|shorten)\b/u.test(c)) return 'A coisa é seguida do particípio: my car <b>fixed</b>, my house <b>painted</b>.';
+    return need(/\b(had|have|has|get|got|getting|having|get) (my|your|his|her|our|their|the|this|it) (\p{L}+ )?(\p{L}+ed|cut|done|made|taken)\b/u.test(c), 'Diga um serviço: I <b>had my hair cut</b>. / I\'m <b>getting my car fixed</b>.');
+  }),
+  passiva_by: R('uma obra ou invenção com a passiva e <b>by</b> (… was invented by …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bwas (invent|paint|write|wrote|direct|compose|discover|found|build)\b/.test(c)) return 'Use o particípio: was <b>invented</b>, was <b>written</b>, was <b>painted</b>.';
+    if (/\b(invented|painted|written|directed|composed|discovered|founded|built) (from|of) \p{Lu}/u.test(norm(t))) return 'Quem fez vem com <b>by</b>: invented <b>by</b> Edison.';
+    return need(/\b(was|were) ((it|they|this|that|he|she) )?(\p{L}+ed|written|built|drawn|sung|made|taken|shown)\b/u.test(c), 'Use a passiva: The light bulb <b>was invented by</b> Edison.');
+  }),
+  texto_processo: R('uma frase do texto sobre um <b>processo</b> (introdução, etapa com a passiva ou conclusão)', (t, k) => need(/\b(is|are) \p{L}+(ed|en|wn|t)\b/u.test(k.join(' ')) || /\b(have you ever wondered|this way|that's how|first|then|after that|finally|next)\b/.test(k.join(' ')), 'Escreva uma etapa: <b>First</b>, the bottles <b>are collected</b>.')),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
