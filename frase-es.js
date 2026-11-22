@@ -943,6 +943,39 @@ const RULES = {
     if (/ puede que (\p{L}+ )?(es|está|tiene|ha|vuelve|viene) /u.test(c)) return 'Com <b>puede que</b>, o subjuntivo.';
     return need(has(k, /\p{L}+(ría|rían|rá|rán)$/u) || / (tiene que|seguro que|habrá|habrán|debe de|a lo mejor|puede que|quizás|lo más probable|estaba|había|nadie) /.test(c), 'Faça hipóteses: <b>Tiene que haber sido</b> … / <b>Habrá dejado</b> … / <b>A lo mejor</b> …');
   }),
+  // ---------- Módulo 26 ----------
+  registro: R('uma frase com o registro certo (tú, usted, ustedes, vos, vosotros)', (t, k) => {
+    const c = C(k);
+    if (/ usted (tienes|eres|estás|puedes|quieres|vienes) /.test(c)) return 'Com <b>usted</b>, o verbo vai na 3ª pessoa: usted <b>tiene</b>, <b>es</b>, <b>está</b>.';
+    if (/ vos (tienes|eres|puedes|quieres) /.test(c)) return 'Com <b>vos</b>: vos <b>tenés</b>, vos <b>sos</b>, vos <b>podés</b>.';
+    if (/ ustedes (tenéis|sois|estáis|comisteis) /.test(c)) return 'Com <b>ustedes</b>, a 3ª pessoa do plural: ustedes <b>tienen</b>, <b>son</b>.';
+    return need(/ (tú|usted|ustedes|vos|vosotros|le|su|tuteamos|tutéame|tutearme|sos|tenés|comisteis|permite) /.test(c), 'Escolha o registro: ¿<b>Le</b> puedo …? / ¿<b>Nos tuteamos</b>? / <b>Vos sos</b> …');
+  }),
+  cortesia_formal: R('uma fórmula de cortesia formal (disculpe la molestia, sería tan amable de, con su permiso…)', (t, k) => {
+    const c = C(k);
+    if (/ (sería|serías) tan amable (ayudarme|esperar|decirme|darme) /.test(c)) return 'Falta o <b>de</b>: ¿sería tan amable <b>de</b> ayudarme?';
+    return need(/ (disculpe|molestia|sería tan amable|tenga la amabilidad|haga el favor|permítame|con su permiso|no faltaba más|a sus órdenes|con mucho gusto|le agradezco|muy amable|le importaría|podría) /.test(c), 'Seja formal: <b>Disculpe la molestia</b> … / ¿<b>Sería tan amable de</b> …?');
+  }),
+  presentacion: R('uma frase de apresentação formal (quisiera agradecer, pasemos ahora a, como pueden ver…)', (t, k) => {
+    const c = C(k);
+    if (/ como (puede|podéis) ver /.test(c) && / ustedes /.test(c)) return 'Com ustedes: como <b>pueden</b> ver.';
+    return need(/ (buenos días a todos|quisiera|agradecerles|agradezco|objetivo|en primer lugar|hablaré|pasemos|pasaré|como pueden ver|diapositiva|me gustaría destacar|para concluir|en resumen|gracias por su atención|alguna pregunta|propongo) /.test(c), 'Guie o público: <b>Quisiera agradecerles</b> … / <b>Pasemos ahora a</b> … / <b>Para concluir</b> …');
+  }),
+  nominal: R('uma frase no estilo nominal ou impessoal (la presentación de, se ha decidido, cabe destacar…)', (t, k) => {
+    const c = C(k);
+    if (/ resulta necesario (la|una) /.test(c)) return 'Com substantivo feminino, concorda: resulta <b>necesaria</b> la revisión.';
+    return need(/ (se ha decidido|se acordó|se recomienda|cabe destacar|cabe señalar|conviene|resulta necesari|resulta fundamental|llevó a cabo|llevar a cabo|contar con|dar a conocer) /.test(c) || has(k, /\p{L}+(ción|miento|sión)$/u), 'Use o estilo formal: <b>La presentación del</b> informe … / <b>Se ha decidido</b> … / <b>Cabe destacar</b> …');
+  }),
+  conectores_formales: R('um conector formal (no obstante, asimismo, por consiguiente, dado que, a fin de que…)', (t, k) => {
+    const c = C(k);
+    if (/ a fin de que (\p{L}+ )?(están|son|tienen|pueden|saben|reciben) /u.test(c)) return 'Depois de <b>a fin de que</b>, o subjuntivo: <b>estén</b>, <b>sean</b>, <b>tengan</b>.';
+    return need(/ (no obstante|sin embargo|asimismo|igualmente|por consiguiente|por lo tanto|de ahí que|en cuanto a|en cuanto al|con respecto a|en lo que se refiere|dado que|puesto que|ya que|a fin de|en definitiva|en suma) /.test(c), 'Use um conector formal: <b>No obstante</b>, … / <b>Asimismo</b>, … / <b>Dado que</b> …');
+  }),
+  reclamacion: R('uma frase de reclamação formal (me dirijo a ustedes, solicito, les ruego que, en caso contrario…)', (t, k) => {
+    const c = C(k);
+    if (/ les ruego que (me )?(responden|envían|devuelven|pagan|informan) /.test(c)) return 'Depois de <b>les ruego que</b>, o subjuntivo: <b>respondan</b>, <b>envíen</b>, <b>devuelvan</b>.';
+    return need(/ (me dirijo|descontento|el pasado|adquirí|no obstante|sin embargo|asimismo|solicito|les ruego|devolución|sustitución|importe|en caso contrario|me veré obligad|quedo a la espera|atentamente|dado que|por consiguiente) /.test(c), 'Escreva formalmente: <b>Me dirijo a ustedes</b> … / <b>Solicito</b> … / <b>En caso contrario</b> …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
