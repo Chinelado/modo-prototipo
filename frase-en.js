@@ -141,6 +141,37 @@ const RULES = {
     if (/\bwould you like (come|go|have|eat|watch)\b/.test(k.join(' '))) return 'Depois de would you like vem <b>to</b>: Would you like <b>to</b> come?';
     return need(has(k, /^(would|i'd|can't|cannot|love|sorry|invitation|party)$/), "Convide (Would you like to …?), aceite (I'd love to!) ou recuse (Sorry, I can't …).");
   }),
+  // ---------- Módulo 4 ----------
+  comida: R("comida com <b>some</b> ou <b>any</b>, ou fome e sede com to be (I'm hungry)", (t, k) => {
+    const c = k.join(' ');
+    if (/\b(have|has) (hungry|thirsty)\b/.test(c)) return "Fome e sede se dizem com to be: <b>I'm hungry</b>.";
+    if (/\b(don't|doesn't|isn't|aren't|not) have some\b|\bdon't .*\bsome\b/.test(c) && !/\bany\b/.test(c)) return 'Na negativa, use <b>any</b>: We don\'t have <b>any</b> milk.';
+    if (/\ba (bread|rice|milk|water|cheese|sugar|butter|meat)\b/.test(c)) return 'Essa comida não se conta: diga <b>some</b> bread, e não "a bread".';
+    return need(has(k, /^(some|any|hungry|thirsty)$/), "Use some, any, hungry ou thirsty: We have <b>some</b> eggs. / I'm <b>hungry</b>.");
+  }),
+  quantidade: R('uma <b>quantidade</b> ou um <b>preço</b> (How many …? / How much is it? / a bottle of water)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bhow many (milk|water|rice|bread|coffee|money|time|sugar|cheese)\b/.test(c)) return 'Isso não se conta: <b>How much</b> milk?';
+    if (/\bhow much (eggs|apples|tomatoes|people|bottles|cans|books|potatoes)\b/.test(c)) return 'Isso se conta: <b>How many</b> eggs?';
+    if (/\bdozen of\b/.test(c)) return 'Em a dozen eggs não tem <b>of</b>.';
+    return need(has(k, /^(much|many|bottle|bottles|pound|pounds|dozen|can|cans|carton|dollar|dollars|cents|cent|price)$/) || /\$\s*\d/.test(t), 'Pergunte ou diga uma quantidade ou um preço: How much is it? / a bottle of water.');
+  }),
+  pedido: R("um <b>pedido</b> educado: I'd like … ou Can I have …?", (t, k) => {
+    if (/^\s*(i want|give me)\b/i.test(norm(t))) return "Para pedir com educação, prefira <b>I'd like</b> … ou <b>Can I have</b> …?";
+    return need(/\b(i'd like|i would like|can i have|could i have|may i have)\b/i.test(norm(t)), "Peça com educação: <b>I'd like</b> a coffee, please. / <b>Can I have</b> a muffin?");
+  }),
+  there: R('o que tem num lugar com <b>there is / there are</b> (There\'s a bank near here.)', (t, k) => {
+    const c = k.join(' ');
+    if (/^\s*(have|has) (a|an|two|three|some|many|any)\b/i.test(norm(t))) return '"Tem" de existir é <b>there is / there are</b>: There\'s a bank here.';
+    if (/\bthere is (two|three|four|five|many|some \p{L}+s)\b/u.test(c)) return 'Com várias coisas, use <b>there are</b>.';
+    if (/\bthere are (a|an|one)\b/.test(c)) return 'Com uma coisa, use <b>there is</b> (there\'s).';
+    return need(has(k, /^(there|there's)$/), 'Use <b>there is / there are</b>: There\'s a pharmacy on my street.');
+  }),
+  roupa: R('uma frase de <b>loja de roupas</b>: tamanho, provar, too + adjetivo ou o preço', (t, k) => {
+    if (/\b(pants|jeans|shoes|sneakers|shorts|glasses) is\b/.test(k.join(' '))) return 'pants, jeans e shoes são plural: These pants <b>are</b> …';
+    return need(has(k, /^(too|size|small|medium|large|try|fitting|much|sale|tight|loose)$/), "Fale da roupa: It's <b>too</b> big. / Do you have this in a <b>medium</b>? / Can I <b>try</b> this on?");
+  }),
+  lista: R('um item de <b>lista de compras</b> ou um <b>pedido</b> de restaurante (We need some bread / I\'d like the burger)', (t, k) => need(has(k, /^(some|any|need|dozen|bottle|bottles|pound|like|have|check|menu|comes|with)$/), 'Escreva um item com quantidade (We need <b>some</b> bread) ou um pedido (I\'d like …).')),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
