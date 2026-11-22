@@ -451,6 +451,44 @@ const RULES = {
     if (/ (recomendaria|volveria) /.test(c)) return 'O condicional leva acento: recomend<b>aría</b>, volv<b>ería</b>.';
     return need(/ (nos quedamos|me quedé|quedamos|era|eran|estaba|había|hacía|lo mejor|lo peor|recomendaría|volvería|personal|ubicación|habitación|no funcionaba|fue) /.test(c), 'Avalie: <b>Nos quedamos</b> … / La habitación <b>era</b> … / <b>Volvería</b>.');
   }),
+  // ---------- Módulo 13 ----------
+  futuro: R('um plano ou previsão no <b>futuro simples</b> (viajaré, haré, tendré…)', (t, k) => {
+    const c = C(k);
+    if (/ (viajarei|farei|terei|irei|estarei|poderei|viajaremos) /.test(c) && / (viajarei|farei|terei|irei|estarei|poderei) /.test(c)) return 'Isso é português. Em espanhol: <b>viajaré</b>, <b>haré</b>, <b>tendré</b>, <b>iré</b>.';
+    if (/ (hacerá|teneré|poderé|saliré|veniré|deciré|hacerás|tenerás|poderás) /.test(c)) return 'Esse futuro é irregular: <b>haré</b>, <b>tendré</b>, <b>podré</b>, <b>saldré</b>, <b>vendré</b>, <b>diré</b>.';
+    return need(has(k, /\p{L}+r(é|ás|á|emos|án)$/u) || / (voy a|vas a|va a|vamos a|van a) /.test(c), 'Use o futuro: El año que viene <b>viajaré</b> … / Mañana <b>hará</b> sol.');
+  }),
+  aceptar: R('convidar, aceitar ou recusar (¿te gustaría …?, me encantaría, lo siento, es que …)', (t, k) => {
+    const c = C(k);
+    if (/ é que /.test(c)) return 'Em espanhol: <b>es que</b>, sem acento.';
+    if (/ te gustaría de /.test(c)) return '¿Te gustaría + infinitivo, sem "de": ¿Te gustaría <b>ir</b> al cine?';
+    return need(/ (te gustaría|qué tal si|te animas|quieres|me encantaría|dale|claro|me parece bien|lo siento|es que|otro día|quedamos|quedar|paso por ti|pero no puedo|no puedo) /.test(c), 'Convide ou responda: ¿<b>Te gustaría</b> …? / ¡<b>Me encantaría</b>! / <b>Lo siento, es que</b> …');
+  }),
+  fiestas: R('uma frase sobre uma festa (se celebra, la gente baila, es una tradición…)', (t, k) => {
+    const c = C(k);
+    if (/ la gente (bailan|ponen|comen|cantan|se disfrazan|celebran|son|van) /.test(c)) return '<b>la gente</b> é singular em espanhol: la gente <b>baila</b>, la gente <b>pone</b>.';
+    if (/ (é celebrado|é celebrada) /.test(c)) return 'Em espanhol, com o se: <b>se celebra</b>.';
+    return need(/ (se celebra|se festeja|fiesta|fiestas|tradición|carnaval|desfile|desfiles|altares|disfraza|disfraz|baila|celebramos|recordamos|feriado|colorida|alegre) /.test(c), 'Descreva a festa: <b>Se celebra</b> en … / <b>La gente baila</b> … / Es una <b>tradición</b> …');
+  }),
+  espero_que: R('um desejo para alguém (espero que + subjuntivo, ¡que te vaya bien!…)', (t, k) => {
+    const c = C(k);
+    if (/ espero que (vienes|vendrás|tienes|tendrás|puedes|te gusta|te gustará|llegas|pasas|me llamas) /.test(c)) return 'Depois de <b>espero que</b>, o subjuntivo: que <b>vengas</b>, que <b>tengas</b>, que te <b>guste</b>.';
+    if (/ que lo pasas /.test(c)) return 'É subjuntivo: ¡Que lo <b>pases</b> bien!';
+    return need(/ (espero que|que te vaya|que lo pases|que te mejores|que tengas|que disfrutes|espero llegar|espero) /.test(c), 'Deseje: <b>Espero que vengas</b>. / ¡<b>Que te vaya bien</b>!');
+  }),
+  ojala: R('uma esperança com <b>ojalá</b> + subjuntivo', (t, k) => {
+    const c = C(k);
+    if (/ ojalá (que )?(no )?(hará|hace|llueve|lloverá|puedes|podrás|puedo|tenemos|ganamos|gana|sale|es|va) /.test(c)) return 'Depois de <b>ojalá</b>, o subjuntivo: ojalá <b>haga</b>, ojalá no <b>llueva</b>, ojalá <b>puedas</b>.';
+    if (/ tomara /.test(c)) return 'Em espanhol, "tomara" é <b>ojalá</b>.';
+    return need(/ ojalá /.test(c), 'Use <b>ojalá</b> + subjuntivo: <b>Ojalá</b> haga sol.');
+  }),
+  blog: R('uma frase de post (iré, se celebra, cuéntenme, espero que, ojalá…)', (t, k) => {
+    const c = C(k);
+    if (/ (irei|estarei|viajarei) /.test(c)) return 'Isso é português. Em espanhol: <b>iré</b>, <b>estaré</b>, <b>viajaré</b>.';
+    if (/ la gente (bailan|se disfrazan|ponen) /.test(c)) return '<b>la gente</b> é singular: la gente <b>baila</b>.';
+    if (/ ojalá (que )?(hará|hace|llueve|lloverá) /.test(c)) return 'Depois de <b>ojalá</b>, o subjuntivo: ojalá <b>haga</b>, ojalá no <b>llueva</b>.';
+    return need(has(k, /\p{L}+r(é|ás|á|emos|án)$/u) || / (se celebra|la gente|alguien|cuéntenme|espero que|ojalá|nos vemos|hola|post|blog) /.test(c), 'Escreva o post: <b>Iré</b> a … / <b>Se celebra</b> … / <b>Ojalá</b> …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
