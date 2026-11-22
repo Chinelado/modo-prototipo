@@ -604,6 +604,46 @@ const RULES = {
     if (/ te aconsejo que (hablas|le dices|esperas) /.test(c)) return 'Depois de <b>te aconsejo que</b>, o subjuntivo: <b>hables</b>, <b>le digas</b>.';
     return need(/ (querido|querida|es normal que|entiendo que|te aconsejo|te recomiendo|yo que tú|yo en tu lugar|lo mejor es|es importante que|es necesario que|espero que|ojalá|un abrazo) /.test(c), 'Responda: <b>Es normal que</b> … / <b>Te aconsejo que</b> … / <b>Espero que</b> …');
   }),
+  // ---------- Módulo 17 ----------
+  cuando_sub: R('cuando + subjuntivo para o futuro (cuando tenga, cuando sea…)', (t, k) => {
+    const c = C(k);
+    if (/ cuando (\p{L}+(ré|rás|rá|remos|rán)) /u.test(c) && !/ ¿?cuándo /.test(c)) return 'Depois de <b>cuando</b>, nunca futuro: cuando <b>tenga</b>, cuando <b>sea</b>.';
+    if (/ cuando (tengo|termino|llego|soy|vuelvo|tienes|terminas|vuelves) [^ ]+ .*\p{L}+(ré|rás|rá|remos|rán) /u.test(c)) return 'Se a outra parte é futuro, cuando pede subjuntivo: cuando <b>tenga</b>, cuando <b>termine</b>.';
+    return need(/ (cuando|cuándo) /.test(c), 'Use cuando: <b>Cuando tenga</b> tiempo, te llamaré.');
+  }),
+  temporales: R('uma oração de tempo (en cuanto, hasta que, mientras, antes de que…)', (t, k) => {
+    const c = C(k);
+    if (/ (en cuanto|hasta que|antes de que|tan pronto como) (\p{L}+(ré|rás|rá|remos|rán)) /u.test(c)) return 'Com futuro, essas palavras pedem subjuntivo: en cuanto <b>llegue</b>, hasta que <b>termines</b>.';
+    if (/ hasta (tú|usted|él|ella) (terminar|llegar|volver) /.test(c)) return 'Em espanhol: <b>hasta que termines</b>.';
+    return need(/ (en cuanto|hasta que|antes de que|después de que|mientras|tan pronto como|antes de|después de) /.test(c), 'Use: <b>En cuanto</b> llegue … / <b>Hasta que</b> termines …');
+  }),
+  prediccion: R('uma previsão (futuro, seguramente, es probable que, quizás, a lo mejor…)', (t, k) => {
+    const c = C(k);
+    if (/ habrán /.test(c)) return 'O futuro de hay é <b>habrá</b>, no singular: <b>habrá</b> más robots.';
+    if (/ a lo mejor (sea|haya|tengamos|vivamos|trabajemos|existan) /.test(c)) return 'Depois de <b>a lo mejor</b>, o indicativo: a lo mejor <b>es</b>, <b>hay</b>, <b>vivimos</b>.';
+    if (/ es probable que (\p{L}+(ré|rás|rá|remos|rán)|trabajamos|vivimos|hay|es) /u.test(c)) return 'Depois de <b>es probable que</b>, o subjuntivo: <b>trabajemos</b>, <b>haya</b>, <b>sea</b>.';
+    return need(has(k, /\p{L}+(ré|rás|rá|remos|rán)$/u) || / (seguramente|probablemente|sin duda|es probable|es posible|quizás|tal vez|a lo mejor|no creo que|habrá) /.test(c), 'Preveja: En 2050 <b>habrá</b> … / <b>Es probable que</b> …');
+  }),
+  planes: R('um plano ou intenção (pienso + infinitivo, tengo pensado, estoy pensando en, voy a…)', (t, k) => {
+    const c = C(k);
+    if (/ pienso en (viajar|mudarme|estudiar|hacer|cambiar|abrir|ir|empezar|comprar) /.test(c)) return 'Para planos, <b>pensar</b> + infinitivo, sem en: <b>pienso viajar</b>.';
+    if (/ tengo pensando /.test(c)) return 'É <b>tengo pensado</b> (particípio).';
+    if (/ estoy pensando (viajar|cambiar|mudarme|hacer|estudiar) /.test(c)) return '<b>Estar pensando</b> pede <b>en</b>: estoy pensando <b>en</b> cambiar …';
+    return need(/ (pienso|piensas|piensa|tengo pensado|tienes pensado|intención de|estoy pensando en|voy a|vas a|va a|vamos a|plan|planes|todavía no sé|depende) /.test(c), 'Conte o plano: <b>Pienso</b> viajar … / <b>Tengo pensado</b> mudarme …');
+  }),
+  condicion_real: R('uma condição real (si + presente) ou uma promessa', (t, k) => {
+    const c = C(k);
+    if (/ si (llueva|tengas|tenga|pueda|puedas|haga|esté|estés|sea|seas|vaya|vayas) /.test(c)) return 'Depois de <b>si</b>, o indicativo: si <b>llueve</b>, si <b>tienes</b>, si <b>puedes</b>.';
+    if (/ si (\p{L}+(ré|rás|rá|remos|rán)) /u.test(c)) return 'Depois de <b>si</b>, nunca futuro: si <b>llueve</b>, si <b>tienes</b>.';
+    if (/ (siempre que|a menos que) (llueve|me lo pides|tienes|puedes) /.test(c)) return '<b>siempre que</b> e <b>a menos que</b> pedem subjuntivo: a menos que <b>llueva</b>.';
+    return need(/ (si|te prometo|te juro|prometo|siempre que|a menos que|en caso de que) /.test(c), 'Use: <b>Si</b> llueve, … / <b>Te prometo que</b> …');
+  }),
+  carta_futuro: R('uma frase de carta para o futuro (cuando leas, seguramente, tengo pensado, si, espero que…)', (t, k) => {
+    const c = C(k);
+    if (/ cuando (leerás|lees|abrirás|tendrás) /.test(c)) return 'Com cuando + futuro, o subjuntivo: cuando <b>leas</b>.';
+    if (/ si (estés|tengas|vivas|sigas|seas) /.test(c)) return 'Depois de <b>si</b>, o indicativo: si <b>estás</b>, si <b>tienes</b>.';
+    return need(has(k, /\p{L}+(ré|rás|rá|remos|rán)$/u) || / (cuando|seguramente|es probable|a lo mejor|tengo pensado|pienso|si|espero que|ojalá|no olvides|no te rindas|con cariño|querida|querido) /.test(c), 'Escreva: <b>Cuando leas</b> esta carta, … / <b>Espero que</b> …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
