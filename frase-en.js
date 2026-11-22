@@ -795,6 +795,40 @@ const RULES = {
     return need(/\b(the moment|as soon as|no sooner|hardly|from that day on|ever since|little did i know|out of the blue|it hit me)\b/.test(c), 'Marque o momento: <b>The moment</b> I saw …, I knew. / <b>Hardly had</b> I … <b>when</b> …');
   }),
   memoria_texto: R('uma frase da sua <b>memória</b>: hábito (would / used to), o momento, os sentidos ou a reflexão', (t, k) => need(/\b(would|used to|had been|the moment|smell|hear|taste|looking back|taught me|still|remember|i'll never forget)\b/.test(k.join(' ')) || k.some((w) => /\p{L}{3,}ed$/u.test(w)), 'Escreva a memória: Every summer, she <b>would</b> … / <b>Looking back</b>, …')),
+  // ---------- Módulo 24 ----------
+  condicional3: R("o passado imaginado: <b>if + had + particípio, would have + particípio</b>", (t, k) => {
+    const c = k.join(' ');
+    if (/\bif (i|you|we|they|he|she|it) would have\b/.test(c)) return 'Depois de if, use had: <b>If I had</b> known…';
+    if (/\bwould have (went|ate|saw|did|took|came|knew|called|call|go|come|tell|invite)\b/.test(c) && !/\bwould have (called)\b/.test(c)) return 'Depois de would have, use o particípio: would have <b>gone</b>, <b>known</b>, <b>come</b>.';
+    return need((/\bif\b/.test(c) && /\b(had|hadn't|\w+'d)\b/.test(c) && /\b(would|could|might|wouldn't|couldn't|\w+'d)( \w+)? have\b/.test(c)) || /\bif only\b.*\b(had|hadn't)\b/.test(c), "Imagine o passado: <b>If I had</b> known, I <b>would have</b> …");
+  }),
+  wish_passado: R('um arrependimento com <b>wish / if only + had + particípio</b>', (t, k) => {
+    const c = k.join(' ');
+    if (/\bwish (i|you|we|they|he|she) would have\b/.test(c)) return 'Com wish sobre o passado, use had: I wish I <b>had</b> …';
+    return need(/\b(wish|wishes|wished|if only)\b/.test(c) && /\b(had|hadn't|\w+'d)\b/.test(c), 'Lamente o passado: I <b>wish I had</b> … / <b>If only I had</b> …');
+  }),
+  condicional_mista: R('uma decisão do passado com efeito <b>agora</b> (If I had …, I would … now)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bif\b.*\bhad\b.*\bwould have been\b.*\b(now|today)\b/.test(c)) return 'Com efeito agora, use would + verbo: I <b>would be</b> … now.';
+    return need(/\bif\b/.test(c) && /\b(had|hadn't|were)\b/.test(c) && /\b(would|wouldn't|'d|could)\b/.test(c), 'Ligue o passado ao presente: If I <b>had</b> …, I <b>would</b> … now.');
+  }),
+  should_have: R("o que devia (ou não devia) ter sido feito: <b>should have / could have + particípio</b>", (t, k) => {
+    const c = k.join(' ');
+    if (/\b(should|could|would) of\b/.test(c)) return 'O certo é <b>should have</b> (na fala soa "should\'ve").';
+    if (/\b(should|shouldn't|could) have (call|tell|say|go|come|listen|study|check|eat|start|ask)\b/.test(c)) return 'Depois de should have, use o particípio: should have <b>called</b>.';
+    return need(/\b(should|shouldn't|could|couldn't|would|might)( have|'ve)\b/.test(c), 'Use should have: I <b>should have</b> … / You <b>shouldn\'t have</b> …');
+  }),
+  arrependimento: R("arrependimento ou lição (I regret …ing / I'm glad I … / It turned out to be …)", (t, k) => {
+    const c = k.join(' ');
+    if (/\bregret (to not|don't|didn't|not to)\b/.test(c)) return 'A negativa de regret: regret <b>not</b> + -ing: I regret not going.';
+    return need(/\b(regret|glad|turned out|blessing in disguise|hard way|worth it|lesson|silver lining|no regrets|moved on)\b/.test(c), "Fale de um arrependimento ou lição: I <b>regret</b> …ing / I'm <b>glad</b> I …");
+  }),
+  desculpas: R("uma frase de <b>pedido de desculpas</b> (I'm sorry I … / I should have … / I'd like to make it up to you)", (t, k) => {
+    const c = k.join(' ');
+    if (/\bshould of\b/.test(c)) return 'O certo é <b>should have</b>.';
+    if (/\bapologize (to|of) (forget|miss|be)\b/.test(c)) return 'Pedir desculpas por: apologize <b>for</b> + -ing.';
+    return need(/\b(sorry|apologize|apologise|should have|shouldn't have|make it up|forgive|won't happen again|thoughtless|let you down)\b/.test(c), "Peça desculpas: <b>I'm sorry I</b> … / I <b>should have</b> …");
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
