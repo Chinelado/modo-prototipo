@@ -331,6 +331,46 @@ const RULES = {
     if (has(k, /^recomendo$/)) return 'recomendar muda e → ie: <b>recomiendo</b>.';
     return need(/ (lo mejor|lo peor|mejor|peor|más|menos|recomiendo|vale la pena|estrellas|calidad|precio|compré) /.test(c), 'Avalie: <b>Lo mejor</b> es … / Es <b>mejor que</b> … / <b>Lo recomiendo</b>.');
   }),
+  // ---------- Módulo 10 ----------
+  mitrabajo: R('uma frase sobre o seu trabalho (trabajo en / como, me encargo de…)', (t, k) => {
+    const c = C(k);
+    if (/ me encargo (los|las|el|la|del|atender) /.test(c)) return 'encargarse pede <b>de</b>: me encargo <b>de</b> los clientes.';
+    if (/ trabajo (numa|num) /.test(c)) return 'Isso é português. Em espanhol: trabajo <b>en una</b> empresa.';
+    return need(/ (trabajo|trabajas|trabaja|me encargo|te dedicas|soy|oficina|empresa|jefe|jefa|colegas|reuniones|reunión|sueldo|horario|tiempo) /.test(c), 'Fale do trabalho: <b>Trabajo en</b> … / <b>Me encargo de</b> …');
+  }),
+  telefono: R('uma frase ao telefone (aló, quería hablar con, ¿de parte de quién?…)', (t, k) => {
+    const c = C(k);
+    if (/ (desligue|desligar|ligar|ligo) /.test(c)) return 'Isso é português. Em espanhol: <b>colgar</b> (desligar) e <b>llamar</b> (ligar).';
+    if (/ de parte de quien /.test(c)) return 'Na pergunta, <b>quién</b> leva acento.';
+    return need(/ (aló|bueno|diga|quería|hablar con|de parte|un momento|cuelgue|mensaje|llame|llamar|vuelvo|ocupado|equivocado|habla) /.test(c), 'Ao telefone: ¿<b>Aló</b>? / <b>Quería hablar con</b> … / ¿<b>De parte de quién</b>?');
+  }),
+  porpara: R('uma frase com <b>por</b> ou <b>para</b>', (t, k) => {
+    const c = C(k);
+    if (/ (pelo|pela|pelos|pelas) /.test(c)) return 'Não existe "pelo" em espanhol: use <b>por el</b>, <b>por la</b>.';
+    if (/ gracias para /.test(c)) return 'Agradecimento leva <b>por</b>: gracias <b>por</b> tu ayuda.';
+    if (/ para (teléfono|correo|internet|la lluvia) /.test(c)) return 'Meio e causa levam <b>por</b>: <b>por</b> teléfono, <b>por</b> la lluvia.';
+    if (/ es por (el lunes|el martes|mañana|el viernes|ti|mí) /.test(c)) return 'Prazo e destinatário levam <b>para</b>: es <b>para</b> el lunes.';
+    return need(/ (por|para) /.test(c), 'Use <b>por</b> (causa, meio, troca) ou <b>para</b> (objetivo, destino, prazo).');
+  }),
+  obligacion: R('uma obrigação (tengo que, hay que, debes, no hace falta…)', (t, k) => {
+    const c = C(k);
+    if (/ (yo|tú|él|ella|nosotros) hay que /.test(c)) return '<b>hay que</b> é impessoal: sem pessoa. Para uma pessoa: <b>tengo que</b>.';
+    if (/ tengo (trabajar|llegar|terminar|ir|hacer|estudiar) /.test(c)) return 'Falta o <b>que</b>: tengo <b>que</b> trabajar.';
+    if (/ (tenho|precisa) /.test(c)) return 'Isso é português. Em espanhol: <b>tengo que</b> / <b>no hace falta</b>.';
+    return need(/ (tengo que|tienes que|tiene que|tenemos que|tienen que|hay que|debo|debes|debe|debemos|deben|necesito|necesitas|hace falta|obligatorio|prohibido) /.test(c), 'Fale de obrigação: <b>Tengo que</b> … / <b>Hay que</b> … / <b>No hace falta</b> …');
+  }),
+  entrevista: R('uma frase de entrevista (he trabajado, sé, puedo, ¿por qué quiere …?)', (t, k) => {
+    const c = C(k);
+    if (/ tengo (trabajado|coordinado|estudiado) /.test(c)) return 'O auxiliar é <b>haber</b>: <b>he</b> trabajado.';
+    if (/ (yo )?se (usar|hablar|manejar|programar) /.test(c)) return '"Eu sei" é <b>sé</b>, com acento.';
+    return need(/ (he|sé|hablo|puedo|soy|quiere|cuénteme|sus|experiencia|puntos|próximos|horario|organizada|organizado) /.test(c), 'Na entrevista: <b>He trabajado</b> … / <b>Sé</b> usar … / <b>Soy</b> muy organizada.');
+  }),
+  anuncio: R('uma frase de anúncio ou de candidatura (se busca, me interesa, adjunto…)', (t, k) => {
+    const c = C(k);
+    if (/ me intereso (el|en el) /.test(c)) return '<b>interesar</b> funciona como gustar: <b>me interesa</b> el puesto.';
+    if (/ anexo (mi|el) /.test(c)) return 'Em espanhol: <b>adjunto</b> mi currículum.';
+    return need(/ (se busca|se requiere|se ofrece|me interesa|adjunto|quedo|atentamente|estimados|estimado|estimada|puesto|currículum|requisitos|indispensable) /.test(c), 'Escreva: <b>Se busca</b> … / <b>Me interesa</b> el puesto … / <b>Adjunto</b> mi currículum.');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
