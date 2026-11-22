@@ -799,7 +799,7 @@ const RULES = {
   condicional3: R("o passado imaginado: <b>if + had + particípio, would have + particípio</b>", (t, k) => {
     const c = k.join(' ');
     if (/\bif (i|you|we|they|he|she|it) would have\b/.test(c)) return 'Depois de if, use had: <b>If I had</b> known…';
-    if (/\bwould have (went|ate|saw|did|took|came|knew|called|call|go|come|tell|invite)\b/.test(c) && !/\bwould have (called)\b/.test(c)) return 'Depois de would have, use o particípio: would have <b>gone</b>, <b>known</b>, <b>come</b>.';
+    if (/\b(would|could|might)( \w+)? have (went|ate|saw|did|took|came|knew|wrote|call|go|tell|invite|see|eat|take|know|do|write)\b/.test(c)) return 'Depois de would have, use o particípio: would have <b>gone</b>, <b>known</b>, <b>come</b>.';
     return need((/\bif\b/.test(c) && /\b(had|hadn't|\w+'d)\b/.test(c) && /\b(would|could|might|wouldn't|couldn't|\w+'d)( \w+)? have\b/.test(c)) || /\bif only\b.*\b(had|hadn't)\b/.test(c), "Imagine o passado: <b>If I had</b> known, I <b>would have</b> …");
   }),
   wish_passado: R('um arrependimento com <b>wish / if only + had + particípio</b>', (t, k) => {
