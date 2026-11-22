@@ -172,6 +172,38 @@ const RULES = {
     return need(has(k, /^(too|size|small|medium|large|try|fitting|much|sale|tight|loose)$/), "Fale da roupa: It's <b>too</b> big. / Do you have this in a <b>medium</b>? / Can I <b>try</b> this on?");
   }),
   lista: R('um item de <b>lista de compras</b> ou um <b>pedido</b> de restaurante (We need some bread / I\'d like the burger)', (t, k) => need(has(k, /^(some|any|need|dozen|bottle|bottles|pound|like|have|check|menu|comes|with)$/), 'Escreva um item com quantidade (We need <b>some</b> bread) ou um pedido (I\'d like …).')),
+  // ---------- Módulo 5 ----------
+  lugar: R('onde algo está, com <b>in, on, under, next to, behind ou between</b> (The keys are on the table.)', (t, k) => {
+    if (/\bin the (table|wall|floor|sofa|bed|desk)\b/.test(k.join(' '))) return 'Em cima de uma superfície é <b>on</b>: on the table, on the wall.';
+    return need(has(k, /^(in|on|under|next|behind|between|front|there|there's)$/), 'Diga onde está: The keys are <b>on</b> the table. / The cat is <b>under</b> the bed.');
+  }),
+  can: R("uma habilidade ou um pedido com <b>can / can't</b> (I can swim. / Can you help me?)", (t, k) => {
+    const c = k.join(' ');
+    if (/\bcans\b/.test(c)) return 'can não muda: she <b>can</b>.';
+    if (/\bcan to\b/.test(c)) return 'Depois de can, o verbo vem sem to: can <b>swim</b>.';
+    if (/\b(don't|doesn't|not) can\b/.test(c)) return "A negativa é <b>can't</b>: I can't swim.";
+    if (/\b(do|does) (you|he|she|they|we|i) can\b/.test(c)) return 'A pergunta com can não usa do: <b>Can you</b> swim?';
+    return need(has(k, /^(can|can't|cannot)$/), "Use can ou can't: I <b>can</b> cook. / <b>Can</b> you help me?");
+  }),
+  aluguel: R('uma pergunta ou frase sobre <b>aluguel</b>: rent, bedrooms, utilities (How much is the rent?)', (t, k) => {
+    if (/\bhow much bedrooms\b/.test(k.join(' '))) return 'bedroom se conta: <b>How many</b> bedrooms?';
+    return need(has(k, /^(rent|bedroom|bedrooms|bathroom|bathrooms|utilities|furnished|available|deposit|neighborhood|apartment|landlord|included|pets|parking)$/), 'Fale do aluguel: How much is the <b>rent</b>? / Are <b>utilities</b> included?');
+  }),
+  caminho: R('uma <b>instrução de caminho</b> com o imperativo (Go straight and turn left.)', (t, k) => {
+    if (/^\s*(you )?(goes|turns|crosses)\b/i.test(norm(t))) return 'O imperativo é o verbo sozinho: <b>Go</b> straight, <b>turn</b> left.';
+    return need(has(k, /^(go|turn|take|cross|walk|left|right|straight|block|blocks|corner)$/), 'Dê uma instrução: <b>Go straight</b> and <b>turn left</b>.');
+  }),
+  lugar_cidade: R('onde você está ou aonde vai: <b>at</b> the bank, <b>on</b> Main Street, <b>to</b> work', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(go|goes|come|comes|walk|walks) to home\b/.test(c)) return 'Com go e come, home vai sem to: <b>go home</b>.';
+    if (/\b(go|goes|walk|walks|drive|drives) (at|in) (the|work|school)\b/.test(c)) return 'Movimento usa <b>to</b>: go <b>to</b> work.';
+    if (/\b(i'm|i am|is|are|we're|she's|he's) to (the|work|school|home)\b/.test(c)) return 'Parado num lugar é <b>at</b>: I\'m <b>at</b> work.';
+    return need(has(k, /^(at|on|in|to|home|downtown)$/), 'Diga onde está (<b>at</b> the bank) ou aonde vai (<b>to</b> work).');
+  }),
+  aviso: R("uma <b>placa</b> ou um <b>bilhete</b> com o imperativo (Please close the door. / Don't forget the keys!)", (t, k) => {
+    if (/^\s*(not|no) (forget|close|open|touch|call|use|park|smoke)\b/i.test(norm(t))) return "O imperativo negativo é <b>Don't</b> + verbo: Don't forget.";
+    return need(has(k, /^(please|don't|no|open|closed|close|call|exit|out|push|pull|back)$/), "Escreva um aviso: <b>No</b> parking. / <b>Please</b> close the door. / <b>Don't</b> forget!");
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
