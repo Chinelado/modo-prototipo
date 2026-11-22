@@ -411,6 +411,46 @@ const RULES = {
     if (/ no vou /.test(c)) return 'Em espanhol, <b>voy</b>: no <b>voy</b> a poder ir.';
     return need(/ (no voy a poder|no puedo|avisarte|avisarle|me siento|duele|duelen|fiebre|reposo|justificante|médico|te mando|perdón|molestias|comprensión|volver|enferma|enfermo) /.test(c), 'Avise: Hoy <b>no voy a poder</b> ir. / <b>Perdón por las molestias</b>.');
   }),
+  // ---------- Módulo 12 ----------
+  hotel: R('uma frase de hotel (quisiera reservar, habitación, ¿está incluido …?)', (t, k) => {
+    const c = C(k);
+    if (/ (el|un) habitación /.test(c)) return '<b>habitación</b> é feminino: <b>la</b> habitación, <b>una</b> habitación.';
+    if (/ em nome de /.test(c)) return 'Em espanhol: <b>a nombre de</b>.';
+    if (/ (quarto|café da manhã) /.test(c)) return 'Isso é português. Em espanhol: <b>habitación</b>, <b>desayuno</b>.';
+    return need(/ (quisiera|reservar|reserva|habitación|desayuno|incluido|noche|noches|pasaporte|piso|llave|toalla|salida|recepción|wifi|vista) /.test(c), 'No hotel: <b>Quisiera reservar</b> una <b>habitación</b> doble.');
+  }),
+  aeropuerto: R('uma frase de aeroporto (facturar, puerta, vuelo, retrasado…)', (t, k) => {
+    const c = C(k);
+    if (/ (despachar|atrasado|portão) /.test(c)) return 'Isso é português. Em espanhol: <b>facturar</b>, <b>retrasado</b>, <b>puerta</b>.';
+    return need(/ (facturar|maleta|equipaje|vuelo|puerta|embarque|retrasado|cancelado|escala|aduana|migración|ventanilla|pasillo|asiento|cinta) /.test(c), 'No aeroporto: <b>facturar</b> la maleta / la <b>puerta</b> de embarque / el <b>vuelo</b> está <b>retrasado</b>.');
+  }),
+  problemas_viaje: R('um problema de viagem (no funciona, se me perdió, me robaron, una queja…)', (t, k) => {
+    const c = C(k);
+    if (/ (perdí|olvidé) (el|la|mi|los|las) /.test(c) && !/ se me /.test(c)) return 'Funciona, mas o natural é mostrar que foi sem querer: <b>se me perdió</b> el pasaporte.';
+    if (/ se me (perdieron|olvidaron|rompieron) (el|la) /.test(c)) return 'Com um objeto, o verbo fica no singular: se me <b>perdió</b> el pasaporte.';
+    if (/ se me (perdió|olvidó|rompió) (los|las) /.test(c)) return 'Com plural, o verbo vai para o plural: se me <b>perdieron</b> las llaves.';
+    if (/ (roubaram|reclamação) /.test(c)) return 'Isso é português. Em espanhol: <b>me robaron</b>, <b>una queja</b>.';
+    return need(/ (no funciona|se me|me robaron|robaron|queja|denuncia|ruido|sucia|sucio|roto|rota|agua caliente|bloquear|cambiar de habitación|devolver) /.test(c), 'Explique o problema: … <b>no funciona</b>. / <b>Se me perdió</b> … / <b>Me robaron</b> …');
+  }),
+  condicional: R('um pedido educado no condicional (podría, me gustaría, sería, le importaría…)', (t, k) => {
+    const c = C(k);
+    if (/ (podería|gustaria|seria|poderia|tendria|haria) /.test(c)) return 'Confira a forma: <b>podría</b>, <b>gustaría</b>, <b>sería</b> (com acento no í).';
+    if (/ le importaría de /.test(c)) return '¿Le importaría + infinitivo, sem "de": ¿Le importaría <b>abrir</b> la ventana?';
+    return need(has(k, /\p{L}+(ría|rías|ríamos|rían)$/u), 'Peça com educação: ¿<b>Podría</b> …? / Me <b>gustaría</b> … / ¿<b>Sería</b> posible …?');
+  }),
+  clima: R('uma frase sobre o tempo (hace calor, llueve, está nublado, va a llover…)', (t, k) => {
+    const c = C(k);
+    if (/ está (mucho )?(calor|frío|sol|viento|fresco) /.test(c)) return 'Com calor, frio, sol e vento, use <b>hace</b>: <b>hace</b> calor.';
+    if (/ hace muy (calor|frío|viento|sol) /.test(c)) return 'calor, frío e viento são substantivos: <b>mucho</b> calor, <b>mucho</b> frío.';
+    if (/ llovendo /.test(c)) return 'O gerúndio é <b>lloviendo</b>.';
+    return need(/ (hace|hará|llueve|lloviendo|llover|nieva|nevando|nublado|despejado|tormenta|niebla|grados|tiempo|calor|frío|temporada) /.test(c), 'Fale do tempo: <b>Hace</b> calor. <b>Llueve</b>. <b>Está nublado</b>.');
+  }),
+  resena_hotel: R('uma frase de avaliação de hotel (nos quedamos, era, lo mejor, volvería…)', (t, k) => {
+    const c = C(k);
+    if (/ (ficamos|fiquei) /.test(c)) return 'Isso é português. Em espanhol: <b>nos quedamos</b>, <b>me quedé</b>.';
+    if (/ (recomendaria|volveria) /.test(c)) return 'O condicional leva acento: recomend<b>aría</b>, volv<b>ería</b>.';
+    return need(/ (nos quedamos|me quedé|quedamos|era|eran|estaba|había|hacía|lo mejor|lo peor|recomendaría|volvería|personal|ubicación|habitación|no funcionaba|fue) /.test(c), 'Avalie: <b>Nos quedamos</b> … / La habitación <b>era</b> … / <b>Volvería</b>.');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
