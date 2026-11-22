@@ -1222,6 +1222,29 @@ const RULES = {
     if (/\bthe rate at what\b/.test(c)) return 'Com preposição, use which: the rate <b>at which</b> …';
     return need(/^(put simply|simply put|in other words|when|for example|for instance|as a result|in short|this|imagine)\b/.test(c) || /\b(is the|the rate at which|leads to|makes|which in turn|means|tend to|expected to)\b/.test(c), 'Explique com clareza: <b>Put simply</b>, … / <b>When</b> …, … / <b>For example</b>, … / <b>In short</b>, …');
   }),
+  // ---------- Módulo 38 ----------
+  prova_c1: R('uma frase sobre a prova ou uma estratégia (parts, words, pictures, speculate, extend…)', (t, k) => need(/\b(exam|test|paper|parts?|minutes|hour|words|pictures|photos|speaking|writing|reading|listening|recording|played|twice|speculate|describe|extend|answers?|reasons|examples|strategy|time)\b/.test(k.join(' ')), 'Fale da prova: <b>Reading and Use of English has eight parts.</b> / <b>Extend your answers.</b>')),
+  proposta: R('uma frase de proposal (The aim of this proposal … / At present … / I would suggest … / It would be advisable …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bwould suggest to (introduce|start|extend|create|offer)\b/.test(c)) return 'Depois de suggest, use -ing: I would suggest <b>introducing</b> …';
+    return need(/\b(proposal|aim|at present|currently|would suggest|advisable|one option|would not only|confident|benefit|benefits|feasible|investment|in the long run|survey|improve)\b/.test(c), 'Use a linguagem da proposal: <b>The aim of this proposal is to</b> … / <b>I would suggest</b> …');
+  }),
+  fio_texto: R('uma frase sobre o fio do texto ou a atitude do autor (this, the latter, however, sceptical…)', (t, k) => need(/\b(this|these|such|former|latter|however|moreover|as a result|in contrast|sceptical|skeptical|enthusiastic|dismissive|cautious|critical|supportive|writer|writers|attitude|tone|paragraph|agree|different line|shares the view|claims|doubt)\b/.test(k.join(' ')), 'Siga o fio: <b>This approach</b> … / <b>The latter</b> … / The writer is <b>sceptical</b> …')),
+  ielts: R('uma frase de descrição de gráfico (The graph shows … / Overall, … / peaked at …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(rised|picked at|peeked at)\b/.test(c)) return 'Confira: rose (subiu), <b>peaked at</b> (atingiu o pico).';
+    return need(/\b(graph|chart|table|shows|overall|rose|rise|fell|fall|peaked|fluctuated|steadily|sharply|figure|proportion|number of|increased|decreased|in contrast|respectively|task|band|opinion|counts)\b/.test(c), 'Descreva o gráfico: <b>The graph shows</b> … / <b>Overall</b>, … / … <b>peaked at</b> …');
+  }),
+  toefl: R("uma frase de discussão acadêmica (I agree with … that …, but … / Unlike … / To build on …)", (t, k) => {
+    const c = k.join(' ');
+    if (/\bagree (to|at) (maria|paul|him|her|you)\b/.test(c)) return 'Concordar com alguém: agree <b>with</b>.';
+    return need(/\b(agree with|unlike|build on|i would add|for example|in my own|i believe|disagree|point|section|scale|hours|test|scored|breaks)\b/.test(c), "Dialogue: <b>I agree with Maria that</b> …, <b>but I would add</b> … / <b>Unlike Paul</b>, …");
+  }),
+  redacao_c1: R('uma frase de redação C1 (While … may … / Of the two, … the more … / What matters most … / On balance …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bthe most (effective|important|useful) of the two\b/.test(c)) return 'Comparando dois, use <b>the more</b>: the more effective.';
+    return need(/\b(of the two|the more|more \w+ than|while|although|on balance|crucially|what matters most|in the long term|lasting|immediate|deterrent|on the other hand|however|target|outweigh|i believe)\b/.test(c), 'Avalie e escolha: <b>Of the two</b>, I believe … is <b>the more</b> effective. / <b>On balance</b>, …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
