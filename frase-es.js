@@ -834,6 +834,44 @@ const RULES = {
     if (/ ademas /.test(c)) return '<b>además</b> leva acento.';
     return need(/ (hoy en día|en mi opinión|creo que|en primer lugar|además|por otro lado|por ejemplo|es cierto que|aunque|pero|en conclusión|por todo ello|por lo tanto|no solo|defiendo) /.test(c), 'Escreva: <b>Hoy en día</b>, … / <b>En primer lugar</b>, … / <b>En conclusión</b>, …');
   }),
+  // ---------- Módulo 23 ----------
+  pasados_b2: R('uma narração com os passados (imperfecto, indefinido, pluscuamperfecto, perfecto)', (t, k) => {
+    const c = C(k);
+    if (/ desde entonces (\p{L}+ )?(viví|trabajé|estudié|volví|fui) /u.test(c)) return 'Com <b>desde entonces</b> (até hoje), o perfecto: desde entonces <b>he vivido</b>.';
+    if (/ (ayer|el año pasado|el mes pasado|en \d{4}) (he|has|ha|hemos|han) \p{L}+ /u.test(c)) return 'Com ayer, el año pasado ou uma data, o indefinido: ayer <b>comí</b>.';
+    return need(has(k, /\p{L}+(aba|aban|ábamos|ía|ían|íamos|é|ó|í|ió|aron|ieron)$/u) || / (había|he|ha|hemos|han|fue|fui|era|desde entonces|por aquel entonces|hasta entonces|al cabo de|poco a poco|nos mudamos) /.test(c), 'Narre: <b>Por aquel entonces</b> vivíamos … / … <b>cerró</b> … / <b>Desde entonces he</b> …');
+  }),
+  costumbre: R('um hábito ou adaptação (acostumbrarse a, solía, dejar de, volver a…)', (t, k) => {
+    const c = C(k);
+    if (/ (acostumbré|acostumbro|acostumbrada|acostumbrado|acostumbras|acostumbró|acostumbramos) con /.test(c)) return 'acostumbrarse pede <b>a</b>: me acostumbré <b>al</b> frío.';
+    if (/ volví de (estudiar|fumar|hacer|trabajar|leer|escribir) /.test(c)) return 'Fazer de novo é <b>volver a</b>: volví <b>a</b> estudiar.';
+    if (/ dejé (fumar|estudiar|trabajar|comer|beber) /.test(c)) return 'Parar de é <b>dejar de</b>: dejé <b>de</b> fumar.';
+    return need(/ (acostumbr\p{L}*|suelo|sueles|suele|solía|solías|solíamos|solían|costumbre|dejé de|dejó de|deje de|volví a|volvió a|volver a|me costó|me cuesta|no volví) /u.test(c), 'Fale do hábito: Me <b>acostumbré a</b> … / <b>Solía</b> … / <b>Dejé de</b> …');
+  }),
+  cambio_persona: R('uma mudança (ponerse, volverse, hacerse, quedarse, convertirse en, llegar a ser)', (t, k) => {
+    const c = C(k);
+    if (/ se (convirtió|convierte|convirtieron) (un|una|el|la) /.test(c)) return 'convertirse pede <b>en</b>: se convirtió <b>en</b> …';
+    if (/ (me|se|te) (quedé|quedó|quedaste) (nervios[oa]|roj[oa]|triste|feliz) /.test(c)) return 'Emoção passageira é <b>ponerse</b>: me <b>puse</b> nerviosa.';
+    return need(/ (puse|puso|pusieron|pongo|ponerse|volví|volvió|volvieron|vuelve|hice|hizo|hicieron|quedé|quedó|quedaron|convertí|convirtió|convirtieron|llegó a ser|llegué a ser|llegar a ser) /.test(c), 'Use um verbo de mudança: me <b>volví</b> más paciente / se <b>hizo</b> médico / se <b>quedó</b> sin …');
+  }),
+  perfecto_ind: R('pretérito perfecto ou indefinido (he comido / comí)', (t, k) => {
+    const c = C(k);
+    if (/ (ayer|anoche|el año pasado|el mes pasado|la semana pasada|en \d{4}|hace \p{L}+ (años|días|meses)) (\p{L}+ )?(he|has|ha|hemos|han) \p{L}*(ado|ido) /u.test(c)) return 'Com ayer, el año pasado ou uma data, o indefinido em toda parte: ayer <b>comí</b>.';
+    if (/ alguna vez (\p{L}+ )?(estuviste|fuiste|comiste|viajaste) /u.test(c)) return 'Para experiência, o natural é o perfecto: ¿Alguna vez <b>has estado</b> …?';
+    return need(has(k, /\p{L}+(é|ó|í|ió|aron|ieron|aste|iste)$/u) || / (he|has|ha|hemos|han) \p{L}*(ado|ido|cho|sto|to) /u.test(c), 'Use <b>he comido</b> ou <b>comí</b>: Hoy <b>comí</b> … / ¿Alguna vez <b>has estado</b> …?');
+  }),
+  duracion_pasado: R('duração no passado (llevaba + gerúndio, llevaba … sin, hacía … que)', (t, k) => {
+    const c = C(k);
+    if (/ hizo (mucho|meses|años|tiempo|tanto) (tiempo )?que /.test(c)) return 'No passado, <b>hacía</b>: <b>hacía</b> mucho que …';
+    if (/ llevaba (\p{L}+ )+(años|meses|días|horas) no (\p{L}+) /u.test(c)) return 'Com <b>llevar</b>, o negativo é <b>sin</b> + infinitivo: llevaba años <b>sin ver</b>.';
+    return need(/ (llevaba|llevábamos|llevabas|llevaban|hacía|desde hacía) /.test(c), 'Use: <b>Llevaba</b> dos años viviendo … / <b>Llevaba</b> años <b>sin</b> … / <b>Hacía</b> mucho que …');
+  }),
+  memorias: R('uma frase de memórias (por aquel entonces, solía, llevaba … sin, me volví, desde entonces he…)', (t, k) => {
+    const c = C(k);
+    if (/ hizo (mucho|meses|años) que /.test(c)) return 'No passado, <b>hacía</b> mucho que …';
+    if (/ me acostumbré con /.test(c)) return 'acostumbrarse pede <b>a</b>.';
+    return need(has(k, /\p{L}+(aba|ía|ían|é|ó|ió|aron|ieron)$/u) || / (por aquel entonces|desde entonces|todavía hoy|solía|llevaba|había|he|me volví|me hice|me acostumbré|poco a poco|aquel|aquella) /.test(c), 'Escreva: <b>Por aquel entonces</b> … / <b>Desde entonces he</b> …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
