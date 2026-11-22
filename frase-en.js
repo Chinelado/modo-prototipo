@@ -1276,6 +1276,29 @@ const RULES = {
     return need(/\b(knackered|gutted|quid|cheers|brilliant|dodgy|fancy|cuppa|awesome|bucks|dude|hang out|grab|my bad|what's up|sus|low-key|low key|ghost\w*|no cap|vibe|slay)\b/.test(c), "Use uma gíria: I'm <b>knackered</b> / It cost ten <b>bucks</b> / He <b>ghosted</b> me.");
   }),
   variedades: R('uma frase sobre as variedades do inglês ou adaptada para o britânico (flat, colour, I\'ve just …)', (t, k) => need(/\b(variety|varieties|valid|consistent|native|non-native|lingua franca|owner|clarity|accent|spoken|billion|flat|colour|favourite|centre|have you got|i've just|bill|holiday|autumn|british|american)\b/.test(k.join(' ')), 'Fale das variedades ou adapte: <b>Each variety is equally valid.</b> / <b>We rented a flat in the city centre.</b>')),
+  // ---------- Módulo 41 ----------
+  literatura: R('uma frase sobre ficção ou de ficção (narrator, point of view, imagery, little did they know…)', (t, k) => need(/\b(narrator|novel|story|told|point of view|character|plot|setting|set in|imagery|foreshadowing|little did|would later|if only|between the lines|clues|reader|stared|smelled|as \w+ as|ending|subtext)\b/.test(k.join(' ')), 'Fale de ficção: <b>The story is told by</b> … / <b>Little did they know</b> … / <b>The novel is set in</b> …')),
+  poesia: R('uma frase sobre o poema (The poem compares … to … / The tone is … / The image of … suggests …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bcompares? \w+ with a\b/.test(c)) return 'Para comparar uma coisa a outra: compare … <b>to</b> …';
+    return need(/\b(poem|poet|compares?|metaphor|stanza|line|rhyme|rhythm|alliteration|tone|image|suggests|feathers|hope|bird|soul|aloud|emphasizes)\b/.test(c), 'Comente o poema: <b>The poem compares</b> hope <b>to</b> a bird. / <b>The tone is</b> hopeful.');
+  }),
+  ingles_antigo: R("uma frase com inglês antigo ou a sua versão moderna (thou art, 'tis, wherefore, hath…)", (t, k) => need(/\b(thou|thee|thy|thine|ye|art|hast|hath|doth|dost|'tis|tis|'twas|twas|wherefore|methinks|anon|forsooth|be or not to be|stage|you are|it is|why)\b/.test(k.join(' ')), "Use ou reconheça o inglês antigo: <b>Wherefore art thou</b> …? / <b>'Tis</b> … / <b>Methinks</b> …")),
+  juridico: R('uma cláusula jurídica (The tenant shall … / Either party may … / hereby / liable / breach…)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bshall to\b|\bmay to\b/.test(c)) return 'Depois de shall / may, o verbo básico, sem to: shall <b>pay</b>.';
+    return need(/\b(shall|hereby|herein|hereinafter|pursuant|parties|party|liable|breach|terminate|termination|notice|in writing|notwithstanding|agreement|tenant|landlord|clause)\b/.test(c), 'Escreva como num contrato: The tenant <b>shall</b> … / Either party <b>may terminate</b> …');
+  }),
+  oficial: R('uma frase de texto oficial (applicants, eligible, supporting documents, subject to, non-refundable, unless…)', (t, k) => {
+    const c = k.join(' ');
+    if (/\blegible\b/.test(c) && /\b(residents|applicants|candidates|over)\b/.test(c)) return 'Apto, elegível é <b>eligible</b> (legible é "legível").';
+    return need(/\b(applicants?|eligib\w*|supporting documents|deadline|submit|subject to|discretion|in accordance with|null and void|fine print|terms and conditions|refundable|non-refundable|prior notice|unless|within|renews|automatically|waive|considered)\b/.test(c), 'Use a linguagem oficial: <b>Applicants must submit</b> … / <b>subject to availability</b> / <b>non-refundable</b> …');
+  }),
+  linguagem_simples: R('uma frase em Plain English (You must … / You must not … / If you … / We will …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(the tenant shall|hereby|in the event of|prior to|premises)\b/.test(c) && !/\b(plain english|means|instead)\b/.test(c)) return 'Isso ainda é jurídico. Simplifique: <b>you must</b>, <b>if</b>, <b>before</b>, <b>the flat</b>.';
+    return need(/^(you|we|if you|before you|normal|ask|in plain english)\b|\b(you must|you can|you may|we will|we may|move out|wear and tear|deposit)\b/.test(c), 'Escreva em linguagem simples: <b>You must</b> … / <b>If you</b> … / <b>We will</b> …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
