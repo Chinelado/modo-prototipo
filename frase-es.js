@@ -720,6 +720,48 @@ const RULES = {
     if (/ (le|les) agradecería que (tengan|tienen|tendrían) /.test(c)) return 'Depois de <b>agradecería que</b>, o imperfeito do subjuntivo: <b>tuvieran</b>.';
     return need(/ (me dirijo|candidatura|solicitud|me gradué|llevo|estuve a cargo|me gustaría|me permitiría|puedo aportar|al regresar|les agradecería|le agradecería|quedo a su disposición|atentamente|estimados) /.test(c), 'Escreva: <b>Me dirijo a ustedes</b> … / <b>Puedo aportar</b> … / <b>Les agradecería que</b> …');
   }),
+  // ---------- Módulo 20 ----------
+  pasiva: R('uma frase na voz passiva (ser + particípio, por + agente)', (t, k) => {
+    const c = C(k);
+    if (/ (la|una) (ciudad|catedral|ley|casa|iglesia|novela|película|obra) (fue|será|es|ha sido) \p{L}*(ado|ido) /u.test(c)) return 'O particípio concorda: la ciudad fue fund<b>ada</b>.';
+    if (/ (los|las) \p{L}+ fue \p{L}*(ados|adas|idos|idas) /u.test(c)) return 'Com plural, <b>fueron</b>: los puentes <b>fueron</b> construidos.';
+    if (/ (fue|fueron) \p{L}*(ado|ada|ados|adas|ido|ida|idos|idas|to|ta|tos|tas) para (el|la|los|las|un|una) [A-ZÁÉÍÓÚ]?\p{L}+ /u.test(c) && / escrit| pintad| diseñad/.test(c)) return 'O agente entra com <b>por</b>: fue escrito <b>por</b> …';
+    return need(/ (fue|fueron|será|serán|es|son|ha sido|han sido) \p{L}*(ado|ada|ados|adas|ido|ida|idos|idas|to|ta|tos|tas|cho|cha) /u.test(c), 'Use a passiva: La ciudad <b>fue fundada</b> en … / <b>fue escrito por</b> …');
+  }),
+  se_pasiva: R('uma frase com se passivo ou impessoal (se vende, se venden, se dice que…)', (t, k) => {
+    const c = C(k);
+    if (/ se (vende|alquila|necesita|busca|habla) (casas|departamentos|camareros|libros|habitaciones|autos|locales) /.test(c)) return 'O se passivo concorda com a coisa: se <b>venden</b> casas, se <b>necesitan</b> camareros.';
+    if (/ se (venden|buscan|necesitan) a /.test(c)) return 'Com pessoas, o verbo fica no singular: se <b>busca</b> a dos personas.';
+    if (/ (vende-se|aluga-se|precisa-se) /.test(c)) return 'Isso é português. Em espanhol: <b>se vende</b>, <b>se alquila</b>, <b>se necesita</b>.';
+    return need(/ se \p{L}+ /u.test(c), 'Use o se: <b>Se venden</b> casas. / Aquí <b>se vive</b> bien.');
+  }),
+  proceso: R('uma etapa de processo (primero se …, después se …, por último se …)', (t, k) => {
+    const c = C(k);
+    if (/ se (recoge|seca|tuesta|muele|mezcla|empaqueta) (los|las) /.test(c)) return 'O se concorda com a coisa: se <b>recogen</b> los granos, se <b>secan</b> las semillas.';
+    if (/ por ultimo /.test(c)) return '<b>último</b> leva acento: por <b>último</b>.';
+    return need(/ (primero|después|luego|a continuación|más tarde|por último|finalmente|se) /.test(c), 'Descreva a etapa: <b>Primero se</b> recogen … / <b>Después se</b> secan …');
+  }),
+  sociedad: R('uma frase sobre a sociedade (desigualdad, desempleo, debido a, gracias a…)', (t, k) => {
+    const c = C(k);
+    if (/ devido a /.test(c)) return 'Em espanhol, com b: <b>debido a</b>.';
+    if (/ (el|un) (desigualdad|ciudad|seguridad|inseguridad|sociedad|libertad|realidad) /.test(c)) return 'As palavras em <b>-dad</b> são femininas: <b>la</b> desigualdad, <b>la</b> ciudad.';
+    if (/ por causa de /.test(c)) return 'Em espanhol: <b>a causa de</b> (ou <b>por</b>).';
+    return need(/ (desigualdad|desempleo|pobreza|inseguridad|corrupción|vivienda|inflación|crisis|debido a|a causa de|por culpa de|gracias a|por eso|por lo tanto|como consecuencia|gobierno|problema) /.test(c), 'Fale da sociedade: <b>El desempleo</b> aumentó <b>debido a</b> …');
+  }),
+  datos: R('uma frase com dados (según, el 40 %, la mitad, aumentar, disminuir…)', (t, k) => {
+    const c = C(k);
+    if (/ segundo (un|una|el|la|los|las) (estudio|encuesta|informe|datos) /.test(c)) return 'A fonte é <b>según</b>: <b>según</b> una encuesta.';
+    if (/ metade /.test(c)) return 'Em espanhol: <b>la mitad</b>.';
+    if (/ (^|[^l] )(\d+) % de los /.test(c) && !/ (el|un|del) \d+ % /.test(c)) return 'A porcentagem leva artigo: <b>el</b> 40 % de los jóvenes.';
+    return need(/ (según|%|por ciento|la mitad|un tercio|un cuarto|mayoría|minoría|aumentó|aumentaron|disminuyó|disminuyeron|se duplicó|se mantuvo|creció|bajó|cayó|encuesta|datos) /.test(c), 'Dê um dado: <b>Según</b> una encuesta, <b>el 40 %</b> de …');
+  }),
+  articulo: R('uma frase de artigo informativo (según, fue presentado, se calcula que, debido a, se proponen…)', (t, k) => {
+    const c = C(k);
+    if (/ segundo (un|una|el|la) (estudio|informe|encuesta) /.test(c)) return 'A fonte é <b>según</b>.';
+    if (/ se propone (varias|medidas|campañas|soluciones) /.test(c)) return 'O se concorda: se <b>proponen</b> varias medidas.';
+    if (/ se espera que (\p{L}+ )?(reduce|ayuda|cambia|va) /u.test(c)) return 'Depois de <b>se espera que</b>, o subjuntivo: <b>reduzca</b>, <b>ayude</b>, <b>cambie</b>.';
+    return need(/ (según|fue|fueron|se|debido a|como consecuencia|por eso|gran parte|millones|el \d+ %) /.test(c), 'Escreva: <b>Según</b> un estudio, … / <b>Se calcula que</b> … / <b>Se proponen</b> …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
