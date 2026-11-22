@@ -522,7 +522,7 @@ const RULES = {
   // ---------- Módulo 15 ----------
   narrativa: R('uma cena de história: o cenário no <b>passado contínuo</b> e o fato no <b>passado simples</b> (I was walking when …)', (t, k) => {
     const c = k.join(' ');
-    if (/\b(was|were) (stop|see|open|turn|run|shout|notice|realize|call)\b/.test(c)) return 'Depois de was / were, o verbo vai com -ing: I was <b>walking</b>.';
+    if (/\b(was|were) (stop|see|open|turn|run|shout|notice|realize|call|walk|go|work|drive|wait|read|cook|eat|sleep|sit|rain|snow|talk|play|watch|study)\b/.test(c)) return 'Depois de was / were, o verbo vai com -ing: I was <b>walking</b>.';
     if (/\bwhen (a|the|he|she|they|someone|my) \p{L}+ was \p{L}+ing\b/u.test(c) && /\bwas \p{L}+ing .*when\b/u.test(c)) return 'A ação curta, depois de when, vai no passado simples: … when a car <b>stopped</b>.';
     return need(/\b(was|were) \p{L}+ing\b/u.test(c) || k.some((w) => /\p{L}{3,}ed$/u.test(w)) || has(k, /^(saw|went|ran|came|took|got|found|said|told|heard|felt|left)$/), 'Conte uma cena: I <b>was walking</b> home when a car <b>stopped</b>.');
   }),
@@ -539,6 +539,37 @@ const RULES = {
   }),
   noticia: R('uma frase de <b>notícia</b>: a novidade (has + particípio), um detalhe (passado) ou a fonte (according to)', (t, k) => need(has(k, /^(has|have|according|reported|witnesses|police|firefighters|were|was|had|evacuated|rescued|news)$/) || k.some((w) => /\p{L}{3,}ed$/u.test(w)), 'Escreva uma notícia: A fire <b>has destroyed</b> … / <b>According to</b> the police, …')),
   historia: R('uma frase de <b>história curta</b>, com os tempos do passado e conectores', (t, k) => need(/\b(was|were) \p{L}+ing\b/u.test(k.join(' ')) || /\bhad \p{L}+/u.test(k.join(' ')) || has(k, /^(suddenly|eventually|finally|end|felt|saw|found|decided|realized)$/) || k.some((w) => /\p{L}{3,}ed$/u.test(w)), 'Escreva no passado: I <b>was walking</b> … <b>Suddenly</b>, I <b>saw</b> …')),
+  // ---------- Módulo 16 ----------
+  perfect_continuous: R("algo que começou e continua, com <b>have / has been + -ing</b> (I've been learning English for two years.)", (t, k) => {
+    const c = k.join(' ');
+    if (/\b(i|you|we|they|he|she) (am|is|are|'m|'s|'re) \p{L}+ing\b.*\b(for (\d+|two|three|four|five|six|a|an|many|ten) (years|months|weeks|days|hours|year|month|week|hour)|since)\b/u.test(c) || /\b(i'm|you're|we're|they're|he's|she's) \p{L}+ing\b.*\b(for (\d+|two|three|four|five|six|a|an|many|ten) (years|months|weeks|days|hours|year|month|week|hour)|since)\b/u.test(c)) return "Para algo que começou e continua, use <b>have been + -ing</b>: I've been learning English for two years.";
+    if (/\b(been) (knowing|having|liking|loving|being)\b/.test(c)) return "Verbos de estado ficam no simples: I've <b>known</b> her for years.";
+    return need(/\b(have|has|'ve|'s|i've|you've|we've|they've|she's|he's|it's) ((i|you|we|they|he|she|it) )?been \p{L}+ing\b/u.test(c), "Use have been + -ing: I'<b>ve been learning</b> … for …");
+  }),
+  mudanca: R('uma <b>mudança</b>: present perfect (Prices have gone up.) ou antes e agora (I used to …, but now …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(has|have) (went|become|grew|came|ran)\b/.test(c) && !/\b(has|have) become\b/.test(c)) return 'Depois de has / have, use o particípio: has <b>gone</b>, has <b>grown</b>.';
+    if (/\bnot \p{L}+ anymore\b/u.test(c) === false && /\banymore\b/.test(c) && !/\b(don't|doesn't|didn't|isn't|aren't|wasn't|not|never|no)\b/.test(c)) return 'anymore vai na frase negativa: I <b>don\'t</b> live there anymore.';
+    return need(has(k, /^(changed|grown|become|improved|gone|has|have|used|now|nowadays|anymore|longer)$/), 'Fale de uma mudança: The city <b>has changed</b> … / I <b>used to</b> …, but <b>now</b> …');
+  }),
+  usedto2: R('<b>used to</b> (costumava), <b>be used to</b> (estar acostumado) ou <b>get used to</b> (se acostumar)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(am|is|are|'m|'s|'re|i'm|you're|she's|he's|we're|they're|getting|get|got|was|were) used to (live|work|eat|drive|speak|wake|cook|wear|be|have|go|study|sleep|tip)\b/.test(c)) return 'Depois de be / get used to, o verbo vai com -ing: I\'m used to <b>working</b>.';
+    if (/\bused to (living|working|eating|driving|speaking|waking)\b/.test(c) && !/\b(am|is|are|'m|'s|'re|i'm|you're|she's|he's|we're|they're|getting|get|got|was|were) used to\b/.test(c)) return 'Para "costumava", o verbo vem no básico: I used to <b>live</b>. Para "acostumado", use I\'m used to living.';
+    return need(/\bused to\b/.test(c), 'Use used to, be used to ou get used to.');
+  }),
+  still_yet: R('uma frase de adaptação com <b>still, already, yet ou anymore</b>', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(haven't|hasn't|didn't|don't) \p{L}+ .*\bstill\s*[.!]?$/u.test(c)) return 'Para "ainda não", use <b>yet</b> no fim: I haven\'t found a job <b>yet</b>.';
+    if (/\byet\b/.test(c) && !/\b(haven't|hasn't|have|has|didn't|did|not|don't|isn't|aren't)\b/.test(c)) return 'yet vai na pergunta ou na negativa: I haven\'t … <b>yet</b>. / Have you … <b>yet</b>?';
+    return need(has(k, /^(still|already|yet|anymore|longer)$/), 'Use still, already, yet ou anymore: I <b>still</b> miss … / I\'ve <b>already</b> …');
+  }),
+  perfect_simples_continuo: R("o <b>present perfect</b> simples (resultado: I've saved $2,000) ou contínuo (atividade: I've been saving for a year)", (t, k) => {
+    const c = k.join(' ');
+    if (/\bbeen \p{L}+ing (\d+|two|three|four|five|six|seven|eight|nine|ten|many|several) \p{L}+s\b/u.test(c)) return 'Com um número de coisas (resultado), use o simples: I\'ve <b>read</b> three books.';
+    return need(/\b(have|has|'ve|i've|you've|we've|they've|she's|he's) (been |already |just |never )?\p{L}+/u.test(c) && has(k, /^(have|has|i've|you've|we've|they've|she's|he's|haven't|hasn't)$/), "Use o present perfect: I'<b>ve saved</b> … / I'<b>ve been saving</b> …");
+  }),
+  texto_mudanca: R('uma frase do seu <b>texto sobre uma mudança</b>: used to, passado com data, have been + -ing ou get used to', (t, k) => need(/\b(used to|been \p{L}+ing|getting used|got used|ago|looking back|regret|hasn't been|i've|have)\b/u.test(k.join(' ')) || k.some((w) => /\p{L}{3,}ed$/u.test(w)), "Conte a mudança: I <b>used to</b> … / Two years <b>ago</b>, I … / I'<b>ve been</b> …ing …")),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
