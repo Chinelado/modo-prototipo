@@ -763,6 +763,38 @@ const RULES = {
     if (/\bshould to\b/.test(k.join(' '))) return 'should vem sem to: should <b>ban</b>.';
     return need(/\b(should|would|in my opinion|firstly|in addition|moreover|however|for example|in conclusion|therefore|on the other hand)\b/.test(k.join(' ')), 'Escreva uma parte do texto: In my opinion, … <b>should</b> … / <b>Firstly</b>, … / <b>However</b>, …');
   }),
+  // ---------- Módulo 23 ----------
+  would_habito: R('um hábito do passado com <b>would</b> (ações) ou <b>used to</b> (estados)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(i|we|she|he|they|my \p{L}+) would (have|be|live|know|love|like|own|believe)\b/u.test(c) && /\b(when i was|as a child|every|always|used to|childhood|kid)\b/.test(c)) return 'Para estados no passado (have, be, live, know), use <b>used to</b>: I used to have …';
+    if (/\bwould (went|played|spent|told|made|took)\b/.test(c)) return 'Depois de would, o verbo vem no básico: would <b>go</b>.';
+    return need(/\b(would|'d|used to)\b/.test(c), 'Conte um hábito: Every summer, we <b>would</b> … / I <b>used to</b> …');
+  }),
+  past_perfect_continuous: R('o que <b>vinha acontecendo</b>: had been + -ing (When we arrived, it had been raining for hours.)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bhad been (knowing|having|being|liking|loving|owning)\b/.test(c)) return 'Verbos de estado ficam no past perfect simples: had <b>known</b>.';
+    if (/\bhad been (wait|work|rain|run|cry|walk|study|date|live)\b/.test(c)) return 'Depois de had been, -ing: had been <b>waiting</b>.';
+    return need(/\b(had|'d) been \p{L}+ing\b/u.test(c), "Use had been + -ing: … had <b>been waiting</b> for …");
+  }),
+  remember_ing_to: R('<b>remember, forget, stop ou try</b> com -ing ou to, no sentido certo', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(don't|never) forget (lock|buy|call|send|bring|pay|take)\b/.test(c) || /\bremember (lock|buy|call|send|bring|pay|take)\b/.test(c)) return 'Para tarefa, use to: Remember <b>to</b> lock the door.';
+    return need(/\b(remember|remembered|forget|forgot|stop|stopped|try|tried|regret)\b/.test(c) && (/\b(remember|remembered|forget|forgot|stop|stopped|try|tried|regret)\w* (\p{L}+ing|to \p{L}+)\b/u.test(c)), 'Use remember, forget, stop ou try com -ing ou to: I remember <b>meeting</b> … / Remember <b>to</b> …');
+  }),
+  nostalgia: R('uma memória com os <b>sentidos</b> ou <b>remind … of</b> (I can still smell … / This song reminds me of …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(remembers|remember) me (of|about)\b/.test(c)) return 'Para "isso me lembra de", use <b>reminds me of</b>.';
+    if (/\breminds? me (about|to my|from)\b/.test(c)) return 'A expressão é <b>remind … of</b>: reminds me <b>of</b> …';
+    return need(/\b(remind|reminds|reminded|smell|hear|taste|those were the days|miss|memories|vividly|vaguely|nostalgic|still)\b/.test(c), 'Conte uma memória: I can still <b>smell</b> … / This <b>reminds me of</b> …');
+  }),
+  momento: R('um momento decisivo (The moment I … / As soon as … / Hardly had … when / No sooner had … than)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bno sooner\b.*\bwhen\b/.test(c) && !/\bthan\b/.test(c)) return 'no sooner pede <b>than</b>: No sooner had we left <b>than</b> …';
+    if (/\bhardly\b.*\bthan\b/.test(c) && !/\bwhen\b/.test(c)) return 'hardly pede <b>when</b>: Hardly had I arrived <b>when</b> …';
+    if (/^\s*(no sooner|hardly) (i|we|you|he|she|they) had\b/i.test(norm(t))) return 'Depois de No sooner / Hardly no começo, inverta: <b>had I</b> arrived.';
+    return need(/\b(the moment|as soon as|no sooner|hardly|from that day on|ever since|little did i know|out of the blue|it hit me)\b/.test(c), 'Marque o momento: <b>The moment</b> I saw …, I knew. / <b>Hardly had</b> I … <b>when</b> …');
+  }),
+  memoria_texto: R('uma frase da sua <b>memória</b>: hábito (would / used to), o momento, os sentidos ou a reflexão', (t, k) => need(/\b(would|used to|had been|the moment|smell|hear|taste|looking back|taught me|still|remember|i'll never forget)\b/.test(k.join(' ')) || k.some((w) => /\p{L}{3,}ed$/u.test(w)), 'Escreva a memória: Every summer, she <b>would</b> … / <b>Looking back</b>, …')),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
