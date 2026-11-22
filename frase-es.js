@@ -872,6 +872,42 @@ const RULES = {
     if (/ me acostumbré con /.test(c)) return 'acostumbrarse pede <b>a</b>.';
     return need(has(k, /\p{L}+(aba|ía|ían|é|ó|ió|aron|ieron)$/u) || / (por aquel entonces|desde entonces|todavía hoy|solía|llevaba|había|he|me volví|me hice|me acostumbré|poco a poco|aquel|aquella) /.test(c), 'Escreva: <b>Por aquel entonces</b> … / <b>Desde entonces he</b> …');
   }),
+  // ---------- Módulo 24 ----------
+  si_pasado: R('uma hipótese sobre o passado (si + hubiera + particípio, habría + particípio)', (t, k) => {
+    const c = C(k);
+    if (/ si (\p{L}+ )?(habría|habrías|habríamos|habrían) /u.test(c)) return 'Depois de <b>si</b>, use <b>hubiera</b>: si lo <b>hubiera</b> sabido (nunca "si lo habría").';
+    if (/ (tendría|tendrías|tendríamos) (\p{L}*(ado|ido)|hecho|dicho|visto) /u.test(c)) return 'O "teria" + particípio é <b>habría</b>: <b>habría</b> venido.';
+    return need(/ (hubiera|hubieras|hubiéramos|hubieran|hubiese|habría|habrías|habríamos|habrían) /.test(c), 'Faça a hipótese: Si lo <b>hubiera</b> sabido, <b>habría</b> venido.');
+  }),
+  condicional_comp: R('o condicional composto (habría + particípio, yo en tu lugar habría …)', (t, k) => {
+    const c = C(k);
+    if (/ (tendría|tendrías|tendríamos|tendrían) (\p{L}*(ado|ido)|hecho|dicho|visto|sido) /u.test(c)) return 'O "teria" + particípio é <b>habría</b>: <b>habría</b> hecho.';
+    return need(/ (habría|habrías|habríamos|habrían) /.test(c), 'Use <b>habría</b> + particípio: Yo <b>habría hecho</b> lo mismo.');
+  }),
+  lamento: R('um lamento sobre o passado (ojalá hubiera, me arrepiento de, qué pena que …)', (t, k) => {
+    const c = C(k);
+    if (/ me arrepiento (no|haber|haberlo|haberla|haberte) /.test(c)) return 'arrepentirse pede <b>de</b>: me arrepiento <b>de</b> no haber …';
+    if (/ de no tener (\p{L}*(ado|ido)) /u.test(c)) return 'O "ter" + particípio é <b>haber</b>: de no <b>haber</b> viajado.';
+    if (/ ojalá (\p{L}+ )?(habría|había) /u.test(c)) return 'Depois de <b>ojalá</b>, para o passado: <b>hubiera</b> + particípio.';
+    return need(/ (ojalá|arrepiento|arrepientas|arrepiente|lamento|qué pena|me da pena|nunca es tarde|lo hecho|lección) /.test(c), 'Lamente: <b>Ojalá hubiera</b> … / <b>Me arrepiento de</b> no haber …');
+  }),
+  reproche: R('uma crítica ou autocrítica (deberías haber …, podrías haber …, la próxima vez …)', (t, k) => {
+    const c = C(k);
+    if (/ (debería|deberías|deberíamos|podrías|podría) tener (\p{L}*(ado|ido)|dicho|hecho) /u.test(c)) return 'O "deveria ter" é <b>debería haber</b> + particípio.';
+    if (/ haber me lo /.test(c)) return 'Os pronomes vão colados: <b>habérmelo</b> dicho.';
+    return need(/ (debería|deberías|deberíamos|podrías|podría|tendría que|tendrías que|tendríamos que|por qué no|no pasa nada|la próxima vez) /.test(c) || has(k, /^(habérmelo|habértelo|haberte|haberlo|haberme)$/), 'Critique: <b>Deberías haber</b> … / <b>Podrías haber</b> …');
+  }),
+  mixtas: R('uma hipótese mista (si hubiera …, ahora …; si fuera …, habría …; de haberlo sabido …)', (t, k) => {
+    const c = C(k);
+    if (/ si (\p{L}+ )?(habría|habrías|sería|serías|tendría) /u.test(c)) return 'Depois de <b>si</b>, nunca o condicional: si <b>hubiera</b> …, si <b>fuera</b> …';
+    return need(/ (hubiera|hubieras|hubiéramos|fuera|fueras|fuese) /.test(c) || / de haber(lo|la|te|me)? /.test(c), 'Misture os tempos: Si <b>hubiera estudiado</b>, ahora <b>sería</b> … / <b>De haberlo sabido</b>, …');
+  }),
+  carta_perdon: R('uma frase de carta de reflexão (me arrepiento de, si te hubiera …, debería haber …, ojalá…)', (t, k) => {
+    const c = C(k);
+    if (/ si (\p{L}+ )?(habría|habrías|habríamos) /u.test(c)) return 'Depois de <b>si</b>, use <b>hubiera</b>.';
+    if (/ me arrepiento (no|haber) /.test(c)) return 'arrepentirse pede <b>de</b>.';
+    return need(/ (querida|querido|hace años|te acuerdas|arrepiento|hubiera|habría|habríamos|debería|ojalá|perdón|perdóname|echo de menos|extraño|seríamos|ahora) /.test(c), 'Escreva: <b>Me arrepiento de</b> … / <b>Si te hubiera</b> … / <b>Ojalá</b> …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
