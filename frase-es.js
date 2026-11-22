@@ -1054,6 +1054,40 @@ const RULES = {
     if (/ hice fila /.test(c)) return 'Fazer fila é <b>hacer cola</b>.';
     return need(/ (a punto de|me puse a|me eché a|seguía|volví a|hice cola|hacer cola|sello|sonrisa|pan comido|ojo de la cara|pelos en la lengua|moraleja|todos sabemos|aquel|aquella|las pilas|metí la pata|al final|me di cuenta) /.test(c) || has(k, /\p{L}+(ando|iendo)$/u), 'Escreva a crônica: <b>Estaba a punto de</b> … / <b>Hice cola</b> … / <b>Moraleja</b>: …');
   }),
+  // ---------- Módulo 29 ----------
+  reunion: R('uma frase de reunião (propongo que, quedamos en que, ¿quién se encarga …?)', (t, k) => {
+    const c = C(k);
+    if (/ propongo que (\p{L}+ )?(lanzamos|hacemos|esperamos|dejamos|hablamos|revisamos) /u.test(c)) return 'Depois de <b>propongo que</b>, o subjuntivo: <b>lancemos</b>, <b>hagamos</b>, <b>esperemos</b>.';
+    if (/ quedamos que /.test(c)) return 'Combinar é <b>quedar en</b>: quedamos <b>en</b> que …';
+    return need(/ (propongo|sugiero|qué tal si|qué opinan|alguien quiere|quedamos en|estamos de acuerdo|se encarga|siguiente paso|orden del día|punto|empecemos|objetivo|me parece) /.test(c), 'Na reunião: <b>Propongo que</b> … / <b>Quedamos en que</b> … / ¿<b>Quién se encarga de</b> …?');
+  }),
+  negociar: R('uma frase de negociação (estaríamos dispuestos a, siempre que + subjuntivo, a cambio de…)', (t, k) => {
+    const c = C(k);
+    if (/ (siempre que|con tal de que|a condición de que) (\p{L}+ )?(pagan|firman|es|son|compran|aceptan|entregan) /u.test(c)) return 'Como condição, o subjuntivo: siempre que <b>paguen</b>, <b>firmen</b>, <b>sea</b>.';
+    return need(/ (dispuestos|dispuesta|dispuesto|podríamos|siempre que|con tal de que|a condición de que|qué les parece si|y si|a cambio de|descuento|me temo|trato hecho|cerramos el trato|nos interesaría|lo que podemos ofrecer) /.test(c), 'Negocie: <b>Estaríamos dispuestos a</b> … <b>siempre que</b> … / ¿<b>Qué les parece si</b> …?');
+  }),
+  correo_trabajo: R('uma frase de e-mail de trabalho (te escribo para, te adjunto, ¿podrías …?, quedo atenta…)', (t, k) => {
+    const c = C(k);
+    if (/ te anexo /.test(c)) return 'No e-mail, "anexar" é <b>adjuntar</b>: te <b>adjunto</b> …';
+    if (/ (le|les) (adjunto|escribo) .* (tus|te) /.test(c)) return 'Mantenha o mesmo tratamento: <b>le</b> … <b>sus</b> (usted) ou <b>te</b> … <b>tus</b> (tú).';
+    return need(/ (hola|te escribo|les escribo|te adjunto|les adjunto|adjunto|podrías|me confirmas|quedo atent|quedo pendiente|un saludo|saludos|cualquier duda|gracias de antemano|asunto|recordatorio) /.test(c), 'Escreva: <b>Te escribo para</b> … / <b>Te adjunto</b> … / <b>Quedo atenta</b>.');
+  }),
+  feedback: R('uma frase de feedback (lo que funcionó muy bien, quizás podrías, te sugiero que + subjuntivo…)', (t, k) => {
+    const c = C(k);
+    if (/ te sugiero que (\p{L}+ )?(revisas|incluyes|hablas|practicas|agregas|cambias) /u.test(c)) return 'Depois de <b>te sugiero que</b>, o subjuntivo: <b>revises</b>, <b>incluyas</b>, <b>practiques</b>.';
+    return need(/ (lo que funcionó|me gustó|fortaleza|quizás podrías|podrías|te sugiero|qué te parece si|aspecto a mejorar|en general|muy buen trabajo|gracias por los comentarios|lo tendré en cuenta|si necesitas ayuda) /.test(c), 'Dê feedback: <b>Lo que funcionó muy bien fue</b> … / <b>Quizás podrías</b> …');
+  }),
+  conflicto: R('uma frase para resolver um conflito (entiendo que estés …, busquemos una solución, lo importante es que…)', (t, k) => {
+    const c = C(k);
+    if (/ lo importante es que (\p{L}+ )+(recibe|llega|está|es|tiene|termina) /u.test(c)) return 'Depois de <b>lo importante es que</b>, o subjuntivo: <b>reciba</b>, <b>llegue</b>, <b>esté</b>.';
+    if (/ pongámosnos /.test(c)) return 'Com o pronome, o -s cai: <b>pongámonos</b>.';
+    return need(/ (entiendo|punto de vista|no se trata|culpables|malentendido|busquemos|pongámonos|hablemos|lo importante es que|qué te parece si|a partir de ahora|solución|tienes razón) /.test(c), 'Medeie: <b>Entiendo que</b> … / <b>Busquemos una solución</b> / <b>Lo importante es que</b> …');
+  }),
+  acta: R('uma frase de ata (se trató, se acordó, se encargará de, plazo, queda pendiente…)', (t, k) => {
+    const c = C(k);
+    if (/ (acordamos|decidimos) /.test(c)) return 'Na ata, o impessoal: <b>se acordó</b>, <b>se decidió</b>.';
+    return need(/ (asistentes|ausentes|orden del día|se trató|se acordó|se decidió|se aprobó|se encargará|responsable|plazo|queda pendiente|quedan pendientes|próxima reunión|se presentó|se discutió) /.test(c), 'Escreva a ata: <b>Se acordó</b> … / … <b>se encargará de</b> … / <b>Plazo</b>: …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
