@@ -60,7 +60,7 @@ function falaPanel(target, pt = '', mode = 'livre') {
       <button type="button" class="fl-model">🔊 Modelo</button><button type="button" class="fl-slow">🐢 Devagar</button>
       ${mode === 'exercicio' ? '<button type="button" class="ghost fl-skip">Agora não posso falar</button>' : ''}
     </div>
-    <p class="fl-live mut">${sr ? 'Toque em Falar e diga a frase inteira em alemão.' : 'Seu navegador não entende fala (o Chrome, o Edge e o Safari entendem). Grave, ouça e compare com o modelo.'}</p>
+    <p class="fl-live mut">${sr ? 'Toque em Falar e diga a frase inteira em ' + LP.lingua + '.' : 'Seu navegador não entende fala (o Chrome, o Edge e o Safari entendem). Grave, ouça e compare com o modelo.'}</p>
     <div class="fl-res"></div>
   </div>`;
 }
@@ -118,7 +118,7 @@ async function falaStart(el) {
     if (!(await falaRecStart(el))) return fStatus(el, 'Não consegui usar o microfone. Confira a permissão do navegador.');
     el._busy = true; go.textContent = '⏹️ Parar'; fStatus(el, '🔴 Gravando… diga a frase e toque em Parar.'); return;
   }
-  const r = new FALA_SR(); r.lang = 'de-DE'; r.interimResults = true; r.maxAlternatives = 5; r.continuous = false;
+  const r = new FALA_SR(); r.lang = LP.tts; r.interimResults = true; r.maxAlternatives = 5; r.continuous = false;
   let finalAlts = [], heard = '';
   r.onresult = (e) => {
     heard = [...e.results].map((x) => x[0].transcript).join(' ');
