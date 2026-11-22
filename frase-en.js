@@ -1261,6 +1261,21 @@ const RULES = {
   }),
   figurado: R('uma metáfora ou hipérbole (drowning in work, a heart of gold, a million times, I\'m starving…)', (t, k) => need(/\b(drowning|a sea of|heart of gold|rollercoaster|roller coaster|breath of fresh air|flood of|backbone|million times|starving|dying to|weighs a ton|took forever|literally|crystal clear|collapsed|war zone|waste\w* time|spend\w* time|build\w* an argument|time is money)\b/.test(k.join(' ')), 'Use linguagem figurada: I\'m <b>drowning in work</b> / I\'ve told you <b>a million times</b> …')),
   cronica: R('uma frase de crônica de humor (What could possibly go wrong? / It was not, perhaps, my finest hour / Big mistake.)', (t, k) => need(/\b(go wrong|finest hour|turned out|gone are the days|needless to say|in my defence|in my defense|to be fair|let us say|big mistake|huge|so much for|next (time|year)|at least|what a brilliant|like millions|how hard could it be|war zone)\b/.test(k.join(' ')) || /^\p{L}+( \p{L}+){0,2}[.!]$/u.test(t.trim()), 'Escreva com humor: <b>What could possibly go wrong?</b> / <b>It was not, perhaps, my finest hour.</b>')),
+  // ---------- Módulo 40 ----------
+  us_uk_vocab: R('uma frase com vocabulário britânico ou americano (flat, lift, bill, queue, autumn…)', (t, k) => need(has(k, /^(flat|lift|lorry|autumn|biscuit|biscuits|queue|holiday|bill|petrol|trousers|apartment|elevator|truck|fall|cookie|cookies|line|vacation|check|gas|pants|crisps|chips|pavement|sidewalk|underground|subway|tube|motorway|highway|floor|park|gap|vest)$/), 'Use o vocabulário de uma variedade: <b>flat</b> / <b>apartment</b>, <b>lift</b> / <b>elevator</b>, <b>bill</b> / <b>check</b> …')),
+  us_uk_grammar: R("uma frase com ortografia ou gramática de uma variedade (colour, centre, Have you got …?, I've just …)", (t, k) => {
+    const c = k.join(' ');
+    if (/\bfavourite color\b|\bfavorite colour\b|\bcolour\b.*\bcenter\b|\bcolor\b.*\bcentre\b/.test(c)) return 'Não misture: use <b>favourite colour / centre</b> (UK) ou <b>favorite color / center</b> (US).';
+    return need(/\b(colou?r|favou?rite|cent(re|er)|organi[sz]e|travel+ed|programme|have you got|has got|have got|i've just|have you finished|the team are|at the weekend|on the weekend|consistent|spelling)\b/.test(c), "Use a ortografia ou a gramática de uma variedade: <b>colour</b>, <b>centre</b>, <b>Have you got</b> …?, <b>I've just</b> …");
+  }),
+  sotaques: R('uma frase sobre sotaques ou para pedir que alguém repita (accent, could you say that again …)', (t, k) => need(/\b(accents?|say that again|more slowly|slow down|pronounce|sounds?|tomayto|tomahto|water|car|british|american|australian|scottish|irish|correct|listen|variety)\b/.test(k.join(' ')), 'Fale de sotaques ou peça para repetir: <b>Sorry, could you say that again a bit more slowly?</b>')),
+  ingles_mundo: R("uma frase com uma expressão de outra variedade (G'day, arvo, no worries, grand, craic, prepone…)", (t, k) => need(/\b(g'day|gday|mate|arvo|brekkie|no worries|heaps|grand|craic|wee|aye|prepone|needful|lah|native speakers|non-native|second language|lingua franca)\b/.test(k.join(' ')), "Use uma expressão de outra variedade: <b>G'day, mate!</b> / <b>I'm grand</b> / <b>See you this arvo</b>.")),
+  girias: R('uma frase com gíria (knackered, gutted, quid, bucks, awesome, ghost, low-key…)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bfive quids\b|\bten quids\b/.test(c)) return 'quid não tem plural: five <b>quid</b>.';
+    return need(/\b(knackered|gutted|quid|cheers|brilliant|dodgy|fancy|cuppa|awesome|bucks|dude|hang out|grab|my bad|what's up|sus|low-key|low key|ghost\w*|no cap|vibe|slay)\b/.test(c), "Use uma gíria: I'm <b>knackered</b> / It cost ten <b>bucks</b> / He <b>ghosted</b> me.");
+  }),
+  variedades: R('uma frase sobre as variedades do inglês ou adaptada para o britânico (flat, colour, I\'ve just …)', (t, k) => need(/\b(variety|varieties|valid|consistent|native|non-native|lingua franca|owner|clarity|accent|spoken|billion|flat|colour|favourite|centre|have you got|i've just|bill|holiday|autumn|british|american)\b/.test(k.join(' ')), 'Fale das variedades ou adapte: <b>Each variety is equally valid.</b> / <b>We rented a flat in the city centre.</b>')),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
