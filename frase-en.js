@@ -702,6 +702,46 @@ const RULES = {
     return need(/\b(was|were) ((it|they|this|that|he|she) )?(\p{L}+ed|written|built|drawn|sung|made|taken|shown)\b/u.test(c), 'Use a passiva: The light bulb <b>was invented by</b> Edison.');
   }),
   texto_processo: R('uma frase do texto sobre um <b>processo</b> (introdução, etapa com a passiva ou conclusão)', (t, k) => need(/\b(is|are) \p{L}+(ed|en|wn|t)\b/u.test(k.join(' ')) || /\b(have you ever wondered|this way|that's how|first|then|after that|finally|next)\b/.test(k.join(' ')), 'Escreva uma etapa: <b>First</b>, the bottles <b>are collected</b>.')),
+  // ---------- Módulo 21 ----------
+  indireto: R('o que alguém disse, em <b>discurso indireto</b> (She said she was tired.)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bsaid (me|you|him|her|us|them)\b/.test(c)) return 'Com a pessoa logo depois, use <b>told</b>: She <b>told me</b> she was tired.';
+    if (/\bsaid (that )?(i|you|he|she|we|they|it) (will|can|am|is|are)\b/.test(c)) return 'No discurso indireto, o tempo volta um passo: will → <b>would</b>, can → <b>could</b>, am / is → <b>was</b>.';
+    return need(/\b(said|told|mentioned|explained)\b/.test(c), 'Conte o que alguém disse: She <b>said</b> she was …');
+  }),
+  indireto_pedido: R('um pedido ou ordem contado: <b>told / asked + pessoa + (not) to + verbo</b>', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(told|asked|reminded|warned) (me|you|him|her|us|them) (don't|do not)\b/.test(c)) return 'Na negativa, use <b>not to</b>: She told me <b>not to</b> run.';
+    if (/\b(told|asked|reminded|warned) (me|you|him|her|us|them) to not\b/.test(c)) return 'A ordem é <b>not to</b>: told me <b>not to</b> …';
+    if (/\b(told|asked) (me|you|him|her|us|them) (wait|call|come|bring|stay|sit|help|be|go|send)\b/.test(c)) return 'Falta o to: told me <b>to</b> wait.';
+    if (/\b(told|asked) (i|he|she|we|they) to\b/.test(c)) return 'Depois de told / asked, use me, him, her, us, them: told <b>me</b> to …';
+    return need(/\b(told|asked|reminded|warned|advised|invited|ordered) (me|you|him|her|us|them|\p{L}+) (not )?to \p{L}+/u.test(c), 'Conte um pedido: He <b>told me to</b> wait. / She <b>asked me not to</b> …');
+  }),
+  indireto_pergunta: R('uma pergunta contada (She asked where I lived. / He asked if I was married.)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(asked|wanted to know|wondered) (me )?(where|when|why|what|how|who|what time|how long) (do|does|did|are|is|was|were|can|will) (i|you|he|she|we|they|it)\b/.test(c)) return 'Na pergunta contada, a ordem é de afirmação e sem do: She asked where <b>I lived</b>.';
+    if (/\?\s*$/.test(t.trim()) && /\b(asked|wanted to know)\b/.test(c)) return 'A pergunta contada termina com ponto, e não com ?';
+    return need(/\b(asked|wanted to know|wondered)\b.*\b(if|whether|where|when|why|what|how|who)\b/.test(c), 'Conte uma pergunta: She <b>asked where</b> I lived. / He <b>asked if</b> I was …');
+  }),
+  verbos_relato: R('um relato com <b>promise, offer, refuse, suggest, admit, explain</b> …', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(suggested|suggest|admitted|admit|denied|deny) to \p{L}+/u.test(c)) return 'suggest, admit e deny pedem -ing: She suggested <b>taking</b> …';
+    if (/\b(promised|offered|refused|agreed) (\p{L}+ing)\b/u.test(c)) return 'promise, offer, refuse e agree pedem to: He promised <b>to call</b>.';
+    if (/\bapologized (to |)(be|being)? ?(late|for be)\b/.test(c) && !/\bfor being\b/.test(c)) return 'Pedir desculpas por: apologized <b>for being</b> late.';
+    return need(has(k, /^(promised|offered|refused|agreed|suggested|explained|admitted|denied|complained|apologized|insisted|recommended|confirmed)$/), 'Use um verbo de relato: He <b>promised</b> to … / She <b>suggested</b> …ing.');
+  }),
+  say_tell: R('<b>say</b> ou <b>tell</b> do jeito certo (She told me … / He said that …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(said|say|says) (me|you|him|her|us|them)\b/.test(c)) return 'Com a pessoa logo depois, use <b>tell</b>: She <b>told me</b> …';
+    if (/\b(told|tell|tells) that\b/.test(c)) return 'tell precisa da pessoa: She told <b>me</b> that … (ou She said that …).';
+    return need(has(k, /^(said|told|say|tell|says|tells|apparently|heard)$/), 'Conte uma novidade: She <b>told me</b> … / He <b>said</b> …');
+  }),
+  recado: R('uma frase de <b>recado</b> em discurso indireto (She said … / She asked you to … / She asked if …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bsaid (that )?(the meeting |it |she |he )?will\b/.test(c)) return 'No recado, will vira <b>would</b>: She said it <b>would</b> be …';
+    if (/\basked (you|him|her) (bring|call|send|confirm)\b/.test(c)) return 'Falta o to: asked you <b>to</b> bring …';
+    return need(/\b(called|said|asked|wanted to know|mentioned|left a message|call (her|him) back)\b/.test(c), 'Repasse o recado: Rachel <b>called</b>. She <b>said</b> … / She <b>asked you to</b> …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
