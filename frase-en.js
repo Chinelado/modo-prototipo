@@ -1048,7 +1048,7 @@ const RULES = {
     const c = k.join(' ');
     if (/\b(it's|it is) \w+.*, is it\?/.test(c) && !/\bnot\b|n't \w+,/.test(c.split(',')[0])) return "Frase afirmativa pede tag negativa: It's nice, <b>isn't it</b>?";
     if (/\byou're \w+.*, (isn't|don't) you\?/.test(c)) return "A tag de you're é <b>aren't you</b>?";
-    return need(/\?/.test(t) || /,[^,]+,[^,]* and \w+/.test(t) || /\b(isn't|aren't|don't|doesn't|didn't|can't|won't|haven't|wasn't|weren't) (it|you|he|she|we|they|i)\b/.test(c), "Faça uma pergunta ou use uma tag: It's cold, <b>isn't it</b>?");
+    return need(/\?/.test(t) || /\w+, \w+,? and \w+/.test(t) || /\b(isn't|aren't|don't|doesn't|didn't|can't|won't|haven't|wasn't|weren't) (it|you|he|she|we|they|i)\b/.test(c), "Faça uma pergunta ou use uma tag: It's cold, <b>isn't it</b>?");
   }),
   marcadores: R('uma frase com um marcador da fala (well, I mean, actually, you know, kind of, anyway…)', (t, k) => {
     const c = k.join(' ');
