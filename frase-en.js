@@ -932,6 +932,42 @@ const RULES = {
     if (/,\s*that\b/i.test(t)) return 'Entre vírgulas, não use that: use <b>who</b> ou <b>which</b>.';
     return need(/\b(born|grew up|moved|studied|married|won|died|became|discovered|remembered|career|having|working|first|which|where|who|whom|later|today|prize|research)\b/.test(c), 'Conte a vida: <b>Born in</b> … / She moved to …<b>, where</b> … / <b>Today</b>, she is remembered as …');
   }),
+  // ---------- Módulo 28 ----------
+  phrasal_relacoes: R('um phrasal verb de relacionamento (get along with, fall out, make up, split up, take after…)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bfell out (to|of) \w+/.test(c) && !/\bfell out of (love|bed)\b/.test(c)) return 'Brigar com alguém: fall out <b>with</b>.';
+    if (/\btakes? after to\b|\blook(s|ed)? up at\b/.test(c)) return 'Sem preposição extra: take after <b>her father</b>; admirar: look up <b>to</b>.';
+    return need(/\b(get|gets|got|getting) (along|on)\b|\b(fall|falls|fell|fallen) out\b|\b(make|makes|made) up\b|\b(split|splits|break|breaks|broke) up\b|\b(ask|asks|asked) \w+ out\b|\b(bring|brought|grow|grew|grown) up\b|\b(take|takes|took) after\b|\blook(s|ed)? (up to|down on)\b|\blet(s|ting)? \w+ down\b|\b(go|goes|went) out with\b|\bget back together\b/.test(c), 'Use um phrasal verb de relacionamento: We <b>fell out</b> / We <b>made up</b> / She <b>takes after</b> …');
+  }),
+  phrasal_trabalho: R('um phrasal verb do trabalho (set up, take on, carry out, deal with, sort out, fill in, hand in…)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bdeal(s|t)? (of|about)\b/.test(c)) return 'Lidar com: deal <b>with</b>.';
+    return need(/\b(set|sets|setting) up\b|\b(take|takes|took|taking|taken) on\b|\b(carry|carries|carried) out\b|\b(deal|deals|dealt) with\b|\b(sort|sorts|sorted|sorting) (\w+ )?out\b|\b(fill|fills|filled) (\w+ )?(in|out)\b|\b(hand|hands|handed) (\w+ )?in\b|\bcatch(ing)? up\b|\bkeep(ing)? up with\b|\b(fall|fell|fallen|falling) behind\b|\blook(ing)? into\b|\bprint(ed)? (\w+ )?out\b/.test(c), 'Use um phrasal verb do trabalho: I need to <b>sort out</b> … / She <b>set up</b> …');
+  }),
+  phrasal_gramatica: R('um phrasal verb com o objeto no lugar certo (turn it off, look after them, put up with it)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(turn|switch|pick|throw|put|take|give|fill|hand|sort|call|write|look) (off|on|up|away|down|back|in|out) (it|them|him|her|me|us)\b/.test(c) && !/\b(look up to|put up with|look out for)\b/.test(c) && !/\blook (after|into|for)\b/.test(c)) return 'Com pronome, ele fica no meio: turn <b>it</b> off, pick <b>them</b> up.';
+    if (/\b(put|putting) up (it|this|that)\b/.test(c)) return 'aguentar é <b>put up with</b>: I can\'t put up with it.';
+    return need(/\b(turn|switch|pick|throw|look|put|get|cut|come|run|give|take|fill|hand|sort|call)(s|ed|ing)?\b.*\b(off|on|up|away|after|with|down|over|into|out|back)\b/.test(c) || /\b(picked|threw|thrown|took|got|came|ran|gave|put|cut)\b.*\b(up|away|with|on|out|off)\b/.test(c), 'Use um phrasal verb: Turn <b>it off</b>. / I can\'t <b>put up with</b> it.');
+  }),
+  collocations_verbo: R('uma collocation com <b>make / do / take / have / pay / keep</b>', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(do|does|did|doing|take|takes|took|taking) (a|the|this|that|my|your|our) (decision|mistake)s?\b/.test(c)) return 'Decisão e erro vão com <b>make</b>: make a decision, make a mistake.';
+    if (/\b(make|makes|making|made) (some |my |your |the )?(research|homework|shopping)\b/.test(c)) return 'Pesquisa e dever de casa vão com <b>do</b>: do research.';
+    if (/\b(give|gives|gave|make|makes|made|do|did) attention\b/.test(c)) return 'Prestar atenção: <b>pay</b> attention.';
+    return need(/\b(make|makes|made|making|do|does|did|doing|done|take|takes|took|taking|taken|have|has|had|having|pay|pays|paid|keep|keeps|kept|break|broke|save|waste|tell|told)\b/.test(c) && /\b(decision|mistakes?|effort|progress|complaint|money|plan|research|homework|best|favou?r|shopping|break|risks?|part|advantage|look|go|chat|attention|promises?|time|truth|lie)\b/.test(c), 'Use uma collocation: <b>make a decision</b> / <b>take a break</b> / <b>pay attention</b>.');
+  }),
+  collocations_adj: R('uma collocation de adjetivo ou advérbio (heavy rain, strong coffee, highly recommended…)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bstrong (rain|traffic)\b/.test(c)) return 'Chuva e trânsito fortes: <b>heavy</b> rain, <b>heavy</b> traffic.';
+    if (/\bheavy coffee\b/.test(c)) return 'Café forte: <b>strong</b> coffee.';
+    return need(/\b(heavy|strong|high|close|big|narrow|slight)\b/.test(c) || /\b(highly|deeply|fully|bitterly|seriously|completely|totally|easily|well) \w+/.test(c) || /\b(coffee|traffic|rain)\b.*\b(strong|heavy)\b/.test(c), 'Use uma collocation: <b>heavy rain</b> / <b>strong coffee</b> / <b>highly recommended</b>.');
+  }),
+  email_informal: R("uma frase de e-mail informal (Sorry I haven't been in touch / Guess what? / Can't wait to …)", (t, k) => {
+    const c = k.join(' ');
+    if (/\b(yours faithfully|yours sincerely|dear sir)\b/.test(c)) return 'Isso é formal demais para um amigo. Use <b>Take care</b> / <b>Love</b>.';
+    return need(/\b(in touch|get back to|guess what|taken up|took up|catch up|catching up|can't wait|take care|love|anyway|by the way|let me know|come and stay|ran into|moved house|how are things|hear from you|no worries)\b/.test(c), "Escreva como para um amigo: <b>Sorry I haven't been in touch</b> / <b>Guess what?</b> / <b>Can't wait to</b> …");
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
