@@ -1088,6 +1088,43 @@ const RULES = {
     if (/ (acordamos|decidimos) /.test(c)) return 'Na ata, o impessoal: <b>se acordó</b>, <b>se decidió</b>.';
     return need(/ (asistentes|ausentes|orden del día|se trató|se acordó|se decidió|se aprobó|se encargará|responsable|plazo|queda pendiente|quedan pendientes|próxima reunión|se presentó|se discutió) /.test(c), 'Escreva a ata: <b>Se acordó</b> … / … <b>se encargará de</b> … / <b>Plazo</b>: …');
   }),
+  // ---------- Módulo 30 ----------
+  aunque_modo: R('uma frase com aunque (indicativo: fato; subjuntivo: hipótese; imperfeito do subjuntivo: irreal)', (t, k) => {
+    const c = C(k);
+    if (/ aunque (\p{L}+ )?(lloverá|será|tendrá|habrá) /u.test(c)) return 'Depois de <b>aunque</b>, nunca o futuro: aunque <b>llueva</b> (hipótese) ou aunque <b>llueve</b> (fato).';
+    if (/ aunque (\p{L}+ )?(sería|tendría|podría) /u.test(c)) return 'Para o irreal, depois de <b>aunque</b>, o imperfeito do subjuntivo: aunque <b>fuera</b>, <b>tuviera</b>.';
+    return need(/ (aunque|aun así|de todos modos|a pesar de que) /.test(c), 'Use <b>aunque</b>: <b>Aunque</b> llueve, … / <b>Aunque</b> llueva mañana, …');
+  }),
+  concesivas: R('uma concessiva (a pesar de, por más que + subjuntivo, si bien, pese a…)', (t, k) => {
+    const c = C(k);
+    if (/^ apesar de /.test(c) || / [,.] apesar de /.test(c) || /^ ?apesar /.test(c)) return 'Em espanhol: <b>a pesar de</b> (com "a").';
+    if (/ sí bien /.test(c)) return 'É <b>si bien</b>, sem acento.';
+    if (/ por (más|mucho) que (\p{L}+ )?(insistes|intentas|dices|haces|quieres) /u.test(c)) return 'Com <b>por más que</b> (hipótese), o subjuntivo: <b>insistas</b>, <b>intentes</b>, <b>digas</b>.';
+    return need(/ (a pesar de|por más que|por mucho que|si bien|pese a|aunque|aun así) /.test(c), 'Use uma concessiva: <b>A pesar de</b> … / <b>Por más que</b> … / <b>Si bien</b> …');
+  }),
+  medios: R('uma frase sobre mídia e informação (fuente, verificar, bulo, según, al parecer…)', (t, k) => {
+    const c = C(k);
+    if (/ (a|la) fonte /.test(c)) return 'Em espanhol: <b>la fuente</b>.';
+    if (/ segundo (fuentes|el|la|los) /.test(c)) return 'A fonte é <b>según</b>: <b>según</b> fuentes oficiales.';
+    return need(/ (fuente|fuentes|verificar|verifico|verifica|contrastar|contrasté|bulo|bulos|noticia|noticias|titular|medio|medios|sesgo|según|al parecer|se rumorea|habría|desmintió|desmentir|viralizó|fiable|periodista|desinformación) /.test(c), 'Fale da mídia: <b>Según</b> fuentes oficiales, … / Hay que <b>verificar la fuente</b>.');
+  }),
+  causa_consec: R('causa e consequência (como, ya que, por lo que, de ahí que + subjuntivo…)', (t, k) => {
+    const c = C(k);
+    if (/ de ahí que (\p{L}+ )?(publica|tiene|es|son|hay|tarda|puede|pierde) /u.test(c)) return 'Depois de <b>de ahí que</b>, o subjuntivo: <b>publique</b>, <b>tenga</b>, <b>sea</b>, <b>tarde</b>.';
+    if (/^ porque (\p{L}+ )+[,]/u.test(c) || /^ porque /.test(c) && /,/.test(t) && t.trim().toLowerCase().startsWith('porque')) return 'No início da frase, use <b>Como</b>: <b>Como</b> no había fuentes, …';
+    return need(/ (como|ya que|puesto que|dado que|debido a|por lo que|de modo que|así que|por eso|por lo tanto|por consiguiente|de ahí que|porque) /.test(c), 'Ligue causa e consequência: <b>Como</b> …, … / …; <b>de ahí que</b> …');
+  }),
+  contraarg: R('um contra-argumento (hay quienes sostienen, si bien es cierto que …, no es menos cierto que …)', (t, k) => {
+    const c = C(k);
+    if (/ frente de quienes /.test(c)) return 'É <b>frente a</b> quienes …';
+    return need(/ (hay quienes|frente a quienes|sostienen|sostiene|si bien es cierto|no es menos cierto|cabe objetar|ahora bien|lo que se olvida|por todo ello|considero|defensores|argumentan|es verdad que|sin embargo|en definitiva) /.test(c), 'Contra-argumente: <b>Si bien es cierto que</b> …, <b>no es menos cierto que</b> …');
+  }),
+  ensayo_b2: R('uma frase de ensaio (tese, causa, consequência, contra-argumento, conclusão)', (t, k) => {
+    const c = C(k);
+    if (/ de ahí que (\p{L}+ )?(es|son|tiene|hay|puede) /u.test(c)) return 'Depois de <b>de ahí que</b>, o subjuntivo: <b>sea</b>, <b>tenga</b>, <b>haya</b>.';
+    if (/ se ha (vuelto|hecho) (en )?un /.test(c)) return 'Com substantivo, <b>convertirse en</b>: se ha <b>convertido en</b> un problema.';
+    return need(/ (en la era digital|hoy en día|en mi opinión|considero|creo que|como|ya que|de ahí que|por lo que|si bien|no es menos cierto|frente a quienes|cabe objetar|aunque|por más que|por todo ello|en definitiva|se ha convertido) /.test(c), 'Escreva o ensaio: <b>Considero que</b> … / <b>Como</b> …, … / <b>Por todo ello</b>, …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
