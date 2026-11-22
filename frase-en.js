@@ -519,6 +519,26 @@ const RULES = {
     if (/\balthough\b.*\bbut\b/i.test(norm(t))) return 'Com although, não use but.';
     return need(has(k, /^(think|opinion|because|so|although|however|example|conclusion|agree|disagree|sum|that's|why)$/), 'Dê a sua opinião: I <b>think</b> … <b>because</b> … / <b>Although</b> … / In <b>conclusion</b>, …');
   }),
+  // ---------- Módulo 15 ----------
+  narrativa: R('uma cena de história: o cenário no <b>passado contínuo</b> e o fato no <b>passado simples</b> (I was walking when …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(was|were) (stop|see|open|turn|run|shout|notice|realize|call)\b/.test(c)) return 'Depois de was / were, o verbo vai com -ing: I was <b>walking</b>.';
+    if (/\bwhen (a|the|he|she|they|someone|my) \p{L}+ was \p{L}+ing\b/u.test(c) && /\bwas \p{L}+ing .*when\b/u.test(c)) return 'A ação curta, depois de when, vai no passado simples: … when a car <b>stopped</b>.';
+    return need(/\b(was|were) \p{L}+ing\b/u.test(c) || k.some((w) => /\p{L}{3,}ed$/u.test(w)) || has(k, /^(saw|went|ran|came|took|got|found|said|told|heard|felt|left)$/), 'Conte uma cena: I <b>was walking</b> home when a car <b>stopped</b>.');
+  }),
+  past_perfect: R('o passado antes do passado, com <b>had + particípio</b> (When I arrived, the train had already left.)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bhad (already |never |just )?(went|ate|saw|did|took|wrote|forgot|came|began|gave|spoke|broke)\b/.test(c)) return 'Depois de had, use o <b>particípio</b>: had <b>gone</b>, had <b>eaten</b>, had <b>forgotten</b>.';
+    return need(/\b(had|'d)\s+(already |never |just )?\p{L}+/u.test(c) && has(k, /^(had|i'd|she'd|he'd|we'd|they'd|you'd)$/), 'Use o past perfect: … the train <b>had already left</b>.');
+  }),
+  conectores_narrativa: R('uma frase de história com um conector: <b>at first, suddenly, meanwhile, as soon as, eventually, in the end</b>', (t, k) => need(/\b(at first|suddenly|meanwhile|as soon as|eventually|in the end|finally|luckily|unfortunately|then|later|the next)\b/i.test(norm(t)), 'Use um conector: <b>Suddenly</b>, … / <b>Eventually</b>, … / <b>In the end</b>, …')),
+  caso: R("uma frase para <b>contar um caso</b> ou <b>reagir</b> (Did I tell you about …? / No way! / You're kidding!)", (t, k) => {
+    const c = k.join(' ');
+    if (/\b(say|said) (me|you|him|her|us|them)\b/.test(c)) return 'Com a pessoa logo depois, use <b>tell</b>: tell <b>me</b>, told <b>you</b>.';
+    return need(/\b(did i tell you|guess what|no way|you're kidding|you won't believe|what happened|long story short|anyway|to make it worse|hilarious|embarrassing|poor you|that's awful|oh my god)\b/.test(c), "Conte ou reaja: <b>Did I tell you about</b> …? / <b>No way!</b> / <b>You're kidding!</b>");
+  }),
+  noticia: R('uma frase de <b>notícia</b>: a novidade (has + particípio), um detalhe (passado) ou a fonte (according to)', (t, k) => need(has(k, /^(has|have|according|reported|witnesses|police|firefighters|were|was|had|evacuated|rescued|news)$/) || k.some((w) => /\p{L}{3,}ed$/u.test(w)), 'Escreva uma notícia: A fire <b>has destroyed</b> … / <b>According to</b> the police, …')),
+  historia: R('uma frase de <b>história curta</b>, com os tempos do passado e conectores', (t, k) => need(/\b(was|were) \p{L}+ing\b/u.test(k.join(' ')) || /\bhad \p{L}+/u.test(k.join(' ')) || has(k, /^(suddenly|eventually|finally|end|felt|saw|found|decided|realized)$/) || k.some((w) => /\p{L}{3,}ed$/u.test(w)), 'Escreva no passado: I <b>was walking</b> … <b>Suddenly</b>, I <b>saw</b> …')),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
