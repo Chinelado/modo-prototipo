@@ -45,7 +45,7 @@ function concord(text, terceira = false) {
     }
   }
   // idade com have: I have twenty years
-  if (/\b(have|has)\s+(\d+|[a-z-]+)\s+years?\b/i.test(norm(text))) return { ok: false, msg: 'Em inglês a idade se diz com <b>to be</b>: <b>I\'m twenty</b> (years old), e não "I have twenty years".' };
+  if (/\b(i|you|he|she|we|they|my \p{L}+) (have|has)\s+(\d+|[a-z]+(-[a-z]+)?)\s+years?(\s+old)?\s*([.!?,]|$)/iu.test(norm(text))) return { ok: false, msg: 'Em inglês a idade se diz com <b>to be</b>: <b>I\'m twenty</b> (years old), e não "I have twenty years".' };
   return { ok: true };
 }
 
@@ -343,6 +343,42 @@ const RULES = {
   reclamacao: R("uma frase de <b>e-mail formal de reclamação</b> (I am writing to complain about … / Unfortunately, … / I would like …)", (t, k) => {
     if (/\b(i'm|i'd|don't|can't|won't|didn't|isn't|wasn't)\b/.test(k.join(' '))) return 'No e-mail formal, sem contrações: <b>I am</b>, <b>I would</b>, <b>do not</b>.';
     return need(has(k, /^(complain|writing|unfortunately|refund|replacement|dear|sincerely|regards|order|damaged|would|attached|forward)$/), 'Use uma frase formal: I am writing to <b>complain</b> about … / <b>Unfortunately</b>, …');
+  }),
+  // ---------- Módulo 10 ----------
+  trabalho: R('uma frase sobre o <b>seu trabalho</b>: a rotina (I usually …) ou o que está fazendo agora (This week I\'m …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(usually|always|every day|every monday|often|never) (i'm|i am|she's|he's|we're) \p{L}+ing\b/u.test(c) || /\b(i'm|i am) (usually|always|often|never) \p{L}+ing\b/u.test(c)) return 'Rotina vai no presente simples: I <b>usually start</b> at nine.';
+    if (/\bwork (with|in) (a|the) (bank|company|hospital|school|hotel)\b/.test(c)) return 'Com empresa, use <b>for</b>: I work <b>for</b> a bank.';
+    return need(has(k, /^(work|works|working|job|team|meeting|meetings|client|clients|project|report|office|manager|colleague|colleagues|charge|deadline)$/), 'Fale do seu trabalho: I <b>work</b> in … / This week I\'m <b>working</b> on …');
+  }),
+  telefone: R("uma frase de <b>telefone</b> (This is … / Can I speak to …? / Could you take a message?)", (t, k) => {
+    if (/^\s*(?:(?:[Hh]ello|[Hh]i),?\s*)?I am \p{Lu}/u.test(norm(t)) || /^\s*(?:(?:[Hh]ello|[Hh]i),?\s*)?I'm \p{Lu}\p{L}+[.!]?\s*$/u.test(norm(t))) return 'Ao telefone, apresente-se com <b>This is</b> Ana.';
+    return need(/\b(this is|speak to|speaking|hold on|message|call (me |you |him |her )?back|available|put you through|who's calling)\b/.test(k.join(' ')), 'Use uma frase de telefone: <b>This is</b> … / <b>Can I speak to</b> …?');
+  }),
+  passado_continuo: R('uma cena do passado com <b>was / were + -ing</b> (I was working when …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(i|he|she|it) were \p{L}+ing\b/u.test(c)) return 'Com I, he, she e it: <b>was</b> + -ing.';
+    if (/\b(you|we|they) was \p{L}+ing\b/u.test(c)) return 'Com you, we e they: <b>were</b> + -ing.';
+    return need(/\b(was|were) ((i|you|he|she|it|we|they) )?\p{L}+ing\b/u.test(c), 'Use o passado contínuo: I <b>was working</b> when …');
+  }),
+  mind: R("um <b>pedido educado</b> (Could you …? / Would you mind + -ing? / Would you mind if I …?)", (t, k) => {
+    const c = k.join(' ');
+    if (/\bwould you mind (to )?(send|check|close|open|help|call|print|forward|share|cover|take|move|give|wait)\b/.test(c)) return 'Depois de would you mind, o verbo vai com -ing: would you mind <b>sending</b> …?';
+    if (/\bwould you mind if i (leave|open|close|use|take|go|come|bring)\b/.test(c)) return 'Depois de would you mind if I, o verbo vai no passado: if I <b>left</b> / <b>opened</b>.';
+    return need(/\b(could you|would you mind|would you|can you|not at all|i'm afraid)\b/.test(c), 'Peça com educação: <b>Could you</b> …? / <b>Would you mind</b> + -ing?');
+  }),
+  futuro: R("o <b>futuro</b>: um combinado (I'm meeting … on Monday), um plano (going to) ou uma decisão / previsão (will)", (t, k) => {
+    const c = k.join(' ');
+    if (/\bwill (to )?(going|goes)\b|\bwill to\b/.test(c)) return 'Depois de will, o verbo vem direto: I <b>will go</b>.';
+    if (/\bwill (meeting|calling|going|working)\b/.test(c)) return 'Depois de will, o verbo vem no básico: I will <b>call</b> you.';
+    return need(/\b(will|won't|i'll|you'll|she'll|he'll|we'll|they'll|it'll|going to|gonna)\b/.test(c) || (/\b(i'm|we're|she's|he's|they're|am|is|are) \p{L}+ing\b/u.test(c) && has(k, /^(tomorrow|next|monday|tuesday|wednesday|thursday|friday|saturday|sunday|tonight|weekend|week|at|on)$/)), "Fale do futuro: I'<b>m meeting</b> … on Monday. / I'm <b>going to</b> … / I'<b>ll</b> …");
+  }),
+  candidatura: R('uma frase de <b>candidatura</b> (I am writing to apply for … / I have … of experience in …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bapply to the (position|job)\b/.test(c)) return 'Candidatar-se a uma vaga: apply <b>for</b> the position.';
+    if (/\b(years|year|months) of experiences\b/.test(c)) return 'experience, de trabalho, não tem plural: two years of <b>experience</b>.';
+    if (/\binterested (on|for|about)\b/.test(c)) return 'Interessado em: interested <b>in</b>.';
+    return need(has(k, /^(apply|applying|position|experience|interested|résumé|resume|fluent|skills|available|attached|interview)$/), 'Use uma frase de candidatura: I am writing to <b>apply for</b> … / I have … of <b>experience in</b> …');
   }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
