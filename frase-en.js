@@ -204,6 +204,37 @@ const RULES = {
     if (/^\s*(not|no) (forget|close|open|touch|call|use|park|smoke)\b/i.test(norm(t))) return "O imperativo negativo é <b>Don't</b> + verbo: Don't forget.";
     return need(has(k, /^(please|don't|no|open|closed|close|call|exit|out|push|pull|back)$/), "Escreva um aviso: <b>No</b> parking. / <b>Please</b> close the door. / <b>Don't</b> forget!");
   }),
+  // ---------- Módulo 6 ----------
+  sintoma: R('um <b>sintoma</b> com have (I have a headache) ou um <b>conselho</b> com should', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(i'm|i am|she's|he's) (a )?(headache|fever|cold|cough|stomachache|sore throat)\b/.test(c)) return 'Sintoma se diz com <b>have</b>: I <b>have</b> a headache.';
+    if (/\bshould to\b/.test(c)) return 'Depois de should, o verbo vem sem to: You should <b>rest</b>.';
+    if (/\bshoulds\b/.test(c)) return 'should não muda: she <b>should</b>.';
+    return need(has(k, /^(headache|fever|cold|cough|stomachache|sore|throat|hurts|hurt|sick|should|shouldn't|medicine|doctor)$/), 'Diga um sintoma (I have a <b>fever</b>) ou dê um conselho (You <b>should</b> rest).');
+  }),
+  continuo: R("o que está acontecendo <b>agora</b>, com to be + -ing (I'm working. / It's raining.)", (t, k) => {
+    // sujeito + verbo -ing sem o to be antes (I working) — mas não na pergunta (Are you working?)
+    const semBe = clauses(t).some((c) => c.some((w, p) => /^(i|you|we|they|he|she|it)$/.test(w) && /\p{L}{2,}ing$/u.test(c[p + 1] || '') && !/^(thing|something|nothing|bring|sing|king)$/.test(c[p + 1]) && !/^(am|is|are|was|were|isn't|aren't)$/.test(c[p - 1] || '')));
+    if (semBe && !has(k, /^(like|likes|love|loves|hate|hates|enjoy|enjoys|keep|stop|start|finish)$/)) return "Não esqueça o to be: <b>I'm</b> working, <b>she's</b> cooking.";
+    return need(k.some((w) => /\p{L}{2,}ing$/u.test(w) && !/^(thing|something|nothing|anything|everything|morning|evening|king|ring|spring|sing|bring|ceiling|building|ping)$/.test(w)) && has(k, /^(am|is|are|i'm|you're|he's|she's|it's|we're|they're|isn't|aren't)$/), "Use to be + -ing: I'<b>m working</b>. / It's <b>raining</b>.");
+  }),
+  was_were: R('o passado de to be: <b>was</b> ou <b>were</b> (I was at home. / It was great.)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(i|he|she|it) were\b/.test(c) && !/\bif (i|he|she|it) were\b/.test(c)) return 'Com I, he, she e it, o passado de to be é <b>was</b>.';
+    if (/\b(you|we|they) was\b/.test(c)) return 'Com you, we e they, o passado de to be é <b>were</b>.';
+    return need(has(k, /^(was|were|wasn't|weren't|born)$/), 'Use <b>was</b> ou <b>were</b>: I <b>was</b> at home. / It <b>was</b> great.');
+  }),
+  passado: R('o que você fez, no <b>passado</b> com -ed ou com did (I worked. / Did you watch …?)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(did|didn't) (you|i|he|she|we|they|it)? ?\p{L}+ed\b/u.test(c) && !/\b(did|didn't) (you|i|he|she|we|they|it) need\b/.test(c)) return 'Com did, o verbo volta à forma básica: Did you <b>work</b>? I didn\'t <b>work</b>.';
+    return need(has(k, /^(did|didn't)$/) || k.some((w) => /\p{L}{2,}ed$/u.test(w) && !/^(need|bed|red|tired|interested|bored|excited|married|used)$/.test(w)), 'Conte algo do passado: I <b>worked</b> … / <b>Did</b> you …?');
+  }),
+  irregular: R('o que você fez com um <b>verbo irregular</b> (went, had, saw, ate, got, bought…)', (t, k) => {
+    if (has(k, /^(goed|eated|buyed|seed|haved|taked|maked|getted|comed|drinked|sleeped|meeted|writed)$/)) return 'Esse verbo é irregular: went, ate, bought, saw, had, took, made, got, came, drank, slept, met, wrote.';
+    if (/\bdid (you|i|he|she|we|they) (went|saw|ate|had|got|bought|made|took)\b/.test(k.join(' '))) return 'Com did, o verbo volta à forma básica: Did you <b>go</b>?';
+    return need(has(k, /^(went|had|saw|ate|got|bought|made|took|came|met|slept|left|read|wrote|drank|did|didn't|was|were)$/), 'Conte algo com um irregular: I <b>went</b> … / We <b>had</b> … / I <b>saw</b> …');
+  }),
+  postal: R('uma frase de <b>cartão de viagem</b>: onde está, o que fez ou como está o tempo', (t, k) => need(has(k, /^(went|saw|ate|had|took|visited|bought|stayed|was|were|weather|sunny|rainy|hot|cold|having|we're|i'm|love|trip|vacation)$/), "Conte a viagem: We're in … / Yesterday we <b>went</b> … / It's <b>sunny</b>.")),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
