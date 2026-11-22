@@ -174,7 +174,7 @@ const levelDone = (id) => { const p = PHASES.find((x) => x.id === id); return !!
 const nDone = () => Object.keys(S.done).length;
 const nWords = () => Object.keys(S.cards).length;
 const BADGES = [
-  ['guide', '🧭', 'Bereit!', 'Concluiu o módulo Comece aqui', () => GUIDE.every((g) => S.guide[g.id])],
+  ['guide', '🧭', 'Bereit!', 'Concluiu o módulo Comece aqui', () => GUIDE.length > 0 && GUIDE.every((g) => S.guide[g.id])],
   ['first', '🌱', 'Erster Schritt', 'Primeira lição concluída', () => nDone() >= 1],
   ['s3', '🔥', '3 dias', 'Sequência de 3 dias', () => S.best >= 3],
   ['s7', '🔥', '1 semana', 'Sequência de 7 dias', () => S.best >= 7],
