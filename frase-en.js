@@ -860,6 +860,45 @@ const RULES = {
     if (/\bmust have (take|steal|go|lie|hide)\b/.test(c)) return 'Use o particípio: must have <b>taken</b>, <b>stolen</b>.';
     return need(/\b(must have|can't have|couldn't have|might have|could have|must be|the culprit|evidence|because|solved|clues?|alibi)\b/.test(c), "Deduza: … <b>must have</b> … / It <b>can't have been</b> … because …");
   }),
+  // ---------- Módulo 26 ----------
+  passiva_impessoal: R('a passiva impessoal: <b>It is said that …</b> ou <b>He is said to be …</b>', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(is|are|was|were) (said|believed|thought|expected|known|reported|considered) (be|have)\b/.test(c)) return 'Falta o to: He is said <b>to be</b> rich.';
+    if (/\b(is|are|was|were) (said|believed|thought|expected|reported) to have (leave|move|go|steal|build)\b/.test(c)) return 'Depois de to have, o particípio: to have <b>left</b>.';
+    return need(/\b(is|are|was|were|it's) (said|believed|thought|expected|known|reported|considered|understood)\b/.test(c), 'Use a passiva: <b>It is said that</b> … / He <b>is said to</b> …');
+  }),
+  passiva_modal: R('a passiva com modal: <b>must be signed</b> / <b>should have been sent</b>', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(must|should|can|could|might|will|may|can't|cannot) been\b/.test(c)) return 'Com modal: <b>be</b> + particípio (must be signed), ou <b>have been</b> (should have been sent).';
+    if (/\b(should|must|might|could) have be\b/.test(c)) return 'Depois de have, use <b>been</b>: should have been sent.';
+    if (/\b(must|should|can|can't|could|might|will) be (sign|send|fix|buy|deliver|solve|replace|leave|steal|do)\b/.test(c)) return 'Depois de be, o particípio: be <b>signed</b>, <b>fixed</b>.';
+    return need(/\b(must|should|can|can't|cannot|could|couldn't|might|may|will|won't|shouldn't|mustn't|must not)( not)? (be|have been)\b/.test(c), 'Use modal + <b>be</b> + particípio: It <b>must be</b> signed. / It <b>should have been</b> sent.');
+  }),
+  verbo_preposicao: R('um verbo de relato com preposição + -ing (accuse of, blame for, thank for, insist on…)', (t, k) => {
+    const c = k.join(' ');
+    if (/\baccus\w* \w+ (for|to|by)\b/.test(c)) return 'accuse pede <b>of</b>: accused him of lying.';
+    if (/\bcongratulat\w* \w+ for\b/.test(c)) return 'congratulate pede <b>on</b>: congratulated her on her promotion.';
+    if (/\binsist\w* (in|to)\b/.test(c)) return 'insist pede <b>on</b>: insisted on paying.';
+    if (/\b(of|for|on|against) (lie|help|pay|swim|be|come|go|lose|change|explain|work)\b/.test(c)) return 'Depois da preposição, use -ing: of <b>lying</b>, for <b>helping</b>.';
+    return need(/\b(accus\w*|blam\w*|thank\w*|congratulat\w*|warn\w*|insist\w*|apologi[sz]\w*|object\w*|forg[ai]v\w*|critici[sz]\w*)\b/.test(c), 'Use um verbo de relato: They <b>accused</b> him <b>of</b> … / She <b>thanked</b> me <b>for</b> …');
+  }),
+  subjuntivo: R('uma recomendação com <b>that + verbo básico</b> (I recommend that she apply)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bsuggest\w* to (go|meet|apply|do|take|see|study)\b/.test(c)) return 'Sem to depois de suggest: I suggest <b>going</b> / I suggest that we <b>go</b>.';
+    if (/\b(essential|important|vital|necessary|recommend\w*|suggest\w*|insist\w*|demand\w*|request\w*) that (he|she|it|everyone|everybody|the \w+) (is|are) (on|ready|here|informed)\b/.test(c)) return 'Depois de that, o verbo básico: that he <b>be</b> on time.';
+    if (/\b(recommend\w*|suggest\w*|insist\w*|demand\w*|request\w*|essential|important|vital) that (he|she|it) (applies|rests|leaves|wears|goes|sees|takes|studies|has)\b/.test(c)) return 'Depois de that, o verbo básico, sem -s: that she <b>apply</b>.';
+    return need(/\b(recommend|recommends|recommended|suggest|suggests|suggested|insist|insisted|demand|demanded|request|requested|essential|important|vital|necessary)\b/.test(c), 'Recomende: <b>I recommend that</b> you … / <b>It is essential that</b> …');
+  }),
+  registro: R('uma frase em <b>registro formal</b> (receive, request, purchase, We regret to inform you…)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(gonna|wanna|gotta)\b/.test(c)) return 'Isso é muito informal. Use <b>going to</b> / <b>would like to</b>.';
+    return need(/\b(receive\w*|request\w*|assist\w*|purchas\w*|requir\w*|obtain\w*|inform\w*|commenc\w*|regret|hesitate|postpon\w*|investigat\w*|attached|look forward|discover\w*|contact|additional|kind regards|formal|informal|register)\b/.test(c), 'Use o vocabulário formal: <b>receive</b>, <b>request</b>, <b>purchase</b>, <b>We regret to inform you</b> …');
+  }),
+  relatorio: R('uma frase de <b>relatório</b> (The aim of this report … / It was found that … / It is recommended that …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\brecommended that \w+( \w+)? (is|are) (extended|purchased|replaced|improved)\b/.test(c)) return 'Depois de recommended that, o verbo básico: … <b>be</b> extended.';
+    return need(/\b(report|aim|it was found|survey|majority|most|a small number|overall|recommend\w*|according to|findings|in addition|solution|facilities|students said)\b/.test(c), 'Use a linguagem do relatório: <b>The aim of this report</b> … / <b>It was found that</b> … / <b>Overall</b> …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
