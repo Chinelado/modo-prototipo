@@ -141,6 +141,7 @@ As lições destes níveis são detalhadas na hora de escrever. Os módulos defi
 ## 7. Próximos passos
 
 1. ✅ Variante: América Latina.
-2. Montar o pacote do idioma (`espanhol.html`, `es/`, `frase-es.js`) e o Comece aqui.
+2. ✅ **Pacote do idioma e Comece aqui** (22/11/2026, rascunho): `espanhol.html`, `es/base.js`, `es/guia.js` (10 aulas), `es/apoio.js`, `es/curso.js`, `es/trilha.js` e `frase-es.js` (frase livre com as checagens de portunhol: muy × mucho, gustar, años, ser / estar / tener com o pronome, palavras em português). Progresso separado (`modo.es.v1`). A troca de idioma passou a abrir uma lista com os três idiomas (`pickLang` em `lang.js`), e o teclado de acentos (á é í ó ú ñ ü ¿ ¡) aparece nas respostas digitadas.
+   - ✅ **A1 completo** (22/11/2026, rascunho): módulos 1 a 6 em `es/curso.js` e `es/m02.js` … `es/m06.js`, 36 lições, cada uma com o passo "Ojo, brasileño".
 3. Escrever o A1 e publicar; depois A2, B1, B2, C1 e C2, conferindo o formato de cada prova DELE no site oficial do Instituto Cervantes antes de escrever a lição.
 4. Revisão por professor(a) de espanhol.
