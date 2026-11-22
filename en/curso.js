@@ -387,9 +387,9 @@ NL('en-form', {
         { l: 'City', d: 'cidade onde você mora', re: '^\\p{Lu}[\\p{L} .-]+$', err: 'Escreva o nome da cidade com maiúscula.' },
         { l: 'Country', d: 'país, em inglês', re: '^\\p{Lu}[\\p{L} ]+$', err: 'Escreva o país com maiúscula.', bad: [['^brasil$', 'Em inglês o Brasil é <b>Brazil</b>, com z.'], ['^estados unidos$', 'Em inglês é <b>the United States</b>.']] },
         { l: 'Nationality', d: 'nacionalidade, em inglês', re: '^\\p{Lu}[\\p{L} ]+$', err: 'Em inglês, a nacionalidade começa com maiúscula: <b>Brazilian</b>.', bad: [['^brasileir[oa]$', 'Em inglês é <b>Brazilian</b>, com maiúscula.'], ['^brazil$', 'Brazil é o país. A nacionalidade é <b>Brazilian</b>.']] },
-        { l: 'Languages', d: 'línguas que você fala, em inglês', re: '(English|Portuguese|Spanish|French|Italian|German|Japanese|Chinese)', f: 'u', err: 'Escreva as línguas em inglês e com maiúscula: Portuguese, English, Spanish…', bad: [['\b(portugu[eê]s|ingl[eê]s|espanhol)\b', 'Escreva em inglês: <b>Portuguese</b>, <b>English</b>, <b>Spanish</b>.']] },
+        { l: 'Languages', d: 'línguas que você fala, em inglês', re: '(English|Portuguese|Spanish|French|Italian|German|Japanese|Chinese)', f: 'u', err: 'Escreva as línguas em inglês e com maiúscula: Portuguese, English, Spanish…', bad: [['\\b(portugu[eê]s|ingl[eê]s|espanhol)\\b','Escreva em inglês: <b>Portuguese</b>, <b>English</b>, <b>Spanish</b>.']] },
       ],
-      modelo: 'Last name: Souza · First name: Ana · City: Curitiba · Country: Brazil · Nationality: Brazilian · Languages: Portuguese, English',
+      modelo: 'Souza · Ana · Curitiba · Brazil · Brazilian · Portuguese, English',
     },
   },
   deep: `
