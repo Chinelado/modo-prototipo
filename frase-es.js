@@ -103,6 +103,30 @@ const RULES = {
     return need(has(k, /^(gusta|gustan|encanta|encantan|gustaría)$/) || / (también|tampoco) /.test(c), 'Use gustar: <b>Me gusta</b> … / <b>Me gustan</b> …');
   }),
   mensaje: R('uma frase de mensagem de apresentação (¡Hola a todos! / Me llamo … / Me encanta … / ¡Un abrazo!)', (t, k) => need(has(k, /^(hola|todos|llamo|soy|tengo|gusta|gustan|encanta|abrazo|saludos|vemos|quiero|practicar|nueva|nuevo|libre)$/), 'Escreva como numa apresentação: <b>¡Hola a todos!</b> / <b>Me llamo</b> … / <b>¡Un abrazo!</b>')),
+  // ---------- Módulo 3 ----------
+  hora: R('uma hora ou um horário (Son las tres y media / a las ocho…)', (t, k) => {
+    const c = C(k);
+    if (/ son (dos|tres|cuatro|cinco|seis|siete|ocho|nueve|diez|once|doce) /.test(c)) return 'A hora leva artigo: son <b>las</b> tres.';
+    if (/ son las una /.test(c)) return 'Uma hora fica no singular: <b>es la una</b>.';
+    return need(/ (es la|son las|a la|a las) /.test(c) || has(k, /^(hora|horas|mediodía|medianoche|punto)$/), 'Diga a hora: <b>Son las</b> tres y media. / <b>a las</b> ocho.');
+  }),
+  rutina: R('uma ação da rotina, com verbo reflexivo (me levanto, me ducho…)', (t, k) => {
+    const c = C(k);
+    if (/ yo (levanto|ducho|acuesto|visto|despierto) /.test(c)) return 'Falta o pronome reflexivo: (yo) <b>me</b> levanto.';
+    if (/ me (levantas|duchas|acuestas) /.test(c)) return 'Com me, o verbo vai na forma de yo: me <b>levanto</b>.';
+    return need(has(k, /^(me|te|se|nos)$/) || has(k, /^(desayuno|desayunas|desayuna|almuerzo|almuerzas|almuerza|almorzamos|ceno|cenas|cena|salgo|sales|sale)$/), 'Use um verbo da rotina: <b>me levanto</b>, <b>me ducho</b>, <b>desayuno</b>…');
+  }),
+  cambian: R('um verbo que muda a vogal (quiero, puedo, duermo, pido…)', (t, k) => {
+    if (has(k, /^(quero|posso|podo|dormo|prefero|empezo|pedo|volvo|jogo|quieremos|puedemos|duermimos)$/)) return 'Confira a vogal: <b>quiero</b>, <b>puedo</b>, <b>duermo</b> (e em nosotros, sem mudança: queremos, podemos).';
+    return need(has(k, /^(quiero|quieres|quiere|quieren|queremos|puedo|puedes|puede|pueden|podemos|duermo|duermes|duerme|duermen|dormimos|empiezo|empieza|empiezan|prefiero|prefieres|prefiere|pienso|piensas|piensa|vuelvo|vuelves|vuelve|pido|pides|pide|repito|juego|juegas|juega|cuesta|cuestan|entiendo|entiendes|entiende|cierro|cierra|encuentro|recuerdo|sirvo)$/), 'Use um verbo que muda a vogal: <b>quiero</b>, <b>puedo</b>, <b>duermo</b>…');
+  }),
+  frecuencia: R('com que frequência (siempre, a veces, nunca, los lunes, dos veces a la semana…)', (t, k) => {
+    const c = C(k);
+    if (/ (nas|às|aos) (segundas|terças|quartas|quintas|sextas|sábados|domingos) /.test(c)) return 'Em espanhol: <b>los</b> lunes, <b>los</b> sábados (sem preposição).';
+    return need(/ (siempre|nunca|a veces|a menudo|casi|todos los días|cada|veces|los lunes|los martes|los miércoles|los jueves|los viernes|los sábados|los domingos|el fin de semana|el lunes|el martes|el miércoles|el jueves|el viernes|el sábado|el domingo) /.test(c), 'Diga a frequência: <b>siempre</b> / <b>a veces</b> / <b>nunca</b> / <b>los lunes</b>.');
+  }),
+  muymucho: R('"muito" com <b>muy</b> ou <b>mucho</b> (muy bueno, mucho trabajo, trabajo mucho)', (t, k) => need(has(k, /^(muy|mucho|mucha|muchos|muchas|poco|poca|pocos|pocas|bastante|demasiado)$/), 'Use muy ou mucho: <b>muy</b> bueno / <b>mucho</b> trabajo / trabajo <b>mucho</b>.')),
+  invitacion: R('uma frase de convite (Te invito a … / La fiesta es a las … / ¡Claro que sí!)', (t, k) => need(has(k, /^(invito|invitamos|invitación|fiesta|cumpleaños|venir|vienes|quieres|confirma|confirmen|confirmar|trae|traigan|traer|claro|siento|encantaría|asado|espero|vemos|empieza)$/), 'Escreva como num convite: <b>Te invito a</b> … / <b>La fiesta empieza a las</b> …')),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
