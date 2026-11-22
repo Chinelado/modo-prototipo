@@ -223,6 +223,38 @@ const RULES = {
     if (/ (voy|vamos) (ir|visitar|viajar|comer|ver) /.test(c)) return 'Não esqueça o <b>a</b>: voy <b>a</b> ir.';
     return need(/ (desde|querida|querido|estoy|disfrutando|ayer|visité|fui|comí|mañana|voy a|besos|abrazo|extraño|hasta pronto|hace|calor) /.test(c), 'Escreva como num postal: <b>¡Hola desde</b> …! / <b>Ayer visité</b> … / <b>Mañana voy a</b> …');
   }),
+  // ---------- Módulo 7 ----------
+  imperfecto: R('como as coisas eram, no <b>imperfeito</b> (era, vivía, jugaba, iba…)', (t, k) => {
+    if (has(k, /^(brincava|morava|tinha|ia|era criança)$/)) return 'Isso é português. Em espanhol: <b>jugaba</b>, <b>vivía</b>, <b>tenía</b>, <b>iba</b>.';
+    if (has(k, /^(ibamos|jugabamos|viviamos|comia|vivia|tenia|habia)$/)) return 'Confira o acento: <b>íbamos</b>, <b>jugábamos</b>, <b>vivía</b>, <b>tenía</b>, <b>había</b>.';
+    return need(has(k, /\p{L}+(aba|abas|ábamos|aban|ía|ías|íamos|ían)$/u) || has(k, /^(era|eras|éramos|eran|iba|ibas|íbamos|iban|veía|veían)$/), 'Use o imperfeito: Cuando <b>era</b> niño, <b>jugaba</b> …');
+  }),
+  describir_pasado: R('uma descrição no passado (era, tenía, había, llevaba…)', (t, k) => {
+    const c = C(k);
+    if (/ habían (muchos|muchas|dos|tres|cuatro|cinco|treinta|\p{L}+ alumnos) /u.test(c)) return '<b>había</b> (existir) não vai para o plural: había treinta alumnos.';
+    return need(has(k, /^(era|eran|tenía|tenían|había|estaba|estaban|llevaba|llevábamos|llevaban|empezaban|jugábamos|comíamos)$/) || has(k, /\p{L}+(aba|aban|ábamos|ía|ían|íamos)$/u), 'Descreva no imperfeito: La escuela <b>era</b> grande. <b>Había</b> un patio.');
+  }),
+  contraste: R('uma história com os dois passados (Llovía cuando salí / Estaba … cuando …)', (t, k) => {
+    const imp = has(k, /\p{L}+(aba|aban|ía|ían)$/u) || has(k, /^(era|había|estaba|iba)$/);
+    const ind = has(k, /\p{L}+(é|ó|í|ió|aron|ieron)$/u) || has(k, /^(fui|fue|hice|hizo|tuve|vino|dijo|pude|vi|vio|puse)$/);
+    return need(imp || ind, 'Conte com os dois passados: <b>Llovía</b> cuando <b>salí</b>. / <b>Estaba</b> cocinando cuando <b>sonó</b> el teléfono.');
+  }),
+  soler: R('antes e agora (soler, ya no, todavía, antes … ahora …)', (t, k) => {
+    const c = C(k);
+    if (/ no más (fumo|vivo|trabajo|como|juego|estudio|tengo) /.test(c)) return 'Para "não … mais", use <b>ya no</b>: <b>ya no</b> fumo.';
+    if (has(k, /^(solo|soles|sole|soleía|suelía)$/) && /solo (correr|ir|comer|levantar|trabajar)/.test(c.trim())) return 'soler muda o → ue: <b>suelo</b> correr.';
+    return need(/ (antes|ahora|ya no|todavía|suelo|sueles|suele|solemos|suelen|solía|solías|solíamos|solían|sigo|sigues|sigue|dejé de|empecé a|hoy en día) /.test(c), 'Compare: <b>Antes</b> …, <b>ahora</b> … / <b>Solía</b> … / <b>Ya no</b> …');
+  }),
+  recuerdo: R('uma lembrança (Recuerdo que … / Me acuerdo de … / olía a / me encantaba…)', (t, k) => {
+    const c = C(k);
+    if (/ me acuerdo (mi|la|el|los|las|que) /.test(c)) return 'acordarse pede <b>de</b>: me acuerdo <b>de</b> mi abuelo.';
+    return need(/ (recuerdo|recuerdas|me acuerdo|te acuerdas|olía|se oía|se oían|se veía|me encantaba|me gustaba|me daba|me sentía|lo que más) /.test(c) || has(k, /\p{L}+(aba|ía|ían)$/u), 'Conte a lembrança: <b>Recuerdo que</b> … / <b>Me acuerdo de</b> … / <b>Me encantaba</b> …');
+  }),
+  recuerdo_texto: R('uma frase de lembrança (Cuando tenía … / Un día, … llegó / Todavía me acuerdo …)', (t, k) => {
+    const c = C(k);
+    if (/ cuando (tuve|fui) (\p{L}+) años /u.test(c)) return 'Para a idade no cenário, use o imperfeito: cuando <b>tenía</b> ocho años.';
+    return need(/ (cuando tenía|cuando era|un día|aquel día|ese día|una vez|de repente|todavía|nunca olvidaré|desde entonces|me acuerdo|no podía) /.test(c) || has(k, /\p{L}+(aba|ía|é|ó|ió)$/u), 'Conte a lembrança: <b>Cuando tenía</b> … / <b>Un día</b>, … / <b>Todavía me acuerdo</b> …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
