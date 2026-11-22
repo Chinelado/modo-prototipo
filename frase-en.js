@@ -269,6 +269,46 @@ const RULES = {
     return need(has(k, /^(since|for|long)$/), 'Diga há quanto tempo, com <b>for</b> (for five years) ou <b>since</b> (since 2020).');
   }),
   email_pessoal: R('uma frase de <b>e-mail pessoal</b> com novidade (just), experiência ou há quanto tempo', (t, k) => need(has(k, /^(just|already|yet|have|has|i've|we've|haven't|since|for|hope|miss|news|ever|never)$/) || k.some((w) => /\p{L}{2,}ed$/u.test(w)), "Conte uma novidade: I've <b>just</b> started … / I've lived here <b>for</b> …")),
+  // ---------- Módulo 8 ----------
+  going_to: R("um <b>plano</b> com to be + going to (I'm going to move …)", (t, k) => {
+    const c = k.join(' ');
+    if (clauses(t).some((cl) => cl.some((w, p) => /^(i|you|we|they|he|she)$/.test(w) && cl[p + 1] === 'going' && !/^(am|is|are|was|were|isn't|aren't|not)$/.test(cl[p - 1] || '')))) return "Não esqueça o to be: <b>I'm</b> going to …";
+    if (/\bgoing to (moved|went|bought|sold|painted|visited|studied)\b/.test(c)) return 'Depois de going to, o verbo vem no básico: going to <b>move</b>.';
+    return need(/\bgoing to\b|\bgonna\b/.test(c), "Conte um plano: I'm <b>going to</b> …");
+  }),
+  regras: R("uma <b>regra</b> com must, have to, mustn't ou don't have to", (t, k) => {
+    const c = k.join(' ');
+    if (/\bmust to\b/.test(c)) return 'must vem sem to: You must <b>recycle</b>.';
+    if (/\b(he|she|it) have to\b/.test(c)) return 'Com he e she: <b>has to</b>.';
+    if (/\bhaven't to\b/.test(c)) return "A negativa de have to é <b>don't have to</b>.";
+    return need(has(k, /^(must|mustn't|have|has|had|allowed)$/) && (has(k, /^(must|mustn't|allowed)$/) || /\b(have|has|had) to\b/.test(c)), "Escreva uma regra com must, have to, mustn't ou don't have to.");
+  }),
+  comparativo: R('uma <b>comparação</b> (bigger than / more expensive than / the best)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bmore (big|small|cheap|good|bad|nice|old|new|tall|short|fast|hot|cold|easy|safe|quiet|close)(er)?\b/.test(c)) return 'Adjetivo curto ganha -er: <b>bigger</b>, <b>cheaper</b>. more é para os longos.';
+    if (/\b(gooder|goodest|badder|baddest|more better|most best)\b/.test(c)) return 'good e bad são irregulares: better, the best, worse, the worst.';
+    if (/\b(bigger|smaller|cheaper|better|worse|more \p{L}+|\p{L}+er) (that|then|of)\b/u.test(c)) return 'Para comparar, use <b>than</b>: bigger <b>than</b>.';
+    return need(has(k, /^(than|best|worst|most|better|worse|as)$/) || k.some((w) => /\p{L}{3,}est$/u.test(w)), 'Compare: <b>bigger than</b>, <b>more expensive than</b>, <b>the best</b>.');
+  }),
+  tarefas: R('uma <b>tarefa de casa</b> com make, do ou um phrasal verb (do the dishes / make the bed / take out the trash)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bmake (the )?(dishes|laundry|homework|shopping|exercise)\b/.test(c)) return 'Tarefa e atividade usam <b>do</b>: do the dishes, do the laundry.';
+    if (/\bdo (the )?bed\b|\bdo (a )?(dinner|cake|mistake|noise)\b/.test(c)) return 'Criar ou produzir usa <b>make</b>: make the bed, make dinner.';
+    if (/\b(take|put|clean|pick) (out|away|up) (it|them)\b/.test(c)) return 'Com pronome, a partícula vai para o fim: take <b>it out</b>.';
+    return need(has(k, /^(do|does|did|make|makes|made|clean|take|put|vacuum|sweep|iron|wash|chores|dishes|laundry)$/), 'Fale de uma tarefa: I <b>do the dishes</b>. / She <b>makes the bed</b>.');
+  }),
+  descrever: R('uma <b>descrição</b> de alguém: aparência (She has curly hair) ou jeito (He\'s friendly)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(is|she's|he's|i'm) (long|short|curly|straight|blond|black|brown) hair\b/.test(c)) return 'Cabelo se diz com <b>have</b>: She <b>has</b> long hair.';
+    if (/\b(she|he|i) (have|has)\b.*\b(tall|short)\b(?! hair)/.test(c) && !/hair/.test(c)) return 'Altura se diz com <b>to be</b>: She <b>is</b> tall.';
+    return need(has(k, /^(tall|short|hair|eyes|beard|friendly|funny|kind|smart|shy|lazy|outgoing|quiet|like|looks|hardworking|bossy|rude|boring|curly|blond)$/), 'Descreva alguém: She\'s <b>tall</b>. He has <b>curly hair</b>. She\'s <b>friendly</b>.');
+  }),
+  vizinhos: R('um <b>pedido educado</b> (Could you please …? / Would you mind …?) ou um pedido de <b>desculpas</b> (I\'m sorry for …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bwould you mind (to )?(turn|move|take|close|open|leave|help|park)\b/.test(c)) return 'Depois de would you mind, o verbo vai com -ing: Would you mind <b>moving</b> …?';
+    if (/\bsorry of\b/.test(c)) return 'Desculpas por algo: sorry <b>for</b>.';
+    return need(/\b(could you|would you mind|can you please|sorry|apologize|thank you for)\b/.test(c), 'Peça com <b>Could you please</b> …? ou peça desculpas com <b>I\'m sorry for</b> …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
