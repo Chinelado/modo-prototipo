@@ -235,6 +235,40 @@ const RULES = {
     return need(has(k, /^(went|had|saw|ate|got|bought|made|took|came|met|slept|left|read|wrote|drank|did|didn't|was|were)$/), 'Conte algo com um irregular: I <b>went</b> … / We <b>had</b> … / I <b>saw</b> …');
   }),
   postal: R('uma frase de <b>cartão de viagem</b>: onde está, o que fez ou como está o tempo', (t, k) => need(has(k, /^(went|saw|ate|had|took|visited|bought|stayed|was|were|weather|sunny|rainy|hot|cold|having|we're|i'm|love|trip|vacation)$/), "Conte a viagem: We're in … / Yesterday we <b>went</b> … / It's <b>sunny</b>.")),
+  // ---------- Módulo 7 ----------
+  used_to: R('um hábito do passado com <b>used to</b> (I used to play …) ou um fato com o passado simples', (t, k) => {
+    const c = k.join(' ');
+    if (/\bdid(n't)? (you|i|he|she|we|they) used to\b|\bdidn't used to\b/.test(c)) return 'Com did, o d sai: did you <b>use to</b>, I didn\'t <b>use to</b>.';
+    if (/\b(i|you|we|they|he|she) use to\b/.test(c) && !/\bdid/.test(c)) return 'Na afirmação é <b>used to</b>: I used to play.';
+    if (/\bused to (played|went|lived|was|had|ate)\b/.test(c)) return 'Depois de used to, o verbo vem na forma básica: used to <b>play</b>.';
+    return need(/\bused to\b|\buse to\b/.test(c) || k.some((w) => /\p{L}{2,}ed$/u.test(w)) || has(k, /^(was|were|went|had|broke|grew|fell)$/), 'Conte um hábito do passado: I <b>used to</b> play in the street.');
+  }),
+  datas: R('uma data ou um ano da sua vida (I was born in nineteen ninety… / on May fifth)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bon (january|february|march|april|may|june|july|august|september|october|november|december)\b(?! \d| (first|second|third|\p{L}+th))/u.test(c) || /\bon (19|20)\d\d\b/.test(norm(t))) return 'Com o mês ou o ano sozinho, use <b>in</b>: in May, in 1995.';
+    if (/\bin (january|february|march|april|may|june|july|august|september|october|november|december) (\d|first|second|third|\p{L}+th)\b/u.test(c)) return 'Com a data completa, use <b>on</b>: on May 5th.';
+    return need(/\b(19|20)\d\d\b/.test(t) || has(k, /^(born|nineteen|twenty|thousand|first|second|third|fifth|birthday|graduated|married|moved|retired|started)$/) || has(k, /^\p{L}+th$/u), 'Diga uma data ou um ano: I was born <b>in</b> 1995. / My birthday is <b>on</b> May 5th.');
+  }),
+  pergunta_passado: R('uma <b>pergunta no passado</b> (Where did you study? / Who was your teacher?)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bdid (you|he|she|they|we|i) \p{L}+ed\b/u.test(c) && !/\bneed\b/.test(c)) return 'Depois de did, o verbo fica no básico: Did you <b>study</b>?';
+    if (/^(where|what|when|why|how) (you|he|she|they|we) (studied|went|learned|did)\b/.test(c)) return 'Na pergunta, entra o did: Where <b>did</b> you study?';
+    return need(/\?\s*$/.test(t.trim()) && has(k, /^(did|was|were|didn't|wasn't|weren't|taught|happened)$/), 'Faça uma pergunta no passado, com did, was ou were, e termine com ?');
+  }),
+  perfect_ever: R("uma <b>experiência</b> com o present perfect (I've been to … / Have you ever …? / I've never …)", (t, k) => {
+    const c = k.join(' ');
+    if (/\b(have|has|'ve|'s|i've|you've|we've|they've|she's|he's) (ever |never |already |just )?(went|saw|ate|did|took|wrote|was|came|ran)\b/.test(c)) return 'O present perfect usa o <b>particípio</b>: been, seen, eaten, done, gone, taken.';
+    if (/\b(have|has|i've|you've|we've|they've)\b.*\b(in (19|20)\d\d|last (week|year|month)|yesterday|ago)\b/.test(norm(t).toLowerCase())) return 'Com data (in 2019, last year, ago), use o <b>passado simples</b>: I went there in 2019.';
+    return need(has(k, /^(have|has|i've|you've|we've|they've|she's|he's|haven't|hasn't|ever|never)$/), "Use o present perfect: <b>I've been</b> to … / <b>Have you ever</b> …?");
+  }),
+  since_for: R("há quanto tempo, com o present perfect + <b>for</b> ou <b>since</b> (I've lived here for five years.)", (t, k) => {
+    const c = k.join(' ');
+    if (/\b(i|you|we|they|he|she) (am|is|are|live|lives|work|works|know|knows|have|has)\b.*\b(since|for)\b/.test(c) && !/\b(have|has) (been|lived|worked|known|had|studied)\b/.test(c) && !/\b(i've|you've|we've|they've|he's|she's)\b/.test(c)) return "Para \"há quanto tempo\", use o present perfect: <b>I've lived</b> here for … / <b>I've been</b> here since …";
+    if (/\bsince (one|two|three|four|five|six|seven|eight|nine|ten|a few|many|\d+) (years|months|weeks|days|hours)\b/.test(c)) return 'Com duração, use <b>for</b>: for five years. since é o ponto de partida: since 2020.';
+    if (/\bfor (19|20)\d\d\b|\bfor (january|february|march|april|may|june|july|august|september|october|november|december|monday|last)\b/.test(c)) return 'Com o ponto de partida, use <b>since</b>: since 2020, since January.';
+    return need(has(k, /^(since|for|long)$/), 'Diga há quanto tempo, com <b>for</b> (for five years) ou <b>since</b> (since 2020).');
+  }),
+  email_pessoal: R('uma frase de <b>e-mail pessoal</b> com novidade (just), experiência ou há quanto tempo', (t, k) => need(has(k, /^(just|already|yet|have|has|i've|we've|haven't|since|for|hope|miss|news|ever|never)$/) || k.some((w) => /\p{L}{2,}ed$/u.test(w)), "Conte uma novidade: I've <b>just</b> started … / I've lived here <b>for</b> …")),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 

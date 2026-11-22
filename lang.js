@@ -14,7 +14,8 @@ const LANG_PACKS = {
       'do does did done have has had will would can could should must may might shall the a an this that these those ' +
       'and or but because so if when where what who whom whose which why how not no yes there here to of in on at for from with by about ' +
       'as than then too very also just only all some any every each many much more most other another hi hello bye please thanks thank sorry okay ok ' +
-      "i'm you're he's she's it's we're they're isn't aren't don't doesn't didn't can't won't let's what's where's how's that's there's").split(' '),
+      "i'm you're he's she's it's we're they're isn't aren't don't doesn't didn't can't won't let's what's where's how's that's there's " +
+      "i've you've we've they've haven't hasn't i'd you'd he'd she'd we'd they'd i'll you'll he'll she'll we'll they'll it'll wasn't weren't wouldn't couldn't shouldn't who's").split(' '),
   },
 };
 const LP = LANG_PACKS[LANG] || LANG_PACKS.de;
