@@ -489,6 +489,41 @@ const RULES = {
     if (/ ojalá (que )?(hará|hace|llueve|lloverá) /.test(c)) return 'Depois de <b>ojalá</b>, o subjuntivo: ojalá <b>haga</b>, ojalá no <b>llueva</b>.';
     return need(has(k, /\p{L}+r(é|ás|á|emos|án)$/u) || / (se celebra|la gente|alguien|cuéntenme|espero que|ojalá|nos vemos|hola|post|blog) /.test(c), 'Escreva o post: <b>Iré</b> a … / <b>Se celebra</b> … / <b>Ojalá</b> …');
   }),
+  // ---------- Módulo 14 ----------
+  opinion: R('uma opinião (creo que, me parece que, para mí, no creo que + subjuntivo…)', (t, k) => {
+    const c = C(k);
+    if (/ acho que /.test(c)) return 'Isso é português. Em espanhol: <b>creo que</b>.';
+    if (/ no (creo|pienso) que (es|tiene|está|hay|va|puede|llueve) /.test(c)) return 'Com opinião negativa, o subjuntivo: no creo que <b>sea</b>, <b>tenga</b>, <b>esté</b>, <b>haya</b>, <b>llueva</b>.';
+    if (/ (creo|pienso) que (sea|tenga|esté|haya) /.test(c) && !/ no (creo|pienso) /.test(c)) return 'Com opinião afirmativa, o indicativo: creo que <b>es</b>, <b>tiene</b>.';
+    return need(/ (creo que|pienso que|me parece que|para mí|en mi opinión|qué opinas|qué te parece|qué piensas|no creo que|tienes razón) /.test(c), 'Dê a sua opinião: <b>Creo que</b> … / <b>Para mí</b>, … / <b>No creo que</b> sea …');
+  }),
+  acuerdo: R('concordar ou discordar (estoy de acuerdo, tienes razón, yo no lo veo así…)', (t, k) => {
+    const c = C(k);
+    if (/ (soy|tengo) de acuerdo /.test(c)) return 'Com acuerdo, use <b>estar</b>: <b>estoy</b> de acuerdo.';
+    if (/ (concordo|concuerdo) (com|con) /.test(c)) return 'O natural é <b>estoy de acuerdo con</b> …';
+    if (/ con (tú|ti) /.test(c)) return '"Com você" é <b>contigo</b>.';
+    return need(/ (de acuerdo|tienes razón|tiene razón|toda la razón|exacto|claro|por supuesto|no lo veo así|depende|en parte|al contrario|sí pero) /.test(c) || / pero /.test(c), 'Responda: <b>Estoy de acuerdo</b>. / <b>Tienes razón</b>. / <b>Yo no lo veo así</b>.');
+  }),
+  conectores: R('uma frase com conectores (aunque, sin embargo, además, por eso, por un lado…)', (t, k) => {
+    const c = C(k);
+    if (/ ademas /.test(c)) return '<b>además</b> leva acento.';
+    if (/ (embora|no entanto|além disso|por isso) /.test(c)) return 'Isso é português. Em espanhol: <b>aunque</b>, <b>sin embargo</b>, <b>además</b>, <b>por eso</b>.';
+    return need(/ (aunque|pero|sin embargo|además|también|por eso|así que|por un lado|por otro|en conclusión|en resumen) /.test(c), 'Use um conector: <b>Aunque</b> … / <b>Sin embargo</b>, … / <b>Además</b>, …');
+  }),
+  noticias: R('uma frase sobre notícias (según, ha habido, ¿viste que …?, ¡no me digas!…)', (t, k) => {
+    const c = C(k);
+    if (/ segundo (el|la|los|las) (periódico|radio|expertos|noticias|gobierno) /.test(c)) return 'A fonte é <b>según</b>: <b>según</b> el periódico.';
+    if (/ ha hubo /.test(c)) return 'É <b>ha habido</b> (ou <b>hubo</b>).';
+    return need(/ (según|ha habido|hubo|viste|no me digas|qué barbaridad|qué pena|qué bien|anunció|suben|bajan|gana|ganó|noticias|periódico|huelga|accidente|gobierno|precios|llega) /.test(c), 'Conte ou comente: <b>Según</b> el periódico, … / ¿<b>Viste que</b> …? / ¡<b>No me digas</b>!');
+  }),
+  dele_a2: R('uma frase sobre a prova (examen, prueba, aprobar, lectura, oral…)', (t, k) => need(/ (examen|prueba|pruebas|aprobar|apto|grupo|grupos|lectura|auditiva|escritas|orales|oral|individual|instrucciones|preguntas|palabras|cronómetro|minutos|dele|dura) /.test(C(k)), 'Fale da prova: El <b>examen</b> tiene cuatro <b>pruebas</b>. / Hay que <b>aprobar</b> …')),
+  foro: R('uma frase de comentário (estoy de acuerdo con, creo que, por un lado, en conclusión…)', (t, k) => {
+    const c = C(k);
+    if (/ (soy|tengo) de acuerdo /.test(c)) return 'Com acuerdo, use <b>estar</b>: <b>estoy</b> de acuerdo.';
+    if (/ acho que /.test(c)) return 'Isso é português. Em espanhol: <b>creo que</b>.';
+    if (/ en conclusion /.test(c)) return '<b>conclusión</b> leva acento.';
+    return need(/ (de acuerdo|como dice|creo que|en mi opinión|para mí|por un lado|por otro|además|sin embargo|por ejemplo|en conclusión|en resumen|depende|saludos|no creo que|pero) /.test(c), 'Comente: <b>Estoy de acuerdo con</b> … / <b>Por un lado</b> … / <b>En conclusión</b> …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
