@@ -762,6 +762,45 @@ const RULES = {
     if (/ se espera que (\p{L}+ )?(reduce|ayuda|cambia|va) /u.test(c)) return 'Depois de <b>se espera que</b>, o subjuntivo: <b>reduzca</b>, <b>ayude</b>, <b>cambie</b>.';
     return need(/ (según|fue|fueron|se|debido a|como consecuencia|por eso|gran parte|millones|el \d+ %) /.test(c), 'Escreva: <b>Según</b> un estudio, … / <b>Se calcula que</b> … / <b>Se proponen</b> …');
   }),
+  // ---------- Módulo 21 ----------
+  estilo_ind: R('o discurso indireto (dice que / dijo que, com os tempos que recuam)', (t, k) => {
+    const c = C(k);
+    if (/ (dijo|contó|comentó|explicó) que (\p{L}+ )?(vendrá|será|irá|tendrá|hará|podrá) /u.test(c)) return 'Com <b>dijo que</b>, o futuro vira condicional: <b>vendría</b>, <b>sería</b>, <b>iría</b>.';
+    if (/ (dijo|contó|comentó) que (\p{L}+ )?va a /u.test(c)) return 'Com <b>dijo que</b>, <b>va a</b> vira <b>iba a</b>.';
+    return need(/ (dice que|dijo que|me dijo|contó que|comentó que|explicó que|dicen que|dijeron que) /.test(c), 'Conte: <b>Dijo que</b> estaba cansada. / <b>Me dijo que</b> vendría.');
+  }),
+  cambios_ind: R('as mudanças do discurso indireto (al día siguiente, allí, ese día, llevar…)', (t, k) => {
+    const c = C(k);
+    if (/ dijo que (mañana|aquí) /.test(c)) return 'Contado depois: <b>mañana</b> → <b>al día siguiente</b>; <b>aquí</b> → <b>allí</b>.';
+    return need(/ (al día siguiente|el día anterior|ese día|aquel día|esa semana|la semana siguiente|en ese momento|esa noche|allí|ese|esa|iría|llevaría|su) /.test(c), 'Mude o tempo e o lugar: <b>al día siguiente</b>, <b>allí</b>, <b>ese día</b>.');
+  }),
+  pregunta_ind: R('uma pergunta indireta (preguntó si …, preguntó dónde …, ¿sabe qué …?)', (t, k) => {
+    const c = C(k);
+    if (/ (preguntó|pregunté|preguntaron|quería saber|no sé) que (si|dónde|cuándo|qué|cómo|cuánto) /.test(c)) return 'Sem "que" antes: preguntó <b>si</b> …, preguntó <b>dónde</b> …';
+    if (/ (preguntó|pregunté|no sé|sabe|sabes|decir) (donde|cuando|cuanto|como|quien) /.test(c)) return 'Na pergunta indireta, o interrogativo leva acento: <b>dónde</b>, <b>cuándo</b>, <b>cuánto</b>, <b>cómo</b>.';
+    if (/ (preguntó|pregunté) se /.test(c)) return 'Em espanhol, a pergunta indireta usa <b>si</b>: preguntó <b>si</b> …';
+    return need(/ (preguntó|pregunté|preguntaron|quería saber|quiso saber|no sé si|sabe|sabes|me puede decir|podría decirme) /.test(c), 'Use: Me <b>preguntó si</b> … / Le <b>pregunté dónde</b> …');
+  }),
+  pedido_ind: R('um pedido no discurso indireto (me pidió que + imperfeito do subjuntivo)', (t, k) => {
+    const c = C(k);
+    if (/ (pidió|pidieron|recomendó|exigió|exigieron|prohibió|prohibieron) que (\p{L}+ )?(llame|llamo|descanse|descanso|traigamos|traemos|vuelva|vuelvo|tome|tomo|usemos|usamos|enviemos|enviamos) /u.test(c)) return 'Com o pedido no passado, o imperfeito do subjuntivo: que <b>llamara</b>, <b>descansara</b>, <b>trajéramos</b>.';
+    if (/ (pide|dice|piden|dicen) que (\p{L}+ )?(llamara|llegáramos|descansara|viniera) /u.test(c)) return 'Com o pedido no presente, o presente do subjuntivo: que <b>llame</b>, <b>lleguemos</b>.';
+    return need(/ (pidió que|me pide que|dijo que|dice que|recomendó que|exigieron que|exigió que|prohibieron que|prohibió que|permitió que) /.test(c), 'Conte o pedido: Me <b>pidió que</b> la llamara. / Me <b>dijo que</b> descansara.');
+  }),
+  verbos_relato: R('um verbo de relato (explicó, aseguró, admitió, negó que, se quejó de que…)', (t, k) => {
+    const c = C(k);
+    if (/ negó que (había|hay|era|es|tenía|tiene) /.test(c)) return '<b>negar que</b> pede subjuntivo: negó que <b>hubiera</b>, <b>fuera</b>, <b>tuviera</b>.';
+    if (/ se quejó que /.test(c)) return '<b>quejarse</b> pede <b>de</b>: se quejó <b>de que</b> …';
+    if (/ (reclamó|garantizó|garantió) que /.test(c)) return 'Em espanhol: <b>se quejó de que</b> (reclamou), <b>aseguró que</b> (garantiu).';
+    return need(/ (explicó|aseguró|admitió|negó|añadió|se quejó|prometió|advirtió|reconoció|confesó|declaró|afirmó|comentó|contó) /.test(c), 'Use um verbo de relato: <b>Aseguró que</b> … / <b>Admitió que</b> … / <b>Negó que</b> …');
+  }),
+  recado: R('uma frase de resumo (te cuento, explicó que, preguntó si, nos pidió que…)', (t, k) => {
+    const c = C(k);
+    if (/ preguntó que (si|dónde|cuándo|qué) /.test(c)) return 'Sem "que" antes: preguntó <b>si</b> …';
+    if (/ pidió que (\p{L}+ )?(enviemos|enviamos|traigamos|lleguemos|leamos) /u.test(c)) return 'No passado, o imperfeito do subjuntivo: que <b>enviáramos</b>, <b>leyéramos</b>.';
+    if (/ (dijo|explicó|aseguró) que (\p{L}+ )?(será|va a|retrasará) /u.test(c)) return 'No passado, os tempos recuam: <b>sería</b>, <b>iba a</b>, <b>se retrasaría</b>.';
+    return need(/ (te cuento|resumen|explicó|dijo|aseguró|preguntó|pidió|se quejó|prometió|advirtió|cualquier duda|se ofreció|te perdiste|me perdí) /.test(c), 'Resuma: <b>Te cuento</b> … / <b>Explicó que</b> … / <b>Nos pidió que</b> …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
