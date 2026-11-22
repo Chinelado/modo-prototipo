@@ -1015,6 +1015,45 @@ const RULES = {
     if (/ a quien (busca|quiere|tiene|le gusta) /.test(c)) return 'Para o leitor indefinido, o subjuntivo: a quien <b>busque</b>, <b>quiera</b>, <b>le guste</b>.';
     return need(/ (novela|película|serie|libro|cuenta la historia|trata de|cuyo|cuya|donde|en la que|en el que|lo que más|lo que menos|lo cual|recomiendo|recomendaría|lectura|desenlace|personajes|protagonista|ambientada) /.test(c), 'Escreva a resenha: <b>Cuenta la historia de</b> … / <b>Lo que más me gustó</b> … / <b>Se la recomiendo</b> …');
   }),
+  // ---------- Módulo 28 ----------
+  perifrasis_fase: R('uma perífrase de fase (estar a punto de, ponerse a, echarse a, acabar de, dejar de, volver a)', (t, k) => {
+    const c = C(k);
+    if (/ acabé de (llegar|salir|comer|llamar|terminar) /.test(c) && !/ (ayer|anoche|cuando) /.test(c)) return 'Para "acabei de" (agorinha), o presente: <b>acabo de</b> llegar.';
+    if (/ a ponto de /.test(c)) return 'Em espanhol: a <b>punto</b> de.';
+    if (/ (volví|volvió|volvimos) de (llamar|estudiar|llover|salir) /.test(c)) return 'De novo é <b>volver a</b>: volvió <b>a</b> llamar.';
+    return need(/ (a punto de|me puse a|se puso a|se pusieron a|nos pusimos a|se echó a|se echaron a|me eché a|acabo de|acaba de|acabamos de|acabé de|terminé de|terminó de|dejó de|dejé de|volvió a|volví a|empezó a|empecé a) /.test(c), 'Use uma perífrase: <b>Estaba a punto de</b> … / <b>Se echó a</b> reír / <b>Acabo de</b> …');
+  }),
+  perifrasis_gerundio: R('uma perífrase com gerúndio (sigo estudiando, voy entendiendo, anda diciendo…)', (t, k) => {
+    const c = C(k);
+    if (/ (sigo|sigue|sigues|seguimos|siguen|seguía) a \p{L}+r /u.test(c)) return 'Com <b>seguir</b>, o gerúndio, sem "a": sigo <b>estudiando</b>.';
+    if (/ (continúo|continúa|continúan) (de|a) \p{L}+r /u.test(c)) return 'Com <b>continuar</b>, o gerúndio: continúo <b>estudiando</b>.';
+    return need(/ (sigo|sigues|sigue|seguimos|siguen|seguía|continúo|continúa|continuaba|voy|vas|va|vamos|van|iba|ando|andas|anda|andan|andaba|vengo|venía|viene|llevo|llevaba|lleva) \p{L}+(ando|iendo|yendo) /u.test(c) || / me voy \p{L}+ando /u.test(c) || / (llevo|lleva|llevaba|llevamos) (\p{L}+ )+\p{L}+(ando|iendo|yendo) /u.test(c), 'Use: <b>Sigo</b> estudiando / <b>Voy</b> entendiendo / <b>Anda</b> diciendo …');
+  }),
+  tener_participio: R('tener / llevar / dejar / dar por + particípio (com concordância)', (t, k) => {
+    const c = C(k);
+    if (/ (tengo|llevo|tiene|lleva) (escrito|leído|vendido|hecho) (tres|dos|cuatro|cinco|cien|cincuenta|las|unas) (cartas|páginas|entradas|capítulos|cosas|tareas) /.test(c) && !/ (escritas|leídas|vendidas|hechas) /.test(c)) return 'Aqui o particípio concorda com o objeto: tengo <b>escritas</b> dos cartas, llevo <b>leídas</b> cien páginas.';
+    return need(/ (tengo|tienes|tiene|tenemos|llevo|llevamos|lleva|dejé|dejó|doy|da|dio|dimos) (por )?(\p{L}+ )?\p{L}*(ado|ada|ados|adas|ido|ida|idos|idas|ído|ída|ídos|ídas|cho|cha|chos|chas|to|ta|tos|tas) /u.test(c), 'Use: <b>Tengo escritos</b> tres capítulos / <b>Llevo leídas</b> … / <b>Doy por terminada</b> …');
+  }),
+  colocaciones: R('uma colocação natural (tomar una decisión, echar una mano, sacar una foto, hacer cola…)', (t, k) => {
+    const c = C(k);
+    if (/ (tiramos|tiré|tiró) (una|muchas|unas) fotos? /.test(c)) return 'Tirar foto é <b>sacar</b> (ou tomar) una foto: <b>sacamos</b> fotos.';
+    if (/ (hacer|hago|hice|hace) cumpleaños /.test(c)) return 'Fazer aniversário é <b>cumplir años</b>.';
+    if (/ (das|da|dame|me das) una mano /.test(c)) return 'Dar uma mão é <b>echar una mano</b>: ¿me <b>echas</b> una mano?';
+    if (/ hacer fila /.test(c)) return 'Fazer fila é <b>hacer cola</b>.';
+    return need(/ (decisión|una mano|foto|fotos|paseo|vuelta|cola|caso|prisa|riesgo|error|atención|en cuenta|cumplo|cumple|las gracias|una pregunta|un consejo) /.test(c), 'Use uma colocação: <b>tomar una decisión</b> / <b>echar una mano</b> / <b>sacar una foto</b> …');
+  }),
+  expresiones: R('uma expressão idiomática (estar en las nubes, tomar el pelo, ser pan comido…)', (t, k) => {
+    const c = C(k);
+    if (/ papas en la lengua /.test(c)) return 'Em espanhol são <b>pelos</b>: no tener <b>pelos</b> en la lengua.';
+    if (/ mundo de la luna /.test(c)) return 'Em espanhol: estar <b>en las nubes</b>.';
+    return need(/ (en las nubes|el pelo|las pilas|pan comido|ojo de la cara|pelos en la lengua|en el clavo|la pata|hasta las narices|uña y carne) /.test(c), 'Use uma expressão: <b>estar en las nubes</b> / <b>ser pan comido</b> / <b>tomar el pelo</b> …');
+  }),
+  cronica: R('uma frase de crônica (perífrases, colocações e expressões)', (t, k) => {
+    const c = C(k);
+    if (/ (seguía|seguí) a \p{L}+r /u.test(c)) return 'Com <b>seguir</b>, o gerúndio: seguía <b>esperando</b>.';
+    if (/ hice fila /.test(c)) return 'Fazer fila é <b>hacer cola</b>.';
+    return need(/ (a punto de|me puse a|me eché a|seguía|volví a|hice cola|hacer cola|sello|sonrisa|pan comido|ojo de la cara|pelos en la lengua|moraleja|todos sabemos|aquel|aquella|las pilas|metí la pata|al final|me di cuenta) /.test(c) || has(k, /\p{L}+(ando|iendo)$/u), 'Escreva a crônica: <b>Estaba a punto de</b> … / <b>Hice cola</b> … / <b>Moraleja</b>: …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
