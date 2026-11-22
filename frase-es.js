@@ -70,6 +70,39 @@ const RULES = {
     return need(/ (soy|eres|es|somos|son) \p{L}+/u.test(c) || has(k, /^(trabajo|trabajas|trabaja|trabajamos|trabajan|estudio|estudias|estudia|dedico|dedicas|dedica|vivo|vive|vives|vivimos|viven|trabajas)$/), 'Diga o que você faz: <b>Soy</b> profesora. / <b>Trabajo en</b> un hospital.');
   }),
   ficha: R('um dado pessoal (Me llamo … / Mi apellido es … / Soy de … / Hablo …)', (t, k) => need(has(k, /^(llamo|llama|nombre|apellido|apellidos|soy|vivo|hablo|nací|nacionalidad|correo|teléfono|dirección|fecha|escriba|complete|firme)$/), 'Escreva um dado pessoal: <b>Me llamo</b> … / <b>Mi apellido es</b> … / <b>Hablo</b> portugués.')),
+  // ---------- Módulo 2 ----------
+  posesivos: R('a família com possessivos (mi madre, mis hermanos, su hijo…)', (t, k) => {
+    const c = C(k);
+    if (/ (la|el|los|las) (mi|mis|tu|tus|su|sus) /.test(c)) return 'Sem artigo antes do possessivo: <b>mi madre</b> (e não "la mi madre").';
+    if (/ mi (hermanos|padres|hijos|abuelos|primos|tíos|amigos) /.test(c)) return 'No plural, o possessivo ganha -s: <b>mis</b> hermanos.';
+    return need(has(k, /^(mi|mis|tu|tus|su|sus|nuestro|nuestra|nuestros|nuestras)$/) || has(k, /^(madre|padre|padres|hermano|hermana|hermanos|hijo|hija|hijos|abuelo|abuela|abuelos|familia|esposo|esposa)$/), 'Fale da família: <b>Mi</b> madre se llama … / Tengo dos <b>hermanos</b>.');
+  }),
+  genero: R('substantivos com o artigo certo (el viaje, la leche, los árboles…)', (t, k) => {
+    const c = C(k);
+    if (/ (la|una) (viaje|mensaje|árbol|puente|color|dolor|equipo|paisaje) /.test(c)) return 'Essa palavra é masculina em espanhol: <b>el</b> viaje, <b>el</b> árbol, <b>el</b> color.';
+    if (/ (el|un) (leche|sal|nariz|sangre|miel|ciudad|canción) /.test(c)) return 'Essa palavra é feminina em espanhol: <b>la</b> leche, <b>la</b> sal, <b>la</b> nariz.';
+    return need(has(k, /^(el|la|los|las|un|una|unos|unas)$/), 'Use o artigo: <b>el</b> viaje, <b>la</b> leche, <b>los</b> libros.');
+  }),
+  hay: R('o que existe num lugar, com <b>hay</b>', (t, k) => {
+    const c = C(k);
+    if (/ hay (el|la|los|las) /.test(c)) return 'Depois de hay, use <b>un / una</b> ou um número: hay <b>una</b> cocina (e não "hay la cocina").';
+    if (/ (tem|tiene) (dos|tres|una|un) (dormitorios|cuartos|sillas|baños) /.test(c) && !/ mi casa tiene /.test(c)) return 'Para existir num lugar, use <b>hay</b>: En mi casa <b>hay</b> dos dormitorios.';
+    return need(k.includes('hay'), 'Use <b>hay</b>: En mi casa <b>hay</b> … / No <b>hay</b> …');
+  }),
+  colores: R('uma cor que concorda com o substantivo (la casa blanca, los carros rojos…)', (t, k) => {
+    const c = C(k);
+    if (/ (la|una|las) \p{L}*a (blanco|negro|rojo|amarillo|rosado) /u.test(c)) return 'A cor concorda com o substantivo feminino: la casa <b>blanca</b>.';
+    if (/ (verda|azula|grisa) /.test(c)) return 'verde, azul e gris não mudam no feminino: la camisa <b>verde</b>.';
+    return need(has(k, /^(rojo|roja|rojos|rojas|azul|azules|verde|verdes|amarillo|amarilla|amarillos|amarillas|blanco|blanca|blancos|blancas|negro|negra|negros|negras|gris|grises|rosado|rosada|marrón|marrones|morado|morada|anaranjado|anaranjada|celeste|color|colores)$/), 'Use uma cor: el carro <b>rojo</b>, la casa <b>blanca</b>.');
+  }),
+  gustar: R('um gosto com <b>gustar</b> (me gusta el café, me gustan los libros…)', (t, k) => {
+    const c = C(k);
+    if (/ gusta(n)? de /.test(c)) return 'Sem "de" depois de gustar: me gusta <b>el</b> café.';
+    if (/ me gusta (los|las) /.test(c)) return 'Com várias coisas, use <b>gustan</b>: me <b>gustan</b> los libros.';
+    if (/ me gustan (el|la) /.test(c)) return 'Com uma coisa só, use <b>gusta</b>: me <b>gusta</b> el café.';
+    return need(has(k, /^(gusta|gustan|encanta|encantan|gustaría)$/) || / (también|tampoco) /.test(c), 'Use gustar: <b>Me gusta</b> … / <b>Me gustan</b> …');
+  }),
+  mensaje: R('uma frase de mensagem de apresentação (¡Hola a todos! / Me llamo … / Me encanta … / ¡Un abrazo!)', (t, k) => need(has(k, /^(hola|todos|llamo|soy|tengo|gusta|gustan|encanta|abrazo|saludos|vemos|quiero|practicar|nueva|nuevo|libre)$/), 'Escreva como numa apresentação: <b>¡Hola a todos!</b> / <b>Me llamo</b> … / <b>¡Un abrazo!</b>')),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
