@@ -1149,6 +1149,27 @@ const RULES = {
     if (/\bthese findings suggests\b/.test(c)) return 'findings é plural: These findings <b>suggest</b> …';
     return need(/\b(this study|this paper|examines|investigates|aims to|were collected|was conducted|participants|results (indicate|show|reveal)|findings|was found|further research|growing concern|correlation|survey)\b/.test(c), 'Use a linguagem do abstract: <b>This study examines</b> … / <b>These findings suggest</b> …');
   }),
+  // ---------- Módulo 35 ----------
+  conotacao: R('uma frase com um adjetivo de conotação clara (slim, affordable, determined, stubborn, scent…)', (t, k) => need(has(k, /^(slim|thin|skinny|cheap|affordable|inexpensive|reasonable|stubborn|determined|obstinate|frugal|stingy|mean|childlike|childish|confident|arrogant|self-assured|curious|inquisitive|nosy|scent|fragrance|aroma|smell|smelled|stink|stench|elegant|careful)$/), 'Escolha a conotação: <b>slim</b> × <b>skinny</b>, <b>affordable</b> × <b>cheap</b>, <b>determined</b> × <b>stubborn</b>.')),
+  verbos_precisos: R('uma frase com um verbo preciso (glance, stare, gaze, whisper, mutter, stroll, rush…)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(glanced|stared|gazed|peered) (to|on) \w+/.test(c)) return 'Esses verbos pedem <b>at</b>: glanced <b>at</b> her watch.';
+    return need(has(k, /^(glance|glanced|glances|stare|stared|stares|gaze|gazed|peer|peered|glare|glared|whisper|whispered|mutter|muttered|mumble|mumbled|shout|shouted|yell|yelled|stammer|stammered|stroll|strolled|wander|wandered|rush|rushed|hurry|hurried|stride|strode|tiptoe|tiptoed)$/), 'Use um verbo preciso: <b>glanced</b>, <b>stared</b>, <b>whispered</b>, <b>strolled</b> …');
+  }),
+  idiomas: R('uma frase com uma expressão idiomática (a piece of cake, under the weather, spill the beans…)', (t, k) => need(/\b(piece of cake|break the ice|under the weather|arm and a leg|hit the nail on the head|spill(ed)? the beans|blue moon|cat out of the bag|cloud nine|last straw|easier said than done|tough nut|cold feet)\b/.test(k.join(' ')), 'Use uma expressão: <b>a piece of cake</b> / <b>under the weather</b> / <b>the last straw</b> …')),
+  idiomas_trabalho: R('uma frase com uma expressão do trabalho (back to square one, on the fence, cut corners…)', (t, k) => need(/\b(square one|ball rolling|in your court|on the fence|cut(ting)? corners|outside the box|win-win|win win|call it a day|same page|bite the bullet|meet halfway|pros and cons|wrap up)\b/.test(k.join(' ')), 'Use uma expressão do trabalho: <b>back to square one</b> / <b>on the fence</b> / <b>on the same page</b> …')),
+  collocations_c1: R('uma collocation avançada (raise awareness, meet a deadline, draw a conclusion, pose a threat…)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(take|took|make|made) (a |any |the )?conclusions?\b/.test(c)) return 'Tirar uma conclusão: <b>draw</b> a conclusion.';
+    if (/\b(rise|rose|risen) (awareness|money)\b/.test(c)) return 'Com objeto, use <b>raise</b>: raise awareness.';
+    if (/\b(do|did|make|made) (a |the )?deadline\b/.test(c)) return 'Cumprir um prazo: <b>meet</b> a deadline.';
+    return need(/\b(rais\w* (awareness|money|a question)|(meet|met|meeting|miss|missed) (a |the )?deadline|(draw|drew|drawn) (a |any |the )?conclusions?|(pose|poses|posed) (a |an |any )?(serious |major |real )?(threat|risk)|(address|addressed|tackle|tackled) (this |the |an |a )?(issue|problem)|(reach|reached) (a )?(consensus|decision)|bear in mind|into account|play(s|ed)? a (part|role)|make an effort)\b/.test(c), 'Use uma collocation: <b>raise awareness</b> / <b>meet a deadline</b> / <b>draw a conclusion</b> …');
+  }),
+  tom: R("uma frase com tom diplomático (Unfortunately, … / I'd appreciate it if … / I was slightly disappointed …)", (t, k) => {
+    const c = k.join(' ');
+    if (/\b(disgusting|useless|a joke|awful|pathetic)\b/.test(c)) return 'Isso soa agressivo. Troque o julgamento por um fato ou suavize: <b>was not clean</b> / <b>slightly disappointed</b>.';
+    return need(/\b(unfortunately|slightly|a little|a bit|i'd appreciate|i would appreciate|i was wondering|would it be possible|look into|look forward|not as|did not|was not|were not|were unable|while|although|but|disappointed|regards|address)\b/.test(c), "Ajuste o tom: <b>Unfortunately</b>, … / <b>I'd appreciate it if</b> … / <b>I was slightly disappointed</b> …");
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
