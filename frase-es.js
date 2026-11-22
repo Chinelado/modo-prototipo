@@ -801,6 +801,39 @@ const RULES = {
     if (/ (dijo|explicó|aseguró) que (\p{L}+ )?(será|va a|retrasará) /u.test(c)) return 'No passado, os tempos recuam: <b>sería</b>, <b>iba a</b>, <b>se retrasaría</b>.';
     return need(/ (te cuento|resumen|explicó|dijo|aseguró|preguntó|pidió|se quejó|prometió|advirtió|cualquier duda|se ofreció|te perdiste|me perdí) /.test(c), 'Resuma: <b>Te cuento</b> … / <b>Explicó que</b> … / <b>Nos pidió que</b> …');
   }),
+  // ---------- Módulo 22 ----------
+  argumentar: R('um argumento organizado (en primer lugar, además, no solo … sino también, por lo tanto…)', (t, k) => {
+    const c = C(k);
+    if (/ no solo .* si no también /.test(c)) return 'É <b>sino</b> (junto): no solo …, <b>sino</b> también …';
+    if (/ no solo .* pero también /.test(c)) return 'Depois de <b>no solo</b>, use <b>sino</b> también.';
+    if (/ ademas /.test(c)) return '<b>además</b> leva acento.';
+    return need(/ (en primer lugar|en segundo lugar|además|por otro lado|por ejemplo|es decir|o sea|no solo|sino también|por lo tanto|por eso|en conclusión|en resumen|para terminar|en mi opinión|por último) /.test(c), 'Organize: <b>En primer lugar</b>, … / <b>Además</b>, … / <b>Por lo tanto</b>, …');
+  }),
+  ventajas: R('vantagens e desvantagens (la ventaja es que, lo malo es que, al fin y al cabo…)', (t, k) => {
+    const c = C(k);
+    if (/ el (bueno|malo|mejor|peor) es que /.test(c)) return 'Para "o lado bom", use <b>lo</b>: <b>lo</b> bueno es que …';
+    if (/ (a|la) vantaja /.test(c)) return 'Em espanhol: <b>la ventaja</b>.';
+    return need(/ (ventaja|ventajas|desventaja|desventajas|inconveniente|inconvenientes|lo bueno|lo malo|lo mejor|lo peor|pros|contras|a pesar de|al fin y al cabo|vale la pena|compensa|por un lado|por otro) /.test(c), 'Pese: <b>La ventaja es que</b> … / <b>Lo malo es que</b> …');
+  }),
+  matizar: R('uma opinião matizada (hasta cierto punto, no del todo, es cierto que … pero, puede que…)', (t, k) => {
+    const c = C(k);
+    if (/ puede que (\p{L}+ )?(tienes|tiene|tienen|es|son|está|hay|leen|lee) /u.test(c)) return 'Depois de <b>puede que</b>, o subjuntivo: puede que <b>tengas</b>, <b>sea</b>, <b>haya</b>.';
+    if (/ ni todos /.test(c)) return '"Nem todos" é <b>no todos</b>.';
+    return need(/ (hasta cierto punto|en cierto modo|no del todo|en parte|es cierto que|es verdad que|tienes razón|puede que|es posible que|quizás|a mi parecer|depende|generalizar|exagerar|no todos|en absoluto|de acuerdo) /.test(c), 'Matize: <b>Hasta cierto punto</b> … / <b>Es cierto que</b> …, pero …');
+  }),
+  debate: R('uma frase de debate (perdona que te interrumpa, déjame terminar, como decía, o sea, que…)', (t, k) => {
+    const c = C(k);
+    if (/ perdona que te (interrumpo|interrumpe) /.test(c)) return '<b>Perdona que</b> pede subjuntivo: que te <b>interrumpa</b>.';
+    if (/ dejame /.test(c)) return 'Com o pronome, acento: <b>déjame</b>.';
+    return need(/ (puedo decir|quería añadir|perdona que|perdone que|déjame|un momento|como decía|volviendo a|lo de antes|en eso tienes razón|no es del todo cierto|o sea|si te entiendo|en resumen|qué pasa con|pero) /.test(c), 'Use: <b>Perdona que te interrumpa</b>, pero … / <b>Como decía</b>, …');
+  }),
+  dele_b1: R('uma frase sobre a prova (prueba, minutos, preparación, aprobar…)', (t, k) => need(/ (examen|prueba|pruebas|aprobar|apto|grupo|grupos|lectura|auditiva|escritas|orales|oral|preparación|prepararte|prepararme|instrucciones|conectores|notas|modelos|minutos|dele|dura|examinador|examinadora|texto) /.test(C(k)), 'Fale da prova: La <b>prueba</b> de lectura dura … / Hay que <b>aprobar</b> …')),
+  ensayo: R('uma frase de texto de opinião (hoy en día, en mi opinión, en primer lugar, es cierto que …, en conclusión…)', (t, k) => {
+    const c = C(k);
+    if (/ en conclusion /.test(c)) return '<b>conclusión</b> leva acento.';
+    if (/ ademas /.test(c)) return '<b>además</b> leva acento.';
+    return need(/ (hoy en día|en mi opinión|creo que|en primer lugar|además|por otro lado|por ejemplo|es cierto que|aunque|pero|en conclusión|por todo ello|por lo tanto|no solo|defiendo) /.test(c), 'Escreva: <b>Hoy en día</b>, … / <b>En primer lugar</b>, … / <b>En conclusión</b>, …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
