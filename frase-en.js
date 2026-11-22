@@ -409,7 +409,7 @@ const RULES = {
   }),
   ed_ing: R('um sentimento (-ed) ou como algo é (-ing): I\'m bored. / The movie was boring.', (t, k) => {
     const c = k.join(' ');
-    if (/\b(i'm|i am|i was|we're|we are|we were) (so |very |really )?(boring|tiring|interesting|exciting|confusing|annoying|embarrassing|surprising|relaxing)\b/.test(c) && !/\b(i'm|i am) (so |very |really )?(interesting)\b/.test('')) return 'Para como você se sente, use <b>-ed</b>: I\'m <b>bored</b>. (I\'m boring = eu sou chata!)';
+    if (/\b(i'm|i am|i was|we're|we are|we were) (so |very |really )?(boring|tiring|interesting|exciting|confusing|annoying|embarrassing|surprising|relaxing)\b/.test(c)) return 'Para como você se sente, use <b>-ed</b>: I\'m <b>bored</b>. (I\'m boring = eu sou chata!)';
     if (/\b(movie|class|book|trip|day|meeting|news|show|game|traffic|job|film) (is|was|are|were) (so |very |really )?(bored|tired|interested|excited|confused|annoyed|surprised|relaxed)\b/.test(c)) return 'Para como a coisa é, use <b>-ing</b>: The movie was <b>boring</b>.';
     if (/\binterested (on|about|for)\b/.test(c)) return 'Interessado em: interested <b>in</b>.';
     return need(k.some((w) => /^\p{L}{3,}(ed|ing)$/u.test(w) && /^(bor|tir|interest|excit|worr|relax|surpris|confus|embarrass|annoy|stress)/.test(w)), 'Use um adjetivo de sentimento: I\'m <b>bored</b>. / It was <b>boring</b>.');
@@ -641,6 +641,36 @@ const RULES = {
     if (/\bif i (am|was|would be) you\b/.test(c)) return 'O padrão é <b>If I were you</b>.';
     if (/\bif i were you,? (i will|i'll)\b/.test(c)) return "Com If I were you, use <b>I'd</b>: If I were you, I'd …";
     return need(/\b(if i were you|you should|you could|why don't you|i understand|must be|i'd|i would|would|deserve)\b/.test(c), "Aconselhe: <b>If I were you, I'd</b> … / <b>You could</b> …");
+  }),
+  // ---------- Módulo 19 ----------
+  obrigacao2: R('uma obrigação no passado ou no futuro (I had to … / You\'ll have to …) ou com be supposed to', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(musted|must to|will must|had must)\b/.test(c)) return 'must não tem passado nem futuro: use <b>had to</b> / <b>will have to</b>.';
+    if (/\b(am|is|are|'m|'s|'re|i'm|we're|you're|she's|he's|they're) suppose to\b/.test(c)) return 'A expressão é <b>supposed</b> to, com -d.';
+    return need(/\b(had to|have to|has to|will have to|'ll have to|supposed to|need to|allowed to|didn't have to|don't need to)\b/.test(c), 'Fale de uma obrigação: I <b>had to</b> … / You\'<b>ll have to</b> … / We\'re <b>supposed to</b> …');
+  }),
+  entrevista: R('uma resposta de <b>entrevista</b>: experiência (I\'ve worked …), um ponto forte ou um fato com data', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(i've|i have) (worked|led|managed)\b.*\bin (19|20)\d\d\b/.test(c)) return 'Com data, use o passado simples: In 2020, I <b>led</b> …';
+    if (/\bi work (in|as|for) \p{L}+.*\bfor (\d+|two|three|four|five|six|ten) years\b/u.test(c)) return "Para há quanto tempo, use o present perfect: I'<b>ve worked</b> … for five years.";
+    return need(has(k, /^(experience|worked|i've|strengths|strength|weakness|weaknesses|skills|led|managed|organized|team|achievement|learned)$/), "Responda como numa entrevista: I'<b>ve worked</b> in … / One of my <b>strengths</b> is …");
+  }),
+  had_better: R("um conselho forte com <b>had better</b> (You'd better … / You'd better not …)", (t, k) => {
+    const c = k.join(' ');
+    if (/\b(don't|doesn't|didn't) had better\b|\bhad not better\b|\bhad better don't\b/.test(c)) return "A negativa é <b>had better not</b>: You'd better not …";
+    if (/\b(had|'d) better to\b/.test(c)) return "had better vem sem to: You'd better <b>hurry</b>.";
+    return need(/\b(had better|'d better|you'd better|i'd better|we'd better)\b/.test(c), "Dê um aviso: You'<b>d better</b> … / You'<b>d better not</b> …");
+  }),
+  estudo: R('uma frase sobre <b>estudos</b> com as expressões (sign up for, take a course, catch up on, drop out of …)', (t, k) => {
+    if (/\bmake a course\b/.test(k.join(' '))) return 'Fazer um curso é <b>take</b> a course.';
+    return need(/\b(sign(ed)? up|enroll|take a course|taking|took a course|apply|applied|drop(ped)? out|catch(ing)? up|fall(ing)? behind|fell behind|tuition|scholarship|degree|course|class|assignment)\b/.test(k.join(' ')), 'Fale dos seus estudos: I <b>signed up for</b> … / I need to <b>catch up on</b> …');
+  }),
+  reuniao: R("uma fala de <b>reunião</b> (Sorry to interrupt, but … / What if we …? / I see your point, but …)", (t, k) => need(/\b(sorry to interrupt|can i add|what if we|how about|we could|why don't we|i see your point|in my view|good point|let's move on|wrap up|i agree|i disagree)\b/.test(k.join(' ')), "Fale como numa reunião: <b>Sorry to interrupt, but</b> … / <b>What if we</b> …?")),
+  email_formal: R('uma frase de <b>e-mail formal</b> com pergunta indireta (Could you tell me when the course starts?)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(tell me|know|wonder) (when|where|how much|how many|what time|what) (does|do|did|is|are) \p{L}+/u.test(c)) return 'Na pergunta indireta, a ordem é de afirmação: tell me when the course <b>starts</b>.';
+    if (/\b(i'm|i'd|don't|can't|won't|isn't)\b/.test(c)) return 'No e-mail formal, sem contrações: <b>I am</b>, <b>I would</b>.';
+    return need(/\b(inquire|enquire|could you (please )?tell me|i would like to know|i would be grateful|look forward|dear|regards|further information)\b/.test(c), 'Escreva formalmente: I am writing to <b>inquire about</b> … / <b>Could you please tell me</b> …?');
   }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
