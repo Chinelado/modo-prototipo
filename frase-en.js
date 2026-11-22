@@ -1119,6 +1119,36 @@ const RULES = {
     if (/^never i have\b/.test(c)) return 'Na inversão, o auxiliar vem antes: <b>Never have I</b> …';
     return need(/^(never|not only|rarely|what|all|it (is|was)|so let us|let us|good evening|dear|ladies)\b/.test(c) || /\?\s*$/.test(t) || /\w+, \w+[^,]*,? and \w+/.test(t) || /\b(raise a glass|thank you|bottom of my heart|proud|courage)\b/.test(c), 'Use um recurso de discurso: <b>Never have I</b> … / <b>What we need is</b> … / <b>So let us</b> …');
   }),
+  // ---------- Módulo 34 ----------
+  estilo_nominal: R('uma frase no estilo nominal (There was a rapid increase in … / The discovery of … led to …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\ba rapidly (increase|rise|decline|growth)\b/.test(c)) return 'Antes do substantivo, use o adjetivo: a <b>rapid</b> increase.';
+    return need(has(k, /^(increase|rise|decline|fall|reduction|discovery|development|analysis|introduction|failure|growth|implementation|improvement|use|change|loss)$/) || /\b(led to|resulted in|contributed to)\b/.test(c), 'Use substantivos: <b>There was a rapid increase in</b> … / <b>The introduction of</b> … <b>led to</b> …');
+  }),
+  citar_fontes: R('uma frase que cite uma fonte (According to … / Smith (2020) argues … / It has been shown …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\baccording (with|to the opinion of)\b/.test(c)) return 'Use <b>according to</b> + a fonte.';
+    return need(/\b(according to|argues?|suggests?|demonstrates?|claims?|points out|states?|shows?|indicates?|it has been shown|research suggests|widely accepted|there is evidence|study by|et al)\b/.test(c) || /\(\d{4}\)/.test(t), 'Cite a fonte: <b>According to</b> Smith (2020), … / Smith (2020) <b>argues that</b> …');
+  }),
+  vocab_academico: R('uma frase com vocabulário acadêmico (evidence, research, factor, approach, phenomena, criteria…)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(evidences|researches|informations|advices|knowledges)\b/.test(c)) return 'Essa palavra é incontável: sem -s. Diga <b>a lot of evidence</b> / <b>a piece of research</b>.';
+    if (/\b(phenomenons|criterions|phenomenas|criterias)\b/.test(c)) return 'Plural especial: <b>phenomena</b>, <b>criteria</b>.';
+    return need(has(k, /^(significant|factor|factors|approach|evidence|research|data|phenomenon|phenomena|criterion|criteria|hypothesis|hypotheses|analysis|analyses|concept|method|role|theory|study|range|results)$/) || /\b(in terms of|with regard to|crucial role)\b/.test(c), 'Use o vocabulário acadêmico: <b>significant evidence</b> / <b>several factors</b> / <b>these phenomena</b>.');
+  }),
+  precisao: R('uma frase precisa sobre quantidades (the vast majority / a significant proportion / approximately / just under …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bthe number of \w+ (have|are|were)\b/.test(c)) return 'Depois de the number of, o verbo é singular: The number of students <b>has</b> grown.';
+    if (/\bthe amount of (people|students|cars|participants)\b/.test(c)) return 'Com contáveis, use <b>the number of</b>.';
+    return need(/\b(vast majority|majority|proportion|minority|approximately|roughly|nearly|almost|just over|just under|on average|twice as|times higher|a third|a quarter|half|per ?cent|the number of|the amount of|slight|steady|sharp|dramatic|steadily)\b/.test(c) || /\d/.test(t), 'Seja precisa: <b>the vast majority of</b> … / <b>approximately</b> 40% / <b>just under a third</b> …');
+  }),
+  parafrasear: R('uma paráfrase ou explicação (In other words … / That is to say … / … is harmed by …)', (t, k) => need(/\b(in other words|that is to say|to put it simply|paraphras\w*|own words|quotation marks|credit|source|plagiarism|is harmed by|was|were|there was|growth|significant|issue)\b/.test(k.join(' ')), 'Diga com outras palavras: <b>In other words</b>, … / <b>That is to say</b>, …')),
+  abstract: R('uma frase de abstract (This study examines … / Data were collected … / These findings suggest …)', (t, k) => {
+    const c = k.join(' ');
+    if (/^this (study|paper) (examine|investigate|explore|analyze)\b/.test(c)) return 'Com this study, o verbo leva -s: This study <b>examines</b> …';
+    if (/\bthese findings suggests\b/.test(c)) return 'findings é plural: These findings <b>suggest</b> …';
+    return need(/\b(this study|this paper|examines|investigates|aims to|were collected|was conducted|participants|results (indicate|show|reveal)|findings|was found|further research|growing concern|correlation|survey)\b/.test(c), 'Use a linguagem do abstract: <b>This study examines</b> … / <b>These findings suggest</b> …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
