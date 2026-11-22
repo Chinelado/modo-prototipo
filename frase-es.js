@@ -291,6 +291,46 @@ const RULES = {
     if (/ le (lo|la|los|las) /.test(c)) return 'le + lo vira <b>se lo</b>.';
     return need(/ (hola|querido|querida|cómo estás|qué tal|he|has|hemos|ya|todavía|un abrazo|besos|escríbeme|hasta pronto|saludos|te extraño|novedades) /.test(c), 'Escreva como num e-mail: ¡<b>Hola</b>, …! / <b>He</b> empezado … / <b>Un abrazo</b>.');
   }),
+  // ---------- Módulo 9 ----------
+  comparativo: R('uma comparação (más … que, menos … que, mejor, peor, mayor, menor)', (t, k) => {
+    const c = C(k);
+    if (/ más (mejor|mejores|peor|peores) /.test(c)) return '<b>mejor</b> e <b>peor</b> já comparam: sem "más".';
+    if (/ (más|menos) que (cien|mil|diez|veinte|cincuenta|\d+) /.test(c)) return 'Com números, use <b>de</b>: más <b>de</b> cien.';
+    if (/ más (alto|grande|caro|rápido|barato|frío|fría|cómodo|bonito|bonita) (do|da) /.test(c)) return 'Isso é português. O segundo termo vem com <b>que</b>: más caro <b>que</b> …';
+    return need(/ (más|menos|mejor|mejores|peor|peores|mayor|mayores|menor|menores) /.test(c), 'Compare: Es <b>más</b> caro <b>que</b> … / Es <b>mejor que</b> …');
+  }),
+  igualdad: R('uma igualdade (tan … como, tanto … como, el mismo que)', (t, k) => {
+    const c = C(k);
+    if (/ tan (\p{L}+) (cuanto|quanto) /u.test(c)) return 'O nosso "quanto" vira <b>como</b>: tan grande <b>como</b>.';
+    if (/ tanto gente /.test(c)) return '<b>gente</b> é feminino: <b>tanta</b> gente.';
+    if (/ tan (tiempo|dinero|gente|libros|horas|amigos|trabajo) /.test(c)) return 'Com substantivo, use <b>tanto</b> (que concorda): <b>tanto</b> tiempo, <b>tanta</b> gente.';
+    return need(/ (tan|tanto|tanta|tantos|tantas|el mismo|la misma|los mismos|las mismas|igual|parecido|parecida) /.test(c), 'Compare iguais: <b>tan</b> grande <b>como</b> … / <b>tanto</b> tiempo <b>como</b> …');
+  }),
+  superlativo: R('um superlativo (el más … de, el mejor, el peor, -ísimo)', (t, k) => {
+    const c = C(k);
+    if (/ muy \p{L}+ísim[oa]s? /u.test(c)) return '<b>-ísimo</b> já intensifica: sem "muy".';
+    if (/ (el|la|los|las) más (bueno|buena|buenos|buenas) /.test(c)) return 'Use <b>el mejor</b>, <b>la mejor</b>: nunca "el más bueno".';
+    if (/ (el|la|los|las) (más \p{L}+|mejor|peor|mejores|peores) (\p{L}+ )?do /u.test(c)) return 'O grupo vem com <b>de</b> / <b>del</b>: el río más largo <b>del</b> mundo.';
+    return need(/ (más|mejor|peor|mejores|peores|mayor|menor) /.test(c) || has(k, /\p{L}+ísim[oa]s?$/u), 'Use um superlativo: <b>el más</b> grande <b>de</b> … / <b>el mejor</b> … / caro → <b>carísimo</b>.');
+  }),
+  preferir: R('uma escolha (¿cuál?, ¿qué + substantivo?, prefiero, el rojo…)', (t, k) => {
+    const c = C(k);
+    if (/ cuál (color|talla|número|película|libro|camisa|restaurante|ciudad) /.test(c)) return 'Antes de substantivo, use <b>qué</b>: ¿<b>Qué</b> color prefieres?';
+    if (has(k, /^(prefero|prefiro|preferes|prefere)$/)) return 'preferir muda e → ie: <b>prefiero</b>, <b>prefieres</b>, <b>prefiere</b>.';
+    return need(/ (cuál|cuáles|qué|prefiero|prefieres|prefiere|preferimos|prefieren|me llevo|favorito|favorita) /.test(c), 'Escolha: ¿<b>Cuál</b> prefieres? / <b>Prefiero</b> el azul.');
+  }),
+  devolucion: R('uma frase de troca na loja (quería cambiar, me queda, la talla, el recibo…)', (t, k) => {
+    const c = C(k);
+    if (/ me (fica|ficou|fico) /.test(c)) return 'Para roupa, use <b>quedar</b>: <b>me queda</b> grande.';
+    if (/ me queda (chicos|grandes|apretados|bien) /.test(c) && / (zapatos|pantalones|jeans|lentes) /.test(c)) return 'Com plural, <b>me quedan</b>: los zapatos <b>me quedan</b> chicos.';
+    return need(/ (quería|cambiar|devolver|me queda|me quedan|talla|recibo|probador|reembolso|probármelo|probármela|el dinero|defecto|mancha|garantía) /.test(c), 'Na loja: <b>Quería cambiar</b> … / <b>Me queda</b> grande. / ¿Tiene otra <b>talla</b>?');
+  }),
+  resena: R('uma frase de avaliação (lo mejor, lo peor, mejor que, lo recomiendo…)', (t, k) => {
+    const c = C(k);
+    if (/ más (mejor|mejores|peor|peores) /.test(c)) return '<b>mejor</b> e <b>peor</b> já comparam: sem "más".';
+    if (has(k, /^recomendo$/)) return 'recomendar muda e → ie: <b>recomiendo</b>.';
+    return need(/ (lo mejor|lo peor|mejor|peor|más|menos|recomiendo|vale la pena|estrellas|calidad|precio|compré) /.test(c), 'Avalie: <b>Lo mejor</b> es … / Es <b>mejor que</b> … / <b>Lo recomiendo</b>.');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
