@@ -142,7 +142,7 @@ const _extras = extras;
 extras = function (arg) { _extras(arg); const h = app.querySelector('h1'); if (h) { h.textContent = 'Explorar'; if (!app.querySelector('.mo-sub')) h.insertAdjacentHTML('afterend', '<p class="mut mo-sub">Situações reais, leitura e conteúdos para usar o ' + LP.lingua + ' fora da trilha.</p>'); } };
 
 /* ---------- boas-vindas: idioma → nível → começar ---------- */
-const LANGS = [['DE', 'Alemão', 'A1 a C2 · 252 lições', true], ['EN', 'Inglês', 'piloto: A1 · Módulo 1', true], ['ES', 'Espanhol', 'em preparação', false], ['FR', 'Francês', 'em preparação', false], ['IT', 'Italiano', 'em preparação', false]];
+const LANGS = [['DE', 'Alemão', 'A1 a C2 · 252 lições', true], ['EN', 'Inglês', 'A1 · 36 lições (em construção)', true], ['ES', 'Espanhol', 'em preparação', false], ['FR', 'Francês', 'em preparação', false], ['IT', 'Italiano', 'em preparação', false]];
 onboard = function (step = 1) {
   const steps = `<div class="mo-steps">${[1, 2, 3].map((i) => `<i class="${i <= step ? 'on' : ''}"></i>`).join('')}</div>`;
   if (step === 1 && /[?&]ob=3/.test(location.search)) step = 3; // veio da troca de idioma nas boas-vindas

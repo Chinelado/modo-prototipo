@@ -2,7 +2,7 @@
    Estratégia do app: responde com o que está guardado e atualiza em segundo plano (a versão nova vale na próxima abertura).
    Áudios (audio/xx/*.mp3): ficam num cache separado, que não é apagado quando o app atualiza. Entram ali quando você
    toca um áudio pela primeira vez ou quando baixa um nível inteiro no Perfil. */
-const CACHE = 'deutsch-trilha-v4'; // v4: Comece aqui do inglês · v3 (21/11/2026): página do inglês (piloto); v2: logo e ícones novos do MODO
+const CACHE = 'deutsch-trilha-v5'; // v5: A1 do inglês completo · v4: Comece aqui do inglês · v3 (21/11/2026): página do inglês (piloto); v2: logo e ícones novos do MODO
 const AUDIO = 'deutsch-trilha-audio';
 const BASE = ['./', './index.html', './ingles.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png'];
 

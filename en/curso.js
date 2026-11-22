@@ -1,11 +1,14 @@
 // Inglês · curso (piloto). Carregado depois de en/base.js, só em ingles.html.
 // Mesmo formato das lições novas do alemão (data/curriculo.js): NL(id, {...}) registra a lição, SEQ monta a trilha.
-// Piloto: A1 · Módulo 1 (First contacts), conforme docs/ingles-estrutura.md. Inglês americano.
+// Este arquivo: o motor das lições (NL) e o Módulo 1 (First contacts), conforme docs/ingles-estrutura.md. Inglês americano.
 // Diferenças do alemão, adaptadas à língua: sem cores de gênero; a profissão leva artigo (a / an); idade com to be;
 // e cada aula tem um passo "Som da lição" com o contraste de pronúncia que o brasileiro mais erra.
 
 /* ---------- 1. lições ---------- */
+// Cada arquivo de módulo (en/m02.js, en/m03.js…) registra as suas lições com NL e o módulo com EN_MODS.push.
+// en/trilha.js, carregado por último, monta a trilha na ordem de EN_MODS.
 const NEW_LESSONS = {};
+const EN_MODS = [];
 function NL(id, o) {
   const l = {
     i: LESSONS.length, sid: id, nova: true, de: o.de, pt: o.pt, gt: o.gt, gx: o.gx,
@@ -450,73 +453,4 @@ S_("What's your job?", 'nice=legal, agradável|in a / in an=num, numa|for=para (
 S_('A sign-up form', 'speak=falar (uma língua)|sign=assinar|here=aqui|Mr. / Ms.=senhor / senhora');
 ['emma', 'chicago', 'carla', 'mendes', 'oliveira', 'mike', 'pete', 'nick', 'boston', 'linden', 'colombia', 'shakira'].forEach((n) => NAMES.add(n));
 
-/* ---------- 2. sequência ---------- */
-const SEQ = [
-  { lv: 'A1', n: 'Primeiros contatos', l: ['en-hi', 'en-from', 'en-spell', 'en-age', 'en-job', 'en-form'] },
-];
-const TEXT_MOD = {};
-
-// Níveis do inglês: provas de referência Cambridge. No piloto, só o A1 existe; os outros níveis ficam fora da trilha.
-const PHASES_EN = {
-  A1: ['A1 · Starter', 'Apresentar-se, fazer pedidos simples, perguntar e responder sobre o dia a dia.'],
-  A2: ['A2 · Cambridge A2 Key', 'Contar experiências, comparar, fazer planos e resolver situações de rotina.'],
-  B1: ['B1 · Cambridge B1 Preliminary', 'Contar histórias, dar opinião e lidar com imprevistos no trabalho e em viagens.'],
-  B2: ['B2 · Cambridge B2 First', 'Discutir temas abstratos com fluência e defender um ponto de vista com detalhes.'],
-  C1: ['C1 · Cambridge C1 Advanced', 'Usar o inglês com flexibilidade em contextos acadêmicos e profissionais.'],
-  C2: ['C2 · Cambridge C2 Proficiency', 'Entender praticamente tudo e se expressar com precisão e nuance.'],
-};
-PHASES.forEach((p) => { const e = PHASES_EN[p.id]; if (e) { p.n = e[0]; p.can = e[1]; delete p.mods; delete p.ue; } }); // as horas por nível do Goethe não valem para o inglês
-
-/* ---------- 3. trilha ---------- */
-const MODS = [], DAYS = [], LBYSID = {}, LMOD = [], LDAY = [];
-(function buildSeq() {
-  LESSONS.forEach((l) => { LBYSID[l.sid] = l; });
-  const old = LESSONS.slice(); LESSONS.length = 0;
-  SEQ.forEach((m, w) => {
-    const li = [], plan = [];
-    m.l.forEach((x) => {
-      const l = LBYSID[String(x)];
-      if (!l) throw new Error('Sequência: lição desconhecida ' + x);
-      l.i = LESSONS.length; l.oi = l.i; LESSONS.push(l); li.push(l.i); plan.push({ i: l.i });
-    });
-    MODS.push({ lv: m.lv, n: m.n || '', li, plan });
-    li.forEach((i, r) => { LMOD[i] = w; LDAY[i] = DAYS.length + 1; DAYS.push({ w, r, li: i, review: false }); });
-    DAYS.push({ w, r: li.length, review: true });
-  });
-  const miss = old.filter((l) => !LESSONS.includes(l));
-  if (miss.length) throw new Error('Sequência: lições fora da trilha: ' + miss.map((l) => l.sid).join(', '));
-  // só os níveis que já têm módulos ficam na trilha
-  for (let k = PHASES.length - 1; k >= 0; k--) {
-    const p = PHASES[k], ws = MODS.map((m, w) => (m.lv === p.id ? w : -1)).filter((w) => w >= 0);
-    if (!ws.length) { PHASES.splice(k, 1); continue; }
-    p.weeks = [ws[0], ws[ws.length - 1] + 1];
-    p.when = ws.length > 1 ? `Módulos ${ws[0] + 1}–${ws[ws.length - 1] + 1}` : `Módulo ${ws[0] + 1}`;
-  }
-})();
-const modLs = (w) => (MODS[w] ? MODS[w].li.map((i) => LESSONS[i]) : []);
-const firstDayOf = (w) => { const i = DAYS.findIndex((x) => x.w === w); return i < 0 ? DAYS.length : i + 1; };
-
-// Progresso: o inglês nasce com a sequência nova, então só remapeia quando a trilha crescer (mesma lógica do alemão).
-const SEQ_V1_NEW = [], SEQ_ADDED_V2 = [];
-const seqKeys = () => DAYS.map((d) => (d.review ? 'r' + d.w : LESSONS[d.li].sid));
-function remapSeq(S, oldKeys) {
-  const nk = seqKeys(), day = {}; nk.forEach((k, i) => { day[k] = i + 1; });
-  const oldSids = oldKeys.filter((k) => !/^r\d+$/.test(k));
-  const mapDays = (obj, keepReview) => {
-    const out = {};
-    Object.entries(obj || {}).forEach(([d, v]) => { const k = oldKeys[+d - 1]; if (k && day[k] && (keepReview || !/^r\d+$/.test(k))) out[day[k]] = v; });
-    return out;
-  };
-  const nd = mapDays(S.done, false);
-  Object.entries(S.done || {}).forEach(([d, v]) => { const k = oldKeys[+d - 1]; if (!/^r\d+$/.test(k || '')) return;
-    const w = +k.slice(1); if (MODS[w] && MODS[w].li.every((i) => nd[LDAY[i]])) nd[day[k]] = v; });
-  S.done = nd;
-  S.lstep = mapDays(S.lstep, true);
-  const hw = {}; Object.entries(S.hw || {}).forEach(([i, v]) => { const l = LBYSID[oldSids[+i]]; hw[l ? l.i : i] = v; }); S.hw = hw;
-  (S.diary || []).forEach((x) => { if (!x.x && x.l != null && LBYSID[oldSids[x.l]]) x.l = LBYSID[oldSids[x.l]].i; });
-}
-function migrateSeq(S) {
-  const now = seqKeys();
-  if (S.seqDays && S.seqDays.join() !== now.join()) remapSeq(S, S.seqDays);
-  S.seqV = 2; S.seqDays = now;
-}
+EN_MODS.push({ lv: 'A1', n: 'Primeiros contatos', l: ['en-hi', 'en-from', 'en-spell', 'en-age', 'en-job', 'en-form'] });

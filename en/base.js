@@ -34,7 +34,10 @@ function knownIndex() {
   const toks = (t) => (String(t).replace(/\*\*/g, '').match(/[\p{L}']+/gu) || []).map((w) => w.toLowerCase().replace(/^'+|'+$/g, ''));
   const taught = new Set(), stems = new Set();
   const teach = (t) => toks(t).forEach((w) => { taught.add(w); if (w.length > 3) stems.add(stemOf(w)); });
-  const isKnown = (w) => taught.has(w) || (w.length > 3 && stems.has(stemOf(w))) || (LP.extra || []).includes(w);
+  // formas da mesma palavra: eggs/egg, boxes/box, cities/city, cooking/cook, dancing/dance, worked/work, liked/like
+  const forms = (w) => [w, w.replace(/'s$/, ''), w.replace(/s$/, ''), w.replace(/es$/, ''), w.replace(/ies$/, 'y'), w.replace(/ing$/, ''), w.replace(/ing$/, 'e'),
+    w.replace(/(\p{L})\1ing$/u, '$1'), w.replace(/ed$/, ''), w.replace(/d$/, ''), w.replace(/ied$/, 'y'), w.replace(/(\p{L})\1ed$/u, '$1')];
+  const isKnown = (w) => forms(w).some((f) => taught.has(f)) || (w.length > 3 && stems.has(stemOf(w))) || (LP.extra || []).includes(w);
   GUIDE.forEach((g) => g.body.split('\n').filter((x) => x.trim().startsWith('~ ')).forEach((x) => teach(x.trim().slice(2).split(' = ')[0])));
   const report = [];
   LESSONS.forEach((l) => {
