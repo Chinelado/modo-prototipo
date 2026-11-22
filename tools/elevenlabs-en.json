@@ -1,0 +1,16 @@
+{
+  "modelo": "eleven_v4",
+  "formato": "mp3_44100_64",
+  "velocidade": 0.95,
+  "estabilidade": 0.5,
+  "similaridade": 0.75,
+  "paralelo": 4,
+  "vozes": {
+    "a": "EXAVITQu4vr4xnSDxMaL",
+    "b": "nPczCjzI2devNBz1zQrb"
+  },
+  "nomes": {
+    "a": "Sarah (americana, padrão da ElevenLabs)",
+    "b": "Brian (americano, padrão da ElevenLabs)"
+  }
+}

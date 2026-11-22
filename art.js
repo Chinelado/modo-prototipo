@@ -70,7 +70,7 @@ const words = (t) => (String(t).toLowerCase().replace(/\*\*/g, '').match(/\p{L}+
 let DE_SET = null;
 function deSet() {
   if (DE_SET) return DE_SET;
-  const s = new Set(DE_EXTRA), add = (t) => words(t).forEach((w) => s.add(w));
+  const s = new Set(LP.extra || DE_EXTRA), add = (t) => words(t).forEach((w) => s.add(w));
   LESSONS.forEach((l) => {
     l.v.forEach((v) => add(v.de)); [...l.ge, ...l.ex, ...l.dlg].forEach((e) => add(e.de));
     l.cz.forEach((c) => { add(c.q.replace('___', ' ')); add(c.a); c.w.forEach(add); });

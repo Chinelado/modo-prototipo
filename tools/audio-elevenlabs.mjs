@@ -13,15 +13,20 @@
      node tools/audio-elevenlabs.mjs indice           só reconstrói audio/index.json
 
    A chave da API fica só na variável de ambiente ELEVENLABS_API_KEY (nunca no código nem no repositório).
-   Vozes, modelo e velocidade ficam em tools/elevenlabs.json. Veja AUDIO-ELEVENLABS.md. */
+   Vozes, modelo e velocidade ficam em tools/elevenlabs.json (inglês: tools/elevenlabs-en.json, com --lang en). Veja AUDIO-ELEVENLABS.md. */
 import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const OUT = path.join(ROOT, 'audio');
-const CFG_FILE = path.join(ROOT, 'tools', 'elevenlabs.json');
+// Idioma: alemão por padrão; --lang en grava o inglês (ingles.html → audio-en/, vozes em tools/elevenlabs-en.json).
+const LANG_ARG = process.argv.indexOf('--lang');
+const LANG = LANG_ARG > 0 ? process.argv.splice(LANG_ARG, 2)[1] : 'de';
+if (!['de', 'en'].includes(LANG)) { console.error('Idioma desconhecido: ' + LANG + ' (use de ou en).'); process.exit(1); }
+const OUT = path.join(ROOT, LANG === 'en' ? 'audio-en' : 'audio');
+const CFG_FILE = path.join(ROOT, 'tools', LANG === 'en' ? 'elevenlabs-en.json' : 'elevenlabs.json');
+const PAGE = LANG === 'en' ? 'ingles.html' : 'index.html';
 const API = 'https://api.elevenlabs.io/v1';
 
 /* ---------- mesma chave e mesmo hash usados pelo app (audioKey e cyrb53 em app.js) ---------- */
@@ -38,10 +43,11 @@ const fileOf = (h) => path.join(OUT, h.slice(0, 2), h + '.mp3');
 
 /* ---------- carrega os dados do app ---------- */
 function loadApp() {
-  const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
-  const files = [...html.matchAll(/src="(data\/[^"]+)"/g)].map((m) => m[1]).concat('art.js');
+  const html = fs.readFileSync(path.join(ROOT, PAGE), 'utf8');
+  // lang.js (pacote do idioma) + dados (data/ no alemão, en/ no inglês) + art.js
+  const files = ['lang.js', ...[...html.matchAll(/src="((?:data|en)\/[^"]+)"/g)].map((m) => m[1]), 'art.js'];
   const esc = (x) => String(x).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  const ctx = { console, esc };
+  const ctx = { console, esc, document: { documentElement: { dataset: { lang: LANG } }, addEventListener() {}, querySelector() { return null; } } };
   vm.createContext(ctx);
   const code = files.map((f) => fs.readFileSync(path.join(ROOT, f), 'utf8')).join('\n;\n')
     + '\n;this.__app = { LESSONS, SUP, TEXTS, GUIDE, GLOSS: typeof GLOSS === "undefined" ? [] : GLOSS, PHASES, VIS: typeof VIS === "undefined" ? {} : VIS, IMG_CAP: typeof IMG_CAP === "undefined" ? {} : IMG_CAP, KATZE: typeof KATZE === "undefined" ? [] : KATZE, ZEITEN: typeof ZEITEN === "undefined" ? [] : ZEITEN, DEKL: typeof DEKL === "undefined" ? {} : DEKL, BRIEF: typeof BRIEF === "undefined" ? [] : BRIEF, GEWISS: typeof GEWISS === "undefined" ? [] : GEWISS, uhrText: typeof uhrText === "undefined" ? null : uhrText, isGerman, falavel, visHTML, vozDe, splitFala,'
@@ -182,7 +188,7 @@ async function tts(cfg, item) {
   };
   // pede alemão explícito: palavras soltas que existem em inglês (null, elf) saíam lidas em inglês.
   // Se o modelo não aceitar o parâmetro, o gerador tenta de novo sem ele e lembra para os próximos.
-  if (/flash|turbo/i.test(cfg.modelo) || !noLangCode) body.language_code = 'de';
+  if (/flash|turbo/i.test(cfg.modelo) || !noLangCode) body.language_code = LANG;
   for (let attempt = 1; ; attempt++) {
     try {
       const res = await api(`/text-to-speech/${voice}?output_format=${cfg.formato}`, {
@@ -240,14 +246,14 @@ async function simulate(items, cfg) {
   console.log(`  Multilingual v2 / v3 / v4: ~${fmt(chars(todo) * 0.45)}   ·   Flash v2.5 / v4 Turbo: ~${fmt(chars(todo) * 0.22)}`);
   console.log('  Some uns 20% de folga para refazer áudios que saírem ruins.');
   const missing = ['a', 'b'].filter((s) => !cfg.vozes[s]);
-  if (missing.length) console.log(`\n⚠️  Falta escolher as vozes ${missing.join(' e ')} em tools/elevenlabs.json (rode: node tools/audio-elevenlabs.mjs vozes).`);
+  if (missing.length) console.log(`\n⚠️  Falta escolher as vozes ${missing.join(' e ')} em tools/${path.basename(CFG_FILE)} (rode: node tools/audio-elevenlabs.mjs vozes).`);
   if (process.env.ELEVENLABS_API_KEY) { const c = await credits(); if (c) console.log(`\nSua conta (${c.tier}): ${fmt(c.limit - c.used)} créditos disponíveis de ${fmt(c.limit)}.`); }
   console.log('');
 }
 
 async function listVoices() {
   const { voices } = await (await api('/voices')).json();
-  console.log('\nVozes da sua conta (copie o ID para tools/elevenlabs.json):\n');
+  console.log(`\nVozes da sua conta (copie o ID para tools/${path.basename(CFG_FILE)}):\n`);
   voices.forEach((v) => {
     const lb = v.labels || {};
     console.log(`${v.voice_id}  ${v.name.padEnd(28)} ${[lb.gender, lb.accent, lb.language, lb.age, lb.use_case].filter(Boolean).join(' · ')}`);
@@ -256,7 +262,7 @@ async function listVoices() {
 }
 
 async function generate(items, cfg, limitArg) {
-  if (!cfg.vozes.a) { console.error('Escolha pelo menos a voz "a" em tools/elevenlabs.json (rode: node tools/audio-elevenlabs.mjs vozes).'); process.exit(1); }
+  if (!cfg.vozes.a) { console.error('Escolha pelo menos a voz "a" em tools/' + path.basename(CFG_FILE) + ' (rode: node tools/audio-elevenlabs.mjs vozes).'); process.exit(1); }
   const rate = creditRate(cfg.modelo);
   const limit = limitArg === 'tudo' ? Infinity : Number(limitArg);
   if (!Number.isFinite(limit) && limitArg !== 'tudo') { console.error('Diga quantos créditos no máximo: --limite 20000 (ou --limite tudo).'); process.exit(1); }

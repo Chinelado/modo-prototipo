@@ -22,6 +22,10 @@
   // Tema antes de desenhar a tela (evita piscar escuro ao abrir no modo claro). Detalhes em app.js (applyTheme).
   (function () { try { var p = localStorage.getItem('deutschTrilha.theme') || 'light'; var t = p === 'auto' ? (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark') : p; document.documentElement.dataset.theme = t; if (t === 'light') { document.querySelector('meta[name="theme-color"]').content = '#f4f6fb'; document.querySelector('meta[name="color-scheme"]').content = 'only light'; } } catch (e) {} })();
 </script>
+<script>
+  // quem escolheu inglês da última vez abre direto a página do inglês (lang.js; o progresso de cada idioma é separado)
+  try { if (localStorage.getItem('modo.lang') === 'en') location.replace('ingles.html' + location.search); } catch (e) { /* fica no alemão */ }
+</script>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="modo.css">
 </head>
@@ -29,6 +33,7 @@
 <nav id="nav" hidden></nav>
 <main id="app"></main>
 <div id="toasts" aria-live="polite"></div>
+<script src="lang.js"></script>
 <script src="data/core.js"></script>
 <script src="data/a1.js"></script>
 <script src="data/a2.js"></script>

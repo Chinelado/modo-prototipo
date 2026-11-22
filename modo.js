@@ -47,7 +47,7 @@ function modoNav(v, due) {
   const on = NAV_OF[v] || v;
   return `<div class="brand">${modoLockup(26)}</div>` +
     MODO_NAV.map(([id, i, n], k) => `${k === 5 ? '<div class="mo-sep"></div>' : ''}<button data-v="${id}" class="${id === on ? 'on' : ''}">${ic(i, 20)}<span>${n}</span>${id === 'cards' && due ? `<em>${due}</em>` : ''}</button>`).join('') +
-    `<div class="mo-lang"><span class="mo-code">DE</span>Alemão<small>${curLevel()}</small></div>
+    `<button class="mo-lang" id="moLang" title="Trocar de idioma"><span class="mo-code">${LP.sigla}</span>${LP.nome}<small>${curLevel()}</small></button>
     <div class="mo-foot"><span>${ic('flame', 16)} ${shownStreak()} dias</span><span>${ic('star', 16)} ${S.xp} XP</span></div>`;
 }
 
@@ -130,7 +130,7 @@ home = function () {
 };
 
 /* ---------- Aprender: abas Trilha e Comece aqui ---------- */
-const aprTabs = (on) => `<div class="mo-tabs">${[['trilha', 'Trilha'], ['curriculo', 'Currículo'], ['guide', 'Comece aqui']].map(([id, t]) => `<button data-apr="${id}" class="${on === id ? 'on' : ''}">${t}</button>`).join('')}</div>`;
+const aprTabs = (on) => `<div class="mo-tabs">${[['trilha', 'Trilha'], ['curriculo', 'Currículo'], ...(GUIDE.length ? [['guide', 'Comece aqui']] : [])].map(([id, t]) => `<button data-apr="${id}" class="${on === id ? 'on' : ''}">${t}</button>`).join('')}</div>`;
 const wireApr = () => $$('[data-apr]').forEach((b) => (b.onclick = () => go(b.dataset.apr)));
 const _trilha = trilha;
 trilha = function (lv) { _trilha(lv); const h = app.querySelector('h1'); if (h) { h.textContent = 'Aprender'; h.insertAdjacentHTML('afterend', aprTabs('trilha')); wireApr(); } };
@@ -139,12 +139,13 @@ guide = function (id) { _guide(id); if (id) return; const h = app.querySelector(
 
 /* ---------- Explorar ---------- */
 const _extras = extras;
-extras = function (arg) { _extras(arg); const h = app.querySelector('h1'); if (h) { h.textContent = 'Explorar'; if (!app.querySelector('.mo-sub')) h.insertAdjacentHTML('afterend', '<p class="mut mo-sub">Situações reais, leitura e conteúdos para usar o alemão fora da trilha.</p>'); } };
+extras = function (arg) { _extras(arg); const h = app.querySelector('h1'); if (h) { h.textContent = 'Explorar'; if (!app.querySelector('.mo-sub')) h.insertAdjacentHTML('afterend', '<p class="mut mo-sub">Situações reais, leitura e conteúdos para usar o ' + LP.lingua + ' fora da trilha.</p>'); } };
 
 /* ---------- boas-vindas: idioma → nível → começar ---------- */
-const LANGS = [['DE', 'Alemão', `A1 a C2 · ${LESSONS.length} lições`, true], ['EN', 'Inglês', 'em preparação', false], ['ES', 'Espanhol', 'em preparação', false], ['FR', 'Francês', 'em preparação', false], ['IT', 'Italiano', 'em preparação', false]];
+const LANGS = [['DE', 'Alemão', 'A1 a C2 · 252 lições', true], ['EN', 'Inglês', 'piloto: A1 · Módulo 1', true], ['ES', 'Espanhol', 'em preparação', false], ['FR', 'Francês', 'em preparação', false], ['IT', 'Italiano', 'em preparação', false]];
 onboard = function (step = 1) {
   const steps = `<div class="mo-steps">${[1, 2, 3].map((i) => `<i class="${i <= step ? 'on' : ''}"></i>`).join('')}</div>`;
+  if (step === 1 && /[?&]ob=3/.test(location.search)) step = 3; // veio da troca de idioma nas boas-vindas
   if (step === 1) {
     app.innerHTML = `<div class="mo-ob"><section class="mo-hero"><span class="mo-brand">${modoLockup(26)}</span>
       <h1>Aprenda idiomas no seu ritmo.</h1><p>Um método completo, prático e conectado à vida real: aulas guiadas, prática variada, revisão na hora certa e situações do dia a dia.</p>
@@ -153,12 +154,14 @@ onboard = function (step = 1) {
   }
   if (step === 2) {
     app.innerHTML = `<div class="mo-ob">${steps}<h1>Qual idioma você quer aprender?</h1>
-      ${LANGS.map(([c, n, d, ok]) => `<button class="mo-opt ${ok ? 'on' : ''}" ${ok ? 'data-lang="' + c + '"' : 'disabled'}><span class="mo-code">${c}</span><span><b>${n}</b><small>${d}</small></span>${ok ? `<span class="mo-ok">${ic('check', 20)}</span>` : '<span class="mo-soon">em breve</span>'}</button>`).join('')}
+      ${LANGS.map(([c, n, d, ok]) => `<button class="mo-opt ${c === LP.sigla ? 'on' : ''}" ${ok ? 'data-lang="' + c + '"' : 'disabled'}><span class="mo-code">${c}</span><span><b>${n}</b><small>${d}</small></span>${ok ? `<span class="mo-ok">${ic('check', 20)}</span>` : '<span class="mo-soon">em breve</span>'}</button>`).join('')}
       <button class="pri big" id="ob2">Continuar ${ic('arrow', 18)}</button></div>`;
-    $('#ob2').onclick = () => onboard(3); return;
+    let langSel = LP.code;
+    $$('[data-lang]').forEach((b) => (b.onclick = () => { langSel = b.dataset.lang.toLowerCase(); $$('[data-lang]').forEach((x) => { const on = x === b; x.classList.toggle('on', on); const ok = x.querySelector('.mo-ok'); if (ok) ok.innerHTML = on ? ic('check', 20) : ''; }); }));
+    $('#ob2').onclick = () => { if (langSel !== LP.code) { try { localStorage.setItem('modo.lang', langSel); } catch (e) { /* só lembra */ } location.href = LANG_PACKS[langSel].page + '?ob=3'; return; } onboard(3); }; return;
   }
-  app.innerHTML = `<div class="mo-ob">${steps}<h1>Qual é o seu nível de alemão?</h1><p class="mut">Isso define por onde a sua trilha começa.</p>
-    <button class="mo-opt on" data-lv="zero"><span class="mo-code">A1</span><span><b>Estou começando do zero</b><small>Começo pelas aulas curtas do Comece aqui.</small></span><span class="mo-ok">${ic('check', 20)}</span></button>
+  app.innerHTML = `<div class="mo-ob">${steps}<h1>Qual é o seu nível de ${LP.nome.toLowerCase()}?</h1><p class="mut">Isso define por onde a sua trilha começa.</p>
+    <button class="mo-opt on" data-lv="zero"><span class="mo-code">A1</span><span><b>Estou começando do zero</b><small>${GUIDE.length ? 'Começo pelas aulas curtas do Comece aqui.' : 'Começo pela primeira lição.'}</small></span><span class="mo-ok">${ic('check', 20)}</span></button>
     <button class="mo-opt" data-lv="teste"><span class="mo-code">?</span><span><b>Já sei um pouco</b><small>Faço o teste de nível para pular o que já sei.</small></span><span class="mo-ok"></span></button>
     <label class="mo-f" for="nm">Como posso te chamar?</label><input id="nm" placeholder="Seu nome" maxlength="30" value="${esc(S.name || '')}">
     <label class="mo-f" for="goal">Quanto tempo por dia?</label><select id="goal"><option value="15">15 min · leve</option><option value="30" selected>30 min · constante</option><option value="60">60 min · firme</option><option value="120">2 horas · intenso</option></select>
@@ -201,7 +204,7 @@ function modObjCard(w, ls) {
   return `<div class="card mo-obj"><div class="mo-card-h">${ic('target', 22)}<h3>Objetivos do módulo</h3><span class="mo-pend">rascunho</span></div>
     ${mo ? `<p class="mut">Ao fim deste módulo:</p><ul class="mo-gt">${mo.map((o) => `<li>${esc(o)}</li>`).join('')}</ul>` : ''}
     ${lo.length ? `<details class="mo-lobj"><summary>Objetivo de cada lição <span class="mut">· ${sim} de ${lo.length} marcados como "já consigo"</span></summary><ul class="mo-lobjs">${lo.map((l) => { const r = (au[l.sid] || {}).r;
-      return `<li class="${r === 'sim' ? 'sim' : r === 'nao' ? 'nao' : ''}"><span class="mo-lob">${r === 'sim' ? ic('check', 14) : r === 'nao' ? '…' : '·'}</span><span><b lang="de">${esc(l.de)}</b><small>${esc(OBJ[l.sid].o)}</small></span></li>`; }).join('')}</ul></details>` : ''}</div>`;
+      return `<li class="${r === 'sim' ? 'sim' : r === 'nao' ? 'nao' : ''}"><span class="mo-lob">${r === 'sim' ? ic('check', 14) : r === 'nao' ? '…' : '·'}</span><span><b lang="${LP.code}">${esc(l.de)}</b><small>${esc(OBJ[l.sid].o)}</small></span></li>`; }).join('')}</ul></details>` : ''}</div>`;
 }
 function modulo(w) {
   w = Math.max(0, Math.min(WEEKS - 1, Number.isFinite(+w) ? +w : 0));
@@ -247,7 +250,7 @@ function modulo(w) {
 // A árvore inteira da trilha: Nível → Módulo → Lição, com busca por título, tema ou gramática.
 function curriculo() {
   app.innerHTML = `<h1>Aprender</h1>${aprTabs('curriculo')}
-  <p class="mut">Tudo o que a trilha de alemão cobre, do A1 ao C2: ${PHASES.length} níveis, ${WEEKS} módulos, ${LESSONS.length} lições.</p>
+  <p class="mut">Tudo o que a trilha de ${LP.lingua} cobre, do A1 ao C2: ${PHASES.length} níveis, ${WEEKS} módulos, ${LESSONS.length} lições.</p>
   <input id="cq" class="mo-search" type="search" placeholder="Buscar tema, gramática ou título" aria-label="Buscar no currículo">
   <div id="ctree"></div>`;
   const draw = () => {
@@ -262,8 +265,8 @@ function curriculo() {
         hits += rows.filter((it) => it.falta || !dayInfo(it.d).review).length;
         const st = modState(w);
         mods.push(`<div class="mo-cmod"><button class="mo-cmh" data-mod="${w}"><b>${esc(modName(w))}</b><span class="mut">${st.n}/${st.ds.length}</span>${st.done ? ic('check', 16, 'okc') : st.locked ? ic('lock', 14, 'mutc') : ''}${ic('chevron', 16, 'arr')}</button>
-          <ol>${rows.map((it) => { if (it.falta) return `<li><span class="mo-cl mo-prep"><span class="mo-cn">${ic('clock', 14)}</span><span><b lang="de">${esc(it.falta)}</b> <small>em preparação</small></span></span></li>`; const d = it.d, i = dayInfo(d), L = i.review ? null : LESSONS[i.li], lock = d > cur && !S.done[d];
-            return `<li><button class="mo-cl ${S.done[d] ? 'mo-done' : ''}" data-day="${d}" ${lock ? 'disabled' : ''}><span class="mo-cn">${S.done[d] ? ic('check', 14) : L ? i.r + 1 : ic('target', 14)}</span><span><b lang="de">${L ? esc(L.de) : 'Avaliação do módulo'}</b> <small>${L ? esc(L.pt) + ' · ' + esc(L.gt) : '18 exercícios'}</small></span></button></li>`; }).join('')}</ol></div>`);
+          <ol>${rows.map((it) => { if (it.falta) return `<li><span class="mo-cl mo-prep"><span class="mo-cn">${ic('clock', 14)}</span><span><b lang="${LP.code}">${esc(it.falta)}</b> <small>em preparação</small></span></span></li>`; const d = it.d, i = dayInfo(d), L = i.review ? null : LESSONS[i.li], lock = d > cur && !S.done[d];
+            return `<li><button class="mo-cl ${S.done[d] ? 'mo-done' : ''}" data-day="${d}" ${lock ? 'disabled' : ''}><span class="mo-cn">${S.done[d] ? ic('check', 14) : L ? i.r + 1 : ic('target', 14)}</span><span><b lang="${LP.code}">${L ? esc(L.de) : 'Avaliação do módulo'}</b> <small>${L ? esc(L.pt) + ' · ' + esc(L.gt) : '18 exercícios'}</small></span></button></li>`; }).join('')}</ol></div>`);
       }
       if (!mods.length) return '';
       const days = phaseDays(p), dn = days.filter((d) => S.done[d]).length;
@@ -368,11 +371,11 @@ perfil = function () {
   const cur = currentDay(), d = cur && dayInfo(cur), wk = compWeakest(), done = nDone();
   const pos = d ? `${d.level} · Módulo ${d.w + 1} · ${d.review ? 'avaliação' : 'lição ' + (d.r + 1) + ' de ' + d.n}` : 'Trilha concluída';
   h.insertAdjacentHTML('afterend', `
-  <div class="mo-pos card"><span class="mo-code">DE</span><div><b>Alemão · Trilha ${d ? d.level : 'C2'}</b><small>${pos} · ${done} de ${TOTAL} etapas</small></div>
+  <div class="mo-pos card"><span class="mo-code">${LP.sigla}</span><div><b>${LP.nome} · Trilha ${d ? d.level : LAST_LV}</b><small>${pos} · ${done} de ${TOTAL} etapas</small></div>
     <p class="mut">A posição na trilha mostra o que você já estudou. Não é um nível de proficiência nem uma certificação.</p></div>
   <div class="mo-compgrid">
     <section class="card"><div class="mo-card-h">${ic('target', 22)}<h3>Competências</h3></div>
-      <p class="mut mo-lead">O que você consegue fazer com o alemão.</p>${COMP.filter((c) => c.g === 'c').map(compRow).join('')}
+      <p class="mut mo-lead">O que você consegue fazer com o ${LP.lingua}.</p>${COMP.filter((c) => c.g === 'c').map(compRow).join('')}
       <p class="mut mo-foot2">Interação e mediação aparecem aqui quando houver atividades que as avaliem.</p></section>
     <section class="card"><div class="mo-card-h">${ic('puzzle', 22)}<h3>Conhecimento da língua</h3></div>
       <p class="mut mo-lead">A base que sustenta as competências.</p>${COMP.filter((c) => c.g === 'k').map(compRow).join('')}
@@ -389,8 +392,8 @@ perfil = function () {
 // Com T.vozes, "Nome: fala" mostra o nome à parte e só a fala tem áudio (a voz de cada pessoa vem de data/vozes.js).
 const leTextHTML = (T) => `<div class="mo-ltx">${T.paras.map((p) => {
   const { who, txt } = splitFala(p);
-  if (who && T.vozes && T.vozes[who]) return `<p>${spk(txt)}<b class="twho">${esc(who)}:</b> <span lang="de">${esc(txt)}</span></p>`;
-  return `<p>${spk(p)}<span lang="de">${esc(p)}</span></p>`;
+  if (who && T.vozes && T.vozes[who]) return `<p>${spk(txt)}<b class="twho">${esc(who)}:</b> <span lang="${LP.code}">${esc(txt)}</span></p>`;
+  return `<p>${spk(p)}<span lang="${LP.code}">${esc(p)}</span></p>`;
 }).join('')}</div>`;
 GEN.leq = function (les, el, done, it) {
   const T = les.le.texto, q = T.qs[it.j], right = q.o[q.a];
@@ -401,7 +404,7 @@ GEN.leq = function (les, el, done, it) {
 GEN.lew = function (les, el, done) {
   const E = les.le.escrita, rx = (s, f = 'iu') => new RegExp(s, f);
   el.innerHTML = `<p class="q">${ic('chat', 18)} ${esc(E.t)}</p><p class="hint">${esc(E.pede)}</p>
-    <div class="mo-form">${E.campos.map((c, j) => `<label class="mo-fl"><span><b lang="de">${esc(c.l)}</b><small>${esc(c.d)}</small></span><input data-f="${j}" autocomplete="off" spellcheck="false"><em class="mo-fe" data-e="${j}"></em></label>`).join('')}</div>
+    <div class="mo-form">${E.campos.map((c, j) => `<label class="mo-fl"><span><b lang="${LP.code}">${esc(c.l)}</b><small>${esc(c.d)}</small></span><input data-f="${j}" autocomplete="off" spellcheck="false"><em class="mo-fe" data-e="${j}"></em></label>`).join('')}</div>
     ${UML}<button class="pri" id="lwChk">Conferir</button><div id="lwRes"></div>`;
   const ins = $$('[data-f]', el); let last = ins[0], tries = 0;
   ins.forEach((i) => (i.onfocus = () => { last = i; })); ins[0].focus(); wireUml(el, { get value() { return last.value; }, set value(v) { last.value = v; }, focus: () => last.focus() });
@@ -454,14 +457,14 @@ function vocabGroupsEl(l, st) {
   for (let i = 0; i < core.length; i += 5) G.push(core.slice(i, i + 5));
   if (G.length > 1 && G[G.length - 1].length < 3) G[G.length - 2].push(...G.pop());
   st.vg = st.vg || {}; let g = Math.min(st.vgI || 0, Math.max(0, G.length - 1));
-  const el = elOf(`<div><div class="card mo-vgrp"></div>${ext.length ? `<details class="card mo-vext"><summary><b>Vocabulário ampliado</b> <span class="mut">${ext.length} palavras, opcional</span></summary><ul class="mo-vlist">${ext.map((v) => `<li>${spk(v.de)}<b class="${gcls(v.de)}" lang="de">${esc(v.de)}</b><span>${esc(v.pt)}</span></li>`).join('')}</ul></details>` : ''}</div>`);
+  const el = elOf(`<div><div class="card mo-vgrp"></div>${ext.length ? `<details class="card mo-vext"><summary><b>Vocabulário ampliado</b> <span class="mut">${ext.length} palavras, opcional</span></summary><ul class="mo-vlist">${ext.map((v) => `<li>${spk(v.de)}<b class="${gcls(v.de)}" lang="${LP.code}">${esc(v.de)}</b><span>${esc(v.pt)}</span></li>`).join('')}</ul></details>` : ''}</div>`);
   const box = $('.mo-vgrp', el);
   if (!G.length) { box.remove(); return el; }
   const draw = () => {
     st.vgI = g; const ws = G[g];
     box.innerHTML = `<div class="mo-card-h">${ic('layers', 22)}<h3>Grupo ${g + 1} de ${G.length}</h3><span class="mo-dots">${G.map((_, k) => `<button data-vg="${k}" class="${k === g ? 'on' : st.vg[k] ? 'ok' : ''}" aria-label="Grupo ${k + 1}"></button>`).join('')}</span></div>
       <p class="mut">Ouça e repita cada palavra; depois teste o grupo num jogo rápido de pares. <small>Cores: <span class="g-m">der</span> · <span class="g-f">die</span> · <span class="g-n">das</span></small></p>
-      <ul class="mo-vlist">${ws.map((v) => `<li>${spk(v.de)}<b class="${gcls(v.de)}" lang="de">${esc(v.de)}</b><span>${v.em ? v.em + ' ' : ''}${esc(v.pt)}</span></li>`).join('')}</ul>
+      <ul class="mo-vlist">${ws.map((v) => `<li>${spk(v.de)}<b class="${gcls(v.de)}" lang="${LP.code}">${esc(v.de)}</b><span>${v.em ? v.em + ' ' : ''}${esc(v.pt)}</span></li>`).join('')}</ul>
       <div class="mo-vgame"></div>
       <div class="row mo-vact"><button class="pri" type="button" data-vplay>${st.vg[g] ? 'Jogar de novo' : 'Testar este grupo'}</button>${g < G.length - 1 ? `<button class="ghost" type="button" data-vnext>Próximo grupo ${ic('arrow', 16)}</button>` : ''}</div>`;
     $$('[data-vg]', box).forEach((b) => (b.onclick = () => { g = +b.dataset.vg; draw(); }));
@@ -471,7 +474,7 @@ function vocabGroupsEl(l, st) {
   const game = (ws) => {
     const area = $('.mo-vgame', box), L = shuffle(ws.slice()), R = shuffle(ws.slice()); let sel = null, left = ws.length, miss = 0;
     $('.mo-vlist', box).hidden = true; $('.mo-vact', box).hidden = true;
-    area.innerHTML = `<p class="q">Ligue cada palavra à tradução</p><div class="mo-pairs"><div>${L.map((v) => `<button type="button" data-pl="${v.k}" lang="de" class="${gcls(v.de)}">${esc(v.de)}</button>`).join('')}</div><div>${R.map((v) => `<button type="button" data-pr="${v.k}">${esc(v.pt)}</button>`).join('')}</div></div>`;
+    area.innerHTML = `<p class="q">Ligue cada palavra à tradução</p><div class="mo-pairs"><div>${L.map((v) => `<button type="button" data-pl="${v.k}" lang="${LP.code}" class="${gcls(v.de)}">${esc(v.de)}</button>`).join('')}</div><div>${R.map((v) => `<button type="button" data-pr="${v.k}">${esc(v.pt)}</button>`).join('')}</div></div>`;
     $$('[data-pl]', area).forEach((b) => (b.onclick = () => { $$('[data-pl]', area).forEach((x) => x.classList.remove('sel')); sel = b; b.classList.add('sel'); say(ws.find((v) => v.k === b.dataset.pl).de); }));
     $$('[data-pr]', area).forEach((b) => (b.onclick = () => {
       if (!sel) return;
@@ -533,7 +536,7 @@ intro = function (day) {
     const vg = typeof VG !== 'undefined' ? VG[l.sid] : null;
     const vin = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, (m, w) => (isGerman(w) ? `<b class="sayw" data-say="${w}" title="Toque para ouvir">${w}</b>` : `<b>${w}</b>`));
     const sec = (k, v) => (v ? `<p class="mo-vgk">${k}</p><p>${vin(v)}</p>` : '');
-    const exs = l.ge.length ? `<p class="mo-vgk">Exemplos</p><div class="exs mo-vgex">${l.ge.map((e) => `<p>${spk(e.de)}<span class="de" lang="de">${esc(e.de)}</span><br><small>${esc(e.pt)}</small></p>`).join('')}</div>` : '';
+    const exs = l.ge.length ? `<p class="mo-vgk">Exemplos</p><div class="exs mo-vgex">${l.ge.map((e) => `<p>${spk(e.de)}<span class="de" lang="${LP.code}">${esc(e.de)}</span><br><small>${esc(e.pt)}</small></p>`).join('')}</div>` : '';
     parts.unshift({ t: '🧭 Visão geral', nodes: [elOf(`<div class="mo-vg"><div class="mo-card-h">${ic('compass', 22)}<h3>Visão geral</h3><span class="mo-vgt">${esc(l.gt)}</span></div>
       ${vg ? sec('O que é', vg.o) + sec('Quando usar', vg.q) + exs + sec('Por que aprender', vg.p) : sec('A regra em poucas palavras', l.gx) + exs}
       <p class="mut mo-vgnext">Nas próximas partes, a regra passo a passo, com esquemas e exercícios rápidos.</p></div>`)] });
@@ -596,7 +599,7 @@ intro = function (day) {
   if (hw) {
     const ts = $$('.hwt', hw), fst = ts.find((t) => !t.classList.contains('ok')) || ts[0];
     ts.forEach((t) => { if (t !== fst) t.hidden = true; });
-    const pm = hw.querySelector('p.mut'); if (pm) pm.textContent = 'Uma sugestão para levar o alemão para o seu dia. Faça hoje ou amanhã e marque aqui.';
+    const pm = hw.querySelector('p.mut'); if (pm) pm.textContent = 'Uma sugestão para levar o ' + LP.lingua + ' para o seu dia. Faça hoje ou amanhã e marque aqui.';
     if (ts.length > 1) { const more = elOf(`<button class="link mo-hwmore" type="button">Ver as outras ${ts.length - 1} opções</button>`); more.onclick = () => { ts.forEach((t) => (t.hidden = false)); more.remove(); }; hw.append(more); }
     P(4).append(hw);
   }
@@ -674,7 +677,7 @@ finish = function () {
   const html = rows.length
     ? `<div class="card mo-concl"><div class="mo-card-h">${ic('bulb', 22)}<h3>O que rever desta sessão</h3><small class="mut">${rows.length} ${rows.length === 1 ? 'ponto' : 'pontos'}</small></div>
       <p class="mut">A resposta certa de cada erro e onde ela é explicada.</p>
-      ${rows.slice(0, 6).map((r, i) => `<div class="mo-crow"><span><b lang="de">${esc(errText(r.e))}</b>${s.kind !== 'lesson' ? `<small>${esc(LESSONS[r.e.li].de)}</small>` : ''}</span>${r.t ? `<button class="ghost" data-rev="${i}">${esc(r.t.label)} ${ic('arrow', 14)}</button>` : ''}</div>`).join('')}
+      ${rows.slice(0, 6).map((r, i) => `<div class="mo-crow"><span><b lang="${LP.code}">${esc(errText(r.e))}</b>${s.kind !== 'lesson' ? `<small>${esc(LESSONS[r.e.li].de)}</small>` : ''}</span>${r.t ? `<button class="ghost" data-rev="${i}">${esc(r.t.label)} ${ic('arrow', 14)}</button>` : ''}</div>`).join('')}
       ${keys.length ? `<p class="mut mo-cnext">${ic('layers', 16)} ${keys.length} ${keys.length === 1 ? 'palavra que você errou volta' : 'palavras que você errou voltam'} na revisão de cartas amanhã.</p>` : ''}</div>`
     : `<div class="card mo-concl"><div class="mo-card-h">${ic('check', 22)}<h3>Nada para rever</h3></div><p class="mut">Você não errou nenhum exercício nesta sessão.</p></div>`;
   app.querySelector('.stats')?.insertAdjacentHTML('afterend', html);
@@ -716,7 +719,7 @@ intro = function (day) {
   const qs = [...vs.map((v) => ({ v })), ...(pl.cz.length ? [{ c: pick(pl.cz) }] : [])];
   if (!qs.length) return;
   const card = elOf(`<div class="card mo-warm"><div class="mo-card-h">${ic('flame', 22)}<h3>Aquecimento · 1 min</h3><button class="link mo-wskip" type="button">Pular</button></div>
-    <p class="mut">${qs.length} perguntas da lição anterior, <b lang="de">${esc(pl.de)}</b>, para lembrar antes de começar.</p><div class="mo-wq"></div><div class="mo-wr"></div></div>`);
+    <p class="mut">${qs.length} perguntas da lição anterior, <b lang="${LP.code}">${esc(pl.de)}</b>, para lembrar antes de começar.</p><div class="mo-wq"></div><div class="mo-wr"></div></div>`);
   $('[data-lp="0"]').prepend(card);
   let i = 0, hits = 0;
   const end = () => { st.warm = true; save(); $('.mo-wq', card).innerHTML = ''; $('.mo-wr', card).innerHTML = `<p><b>${hits} de ${qs.length}</b> certas. ${hits === qs.length ? 'A lição anterior está firme.' : 'O que você errou volta nas cartas.'}</p>`; $('.mo-wskip', card).remove(); };
@@ -729,8 +732,8 @@ intro = function (day) {
       $('.mo-wr', card).innerHTML = ok ? `<p class="mo-ok2">${ic('check', 16)} Isso!</p>` : `<p class="mo-no2">Resposta: <b>${esc(right)}</b></p>`;
       i++; setTimeout(() => { if (card.isConnected) next(); }, ok ? 700 : 1600);
     };
-    if (q.v) { const opts = shuffle([q.v.pt, ...sample(pl.v.filter((x) => x !== q.v && x.pt !== q.v.pt), 2).map((x) => x.pt)]); mcq(el, `<p class="q">${i + 1}/${qs.length} · O que significa esta palavra?<b lang="de" class="${gcls(q.v.de)}">${esc(q.v.de)}</b></p>`, opts, q.v.pt, (ok) => after(ok, q.v.pt, 'voc', q.v.k)); }
-    else mcq(el, `<p class="q">${i + 1}/${qs.length} · Complete: <b lang="de">${esc(q.c.q)}</b></p>`, shuffle([q.c.a, ...q.c.w]), (o) => czOk(q.c, o), (ok) => after(ok, fill(q.c), 'gra'));
+    if (q.v) { const opts = shuffle([q.v.pt, ...sample(pl.v.filter((x) => x !== q.v && x.pt !== q.v.pt), 2).map((x) => x.pt)]); mcq(el, `<p class="q">${i + 1}/${qs.length} · O que significa esta palavra?<b lang="${LP.code}" class="${gcls(q.v.de)}">${esc(q.v.de)}</b></p>`, opts, q.v.pt, (ok) => after(ok, q.v.pt, 'voc', q.v.k)); }
+    else mcq(el, `<p class="q">${i + 1}/${qs.length} · Complete: <b lang="${LP.code}">${esc(q.c.q)}</b></p>`, shuffle([q.c.a, ...q.c.w]), (o) => czOk(q.c, o), (ok) => after(ok, fill(q.c), 'gra'));
   };
   $('.mo-wskip', card).onclick = () => { st.warm = true; save(); card.remove(); };
   next();
