@@ -1081,6 +1081,170 @@ const RULES = {
     if (/^actually,? (many|most|people|students)\b/.test(c)) return '<b>actually</b> é "na verdade". Para "atualmente", use <b>nowadays</b>.';
     return need(/\b(nowadays|in my view|firstly|in addition|another important point|admittedly|however|in conclusion|in the long term|would|should|notes|own idea|words|word count|check|essay|plan)\b/.test(c), 'Use a linguagem da redação: <b>Firstly</b> … / <b>Another important point is</b> … / <b>In conclusion</b> …');
   }),
+  // ---------- Módulo 33 ----------
+  inversao_negativa: R('uma inversão depois de expressão negativa (Never have I … / Rarely do we … / Not only did …)', (t, k) => {
+    const c = k.join(' ');
+    if (/^(never|rarely|seldom) (i|you|we|they|he|she) (have|has|had|do|does|did|am|is|are|was|were|can|will)\b/.test(c)) return 'Na inversão, o auxiliar vem antes do sujeito: <b>Never have I</b> …';
+    if (/^(rarely|seldom|never) (i|you|we|they|he|she) \w+/.test(c)) return 'Use o auxiliar antes do sujeito: <b>Rarely do we</b> get …';
+    if (/^hardly had\b.*\bthan\b/.test(c)) return 'hardly pede <b>when</b>: Hardly had I arrived <b>when</b> …';
+    if (/^no sooner had\b.*\bwhen\b/.test(c)) return 'no sooner pede <b>than</b>: No sooner had we left <b>than</b> …';
+    return need(/^(never|rarely|seldom|not only|hardly|scarcely|no sooner|little|nowhere|never in my life)\b/.test(c) && /\b(have|has|had|do|does|did|is|are|was|were|can|could|will|would)\b/.test(c), 'Comece com a expressão negativa e inverta: <b>Never have I</b> … / <b>Rarely do we</b> …');
+  }),
+  inversao_only: R('uma inversão com only / not until / under no circumstances / at no time', (t, k) => {
+    const c = k.join(' ');
+    if (/^only then (i|you|we|they|he|she) \w+/.test(c)) return 'Inverta: Only then <b>did I</b> realize.';
+    if (/^under no circumstances (you|we|they|visitors) (should|must|can)\b/.test(c)) return 'Inverta: Under no circumstances <b>should you</b> …';
+    return need(/^(only|not until|under no circumstances|on no account|at no time|in no way)\b/.test(c) && /\b(do|does|did|have|has|had|should|must|can|could|is|are|was|were|will|would)\b/.test(c), 'Use a inversão: <b>Only then did I</b> … / <b>Under no circumstances should you</b> …');
+  }),
+  clivada_what: R('uma frase clivada (What I need is … / What she did was … / All I want is …)', (t, k) => {
+    const c = k.join(' ');
+    if (/^all what\b/.test(c)) return 'Sem what: <b>All I want</b> is …';
+    if (/^what \w+( \w+)? did (is|was) (called|talked|pressed)\b/.test(c)) return 'Depois de What … did was, o verbo básico: was <b>call</b> the police.';
+    return need(/^(what|all|the thing|the reason|the only thing)\b.*\b(is|was|are|were)\b/.test(c), 'Use uma clivada: <b>What I need is</b> … / <b>All I want is</b> …');
+  }),
+  clivada_it: R("uma clivada com it (It was … who / that … / It wasn't until … that …)", (t, k) => {
+    const c = k.join(' ');
+    if (/^it (was|is) \w+( \w+)? which (called|organized|taught|broke)\b/.test(c)) return 'Para pessoas, use <b>who</b>: It was Tom <b>who</b> called.';
+    if (/^it wasn't until\b/.test(c) && !/\bthat\b/.test(c)) return "Complete com that: It wasn't until midnight <b>that</b> …";
+    return need(/^it('s| is| was| wasn't| isn't)\b.*\b(who|that)\b/.test(c), 'Use a clivada com it: <b>It was</b> Tom <b>who</b> called. / <b>It wasn\'t until</b> … <b>that</b> …');
+  }),
+  condicional_inversao: R('uma condicional invertida (Had I known … / Should you need … / Were I …)', (t, k) => {
+    const c = k.join(' ');
+    if (/^hadn't (i|you|we|they|he|she|the)\b/.test(c)) return 'Na inversão, a negativa não se contrai: <b>Had I not</b> …';
+    if (/^if (had|should|were) (i|you|we|they|he|she|it)\b/.test(c)) return 'Na inversão, o if sai: <b>Had I known</b>, …';
+    return need(/^(had|should|were)\s+(i|you|we|they|he|she|it|the|any|there)\b/.test(c), 'Inverta a condicional: <b>Had I known</b>, … / <b>Should you need</b> … / <b>Were I</b> you, …');
+  }),
+  discurso: R('uma frase de discurso (inversão, clivada, regra de três, pergunta retórica ou So let us …)', (t, k) => {
+    const c = k.join(' ');
+    if (/^never i have\b/.test(c)) return 'Na inversão, o auxiliar vem antes: <b>Never have I</b> …';
+    return need(/^(never|not only|rarely|what|all|it (is|was)|so let us|let us|good evening|dear|ladies)\b/.test(c) || /\?\s*$/.test(t) || /\w+, \w+[^,]*,? and \w+/.test(t) || /\b(raise a glass|thank you|bottom of my heart|proud|courage)\b/.test(c), 'Use um recurso de discurso: <b>Never have I</b> … / <b>What we need is</b> … / <b>So let us</b> …');
+  }),
+  // ---------- Módulo 34 ----------
+  estilo_nominal: R('uma frase no estilo nominal (There was a rapid increase in … / The discovery of … led to …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\ba rapidly (increase|rise|decline|growth)\b/.test(c)) return 'Antes do substantivo, use o adjetivo: a <b>rapid</b> increase.';
+    return need(has(k, /^(increase|rise|decline|fall|reduction|discovery|development|analysis|introduction|failure|growth|implementation|improvement|use|change|loss)$/) || /\b(led to|resulted in|contributed to)\b/.test(c), 'Use substantivos: <b>There was a rapid increase in</b> … / <b>The introduction of</b> … <b>led to</b> …');
+  }),
+  citar_fontes: R('uma frase que cite uma fonte (According to … / Smith (2020) argues … / It has been shown …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\baccording (with|to the opinion of)\b/.test(c)) return 'Use <b>according to</b> + a fonte.';
+    return need(/\b(according to|argues?|suggests?|demonstrates?|claims?|points out|states?|shows?|indicates?|it has been shown|research suggests|widely accepted|there is evidence|study by|et al)\b/.test(c) || /\(\d{4}\)/.test(t), 'Cite a fonte: <b>According to</b> Smith (2020), … / Smith (2020) <b>argues that</b> …');
+  }),
+  vocab_academico: R('uma frase com vocabulário acadêmico (evidence, research, factor, approach, phenomena, criteria…)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(evidences|researches|informations|advices|knowledges)\b/.test(c)) return 'Essa palavra é incontável: sem -s. Diga <b>a lot of evidence</b> / <b>a piece of research</b>.';
+    if (/\b(phenomenons|criterions|phenomenas|criterias)\b/.test(c)) return 'Plural especial: <b>phenomena</b>, <b>criteria</b>.';
+    return need(has(k, /^(significant|factor|factors|approach|evidence|research|data|phenomenon|phenomena|criterion|criteria|hypothesis|hypotheses|analysis|analyses|concept|method|role|theory|study|range|results)$/) || /\b(in terms of|with regard to|crucial role)\b/.test(c), 'Use o vocabulário acadêmico: <b>significant evidence</b> / <b>several factors</b> / <b>these phenomena</b>.');
+  }),
+  precisao: R('uma frase precisa sobre quantidades (the vast majority / a significant proportion / approximately / just under …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bthe number of \w+ (have|are|were)\b/.test(c)) return 'Depois de the number of, o verbo é singular: The number of students <b>has</b> grown.';
+    if (/\bthe amount of (people|students|cars|participants)\b/.test(c)) return 'Com contáveis, use <b>the number of</b>.';
+    return need(/\b(vast majority|majority|proportion|minority|approximately|roughly|nearly|almost|just over|just under|on average|twice as|times higher|a third|a quarter|half|per ?cent|the number of|the amount of|slight|steady|sharp|dramatic|steadily)\b/.test(c) || /\d/.test(t), 'Seja precisa: <b>the vast majority of</b> … / <b>approximately</b> 40% / <b>just under a third</b> …');
+  }),
+  parafrasear: R('uma paráfrase ou explicação (In other words … / That is to say … / … is harmed by …)', (t, k) => need(/\b(in other words|that is to say|to put it simply|paraphras\w*|own words|quotation marks|credit|source|plagiarism|is harmed by|was|were|there was|growth|significant|issue)\b/.test(k.join(' ')), 'Diga com outras palavras: <b>In other words</b>, … / <b>That is to say</b>, …')),
+  abstract: R('uma frase de abstract (This study examines … / Data were collected … / These findings suggest …)', (t, k) => {
+    const c = k.join(' ');
+    if (/^this (study|paper) (examine|investigate|explore|analyze)\b/.test(c)) return 'Com this study, o verbo leva -s: This study <b>examines</b> …';
+    if (/\bthese findings suggests\b/.test(c)) return 'findings é plural: These findings <b>suggest</b> …';
+    return need(/\b(this study|this paper|examines|investigates|aims to|were collected|was conducted|participants|results (indicate|show|reveal)|findings|was found|further research|growing concern|correlation|survey)\b/.test(c), 'Use a linguagem do abstract: <b>This study examines</b> … / <b>These findings suggest</b> …');
+  }),
+  // ---------- Módulo 35 ----------
+  conotacao: R('uma frase com um adjetivo de conotação clara (slim, affordable, determined, stubborn, scent…)', (t, k) => need(has(k, /^(slim|thin|skinny|cheap|affordable|inexpensive|reasonable|stubborn|determined|obstinate|frugal|stingy|mean|childlike|childish|confident|arrogant|self-assured|curious|inquisitive|nosy|scent|fragrance|aroma|smell|smelled|stink|stench|elegant|careful)$/), 'Escolha a conotação: <b>slim</b> × <b>skinny</b>, <b>affordable</b> × <b>cheap</b>, <b>determined</b> × <b>stubborn</b>.')),
+  verbos_precisos: R('uma frase com um verbo preciso (glance, stare, gaze, whisper, mutter, stroll, rush…)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(glanced|stared|gazed|peered) (to|on) \w+/.test(c)) return 'Esses verbos pedem <b>at</b>: glanced <b>at</b> her watch.';
+    return need(has(k, /^(glance|glanced|glances|stare|stared|stares|gaze|gazed|peer|peered|glare|glared|whisper|whispered|mutter|muttered|mumble|mumbled|shout|shouted|yell|yelled|stammer|stammered|stroll|strolled|wander|wandered|rush|rushed|hurry|hurried|stride|strode|tiptoe|tiptoed)$/), 'Use um verbo preciso: <b>glanced</b>, <b>stared</b>, <b>whispered</b>, <b>strolled</b> …');
+  }),
+  idiomas: R('uma frase com uma expressão idiomática (a piece of cake, under the weather, spill the beans…)', (t, k) => need(/\b(piece of cake|break the ice|under the weather|arm and a leg|hit the nail on the head|spill(ed)? the beans|blue moon|cat out of the bag|cloud nine|last straw|easier said than done|tough nut|cold feet)\b/.test(k.join(' ')), 'Use uma expressão: <b>a piece of cake</b> / <b>under the weather</b> / <b>the last straw</b> …')),
+  idiomas_trabalho: R('uma frase com uma expressão do trabalho (back to square one, on the fence, cut corners…)', (t, k) => need(/\b(square one|ball rolling|in your court|on the fence|cut(ting)? corners|outside the box|win-win|win win|call it a day|same page|bite the bullet|meet halfway|pros and cons|wrap up)\b/.test(k.join(' ')), 'Use uma expressão do trabalho: <b>back to square one</b> / <b>on the fence</b> / <b>on the same page</b> …')),
+  collocations_c1: R('uma collocation avançada (raise awareness, meet a deadline, draw a conclusion, pose a threat…)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(take|took|make|made) (a |any |the )?conclusions?\b/.test(c)) return 'Tirar uma conclusão: <b>draw</b> a conclusion.';
+    if (/\b(rise|rose|risen) (awareness|money)\b/.test(c)) return 'Com objeto, use <b>raise</b>: raise awareness.';
+    if (/\b(do|did|make|made) (a |the )?deadline\b/.test(c)) return 'Cumprir um prazo: <b>meet</b> a deadline.';
+    return need(/\b(rais\w* (awareness|money|a question)|(meet|met|meeting|miss|missed) (a |the )?deadline|(draw|drew|drawn) (a |any |the )?conclusions?|(pose|poses|posed) (a |an |any )?(serious |major |real )?(threat|risk)|(address|addressed|tackle|tackled) (this |the |an |a )?(issue|problem)|(reach|reached) (a )?(consensus|decision)|bear in mind|into account|play(s|ed)? a (part|role)|make an effort)\b/.test(c), 'Use uma collocation: <b>raise awareness</b> / <b>meet a deadline</b> / <b>draw a conclusion</b> …');
+  }),
+  tom: R("uma frase com tom diplomático (Unfortunately, … / I'd appreciate it if … / I was slightly disappointed …)", (t, k) => {
+    const c = k.join(' ');
+    if (/\b(disgusting|useless|a joke|awful|pathetic)\b/.test(c)) return 'Isso soa agressivo. Troque o julgamento por um fato ou suavize: <b>was not clean</b> / <b>slightly disappointed</b>.';
+    return need(/\b(unfortunately|slightly|a little|a bit|i'd appreciate|i would appreciate|i was wondering|would it be possible|look into|look forward|not as|did not|was not|were not|were unable|while|although|but|disappointed|regards|address)\b/.test(c), "Ajuste o tom: <b>Unfortunately</b>, … / <b>I'd appreciate it if</b> … / <b>I was slightly disappointed</b> …");
+  }),
+  // ---------- Módulo 36 ----------
+  emocao: R('uma frase que convide a imaginar ou conte uma história (Imagine … / Picture this … / When I was …)', (t, k) => need(/^(imagine|picture|close your eyes|think of|let me tell you)\b/.test(k.join(' ')) || /\b(when i was|last year,? i|every single day|every day|behind every|one of|real person|statistic)\b/.test(k.join(' ')), 'Envolva o público: <b>Imagine a world where</b> … / <b>Picture this</b>: … / <b>When I was</b> …')),
+  retorica: R("uma pergunta retórica ou um apelo ao bom senso (Isn't it time we …? / Who wouldn't …? / Surely …)", (t, k) => {
+    const c = k.join(' ');
+    if (/\b(isn't it time|it's time|it is time) we (take|stop|act|start|do|make|invest)\b/.test(c)) return "Depois de it's time we, o verbo vai no passado: it's time we <b>took</b> / <b>stopped</b>.";
+    return need(/\?\s*$/.test(t) || /\b(surely|it's time we|isn't it time|let's face it|after all|enough is enough)\b/.test(c), "Use a retórica: <b>Isn't it time we</b> …? / <b>Who wouldn't</b> …? / <b>Surely</b> …");
+  }),
+  credibilidade: R('uma frase de credibilidade (As someone who … / Experts agree … / The figures show …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bas someone which\b/.test(c)) return 'Para pessoas: As someone <b>who</b> …';
+    return need(/\b(as someone who|having worked|in my experience|first-hand|first hand|experts|according to|the figures|studies|survey|found that|evidence|speak for themselves|beyond doubt|scientists)\b/.test(c), 'Mostre credibilidade: <b>As someone who</b> … / <b>Experts agree</b> … / <b>The figures show</b> …');
+  }),
+  conceder_rebater: R('uma concessão seguida de rebate (Granted, … but … / Be that as it may … / Even if …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\beven if that (was|is) the case\b/.test(c)) return 'Para hipótese irreal: Even if that <b>were</b> the case.';
+    if (/\bbe that like it may\b|\bbe that so it may\b/.test(c)) return 'A expressão é <b>Be that as it may</b>.';
+    return need(/\b(granted|admittedly|may well be true|be that as it may|even if|with all due respect|beside the point|misses the point|real question|you have a point|even so|at the end of the day|bigger picture|take your point)\b/.test(c), 'Conceda e rebata: <b>Granted</b>, …, <b>but</b> … / <b>Be that as it may</b>, …');
+  }),
+  apelo_acao: R("um contraste, um paralelismo ou um apelo à ação (It's not …, it's … / Join us / If not now, when?)", (t, k) => {
+    const c = k.join(' ');
+    return need(/\b(it's not|it is not|not for)\b.*\b(it's|it is|but)\b/.test(c) || /\b(act now|join us|sign|together|if not now|if not us|the time is now|make a difference|we will|we must)\b/.test(c) || /(\b\w+\b).*, \1\b.*\band \1\b/.test(t.toLowerCase()), "Feche com força: <b>It's not a cost, it's an investment.</b> / <b>Join us.</b> / <b>If not now, when?</b>");
+  }),
+  carta_persuasiva: R('uma frase de carta persuasiva (I am writing to urge you to … / Granted … but … / I urge you to …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\burge you (keep|reconsider|vote|stop|save|create)\b/.test(c)) return 'Depois de urge you, use <b>to</b>: I urge you <b>to</b> reconsider.';
+    return need(/\b(urge|on behalf of|residents|petition|reconsider|lifeline|granted|where else|signed|yours sincerely|dear editor|i am writing|vote against|more than)\b/.test(c) || /\?\s*$/.test(t), 'Use a linguagem da carta: <b>I am writing to urge you to</b> … / <b>I urge you to reconsider</b> …');
+  }),
+  // ---------- Módulo 37 ----------
+  causa_efeito: R('uma relação de causa e efeito (give rise to, stem from, trigger, be attributed to, a knock-on effect…)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bgave raise to|gives raise to|give raise to\b/.test(c)) return 'A expressão é give <b>rise</b> to.';
+    if (/\bstems? of\b/.test(c)) return 'Vir de: stem <b>from</b>.';
+    return need(/\b(give|gives|gave|given) rise to\b|\b(trigger|triggers|triggered|bring about|brought about|stem|stems|stemmed|result|results|resulted|arise|arises|arose|attributed|lead to|leads to|led to|knock.?on|in turn|vicious circle|as a consequence|consequently|hence|thereby|because of|due to)\b/.test(c), 'Mostre causa e efeito: … <b>stems from</b> … / … <b>gave rise to</b> … / <b>a knock-on effect</b> …');
+  }),
+  economia: R('uma frase sobre economia (inflation, interest rates, recession, GDP, wages, the cost of living…)', (t, k) => need(has(k, /^(inflation|interest|rates|rate|recession|gdp|growth|unemployment|supply|demand|cost|living|wages|taxes|budget|debt|spending|economy|economic|prices|exports|imports|slowdown|recovery|bank|purchasing)$/), 'Use o vocabulário da economia: <b>inflation</b>, <b>interest rates</b>, <b>the cost of living</b> …')),
+  ciencia: R('uma frase sobre ciência e dados (correlation, causation, sample, control group, peer-reviewed…)', (t, k) => need(/\b(correlation|causation|sample|variables?|control group|peer-reviewed|peer reviewed|statistically|significant|hypothesis|bias|findings|third factor|randomly|study|both|data|participants|margin of error|replicated|draw conclusions)\b/.test(k.join(' ')), 'Use a linguagem da ciência: <b>correlation does not imply causation</b> / <b>the sample</b> / <b>a third factor</b> …')),
+  etica: R('uma frase sobre um dilema ético (Suppose … / Is it ever justified … / In principle … / draw the line…)', (t, k) => {
+    const c = k.join(' ');
+    if (/^suppose you (find|know|see|have) .*\bwould\b/.test(c)) return 'Com suppose + would, use o passado: Suppose you <b>found</b> …';
+    return need(/\b(suppose|what if|imagine|justified|justify|greater good|rights|consent|privacy|fairness|fair|responsibility|acceptable|unacceptable|wrong|right|in principle|in practice|draw the line|slippery slope|dilemma|harm|depends)\b/.test(c), 'Discuta o dilema: <b>Suppose</b> you … / <b>Is it ever justified</b> to …? / <b>In principle</b>, … but …');
+  }),
+  previsao: R('uma previsão (is set to / is expected to / is likely to / by 2050 / will have …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(is|are) (set|expected|projected|likely|unlikely|bound|forecast) (rise|fall|grow|reach|increase|remain)\b/.test(c)) return 'Falta o to: is set <b>to</b> rise.';
+    if (/\bwill have (rise|grow|fall|increase|reach)\b/.test(c)) return 'Depois de will have, o particípio: will have <b>risen</b>.';
+    return need(/\b(is|are|was|were) (set|expected|projected|forecast|predicted|likely|unlikely|bound) to\b|\bwill have\b|\bby 20\d\d\b|\b(foreseeable future|next decade|long term|according to forecasts)\b/.test(c), 'Faça uma previsão: Sales <b>are set to</b> rise / Prices <b>are unlikely to</b> fall / <b>By 2050</b>, …');
+  }),
+  explicar: R('uma frase de texto explicativo (Put simply, … / When …, … / For example, … / In short, …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bthe rate at what\b/.test(c)) return 'Com preposição, use which: the rate <b>at which</b> …';
+    return need(/^(put simply|simply put|in other words|when|for example|for instance|as a result|in short|this|imagine)\b/.test(c) || /\b(is the|the rate at which|leads to|makes|which in turn|means|tend to|expected to)\b/.test(c), 'Explique com clareza: <b>Put simply</b>, … / <b>When</b> …, … / <b>For example</b>, … / <b>In short</b>, …');
+  }),
+  // ---------- Módulo 38 ----------
+  prova_c1: R('uma frase sobre a prova ou uma estratégia (parts, words, pictures, speculate, extend…)', (t, k) => need(/\b(exam|test|paper|parts?|minutes|hour|words|pictures|photos|speaking|writing|reading|listening|recording|played|twice|speculate|describe|extend|answers?|reasons|examples|strategy|time)\b/.test(k.join(' ')), 'Fale da prova: <b>Reading and Use of English has eight parts.</b> / <b>Extend your answers.</b>')),
+  proposta: R('uma frase de proposal (The aim of this proposal … / At present … / I would suggest … / It would be advisable …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bwould suggest to (introduce|start|extend|create|offer)\b/.test(c)) return 'Depois de suggest, use -ing: I would suggest <b>introducing</b> …';
+    return need(/\b(proposal|aim|at present|currently|would suggest|advisable|one option|would not only|confident|benefit|benefits|feasible|investment|in the long run|survey|improve)\b/.test(c), 'Use a linguagem da proposal: <b>The aim of this proposal is to</b> … / <b>I would suggest</b> …');
+  }),
+  fio_texto: R('uma frase sobre o fio do texto ou a atitude do autor (this, the latter, however, sceptical…)', (t, k) => need(/\b(this|these|such|former|latter|however|moreover|as a result|in contrast|sceptical|skeptical|enthusiastic|dismissive|cautious|critical|supportive|writer|writers|attitude|tone|paragraph|agree|different line|shares the view|claims|doubt)\b/.test(k.join(' ')), 'Siga o fio: <b>This approach</b> … / <b>The latter</b> … / The writer is <b>sceptical</b> …')),
+  ielts: R('uma frase de descrição de gráfico (The graph shows … / Overall, … / peaked at …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(rised|picked at|peeked at)\b/.test(c)) return 'Confira: rose (subiu), <b>peaked at</b> (atingiu o pico).';
+    return need(/\b(graph|chart|table|shows|overall|rose|rise|fell|fall|peaked|fluctuated|steadily|sharply|figure|proportion|number of|increased|decreased|in contrast|respectively|task|band|opinion|counts)\b/.test(c), 'Descreva o gráfico: <b>The graph shows</b> … / <b>Overall</b>, … / … <b>peaked at</b> …');
+  }),
+  toefl: R("uma frase de discussão acadêmica (I agree with … that …, but … / Unlike … / To build on …)", (t, k) => {
+    const c = k.join(' ');
+    if (/\bagree (to|at) (maria|paul|him|her|you)\b/.test(c)) return 'Concordar com alguém: agree <b>with</b>.';
+    return need(/\b(agree with|unlike|build on|i would add|for example|in my own|i believe|disagree|point|section|scale|hours|test|scored|breaks)\b/.test(c), "Dialogue: <b>I agree with Maria that</b> …, <b>but I would add</b> … / <b>Unlike Paul</b>, …");
+  }),
+  redacao_c1: R('uma frase de redação C1 (While … may … / Of the two, … the more … / What matters most … / On balance …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bthe most (effective|important|useful) of the two\b/.test(c)) return 'Comparando dois, use <b>the more</b>: the more effective.';
+    return need(/\b(of the two|the more|more \w+ than|while|although|on balance|crucially|what matters most|in the long term|lasting|immediate|deterrent|on the other hand|however|target|outweigh|i believe)\b/.test(c), 'Avalie e escolha: <b>Of the two</b>, I believe … is <b>the more</b> effective. / <b>On balance</b>, …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
