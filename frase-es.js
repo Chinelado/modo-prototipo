@@ -255,6 +255,42 @@ const RULES = {
     if (/ cuando (tuve|fui) (\p{L}+) años /u.test(c)) return 'Para a idade no cenário, use o imperfeito: cuando <b>tenía</b> ocho años.';
     return need(/ (cuando tenía|cuando era|un día|aquel día|ese día|una vez|de repente|todavía|nunca olvidaré|desde entonces|me acuerdo|no podía) /.test(c) || has(k, /\p{L}+(aba|ía|é|ó|ió)$/u), 'Conte a lembrança: <b>Cuando tenía</b> … / <b>Un día</b>, … / <b>Todavía me acuerdo</b> …');
   }),
+  // ---------- Módulo 8 ----------
+  perfecto: R('uma experiência com o <b>pretérito perfecto</b> (he viajado, has comido, nunca he …)', (t, k) => {
+    const c = C(k);
+    if (/ (tengo|tienes|tiene|tenemos|tienen) (\p{L}+(ado|ido)|hecho|visto|dicho|escrito) /u.test(c)) return 'O auxiliar é <b>haber</b>: <b>he</b> comido (e não "tengo comido").';
+    if (/ (haz|as) (estado|visto|comido|ido|hecho|viajado|probado) /.test(c)) return 'Com tú, o auxiliar é <b>has</b> (com h e s).';
+    if (/ (he|has|ha|hemos|han) (hacido|vido|decido|escribido|volvido|ponido|abrido|rompido) /.test(c)) return 'Esse particípio é irregular: <b>hecho</b>, <b>visto</b>, <b>dicho</b>, <b>escrito</b>, <b>vuelto</b>, <b>puesto</b>, <b>abierto</b>, <b>roto</b>.';
+    return need(/ (he|has|ha|hemos|han) (\p{L}+(ado|ido)|hecho|visto|dicho|escrito|vuelto|puesto|abierto|roto) /u.test(c), 'Use haber + particípio: <b>He</b> viajado. ¿Alguna vez <b>has</b> estado …?');
+  }),
+  yatodavia: R('o que já fez e o que ainda não fez (ya, todavía no, aún no)', (t, k) => {
+    const c = C(k);
+    if (/ no todavía /.test(c)) return 'A ordem é <b>todavía no</b> (ou <b>aún no</b>).';
+    return need(/ (ya|todavía no|aún no|todavía|aún|falta) /.test(c), 'Use <b>ya</b> (já) ou <b>todavía no</b> (ainda não): <b>Ya</b> he terminado.');
+  }),
+  objeto: R('um pronome de objeto (lo, la, los, las, le, les)', (t, k) => {
+    const c = C(k);
+    if (/ (el libro|el pasaporte|la película|las llaves|los boletos)\?? (compré|tengo|vi|encuentro|he visto) /.test(c)) return 'Em espanhol o pronome é obrigatório: ¿El libro? <b>Lo</b> compré.';
+    return need(/ (lo|la|los|las|le|les) /.test(c) || has(k, /\p{L}+(rlo|rla|rlos|rlas|rle|rles)$/u), 'Use um pronome: ¿El libro? <b>Lo</b> compré. <b>Le</b> mandé un mensaje.');
+  }),
+  doble_pronombre: R('dois pronomes juntos (me lo, te la, se lo…)', (t, k) => {
+    const c = C(k);
+    if (/ (le|les) (lo|la|los|las) /.test(c)) return 'le + lo vira <b>se lo</b>: <b>se lo</b> di.';
+    if (/ (lo|la|los|las) (me|te|nos) /.test(c)) return 'A ordem é: primeiro quem recebe, depois o objeto: <b>me lo</b>, <b>te la</b>.';
+    return need(/ (me|te|se|nos) (lo|la|los|las) /.test(c) || has(k, /\p{L}+(melo|mela|melos|melas|telo|tela|telos|telas|selo|sela|selos|selas)$/u), 'Junte os dois pronomes: <b>me lo</b> das, <b>se lo</b> di, <b>te la</b> presto.');
+  }),
+  primera_vez: R('uma primeira vez (la primera vez que …, por primera vez, nunca antes…)', (t, k) => {
+    const c = C(k);
+    if (/ (el|mi|un|su|tu) primero (viaje|día|trabajo|vuelo|año) /.test(c)) return '<b>primero</b> perde o -o antes de substantivo masculino: <b>primer</b> viaje.';
+    if (/ (la|mi|una) viaje /.test(c)) return '<b>viaje</b> é masculino: <b>el</b> viaje, <b>mi primer</b> viaje.';
+    return need(/ (primera vez|primer|primera|nunca antes|alguna vez|una vez|increíble|inolvidable) /.test(c) || has(k, /\p{L}+(é|ó|í|ió|aba|ía)$/u), 'Conte a primeira vez: <b>La primera vez que</b> viajé … / <b>Por primera vez</b> …');
+  }),
+  correo: R('uma frase de e-mail pessoal (saudação, novidade, pedido ou despedida)', (t, k) => {
+    const c = C(k);
+    if (/ (tengo|tienes) (\p{L}+(ado|ido)) /u.test(c)) return 'O auxiliar é <b>haber</b>: <b>he</b> cambiado (e não "tengo cambiado").';
+    if (/ le (lo|la|los|las) /.test(c)) return 'le + lo vira <b>se lo</b>.';
+    return need(/ (hola|querido|querida|cómo estás|qué tal|he|has|hemos|ya|todavía|un abrazo|besos|escríbeme|hasta pronto|saludos|te extraño|novedades) /.test(c), 'Escreva como num e-mail: ¡<b>Hola</b>, …! / <b>He</b> empezado … / <b>Un abrazo</b>.');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
