@@ -1175,6 +1175,204 @@ const RULES = {
     if (/ propondría que (\p{L}+ )+(limite|escuche|cree|construya|controle|ponga|limiten|escuchen) /u.test(c)) return 'Com <b>propondría que</b>, o imperfeito do subjuntivo: <b>limitara</b>, <b>escuchara</b>, <b>creara</b>.';
     return need(/ (me dirijo|en relación con|señor director|según|datos|en primer lugar|asimismo|si bien|no es menos cierto|propondría|sería conveniente|por todo ello|atentamente|pido|propongo) /.test(c), 'Escreva formalmente: <b>Me dirijo a usted</b> … / <b>Asimismo</b>, … / <b>Propondría que</b> …');
   }),
+  // ---------- Módulo 33 ----------
+  lo_adjetivo: R('uma frase com lo + adjetivo (lo bueno, lo mejor, lo difícil que es, lo de…)', (t, k) => {
+    const c = C(k);
+    if (/ el (bueno|malo|mejor|peor|importante|difícil|curioso) es que /.test(c)) return 'Para a ideia abstrata, use <b>lo</b>: <b>lo bueno es que</b> …';
+    return need(/ lo (mejor|peor|bueno|malo|más|menos|importante|difícil|curioso|raro|interesante|increíble|bonito|lindo|único|primero|de|fácil|triste|gracioso|extraño|normal|lógico|mismo|cierto|complicado|cansad[oa]s?|car[oa]s?|emocionad[oa]s?|nerviosa?) /.test(c), 'Use lo + adjetivo: <b>Lo bueno</b> es que … / No sabes <b>lo difícil que</b> es.');
+  }),
+  hendida: R('uma frase destacada (fue … quien, lo que … es, fue … cuando, es aquí donde…)', (t, k) => {
+    const c = C(k);
+    if (/ fue (yo|él|ella|ana|juan|marta|pedro|maría|mi \p{L}+) que /u.test(c)) return 'Com pessoa, use <b>quien</b> (ou el que / la que): Fue Ana <b>quien</b> llamó.';
+    return need(/ (quien|quienes|el que|la que|los que|las que|lo que|cuando|donde|como) /.test(c) && / (fue|fueron|fui|fuimos|es|son|era|será|ha sido) /.test(c), 'Destaque: <b>Fue</b> Ana <b>quien</b> llamó. / <b>Lo que</b> necesito <b>es</b> tiempo.');
+  }),
+  no_es_que: R('uma frase com es que, no es que + subjuntivo ou sino (que)', (t, k) => {
+    const c = C(k);
+    if (/ no es que (no )?(me |te |se |lo )?(quiero|puedo|tengo|sé|es|está|estoy|soy|voy|gusta|gustan) /.test(c)) return 'Depois de <b>no es que</b>, o subjuntivo: <b>quiera</b>, <b>pueda</b>, <b>tenga</b>, <b>sea</b>, <b>esté</b>.';
+    return need(/ (no es que|es que|sino que|sino|no porque) /.test(c), 'Justifique ou corrija: <b>Es que</b> … / <b>No es que</b> no quiera, es que … / No es caro, <b>sino</b> carísimo.');
+  }),
+  intensificar: R('uma frase intensificada (sumamente, de lo más, ¡qué … tan …!, -ísimo, para nada…)', (t, k) => {
+    const c = C(k);
+    if (/ muy mucho /.test(c)) return 'Não se diz "muy mucho": use <b>muchísimo</b>.';
+    if (/ muito /.test(c)) return 'Isso é português: <b>muy</b>, <b>sumamente</b>, <b>muchísimo</b>.';
+    return need(/ (sumamente|de lo más|la mar de|qué|tan|tremendamente|increíblemente|realmente|enormemente|extremadamente|súper|para nada|en absoluto|ni de broma|muchísimo|muchísima|bastante|muy|\p{L}+ísim[oa]s?) /u.test(c), 'Intensifique: <b>sumamente</b> útil / <b>de lo más</b> interesante / ¡Qué día <b>tan</b> largo!');
+  }),
+  tematizar: R('uma frase com o assunto no começo e pronome (el libro lo compré, a mí me…, eso no lo sabía)', (t, k) => {
+    const c = C(k);
+    if (/ a (mí|ti) (parece|gusta|gustan|encanta|encantan|interesa|toca|molesta) /.test(c)) return 'O pronome não some: a mí <b>me</b> parece / a ti <b>te</b> toca.';
+    if (/ (eso|esto) no (sabía|sé|entiendo|creo) /.test(c)) return 'Retome com o pronome: Eso no <b>lo</b> sabía.';
+    return need(/ (lo|la|los|las|le|les|me|te|nos) /.test(c), 'Retome com pronome: El libro <b>lo</b> compré ayer. / A mí <b>me</b> parece …');
+  }),
+  discurso_c1: R('uma frase de discurso (queridos…, lo más bonito, fue aquí donde, brindo por…)', (t, k) => {
+    const c = C(k);
+    if (/ brindo (a|para) /.test(c)) return 'Em espanhol se brinda <b>por</b>: ¡Brindo <b>por</b> ustedes!';
+    return need(/ (queridos|queridas|querido|querida|estimados|lo más|lo mejor|fue|fueron|no es que|sino|sumamente|brindo|brindemos|salud|gracias|agradecid[oa]|agradezco|compañeros|amigos|estos años|echar|extrañar|emocionad[oa]) /.test(c), 'Escreva como num discurso: <b>Queridos</b> compañeros … / <b>Lo más bonito</b> … / ¡<b>Brindo por</b> ustedes!');
+  }),
+  // ---------- Módulo 34 ----------
+  impersonal_ac: R('uma frase acadêmica impessoal (se analiza, cabe señalar, conviene recordar, como hemos visto…)', (t, k) => {
+    const c = C(k);
+    if (/ (yo creo|yo pienso|yo analicé|en mi opinión) /.test(c)) return 'No texto acadêmico, evite o "yo": <b>se puede afirmar que</b> … / <b>en este trabajo se analiza</b> …';
+    if (/ habemos /.test(c)) return 'É <b>hemos</b>: como hemos visto.';
+    return need(/ (se analiza|se analizan|se observa|se observan|se propone|se concluye|se puede|cabe|conviene|es preciso|es necesario|hemos|veremos|en este trabajo|a continuación) /.test(c), 'Escreva impessoal: <b>Se observa</b> que … / <b>Cabe señalar</b> que …');
+  }),
+  cautela: R('uma frase com cautela (podría afirmarse, los datos sugieren, en cierta medida, tiende a…)', (t, k) => {
+    const c = C(k);
+    if (/ (sugerem|sugerén|sugeren) /.test(c)) return 'Sugerir: los datos <b>sugieren</b>.';
+    if (/ en certa medida /.test(c)) return 'Em espanhol: en <b>cierta</b> medida.';
+    return need(/ (podría|podrían|cabría|sería|habría|parece|al parecer|aparentemente|en cierta medida|en gran parte|hasta cierto punto|tiende|tienden|sugiere|sugieren|apunta|apuntan|indica|indican|probablemente|posiblemente|en la mayoría) /.test(c), 'Atenue: <b>Podría afirmarse</b> que … / Los datos <b>sugieren</b> … / <b>En cierta medida</b>, …');
+  }),
+  citar: R('uma frase citando uma fonte (según X, como señala X, X sostiene / advierte que…)', (t, k) => {
+    const c = C(k);
+    if (/ segundo (el |la |los |las )?(\p{L}+ )?(autor|autora|informe|estudio|garcía|pérez|lópez|ruiz|datos) /u.test(c)) return '"Segundo" (a fonte) é <b>según</b>: según García …';
+    if (/ sostene /.test(c)) return 'Sostener se conjuga como tener: <b>sostiene</b>.';
+    return need(/ (según|de acuerdo con|como señala|en palabras de|para|afirma|afirmó|señala|señaló|sostiene|sostuvo|plantea|advierte|cuestiona|cuestionan|subraya|indica) /.test(c), 'Cite: <b>Según</b> García (2019), … / López <b>sostiene</b> que …');
+  }),
+  estructurar: R('uma frase que organiza o texto (se divide en, en primer lugar, a continuación, asimismo, en suma…)', (t, k) => {
+    const c = C(k);
+    if (/ (a seguir|em suma|em primeiro lugar) /.test(c)) return 'Isso é português: <b>a continuación</b>, <b>en suma</b>, <b>en primer lugar</b>.';
+    return need(/ (se divide|en primer lugar|en segundo lugar|a continuación|por último|asimismo|además|por otra parte|no obstante|sin embargo|ahora bien|en suma|en definitiva|en conclusión|a modo de conclusión|por todo lo expuesto|apartado|cabe concluir) /.test(c), 'Organize: <b>En primer lugar</b>, … / <b>A continuación</b>, … / <b>En suma</b>, …');
+  }),
+  definir: R('uma definição, classificação ou exemplo (se entiende por, consiste en, se distinguen, es el caso de…)', (t, k) => {
+    const c = C(k);
+    if (/ consiste de /.test(c)) return 'É <b>consiste en</b>.';
+    return need(/ (se entiende|se define|consiste en|se divide|se distinguen|existen|a saber|por ejemplo|tal como|es el caso|un ejemplo|es un|es una|se llama) /.test(c), 'Defina: <b>Se entiende por</b> X … / X <b>consiste en</b> … / <b>Es el caso de</b> …');
+  }),
+  resumen_ac: R('uma frase de resumo acadêmico (el objetivo es, se realizó, los resultados muestran, se concluye…)', (t, k) => {
+    const c = C(k);
+    if (/ el objetivo de este (estudio|trabajo) es de /.test(c)) return 'Sem "de": El objetivo … <b>es analizar</b>.';
+    return need(/ (el objetivo|tiene como objetivo|para ello|se realizó|se realizaron|se entrevistó|se analizaron|los resultados|los datos|muestran|sugieren|indican|se concluye|permiten|palabras clave|tiende) /.test(c), 'Escreva como num resumo: <b>El objetivo</b> … / <b>Para ello, se realizó</b> … / <b>Se concluye que</b> …');
+  }),
+  // ---------- Módulo 35 ----------
+  registro_c1: R('uma frase num registro claro (plata / dinero / recursos, arrancar / iniciar, residir, abonar…)', (t, k) => {
+    const c = C(k);
+    if (/ (solicito|le agradecería|estimado) /.test(c) && / (plata|chamba|laburo|curro|arrancar) /.test(c)) return 'Registros misturados: no formal, <b>recursos</b>, <b>empleo</b>, <b>iniciar</b>.';
+    if (/ dispono /.test(c)) return 'Disponer se conjuga como poner: <b>dispongo</b>.';
+    return need(/ (plata|dinero|recursos|chamba|laburo|curro|camello|trabajo|empleo|arrancar|empezar|iniciar|manifestó|manifestar|resido|residir|adquirir|abonar|abonarse|percibe|percibir|dispongo|disponer|sale|solicito|importe) /.test(c), 'Escolha o registro: <b>plata</b> / <b>dinero</b> / <b>recursos</b> … / <b>iniciar</b> el proyecto.');
+  }),
+  verbos_precisos: R('uma frase com verbo preciso (elaborar, llevar a cabo, plantear, contar con, establecer…)', (t, k) => {
+    const c = C(k);
+    if (/ (hice|hicimos|hacer) un (informe|estudio) /.test(c)) return 'Mais preciso: <b>elaborar</b> un informe / <b>realizar</b> un estudio.';
+    if (/ plantó una (solución|idea|pregunta) /.test(c)) return 'Propor é <b>plantear</b>: planteó una solución.';
+    return need(/ (elaborar|elaboramos|elaboró|realizar|realizó|llevar a cabo|llevamos a cabo|llevé a cabo|celebrar|celebrará|plantear|planteó|expresar|expresó|contar con|cuenta con|cuento con|poseer|posee|disponemos|disponer|establecer|estableció|fijar|efectuar|efectuó|afirmar|señalar|comunicar) /.test(c), 'Use um verbo preciso: <b>elaborar</b> un informe / <b>contar con</b> experiencia / <b>plantear</b> una idea.');
+  }),
+  refranes: R('um refrão (más vale tarde que nunca, no hay mal que por bien no venga…)', (t, k) => {
+    const c = C(k);
+    if (/ no hay mal que por bien no viene /.test(c)) return 'No refrão, subjuntivo: no hay mal que por bien no <b>venga</b>.';
+    if (/ antes tarde (do|de) que nunca /.test(c)) return 'Em espanhol: <b>Más vale tarde que nunca</b>.';
+    return need(/ (más vale|no hay mal|caballo regalado|boca cerrada|dime con quién|madruga|no arriesga|refrán|dicho) /.test(c), 'Use um refrão: <b>Más vale tarde que nunca</b>. / <b>No hay mal que por bien no venga</b>.');
+  }),
+  colocavanz: R('uma colocação culta (asumir una responsabilidad, desempeñar un papel, contraer una deuda…)', (t, k) => {
+    const c = C(k);
+    if (/ (no puedo|no consigo) dormir el sueño /.test(c)) return 'Use <b>conciliar el sueño</b>.';
+    return need(/ (asumir|asumió|asume|desempeñar|desempeña|desempeñan|contraer|contrajo|saldar|entablar|entablamos|cumplir|cumplir el plazo|cumpliríamos|conciliar|formular|plantear una duda|acarrear|acarreó|conllevar|surtir|surtió|ocupar un puesto) /.test(c), 'Use uma colocação: <b>asumir</b> una responsabilidad / <b>desempeñar</b> un papel / <b>contraer</b> una deuda.');
+  }),
+  falsos_amigos: R('uma frase com um falso amigo bem usado (presunto, polvo, cola, taller, sitio, largo…)', (t, k) => {
+    const c = C(k);
+    if (/ (comí|pedí|como|quiero) (un |el |)?(polvo|presunto) /.test(c)) return 'Cuidado: o polvo de comer é <b>pulpo</b>; o presunto de comer é <b>jamón</b>.';
+    if (/ (hice|hicimos|hacer) fila /.test(c)) return 'Fila é <b>cola</b>: hacer cola.';
+    return need(/ (pretendo|pretender|presunto|raro|polvo|pulpo|jamón|borracho|borracha|goma|late|latir|ladra|largo|larga|ancho|cola|taller|sitio|estrecha) /.test(c), 'Use um falso amigo bem: Hicimos <b>cola</b> … / Llevé el carro al <b>taller</b>. / El <b>presunto</b> culpable …');
+  }),
+  reescribir: R('uma frase de e-mail formal (le escribo para, quisiera solicitarle, adjunto, quedo a su disposición…)', (t, k) => {
+    const c = C(k);
+    if (/ (me gustaría de|quería de) /.test(c)) return 'Sem "de": <b>quisiera solicitarle</b> / me gustaría solicitarle.';
+    if (/ (oye|qué lío|pídele) /.test(c)) return 'Isso é do chat. No e-mail formal: <b>Le escribo para</b> … / <b>Quisiera</b> …';
+    return need(/ (le escribo|me dirijo|comunicarle|quisiera|le agradecería|adjunto|quedo a su disposición|atentamente|cordial saludo|lamento|lamentablemente|inconveniente|prórroga|presupuesto|estimado) /.test(c), 'Escreva formal: <b>Le escribo para</b> … / <b>Quisiera solicitarle</b> … / <b>Quedo a su disposición</b>.');
+  }),
+  // ---------- Módulo 36 ----------
+  retorica: R('uma frase retórica (¿acaso…?, no es X, es Y, no se trata de…, sino de…, uma tríade…)', (t, k) => {
+    const c = C(k);
+    if (/ por acaso /.test(c)) return '"Por acaso" (pergunta) em espanhol é só <b>acaso</b>: ¿Acaso …?';
+    return need(/ (acaso|no es cierto que|quién no|no es (\p{L}+ )+es|no se trata de|sino|queremos|cierra con|merecemos) /u.test(c) || /\?/.test(t), 'Use um recurso: ¿<b>Acaso</b> …? / <b>No es</b> un gasto, <b>es</b> una inversión.');
+  }),
+  discrepar: R('uma discordância diplomática (permítame que discrepe, me temo que, no acabo de ver…)', (t, k) => {
+    const c = C(k);
+    if (/ permítame que discrepo /.test(c)) return 'Permitir que + subjuntivo: permítame que <b>discrepe</b>.';
+    return need(/ (discrepar|discrepe|lamento|me temo|no acabo de|no termino de|tengo mis dudas|lo plantearía|con todo respeto|entiendo su postura|entiendo tu postura|comprendo|tiene razón en parte|tienes razón en parte|en lugar de|no la comparto|no lo comparto) /.test(c), 'Discorde com diplomacia: <b>Permítame que discrepe</b>. / <b>Me temo que</b> no lo comparto.');
+  }),
+  conceder: R('uma concessão (reconozco que, admito que, ahora bien, con todo, eso no quita que…)', (t, k) => {
+    const c = C(k);
+    if (/ no quita que (\p{L}+ )?(debemos|es|tiene|hay|podemos|mejoramos) /u.test(c)) return 'Depois de <b>no quita que</b>, o subjuntivo: <b>debamos</b>, <b>sea</b>, <b>tenga</b>, <b>haya</b>.';
+    return need(/ (reconozco|admito|concedo|es cierto que|ahora bien|con todo|aun así|de todos modos|no quita que|no significa que|sin embargo) /.test(c), 'Conceda e vire: <b>Reconozco que</b> …; <b>ahora bien</b>, …');
+  }),
+  apelar: R('uma frase que envolve o público (imagínense, piensen en, ¿qué pasaría si…?, uno de cada tres…)', (t, k) => {
+    const c = C(k);
+    if (/ qué pasaría si (\p{L}+ )*?(planta|plantamos|hacemos|usamos|reciclamos) /u.test(c)) return 'Com <b>¿qué pasaría si …?</b>, o imperfeito do subjuntivo: <b>plantara</b>, <b>hiciéramos</b>, <b>usáramos</b>.';
+    return need(/ (imagínense|imaginen|piensen|pregúntense|miren|qué pasaría si|todos sabemos|todos podemos|nos afecta|está en juego|los números|uno de cada|una de cada|la mitad|el doble|nuestro|nuestra) /.test(c), 'Envolva o público: <b>Imagínense</b> … / ¿<b>Qué pasaría si</b> …? / <b>Uno de cada tres</b> …');
+  }),
+  rebatir: R('uma refutação (eso no es del todo cierto, se suele decir que…, quienes afirman… olvidan, lejos de…)', (t, k) => {
+    const c = C(k);
+    if (/ longe de /.test(c)) return 'Em espanhol: <b>lejos de</b>.';
+    return need(/ (no es del todo|verdad a medias|matizar|se suele decir|existe la creencia|quienes afirman|olvidan|lo que no se dice|lejos de|nada más lejos|en realidad|lo contrario|dicen que) /.test(c), 'Refute: <b>Eso no es del todo cierto</b>. / <b>Se suele decir que</b> …, pero … / <b>Lejos de</b> …');
+  }),
+  columna: R('uma frase de coluna (¿acaso…?, defiendo que, reconozco que… ahora bien, quienes afirman…, no es X, es Y)', (t, k) => {
+    const c = C(k);
+    if (/ por acaso /.test(c)) return '"Por acaso" em espanhol é só <b>acaso</b>.';
+    return need(/ (acaso|defiendo|es hora de|estoy convencid[oa]|reconozco|ahora bien|quienes afirman|olvidan|según|no es (\p{L}+ )+es|sino|imagínense|leíste la columna|me convenció|me gustó|convence) /u.test(c) || /\?/.test(t), 'Escreva como numa coluna: <b>Defiendo que</b> … / <b>Reconozco que</b> …; <b>ahora bien</b>, …');
+  }),
+  // ---------- Módulo 37 ----------
+  causa_efecto: R('uma frase de causa e efeito (provoca, desencadena, da lugar a, repercute en, se debe a, a raíz de…)', (t, k) => {
+    const c = C(k);
+    if (/ desencade(ó|ou|ar|a) /.test(c)) return 'É <b>desencadenar</b>, com n: desencadenó.';
+    if (/ repercute (no|na|a) /.test(c)) return 'Em espanhol: repercute <b>en</b>.';
+    return need(/ (provoca|provocó|provocar|causa|causó|desencadena|desencadenó|da lugar|dio lugar|conlleva|conllevar|repercute|repercutir|incide|deriva|derivó|desemboca|se debe|se deben|obedece|se atribuye|tiene su origen|a raíz de|como consecuencia|afecta|genera|generó) /.test(c), 'Ligue causa e efeito: … <b>se debe a</b> … / … <b>repercute en</b> … / <b>A raíz de</b> …');
+  }),
+  graficos: R('uma frase sobre uma tendência (pasó de … a …, alcanzó un máximo, tocó fondo, tendencia al alza…)', (t, k) => {
+    const c = C(k);
+    if (/ pas(ó|aron|a) de (\p{L}+ |\d+ ?%? )+para /u.test(c)) return 'Em espanhol: pasar de X <b>a</b> Y.';
+    if (/ (tocó|tocaron) fundo /.test(c)) return 'Em espanhol: tocar <b>fondo</b>.';
+    return need(/ (pasó|pasaron|aumentó|aumentaron|creció|crecieron|hemos crecido|subió|subieron|disminuyó|bajó|bajaron|cayó|cayeron|repuntó|repuntan|repuntar|se disparó|se desplomó|alcanzó|tocó|tocaron|se mantuvo|se mantuvieron|se estancaron|se redujo|se duplicó|tendencia|al alza|a la baja|frente a|respecto a|cómo van) /.test(c), 'Descreva: Las ventas <b>pasaron de</b> 2 <b>a</b> 5 millones. / La tendencia es <b>al alza</b>.');
+  }),
+  economia: R('uma frase sobre economia (inflación, PIB, poder adquisitivo, tasas de interés, se encareció…)', (t, k) => {
+    const c = C(k);
+    if (/ (tazas|taxas) de (interés|juros) /.test(c)) return 'Taxa de juros: <b>tasa de interés</b> (com s).';
+    if (/ poder de compra /.test(c)) return 'Na imprensa: <b>poder adquisitivo</b>.';
+    return need(/ (inflación|pib|desempleo|desocupación|paro|poder adquisitivo|recesión|tasas|tipos de interés|deuda|gasto público|impuestos|presupuesto|encarecido|encareció|encarecerse|abarataron|abaratarse|sueldo|fin de mes|cinturón|caro|carísimo|crecimiento|precios) /.test(c), 'Fale de economia: La <b>inflación</b> reduce el <b>poder adquisitivo</b>.');
+  }),
+  ciencia: R('uma frase sobre ciência (según un estudio, se ha demostrado que, ensayo clínico, comprobar…)', (t, k) => {
+    const c = C(k);
+    if (/ demonstr/.test(c)) return 'Em espanhol: <b>demostrar</b>, sem n.';
+    if (/ esperar a que (\p{L}+ )?(se )?(confirman|confirmarán) /u.test(c)) return 'Esperar a que + subjuntivo: se <b>confirmen</b>.';
+    return need(/ (estudio|investigación|investigador|investigadora|científicos|científica|hipótesis|experimento|ensayo|comprobar|comprobado|demostrado|demostrar|descubierto|avance|resultados|prometedores|tratamiento|laboratorio) /.test(c), 'Fale de ciência: <b>Según un estudio reciente</b>, … / <b>Se ha demostrado que</b> …');
+  }),
+  etica: R('uma frase de debate ético (¿es lícito que…?, plantea un dilema, por un lado… por otro, la responsabilidad…)', (t, k) => {
+    const c = C(k);
+    if (/ es (lícito|legítimo|ético) que (\p{L}+ )*?(usa|vigila|decide|controla|usan|vigilan) /u.test(c)) return 'Depois de <b>es lícito que</b>, o subjuntivo: <b>use</b>, <b>vigile</b>, <b>decida</b>.';
+    return need(/ (lícito|legítimo|ético|ética|dilema|por un lado|por otro|cabe preguntarse|límite|límites|responsable|responsabilidad|entran en conflicto|privacidad|te parece bien|problema de fondo) /.test(c), 'Debata: ¿<b>Es lícito que</b> …? / <b>Por un lado</b> …, <b>por otro</b> …');
+  }),
+  informe_c1: R('uma frase de comentário de dados (el gráfico muestra, pasó de … a …, frente a, se debe a, en suma…)', (t, k) => {
+    const c = C(k);
+    if (/ el gráfico mostra /.test(c)) return 'Em espanhol: el gráfico <b>muestra</b>.';
+    if (/ pas(ó|aron) de (\p{L}+ |\d+ ?%? )+para /u.test(c)) return 'Em espanhol: pasar de X <b>a</b> Y.';
+    return need(/ (el gráfico|muestra|pasó|frente a|se debe|a raíz de|en suma|los datos|sugieren|se mantuvo|bajaron|depende|renovable|la cifra|viste el gráfico|cambió) /.test(c), 'Comente: <b>El gráfico muestra</b> … / La cifra <b>pasó de</b> … <b>a</b> … / <b>En suma</b>, …');
+  }),
+  // ---------- Módulo 38 ----------
+  dele_c1: R('uma frase sobre a prova (dura, pruebas integradas, uso de la lengua, grupos…)', (t, k) => need(/ (examen|prueba|pruebas|integradas|uso de la lengua|grupo|grupos|aprobar|apto|dura|horas|minutos|exposición|audio|notas|modelo|dele|especial|conferencia|descansado) /.test(C(k)), 'Fale da prova: El <b>examen</b> dura … / Hay <b>pruebas integradas</b> …')),
+  c1_lectura: R('uma estratégia de leitura e uso da língua (lee el párrafo, la preposición, el conector, descarta…)', (t, k) => {
+    const c = C(k);
+    if (/ consiste de /.test(c)) return 'Regência: consiste <b>en</b>.';
+    return need(/ (lee|párrafo|opción|opciones|preposición|verbo|conector|contraste|regencia|hueco|huecos|descarta|depende|consiste|vuelve|dudo|miras|hazlo) /.test(c), 'Dê uma estratégia: <b>Lee el párrafo</b> entero … / <b>Fíjate en la preposición</b> …');
+  }),
+  c1_integrada: R('uma estratégia da prova integrada (toma notas, flechas, esquema, según la conferenciante, reformula…)', (t, k) => {
+    const c = C(k);
+    if (/ segundo (la|el) (conferenciante|ponente|audio) /.test(c)) return '"Segundo" (a fonte) é <b>según</b>.';
+    if (/ con setas /.test(c)) return '"Setas" (sinal) é <b>flechas</b>.';
+    return need(/ (notas|abreviaturas|flechas|flecha|esquema|según|conferenciante|conferencia|reformula|propias palabras|fuente|copies|audio|género|escucho|ordena) /.test(c), 'Dê uma estratégia: <b>Toma notas</b> con <b>flechas</b> … / <b>Según la conferenciante</b>, …');
+  }),
+  c1_oral: R('uma frase da exposição ou negociação (me gustaría empezar, para resumir, podríamos llegar a un acuerdo…)', (t, k) => {
+    const c = C(k);
+    if (/ siempre que (\p{L}+ )?(se )?(respeta|cumple|reduce|hay|es) /u.test(c)) return 'Com sentido de condição, <b>siempre que</b> pede subjuntivo: se <b>respete</b>.';
+    return need(/ (me gustaría|señalando|en primer lugar|por otra parte|para resumir|plantean|posturas|acuerdo|ceder|dispuesta|dispuesto|siempre que|se refiere|matizar|propondría|exposición|coinciden) /.test(c), 'Na oral: <b>Me gustaría empezar</b> … / <b>Para resumir</b>, … / <b>Podríamos llegar a un acuerdo</b> …');
+  }),
+  siele: R('uma frase sobre o SIELE (ordenador, puntuación, nivel, DELE o SIELE…)', (t, k) => {
+    const c = C(k);
+    if (/ (reprovado|computador) /.test(c)) return 'Em espanhol: <b>suspenso</b> / <b>reprobado</b>; <b>ordenador</b> / <b>computadora</b>.';
+    return need(/ (siele|dele|ordenador|computadora|puntuación|puntos|nivel|aprobado|suspenso|graba|caduca|certifica|beca|universidad|resultado|examen|depende) /.test(c), 'Fale do SIELE: El <b>SIELE</b> se hace en el <b>ordenador</b>. / La <b>puntuación</b> …');
+  }),
+  c1_simulado: R('uma frase do artigo (según la conferenciante, si bien…, sería conveniente que…, todo indica que…)', (t, k) => {
+    const c = C(k);
+    if (/ sería (conveniente|necesario) que (\p{L}+ )*?(tiene|tienen|hay|adapta|adaptan) /u.test(c)) return 'Com <b>sería conveniente que</b>, o imperfeito do subjuntivo: <b>tuviera</b>, <b>adaptara</b>.';
+    return need(/ (según|conferencia|conferenciante|urbanista|si bien|no es menos cierto|cabe preguntarse|sería conveniente|en definitiva|todo indica|asimismo|en primer lugar|planteó|ciudad|barrio|simulacro|artículo|notas|cité) /.test(c), 'Escreva como no artigo: <b>Según la conferenciante</b>, … / <b>Si bien</b> … / <b>Todo indica que</b> …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
