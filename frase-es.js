@@ -127,6 +127,40 @@ const RULES = {
   }),
   muymucho: R('"muito" com <b>muy</b> ou <b>mucho</b> (muy bueno, mucho trabajo, trabajo mucho)', (t, k) => need(has(k, /^(muy|mucho|mucha|muchos|muchas|poco|poca|pocos|pocas|bastante|demasiado)$/), 'Use muy ou mucho: <b>muy</b> bueno / <b>mucho</b> trabajo / trabajo <b>mucho</b>.')),
   invitacion: R('uma frase de convite (Te invito a … / La fiesta es a las … / ¡Claro que sí!)', (t, k) => need(has(k, /^(invito|invitamos|invitación|fiesta|cumpleaños|venir|vienes|quieres|confirma|confirmen|confirmar|trae|traigan|traer|claro|siento|encantaría|asado|espero|vemos|empieza)$/), 'Escreva como num convite: <b>Te invito a</b> … / <b>La fiesta empieza a las</b> …')),
+  // ---------- Módulo 4 ----------
+  hambre: R('como você está, com <b>tener</b> (tengo hambre, tengo sed, tengo frío…)', (t, k) => {
+    const c = C(k);
+    if (/ (estoy|estás|está|estamos|están) con (hambre|sed|frío|calor|sueño|prisa) /.test(c)) return 'Em espanhol, essas sensações se "têm": <b>tengo</b> hambre, <b>tengo</b> sed.';
+    if (/ mucho (hambre|sed|prisa) /.test(c)) return 'hambre, sed e prisa são femininos: <b>mucha</b> hambre.';
+    return need(has(k, /^(hambre|sed|frío|calor|sueño|prisa)$/) || / algo de (tomar|comer) /.test(c), 'Diga como está: <b>Tengo hambre</b> / <b>Tengo sed</b> / <b>Tengo frío</b>.');
+  }),
+  mercado: R('um pedido ou uma pergunta de preço (un kilo de …, ¿Cuánto cuesta?…)', (t, k) => {
+    const c = C(k);
+    if (/ cuánto cuesta (los|las) /.test(c)) return 'Com várias coisas: ¿Cuánto <b>cuestan</b> las manzanas?';
+    if (/ cuánto cuestan (el|la) /.test(c)) return 'Com uma coisa só: ¿Cuánto <b>cuesta</b> el queso?';
+    return need(/ (kilo|kilos|medio|docena|gramos|botella|paquete|cuánto|cuesta|cuestan|algo más|aquí tiene|eso es todo|me da|quiero|son|tiene|cómo se llama) /.test(c), 'Peça ou pergunte o preço: <b>Quiero un kilo de</b> … / <b>¿Cuánto cuesta?</b>');
+  }),
+  restaurante: R('um pedido no restaurante (Quisiera … / Para mí, … / La cuenta, por favor)', (t, k) => {
+    const c = C(k);
+    if (/ para mi /.test(c) && !/ para mi (plato|mesa|amigo|amiga|casa) /.test(c)) return 'Depois de para, use <b>mí</b>, com acento: para <b>mí</b>.';
+    return need(/ (quisiera|para mí|me trae|la cuenta|de primero|de segundo|de postre|para tomar|propina|mesa|pagar|tarjeta|exquisita|exquisito|carta|menú) /.test(c), 'Peça com educação: <b>Quisiera</b> … / <b>Para mí</b>, … / <b>La cuenta, por favor</b>.');
+  }),
+  demostrativos: R('um demonstrativo (este, esa, aquellos, esto…)', (t, k) => {
+    const c = C(k);
+    if (/ (este|ese|aquel) (camisa|casa|mesa|chaqueta|falda|ciudad|calle) /.test(c)) return 'Com substantivo feminino: <b>esta</b>, <b>esa</b>, <b>aquella</b> camisa.';
+    if (/ (esta|esa|aquella) (pan|libro|carro|vestido|plato) /.test(c)) return 'Com substantivo masculino: <b>este</b>, <b>ese</b>, <b>aquel</b> libro.';
+    return need(has(k, /^(este|esta|estos|estas|ese|esa|esos|esas|aquel|aquella|aquellos|aquellas|esto|eso|aquello)$/), 'Use um demonstrativo: <b>este</b> (aqui), <b>ese</b> (aí), <b>aquel</b> (lá).');
+  }),
+  ropa: R('uma frase de compra de roupa (¿Puedo probarme …? / me queda bien / ¿Qué talla …?)', (t, k) => {
+    const c = C(k);
+    if (/ (los pantalones|los zapatos|las \p{L}+) me queda /u.test(c)) return 'Com várias peças, use <b>quedan</b>: los zapatos me <b>quedan</b> chicos.';
+    return need(has(k, /^(talla|probarme|probarse|probármelo|probador|queda|quedan|calza|número|oferta|caja|ropa|camisa|camiseta|pantalones|falda|vestido|zapatos|chaqueta)$/), 'Fale de roupa: <b>¿Puedo probarme</b> …? / Me <b>queda</b> bien.');
+  }),
+  menu: R('uma frase de pedido do menú del día (De primero, … / ¿Está incluido …?)', (t, k) => {
+    const c = C(k);
+    if (/ suco /.test(c)) return 'Suco, na América Latina, é <b>jugo</b>.';
+    return need(/ (de primero|de segundo|de postre|para tomar|incluye|incluido|menú|sopa|ensalada|jugo|picante|sin|vegetariana|plato) /.test(c), 'Peça do cardápio: <b>De primero</b>, … / <b>¿Está incluido</b> …?');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
