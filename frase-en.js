@@ -493,7 +493,7 @@ const RULES = {
     const c = k.join(' ');
     if (/^\s*(watch|read|follow|listen|scroll|play|use) \p{L}+.* (is|are) /iu.test(norm(t))) return 'A atividade como sujeito vai com -ing: <b>Watching</b> series is …';
     if (/\bi pass (\p{L}+ )?(hours|hour|minutes|time)\b/u.test(c)) return 'Passar tempo é <b>spend</b>: I spend two hours …';
-    return need(/^\s*\p{L}+ing\b/iu.test(norm(t)) || has(k, /^(spend|spent|series|news|podcasts|podcast|media|social|watch|watching|online|screen|scrolling)$/), 'Fale da mídia: <b>Watching</b> series is … / I <b>spend</b> … a day on …');
+    return need(/^\s*\p{L}+ing\b/iu.test(norm(t)) || has(k, /^(spend|spent|series|news|podcasts|podcast|media|social|watch|watching|watched|binge|season|online|screen|scrolling)$/), 'Fale da mídia: <b>Watching</b> series is … / I <b>spend</b> … a day on …');
   }),
   concordar: R("uma reação: <b>So do I / Neither do I</b> (com o auxiliar certo) ou <b>I agree / I see your point, but …</b>", (t, k) => {
     const c = k.join(' ');
@@ -1011,7 +1011,7 @@ const RULES = {
     if (/\b(despite|in spite of) (be|have|feel|work)\b/.test(c)) return 'Depois de despite, use -ing: despite <b>being</b> tired.';
     return need(/\b(despite|in spite of|even though|although|though|whereas|while|nevertheless|however|on the other hand|in contrast)\b/.test(c), 'Contraste: <b>Despite</b> the rain, … / <b>Even though</b> … / … <b>whereas</b> …');
   }),
-  midia: R('uma frase sobre mídia (reliable, biased, misleading, clickbait, fact-check, go viral…)', (t, k) => need(/\b(source|sources|reliable|trustworthy|biased|misleading|clickbait|fact-check\w*|fact|checked|viral|headline|misinformation|fake|share|shared|spread|spreads|evidence|edited|out of context|article|news)\b/.test(k.join(' ')), 'Use o vocabulário da mídia: a <b>reliable source</b> / <b>misleading</b> / it <b>went viral</b> …')),
+  midia_critica: R('uma frase sobre mídia (reliable, biased, misleading, clickbait, fact-check, go viral…)', (t, k) => need(/\b(source|sources|reliable|trustworthy|biased|misleading|clickbait|fact-check\w*|fact|checked|viral|headline|misinformation|fake|share|shared|spread|spreads|evidence|edited|out of context|article|news)\b/.test(k.join(' ')), 'Use o vocabulário da mídia: a <b>reliable source</b> / <b>misleading</b> / it <b>went viral</b> …')),
   cautela: R('uma afirmação cautelosa (It could be argued … / tend to / some evidence / arguably / to some extent)', (t, k) => {
     const c = k.join(' ');
     if (/\bit could be argue\b/.test(c)) return 'Na passiva: It could be <b>argued</b> that …';
@@ -1211,7 +1211,7 @@ const RULES = {
     if (/^suppose you (find|know|see|have) .*\bwould\b/.test(c)) return 'Com suppose + would, use o passado: Suppose you <b>found</b> …';
     return need(/\b(suppose|what if|imagine|justified|justify|greater good|rights|consent|privacy|fairness|fair|responsibility|acceptable|unacceptable|wrong|right|in principle|in practice|draw the line|slippery slope|dilemma|harm|depends)\b/.test(c), 'Discuta o dilema: <b>Suppose</b> you … / <b>Is it ever justified</b> to …? / <b>In principle</b>, … but …');
   }),
-  previsao: R('uma previsão (is set to / is expected to / is likely to / by 2050 / will have …)', (t, k) => {
+  previsao_dados: R('uma previsão (is set to / is expected to / is likely to / by 2050 / will have …)', (t, k) => {
     const c = k.join(' ');
     if (/\b(is|are) (set|expected|projected|likely|unlikely|bound|forecast) (rise|fall|grow|reach|increase|remain)\b/.test(c)) return 'Falta o to: is set <b>to</b> rise.';
     if (/\bwill have (rise|grow|fall|increase|reach)\b/.test(c)) return 'Depois de will have, o particípio: will have <b>risen</b>.';
@@ -1244,6 +1244,85 @@ const RULES = {
     const c = k.join(' ');
     if (/\bthe most (effective|important|useful) of the two\b/.test(c)) return 'Comparando dois, use <b>the more</b>: the more effective.';
     return need(/\b(of the two|the more|more \w+ than|while|although|on balance|crucially|what matters most|in the long term|lasting|immediate|deterrent|on the other hand|however|target|outweigh|i believe)\b/.test(c), 'Avalie e escolha: <b>Of the two</b>, I believe … is <b>the more</b> effective. / <b>On balance</b>, …');
+  }),
+  // ---------- Módulo 39 ----------
+  atenuacao: R('uma frase com understatement (not exactly …, a bit of a …, not ideal, not bad at all…)', (t, k) => need(/(\bnot|n't) exactly\b|\b(a bit of a|not bad|not ideal|overjoyed|could have gone better|a little|slightly|rather|quite|seen better|could be worse|cup of tea|not the best|took a while|interesting idea|bear it in mind)\b/.test(k.join(' ')), 'Atenue: It was<b>n\'t exactly</b> cheap. / It was <b>a bit of a</b> disaster. / <b>Not bad at all!</b>')),
+  ironia: R('uma frase irônica (Oh, great … / Lovely weather! / That went well / Yeah, right)', (t, k) => need(/\b(oh,? (great|wonderful|brilliant|lovely|perfect)|just what i needed|that went well|yeah,? right|as if|thanks a lot|nice one|what a surprise|brilliant|lovely|wonderful|sarcastic\w*|queen of england)\b/.test(k.join(' ')), 'Use a ironia: <b>Oh, great. Just what I needed.</b> / <b>Yeah, right.</b>')),
+  ordem_estilo: R('uma frase com ordem expressiva (Strange as it may seem / Much as I … / Try as I might / Gone are the days / So … was …)', (t, k) => {
+    const c = k.join(' ');
+    if (/^so (tired|great|loud|happy|bad) (she|he|it|i|they|we) (was|were)\b/.test(c)) return 'Depois de So + adjetivo, inverta: So tired <b>was she</b> that …';
+    if (/^gone (is|are) the days that\b/.test(c)) return 'Use <b>when</b>: Gone are the days <b>when</b> …';
+    return need(/^(\w+ as (it|i|she|he|they|we) (may|might|was|were|am|is|are|like|love|admire|tried)|much as|try as|gone are the days|here comes|there goes|so \w+ (was|were|is|did)|such (was|were|is))\b/.test(c), 'Use a ordem como estilo: <b>Strange as it may seem</b>, … / <b>Gone are the days when</b> …');
+  }),
+  elipse: R('uma resposta com substituição ou elipse (I hope so / I\'m afraid not / If so / Sounds good)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bi (hope|think|suppose|guess) no\b|\bi'm afraid no\b/.test(c)) return 'A negativa é <b>not</b>: I hope <b>not</b> / I\'m afraid <b>not</b>.';
+    return need(/\b(hope|think|suppose|guess|expect|afraid) (so|not)\b|\bif (so|not)\b|\bdon't think so\b|^(sounds|want|got|never heard|can't complain|could be worse|told you|looks like|see you)\b/.test(c), 'Economize palavras: <b>I hope so</b> / <b>I\'m afraid not</b> / <b>If so</b>, … / <b>Sounds good.</b>');
+  }),
+  figurado: R('uma metáfora ou hipérbole (drowning in work, a heart of gold, a million times, I\'m starving…)', (t, k) => need(/\b(drowning|a sea of|heart of gold|rollercoaster|roller coaster|breath of fresh air|flood of|backbone|million times|starving|dying to|weighs a ton|took forever|literally|crystal clear|collapsed|war zone|waste\w* time|spend\w* time|build\w* an argument|time is money)\b/.test(k.join(' ')), 'Use linguagem figurada: I\'m <b>drowning in work</b> / I\'ve told you <b>a million times</b> …')),
+  cronica: R('uma frase de crônica de humor (What could possibly go wrong? / It was not, perhaps, my finest hour / Big mistake.)', (t, k) => need(/\b(go wrong|finest hour|turned out|gone are the days|needless to say|in my defence|in my defense|to be fair|let us say|big mistake|huge|so much for|next (time|year)|at least|what a brilliant|like millions|how hard could it be|war zone)\b/.test(k.join(' ')) || /^\p{L}+( \p{L}+){0,2}[.!]$/u.test(t.trim()), 'Escreva com humor: <b>What could possibly go wrong?</b> / <b>It was not, perhaps, my finest hour.</b>')),
+  // ---------- Módulo 40 ----------
+  us_uk_vocab: R('uma frase com vocabulário britânico ou americano (flat, lift, bill, queue, autumn…)', (t, k) => need(has(k, /^(flat|lift|lorry|autumn|biscuit|biscuits|queue|holiday|bill|petrol|trousers|apartment|elevator|truck|fall|cookie|cookies|line|vacation|check|gas|pants|crisps|chips|pavement|sidewalk|underground|subway|tube|motorway|highway|floor|park|gap|vest)$/), 'Use o vocabulário de uma variedade: <b>flat</b> / <b>apartment</b>, <b>lift</b> / <b>elevator</b>, <b>bill</b> / <b>check</b> …')),
+  us_uk_grammar: R("uma frase com ortografia ou gramática de uma variedade (colour, centre, Have you got …?, I've just …)", (t, k) => {
+    const c = k.join(' ');
+    if (/\bfavourite color\b|\bfavorite colour\b|\bcolour\b.*\bcenter\b|\bcolor\b.*\bcentre\b/.test(c)) return 'Não misture: use <b>favourite colour / centre</b> (UK) ou <b>favorite color / center</b> (US).';
+    return need(/\b(colou?r|favou?rite|cent(re|er)|organi[sz]e|travel+ed|programme|have you got|has got|have got|i've just|have you finished|the team are|at the weekend|on the weekend|consistent|spelling)\b/.test(c), "Use a ortografia ou a gramática de uma variedade: <b>colour</b>, <b>centre</b>, <b>Have you got</b> …?, <b>I've just</b> …");
+  }),
+  sotaques: R('uma frase sobre sotaques ou para pedir que alguém repita (accent, could you say that again …)', (t, k) => need(/\b(accents?|say that again|more slowly|slow down|pronounce|sounds?|tomayto|tomahto|water|car|british|american|australian|scottish|irish|correct|listen|variety)\b/.test(k.join(' ')), 'Fale de sotaques ou peça para repetir: <b>Sorry, could you say that again a bit more slowly?</b>')),
+  ingles_mundo: R("uma frase com uma expressão de outra variedade (G'day, arvo, no worries, grand, craic, prepone…)", (t, k) => need(/\b(g'day|gday|mate|arvo|brekkie|no worries|heaps|grand|craic|wee|aye|prepone|needful|lah|native speakers|non-native|second language|lingua franca)\b/.test(k.join(' ')), "Use uma expressão de outra variedade: <b>G'day, mate!</b> / <b>I'm grand</b> / <b>See you this arvo</b>.")),
+  girias: R('uma frase com gíria (knackered, gutted, quid, bucks, awesome, ghost, low-key…)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bfive quids\b|\bten quids\b/.test(c)) return 'quid não tem plural: five <b>quid</b>.';
+    return need(/\b(knackered|gutted|quid|cheers|brilliant|dodgy|fancy|cuppa|awesome|bucks|dude|hang out|grab|my bad|what's up|sus|low-key|low key|ghost\w*|no cap|vibe|slay)\b/.test(c), "Use uma gíria: I'm <b>knackered</b> / It cost ten <b>bucks</b> / He <b>ghosted</b> me.");
+  }),
+  variedades: R('uma frase sobre as variedades do inglês ou adaptada para o britânico (flat, colour, I\'ve just …)', (t, k) => need(/\b(variety|varieties|valid|consistent|native|non-native|lingua franca|owner|clarity|accent|spoken|billion|flat|colour|favourite|centre|have you got|i've just|bill|holiday|autumn|british|american)\b/.test(k.join(' ')), 'Fale das variedades ou adapte: <b>Each variety is equally valid.</b> / <b>We rented a flat in the city centre.</b>')),
+  // ---------- Módulo 41 ----------
+  literatura: R('uma frase sobre ficção ou de ficção (narrator, point of view, imagery, little did they know…)', (t, k) => need(/\b(narrator|novel|story|told|point of view|character|plot|setting|set in|imagery|foreshadowing|little did|would later|if only|between the lines|clues|reader|stared|smelled|as \w+ as|ending|subtext)\b/.test(k.join(' ')), 'Fale de ficção: <b>The story is told by</b> … / <b>Little did they know</b> … / <b>The novel is set in</b> …')),
+  poesia: R('uma frase sobre o poema (The poem compares … to … / The tone is … / The image of … suggests …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bcompares? \w+ with a\b/.test(c)) return 'Para comparar uma coisa a outra: compare … <b>to</b> …';
+    return need(/\b(poem|poet|compares?|metaphor|stanza|line|rhyme|rhythm|alliteration|tone|image|suggests|feathers|hope|bird|soul|aloud|emphasizes)\b/.test(c), 'Comente o poema: <b>The poem compares</b> hope <b>to</b> a bird. / <b>The tone is</b> hopeful.');
+  }),
+  ingles_antigo: R("uma frase com inglês antigo ou a sua versão moderna (thou art, 'tis, wherefore, hath…)", (t, k) => need(/\b(thou|thee|thy|thine|ye|art|hast|hath|doth|dost|'tis|tis|'twas|twas|wherefore|methinks|anon|forsooth|be or not to be|stage|you are|it is|why)\b/.test(k.join(' ')), "Use ou reconheça o inglês antigo: <b>Wherefore art thou</b> …? / <b>'Tis</b> … / <b>Methinks</b> …")),
+  juridico: R('uma cláusula jurídica (The tenant shall … / Either party may … / hereby / liable / breach…)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bshall to\b|\bmay to\b/.test(c)) return 'Depois de shall / may, o verbo básico, sem to: shall <b>pay</b>.';
+    return need(/\b(shall|hereby|herein|hereinafter|pursuant|parties|party|liable|breach|terminate|termination|notice|in writing|notwithstanding|agreement|tenant|landlord|clause)\b/.test(c), 'Escreva como num contrato: The tenant <b>shall</b> … / Either party <b>may terminate</b> …');
+  }),
+  oficial: R('uma frase de texto oficial (applicants, eligible, supporting documents, subject to, non-refundable, unless…)', (t, k) => {
+    const c = k.join(' ');
+    if (/\blegible\b/.test(c) && /\b(residents|applicants|candidates|over)\b/.test(c)) return 'Apto, elegível é <b>eligible</b> (legible é "legível").';
+    return need(/\b(applicants?|eligib\w*|supporting documents|deadline|submit|subject to|discretion|in accordance with|null and void|fine print|terms and conditions|refundable|non-refundable|prior notice|unless|within|renews|automatically|waive|considered)\b/.test(c), 'Use a linguagem oficial: <b>Applicants must submit</b> … / <b>subject to availability</b> / <b>non-refundable</b> …');
+  }),
+  linguagem_simples: R('uma frase em Plain English (You must … / You must not … / If you … / We will …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(the tenant shall|hereby|in the event of|prior to|premises)\b/.test(c) && !/\b(plain english|means|instead)\b/.test(c)) return 'Isso ainda é jurídico. Simplifique: <b>you must</b>, <b>if</b>, <b>before</b>, <b>the flat</b>.';
+    return need(/^(you|we|if you|before you|normal|ask|in plain english)\b|\b(you must|you can|you may|we will|we may|move out|wear and tear|deposit)\b/.test(c), 'Escreva em linguagem simples: <b>You must</b> … / <b>If you</b> … / <b>We will</b> …');
+  }),
+  // ---------- Módulo 42 ----------
+  prova_c2: R('uma frase sobre a prova C2 ou o seu estudo (parts, words, two texts, talk alone…)', (t, k) => need(/\b(exam|test|paper|papers|parts?|questions|minutes|words|texts?|summari[sz]e|evaluate|speaking|writing|reading|listening|recording|heard|twice|alone|card|essays?|topic)\b/.test(k.join(' ')), 'Fale da prova: <b>Reading and Use of English has seven parts.</b> / <b>You talk alone for about two minutes.</b>')),
+  resumir_avaliar: R('uma frase que resuma ou avalie textos (Both writers … / The first text argues … whereas … / raises a valid point …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bboth writers agrees\b|\bthe first writer argue that\b/.test(c)) return 'Confira a concordância: Both writers <b>agree</b>; the first writer <b>argues</b>.';
+    return need(/\b(both writers|both texts|the first (text|writer)|the second|whereas|unlike|argues|claims|convincing|valid point|fails to consider|overlooks|i would argue|in my view|on balance|focuses on)\b/.test(c), 'Resuma e avalie: <b>Both writers agree that</b> … / The first text argues …, <b>whereas</b> … / <b>raises a valid point</b> …');
+  }),
+  fala_longa: R("uma frase para organizar uma fala longa (That's a fascinating question … / Take, for instance … / All things considered …)", (t, k) => need(/\b(fascinating question|several ways|to begin with|another aspect|take,? for instance|for instance|for example|from my own experience|admittedly|it depends|all things considered|i'd say|let me think|interesting point|on the one hand|to sum up)\b/.test(k.join(' ')), "Organize a fala: <b>That's a fascinating question</b> … / <b>Take, for instance</b>, … / <b>So, all things considered</b>, …")),
+  erros_classicos: R('uma frase correta, sem os falsos amigos clássicos (currently, intend, attend, I\'m 30, ask a question…)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bi pretend to (study|move|travel|go|work|live|learn|buy)\b/.test(c)) return 'Para "pretendo", use <b>intend</b> (pretend é "fingir"): I <b>intend</b> to …';
+    if (/\bi have \d+ years\b|\bi have (twenty|thirty|forty|fifty)\w* years\b/.test(c)) return "Idade com to be: I<b>'m</b> 30.";
+    if (/\bmake (a|any) question\b/.test(c)) return 'Fazer uma pergunta: <b>ask</b> a question.';
+    if (/\bdepends of\b/.test(c)) return 'depend pede <b>on</b>: It depends <b>on</b> …';
+    if (/\bdiscuss(ed)? about\b/.test(c)) return 'discuss não leva about: <b>discuss the plan</b>.';
+    if (/\bexplain me\b/.test(c)) return 'Diga: explain it <b>to me</b>.';
+    if (/\b(lost|lose) the (bus|train|flight)\b/.test(c)) return 'Perder o ônibus: <b>miss</b> the bus.';
+    return need(k.length >= 3, 'Escreva uma frase completa, sem os falsos amigos: <b>Currently</b> … / I <b>intend</b> to … / Can I <b>ask</b> a question?');
+  }),
+  manutencao: R('uma frase sobre os seus hábitos em inglês (I read … every day / I listen to podcasts … / once a week …)', (t, k) => need(/\b(every day|every week|once a week|twice a week|daily|habit|routine|read|listen|podcasts?|watch|series|subtitles|journal|write|record|conversation|review|feedback|little and often|keep)\b/.test(k.join(' ')), 'Fale dos seus hábitos: <b>I read</b> for twenty minutes <b>every day</b>. / <b>Once a week</b>, I …')),
+  redacao_c2: R('uma frase da redação final (Both texts discuss whether … / The first writer argues … / On balance …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bdiscuss(es)? about\b/.test(c)) return 'discuss não leva about: Both texts <b>discuss whether</b> …';
+    return need(/\b(both texts|both writers|discuss whether|the first writer|the second writer|argues|maintains|fears|convincing|to some extent|valid point|fails to consider|overlooks|on balance|in my view|strike a balance|at the expense of|completed)\b/.test(c), 'Use a linguagem da redação: <b>Both texts discuss whether</b> … / <b>The first writer argues</b> … / <b>On balance</b>, …');
   }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;

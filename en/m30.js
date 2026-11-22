@@ -58,7 +58,7 @@ NL('en-fakenews', {
   pts: 'Fontes: a reliable / trustworthy source, an anonymous account, a fact-checking website. Pergunte: Who wrote it? When? Where does it come from?|Problemas: biased (tendencioso), misleading (enganoso), out of context (fora de contexto), edited (editado), clickbait (caça-cliques).|Ações: fact-check (checar), share (compartilhar), go viral (viralizar), spread misinformation (espalhar desinformação).|Para opinar: The article is biased. / The headline is just clickbait. / There\'s no evidence for that.',
   ex: "The article is clearly biased.=O artigo é claramente tendencioso.|The photo was taken out of context.=A foto foi tirada de contexto.|Fake news spreads faster than the truth.=As notícias falsas se espalham mais rápido que a verdade.|There's no evidence for that claim.=Não há evidências para essa afirmação.",
   bd: ['Always=C^sempre|check=V^verifique|if_the_source=S^a fonte|is_reliable.=C^confiável', 'Sempre verifique se a fonte é confiável.'],
-  rule: 'midia',
+  rule: 'midia_critica',
   hw: 'Escolha uma notícia que você viu nas redes e escreva cinco frases avaliando-a: a fonte é confiável? A manchete é enganosa? Há evidências? Use o vocabulário da lição.',
   deep: `
 Hoje você aprende o vocabulário da **mídia** com senso crítico: fontes, manchetes, viralização e notícias falsas.
