@@ -1197,6 +1197,31 @@ const RULES = {
     if (/\burge you (keep|reconsider|vote|stop|save|create)\b/.test(c)) return 'Depois de urge you, use <b>to</b>: I urge you <b>to</b> reconsider.';
     return need(/\b(urge|on behalf of|residents|petition|reconsider|lifeline|granted|where else|signed|yours sincerely|dear editor|i am writing|vote against|more than)\b/.test(c) || /\?\s*$/.test(t), 'Use a linguagem da carta: <b>I am writing to urge you to</b> … / <b>I urge you to reconsider</b> …');
   }),
+  // ---------- Módulo 37 ----------
+  causa_efeito: R('uma relação de causa e efeito (give rise to, stem from, trigger, be attributed to, a knock-on effect…)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bgave raise to|gives raise to|give raise to\b/.test(c)) return 'A expressão é give <b>rise</b> to.';
+    if (/\bstems? of\b/.test(c)) return 'Vir de: stem <b>from</b>.';
+    return need(/\b(give|gives|gave|given) rise to\b|\b(trigger|triggers|triggered|bring about|brought about|stem|stems|stemmed|result|results|resulted|arise|arises|arose|attributed|lead to|leads to|led to|knock.?on|in turn|vicious circle|as a consequence|consequently|hence|thereby|because of|due to)\b/.test(c), 'Mostre causa e efeito: … <b>stems from</b> … / … <b>gave rise to</b> … / <b>a knock-on effect</b> …');
+  }),
+  economia: R('uma frase sobre economia (inflation, interest rates, recession, GDP, wages, the cost of living…)', (t, k) => need(has(k, /^(inflation|interest|rates|rate|recession|gdp|growth|unemployment|supply|demand|cost|living|wages|taxes|budget|debt|spending|economy|economic|prices|exports|imports|slowdown|recovery|bank|purchasing)$/), 'Use o vocabulário da economia: <b>inflation</b>, <b>interest rates</b>, <b>the cost of living</b> …')),
+  ciencia: R('uma frase sobre ciência e dados (correlation, causation, sample, control group, peer-reviewed…)', (t, k) => need(/\b(correlation|causation|sample|variables?|control group|peer-reviewed|peer reviewed|statistically|significant|hypothesis|bias|findings|third factor|randomly|study|both|data|participants|margin of error|replicated|draw conclusions)\b/.test(k.join(' ')), 'Use a linguagem da ciência: <b>correlation does not imply causation</b> / <b>the sample</b> / <b>a third factor</b> …')),
+  etica: R('uma frase sobre um dilema ético (Suppose … / Is it ever justified … / In principle … / draw the line…)', (t, k) => {
+    const c = k.join(' ');
+    if (/^suppose you (find|know|see|have) .*\bwould\b/.test(c)) return 'Com suppose + would, use o passado: Suppose you <b>found</b> …';
+    return need(/\b(suppose|what if|imagine|justified|justify|greater good|rights|consent|privacy|fairness|fair|responsibility|acceptable|unacceptable|wrong|right|in principle|in practice|draw the line|slippery slope|dilemma|harm|depends)\b/.test(c), 'Discuta o dilema: <b>Suppose</b> you … / <b>Is it ever justified</b> to …? / <b>In principle</b>, … but …');
+  }),
+  previsao: R('uma previsão (is set to / is expected to / is likely to / by 2050 / will have …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(is|are) (set|expected|projected|likely|unlikely|bound|forecast) (rise|fall|grow|reach|increase|remain)\b/.test(c)) return 'Falta o to: is set <b>to</b> rise.';
+    if (/\bwill have (rise|grow|fall|increase|reach)\b/.test(c)) return 'Depois de will have, o particípio: will have <b>risen</b>.';
+    return need(/\b(is|are|was|were) (set|expected|projected|forecast|predicted|likely|unlikely|bound) to\b|\bwill have\b|\bby 20\d\d\b|\b(foreseeable future|next decade|long term|according to forecasts)\b/.test(c), 'Faça uma previsão: Sales <b>are set to</b> rise / Prices <b>are unlikely to</b> fall / <b>By 2050</b>, …');
+  }),
+  explicar: R('uma frase de texto explicativo (Put simply, … / When …, … / For example, … / In short, …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bthe rate at what\b/.test(c)) return 'Com preposição, use which: the rate <b>at which</b> …';
+    return need(/^(put simply|simply put|in other words|when|for example|for instance|as a result|in short|this|imagine)\b/.test(c) || /\b(is the|the rate at which|leads to|makes|which in turn|means|tend to|expected to)\b/.test(c), 'Explique com clareza: <b>Put simply</b>, … / <b>When</b> …, … / <b>For example</b>, … / <b>In short</b>, …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
