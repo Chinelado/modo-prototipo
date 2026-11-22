@@ -194,6 +194,35 @@ const RULES = {
     if (has(k, /^(proibido|proibida|saída|empurre|puxe|banheiro|banheiros)$/)) return 'Escreva o aviso em espanhol: <b>Prohibido</b>, <b>Salida</b>, <b>Empuje</b>, <b>Jale</b>, <b>Baños</b>.';
     return need(has(k, /^(prohibido|prohibida|salida|entrada|empuje|jale|tire|abierto|abierta|cerrado|cerrada|baños|caja|horario|servicio|permite|ascensor|escalera|aviso|alquila|no)$/), 'Escreva um aviso: <b>Prohibido fumar</b> / <b>Salida</b> / <b>Empuje</b>.');
   }),
+  // ---------- Módulo 6 ----------
+  gerundio: R('o que está acontecendo, com <b>estar + gerúndio</b> (estoy comiendo…)', (t, k) => {
+    if (has(k, /^(comendo|fazendo|lendo|dormindo|escrevendo|bebendo|vivendo)$/)) return 'O gerúndio do -er e do -ir leva i: com<b>iendo</b>, hac<b>iendo</b>, le<b>yendo</b>.';
+    if (has(k, /^(leiendo|dormiendo|pediendo)$/)) return 'Confira: <b>leyendo</b>, <b>durmiendo</b>, <b>pidiendo</b>.';
+    return need(has(k, ESTAR) && has(k, /\p{L}+(ando|iendo|yendo)$/u), 'Use estar + gerúndio: <b>Estoy comiendo</b>. / <b>Está lloviendo</b>.');
+  }),
+  ira: R('um plano com <b>ir a + infinitivo</b> (voy a viajar…)', (t, k) => {
+    const c = C(k);
+    if (/ (voy|vas|va|vamos|van) (ir|viajar|comer|trabajar|visitar|descansar|hacer|cenar|salir|ver|estudiar|llover|empezar|venir) /.test(c)) return 'Não esqueça o <b>a</b>: voy <b>a</b> viajar.';
+    return need(/ (voy|vas|va|vamos|van) a \p{L}+(ar|er|ir) /u.test(c), 'Fale de um plano: <b>Voy a</b> viajar. / <b>Vamos a</b> cenar.');
+  }),
+  pasado: R('algo que você fez, no <b>pretérito indefinido</b> (ayer trabajé, comí…)', (t, k) => {
+    if (has(k, /^(hablastes|comistes|vistes|fuistes|hicistes|estuvistes)$/)) return 'Com tú, o passado não termina em -s: <b>viste</b>, <b>hablaste</b>.';
+    if (has(k, /^(trabalhei|comi|fiz|cheguei|comprei|visitei)$/)) return 'Isso é português. Em espanhol: <b>trabajé</b>, <b>comí</b>, <b>hice</b>, <b>llegué</b>.';
+    return need(has(k, /\p{L}+(é|aste|ó|amos|aron|í|iste|ió|imos|ieron)$/u) || has(k, /^(fui|fue|fuimos|fueron|vi|vio|tuve|hice|hizo|estuve|pude|vine|dije)$/), 'Conte o que fez: Ayer <b>trabajé</b> … / <b>Comí</b> …');
+  }),
+  irregulares: R('um irregular no passado (fui, tuve, hice, estuve, pude, vine, dije…)', (t, k) => {
+    if (has(k, /^(tuvé|hicé|estuvé|pudé|viné|dijé|hiço|dijieron|tení|hací)$/)) return 'Os irregulares não levam acento e têm forma própria: <b>tuve</b>, <b>hice</b>, <b>hizo</b>, <b>dijeron</b>.';
+    return need(has(k, /^(fui|fuiste|fue|fuimos|fueron|tuve|tuviste|tuvo|tuvimos|tuvieron|hice|hiciste|hizo|hicimos|hicieron|estuve|estuviste|estuvo|estuvimos|estuvieron|pude|pudiste|pudo|pudimos|quise|quiso|vine|viniste|vino|vinimos|vinieron|dije|dijiste|dijo|dijimos|dijeron)$/), 'Use um irregular: <b>fui</b>, <b>tuve</b>, <b>hice</b>, <b>estuve</b>…');
+  }),
+  finde: R('uma frase sobre o fim de semana (primero, después, al final, ¡qué bien!…)', (t, k) => {
+    const c = C(k);
+    return need(/ (primero|después|luego|más tarde|al final|qué tal|qué bien|qué lástima|qué pena|lo pasé|cómo te fue|fin de semana|divertido|tranquilo|aburrido) /.test(c) || has(k, /\p{L}+(é|ó|í|ió|aste|iste)$/u), 'Conte o fim de semana: <b>Primero</b> fui …, <b>después</b> … / <b>¡Qué bien!</b>');
+  }),
+  postal: R('uma frase de postal (¡Hola desde …! / Estoy … / Ayer visité … / Mañana voy a … / Besos)', (t, k) => {
+    const c = C(k);
+    if (/ (voy|vamos) (ir|visitar|viajar|comer|ver) /.test(c)) return 'Não esqueça o <b>a</b>: voy <b>a</b> ir.';
+    return need(/ (desde|querida|querido|estoy|disfrutando|ayer|visité|fui|comí|mañana|voy a|besos|abrazo|extraño|hasta pronto|hace|calor) /.test(c), 'Escreva como num postal: <b>¡Hola desde</b> …! / <b>Ayer visité</b> … / <b>Mañana voy a</b> …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
