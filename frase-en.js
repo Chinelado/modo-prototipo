@@ -415,6 +415,39 @@ const RULES = {
     return need(k.some((w) => /^\p{L}{3,}(ed|ing)$/u.test(w) && /^(bor|tir|interest|excit|worr|relax|surpris|confus|embarrass|annoy|stress)/.test(w)), 'Use um adjetivo de sentimento: I\'m <b>bored</b>. / It was <b>boring</b>.');
   }),
   doente: R('um aviso de que está doente, com <b>because</b> ou <b>so</b> (I can\'t come in because …)', (t, k) => need(has(k, /^(because|so|sick|flu|fever|note|home|can't|calling|cold|dizzy)$/), "Avise com o motivo: I can't come in today <b>because</b> I'm sick. / I have a fever, <b>so</b> …")),
+  // ---------- Módulo 12 ----------
+  reserva: R("uma frase de <b>reserva</b> (I'd like to book … / Is breakfast included? / OK, I'll take it!)", (t, k) => {
+    const c = k.join(' ');
+    if (/\bi will to\b|\bi'll to\b/.test(c)) return "Depois de will, o verbo vem direto: I'll <b>take</b> it.";
+    return need(has(k, /^(book|booking|reservation|room|night|nights|included|check|i'll|flight|ticket|seat|round|one-way)$/), "Faça uma reserva: I'd like to <b>book</b> a room … / OK, <b>I'll</b> take it!");
+  }),
+  aeroporto: R('uma frase de <b>aeroporto</b> (The flight is delayed. / Now boarding at gate 12. / I have a bag to check.)', (t, k) => {
+    if (/\bport (\d+|twelve|ten|five)\b/.test(k.join(' '))) return 'Portão de embarque é <b>gate</b>.';
+    return need(has(k, /^(flight|gate|boarding|delayed|canceled|cancelled|passport|check|carry-on|layover|customs|baggage|departures|arrivals|time|seat|terminal)$/), 'Use uma palavra do aeroporto: The <b>flight</b> is <b>delayed</b>. / Now boarding at <b>gate</b> 12.');
+  }),
+  problema: R('um <b>imprevisto</b> no passado, com because ou so (We missed the flight because …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(lost|lose) (the|our|my|a) (flight|bus|train|connection|plane)\b/.test(c)) return 'Perder um transporte é <b>miss</b>: We <b>missed</b> the flight.';
+    if (/\b(missed|miss) (my|the|our|her|his) (passport|wallet|phone|bag|suitcase|keys|key)\b/.test(c)) return 'Perder um objeto é <b>lose</b>: I <b>lost</b> my passport.';
+    if (/\bbecause (a|the) (storm|strike|rain|snow|traffic|delay)\b/.test(c)) return 'Com um substantivo, use <b>because of</b>: because of the storm.';
+    return need(has(k, /^(missed|lost|stolen|delayed|canceled|cancelled|because|so|stuck|forgot|broke)$/), 'Conte um imprevisto: We <b>missed</b> the flight <b>because</b> … / I <b>lost</b> my …, <b>so</b> …');
+  }),
+  tempo_clima: R("uma frase sobre o <b>tempo</b> com it (It's raining. / It will be sunny tomorrow.)", (t, k) => {
+    if (/^\s*(is|was) (raining|snowing|sunny|cold|hot|windy|cloudy)\b/i.test(norm(t))) return "O tempo precisa de sujeito: <b>It's</b> raining.";
+    if (/\bwhat('s| is) the weather\s*\??\s*$/i.test(norm(t))) return "A pergunta é <b>What's the weather like?</b>";
+    return need(has(k, /^(weather|sunny|cloudy|rain|raining|rains|snow|snowing|windy|hot|cold|warm|degrees|forecast|storm|humid|freezing)$/), "Fale do tempo: <b>It's</b> sunny. / It <b>will rain</b> tomorrow.");
+  }),
+  condicional1: R("um plano com <b>if</b> (If it rains, we'll stay home.)", (t, k) => {
+    const c = k.join(' ');
+    if (/\bif (it|i|you|we|they|he|she) will\b/.test(c) || /\bif (it|i|you|we|they|he|she)'ll\b/.test(c)) return 'Depois de if, use o presente: If it <b>rains</b> (e não "if it will rain").';
+    if (/\bif it rain\b/.test(c)) return 'Com it, o presente ganha -s: If it <b>rains</b>.';
+    return need(has(k, /^(if|unless)$/) && /\b(will|won't|'ll|i'll|we'll|you'll|they'll|it'll|she'll|he'll)\b/.test(c), "Faça um plano com condição: <b>If</b> it rains, we<b>'ll</b> stay home.");
+  }),
+  avaliacao: R("uma frase de <b>avaliação</b> no passado (The room was clean. / I'd recommend this hotel.)", (t, k) => {
+    const c = k.join(' ');
+    if (/\b(i'd|i would) (recommending|recommends|to recommend)\b/.test(c)) return "Depois de I'd, o verbo vem no básico: I'd <b>recommend</b>.";
+    return need(has(k, /^(was|were|stayed|recommend|recommended|clean|dirty|staff|location|comfortable|noisy|helpful|spotless|disappointing|value|stars)$/), "Avalie: The room <b>was</b> clean. / I'd <b>recommend</b> this hotel.");
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
