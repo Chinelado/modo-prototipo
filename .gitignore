@@ -4,3 +4,6 @@ images/guia/*.png
 images/aulas/*.png
 capturas/
 capturas-modo/
+
+# folhas originais das cartas (fonte, 1,6 MB cada): ficam só no computador; o site usa images/cartas/webp/
+images/cartas/*.png

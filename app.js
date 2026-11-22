@@ -229,6 +229,8 @@ const clockText = () => Math.floor(secsToday() / 60) + ' / ' + S.goal + ' min';
 /* ---------- navegação ---------- */
 let view = 'home';
 function go(v, arg) {
+  // versão nova pendente (ver updReady): aplica ao voltar para uma tela calma
+  if (updPending && UPD_CALM.includes(v)) { try { save(); } catch (e) { /* segue */ } updPending = false; location.reload(); return; }
   view = v; sess = null; stopClip(); if (hasTTS) speechSynthesis.cancel();
   const tabs = [['home', '🏠', 'Hoje'], ['trilha', '🗺️', 'Trilha'], ['cards', '🃏', 'Cartas'], ['guide', '📘', 'Guia'], ['extras', '🎬', 'Extras'], ['perfil', '🧠', 'Perfil']];
   const due = dueKeys().length;
@@ -1083,14 +1085,17 @@ function cards() {
     }
     const k = queue[0], v = vocab(k), c = S.cards[k];
     const audioFirst = top === 'mus' && hasTTS && S.audio, rev = !audioFirst && Math.random() < 0.3;
+    // imagem da carta (data/cartas.js) no lugar do emoji; na frente só quando a pergunta é em português, para não entregar a resposta
+    const pic = typeof cardPicFile === 'function' ? cardPicFile(v) : '';
+    const picTag = pic ? `<img class="cardpic" src="images/cartas/webp/${pic}.webp" alt="" width="128" height="128" decoding="async">` : '';
     const front = audioFirst ? `<button class="play" data-say="${esc(v.de)}">🔊</button><p class="mut">Ouça e lembre o significado</p>`
       : rev ? `<div class="word ${gcls(v.de)}">${esc(v.de)}</div><p class="mut">O que significa?</p>`
-        : `<div class="word">${v.em} ${esc(v.pt)}</div><p class="mut">Como se diz em ${LP.lingua}?</p>`;
+        : `${picTag}<div class="word">${pic ? '' : v.em + ' '}${esc(v.pt)}</div><p class="mut">Como se diz em ${LP.lingua}?</p>`;
     app.innerHTML = `<div class="row"><h1 class="grow">🃏 Cartas</h1><small>${queue.length} restantes</small></div>
     <div class="card" style="text-align:center;min-height:220px">${front}<div id="back"></div></div><button class="pri big" id="flip">Mostrar resposta</button>`;
     if (audioFirst) setTimeout(() => say(sayText(v.de)), 300);
     $('#flip').onclick = () => {
-      $('#back').innerHTML = `<hr><div class="word ${gcls(v.de)}">${esc(v.de)} ${spk(v.de)}</div><p>${v.em} ${esc(v.pt)}</p>`;
+      $('#back').innerHTML = `<hr>${pic && (rev || audioFirst) ? picTag : ''}<div class="word ${gcls(v.de)}">${esc(v.de)} ${spk(v.de)}</div><p>${pic ? '' : v.em + ' '}${esc(v.pt)}</p>`;
       say(sayText(v.de));
       $('#flip').outerHTML = `<div class="opts"><button data-q="0" class="no">Errei</button><button data-q="1">Difícil</button><button data-q="2" class="ok">Lembrei</button><button data-q="3">Fácil</button></div>`;
       $$('[data-q]').forEach((b) => (b.onclick = () => { rate(k, c, +b.dataset.q); queue.shift(); if (+b.dataset.q === 0) queue.push(k); else n++; save(); show(); }));
@@ -1463,8 +1468,32 @@ const isIOS = () => /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.
 let installEvt = null;
 addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); installEvt = e; if (view === 'perfil' || view === 'home') go(view); });
 addEventListener('appinstalled', () => { installEvt = null; toast('📲 App instalado! Abra pelo ícone na tela inicial.'); });
+/* Atualização automática. Cada versão publicada muda o sw.js (CACHE); o navegador baixa a versão nova, o service worker
+   novo assume (skipWaiting + claim) e dispara controllerchange aqui. Então:
+   · numa tela calma (Hoje, Trilha, Perfil, Guia, Extras), sem lição em andamento: recarrega sozinho;
+   · no meio de uma lição ou revisão: mostra um aviso com "Atualizar" e recarrega na próxima vez que você voltar a uma tela calma.
+   A procura por versão nova acontece ao abrir, sempre que o app volta para a frente e a cada 30 minutos. */
+var updPending = false, UPD_CALM = ['home', 'trilha', 'perfil', 'guide', 'extras']; // var: go() pode rodar antes desta linha
+const updCalm = () => !sess && UPD_CALM.includes(view) && !document.querySelector('input:focus, textarea:focus, dialog[open]');
+function updApply() { if (updPending) { updPending = false; location.reload(); } }
+function updReady() {
+  if (updPending) return; updPending = true;
+  if (updCalm()) { updApply(); return; }
+  if (document.getElementById('updBar')) return;
+  const bar = document.createElement('div'); bar.id = 'updBar'; bar.className = 'upd-bar'; bar.setAttribute('role', 'status');
+  bar.innerHTML = '<span>✨ Nova versão do app pronta.</span><button type="button" class="pri" id="updNow">Atualizar</button><button type="button" class="ghost" id="updLater" aria-label="Depois">Depois</button>';
+  document.body.appendChild(bar);
+  $('#updNow').onclick = () => { save(); updApply(); };
+  $('#updLater').onclick = () => bar.remove(); // continua pendente: atualiza sozinho na próxima tela calma
+}
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
-  navigator.serviceWorker.register('sw.js').catch((e) => console.error('Falha ao ativar o modo offline:', e));
+  const hadController = !!navigator.serviceWorker.controller; // na primeira instalação não há o que atualizar na tela
+  navigator.serviceWorker.addEventListener('controllerchange', () => { if (hadController) updReady(); });
+  navigator.serviceWorker.register('sw.js').then((reg) => {
+    const check = () => { if (navigator.onLine) reg.update().catch(() => {}); };
+    setInterval(check, 30 * 60e3);
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') { check(); if (updPending && updCalm()) updApply(); } });
+  }).catch((e) => console.error('Falha ao ativar o modo offline:', e));
 }
 addEventListener('offline', () => toast('📴 Sem internet: tudo continua funcionando, menos os links externos.'));
 addEventListener('online', () => toast('🌐 Conectado de novo.'));

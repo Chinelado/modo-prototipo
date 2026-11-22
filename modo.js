@@ -142,7 +142,7 @@ const _extras = extras;
 extras = function (arg) { _extras(arg); const h = app.querySelector('h1'); if (h) { h.textContent = 'Explorar'; if (!app.querySelector('.mo-sub')) h.insertAdjacentHTML('afterend', '<p class="mut mo-sub">Situações reais, leitura e conteúdos para usar o ' + LP.lingua + ' fora da trilha.</p>'); } };
 
 /* ---------- boas-vindas: idioma → nível → começar ---------- */
-const LANGS = [['DE', 'Alemão', 'A1 a C2 · 252 lições', true], ['EN', 'Inglês', 'A1 a C2 · 252 lições', true], ['ES', 'Espanhol', 'A1 e A2 · 84 lições (em construção)', true], ['FR', 'Francês', 'em preparação', false], ['IT', 'Italiano', 'em preparação', false]];
+const LANGS = [['DE', 'Alemão', 'A1 a C2 · 252 lições', true], ['EN', 'Inglês', 'A1 a C2 · 252 lições', true], ['ES', 'Espanhol', 'A1 a B1 · 126 lições (em construção)', true], ['FR', 'Francês', 'em preparação', false], ['IT', 'Italiano', 'em preparação', false]];
 onboard = function (step = 1) {
   const steps = `<div class="mo-steps">${[1, 2, 3].map((i) => `<i class="${i <= step ? 'on' : ''}"></i>`).join('')}</div>`;
   if (step === 1 && /[?&]ob=3/.test(location.search)) step = 3; // veio da troca de idioma nas boas-vindas
@@ -406,7 +406,8 @@ GEN.leq = function (les, el, done, it) {
     (ok) => done(ok, [], right, '', `<p>A resposta está no texto. Procure a linha que fala disso e compare: <b>${esc(right)}</b>.</p>`), 'col');
 };
 GEN.lew = function (les, el, done) {
-  const E = les.le.escrita, rx = (s, f = 'iu') => new RegExp(s, f);
+  // com a flag u, \p{L} funciona (letras acentuadas); um padrão antigo que não compile com u cai para a versão sem ela
+  const E = les.le.escrita, rx = (s, f = 'iu') => { try { return new RegExp(s, f.includes('u') ? f : f + 'u'); } catch (e) { return new RegExp(s, f.replace('u', '')); } };
   el.innerHTML = `<p class="q">${ic('chat', 18)} ${esc(E.t)}</p><p class="hint">${esc(E.pede)}</p>
     <div class="mo-form">${E.campos.map((c, j) => `<label class="mo-fl"><span><b lang="${LP.code}">${esc(c.l)}</b><small>${esc(c.d)}</small></span><input data-f="${j}" autocomplete="off" spellcheck="false"><em class="mo-fe" data-e="${j}"></em></label>`).join('')}</div>
     ${UML}<button class="pri" id="lwChk">Conferir</button><div id="lwRes"></div>`;

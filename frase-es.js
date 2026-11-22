@@ -258,10 +258,10 @@ const RULES = {
   // ---------- Módulo 8 ----------
   perfecto: R('uma experiência com o <b>pretérito perfecto</b> (he viajado, has comido, nunca he …)', (t, k) => {
     const c = C(k);
-    if (/ (tengo|tienes|tiene|tenemos|tienen) (\p{L}+(ado|ido)|hecho|visto|dicho|escrito) /u.test(c)) return 'O auxiliar é <b>haber</b>: <b>he</b> comido (e não "tengo comido").';
+    if (/ (tengo|tienes|tiene|tenemos|tienen) (\p{L}*(ado|ido)|hecho|visto|dicho|escrito) /u.test(c)) return 'O auxiliar é <b>haber</b>: <b>he</b> comido (e não "tengo comido").';
     if (/ (haz|as) (estado|visto|comido|ido|hecho|viajado|probado) /.test(c)) return 'Com tú, o auxiliar é <b>has</b> (com h e s).';
     if (/ (he|has|ha|hemos|han) (hacido|vido|decido|escribido|volvido|ponido|abrido|rompido) /.test(c)) return 'Esse particípio é irregular: <b>hecho</b>, <b>visto</b>, <b>dicho</b>, <b>escrito</b>, <b>vuelto</b>, <b>puesto</b>, <b>abierto</b>, <b>roto</b>.';
-    return need(/ (he|has|ha|hemos|han) (\p{L}+(ado|ido)|hecho|visto|dicho|escrito|vuelto|puesto|abierto|roto) /u.test(c), 'Use haber + particípio: <b>He</b> viajado. ¿Alguna vez <b>has</b> estado …?');
+    return need(/ (he|has|ha|hemos|han) (\p{L}*(ado|ido)|hecho|visto|dicho|escrito|vuelto|puesto|abierto|roto) /u.test(c), 'Use haber + particípio: <b>He</b> viajado. ¿Alguna vez <b>has</b> estado …?');
   }),
   yatodavia: R('o que já fez e o que ainda não fez (ya, todavía no, aún no)', (t, k) => {
     const c = C(k);
@@ -287,7 +287,7 @@ const RULES = {
   }),
   correo: R('uma frase de e-mail pessoal (saudação, novidade, pedido ou despedida)', (t, k) => {
     const c = C(k);
-    if (/ (tengo|tienes) (\p{L}+(ado|ido)) /u.test(c)) return 'O auxiliar é <b>haber</b>: <b>he</b> cambiado (e não "tengo cambiado").';
+    if (/ (tengo|tienes) (\p{L}*(ado|ido)) /u.test(c)) return 'O auxiliar é <b>haber</b>: <b>he</b> cambiado (e não "tengo cambiado").';
     if (/ le (lo|la|los|las) /.test(c)) return 'le + lo vira <b>se lo</b>.';
     return need(/ (hola|querido|querida|cómo estás|qué tal|he|has|hemos|ya|todavía|un abrazo|besos|escríbeme|hasta pronto|saludos|te extraño|novedades) /.test(c), 'Escreva como num e-mail: ¡<b>Hola</b>, …! / <b>He</b> empezado … / <b>Un abrazo</b>.');
   }),
@@ -523,6 +523,283 @@ const RULES = {
     if (/ acho que /.test(c)) return 'Isso é português. Em espanhol: <b>creo que</b>.';
     if (/ en conclusion /.test(c)) return '<b>conclusión</b> leva acento.';
     return need(/ (de acuerdo|como dice|creo que|en mi opinión|para mí|por un lado|por otro|además|sin embargo|por ejemplo|en conclusión|en resumen|depende|saludos|no creo que|pero) /.test(c), 'Comente: <b>Estoy de acuerdo con</b> … / <b>Por un lado</b> … / <b>En conclusión</b> …');
+  }),
+  // ---------- Módulo 15 ----------
+  narrar: R('uma frase de história (imperfecto para o cenário, indefinido para os fatos)', (t, k) => {
+    const c = C(k);
+    if (/ (fiquei|percebi) /.test(c)) return 'Isso é português. Em espanhol: <b>me puse</b> (fiquei), <b>me di cuenta</b> (percebi).';
+    if (/ me (quedé|quede) (nervios[oa]|triste|roj[oa]|feliz) /.test(c)) return 'Para emoções, "ficar" é <b>ponerse</b>: <b>me puse</b> nerviosa.';
+    if (/ me di cuenta que /.test(c)) return 'darse cuenta pede <b>de</b>: me di cuenta <b>de que</b> …';
+    const imp = has(k, /\p{L}+(aba|aban|ía|ían)$/u) || has(k, /^(era|había|estaba|iba)$/);
+    const ind = has(k, /\p{L}+(é|ó|í|ió|aron|ieron)$/u) || has(k, /^(fui|fue|hice|hizo|tuve|vino|dijo|pude|vi|vio|puse|di|dio)$/);
+    return need(imp || ind, 'Conte: <b>Era</b> tarde … / <b>Abrí</b> la puerta … / Me <b>di cuenta</b> de que …');
+  }),
+  pluscuamperfecto: R('o passado do passado (había + particípio)', (t, k) => {
+    const c = C(k);
+    if (/ (tenía|tenías|teníamos|tenían) (\p{L}*(ado|ido)|hecho|visto|dicho|escrito|vuelto|puesto) /u.test(c)) return 'O auxiliar é <b>haber</b>: <b>había</b> comido (e não "tenía comido").';
+    if (/ hubo (\p{L}*(ado|ido)) /u.test(c)) return 'Use <b>había</b> + particípio: <b>había</b> terminado.';
+    return need(/ (había|habías|habíamos|habían) (\p{L}*(ado|ido)|hecho|visto|dicho|escrito|vuelto|puesto|abierto|roto) /u.test(c) || / se había /.test(c), 'Use o pluscuamperfecto: Cuando llegué, ya <b>había</b> terminado.');
+  }),
+  conectores_narr: R('uma frase com conector de narrativa (al principio, luego, de pronto, en cuanto, por fin…)', (t, k) => {
+    const c = C(k);
+    if (/ (no começo|assim que|enquanto isso|finalmente|de repente) /.test(c) && / (no começo|assim que|enquanto isso) /.test(c)) return 'Isso é português. Em espanhol: <b>al principio</b>, <b>en cuanto</b>, <b>mientras tanto</b>.';
+    if (/ en el principio /.test(c)) return 'O natural é <b>al principio</b>.';
+    return need(/ (al principio|primero|luego|después|más tarde|al rato|de pronto|de repente|en cuanto|mientras tanto|mientras|al final|por fin|finalmente|total que|al día siguiente|a la mañana siguiente|esa mañana|esa noche|entonces|resulta que) /.test(c), 'Use um conector: <b>Al principio</b> … / <b>De pronto</b> … / <b>Por fin</b> …');
+  }),
+  anecdota: R('uma frase de anedota ou reação (resulta que, a punto de, ¡qué fuerte!…)', (t, k) => {
+    const c = C(k);
+    if (/ verguenza /.test(c)) return '<b>vergüenza</b> leva trema: ver<b>güe</b>nza.';
+    if (/ a ponto de /.test(c)) return 'Em espanhol: <b>a punto de</b>.';
+    return need(/ (sabes qué|te conté|resulta que|a punto de|de pronto|qué fuerte|qué vergüenza|qué susto|en serio|no me digas|qué hiciste|me morí de risa|metí la pata|al final|nunca más) /.test(c) || has(k, /\p{L}+(é|ó|í|ió|aba|ía)$/u), 'Conte ou reaja: <b>Resulta que</b> … / <b>Estaba a punto de</b> … / ¡<b>Qué vergüenza</b>!');
+  }),
+  leyenda: R('uma frase de lenda (había una vez, cuenta la leyenda, se dice que, se convirtió en…)', (t, k) => {
+    const c = C(k);
+    if (/ (era una vez|diz a lenda) /.test(c)) return 'Em espanhol: <b>Había una vez</b>, <b>Cuenta la leyenda que</b>.';
+    if (/ se convirtió (piedra|volcán|montaña|árbol|pez|animal|un|una) /.test(c)) return 'convertirse pede <b>en</b>: se convirtió <b>en</b> piedra.';
+    return need(/ (había una vez|cuenta la leyenda|se dice que|hace muchos años|desde entonces|y por eso|se convirtió en|los convirtieron en|convirtió) /.test(c) || has(k, /\p{L}+(aba|ía|ían|é|ó|ió|aron|ieron)$/u), 'Conte a lenda: <b>Había una vez</b> … / <b>Cuenta la leyenda que</b> …');
+  }),
+  relato: R('uma frase de relato (cenário, fatos, había + particípio, conectores, desfecho)', (t, k) => {
+    const c = C(k);
+    if (/ (tenía|tenían) (\p{L}*(ado|ido)) /u.test(c)) return 'O auxiliar é <b>haber</b>: <b>había</b> perdido.';
+    if (/ me (quedé|quede) (nervios[oa]|triste) /.test(c)) return 'Para emoções, use <b>ponerse</b>: <b>me puse</b> nerviosa.';
+    return need(has(k, /\p{L}+(aba|ía|ían|é|ó|ió|aron|ieron)$/u) || / (había|era|fue|fui|hice|tuve|vi|desde entonces|al final|de pronto|al principio|nunca olvidaré|aquella|aquel) /.test(c), 'Conte o relato: <b>Aquella mañana</b> … / … ya se <b>había</b> ido / <b>Desde entonces</b> …');
+  }),
+  // ---------- Módulo 16 ----------
+  subjuntivo: R('uma frase com o presente do <b>subjuntivo</b> (que tengas, espero que sea, ojalá…)', (t, k) => {
+    const c = C(k);
+    if (/ (conosca|conoscas|tenas|hacas|salas|dormas|seja|esteja|tenha) /.test(c)) return 'Confira a forma: <b>conozca</b>, <b>tengas</b>, <b>hagas</b>, <b>salgas</b>, <b>duermas</b>, <b>sea</b>, <b>esté</b>.';
+    if (/ (espero que|ojalá|que) (tienes|eres|estás|puedes|haces|conoces|sabes|vas) /.test(c) && / (espero que|ojalá) /.test(c)) return 'Depois de <b>espero que</b> e <b>ojalá</b>, o subjuntivo: <b>tengas</b>, <b>seas</b>, <b>estés</b>, <b>puedas</b>.';
+    return need(/ (que|ojalá) /.test(c), 'Use o subjuntivo: <b>Que tengas</b> suerte. / <b>Espero que sea</b> verdad.');
+  }),
+  influencia: R('um pedido sobre outra pessoa (quiero que, necesito que, te pido que + subjuntivo)', (t, k) => {
+    const c = C(k);
+    if (/ (quiero|quieres|quiere|queremos|quieren|necesito|necesitas|prefiero|pido|pide|piden|digo) que (vienes|me ayudas|me llamas|llegan|estudio|te preocupas|vas|haces|tienes|eres|estás) /.test(c)) return 'Quando outra pessoa faz, o subjuntivo: que <b>vengas</b>, que me <b>ayudes</b>, que <b>lleguen</b>.';
+    if (/ (quiero|necesito|prefiero) que (vaya|ir) a /.test(c) && / yo /.test(c)) return 'Se é você mesma, use o infinitivo: <b>quiero ir</b>.';
+    if (/ (digo|pido) para (él|ella|ellos|ti|usted) /.test(c)) return 'Em espanhol: <b>le digo que</b> venga, <b>te pido que</b> esperes.';
+    return need(/ (quiero que|quieres que|quiere que|quieren que|necesito que|prefiero que|te pido que|le pido que|les pido que|me piden que|les digo que|le digo que|no quiero que|quiero|prefiero|necesito) /.test(c), 'Peça: <b>Quiero que</b> vengas. / <b>Te pido que</b> me ayudes.');
+  }),
+  emocion_sub: R('uma emoção sobre o outro (me alegra que, me molesta que, me preocupa que + subjuntivo)', (t, k) => {
+    const c = C(k);
+    if (/ me (alegra|molesta|preocupa|encanta|sorprende|da pena) que (estás|llegas|duermes|hay|te vas|vienes|tienes|eres) /.test(c)) return 'Com emoção sobre o outro, o subjuntivo: que <b>estés</b>, <b>llegues</b>, <b>duermas</b>, <b>haya</b>.';
+    if (/ (yo )?(alegro|molesto|preocupo) que /.test(c) && !/ me /.test(c)) return 'Funciona como gustar: <b>me alegra</b>, <b>me molesta</b>, <b>me preocupa</b>.';
+    return need(/ (alegra|molesta|preocupa|encanta|sorprende|da pena|miedo de que|odio que|siento que|da igual que|pone nervioso|pone nerviosa) /.test(c), 'Reaja: <b>Me alegra que</b> estés aquí. / <b>Me molesta que</b> llegues tarde.');
+  }),
+  valoracion: R('uma expressão impessoal (es importante que + subjuntivo / es verdad que + indicativo)', (t, k) => {
+    const c = C(k);
+    if (/ es (importante|necesario|mejor|normal|posible|raro|una pena) que (duermes|sales|salimos|estás|llueve|puedes|vienes|tienes|es) /.test(c)) return 'Expressões de valor pedem subjuntivo: que <b>duermas</b>, <b>salgamos</b>, <b>estés</b>, <b>llueva</b>, <b>puedas</b>.';
+    if (/ (es verdad|es cierto|está claro|es evidente) que (sea|tengas|estés|haya|puedas) /.test(c) && !/ no (es verdad|es cierto|está claro) /.test(c)) return 'Fato afirmado pede indicativo: es verdad que <b>es</b>, que <b>tienes</b>.';
+    return need(/ (es importante|es necesario|es mejor|es normal|es posible|es raro|es una pena|es verdad|es cierto|está claro|es evidente|hace falta) /.test(c), 'Use: <b>Es importante que</b> … / <b>Es verdad que</b> …');
+  }),
+  aconsejar: R('um conselho (te aconsejo que + subjuntivo, yo que tú + condicional, ¿por qué no …?)', (t, k) => {
+    const c = C(k);
+    if (/ te (aconsejo|recomiendo|sugiero) que (hablas|descansas|buscas|esperas|llamas|vas|le dices|piensas) /.test(c)) return 'Depois de <b>te aconsejo que</b>, o subjuntivo: <b>hables</b>, <b>descanses</b>, <b>busques</b>.';
+    if (/ yo que tú (busco|hablo|hago|digo|voy|busque|hable|haga) /.test(c)) return 'Depois de <b>yo que tú</b>, o condicional: <b>buscaría</b>, <b>hablaría</b>, <b>haría</b>.';
+    if (/ te aconsejo a /.test(c)) return 'Em espanhol: <b>te aconsejo que</b> + subjuntivo.';
+    return need(/ (te aconsejo|te recomiendo|te sugiero|yo que tú|yo en tu lugar|por qué no|lo mejor es) /.test(c) || has(k, /\p{L}+ría$/u), 'Aconselhe: <b>Te aconsejo que</b> hables … / <b>Yo que tú</b>, buscaría …');
+  }),
+  consultorio: R('uma frase de resposta de conselhos (es normal que, te aconsejo que, yo que tú, espero que…)', (t, k) => {
+    const c = C(k);
+    if (/ es normal que (te sientes|estás|tienes) /.test(c)) return 'Depois de <b>es normal que</b>, o subjuntivo: te <b>sientas</b>, <b>estés</b>, <b>tengas</b>.';
+    if (/ yo que tu /.test(c)) return '<b>tú</b> leva acento: yo que <b>tú</b>.';
+    if (/ te aconsejo que (hablas|le dices|esperas) /.test(c)) return 'Depois de <b>te aconsejo que</b>, o subjuntivo: <b>hables</b>, <b>le digas</b>.';
+    return need(/ (querido|querida|es normal que|entiendo que|te aconsejo|te recomiendo|yo que tú|yo en tu lugar|lo mejor es|es importante que|es necesario que|espero que|ojalá|un abrazo) /.test(c), 'Responda: <b>Es normal que</b> … / <b>Te aconsejo que</b> … / <b>Espero que</b> …');
+  }),
+  // ---------- Módulo 17 ----------
+  cuando_sub: R('cuando + subjuntivo para o futuro (cuando tenga, cuando sea…)', (t, k) => {
+    const c = C(k);
+    if (/ cuando (\p{L}+(ré|rás|rá|remos|rán)) /u.test(c) && !/ ¿?cuándo /.test(c)) return 'Depois de <b>cuando</b>, nunca futuro: cuando <b>tenga</b>, cuando <b>sea</b>.';
+    if (/ cuando (tengo|termino|llego|soy|vuelvo|tienes|terminas|vuelves) [^ ]+ .*\p{L}+(ré|rás|rá|remos|rán) /u.test(c)) return 'Se a outra parte é futuro, cuando pede subjuntivo: cuando <b>tenga</b>, cuando <b>termine</b>.';
+    return need(/ (cuando|cuándo) /.test(c), 'Use cuando: <b>Cuando tenga</b> tiempo, te llamaré.');
+  }),
+  temporales: R('uma oração de tempo (en cuanto, hasta que, mientras, antes de que…)', (t, k) => {
+    const c = C(k);
+    if (/ (en cuanto|hasta que|antes de que|tan pronto como) (\p{L}+(ré|rás|rá|remos|rán)) /u.test(c)) return 'Com futuro, essas palavras pedem subjuntivo: en cuanto <b>llegue</b>, hasta que <b>termines</b>.';
+    if (/ hasta (tú|usted|él|ella) (terminar|llegar|volver) /.test(c)) return 'Em espanhol: <b>hasta que termines</b>.';
+    return need(/ (en cuanto|hasta que|antes de que|después de que|mientras|tan pronto como|antes de|después de) /.test(c), 'Use: <b>En cuanto</b> llegue … / <b>Hasta que</b> termines …');
+  }),
+  prediccion: R('uma previsão (futuro, seguramente, es probable que, quizás, a lo mejor…)', (t, k) => {
+    const c = C(k);
+    if (/ habrán /.test(c)) return 'O futuro de hay é <b>habrá</b>, no singular: <b>habrá</b> más robots.';
+    if (/ a lo mejor (sea|haya|tengamos|vivamos|trabajemos|existan) /.test(c)) return 'Depois de <b>a lo mejor</b>, o indicativo: a lo mejor <b>es</b>, <b>hay</b>, <b>vivimos</b>.';
+    if (/ es probable que (\p{L}+(ré|rás|rá|remos|rán)|trabajamos|vivimos|hay|es) /u.test(c)) return 'Depois de <b>es probable que</b>, o subjuntivo: <b>trabajemos</b>, <b>haya</b>, <b>sea</b>.';
+    return need(has(k, /\p{L}+(ré|rás|rá|remos|rán)$/u) || / (seguramente|probablemente|sin duda|es probable|es posible|quizás|tal vez|a lo mejor|no creo que|habrá) /.test(c), 'Preveja: En 2050 <b>habrá</b> … / <b>Es probable que</b> …');
+  }),
+  planes: R('um plano ou intenção (pienso + infinitivo, tengo pensado, estoy pensando en, voy a…)', (t, k) => {
+    const c = C(k);
+    if (/ pienso en (viajar|mudarme|estudiar|hacer|cambiar|abrir|ir|empezar|comprar) /.test(c)) return 'Para planos, <b>pensar</b> + infinitivo, sem en: <b>pienso viajar</b>.';
+    if (/ tengo pensando /.test(c)) return 'É <b>tengo pensado</b> (particípio).';
+    if (/ estoy pensando (viajar|cambiar|mudarme|hacer|estudiar) /.test(c)) return '<b>Estar pensando</b> pede <b>en</b>: estoy pensando <b>en</b> cambiar …';
+    return need(/ (pienso|piensas|piensa|tengo pensado|tienes pensado|intención de|estoy pensando en|voy a|vas a|va a|vamos a|plan|planes|todavía no sé|depende) /.test(c), 'Conte o plano: <b>Pienso</b> viajar … / <b>Tengo pensado</b> mudarme …');
+  }),
+  condicion_real: R('uma condição real (si + presente) ou uma promessa', (t, k) => {
+    const c = C(k);
+    if (/ si (llueva|tengas|tenga|pueda|puedas|haga|esté|estés|sea|seas|vaya|vayas) /.test(c)) return 'Depois de <b>si</b>, o indicativo: si <b>llueve</b>, si <b>tienes</b>, si <b>puedes</b>.';
+    if (/ si (\p{L}+(ré|rás|rá|remos|rán)) /u.test(c)) return 'Depois de <b>si</b>, nunca futuro: si <b>llueve</b>, si <b>tienes</b>.';
+    if (/ (siempre que|a menos que) (llueve|me lo pides|tienes|puedes) /.test(c)) return '<b>siempre que</b> e <b>a menos que</b> pedem subjuntivo: a menos que <b>llueva</b>.';
+    return need(/ (si|te prometo|te juro|prometo|siempre que|a menos que|en caso de que) /.test(c), 'Use: <b>Si</b> llueve, … / <b>Te prometo que</b> …');
+  }),
+  carta_futuro: R('uma frase de carta para o futuro (cuando leas, seguramente, tengo pensado, si, espero que…)', (t, k) => {
+    const c = C(k);
+    if (/ cuando (leerás|lees|abrirás|tendrás) /.test(c)) return 'Com cuando + futuro, o subjuntivo: cuando <b>leas</b>.';
+    if (/ si (estés|tengas|vivas|sigas|seas) /.test(c)) return 'Depois de <b>si</b>, o indicativo: si <b>estás</b>, si <b>tienes</b>.';
+    return need(has(k, /\p{L}+(ré|rás|rá|remos|rán)$/u) || / (cuando|seguramente|es probable|a lo mejor|tengo pensado|pienso|si|espero que|ojalá|no olvides|no te rindas|con cariño|querida|querido) /.test(c), 'Escreva: <b>Cuando leas</b> esta carta, … / <b>Espero que</b> …');
+  }),
+  // ---------- Módulo 18 ----------
+  imperf_sub: R('uma frase com o imperfeito do subjuntivo (tuviera, fuera, pudiera…)', (t, k) => {
+    const c = C(k);
+    if (/ (pudieramos|tuvieramos|fueramos|hablaramos|hicieramos) /.test(c)) return 'Com nosotros, acento: <b>pudiéramos</b>, <b>tuviéramos</b>, <b>fuéramos</b>.';
+    if (/ (tenería|tenera|podiera|hacera|sabiera|decera) /.test(c)) return 'Use o ellos do indefinido: <b>tuviera</b>, <b>pudiera</b>, <b>hiciera</b>, <b>supiera</b>, <b>dijera</b>.';
+    if (/ si (tendría|sería|podría|haría|estaría|sabría) /.test(c)) return 'Depois de <b>si</b>, o imperfeito do subjuntivo: si <b>tuviera</b>, si <b>fuera</b>.';
+    return need(has(k, /\p{L}+(ra|ras|ramos|ran|se|ses|semos|sen)$/u) && / (si|ojalá|que|como si) /.test(c), 'Use o imperfeito do subjuntivo: Si <b>tuviera</b> …, Si <b>fuera</b> …');
+  }),
+  si_irreal: R('uma hipótese (si + imperfeito do subjuntivo, condicional)', (t, k) => {
+    const c = C(k);
+    if (/ si (tendría|sería|podría|haría|estaría|habría|ganaría|viviría|hablaría) /.test(c)) return 'Depois de <b>si</b>, nunca o condicional: si <b>tuviera</b>, si <b>fuera</b>, si <b>ganara</b>.';
+    if (/ si (tenga|sea|pueda|gane|viva|hable) /.test(c)) return 'Na hipótese, o imperfeito do subjuntivo: si <b>tuviera</b>, si <b>fuera</b>, si <b>ganara</b>.';
+    return need(has(k, /\p{L}+(ría|rías|ríamos|rían)$/u) || / si /.test(c), 'Faça a hipótese: <b>Si ganara</b> la lotería, <b>dejaría</b> de trabajar.');
+  }),
+  ojala_imperf: R('um desejo improvável (ojalá + imperfeito do subjuntivo) ou como si', (t, k) => {
+    const c = C(k);
+    if (/ como si (es|sea|está|esté|tiene|tenga|conoce|conozca|pasa|pase|hay|haya) /.test(c)) return 'Depois de <b>como si</b>, sempre o imperfeito do subjuntivo: como si <b>fuera</b>, <b>estuviera</b>, <b>tuviera</b>.';
+    if (/ quem dera /.test(c)) return 'Em espanhol: <b>ojalá</b> + imperfeito do subjuntivo, ou <b>¡quién pudiera!</b>';
+    return need(/ (ojalá|como si|quién pudiera) /.test(c), 'Use: <b>Ojalá fuera</b> verdad. / Habla <b>como si fuera</b> el jefe.');
+  }),
+  me_gustaria_que: R('um desejo ou pedido com a concordância dos tempos (me gustaría que vinieras, me pidió que…)', (t, k) => {
+    const c = C(k);
+    if (/ (me gustaría|preferiría|sería mejor|quisiera|quería|me pidió|le dije|le pedí|me dijo) que (\p{L}+ )?(vengas|fumes|llames|esperes|expliques|tengas|vengan|hables|acompañes|digas) /u.test(c)) return 'Com condicional ou passado, o imperfeito do subjuntivo: que <b>vinieras</b>, <b>fumaras</b>, <b>llamara</b>.';
+    if (/ (me gustaría|preferiría) que (\p{L}+(rías|ría|ríamos|rían)) /u.test(c)) return 'Depois de que, o imperfeito do subjuntivo (e não o condicional): que <b>vinieras</b>.';
+    return need(/ (me gustaría que|preferiría que|sería mejor que|quisiera que|quería que|me pidió que|le dije que|le pedí que|me dijo que|me gustaría|preferiría|quisiera) /.test(c), 'Use: <b>Me gustaría que</b> vinieras. / <b>Me pidió que</b> lo llamara.');
+  }),
+  dilemas: R('uma resposta a um dilema (condicional, en ese caso, si + imperfeito do subjuntivo…)', (t, k) => {
+    const c = C(k);
+    if (/ si (no )?(lo |la |me |te )?(devolvería|haría|diría|mentiría|quedaría) /.test(c)) return 'Depois de <b>si</b>, o imperfeito do subjuntivo: si no lo <b>devolviera</b>, si <b>mintiera</b>.';
+    if (/ aunque nadie me (ve|vea|verá) .*\p{L}+ría /u.test(c)) return 'Na hipótese, <b>aunque</b> + imperfeito do subjuntivo: aunque nadie me <b>viera</b>.';
+    return need(has(k, /\p{L}+(ría|rías|ríamos|rían)$/u) || / (en ese caso|dependería|imagina|en tu lugar|en mi lugar|si|aunque) /.test(c), 'Responda: <b>Yo, en ese caso, devolvería</b> … / <b>Dependería de</b> …');
+  }),
+  mundo_ideal: R('uma frase de texto hipotético (si yo fuera, lo primero que haría, si hubiera, ojalá…)', (t, k) => {
+    const c = C(k);
+    if (/ si (yo )?(sería|sea|soy) /.test(c)) return 'Depois de <b>si</b>, o imperfeito do subjuntivo: si yo <b>fuera</b>.';
+    if (/ si (habría|haya) /.test(c)) return 'Depois de <b>si</b>: si <b>hubiera</b> (houvesse).';
+    if (/ la gente (usarían|tendrían|caminarían|serían) /.test(c)) return '<b>la gente</b> é singular: la gente <b>usaría</b>.';
+    return need(has(k, /\p{L}+(ría|rían|ríamos)$/u) || / (si|ojalá|así|de esta manera|en conclusión|lo primero) /.test(c), 'Escreva: <b>Si yo fuera</b> … / <b>Lo primero que haría</b> … / <b>Si hubiera</b> …');
+  }),
+  // ---------- Módulo 19 ----------
+  trayectoria: R('uma frase de trajetória (me gradué, llevo … + gerúndio, desde hace, estuve a cargo de…)', (t, k) => {
+    const c = C(k);
+    if (/ hay (\p{L}+ )?(años|meses) /u.test(c)) return 'Para tempo, use <b>hace</b>: <b>hace</b> tres años, <b>desde hace</b> tres años.';
+    if (/ llevo (\p{L}+ )?(años|meses) (trabajo|estudio|vivo) /u.test(c)) return 'Com <b>llevar</b>, o gerúndio: llevo tres años <b>trabajando</b>.';
+    if (/ me formé (en|como) /.test(c)) return 'O natural é <b>me gradué en</b> (ou me licencié en, na Espanha).';
+    return need(/ (me gradué|me licencié|llevo|desde hace|hace|estuve a cargo|me encargaba|coordiné|lideré|empecé como|me ascendieron|me especialicé|hice una maestría) /.test(c), 'Conte: <b>Me gradué en</b> … / <b>Llevo</b> tres años <b>trabajando</b> …');
+  }),
+  carta_formal: R('uma fórmula de e-mail formal (estimado/a, le escribo para, quedo a su disposición…)', (t, k) => {
+    const c = C(k);
+    if (/ (te escribo|tu respuesta|quedo a tu disposición) /.test(c)) return 'No e-mail formal, use <b>usted</b>: <b>le</b> escribo, <b>su</b> respuesta.';
+    if (/ (prezad[oa]|atenciosamente|fico à disposição) /.test(c)) return 'Isso é português. Em espanhol: <b>Estimado/a</b>, <b>Atentamente</b>, <b>Quedo a su disposición</b>.';
+    return need(/ (estimado|estimada|estimados|le escribo|me pongo en contacto|en relación con|le agradecería|podría|quedo a su disposición|quedo a la espera|atentamente|saludos cordiales|adjunto|solicitar) /.test(c), 'Use as fórmulas: <b>Estimada señora</b> …: / <b>Le escribo para</b> … / <b>Atentamente</b>.');
+  }),
+  pedido_formal: R('um pedido formal (le ruego que, le agradecería que, ¿le importa que …?)', (t, k) => {
+    const c = C(k);
+    if (/ le agradecería que (me )?(confirme|envíe|responda|llame|tenga|envíen|confirmen) /.test(c)) return 'Depois de <b>le agradecería que</b>, o imperfeito do subjuntivo: <b>confirmara</b>, <b>enviara</b>, <b>respondiera</b>.';
+    if (/ le (ruego|importa) que (me )?(disculpa|abro|cambiamos|uso) /.test(c)) return 'Depois de <b>le ruego que</b> / <b>le importa que</b>, o subjuntivo: <b>disculpe</b>, <b>abra</b>, <b>cambiemos</b>.';
+    return need(/ (le ruego|le agradecería|le importa|le importaría|me permite|sería posible|disculpe|le pido disculpas|por supuesto|con mucho gusto|no hay problema) /.test(c), 'Peça com formalidade: <b>Le agradecería que</b> … / ¿<b>Le importa que</b> …?');
+  }),
+  entrevista_b1: R('uma resposta de entrevista (creo que encajo, puedo aportar, cuando trabajaba … tuve que …)', (t, k) => {
+    const c = C(k);
+    if (/ (me encaixo|consegui) /.test(c)) return 'Isso é português. Em espanhol: <b>encajo</b>, <b>logré</b> / <b>conseguí</b>.';
+    return need(/ (creo que|encajo|puedo aportar|por ejemplo|una vez|cuando trabajaba|tuve que|logramos|logré|al final|mi mayor|fortaleza|debilidad|cómo es|próximos pasos|equipo|organizada|organizado|aprendo) /.test(c), 'Responda: <b>Creo que encajo</b> bien porque … / <b>Una vez tuve que</b> …');
+  }),
+  estudios: R('uma frase sobre estudos (carrera, beca, aprobar, reprobar, sacar una nota…)', (t, k) => {
+    const c = C(k);
+    if (/ (una|la) bolsa (de estudios|para estudiar) /.test(c)) return 'Bolsa de estudos é <b>beca</b>.';
+    if (/ (tiré|tire) (un|una) /.test(c)) return 'Tirar nota é <b>sacar</b>: <b>saqué</b> un nueve.';
+    return need(/ (carrera|licenciatura|maestría|máster|doctorado|beca|matriculé|matricularse|aprobé|aprobar|reprobé|reprobar|suspendí|saqué|nota|promedio|semestre|materia|materias|tesis|intercambio|universidad|estudio|estudias) /.test(c), 'Fale dos estudos: <b>Estudio la carrera de</b> … / <b>Conseguí una beca</b> …');
+  }),
+  motivacion: R('uma frase de carta de motivação (me dirijo a ustedes, me gradué, puedo aportar, les agradecería que…)', (t, k) => {
+    const c = C(k);
+    if (/ me dirigo /.test(c)) return 'Em espanhol: <b>me dirijo</b> (com j).';
+    if (/ (le|les) agradecería que (tengan|tienen|tendrían) /.test(c)) return 'Depois de <b>agradecería que</b>, o imperfeito do subjuntivo: <b>tuvieran</b>.';
+    return need(/ (me dirijo|candidatura|solicitud|me gradué|llevo|estuve a cargo|me gustaría|me permitiría|puedo aportar|al regresar|les agradecería|le agradecería|quedo a su disposición|atentamente|estimados) /.test(c), 'Escreva: <b>Me dirijo a ustedes</b> … / <b>Puedo aportar</b> … / <b>Les agradecería que</b> …');
+  }),
+  // ---------- Módulo 20 ----------
+  pasiva: R('uma frase na voz passiva (ser + particípio, por + agente)', (t, k) => {
+    const c = C(k);
+    if (/ (la|una) (ciudad|catedral|ley|casa|iglesia|novela|película|obra) (fue|será|es|ha sido) \p{L}*(ado|ido) /u.test(c)) return 'O particípio concorda: la ciudad fue fund<b>ada</b>.';
+    if (/ (los|las) \p{L}+ fue \p{L}*(ados|adas|idos|idas) /u.test(c)) return 'Com plural, <b>fueron</b>: los puentes <b>fueron</b> construidos.';
+    if (/ (fue|fueron) \p{L}*(ado|ada|ados|adas|ido|ida|idos|idas|to|ta|tos|tas) para (el|la|los|las|un|una) [A-ZÁÉÍÓÚ]?\p{L}+ /u.test(c) && / escrit| pintad| diseñad/.test(c)) return 'O agente entra com <b>por</b>: fue escrito <b>por</b> …';
+    return need(/ (fue|fueron|será|serán|es|son|ha sido|han sido) \p{L}*(ado|ada|ados|adas|ido|ida|idos|idas|to|ta|tos|tas|cho|cha) /u.test(c), 'Use a passiva: La ciudad <b>fue fundada</b> en … / <b>fue escrito por</b> …');
+  }),
+  se_pasiva: R('uma frase com se passivo ou impessoal (se vende, se venden, se dice que…)', (t, k) => {
+    const c = C(k);
+    if (/ se (vende|alquila|necesita|busca|habla) (casas|departamentos|camareros|libros|habitaciones|autos|locales) /.test(c)) return 'O se passivo concorda com a coisa: se <b>venden</b> casas, se <b>necesitan</b> camareros.';
+    if (/ se (venden|buscan|necesitan) a /.test(c)) return 'Com pessoas, o verbo fica no singular: se <b>busca</b> a dos personas.';
+    if (/ (vende-se|aluga-se|precisa-se) /.test(c)) return 'Isso é português. Em espanhol: <b>se vende</b>, <b>se alquila</b>, <b>se necesita</b>.';
+    return need(/ se \p{L}+ /u.test(c), 'Use o se: <b>Se venden</b> casas. / Aquí <b>se vive</b> bien.');
+  }),
+  proceso: R('uma etapa de processo (primero se …, después se …, por último se …)', (t, k) => {
+    const c = C(k);
+    if (/ se (recoge|seca|tuesta|muele|mezcla|empaqueta) (los|las) /.test(c)) return 'O se concorda com a coisa: se <b>recogen</b> los granos, se <b>secan</b> las semillas.';
+    if (/ por ultimo /.test(c)) return '<b>último</b> leva acento: por <b>último</b>.';
+    return need(/ (primero|después|luego|a continuación|más tarde|por último|finalmente|se) /.test(c), 'Descreva a etapa: <b>Primero se</b> recogen … / <b>Después se</b> secan …');
+  }),
+  sociedad: R('uma frase sobre a sociedade (desigualdad, desempleo, debido a, gracias a…)', (t, k) => {
+    const c = C(k);
+    if (/ devido a /.test(c)) return 'Em espanhol, com b: <b>debido a</b>.';
+    if (/ (el|un) (desigualdad|ciudad|seguridad|inseguridad|sociedad|libertad|realidad) /.test(c)) return 'As palavras em <b>-dad</b> são femininas: <b>la</b> desigualdad, <b>la</b> ciudad.';
+    if (/ por causa de /.test(c)) return 'Em espanhol: <b>a causa de</b> (ou <b>por</b>).';
+    return need(/ (desigualdad|desempleo|pobreza|inseguridad|corrupción|vivienda|inflación|crisis|debido a|a causa de|por culpa de|gracias a|por eso|por lo tanto|como consecuencia|gobierno|problema) /.test(c), 'Fale da sociedade: <b>El desempleo</b> aumentó <b>debido a</b> …');
+  }),
+  datos: R('uma frase com dados (según, el 40 %, la mitad, aumentar, disminuir…)', (t, k) => {
+    const c = C(k);
+    if (/ segundo (un|una|el|la|los|las) (estudio|encuesta|informe|datos) /.test(c)) return 'A fonte é <b>según</b>: <b>según</b> una encuesta.';
+    if (/ metade /.test(c)) return 'Em espanhol: <b>la mitad</b>.';
+    if (/ (^|[^l] )(\d+) % de los /.test(c) && !/ (el|un|del) \d+ % /.test(c)) return 'A porcentagem leva artigo: <b>el</b> 40 % de los jóvenes.';
+    return need(/ (según|%|por ciento|la mitad|un tercio|un cuarto|mayoría|minoría|aumentó|aumentaron|disminuyó|disminuyeron|se duplicó|se mantuvo|creció|bajó|cayó|encuesta|datos) /.test(c), 'Dê um dado: <b>Según</b> una encuesta, <b>el 40 %</b> de …');
+  }),
+  articulo: R('uma frase de artigo informativo (según, fue presentado, se calcula que, debido a, se proponen…)', (t, k) => {
+    const c = C(k);
+    if (/ segundo (un|una|el|la) (estudio|informe|encuesta) /.test(c)) return 'A fonte é <b>según</b>.';
+    if (/ se propone (varias|medidas|campañas|soluciones) /.test(c)) return 'O se concorda: se <b>proponen</b> varias medidas.';
+    if (/ se espera que (\p{L}+ )?(reduce|ayuda|cambia|va) /u.test(c)) return 'Depois de <b>se espera que</b>, o subjuntivo: <b>reduzca</b>, <b>ayude</b>, <b>cambie</b>.';
+    return need(/ (según|fue|fueron|se|debido a|como consecuencia|por eso|gran parte|millones|el \d+ %) /.test(c), 'Escreva: <b>Según</b> un estudio, … / <b>Se calcula que</b> … / <b>Se proponen</b> …');
+  }),
+  // ---------- Módulo 21 ----------
+  estilo_ind: R('o discurso indireto (dice que / dijo que, com os tempos que recuam)', (t, k) => {
+    const c = C(k);
+    if (/ (dijo|contó|comentó|explicó) que (\p{L}+ )?(vendrá|será|irá|tendrá|hará|podrá) /u.test(c)) return 'Com <b>dijo que</b>, o futuro vira condicional: <b>vendría</b>, <b>sería</b>, <b>iría</b>.';
+    if (/ (dijo|contó|comentó) que (\p{L}+ )?va a /u.test(c)) return 'Com <b>dijo que</b>, <b>va a</b> vira <b>iba a</b>.';
+    return need(/ (dice que|dijo que|me dijo|contó que|comentó que|explicó que|dicen que|dijeron que) /.test(c), 'Conte: <b>Dijo que</b> estaba cansada. / <b>Me dijo que</b> vendría.');
+  }),
+  cambios_ind: R('as mudanças do discurso indireto (al día siguiente, allí, ese día, llevar…)', (t, k) => {
+    const c = C(k);
+    if (/ dijo que (mañana|aquí) /.test(c)) return 'Contado depois: <b>mañana</b> → <b>al día siguiente</b>; <b>aquí</b> → <b>allí</b>.';
+    return need(/ (al día siguiente|el día anterior|ese día|aquel día|esa semana|la semana siguiente|en ese momento|esa noche|allí|ese|esa|iría|llevaría|su) /.test(c), 'Mude o tempo e o lugar: <b>al día siguiente</b>, <b>allí</b>, <b>ese día</b>.');
+  }),
+  pregunta_ind: R('uma pergunta indireta (preguntó si …, preguntó dónde …, ¿sabe qué …?)', (t, k) => {
+    const c = C(k);
+    if (/ (preguntó|pregunté|preguntaron|quería saber|no sé) que (si|dónde|cuándo|qué|cómo|cuánto) /.test(c)) return 'Sem "que" antes: preguntó <b>si</b> …, preguntó <b>dónde</b> …';
+    if (/ (preguntó|pregunté|no sé|sabe|sabes|decir) (donde|cuando|cuanto|como|quien) /.test(c)) return 'Na pergunta indireta, o interrogativo leva acento: <b>dónde</b>, <b>cuándo</b>, <b>cuánto</b>, <b>cómo</b>.';
+    if (/ (preguntó|pregunté) se /.test(c)) return 'Em espanhol, a pergunta indireta usa <b>si</b>: preguntó <b>si</b> …';
+    return need(/ (preguntó|pregunté|preguntaron|quería saber|quiso saber|no sé si|sabe|sabes|me puede decir|podría decirme) /.test(c), 'Use: Me <b>preguntó si</b> … / Le <b>pregunté dónde</b> …');
+  }),
+  pedido_ind: R('um pedido no discurso indireto (me pidió que + imperfeito do subjuntivo)', (t, k) => {
+    const c = C(k);
+    if (/ (pidió|pidieron|recomendó|exigió|exigieron|prohibió|prohibieron) que (\p{L}+ )?(llame|llamo|descanse|descanso|traigamos|traemos|vuelva|vuelvo|tome|tomo|usemos|usamos|enviemos|enviamos) /u.test(c)) return 'Com o pedido no passado, o imperfeito do subjuntivo: que <b>llamara</b>, <b>descansara</b>, <b>trajéramos</b>.';
+    if (/ (pide|dice|piden|dicen) que (\p{L}+ )?(llamara|llegáramos|descansara|viniera) /u.test(c)) return 'Com o pedido no presente, o presente do subjuntivo: que <b>llame</b>, <b>lleguemos</b>.';
+    return need(/ (pidió que|me pide que|dijo que|dice que|recomendó que|exigieron que|exigió que|prohibieron que|prohibió que|permitió que) /.test(c), 'Conte o pedido: Me <b>pidió que</b> la llamara. / Me <b>dijo que</b> descansara.');
+  }),
+  verbos_relato: R('um verbo de relato (explicó, aseguró, admitió, negó que, se quejó de que…)', (t, k) => {
+    const c = C(k);
+    if (/ negó que (había|hay|era|es|tenía|tiene) /.test(c)) return '<b>negar que</b> pede subjuntivo: negó que <b>hubiera</b>, <b>fuera</b>, <b>tuviera</b>.';
+    if (/ se quejó que /.test(c)) return '<b>quejarse</b> pede <b>de</b>: se quejó <b>de que</b> …';
+    if (/ (reclamó|garantizó|garantió) que /.test(c)) return 'Em espanhol: <b>se quejó de que</b> (reclamou), <b>aseguró que</b> (garantiu).';
+    return need(/ (explicó|aseguró|admitió|negó|añadió|se quejó|prometió|advirtió|reconoció|confesó|declaró|afirmó|comentó|contó) /.test(c), 'Use um verbo de relato: <b>Aseguró que</b> … / <b>Admitió que</b> … / <b>Negó que</b> …');
+  }),
+  recado: R('uma frase de resumo (te cuento, explicó que, preguntó si, nos pidió que…)', (t, k) => {
+    const c = C(k);
+    if (/ preguntó que (si|dónde|cuándo|qué) /.test(c)) return 'Sem "que" antes: preguntó <b>si</b> …';
+    if (/ pidió que (\p{L}+ )?(enviemos|enviamos|traigamos|lleguemos|leamos) /u.test(c)) return 'No passado, o imperfeito do subjuntivo: que <b>enviáramos</b>, <b>leyéramos</b>.';
+    if (/ (dijo|explicó|aseguró) que (\p{L}+ )?(será|va a|retrasará) /u.test(c)) return 'No passado, os tempos recuam: <b>sería</b>, <b>iba a</b>, <b>se retrasaría</b>.';
+    return need(/ (te cuento|resumen|explicó|dijo|aseguró|preguntó|pidió|se quejó|prometió|advirtió|cualquier duda|se ofreció|te perdiste|me perdí) /.test(c), 'Resuma: <b>Te cuento</b> … / <b>Explicó que</b> … / <b>Nos pidió que</b> …');
   }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
