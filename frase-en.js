@@ -309,6 +309,41 @@ const RULES = {
     if (/\bsorry of\b/.test(c)) return 'Desculpas por algo: sorry <b>for</b>.';
     return need(/\b(could you|would you mind|can you please|sorry|apologize|thank you for)\b/.test(c), 'Peça com <b>Could you please</b> …? ou peça desculpas com <b>I\'m sorry for</b> …');
   }),
+  // ---------- Módulo 9 ----------
+  devolver: R("uma frase para <b>devolver ou trocar</b> (I'd like to return this. / It doesn't fit. / It's too small.)", (t, k) => {
+    const c = k.join(' ');
+    if (/\benough (big|small|long|short|cheap|good|old|warm)\b/.test(c)) return 'enough vem <b>depois</b> do adjetivo: big enough.';
+    if (/\b(it's|it is|is) not fit\b|\bisn't fit\b/.test(c)) return "fit é verbo: It <b>doesn't fit</b>.";
+    return need(has(k, /^(return|exchange|refund|receipt|fit|fits|broken|too|enough|wrong|damaged)$/), "Explique a troca: I'd like to <b>return</b> this. / It <b>doesn't fit</b>. / It's <b>too</b> small.");
+  }),
+  servico: R("um pedido com <b>I'd like to</b> + verbo ou a pergunta <b>How long does it take?</b>", (t, k) => {
+    const c = k.join(' ');
+    if (/\bi'd like (open|send|withdraw|deposit|transfer|buy|return|pay|make)\b/.test(c)) return "Com uma ação: I'd like <b>to</b> open …";
+    if (/\bhow long (it takes|does it takes)\b/.test(c)) return 'A pergunta é <b>How long does it take?</b>';
+    return need(/\b(i'd like to|i would like to|how long|it takes|takes)\b/.test(c), "Peça com <b>I'd like to</b> … ou pergunte <b>How long does it take?</b>");
+  }),
+  pronome_objeto: R('uma frase com <b>it, them, me, him, her ou us</b> depois do verbo (They delivered it.)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(help|call|tell|send|give|show|love|like|see|ask) (i|he|she|we|they)\b/.test(c)) return 'Depois do verbo, use o pronome objeto: help <b>me</b>, call <b>him</b>, love <b>them</b>.';
+    if (/\b(send|pick|take|give|put) back (it|them)\b|\b(pick|take) up (it|them)\b/.test(c)) return 'Com pronome, a partícula vai para o fim: send <b>it back</b>.';
+    return need(has(k, /^(it|them|me|him|her|us)$/) && k.indexOf('it') !== 0, 'Use um pronome depois do verbo: They delivered <b>it</b>. / I love <b>them</b>.');
+  }),
+  dois_objetos: R('um <b>presente</b> com dois objetos (I gave her a book. / I bought a gift for my mom.)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(give|gave|send|sent|show|showed) (her|him|me|them|us) (it|them)\b/.test(c)) return 'Com it, a coisa vem antes: give <b>it to her</b>.';
+    if (/\b(gave|give|sent|send|showed|show) to (her|him|me|them|us|my)\b/.test(c) && !/\b(it|them) to\b/.test(c)) return 'Com a pessoa logo depois do verbo, não tem to: I gave <b>her</b> a book.';
+    if (/\b(bought|buy|made|make|got|get) (a|an|the|some) \p{L}+ to (her|him|me|my|them|us)\b/u.test(c)) return 'Com buy e make, use <b>for</b>: bought a gift <b>for</b> my mom.';
+    return need(has(k, /^(gave|give|sent|send|bought|buy|showed|show|made|lent|gift|present)$/), 'Conte um presente: I <b>gave</b> my sister a book. / I <b>bought</b> a gift for …');
+  }),
+  escolha: R('uma <b>escolha</b> com one / ones ou uma pergunta com which (I\'ll take the red one. / Which one do you want?)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(take|want|like|prefer|buy) the (red|blue|black|white|green|big|small|cheap|cheaper|new|old|other|first|second)\s*[.!]?$/.test(c)) return 'O adjetivo precisa de um substantivo: the red <b>one</b>.';
+    return need(has(k, /^(one|ones|which|both|either|neither|prefer|choose)$/), "Escolha: I'll take the red <b>one</b>. / <b>Which</b> one do you want?");
+  }),
+  reclamacao: R("uma frase de <b>e-mail formal de reclamação</b> (I am writing to complain about … / Unfortunately, … / I would like …)", (t, k) => {
+    if (/\b(i'm|i'd|don't|can't|won't|didn't|isn't|wasn't)\b/.test(k.join(' '))) return 'No e-mail formal, sem contrações: <b>I am</b>, <b>I would</b>, <b>do not</b>.';
+    return need(has(k, /^(complain|writing|unfortunately|refund|replacement|dear|sincerely|regards|order|damaged|would|attached|forward)$/), 'Use uma frase formal: I am writing to <b>complain</b> about … / <b>Unfortunately</b>, …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
