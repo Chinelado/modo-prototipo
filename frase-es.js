@@ -1309,6 +1309,42 @@ const RULES = {
     if (/ por acaso /.test(c)) return '"Por acaso" em espanhol é só <b>acaso</b>.';
     return need(/ (acaso|defiendo|es hora de|estoy convencid[oa]|reconozco|ahora bien|quienes afirman|olvidan|según|no es (\p{L}+ )+es|sino|imagínense|leíste la columna|me convenció|me gustó|convence) /u.test(c) || /\?/.test(t), 'Escreva como numa coluna: <b>Defiendo que</b> … / <b>Reconozco que</b> …; <b>ahora bien</b>, …');
   }),
+  // ---------- Módulo 37 ----------
+  causa_efecto: R('uma frase de causa e efeito (provoca, desencadena, da lugar a, repercute en, se debe a, a raíz de…)', (t, k) => {
+    const c = C(k);
+    if (/ desencade(ó|ou|ar|a) /.test(c)) return 'É <b>desencadenar</b>, com n: desencadenó.';
+    if (/ repercute (no|na|a) /.test(c)) return 'Em espanhol: repercute <b>en</b>.';
+    return need(/ (provoca|provocó|provocar|causa|causó|desencadena|desencadenó|da lugar|dio lugar|conlleva|conllevar|repercute|repercutir|incide|deriva|derivó|desemboca|se debe|se deben|obedece|se atribuye|tiene su origen|a raíz de|como consecuencia|afecta|genera|generó) /.test(c), 'Ligue causa e efeito: … <b>se debe a</b> … / … <b>repercute en</b> … / <b>A raíz de</b> …');
+  }),
+  graficos: R('uma frase sobre uma tendência (pasó de … a …, alcanzó un máximo, tocó fondo, tendencia al alza…)', (t, k) => {
+    const c = C(k);
+    if (/ pas(ó|aron|a) de (\p{L}+ |\d+ ?%? )+para /u.test(c)) return 'Em espanhol: pasar de X <b>a</b> Y.';
+    if (/ (tocó|tocaron) fundo /.test(c)) return 'Em espanhol: tocar <b>fondo</b>.';
+    return need(/ (pasó|pasaron|aumentó|aumentaron|creció|crecieron|hemos crecido|subió|subieron|disminuyó|bajó|bajaron|cayó|cayeron|repuntó|repuntan|repuntar|se disparó|se desplomó|alcanzó|tocó|tocaron|se mantuvo|se mantuvieron|se estancaron|se redujo|se duplicó|tendencia|al alza|a la baja|frente a|respecto a|cómo van) /.test(c), 'Descreva: Las ventas <b>pasaron de</b> 2 <b>a</b> 5 millones. / La tendencia es <b>al alza</b>.');
+  }),
+  economia: R('uma frase sobre economia (inflación, PIB, poder adquisitivo, tasas de interés, se encareció…)', (t, k) => {
+    const c = C(k);
+    if (/ (tazas|taxas) de (interés|juros) /.test(c)) return 'Taxa de juros: <b>tasa de interés</b> (com s).';
+    if (/ poder de compra /.test(c)) return 'Na imprensa: <b>poder adquisitivo</b>.';
+    return need(/ (inflación|pib|desempleo|desocupación|paro|poder adquisitivo|recesión|tasas|tipos de interés|deuda|gasto público|impuestos|presupuesto|encarecido|encareció|encarecerse|abarataron|abaratarse|sueldo|fin de mes|cinturón|caro|carísimo|crecimiento|precios) /.test(c), 'Fale de economia: La <b>inflación</b> reduce el <b>poder adquisitivo</b>.');
+  }),
+  ciencia: R('uma frase sobre ciência (según un estudio, se ha demostrado que, ensayo clínico, comprobar…)', (t, k) => {
+    const c = C(k);
+    if (/ demonstr/.test(c)) return 'Em espanhol: <b>demostrar</b>, sem n.';
+    if (/ esperar a que (\p{L}+ )?(se )?(confirman|confirmarán) /u.test(c)) return 'Esperar a que + subjuntivo: se <b>confirmen</b>.';
+    return need(/ (estudio|investigación|investigador|investigadora|científicos|científica|hipótesis|experimento|ensayo|comprobar|comprobado|demostrado|demostrar|descubierto|avance|resultados|prometedores|tratamiento|laboratorio) /.test(c), 'Fale de ciência: <b>Según un estudio reciente</b>, … / <b>Se ha demostrado que</b> …');
+  }),
+  etica: R('uma frase de debate ético (¿es lícito que…?, plantea un dilema, por un lado… por otro, la responsabilidad…)', (t, k) => {
+    const c = C(k);
+    if (/ es (lícito|legítimo|ético) que (\p{L}+ )*?(usa|vigila|decide|controla|usan|vigilan) /u.test(c)) return 'Depois de <b>es lícito que</b>, o subjuntivo: <b>use</b>, <b>vigile</b>, <b>decida</b>.';
+    return need(/ (lícito|legítimo|ético|ética|dilema|por un lado|por otro|cabe preguntarse|límite|límites|responsable|responsabilidad|entran en conflicto|privacidad|te parece bien|problema de fondo) /.test(c), 'Debata: ¿<b>Es lícito que</b> …? / <b>Por un lado</b> …, <b>por otro</b> …');
+  }),
+  informe_c1: R('uma frase de comentário de dados (el gráfico muestra, pasó de … a …, frente a, se debe a, en suma…)', (t, k) => {
+    const c = C(k);
+    if (/ el gráfico mostra /.test(c)) return 'Em espanhol: el gráfico <b>muestra</b>.';
+    if (/ pas(ó|aron) de (\p{L}+ |\d+ ?%? )+para /u.test(c)) return 'Em espanhol: pasar de X <b>a</b> Y.';
+    return need(/ (el gráfico|muestra|pasó|frente a|se debe|a raíz de|en suma|los datos|sugieren|se mantuvo|bajaron|depende|renovable|la cifra|viste el gráfico|cambió) /.test(c), 'Comente: <b>El gráfico muestra</b> … / La cifra <b>pasó de</b> … <b>a</b> … / <b>En suma</b>, …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
