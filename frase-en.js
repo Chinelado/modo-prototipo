@@ -899,6 +899,39 @@ const RULES = {
     if (/\brecommended that \w+( \w+)? (is|are) (extended|purchased|replaced|improved)\b/.test(c)) return 'Depois de recommended that, o verbo básico: … <b>be</b> extended.';
     return need(/\b(report|aim|it was found|survey|majority|most|a small number|overall|recommend\w*|according to|findings|in addition|solution|facilities|students said)\b/.test(c), 'Use a linguagem do relatório: <b>The aim of this report</b> … / <b>It was found that</b> … / <b>Overall</b> …');
   }),
+  // ---------- Módulo 27 ----------
+  relativa_explicativa: R('uma relativa explicativa entre vírgulas (…, who / which / where / whose …,)', (t, k) => {
+    if (/,\s*that\b/i.test(t)) return 'Entre vírgulas, não use that: use <b>who</b> (pessoas) ou <b>which</b> (coisas).';
+    return need(/,\s*(who|whom|which|where|whose|when)\b/i.test(t) || has(k, /^(who|whom|which|where|whose)$/), 'Acrescente uma informação extra: My sister<b>, who</b> lives in Rome, …');
+  }),
+  which_frase: R('<b>, which</b> comentando a frase inteira (…, which was a shame)', (t, k) => {
+    if (/,\s*what\b/i.test(t)) return 'Para comentar a frase, use <b>, which</b>: He was late<b>, which</b> annoyed me.';
+    if (/\b(all|most|some|none|both|many) of who\b/i.test(t)) return 'Depois de of, use <b>whom</b>: all of whom.';
+    return need(/,\s*which\b/i.test(t) || /\bof (whom|which)\b/i.test(t) || has(k, /^which$/), 'Comente a frase: …<b>, which</b> was a relief.');
+  }),
+  participio: R('uma oração com particípio (…ing, … / Having …, … / Built in …, …)', (t, k) => {
+    const c = k.join(' ');
+    if (/^having (finish|eat|see|write|do|go|leave|lose|win)\b/.test(c)) return 'Depois de having, o particípio: Having <b>finished</b>.';
+    return need(/^(having|not)\b|^\w+ing\b|^(built|born|written|seen|made|founded|left|known|located)\b/.test(c) || /\b(having|walking|feeling|reading|working|knowing)\b/.test(c), 'Comece com particípio: <b>Walking</b> home, … / <b>Having finished</b>, …');
+  }),
+  relativa_reduzida: R('uma relativa reduzida (the woman sitting …, a book written …, the first to …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\bthe (first|last|only( one)?) (who )?(arrive|leave|finish|speak|win)\b/.test(c)) return 'Use to: the first <b>to</b> arrive.';
+    return need(/\b\w+ing\b/.test(c) || /\b(written|made|called|parked|left|built|taken|known|named|arrested)\b/.test(c) || /\bthe (first|last|only( one)?) to\b/.test(c), 'Encurte a relativa: the woman <b>sitting</b> there / a book <b>written</b> in 1900.');
+  }),
+  conectores_adicao: R('um conector de adição, causa, finalidade ou resultado', (t, k) => {
+    const c = k.join(' ');
+    if (/\bnot only\b/.test(c) && !/\bbut\b/.test(c)) return 'Complete com <b>but also</b>: not only … but also …';
+    if (/\bdue to (it|the \w+ (is|was|were|are))\b/.test(c)) return 'Depois de due to, use substantivo: due to <b>the rain</b>. Para frase, use since / because.';
+    if (/\bso as to not\b|\bin order to not\b/.test(c)) return 'A negativa é <b>so as not to</b> / <b>in order not to</b>.';
+    return need(/\b(not only|but also|as well as|in addition|moreover|furthermore|due to|because of|owing to|since|as a result|therefore|consequently|in order to|so as to|so as not to|so that)\b/.test(c), 'Use um conector: <b>not only</b> … <b>but also</b> / <b>due to</b> / <b>so as to</b> …');
+  }),
+  biografia: R('uma frase de biografia (Born in … / …, where … / Having … / the first … to … / Today, … is remembered as …)', (t, k) => {
+    const c = k.join(' ');
+    if (/^borned\b/.test(c)) return 'O particípio é <b>born</b>.';
+    if (/,\s*that\b/i.test(t)) return 'Entre vírgulas, não use that: use <b>who</b> ou <b>which</b>.';
+    return need(/\b(born|grew up|moved|studied|married|won|died|became|discovered|remembered|career|having|working|first|which|where|who|whom|later|today|prize|research)\b/.test(c), 'Conte a vida: <b>Born in</b> … / She moved to …<b>, where</b> … / <b>Today</b>, she is remembered as …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
