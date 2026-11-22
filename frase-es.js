@@ -1175,6 +1175,39 @@ const RULES = {
     if (/ propondría que (\p{L}+ )+(limite|escuche|cree|construya|controle|ponga|limiten|escuchen) /u.test(c)) return 'Com <b>propondría que</b>, o imperfeito do subjuntivo: <b>limitara</b>, <b>escuchara</b>, <b>creara</b>.';
     return need(/ (me dirijo|en relación con|señor director|según|datos|en primer lugar|asimismo|si bien|no es menos cierto|propondría|sería conveniente|por todo ello|atentamente|pido|propongo) /.test(c), 'Escreva formalmente: <b>Me dirijo a usted</b> … / <b>Asimismo</b>, … / <b>Propondría que</b> …');
   }),
+  // ---------- Módulo 33 ----------
+  lo_adjetivo: R('uma frase com lo + adjetivo (lo bueno, lo mejor, lo difícil que es, lo de…)', (t, k) => {
+    const c = C(k);
+    if (/ el (bueno|malo|mejor|peor|importante|difícil|curioso) es que /.test(c)) return 'Para a ideia abstrata, use <b>lo</b>: <b>lo bueno es que</b> …';
+    return need(/ lo (mejor|peor|bueno|malo|más|menos|importante|difícil|curioso|raro|interesante|increíble|bonito|lindo|único|primero|de|fácil|triste|gracioso|extraño|normal|lógico|mismo|cierto|complicado|cansad[oa]s?|car[oa]s?|emocionad[oa]s?|nerviosa?) /.test(c), 'Use lo + adjetivo: <b>Lo bueno</b> es que … / No sabes <b>lo difícil que</b> es.');
+  }),
+  hendida: R('uma frase destacada (fue … quien, lo que … es, fue … cuando, es aquí donde…)', (t, k) => {
+    const c = C(k);
+    if (/ fue (yo|él|ella|ana|juan|marta|pedro|maría|mi \p{L}+) que /u.test(c)) return 'Com pessoa, use <b>quien</b> (ou el que / la que): Fue Ana <b>quien</b> llamó.';
+    return need(/ (quien|quienes|el que|la que|los que|las que|lo que|cuando|donde|como) /.test(c) && / (fue|fueron|fui|fuimos|es|son|era|será|ha sido) /.test(c), 'Destaque: <b>Fue</b> Ana <b>quien</b> llamó. / <b>Lo que</b> necesito <b>es</b> tiempo.');
+  }),
+  no_es_que: R('uma frase com es que, no es que + subjuntivo ou sino (que)', (t, k) => {
+    const c = C(k);
+    if (/ no es que (no )?(me |te |se |lo )?(quiero|puedo|tengo|sé|es|está|estoy|soy|voy|gusta|gustan) /.test(c)) return 'Depois de <b>no es que</b>, o subjuntivo: <b>quiera</b>, <b>pueda</b>, <b>tenga</b>, <b>sea</b>, <b>esté</b>.';
+    return need(/ (no es que|es que|sino que|sino|no porque) /.test(c), 'Justifique ou corrija: <b>Es que</b> … / <b>No es que</b> no quiera, es que … / No es caro, <b>sino</b> carísimo.');
+  }),
+  intensificar: R('uma frase intensificada (sumamente, de lo más, ¡qué … tan …!, -ísimo, para nada…)', (t, k) => {
+    const c = C(k);
+    if (/ muy mucho /.test(c)) return 'Não se diz "muy mucho": use <b>muchísimo</b>.';
+    if (/ muito /.test(c)) return 'Isso é português: <b>muy</b>, <b>sumamente</b>, <b>muchísimo</b>.';
+    return need(/ (sumamente|de lo más|la mar de|qué|tan|tremendamente|increíblemente|realmente|enormemente|extremadamente|súper|para nada|en absoluto|ni de broma|muchísimo|muchísima|bastante|muy|\p{L}+ísim[oa]s?) /u.test(c), 'Intensifique: <b>sumamente</b> útil / <b>de lo más</b> interesante / ¡Qué día <b>tan</b> largo!');
+  }),
+  tematizar: R('uma frase com o assunto no começo e pronome (el libro lo compré, a mí me…, eso no lo sabía)', (t, k) => {
+    const c = C(k);
+    if (/ a (mí|ti) (parece|gusta|gustan|encanta|encantan|interesa|toca|molesta) /.test(c)) return 'O pronome não some: a mí <b>me</b> parece / a ti <b>te</b> toca.';
+    if (/ (eso|esto) no (sabía|sé|entiendo|creo) /.test(c)) return 'Retome com o pronome: Eso no <b>lo</b> sabía.';
+    return need(/ (lo|la|los|las|le|les|me|te|nos) /.test(c), 'Retome com pronome: El libro <b>lo</b> compré ayer. / A mí <b>me</b> parece …');
+  }),
+  discurso_c1: R('uma frase de discurso (queridos…, lo más bonito, fue aquí donde, brindo por…)', (t, k) => {
+    const c = C(k);
+    if (/ brindo (a|para) /.test(c)) return 'Em espanhol se brinda <b>por</b>: ¡Brindo <b>por</b> ustedes!';
+    return need(/ (queridos|queridas|querido|querida|estimados|lo más|lo mejor|fue|fueron|no es que|sino|sumamente|brindo|brindemos|salud|gracias|agradecid[oa]|agradezco|compañeros|amigos|estos años|echar|extrañar|emocionad[oa]) /.test(c), 'Escreva como num discurso: <b>Queridos</b> compañeros … / <b>Lo más bonito</b> … / ¡<b>Brindo por</b> ustedes!');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
