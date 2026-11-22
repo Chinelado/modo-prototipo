@@ -142,7 +142,7 @@ const _extras = extras;
 extras = function (arg) { _extras(arg); const h = app.querySelector('h1'); if (h) { h.textContent = 'Explorar'; if (!app.querySelector('.mo-sub')) h.insertAdjacentHTML('afterend', '<p class="mut mo-sub">Situações reais, leitura e conteúdos para usar o ' + LP.lingua + ' fora da trilha.</p>'); } };
 
 /* ---------- boas-vindas: idioma → nível → começar ---------- */
-const LANGS = [['DE', 'Alemão', 'A1 a C2 · 252 lições', true], ['EN', 'Inglês', 'A1 a C2 · 252 lições', true], ['ES', 'Espanhol', 'em preparação', false], ['FR', 'Francês', 'em preparação', false], ['IT', 'Italiano', 'em preparação', false]];
+const LANGS = [['DE', 'Alemão', 'A1 a C2 · 252 lições', true], ['EN', 'Inglês', 'A1 a C2 · 252 lições', true], ['ES', 'Espanhol', 'A1 · em construção', true], ['FR', 'Francês', 'em preparação', false], ['IT', 'Italiano', 'em preparação', false]];
 onboard = function (step = 1) {
   const steps = `<div class="mo-steps">${[1, 2, 3].map((i) => `<i class="${i <= step ? 'on' : ''}"></i>`).join('')}</div>`;
   if (step === 1 && /[?&]ob=3/.test(location.search)) step = 3; // veio da troca de idioma nas boas-vindas
@@ -385,8 +385,8 @@ perfil = function () {
   </div>
   <p class="mut mo-how">Como ler: a porcentagem é o acerto nas ${ATT_WIN} respostas mais recentes de cada competência e aparece a partir de ${ATT_MIN} respostas. XP e sequência medem dedicação, não domínio.</p>`);
   // troca de idioma também no celular (na tela larga, ela fica na barra lateral)
-  const pl = $('#mPosLang', app), other = LP.code === 'de' ? 'en' : 'de';
-  if (pl && typeof goLang === 'function') pl.onclick = () => { if (confirm(`Trocar para ${LANG_PACKS[other].nome}? O progresso de cada idioma fica guardado separado.`)) goLang(other); };
+  const pl = $('#mPosLang', app);
+  if (pl && typeof pickLang === 'function') pl.onclick = pickLang;
   if ($('#mWeak')) $('#mWeak').onclick = () => (wk.c.pr === 'textos' ? go('extras', 'textos') : pratRun(PRAT.find((p) => p.id === wk.c.pr)));
 };
 
