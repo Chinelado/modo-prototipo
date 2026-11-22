@@ -258,10 +258,10 @@ const RULES = {
   // ---------- Módulo 8 ----------
   perfecto: R('uma experiência com o <b>pretérito perfecto</b> (he viajado, has comido, nunca he …)', (t, k) => {
     const c = C(k);
-    if (/ (tengo|tienes|tiene|tenemos|tienen) (\p{L}+(ado|ido)|hecho|visto|dicho|escrito) /u.test(c)) return 'O auxiliar é <b>haber</b>: <b>he</b> comido (e não "tengo comido").';
+    if (/ (tengo|tienes|tiene|tenemos|tienen) (\p{L}*(ado|ido)|hecho|visto|dicho|escrito) /u.test(c)) return 'O auxiliar é <b>haber</b>: <b>he</b> comido (e não "tengo comido").';
     if (/ (haz|as) (estado|visto|comido|ido|hecho|viajado|probado) /.test(c)) return 'Com tú, o auxiliar é <b>has</b> (com h e s).';
     if (/ (he|has|ha|hemos|han) (hacido|vido|decido|escribido|volvido|ponido|abrido|rompido) /.test(c)) return 'Esse particípio é irregular: <b>hecho</b>, <b>visto</b>, <b>dicho</b>, <b>escrito</b>, <b>vuelto</b>, <b>puesto</b>, <b>abierto</b>, <b>roto</b>.';
-    return need(/ (he|has|ha|hemos|han) (\p{L}+(ado|ido)|hecho|visto|dicho|escrito|vuelto|puesto|abierto|roto) /u.test(c), 'Use haber + particípio: <b>He</b> viajado. ¿Alguna vez <b>has</b> estado …?');
+    return need(/ (he|has|ha|hemos|han) (\p{L}*(ado|ido)|hecho|visto|dicho|escrito|vuelto|puesto|abierto|roto) /u.test(c), 'Use haber + particípio: <b>He</b> viajado. ¿Alguna vez <b>has</b> estado …?');
   }),
   yatodavia: R('o que já fez e o que ainda não fez (ya, todavía no, aún no)', (t, k) => {
     const c = C(k);
@@ -287,7 +287,7 @@ const RULES = {
   }),
   correo: R('uma frase de e-mail pessoal (saudação, novidade, pedido ou despedida)', (t, k) => {
     const c = C(k);
-    if (/ (tengo|tienes) (\p{L}+(ado|ido)) /u.test(c)) return 'O auxiliar é <b>haber</b>: <b>he</b> cambiado (e não "tengo cambiado").';
+    if (/ (tengo|tienes) (\p{L}*(ado|ido)) /u.test(c)) return 'O auxiliar é <b>haber</b>: <b>he</b> cambiado (e não "tengo cambiado").';
     if (/ le (lo|la|los|las) /.test(c)) return 'le + lo vira <b>se lo</b>.';
     return need(/ (hola|querido|querida|cómo estás|qué tal|he|has|hemos|ya|todavía|un abrazo|besos|escríbeme|hasta pronto|saludos|te extraño|novedades) /.test(c), 'Escreva como num e-mail: ¡<b>Hola</b>, …! / <b>He</b> empezado … / <b>Un abrazo</b>.');
   }),
@@ -523,6 +523,46 @@ const RULES = {
     if (/ acho que /.test(c)) return 'Isso é português. Em espanhol: <b>creo que</b>.';
     if (/ en conclusion /.test(c)) return '<b>conclusión</b> leva acento.';
     return need(/ (de acuerdo|como dice|creo que|en mi opinión|para mí|por un lado|por otro|además|sin embargo|por ejemplo|en conclusión|en resumen|depende|saludos|no creo que|pero) /.test(c), 'Comente: <b>Estoy de acuerdo con</b> … / <b>Por un lado</b> … / <b>En conclusión</b> …');
+  }),
+  // ---------- Módulo 15 ----------
+  narrar: R('uma frase de história (imperfecto para o cenário, indefinido para os fatos)', (t, k) => {
+    const c = C(k);
+    if (/ (fiquei|percebi) /.test(c)) return 'Isso é português. Em espanhol: <b>me puse</b> (fiquei), <b>me di cuenta</b> (percebi).';
+    if (/ me (quedé|quede) (nervios[oa]|triste|roj[oa]|feliz) /.test(c)) return 'Para emoções, "ficar" é <b>ponerse</b>: <b>me puse</b> nerviosa.';
+    if (/ me di cuenta que /.test(c)) return 'darse cuenta pede <b>de</b>: me di cuenta <b>de que</b> …';
+    const imp = has(k, /\p{L}+(aba|aban|ía|ían)$/u) || has(k, /^(era|había|estaba|iba)$/);
+    const ind = has(k, /\p{L}+(é|ó|í|ió|aron|ieron)$/u) || has(k, /^(fui|fue|hice|hizo|tuve|vino|dijo|pude|vi|vio|puse|di|dio)$/);
+    return need(imp || ind, 'Conte: <b>Era</b> tarde … / <b>Abrí</b> la puerta … / Me <b>di cuenta</b> de que …');
+  }),
+  pluscuamperfecto: R('o passado do passado (había + particípio)', (t, k) => {
+    const c = C(k);
+    if (/ (tenía|tenías|teníamos|tenían) (\p{L}*(ado|ido)|hecho|visto|dicho|escrito|vuelto|puesto) /u.test(c)) return 'O auxiliar é <b>haber</b>: <b>había</b> comido (e não "tenía comido").';
+    if (/ hubo (\p{L}*(ado|ido)) /u.test(c)) return 'Use <b>había</b> + particípio: <b>había</b> terminado.';
+    return need(/ (había|habías|habíamos|habían) (\p{L}*(ado|ido)|hecho|visto|dicho|escrito|vuelto|puesto|abierto|roto) /u.test(c) || / se había /.test(c), 'Use o pluscuamperfecto: Cuando llegué, ya <b>había</b> terminado.');
+  }),
+  conectores_narr: R('uma frase com conector de narrativa (al principio, luego, de pronto, en cuanto, por fin…)', (t, k) => {
+    const c = C(k);
+    if (/ (no começo|assim que|enquanto isso|finalmente|de repente) /.test(c) && / (no começo|assim que|enquanto isso) /.test(c)) return 'Isso é português. Em espanhol: <b>al principio</b>, <b>en cuanto</b>, <b>mientras tanto</b>.';
+    if (/ en el principio /.test(c)) return 'O natural é <b>al principio</b>.';
+    return need(/ (al principio|primero|luego|después|más tarde|al rato|de pronto|de repente|en cuanto|mientras tanto|mientras|al final|por fin|finalmente|total que|al día siguiente|a la mañana siguiente|esa mañana|esa noche|entonces|resulta que) /.test(c), 'Use um conector: <b>Al principio</b> … / <b>De pronto</b> … / <b>Por fin</b> …');
+  }),
+  anecdota: R('uma frase de anedota ou reação (resulta que, a punto de, ¡qué fuerte!…)', (t, k) => {
+    const c = C(k);
+    if (/ verguenza /.test(c)) return '<b>vergüenza</b> leva trema: ver<b>güe</b>nza.';
+    if (/ a ponto de /.test(c)) return 'Em espanhol: <b>a punto de</b>.';
+    return need(/ (sabes qué|te conté|resulta que|a punto de|de pronto|qué fuerte|qué vergüenza|qué susto|en serio|no me digas|qué hiciste|me morí de risa|metí la pata|al final|nunca más) /.test(c) || has(k, /\p{L}+(é|ó|í|ió|aba|ía)$/u), 'Conte ou reaja: <b>Resulta que</b> … / <b>Estaba a punto de</b> … / ¡<b>Qué vergüenza</b>!');
+  }),
+  leyenda: R('uma frase de lenda (había una vez, cuenta la leyenda, se dice que, se convirtió en…)', (t, k) => {
+    const c = C(k);
+    if (/ (era una vez|diz a lenda) /.test(c)) return 'Em espanhol: <b>Había una vez</b>, <b>Cuenta la leyenda que</b>.';
+    if (/ se convirtió (piedra|volcán|montaña|árbol|pez|animal|un|una) /.test(c)) return 'convertirse pede <b>en</b>: se convirtió <b>en</b> piedra.';
+    return need(/ (había una vez|cuenta la leyenda|se dice que|hace muchos años|desde entonces|y por eso|se convirtió en|los convirtieron en|convirtió) /.test(c) || has(k, /\p{L}+(aba|ía|ían|é|ó|ió|aron|ieron)$/u), 'Conte a lenda: <b>Había una vez</b> … / <b>Cuenta la leyenda que</b> …');
+  }),
+  relato: R('uma frase de relato (cenário, fatos, había + particípio, conectores, desfecho)', (t, k) => {
+    const c = C(k);
+    if (/ (tenía|tenían) (\p{L}*(ado|ido)) /u.test(c)) return 'O auxiliar é <b>haber</b>: <b>había</b> perdido.';
+    if (/ me (quedé|quede) (nervios[oa]|triste) /.test(c)) return 'Para emoções, use <b>ponerse</b>: <b>me puse</b> nerviosa.';
+    return need(has(k, /\p{L}+(aba|ía|ían|é|ó|ió|aron|ieron)$/u) || / (había|era|fue|fui|hice|tuve|vi|desde entonces|al final|de pronto|al principio|nunca olvidaré|aquella|aquel) /.test(c), 'Conte o relato: <b>Aquella mañana</b> … / … ya se <b>había</b> ido / <b>Desde entonces</b> …');
   }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
