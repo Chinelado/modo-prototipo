@@ -742,6 +742,27 @@ const RULES = {
     if (/\basked (you|him|her) (bring|call|send|confirm)\b/.test(c)) return 'Falta o to: asked you <b>to</b> bring …';
     return need(/\b(called|said|asked|wanted to know|mentioned|left a message|call (her|him) back)\b/.test(c), 'Repasse o recado: Rachel <b>called</b>. She <b>said</b> … / She <b>asked you to</b> …');
   }),
+  // ---------- Módulo 22 ----------
+  conectores_argumento: R('um argumento com conector (<b>Firstly, In addition, However, Therefore, In conclusion</b>)', (t, k) => {
+    if (/\bdespite (it|they|he|she|we|i|you|the \p{L}+ (is|are|was|were))\b/iu.test(norm(t))) return 'despite vem com substantivo ou -ing: despite <b>the cost</b>. Com frase, use although.';
+    return need(/\b(firstly|first of all|secondly|in addition|moreover|furthermore|however|on the other hand|therefore|as a result|in conclusion|to sum up|all in all|despite|finally)\b/i.test(norm(t)), 'Use um conector: <b>Firstly</b>, … / <b>In addition</b>, … / <b>Therefore</b>, …');
+  }),
+  phrasal: R('uma frase com um <b>phrasal verb</b> (give up, find out, look after, put off, run out of …)', (t, k) => {
+    const c = k.join(' ');
+    if (/\b(turn|put|give|pick|find|set) (down|off|up|out) (it|them)\b/.test(c)) return 'Com pronome, a partícula vai para o fim: turn <b>it down</b>.';
+    if (/\blooking forward to (see|meet|hear|work|visit)\b/.test(c)) return 'Depois de look forward to, use -ing: looking forward to <b>seeing</b>.';
+    return need(/\b(give|gave|giving) up\b|\b(find|found|finding) out\b|\blook(ed|ing|s)? after\b|\blook(ing)? forward to\b|\b(put|putting) off\b|\bturn(ed|ing)? down\b|\bcame? up with\b|\b(run|ran|running) out of\b|\b(get|got|gets|getting) (on |along )?(well )?(on )?with\b|\bset(ting)? up\b|\b(took|take) up\b|\bcarry on\b|\bfigure(d)? out\b|\bbroke down\b|\bshow(ed)? up\b|\bwork(ed)? out\b|\bcall(ed)? off\b/.test(c), 'Use um phrasal verb: I <b>gave up</b> … / We <b>ran out of</b> …');
+  }),
+  pros_contras: R('uma opinião com grau ou com prós e contras (I agree up to a point … / The main advantage is …)', (t, k) => {
+    if (/\b(i'm|i am) (agree|disagree)\b/.test(k.join(' '))) return 'agree é verbo: <b>I agree</b>.';
+    return need(/\b(agree|disagree|up to a point|not so sure|advantage|disadvantage|benefit|drawback|on balance|fair point|it depends|in favor|against|pros|cons)\b/.test(k.join(' ')), 'Dê o grau da opinião ou um prós e contras: I <b>agree up to a point</b>. / The main <b>advantage</b> is …');
+  }),
+  artigo: R('uma frase de <b>artigo</b> (Have you ever …? / In my opinion, … / What are you waiting for?)', (t, k) => need(/\b(have you ever|imagine|in my opinion|in my experience|let me tell you|what are you waiting for|give it a try|the best way|i think|for example)\b/.test(k.join(' ')), 'Escreva como num artigo: <b>Have you ever</b> …? / <b>In my experience</b>, …')),
+  prova_b1: R('uma frase sobre a <b>prova</b> ou uma estratégia (The exam has … / I will practice …)', (t, k) => need(has(k, /^(exam|test|reading|writing|listening|speaking|practice|e-mail|article|story|photo|pairs|parts|minutes|spelling|answers|strategy)$/), 'Fale da prova: The <b>exam</b> has … / I will <b>practice</b> …')),
+  texto_opiniao: R('uma frase de <b>texto de opinião</b> (In my opinion, … should … / Firstly, … / However, … / In conclusion, …)', (t, k) => {
+    if (/\bshould to\b/.test(k.join(' '))) return 'should vem sem to: should <b>ban</b>.';
+    return need(/\b(should|would|in my opinion|firstly|in addition|moreover|however|for example|in conclusion|therefore|on the other hand)\b/.test(k.join(' ')), 'Escreva uma parte do texto: In my opinion, … <b>should</b> … / <b>Firstly</b>, … / <b>However</b>, …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
