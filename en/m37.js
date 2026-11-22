@@ -193,7 +193,7 @@ NL('en-setto', {
   pts: 'Previsões impessoais: X is expected / projected / forecast / predicted to + verbo: The economy is expected to grow by 2%.|Grau de certeza: is set to (planejado, quase certo), is bound to (com certeza), is likely to (provável), is unlikely to (improvável).|Prazos: by 2050 (até 2050, no máximo), over the next decade (ao longo da próxima década), in the foreseeable future (num futuro próximo), in the long term (a longo prazo).|Future perfect para o que estará concluído: By 2050, temperatures will have risen by 2 °C. Use com cautela: According to forecasts, …',
   ex: "Electric cars are expected to account for half of all new cars by 2035.=A expectativa é que os carros elétricos representem metade dos carros novos até 2035.|Demand for water is bound to increase.=A demanda por água com certeza vai aumentar.|By 2050, sea levels will have risen significantly.=Até 2050, o nível do mar terá subido significativamente.|According to forecasts, prices will remain stable.=Segundo as previsões, os preços vão ficar estáveis.",
   bd: ['Sales=S|are_set_to=V^be set to: encaminhado|rise=V^verbo básico|by_10%=C^a diferença|next_year.=T', 'As vendas devem subir 10% no ano que vem.'],
-  rule: 'previsao',
+  rule: 'previsao_dados',
   hw: 'Escolha um setor (tecnologia, energia, educação) e escreva cinco previsões para 2040, cada uma com um grau de certeza diferente: is set to, is expected to, is likely to, is unlikely to e will have + particípio.',
   deep: `
 Hoje você aprende a falar de **previsões e projeções**: o futuro com base em dados, como em relatórios, notícias e apresentações.

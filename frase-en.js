@@ -493,7 +493,7 @@ const RULES = {
     const c = k.join(' ');
     if (/^\s*(watch|read|follow|listen|scroll|play|use) \p{L}+.* (is|are) /iu.test(norm(t))) return 'A atividade como sujeito vai com -ing: <b>Watching</b> series is …';
     if (/\bi pass (\p{L}+ )?(hours|hour|minutes|time)\b/u.test(c)) return 'Passar tempo é <b>spend</b>: I spend two hours …';
-    return need(/^\s*\p{L}+ing\b/iu.test(norm(t)) || has(k, /^(spend|spent|series|news|podcasts|podcast|media|social|watch|watching|online|screen|scrolling)$/), 'Fale da mídia: <b>Watching</b> series is … / I <b>spend</b> … a day on …');
+    return need(/^\s*\p{L}+ing\b/iu.test(norm(t)) || has(k, /^(spend|spent|series|news|podcasts|podcast|media|social|watch|watching|watched|binge|season|online|screen|scrolling)$/), 'Fale da mídia: <b>Watching</b> series is … / I <b>spend</b> … a day on …');
   }),
   concordar: R("uma reação: <b>So do I / Neither do I</b> (com o auxiliar certo) ou <b>I agree / I see your point, but …</b>", (t, k) => {
     const c = k.join(' ');
@@ -1011,7 +1011,7 @@ const RULES = {
     if (/\b(despite|in spite of) (be|have|feel|work)\b/.test(c)) return 'Depois de despite, use -ing: despite <b>being</b> tired.';
     return need(/\b(despite|in spite of|even though|although|though|whereas|while|nevertheless|however|on the other hand|in contrast)\b/.test(c), 'Contraste: <b>Despite</b> the rain, … / <b>Even though</b> … / … <b>whereas</b> …');
   }),
-  midia: R('uma frase sobre mídia (reliable, biased, misleading, clickbait, fact-check, go viral…)', (t, k) => need(/\b(source|sources|reliable|trustworthy|biased|misleading|clickbait|fact-check\w*|fact|checked|viral|headline|misinformation|fake|share|shared|spread|spreads|evidence|edited|out of context|article|news)\b/.test(k.join(' ')), 'Use o vocabulário da mídia: a <b>reliable source</b> / <b>misleading</b> / it <b>went viral</b> …')),
+  midia_critica: R('uma frase sobre mídia (reliable, biased, misleading, clickbait, fact-check, go viral…)', (t, k) => need(/\b(source|sources|reliable|trustworthy|biased|misleading|clickbait|fact-check\w*|fact|checked|viral|headline|misinformation|fake|share|shared|spread|spreads|evidence|edited|out of context|article|news)\b/.test(k.join(' ')), 'Use o vocabulário da mídia: a <b>reliable source</b> / <b>misleading</b> / it <b>went viral</b> …')),
   cautela: R('uma afirmação cautelosa (It could be argued … / tend to / some evidence / arguably / to some extent)', (t, k) => {
     const c = k.join(' ');
     if (/\bit could be argue\b/.test(c)) return 'Na passiva: It could be <b>argued</b> that …';
@@ -1211,7 +1211,7 @@ const RULES = {
     if (/^suppose you (find|know|see|have) .*\bwould\b/.test(c)) return 'Com suppose + would, use o passado: Suppose you <b>found</b> …';
     return need(/\b(suppose|what if|imagine|justified|justify|greater good|rights|consent|privacy|fairness|fair|responsibility|acceptable|unacceptable|wrong|right|in principle|in practice|draw the line|slippery slope|dilemma|harm|depends)\b/.test(c), 'Discuta o dilema: <b>Suppose</b> you … / <b>Is it ever justified</b> to …? / <b>In principle</b>, … but …');
   }),
-  previsao: R('uma previsão (is set to / is expected to / is likely to / by 2050 / will have …)', (t, k) => {
+  previsao_dados: R('uma previsão (is set to / is expected to / is likely to / by 2050 / will have …)', (t, k) => {
     const c = k.join(' ');
     if (/\b(is|are) (set|expected|projected|likely|unlikely|bound|forecast) (rise|fall|grow|reach|increase|remain)\b/.test(c)) return 'Falta o to: is set <b>to</b> rise.';
     if (/\bwill have (rise|grow|fall|increase|reach)\b/.test(c)) return 'Depois de will have, o particípio: will have <b>risen</b>.';
