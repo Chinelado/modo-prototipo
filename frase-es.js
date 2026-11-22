@@ -1278,6 +1278,37 @@ const RULES = {
     if (/ (oye|qué lío|pídele) /.test(c)) return 'Isso é do chat. No e-mail formal: <b>Le escribo para</b> … / <b>Quisiera</b> …';
     return need(/ (le escribo|me dirijo|comunicarle|quisiera|le agradecería|adjunto|quedo a su disposición|atentamente|cordial saludo|lamento|lamentablemente|inconveniente|prórroga|presupuesto|estimado) /.test(c), 'Escreva formal: <b>Le escribo para</b> … / <b>Quisiera solicitarle</b> … / <b>Quedo a su disposición</b>.');
   }),
+  // ---------- Módulo 36 ----------
+  retorica: R('uma frase retórica (¿acaso…?, no es X, es Y, no se trata de…, sino de…, uma tríade…)', (t, k) => {
+    const c = C(k);
+    if (/ por acaso /.test(c)) return '"Por acaso" (pergunta) em espanhol é só <b>acaso</b>: ¿Acaso …?';
+    return need(/ (acaso|no es cierto que|quién no|no es (\p{L}+ )+es|no se trata de|sino|queremos|cierra con|merecemos) /u.test(c) || /\?/.test(t), 'Use um recurso: ¿<b>Acaso</b> …? / <b>No es</b> un gasto, <b>es</b> una inversión.');
+  }),
+  discrepar: R('uma discordância diplomática (permítame que discrepe, me temo que, no acabo de ver…)', (t, k) => {
+    const c = C(k);
+    if (/ permítame que discrepo /.test(c)) return 'Permitir que + subjuntivo: permítame que <b>discrepe</b>.';
+    return need(/ (discrepar|discrepe|lamento|me temo|no acabo de|no termino de|tengo mis dudas|lo plantearía|con todo respeto|entiendo su postura|entiendo tu postura|comprendo|tiene razón en parte|tienes razón en parte|en lugar de|no la comparto|no lo comparto) /.test(c), 'Discorde com diplomacia: <b>Permítame que discrepe</b>. / <b>Me temo que</b> no lo comparto.');
+  }),
+  conceder: R('uma concessão (reconozco que, admito que, ahora bien, con todo, eso no quita que…)', (t, k) => {
+    const c = C(k);
+    if (/ no quita que (\p{L}+ )?(debemos|es|tiene|hay|podemos|mejoramos) /u.test(c)) return 'Depois de <b>no quita que</b>, o subjuntivo: <b>debamos</b>, <b>sea</b>, <b>tenga</b>, <b>haya</b>.';
+    return need(/ (reconozco|admito|concedo|es cierto que|ahora bien|con todo|aun así|de todos modos|no quita que|no significa que|sin embargo) /.test(c), 'Conceda e vire: <b>Reconozco que</b> …; <b>ahora bien</b>, …');
+  }),
+  apelar: R('uma frase que envolve o público (imagínense, piensen en, ¿qué pasaría si…?, uno de cada tres…)', (t, k) => {
+    const c = C(k);
+    if (/ qué pasaría si (\p{L}+ )*?(planta|plantamos|hacemos|usamos|reciclamos) /u.test(c)) return 'Com <b>¿qué pasaría si …?</b>, o imperfeito do subjuntivo: <b>plantara</b>, <b>hiciéramos</b>, <b>usáramos</b>.';
+    return need(/ (imagínense|imaginen|piensen|pregúntense|miren|qué pasaría si|todos sabemos|todos podemos|nos afecta|está en juego|los números|uno de cada|una de cada|la mitad|el doble|nuestro|nuestra) /.test(c), 'Envolva o público: <b>Imagínense</b> … / ¿<b>Qué pasaría si</b> …? / <b>Uno de cada tres</b> …');
+  }),
+  rebatir: R('uma refutação (eso no es del todo cierto, se suele decir que…, quienes afirman… olvidan, lejos de…)', (t, k) => {
+    const c = C(k);
+    if (/ longe de /.test(c)) return 'Em espanhol: <b>lejos de</b>.';
+    return need(/ (no es del todo|verdad a medias|matizar|se suele decir|existe la creencia|quienes afirman|olvidan|lo que no se dice|lejos de|nada más lejos|en realidad|lo contrario|dicen que) /.test(c), 'Refute: <b>Eso no es del todo cierto</b>. / <b>Se suele decir que</b> …, pero … / <b>Lejos de</b> …');
+  }),
+  columna: R('uma frase de coluna (¿acaso…?, defiendo que, reconozco que… ahora bien, quienes afirman…, no es X, es Y)', (t, k) => {
+    const c = C(k);
+    if (/ por acaso /.test(c)) return '"Por acaso" em espanhol é só <b>acaso</b>.';
+    return need(/ (acaso|defiendo|es hora de|estoy convencid[oa]|reconozco|ahora bien|quienes afirman|olvidan|según|no es (\p{L}+ )+es|sino|imagínense|leíste la columna|me convenció|me gustó|convence) /u.test(c) || /\?/.test(t), 'Escreva como numa coluna: <b>Defiendo que</b> … / <b>Reconozco que</b> …; <b>ahora bien</b>, …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
