@@ -1081,6 +1081,44 @@ const RULES = {
     if (/^actually,? (many|most|people|students)\b/.test(c)) return '<b>actually</b> é "na verdade". Para "atualmente", use <b>nowadays</b>.';
     return need(/\b(nowadays|in my view|firstly|in addition|another important point|admittedly|however|in conclusion|in the long term|would|should|notes|own idea|words|word count|check|essay|plan)\b/.test(c), 'Use a linguagem da redação: <b>Firstly</b> … / <b>Another important point is</b> … / <b>In conclusion</b> …');
   }),
+  // ---------- Módulo 33 ----------
+  inversao_negativa: R('uma inversão depois de expressão negativa (Never have I … / Rarely do we … / Not only did …)', (t, k) => {
+    const c = k.join(' ');
+    if (/^(never|rarely|seldom) (i|you|we|they|he|she) (have|has|had|do|does|did|am|is|are|was|were|can|will)\b/.test(c)) return 'Na inversão, o auxiliar vem antes do sujeito: <b>Never have I</b> …';
+    if (/^(rarely|seldom|never) (i|you|we|they|he|she) \w+/.test(c)) return 'Use o auxiliar antes do sujeito: <b>Rarely do we</b> get …';
+    if (/^hardly had\b.*\bthan\b/.test(c)) return 'hardly pede <b>when</b>: Hardly had I arrived <b>when</b> …';
+    if (/^no sooner had\b.*\bwhen\b/.test(c)) return 'no sooner pede <b>than</b>: No sooner had we left <b>than</b> …';
+    return need(/^(never|rarely|seldom|not only|hardly|scarcely|no sooner|little|nowhere|never in my life)\b/.test(c) && /\b(have|has|had|do|does|did|is|are|was|were|can|could|will|would)\b/.test(c), 'Comece com a expressão negativa e inverta: <b>Never have I</b> … / <b>Rarely do we</b> …');
+  }),
+  inversao_only: R('uma inversão com only / not until / under no circumstances / at no time', (t, k) => {
+    const c = k.join(' ');
+    if (/^only then (i|you|we|they|he|she) \w+/.test(c)) return 'Inverta: Only then <b>did I</b> realize.';
+    if (/^under no circumstances (you|we|they|visitors) (should|must|can)\b/.test(c)) return 'Inverta: Under no circumstances <b>should you</b> …';
+    return need(/^(only|not until|under no circumstances|on no account|at no time|in no way)\b/.test(c) && /\b(do|does|did|have|has|had|should|must|can|could|is|are|was|were|will|would)\b/.test(c), 'Use a inversão: <b>Only then did I</b> … / <b>Under no circumstances should you</b> …');
+  }),
+  clivada_what: R('uma frase clivada (What I need is … / What she did was … / All I want is …)', (t, k) => {
+    const c = k.join(' ');
+    if (/^all what\b/.test(c)) return 'Sem what: <b>All I want</b> is …';
+    if (/^what \w+( \w+)? did (is|was) (called|talked|pressed)\b/.test(c)) return 'Depois de What … did was, o verbo básico: was <b>call</b> the police.';
+    return need(/^(what|all|the thing|the reason|the only thing)\b.*\b(is|was|are|were)\b/.test(c), 'Use uma clivada: <b>What I need is</b> … / <b>All I want is</b> …');
+  }),
+  clivada_it: R("uma clivada com it (It was … who / that … / It wasn't until … that …)", (t, k) => {
+    const c = k.join(' ');
+    if (/^it (was|is) \w+( \w+)? which (called|organized|taught|broke)\b/.test(c)) return 'Para pessoas, use <b>who</b>: It was Tom <b>who</b> called.';
+    if (/^it wasn't until\b/.test(c) && !/\bthat\b/.test(c)) return "Complete com that: It wasn't until midnight <b>that</b> …";
+    return need(/^it('s| is| was| wasn't| isn't)\b.*\b(who|that)\b/.test(c), 'Use a clivada com it: <b>It was</b> Tom <b>who</b> called. / <b>It wasn\'t until</b> … <b>that</b> …');
+  }),
+  condicional_inversao: R('uma condicional invertida (Had I known … / Should you need … / Were I …)', (t, k) => {
+    const c = k.join(' ');
+    if (/^hadn't (i|you|we|they|he|she|the)\b/.test(c)) return 'Na inversão, a negativa não se contrai: <b>Had I not</b> …';
+    if (/^if (had|should|were) (i|you|we|they|he|she|it)\b/.test(c)) return 'Na inversão, o if sai: <b>Had I known</b>, …';
+    return need(/^(had|should|were)\s+(i|you|we|they|he|she|it|the|any|there)\b/.test(c), 'Inverta a condicional: <b>Had I known</b>, … / <b>Should you need</b> … / <b>Were I</b> you, …');
+  }),
+  discurso: R('uma frase de discurso (inversão, clivada, regra de três, pergunta retórica ou So let us …)', (t, k) => {
+    const c = k.join(' ');
+    if (/^never i have\b/.test(c)) return 'Na inversão, o auxiliar vem antes: <b>Never have I</b> …';
+    return need(/^(never|not only|rarely|what|all|it (is|was)|so let us|let us|good evening|dear|ladies)\b/.test(c) || /\?\s*$/.test(t) || /\w+, \w+[^,]*,? and \w+/.test(t) || /\b(raise a glass|thank you|bottom of my heart|proud|courage)\b/.test(c), 'Use um recurso de discurso: <b>Never have I</b> … / <b>What we need is</b> … / <b>So let us</b> …');
+  }),
 };
 const ruleOfLesson = (les) => RULES[les.rule] || null;
 
